@@ -10,4 +10,5 @@ Working:
 Todo:
 
 -Get pokemon/pokestops/gyms
+
 -Gotta catch them all
