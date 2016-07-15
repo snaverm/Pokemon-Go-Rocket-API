@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
+    <Compile Include="GeneratedCode\SettingsResponse.cs" />
     <Compile Include="Settings.cs" />
     <None Include="app.config" />
     <Compile Include="Client.cs" />
@@ -77,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Proto\SettingsResponse.proto" />
     <None Include="Proto\Request.proto" />
   </ItemGroup>
   <ItemGroup>
