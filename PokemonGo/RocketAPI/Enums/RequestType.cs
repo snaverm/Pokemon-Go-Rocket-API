@@ -9,6 +9,7 @@ namespace PokemonGo.RocketAPI.Enums
     public enum RequestType
     {
         Profile = 2,
-        Settings = 5
+        Settings = 5,
+        Encounters = 300
     }
 }

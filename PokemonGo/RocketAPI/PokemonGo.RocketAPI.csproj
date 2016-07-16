@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\RequestType.cs" />
+    <Compile Include="GeneratedCode\EncounterResponse.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
     <Compile Include="GeneratedCode\SettingsResponse.cs" />
     <Compile Include="Settings.cs" />
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Proto\EncounterResponse.proto" />
     <None Include="Proto\SettingsResponse.proto" />
     <None Include="Proto\Request.proto" />
   </ItemGroup>

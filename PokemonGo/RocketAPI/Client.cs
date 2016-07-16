@@ -97,5 +97,10 @@ namespace PokemonGo.RocketAPI
         {
             return await _httpClient.PostProto<Request, SettingsResponse>($"https://{apiUrl}/rpc", settingsRequest);
         }
+        public async Task<EncounterResponse> GetEncounters(string apiUrl, Request encounterRequest)
+        {
+            return await _httpClient.PostProto<Request, EncounterResponse>($"https://{apiUrl}/rpc", encounterRequest);
+        }
+
     }
 }

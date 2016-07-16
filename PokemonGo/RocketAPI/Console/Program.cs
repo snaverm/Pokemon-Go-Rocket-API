@@ -23,11 +23,14 @@ namespace PokemonGo.RocketAPI.Console
             var accessToken = await client.GetGoogleAccessToken(Settings.DeviceId, Settings.ClientSig, Settings.Email, Settings.LongDurationToken);
             var profileRequest = RequestBuilder.GetRequest(RequestType.Profile, accessToken, Settings.DefaultLatitude, Settings.DefaultLongitude, 30);
             var serverSettingsRequest = RequestBuilder.GetRequest(RequestType.Settings, accessToken, Settings.DefaultLatitude, Settings.DefaultLongitude, 30);
+            var encountersRequest = RequestBuilder.GetRequest(RequestType.Encounters, accessToken, Settings.DefaultLatitude, Settings.DefaultLongitude, 30);
 
             var serverResponse = await client.GetServer(profileRequest);
             var profile = await client.GetProfile(serverResponse.ApiUrl, profileRequest);
 
             var serverSettings = await client.GetSettings(serverResponse.ApiUrl, serverSettingsRequest);
+
+            var encounters = await client.GetEncounters(serverResponse.ApiUrl, encountersRequest);
         }
     }
 }
