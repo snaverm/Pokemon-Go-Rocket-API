@@ -1,18 +1,31 @@
 # Pokemon-Go-Rocket-API
 
-Working:
+Example:
 
 ```
+var client = new Client(Settings.DefaultLatitude, Settings.DefaultLongitude);
+
 await client.LoginPtc("FeroxRev", "Sekret");
 //await client.LoginGoogle(Settings.DeviceId, Settings.Email, Settings.LongDurationToken);
 var serverResponse = await client.GetServer();
 var profile = await client.GetProfile();
 var settings = await client.GetSettings();
-var encounters = await client.GetEncounters();
+var mapObjects = await client.GetMapObjects();
+
+await ExecuteFarmingPokestops(client);
 ```
 
-Todo:
+Features
+```
+#PTC Login / Google last part
+#Get Map Objects
+#Search for gyms/pokestops/spawns
+#Farm pokestops
+```
 
--Get pokemon/pokestops/gyms
+Todo
 
--Gotta catch them all
+```
+#catch the pokemon!
+#Gotta catch them all
+```
