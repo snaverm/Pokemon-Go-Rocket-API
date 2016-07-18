@@ -13,6 +13,7 @@ var serverResponse = await client.GetServer();
 var profile = await client.GetProfile();
 var settings = await client.GetSettings();
 var mapObjects = await client.GetMapObjects();
+var inventory = await client.GetInventory();
 
 await ExecuteFarmingPokestops(client);
 await ExecuteCatchAllNearbyPokemons(client);
