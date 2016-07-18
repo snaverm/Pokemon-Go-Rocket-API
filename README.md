@@ -1,5 +1,7 @@
 # Pokemon-Go-Rocket-API
 
+# Pokemon Go Client API Library in C# #
+
 Example:
 
 ```
