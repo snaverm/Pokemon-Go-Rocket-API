@@ -31,4 +31,5 @@ Todo
 
 ```
 #Gotta catch them all
+#Map Enums
 ```

@@ -83,6 +83,7 @@
     <Compile Include="GeneratedCode\EncounterResponse.cs" />
     <Compile Include="GeneratedCode\FortDetailResponse.cs" />
     <Compile Include="GeneratedCode\FortSearchResponse.cs" />
+    <Compile Include="GeneratedCode\InventoryResponse.cs" />
     <Compile Include="GeneratedCode\MapObjectsResponse.cs" />
     <Compile Include="GeneratedCode\PlayerUpdateResponse.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
@@ -104,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Proto\InventoryResponse.proto" />
     <None Include="Proto\EncounterResponse.proto" />
     <None Include="Proto\CatchPokemonResponse.proto" />
     <None Include="Proto\FortDetailResponse.proto" />
