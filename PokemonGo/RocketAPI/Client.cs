@@ -30,8 +30,13 @@ namespace PokemonGo.RocketAPI
         private string _apiUrl;
         private Request.Types.UnknownAuth _unknownAuth;
 
-        public Client()
+        private double _currentLat;
+        private double _currentLng;
+
+        public Client(double lat, double lng)
         {
+            SetCoordinates(lat, lng);
+
             //Setup HttpClient and create default headers
             HttpClientHandler handler = new HttpClientHandler()
             {
@@ -44,6 +49,12 @@ namespace PokemonGo.RocketAPI
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Connection", "keep-alive");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/x-www-form-urlencoded");
+        }
+
+        private void SetCoordinates(double lat, double lng)
+        {
+            _currentLat = lat;
+            _currentLng = lng;
         }
 
         public async Task LoginGoogle(string deviceId, string email, string refreshToken)
@@ -126,10 +137,22 @@ namespace PokemonGo.RocketAPI
             _accessToken = HttpUtility.ParseQueryString(tokenData)["access_token"];
             _authType = AuthType.Ptc;
         }
+        public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng)
+        {
+            this.SetCoordinates(lat, lng);
+            var customRequest = new Request.Types.PlayerUpdateProto()
+            {
+                Lat = Utils.FloatAsUlong(_currentLat),
+                Lng = Utils.FloatAsUlong(_currentLng)
+            };
 
+            var updateRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10, new Request.Types.Requests() { Type = (int)RequestType.PLAYER_UPDATE, Message = customRequest.ToByteString()});
+            var updateResponse = await _httpClient.PostProto<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
+            return updateResponse;
+        }
         public async Task<ProfileResponse> GetServer()
         {
-            var serverRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, RequestType.Profile, RequestType.Unknown126, RequestType.Time, RequestType.Unknown129, RequestType.Settings);
+            var serverRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10, RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY, RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
             var serverResponse = await _httpClient.PostProto<Request, ProfileResponse>(Resources.RpcUrl, serverRequest);
             _apiUrl = serverResponse.ApiUrl;
             return serverResponse;
@@ -137,7 +160,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<ProfileResponse> GetProfile()
         {
-            var profileRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, new Request.Types.Requests() { Type = (int)RequestType.Profile });
+            var profileRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10, new Request.Types.Requests() { Type = (int)RequestType.GET_PLAYER });
             var profileResponse = await _httpClient.PostProto<Request, ProfileResponse>($"https://{_apiUrl}/rpc", profileRequest);
             _unknownAuth = new Request.Types.UnknownAuth()
             {
@@ -150,30 +173,65 @@ namespace PokemonGo.RocketAPI
 
         public async Task<SettingsResponse> GetSettings()
         {
-            var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, RequestType.Settings);
+            var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10, RequestType.DOWNLOAD_SETTINGS);
             return await _httpClient.PostProto<Request, SettingsResponse>($"https://{_apiUrl}/rpc", settingsRequest);
         }
-        public async Task<EncounterResponse> GetEncounters()
+        public async Task<MapObjectsResponse> GetMapObjects()
         {
-            var customRequest = new EncounterRequest.Types.RequestsMessage()
+            var customRequest = new Request.Types.MapObjectsRequest()
             {
                 CellIds =
                     ByteString.CopyFrom(
-                        ProtoHelper.EncodeUlongList(S2Helper.GetNearbyCellIds(Settings.DefaultLongitude,
-                            Settings.DefaultLatitude))),
-                Latitude = Utils.FloatAsUlong(Settings.DefaultLatitude),
-                Longitude = Utils.FloatAsUlong(Settings.DefaultLongitude),
+                        ProtoHelper.EncodeUlongList(S2Helper.GetNearbyCellIds(_currentLng,
+                            _currentLat))),
+                Latitude = Utils.FloatAsUlong(_currentLat),
+                Longitude = Utils.FloatAsUlong(_currentLng),
                 Unknown14 = ByteString.CopyFromUtf8("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
             };
 
-            var encounterRequest = RequestBuilder.GetRequest(_unknownAuth, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, 
-                new Request.Types.Requests() { Type = (int)RequestType.Encounters, Message = customRequest.ToByteString() },
-                new Request.Types.Requests() { Type = (int)RequestType.Unknown126 },
-                new Request.Types.Requests() { Type = (int)RequestType.Time, Message = new EncounterRequest.Types.Time() { Time_ = DateTime.UtcNow.ToUnixTime() }.ToByteString() },
-                new Request.Types.Requests() { Type = (int)RequestType.Unknown129 },
-                new Request.Types.Requests() { Type = (int)RequestType.Settings, Message = new EncounterRequest.Types.SettingsGuid() { Guid = ByteString.CopyFromUtf8("4a2e9bc330dae60e7b74fc85b98868ab4700802e")}.ToByteString() });
+            var mapRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10, 
+                new Request.Types.Requests() { Type = (int)RequestType.GET_MAP_OBJECTS, Message = customRequest.ToByteString() },
+                new Request.Types.Requests() { Type = (int)RequestType.GET_HATCHED_OBJECTS },
+                new Request.Types.Requests() { Type = (int)RequestType.GET_INVENTORY, Message = new Request.Types.Time() { Time_ = DateTime.UtcNow.ToUnixTime() }.ToByteString() },
+                new Request.Types.Requests() { Type = (int)RequestType.CHECK_AWARDED_BADGES },
+                new Request.Types.Requests() { Type = (int)RequestType.DOWNLOAD_SETTINGS, Message = new Request.Types.SettingsGuid() { Guid = ByteString.CopyFromUtf8("4a2e9bc330dae60e7b74fc85b98868ab4700802e")}.ToByteString() });
 
-            return await _httpClient.PostProto<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterRequest);
+            return await _httpClient.PostProto<Request, MapObjectsResponse>($"https://{_apiUrl}/rpc", mapRequest);
+        }
+
+        public async Task<FortDetailResponse> GetFort(string fortId, double fortLat, double fortLng)
+        {
+            var customRequest = new Request.Types.FortDetailsRequest()
+            {
+                Id = ByteString.CopyFromUtf8(fortId),
+                Latitude = Utils.FloatAsUlong(fortLat),
+                Longitude = Utils.FloatAsUlong(fortLng),
+            };
+
+            var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10, new Request.Types.Requests() { Type = (int)RequestType.FORT_DETAILS, Message = customRequest.ToByteString() });
+            return await _httpClient.PostProto<Request, FortDetailResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
+        }
+
+        /*num Holoholo.Rpc.Types.FortSearchOutProto.Result {
+         NO_RESULT_SET = 0;
+         SUCCESS = 1;
+         OUT_OF_RANGE = 2;
+         IN_COOLDOWN_PERIOD = 3;
+         INVENTORY_FULL = 4;
+        }*/
+        public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)
+        {
+            var customRequest = new Request.Types.FortSearchRequest()
+            {
+                Id = ByteString.CopyFromUtf8(fortId),
+                FortLatDegrees = Utils.FloatAsUlong(fortLat),
+                FortLngDegrees = Utils.FloatAsUlong(fortLng),
+                PlayerLatDegrees = Utils.FloatAsUlong(_currentLat),
+                PlayerLngDegrees = Utils.FloatAsUlong(_currentLng)
+            };
+
+            var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, new Request.Types.Requests() { Type = (int)RequestType.FORT_SEARCH, Message = customRequest.ToByteString() });
+            return await _httpClient.PostProto<Request, FortSearchResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
 
     }

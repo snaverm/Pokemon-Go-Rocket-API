@@ -49,4 +49,43 @@ message Request {
       int32 unknown13  = 2;
     }
   }
+	message PlayerUpdateProto {
+	fixed64 Lat = 1;
+	fixed64 Lng = 2;
+	}
+
+	message MapObjectsRequest
+	{
+		bytes cellIds = 1;
+		bytes unknown14 = 2;
+		fixed64 latitude = 3;
+		fixed64 longitude = 4;
+	}
+
+	 message FortSearchRequest
+	{
+		bytes Id = 1;
+		fixed64 PlayerLatDegrees = 2;
+		fixed64 PlayerLngDegrees = 3;
+		fixed64 FortLatDegrees = 4;
+		fixed64 FortLngDegrees = 5;
+	}
+
+	message FortDetailsRequest
+	{
+  		bytes Id = 1;
+		fixed64 Latitude = 2;
+		fixed64 Longitude = 3;
+	}
+  
+	message SettingsGuid
+	{
+		bytes guid = 1;
+	}
+
+	message Time
+	{
+		int64 time = 1;
+	}
+
 }

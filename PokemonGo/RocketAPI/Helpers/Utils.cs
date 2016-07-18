@@ -10,7 +10,7 @@ namespace PokemonGo.RocketAPI.Helpers
     {
         public static ulong FloatAsUlong(double value)
         {
-            var bytes = BitConverter.GetBytes((double)(float)value);
+            var bytes = BitConverter.GetBytes(value);
             return BitConverter.ToUInt64(bytes, 0);
         }
 

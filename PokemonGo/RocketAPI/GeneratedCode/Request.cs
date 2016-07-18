@@ -24,7 +24,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg1SZXF1ZXN0LnByb3RvEiFQb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRl",
-            "ZENvZGUixAYKB1JlcXVlc3QSEAoIdW5rbm93bjEYASABKAUSDgoGcnBjX2lk",
+            "ZENvZGUi0gkKB1JlcXVlc3QSEAoIdW5rbm93bjEYASABKAUSDgoGcnBjX2lk",
             "GAMgASgDEkUKCHJlcXVlc3RzGAQgAygLMjMuUG9rZW1vbkdvLlJvY2tldEFQ",
             "SS5HZW5lcmF0ZWRDb2RlLlJlcXVlc3QuUmVxdWVzdHMSRQoIdW5rbm93bjYY",
             "BiABKAsyMy5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENvZGUuUmVx",
@@ -42,7 +42,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             "b3duMhIQCgh1bmtub3duMRgBIAEoDBqQAQoIQXV0aEluZm8SEAoIcHJvdmlk",
             "ZXIYASABKAkSRgoFdG9rZW4YAiABKAsyNy5Qb2tlbW9uR28uUm9ja2V0QVBJ",
             "LkdlbmVyYXRlZENvZGUuUmVxdWVzdC5BdXRoSW5mby5KV1QaKgoDSldUEhAK",
-            "CGNvbnRlbnRzGAEgASgJEhEKCXVua25vd24xMxgCIAEoBWIGcHJvdG8z"));
+            "CGNvbnRlbnRzGAEgASgJEhEKCXVua25vd24xMxgCIAEoBRotChFQbGF5ZXJV",
+            "cGRhdGVQcm90bxILCgNMYXQYASABKAYSCwoDTG5nGAIgASgGGlwKEU1hcE9i",
+            "amVjdHNSZXF1ZXN0Eg8KB2NlbGxJZHMYASABKAwSEQoJdW5rbm93bjE0GAIg",
+            "ASgMEhAKCGxhdGl0dWRlGAMgASgGEhEKCWxvbmdpdHVkZRgEIAEoBhqDAQoR",
+            "Rm9ydFNlYXJjaFJlcXVlc3QSCgoCSWQYASABKAwSGAoQUGxheWVyTGF0RGVn",
+            "cmVlcxgCIAEoBhIYChBQbGF5ZXJMbmdEZWdyZWVzGAMgASgGEhYKDkZvcnRM",
+            "YXREZWdyZWVzGAQgASgGEhYKDkZvcnRMbmdEZWdyZWVzGAUgASgGGkUKEkZv",
+            "cnREZXRhaWxzUmVxdWVzdBIKCgJJZBgBIAEoDBIQCghMYXRpdHVkZRgCIAEo",
+            "BhIRCglMb25naXR1ZGUYAyABKAYaHAoMU2V0dGluZ3NHdWlkEgwKBGd1aWQY",
+            "ASABKAwaFAoEVGltZRIMCgR0aW1lGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -50,7 +59,13 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Requests), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Requests.Parser, new[]{ "Type", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown3), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown3.Parser, new[]{ "Unknown4" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown6), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown6.Parser, new[]{ "Unknown1", "Unknown2" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown6.Types.Unknown2), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Unknown6.Types.Unknown2.Parser, new[]{ "Unknown1" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Parser, new[]{ "Provider", "Token" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Types.JWT), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Types.JWT.Parser, new[]{ "Contents", "Unknown13" }, null, null, null)})})
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Parser, new[]{ "Provider", "Token" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Types.JWT), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.AuthInfo.Types.JWT.Parser, new[]{ "Contents", "Unknown13" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.PlayerUpdateProto), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.PlayerUpdateProto.Parser, new[]{ "Lat", "Lng" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.MapObjectsRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.MapObjectsRequest.Parser, new[]{ "CellIds", "Unknown14", "Latitude", "Longitude" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortSearchRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortSearchRequest.Parser, new[]{ "Id", "PlayerLatDegrees", "PlayerLngDegrees", "FortLatDegrees", "FortLngDegrees" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortDetailsRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortDetailsRequest.Parser, new[]{ "Id", "Latitude", "Longitude" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.SettingsGuid), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.SettingsGuid.Parser, new[]{ "Guid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Time), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Time.Parser, new[]{ "Time_" }, null, null, null)})
           }));
     }
     #endregion
@@ -1321,6 +1336,894 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
         }
         #endregion
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class PlayerUpdateProto : pb::IMessage<PlayerUpdateProto> {
+        private static readonly pb::MessageParser<PlayerUpdateProto> _parser = new pb::MessageParser<PlayerUpdateProto>(() => new PlayerUpdateProto());
+        public static pb::MessageParser<PlayerUpdateProto> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[5]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public PlayerUpdateProto() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public PlayerUpdateProto(PlayerUpdateProto other) : this() {
+          lat_ = other.lat_;
+          lng_ = other.lng_;
+        }
+
+        public PlayerUpdateProto Clone() {
+          return new PlayerUpdateProto(this);
+        }
+
+        /// <summary>Field number for the "Lat" field.</summary>
+        public const int LatFieldNumber = 1;
+        private ulong lat_;
+        public ulong Lat {
+          get { return lat_; }
+          set {
+            lat_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "Lng" field.</summary>
+        public const int LngFieldNumber = 2;
+        private ulong lng_;
+        public ulong Lng {
+          get { return lng_; }
+          set {
+            lng_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as PlayerUpdateProto);
+        }
+
+        public bool Equals(PlayerUpdateProto other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Lat != other.Lat) return false;
+          if (Lng != other.Lng) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Lat != 0UL) hash ^= Lat.GetHashCode();
+          if (Lng != 0UL) hash ^= Lng.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Lat != 0UL) {
+            output.WriteRawTag(9);
+            output.WriteFixed64(Lat);
+          }
+          if (Lng != 0UL) {
+            output.WriteRawTag(17);
+            output.WriteFixed64(Lng);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (Lat != 0UL) {
+            size += 1 + 8;
+          }
+          if (Lng != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(PlayerUpdateProto other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Lat != 0UL) {
+            Lat = other.Lat;
+          }
+          if (other.Lng != 0UL) {
+            Lng = other.Lng;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 9: {
+                Lat = input.ReadFixed64();
+                break;
+              }
+              case 17: {
+                Lng = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class MapObjectsRequest : pb::IMessage<MapObjectsRequest> {
+        private static readonly pb::MessageParser<MapObjectsRequest> _parser = new pb::MessageParser<MapObjectsRequest>(() => new MapObjectsRequest());
+        public static pb::MessageParser<MapObjectsRequest> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[6]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public MapObjectsRequest() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public MapObjectsRequest(MapObjectsRequest other) : this() {
+          cellIds_ = other.cellIds_;
+          unknown14_ = other.unknown14_;
+          latitude_ = other.latitude_;
+          longitude_ = other.longitude_;
+        }
+
+        public MapObjectsRequest Clone() {
+          return new MapObjectsRequest(this);
+        }
+
+        /// <summary>Field number for the "cellIds" field.</summary>
+        public const int CellIdsFieldNumber = 1;
+        private pb::ByteString cellIds_ = pb::ByteString.Empty;
+        public pb::ByteString CellIds {
+          get { return cellIds_; }
+          set {
+            cellIds_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "unknown14" field.</summary>
+        public const int Unknown14FieldNumber = 2;
+        private pb::ByteString unknown14_ = pb::ByteString.Empty;
+        public pb::ByteString Unknown14 {
+          get { return unknown14_; }
+          set {
+            unknown14_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "latitude" field.</summary>
+        public const int LatitudeFieldNumber = 3;
+        private ulong latitude_;
+        public ulong Latitude {
+          get { return latitude_; }
+          set {
+            latitude_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "longitude" field.</summary>
+        public const int LongitudeFieldNumber = 4;
+        private ulong longitude_;
+        public ulong Longitude {
+          get { return longitude_; }
+          set {
+            longitude_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as MapObjectsRequest);
+        }
+
+        public bool Equals(MapObjectsRequest other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (CellIds != other.CellIds) return false;
+          if (Unknown14 != other.Unknown14) return false;
+          if (Latitude != other.Latitude) return false;
+          if (Longitude != other.Longitude) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (CellIds.Length != 0) hash ^= CellIds.GetHashCode();
+          if (Unknown14.Length != 0) hash ^= Unknown14.GetHashCode();
+          if (Latitude != 0UL) hash ^= Latitude.GetHashCode();
+          if (Longitude != 0UL) hash ^= Longitude.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (CellIds.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(CellIds);
+          }
+          if (Unknown14.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteBytes(Unknown14);
+          }
+          if (Latitude != 0UL) {
+            output.WriteRawTag(25);
+            output.WriteFixed64(Latitude);
+          }
+          if (Longitude != 0UL) {
+            output.WriteRawTag(33);
+            output.WriteFixed64(Longitude);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (CellIds.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(CellIds);
+          }
+          if (Unknown14.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Unknown14);
+          }
+          if (Latitude != 0UL) {
+            size += 1 + 8;
+          }
+          if (Longitude != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(MapObjectsRequest other) {
+          if (other == null) {
+            return;
+          }
+          if (other.CellIds.Length != 0) {
+            CellIds = other.CellIds;
+          }
+          if (other.Unknown14.Length != 0) {
+            Unknown14 = other.Unknown14;
+          }
+          if (other.Latitude != 0UL) {
+            Latitude = other.Latitude;
+          }
+          if (other.Longitude != 0UL) {
+            Longitude = other.Longitude;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                CellIds = input.ReadBytes();
+                break;
+              }
+              case 18: {
+                Unknown14 = input.ReadBytes();
+                break;
+              }
+              case 25: {
+                Latitude = input.ReadFixed64();
+                break;
+              }
+              case 33: {
+                Longitude = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class FortSearchRequest : pb::IMessage<FortSearchRequest> {
+        private static readonly pb::MessageParser<FortSearchRequest> _parser = new pb::MessageParser<FortSearchRequest>(() => new FortSearchRequest());
+        public static pb::MessageParser<FortSearchRequest> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[7]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public FortSearchRequest() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public FortSearchRequest(FortSearchRequest other) : this() {
+          id_ = other.id_;
+          playerLatDegrees_ = other.playerLatDegrees_;
+          playerLngDegrees_ = other.playerLngDegrees_;
+          fortLatDegrees_ = other.fortLatDegrees_;
+          fortLngDegrees_ = other.fortLngDegrees_;
+        }
+
+        public FortSearchRequest Clone() {
+          return new FortSearchRequest(this);
+        }
+
+        /// <summary>Field number for the "Id" field.</summary>
+        public const int IdFieldNumber = 1;
+        private pb::ByteString id_ = pb::ByteString.Empty;
+        public pb::ByteString Id {
+          get { return id_; }
+          set {
+            id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "PlayerLatDegrees" field.</summary>
+        public const int PlayerLatDegreesFieldNumber = 2;
+        private ulong playerLatDegrees_;
+        public ulong PlayerLatDegrees {
+          get { return playerLatDegrees_; }
+          set {
+            playerLatDegrees_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "PlayerLngDegrees" field.</summary>
+        public const int PlayerLngDegreesFieldNumber = 3;
+        private ulong playerLngDegrees_;
+        public ulong PlayerLngDegrees {
+          get { return playerLngDegrees_; }
+          set {
+            playerLngDegrees_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "FortLatDegrees" field.</summary>
+        public const int FortLatDegreesFieldNumber = 4;
+        private ulong fortLatDegrees_;
+        public ulong FortLatDegrees {
+          get { return fortLatDegrees_; }
+          set {
+            fortLatDegrees_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "FortLngDegrees" field.</summary>
+        public const int FortLngDegreesFieldNumber = 5;
+        private ulong fortLngDegrees_;
+        public ulong FortLngDegrees {
+          get { return fortLngDegrees_; }
+          set {
+            fortLngDegrees_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as FortSearchRequest);
+        }
+
+        public bool Equals(FortSearchRequest other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Id != other.Id) return false;
+          if (PlayerLatDegrees != other.PlayerLatDegrees) return false;
+          if (PlayerLngDegrees != other.PlayerLngDegrees) return false;
+          if (FortLatDegrees != other.FortLatDegrees) return false;
+          if (FortLngDegrees != other.FortLngDegrees) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Id.Length != 0) hash ^= Id.GetHashCode();
+          if (PlayerLatDegrees != 0UL) hash ^= PlayerLatDegrees.GetHashCode();
+          if (PlayerLngDegrees != 0UL) hash ^= PlayerLngDegrees.GetHashCode();
+          if (FortLatDegrees != 0UL) hash ^= FortLatDegrees.GetHashCode();
+          if (FortLngDegrees != 0UL) hash ^= FortLngDegrees.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Id.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(Id);
+          }
+          if (PlayerLatDegrees != 0UL) {
+            output.WriteRawTag(17);
+            output.WriteFixed64(PlayerLatDegrees);
+          }
+          if (PlayerLngDegrees != 0UL) {
+            output.WriteRawTag(25);
+            output.WriteFixed64(PlayerLngDegrees);
+          }
+          if (FortLatDegrees != 0UL) {
+            output.WriteRawTag(33);
+            output.WriteFixed64(FortLatDegrees);
+          }
+          if (FortLngDegrees != 0UL) {
+            output.WriteRawTag(41);
+            output.WriteFixed64(FortLngDegrees);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (Id.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Id);
+          }
+          if (PlayerLatDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          if (PlayerLngDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          if (FortLatDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          if (FortLngDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(FortSearchRequest other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Id.Length != 0) {
+            Id = other.Id;
+          }
+          if (other.PlayerLatDegrees != 0UL) {
+            PlayerLatDegrees = other.PlayerLatDegrees;
+          }
+          if (other.PlayerLngDegrees != 0UL) {
+            PlayerLngDegrees = other.PlayerLngDegrees;
+          }
+          if (other.FortLatDegrees != 0UL) {
+            FortLatDegrees = other.FortLatDegrees;
+          }
+          if (other.FortLngDegrees != 0UL) {
+            FortLngDegrees = other.FortLngDegrees;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Id = input.ReadBytes();
+                break;
+              }
+              case 17: {
+                PlayerLatDegrees = input.ReadFixed64();
+                break;
+              }
+              case 25: {
+                PlayerLngDegrees = input.ReadFixed64();
+                break;
+              }
+              case 33: {
+                FortLatDegrees = input.ReadFixed64();
+                break;
+              }
+              case 41: {
+                FortLngDegrees = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class FortDetailsRequest : pb::IMessage<FortDetailsRequest> {
+        private static readonly pb::MessageParser<FortDetailsRequest> _parser = new pb::MessageParser<FortDetailsRequest>(() => new FortDetailsRequest());
+        public static pb::MessageParser<FortDetailsRequest> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[8]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public FortDetailsRequest() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public FortDetailsRequest(FortDetailsRequest other) : this() {
+          id_ = other.id_;
+          latitude_ = other.latitude_;
+          longitude_ = other.longitude_;
+        }
+
+        public FortDetailsRequest Clone() {
+          return new FortDetailsRequest(this);
+        }
+
+        /// <summary>Field number for the "Id" field.</summary>
+        public const int IdFieldNumber = 1;
+        private pb::ByteString id_ = pb::ByteString.Empty;
+        public pb::ByteString Id {
+          get { return id_; }
+          set {
+            id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "Latitude" field.</summary>
+        public const int LatitudeFieldNumber = 2;
+        private ulong latitude_;
+        public ulong Latitude {
+          get { return latitude_; }
+          set {
+            latitude_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "Longitude" field.</summary>
+        public const int LongitudeFieldNumber = 3;
+        private ulong longitude_;
+        public ulong Longitude {
+          get { return longitude_; }
+          set {
+            longitude_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as FortDetailsRequest);
+        }
+
+        public bool Equals(FortDetailsRequest other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Id != other.Id) return false;
+          if (Latitude != other.Latitude) return false;
+          if (Longitude != other.Longitude) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Id.Length != 0) hash ^= Id.GetHashCode();
+          if (Latitude != 0UL) hash ^= Latitude.GetHashCode();
+          if (Longitude != 0UL) hash ^= Longitude.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Id.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(Id);
+          }
+          if (Latitude != 0UL) {
+            output.WriteRawTag(17);
+            output.WriteFixed64(Latitude);
+          }
+          if (Longitude != 0UL) {
+            output.WriteRawTag(25);
+            output.WriteFixed64(Longitude);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (Id.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Id);
+          }
+          if (Latitude != 0UL) {
+            size += 1 + 8;
+          }
+          if (Longitude != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(FortDetailsRequest other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Id.Length != 0) {
+            Id = other.Id;
+          }
+          if (other.Latitude != 0UL) {
+            Latitude = other.Latitude;
+          }
+          if (other.Longitude != 0UL) {
+            Longitude = other.Longitude;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Id = input.ReadBytes();
+                break;
+              }
+              case 17: {
+                Latitude = input.ReadFixed64();
+                break;
+              }
+              case 25: {
+                Longitude = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class SettingsGuid : pb::IMessage<SettingsGuid> {
+        private static readonly pb::MessageParser<SettingsGuid> _parser = new pb::MessageParser<SettingsGuid>(() => new SettingsGuid());
+        public static pb::MessageParser<SettingsGuid> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[9]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public SettingsGuid() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public SettingsGuid(SettingsGuid other) : this() {
+          guid_ = other.guid_;
+        }
+
+        public SettingsGuid Clone() {
+          return new SettingsGuid(this);
+        }
+
+        /// <summary>Field number for the "guid" field.</summary>
+        public const int GuidFieldNumber = 1;
+        private pb::ByteString guid_ = pb::ByteString.Empty;
+        public pb::ByteString Guid {
+          get { return guid_; }
+          set {
+            guid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as SettingsGuid);
+        }
+
+        public bool Equals(SettingsGuid other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Guid != other.Guid) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Guid.Length != 0) hash ^= Guid.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Guid.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(Guid);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (Guid.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Guid);
+          }
+          return size;
+        }
+
+        public void MergeFrom(SettingsGuid other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Guid.Length != 0) {
+            Guid = other.Guid;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Guid = input.ReadBytes();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class Time : pb::IMessage<Time> {
+        private static readonly pb::MessageParser<Time> _parser = new pb::MessageParser<Time>(() => new Time());
+        public static pb::MessageParser<Time> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[10]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public Time() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public Time(Time other) : this() {
+          time_ = other.time_;
+        }
+
+        public Time Clone() {
+          return new Time(this);
+        }
+
+        /// <summary>Field number for the "time" field.</summary>
+        public const int Time_FieldNumber = 1;
+        private long time_;
+        public long Time_ {
+          get { return time_; }
+          set {
+            time_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as Time);
+        }
+
+        public bool Equals(Time other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Time_ != other.Time_) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Time_ != 0L) hash ^= Time_.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Time_ != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(Time_);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (Time_ != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time_);
+          }
+          return size;
+        }
+
+        public void MergeFrom(Time other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Time_ != 0L) {
+            Time_ = other.Time_;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                Time_ = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
 
       }
 

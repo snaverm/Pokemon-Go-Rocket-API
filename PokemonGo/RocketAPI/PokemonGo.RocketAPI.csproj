@@ -76,10 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\AuthType.cs" />
+    <Compile Include="Enums\MiscEnums.cs" />
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="GeneratedCode\EncounterRequest.cs" />
-    <Compile Include="GeneratedCode\EncounterResponse.cs" />
+    <Compile Include="GeneratedCode\FortDetailResponse.cs" />
+    <Compile Include="GeneratedCode\FortSearchResponse.cs" />
+    <Compile Include="GeneratedCode\MapObjectsResponse.cs" />
+    <Compile Include="GeneratedCode\PlayerUpdateResponse.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
     <Compile Include="GeneratedCode\SettingsResponse.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
@@ -99,8 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Proto\EncounterResponse.proto" />
-    <None Include="Proto\EncounterRequest.proto" />
+    <None Include="Proto\FortDetailResponse.proto" />
+    <None Include="Proto\FortSearchResponse.proto" />
+    <None Include="Proto\PlayerUpdateResponse.proto" />
+    <None Include="Proto\MapObjectsResponse.proto" />
     <None Include="Proto\SettingsResponse.proto" />
     <None Include="Proto\Request.proto" />
   </ItemGroup>

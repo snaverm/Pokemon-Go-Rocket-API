@@ -2,7 +2,7 @@
 
 package PokemonGo.RocketAPI.GeneratedCode;
 
-message EncounterResponse {
+message MapObjectsResponse {
   int32 unknown1 = 1;
   int64 unknown2 = 2;
   string api_url = 3;
