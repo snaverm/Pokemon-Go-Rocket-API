@@ -21,7 +21,7 @@ await ExecuteCatchAllNearbyPokemons(client);
 Features
 ```
 #PTC Login / Google last part
-#Get Map Objects
+#Get Map Objects and Inventory
 #Search for gyms/pokestops/spawns
 #Farm pokestops
 #Farm all pokemons in neighbourhood
