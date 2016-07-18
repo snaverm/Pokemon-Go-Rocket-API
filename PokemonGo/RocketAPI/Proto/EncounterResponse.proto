@@ -28,64 +28,98 @@ message EncounterResponse {
   }
 
   message Payload {
-    repeated EncounterOutProto profile = 1;
+    repeated ClientMapCell profile = 1;
 	int32 unknownnumber = 2;
   
-  
-  message EncounterOutProto {
-    WildPokemonProto Pokemon = 1;
-    int32 Background = 2;
-    int32 Status = 3;
-    CaptureProbabilityProto CaptureProbability = 4;
+  message ClientMapCell {
+    uint64 S2CellId = 1;
+    int64 AsOfTimeMs = 2;
+    repeated PokemonFortProto Fort = 3;
+    repeated ClientSpawnPointProto SpawnPoint = 4;
+    repeated WildPokemonProto WildPokemon = 5;
+    //unknown DeletedObject = 6;
+    bool IsTruncatedList = 7;
+    repeated PokemonSummaryFortProto FortSummary = 8;
+    repeated ClientSpawnPointProto DecimatedSpawnPoint = 9;
+    repeated MapPokemonProto MapPokemon = 10;
+    repeated NearbyPokemonProto NearbyPokemon = 11;
+  }
 
-	message WildPokemonProto {
+
+  message WildPokemon {
+    string UniqueId = 1;
+    string PokemonId = 2;
+    // int64 three = 3;
+    // float four = 4;
+    // int32 five = 5;
+    // unknown six = 6;
+    repeated NearbyPokemonProto pokemon = 11;
+  }
+
+
+  message MapPokemonProto {
+    string SpawnpointId = 1;
+    uint64 EncounterId = 2;
+    int32 PokedexTypeId = 3;
+    int64 ExpirationTimeMs = 4;
+    double Latitude = 5;
+    double Longitude = 6;
+  }
+
+  message PokemonFortProto {
+    string FortId = 1;
+    int64 LastModifiedMs = 2;
+    double Latitude = 3;
+    double Longitude = 4;
+    int32 Team = 5;
+    int32 GuardPokemonId = 6;
+    int32 GuardPokemonLevel = 7;
+    bool Enabled = 8;
+    // ENUM.Holoholo.Rpc.FortType FortType = 9;
+    int32 FortType = 9;
+    int64 GymPoints = 10;
+    bool IsInBattle = 11;
+    //unknown ActiveFortModifier = 12;
+    MapPokemonProto ActivePokemon = 13;
+    int64 CooldownCompleteMs = 14;
+    // ENUM.Holoholo.Rpc.Sponsor.Types.FortSponsor.Sponsor Sponsor = 15;
+    int32 Sponsor = 15;
+    // ENUM.Holoholo.Rpc.RenderingType.Types.FortRenderingType.RenderingType RenderingType = 16;
+    int32 RenderingType = 16;
+  }
+
+  message PokemonSummaryFortProto {
+    string FortSummaryId = 1;
+    int64 LastModifiedMs = 2;
+    double Latitude = 3;
+    double Longitude = 4;
+  }
+
+  message ClientSpawnPointProto {
+    double Latitude = 2;
+    double Longitude = 3;
+  }
+
+  message WildPokemonProto {
     uint64 EncounterId = 1;
     int64 LastModifiedMs = 2;
     double Latitude = 3;
     double Longitude = 4;
     string SpawnPointId = 5;
-    PokemonProto Pokemon = 7;
+    Pokemon pokemon = 7;
     int32 TimeTillHiddenMs = 11;
-	
-	}
 
-	message PokemonProto {
-    uint64 Id = 1;
-    int32 PokemonId = 2;
-    int32 Cp = 3;
-    int32 Stamina = 4;
-    int32 MaxStamina = 5;
-    int32 Move1 = 6;
-    int32 Move2 = 7;
-    string DeployedFortId = 8;
-    string OwnerName = 9;
-    bool IsEgg = 10;
-    double EggKmWalkedTarget = 11;
-    double EggKmWalkedStart = 12;
-    int32 Origin = 14;
-    float HeightM = 15;
-    float WeightKg = 16;
-    int32 IndividualAttack = 17;
-    int32 IndividualDefense = 18;
-    int32 IndividualStamina = 19;
-    float CpMultiplier = 20;
-    int32 Pokeball = 21;
-    int64 CapturedS2CellId = 22;
-    int32 BattlesAttacked = 23;
-    int32 BattlesDefended = 24;
-    string EggIncubatorId = 25;
-    int64 CreationTimeMs = 26;
-    int32 NumUpgrades = 27;
-    float AdditionalCpMultiplier = 28;
-    bool Favorite = 29;
-    string Nickname = 30;
-    bool FromFort = 31;
- }
- message CaptureProbabilityProto {
-    //unknown PokeballType = 1;
-    //unknown CaptureProbability = 2;
-    double ReticleDifficultyScale = 12;
- }
- }
- }
- }
+    message Pokemon {
+    	uint64 Id = 1;
+    	int32 PokemonId = 2;
+    }
+  }
+
+  message NearbyPokemonProto {
+    int32 PokedexNumber = 1;
+    float DistanceMeters = 2;
+    uint64 EncounterId = 3;
+  }
+
+  }
+  }

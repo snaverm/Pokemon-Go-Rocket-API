@@ -166,7 +166,12 @@ namespace PokemonGo.RocketAPI
                 Unknown14 = ByteString.CopyFromUtf8("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
             };
 
-            var encounterRequest = RequestBuilder.GetRequest(_unknownAuth, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, new Request.Types.Requests() { Type = (int)RequestType.Encounters, Message = customRequest.ToByteString()});
+            var encounterRequest = RequestBuilder.GetRequest(_unknownAuth, Settings.DefaultLatitude, Settings.DefaultLongitude, 30, 
+                new Request.Types.Requests() { Type = (int)RequestType.Encounters, Message = customRequest.ToByteString() },
+                new Request.Types.Requests() { Type = (int)RequestType.Unknown126 },
+                new Request.Types.Requests() { Type = (int)RequestType.Time, Message = new EncounterRequest.Types.Time() { Time_ = DateTime.UtcNow.ToUnixTime() }.ToByteString() },
+                new Request.Types.Requests() { Type = (int)RequestType.Unknown129 },
+                new Request.Types.Requests() { Type = (int)RequestType.Settings, Message = new EncounterRequest.Types.SettingsGuid() { Guid = ByteString.CopyFromUtf8("4a2e9bc330dae60e7b74fc85b98868ab4700802e")}.ToByteString() });
 
             return await _httpClient.PostProto<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterRequest);
         }
