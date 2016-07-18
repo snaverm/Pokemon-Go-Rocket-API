@@ -79,6 +79,8 @@
     <Compile Include="Enums\MiscEnums.cs" />
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="GeneratedCode\CatchPokemonResponse.cs" />
+    <Compile Include="GeneratedCode\EncounterResponse.cs" />
     <Compile Include="GeneratedCode\FortDetailResponse.cs" />
     <Compile Include="GeneratedCode\FortSearchResponse.cs" />
     <Compile Include="GeneratedCode\MapObjectsResponse.cs" />
@@ -102,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Proto\EncounterResponse.proto" />
+    <None Include="Proto\CatchPokemonResponse.proto" />
     <None Include="Proto\FortDetailResponse.proto" />
     <None Include="Proto\FortSearchResponse.proto" />
     <None Include="Proto\PlayerUpdateResponse.proto" />

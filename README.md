@@ -15,6 +15,7 @@ var settings = await client.GetSettings();
 var mapObjects = await client.GetMapObjects();
 
 await ExecuteFarmingPokestops(client);
+await ExecuteCatchAllNearbyPokemons(client);
 ```
 
 Features
@@ -23,11 +24,11 @@ Features
 #Get Map Objects
 #Search for gyms/pokestops/spawns
 #Farm pokestops
+#Farm all pokemons in neighbourhood
 ```
 
 Todo
 
 ```
-#catch the pokemon!
 #Gotta catch them all
 ```

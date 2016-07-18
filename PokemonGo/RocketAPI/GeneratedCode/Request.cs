@@ -24,7 +24,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg1SZXF1ZXN0LnByb3RvEiFQb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRl",
-            "ZENvZGUi0gkKB1JlcXVlc3QSEAoIdW5rbm93bjEYASABKAUSDgoGcnBjX2lk",
+            "ZENvZGUihAwKB1JlcXVlc3QSEAoIdW5rbm93bjEYASABKAUSDgoGcnBjX2lk",
             "GAMgASgDEkUKCHJlcXVlc3RzGAQgAygLMjMuUG9rZW1vbkdvLlJvY2tldEFQ",
             "SS5HZW5lcmF0ZWRDb2RlLlJlcXVlc3QuUmVxdWVzdHMSRQoIdW5rbm93bjYY",
             "BiABKAsyMy5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENvZGUuUmVx",
@@ -50,8 +50,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             "cmVlcxgCIAEoBhIYChBQbGF5ZXJMbmdEZWdyZWVzGAMgASgGEhYKDkZvcnRM",
             "YXREZWdyZWVzGAQgASgGEhYKDkZvcnRMbmdEZWdyZWVzGAUgASgGGkUKEkZv",
             "cnREZXRhaWxzUmVxdWVzdBIKCgJJZBgBIAEoDBIQCghMYXRpdHVkZRgCIAEo",
-            "BhIRCglMb25naXR1ZGUYAyABKAYaHAoMU2V0dGluZ3NHdWlkEgwKBGd1aWQY",
-            "ASABKAwaFAoEVGltZRIMCgR0aW1lGAEgASgDYgZwcm90bzM="));
+            "BhIRCglMb25naXR1ZGUYAyABKAYacQoQRW5jb3VudGVyUmVxdWVzdBITCgtF",
+            "bmNvdW50ZXJJZBgBIAEoBhIUCgxTcGF3bnBvaW50SWQYAiABKAkSGAoQUGxh",
+            "eWVyTGF0RGVncmVlcxgDIAEoBhIYChBQbGF5ZXJMbmdEZWdyZWVzGAQgASgG",
+            "GrwBChNDYXRjaFBva2Vtb25SZXF1ZXN0EhMKC0VuY291bnRlcklkGAEgASgG",
+            "EhAKCFBva2ViYWxsGAIgASgFEh0KFU5vcm1hbGl6ZWRSZXRpY2xlU2l6ZRgD",
+            "IAEoBhIWCg5TcGF3blBvaW50R3VpZBgEIAEoCRISCgpIaXRQb2tlbW9uGAUg",
+            "ASgFEhQKDFNwaW5Nb2RpZmllchgGIAEoBhIdChVOb3JtYWxpemVkSGl0UG9z",
+            "aXRpb24YByABKAYaHAoMU2V0dGluZ3NHdWlkEgwKBGd1aWQYASABKAwaFAoE",
+            "VGltZRIMCgR0aW1lGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -64,6 +71,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.MapObjectsRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.MapObjectsRequest.Parser, new[]{ "CellIds", "Unknown14", "Latitude", "Longitude" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortSearchRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortSearchRequest.Parser, new[]{ "Id", "PlayerLatDegrees", "PlayerLngDegrees", "FortLatDegrees", "FortLngDegrees" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortDetailsRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.FortDetailsRequest.Parser, new[]{ "Id", "Latitude", "Longitude" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.EncounterRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.EncounterRequest.Parser, new[]{ "EncounterId", "SpawnpointId", "PlayerLatDegrees", "PlayerLngDegrees" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.CatchPokemonRequest), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.CatchPokemonRequest.Parser, new[]{ "EncounterId", "Pokeball", "NormalizedReticleSize", "SpawnPointGuid", "HitPokemon", "SpinModifier", "NormalizedHitPosition" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.SettingsGuid), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.SettingsGuid.Parser, new[]{ "Guid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Time), global::PokemonGo.RocketAPI.GeneratedCode.Request.Types.Time.Parser, new[]{ "Time_" }, null, null, null)})
           }));
@@ -2022,12 +2031,461 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class EncounterRequest : pb::IMessage<EncounterRequest> {
+        private static readonly pb::MessageParser<EncounterRequest> _parser = new pb::MessageParser<EncounterRequest>(() => new EncounterRequest());
+        public static pb::MessageParser<EncounterRequest> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[9]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public EncounterRequest() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public EncounterRequest(EncounterRequest other) : this() {
+          encounterId_ = other.encounterId_;
+          spawnpointId_ = other.spawnpointId_;
+          playerLatDegrees_ = other.playerLatDegrees_;
+          playerLngDegrees_ = other.playerLngDegrees_;
+        }
+
+        public EncounterRequest Clone() {
+          return new EncounterRequest(this);
+        }
+
+        /// <summary>Field number for the "EncounterId" field.</summary>
+        public const int EncounterIdFieldNumber = 1;
+        private ulong encounterId_;
+        public ulong EncounterId {
+          get { return encounterId_; }
+          set {
+            encounterId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "SpawnpointId" field.</summary>
+        public const int SpawnpointIdFieldNumber = 2;
+        private string spawnpointId_ = "";
+        public string SpawnpointId {
+          get { return spawnpointId_; }
+          set {
+            spawnpointId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "PlayerLatDegrees" field.</summary>
+        public const int PlayerLatDegreesFieldNumber = 3;
+        private ulong playerLatDegrees_;
+        public ulong PlayerLatDegrees {
+          get { return playerLatDegrees_; }
+          set {
+            playerLatDegrees_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "PlayerLngDegrees" field.</summary>
+        public const int PlayerLngDegreesFieldNumber = 4;
+        private ulong playerLngDegrees_;
+        public ulong PlayerLngDegrees {
+          get { return playerLngDegrees_; }
+          set {
+            playerLngDegrees_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as EncounterRequest);
+        }
+
+        public bool Equals(EncounterRequest other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (EncounterId != other.EncounterId) return false;
+          if (SpawnpointId != other.SpawnpointId) return false;
+          if (PlayerLatDegrees != other.PlayerLatDegrees) return false;
+          if (PlayerLngDegrees != other.PlayerLngDegrees) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (EncounterId != 0UL) hash ^= EncounterId.GetHashCode();
+          if (SpawnpointId.Length != 0) hash ^= SpawnpointId.GetHashCode();
+          if (PlayerLatDegrees != 0UL) hash ^= PlayerLatDegrees.GetHashCode();
+          if (PlayerLngDegrees != 0UL) hash ^= PlayerLngDegrees.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (EncounterId != 0UL) {
+            output.WriteRawTag(9);
+            output.WriteFixed64(EncounterId);
+          }
+          if (SpawnpointId.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(SpawnpointId);
+          }
+          if (PlayerLatDegrees != 0UL) {
+            output.WriteRawTag(25);
+            output.WriteFixed64(PlayerLatDegrees);
+          }
+          if (PlayerLngDegrees != 0UL) {
+            output.WriteRawTag(33);
+            output.WriteFixed64(PlayerLngDegrees);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (EncounterId != 0UL) {
+            size += 1 + 8;
+          }
+          if (SpawnpointId.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(SpawnpointId);
+          }
+          if (PlayerLatDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          if (PlayerLngDegrees != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(EncounterRequest other) {
+          if (other == null) {
+            return;
+          }
+          if (other.EncounterId != 0UL) {
+            EncounterId = other.EncounterId;
+          }
+          if (other.SpawnpointId.Length != 0) {
+            SpawnpointId = other.SpawnpointId;
+          }
+          if (other.PlayerLatDegrees != 0UL) {
+            PlayerLatDegrees = other.PlayerLatDegrees;
+          }
+          if (other.PlayerLngDegrees != 0UL) {
+            PlayerLngDegrees = other.PlayerLngDegrees;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 9: {
+                EncounterId = input.ReadFixed64();
+                break;
+              }
+              case 18: {
+                SpawnpointId = input.ReadString();
+                break;
+              }
+              case 25: {
+                PlayerLatDegrees = input.ReadFixed64();
+                break;
+              }
+              case 33: {
+                PlayerLngDegrees = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+      public sealed partial class CatchPokemonRequest : pb::IMessage<CatchPokemonRequest> {
+        private static readonly pb::MessageParser<CatchPokemonRequest> _parser = new pb::MessageParser<CatchPokemonRequest>(() => new CatchPokemonRequest());
+        public static pb::MessageParser<CatchPokemonRequest> Parser { get { return _parser; } }
+
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[10]; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        public CatchPokemonRequest() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        public CatchPokemonRequest(CatchPokemonRequest other) : this() {
+          encounterId_ = other.encounterId_;
+          pokeball_ = other.pokeball_;
+          normalizedReticleSize_ = other.normalizedReticleSize_;
+          spawnPointGuid_ = other.spawnPointGuid_;
+          hitPokemon_ = other.hitPokemon_;
+          spinModifier_ = other.spinModifier_;
+          normalizedHitPosition_ = other.normalizedHitPosition_;
+        }
+
+        public CatchPokemonRequest Clone() {
+          return new CatchPokemonRequest(this);
+        }
+
+        /// <summary>Field number for the "EncounterId" field.</summary>
+        public const int EncounterIdFieldNumber = 1;
+        private ulong encounterId_;
+        public ulong EncounterId {
+          get { return encounterId_; }
+          set {
+            encounterId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "Pokeball" field.</summary>
+        public const int PokeballFieldNumber = 2;
+        private int pokeball_;
+        public int Pokeball {
+          get { return pokeball_; }
+          set {
+            pokeball_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "NormalizedReticleSize" field.</summary>
+        public const int NormalizedReticleSizeFieldNumber = 3;
+        private ulong normalizedReticleSize_;
+        public ulong NormalizedReticleSize {
+          get { return normalizedReticleSize_; }
+          set {
+            normalizedReticleSize_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "SpawnPointGuid" field.</summary>
+        public const int SpawnPointGuidFieldNumber = 4;
+        private string spawnPointGuid_ = "";
+        public string SpawnPointGuid {
+          get { return spawnPointGuid_; }
+          set {
+            spawnPointGuid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "HitPokemon" field.</summary>
+        public const int HitPokemonFieldNumber = 5;
+        private int hitPokemon_;
+        public int HitPokemon {
+          get { return hitPokemon_; }
+          set {
+            hitPokemon_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "SpinModifier" field.</summary>
+        public const int SpinModifierFieldNumber = 6;
+        private ulong spinModifier_;
+        public ulong SpinModifier {
+          get { return spinModifier_; }
+          set {
+            spinModifier_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "NormalizedHitPosition" field.</summary>
+        public const int NormalizedHitPositionFieldNumber = 7;
+        private ulong normalizedHitPosition_;
+        public ulong NormalizedHitPosition {
+          get { return normalizedHitPosition_; }
+          set {
+            normalizedHitPosition_ = value;
+          }
+        }
+
+        public override bool Equals(object other) {
+          return Equals(other as CatchPokemonRequest);
+        }
+
+        public bool Equals(CatchPokemonRequest other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (EncounterId != other.EncounterId) return false;
+          if (Pokeball != other.Pokeball) return false;
+          if (NormalizedReticleSize != other.NormalizedReticleSize) return false;
+          if (SpawnPointGuid != other.SpawnPointGuid) return false;
+          if (HitPokemon != other.HitPokemon) return false;
+          if (SpinModifier != other.SpinModifier) return false;
+          if (NormalizedHitPosition != other.NormalizedHitPosition) return false;
+          return true;
+        }
+
+        public override int GetHashCode() {
+          int hash = 1;
+          if (EncounterId != 0UL) hash ^= EncounterId.GetHashCode();
+          if (Pokeball != 0) hash ^= Pokeball.GetHashCode();
+          if (NormalizedReticleSize != 0UL) hash ^= NormalizedReticleSize.GetHashCode();
+          if (SpawnPointGuid.Length != 0) hash ^= SpawnPointGuid.GetHashCode();
+          if (HitPokemon != 0) hash ^= HitPokemon.GetHashCode();
+          if (SpinModifier != 0UL) hash ^= SpinModifier.GetHashCode();
+          if (NormalizedHitPosition != 0UL) hash ^= NormalizedHitPosition.GetHashCode();
+          return hash;
+        }
+
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (EncounterId != 0UL) {
+            output.WriteRawTag(9);
+            output.WriteFixed64(EncounterId);
+          }
+          if (Pokeball != 0) {
+            output.WriteRawTag(16);
+            output.WriteInt32(Pokeball);
+          }
+          if (NormalizedReticleSize != 0UL) {
+            output.WriteRawTag(25);
+            output.WriteFixed64(NormalizedReticleSize);
+          }
+          if (SpawnPointGuid.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(SpawnPointGuid);
+          }
+          if (HitPokemon != 0) {
+            output.WriteRawTag(40);
+            output.WriteInt32(HitPokemon);
+          }
+          if (SpinModifier != 0UL) {
+            output.WriteRawTag(49);
+            output.WriteFixed64(SpinModifier);
+          }
+          if (NormalizedHitPosition != 0UL) {
+            output.WriteRawTag(57);
+            output.WriteFixed64(NormalizedHitPosition);
+          }
+        }
+
+        public int CalculateSize() {
+          int size = 0;
+          if (EncounterId != 0UL) {
+            size += 1 + 8;
+          }
+          if (Pokeball != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Pokeball);
+          }
+          if (NormalizedReticleSize != 0UL) {
+            size += 1 + 8;
+          }
+          if (SpawnPointGuid.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(SpawnPointGuid);
+          }
+          if (HitPokemon != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(HitPokemon);
+          }
+          if (SpinModifier != 0UL) {
+            size += 1 + 8;
+          }
+          if (NormalizedHitPosition != 0UL) {
+            size += 1 + 8;
+          }
+          return size;
+        }
+
+        public void MergeFrom(CatchPokemonRequest other) {
+          if (other == null) {
+            return;
+          }
+          if (other.EncounterId != 0UL) {
+            EncounterId = other.EncounterId;
+          }
+          if (other.Pokeball != 0) {
+            Pokeball = other.Pokeball;
+          }
+          if (other.NormalizedReticleSize != 0UL) {
+            NormalizedReticleSize = other.NormalizedReticleSize;
+          }
+          if (other.SpawnPointGuid.Length != 0) {
+            SpawnPointGuid = other.SpawnPointGuid;
+          }
+          if (other.HitPokemon != 0) {
+            HitPokemon = other.HitPokemon;
+          }
+          if (other.SpinModifier != 0UL) {
+            SpinModifier = other.SpinModifier;
+          }
+          if (other.NormalizedHitPosition != 0UL) {
+            NormalizedHitPosition = other.NormalizedHitPosition;
+          }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 9: {
+                EncounterId = input.ReadFixed64();
+                break;
+              }
+              case 16: {
+                Pokeball = input.ReadInt32();
+                break;
+              }
+              case 25: {
+                NormalizedReticleSize = input.ReadFixed64();
+                break;
+              }
+              case 34: {
+                SpawnPointGuid = input.ReadString();
+                break;
+              }
+              case 40: {
+                HitPokemon = input.ReadInt32();
+                break;
+              }
+              case 49: {
+                SpinModifier = input.ReadFixed64();
+                break;
+              }
+              case 57: {
+                NormalizedHitPosition = input.ReadFixed64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class SettingsGuid : pb::IMessage<SettingsGuid> {
         private static readonly pb::MessageParser<SettingsGuid> _parser = new pb::MessageParser<SettingsGuid>(() => new SettingsGuid());
         public static pb::MessageParser<SettingsGuid> Parser { get { return _parser; } }
 
         public static pbr::MessageDescriptor Descriptor {
-          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[9]; }
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[11]; }
         }
 
         pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -2130,7 +2588,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         public static pb::MessageParser<Time> Parser { get { return _parser; } }
 
         public static pbr::MessageDescriptor Descriptor {
-          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[10]; }
+          get { return global::PokemonGo.RocketAPI.GeneratedCode.Request.Descriptor.NestedTypes[12]; }
         }
 
         pbr::MessageDescriptor pb::IMessage.Descriptor {

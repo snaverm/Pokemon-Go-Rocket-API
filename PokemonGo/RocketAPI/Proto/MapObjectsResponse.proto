@@ -59,7 +59,7 @@ message MapObjectsResponse {
 
   message MapPokemonProto {
     string SpawnpointId = 1;
-    uint64 EncounterId = 2;
+    fixed64 EncounterId = 2;
     int32 PokedexTypeId = 3;
     int64 ExpirationTimeMs = 4;
     double Latitude = 5;

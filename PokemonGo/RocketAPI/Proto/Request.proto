@@ -77,6 +77,23 @@ message Request {
 		fixed64 Latitude = 2;
 		fixed64 Longitude = 3;
 	}
+
+	 message EncounterRequest {
+		 fixed64 EncounterId = 1;
+		 string SpawnpointId = 2;
+		 fixed64 PlayerLatDegrees = 3;
+		 fixed64 PlayerLngDegrees = 4;
+	}
+
+	 message CatchPokemonRequest {
+		fixed64 EncounterId = 1;
+		int32 Pokeball = 2;
+		fixed64 NormalizedReticleSize = 3;
+		string SpawnPointGuid = 4;
+		int32 HitPokemon = 5;
+		fixed64 SpinModifier = 6;
+		fixed64 NormalizedHitPosition = 7;
+	}
   
 	message SettingsGuid
 	{

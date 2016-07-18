@@ -234,5 +234,37 @@ namespace PokemonGo.RocketAPI
             return await _httpClient.PostProto<Request, FortSearchResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
 
+        public async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnPointGuid)
+        {
+            var customRequest = new Request.Types.EncounterRequest()
+            {
+                EncounterId = encounterId,
+                SpawnpointId = spawnPointGuid,
+                PlayerLatDegrees = Utils.FloatAsUlong(_currentLat),
+                PlayerLngDegrees = Utils.FloatAsUlong(_currentLng)
+            };
+
+            var encounterResponse = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, new Request.Types.Requests() { Type = (int)RequestType.ENCOUNTER, Message = customRequest.ToByteString() });
+            return await _httpClient.PostProto<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterResponse);
+        }
+
+        public async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnPointGuid, double pokemonLat, double pokemonLng)
+        {
+            var customRequest = new Request.Types.CatchPokemonRequest()
+            {
+                EncounterId = encounterId,
+                Pokeball = (int) MiscEnums.Item.ITEM_POKE_BALL,
+                SpawnPointGuid = spawnPointGuid,
+                HitPokemon = 1,
+                NormalizedReticleSize = Utils.FloatAsUlong(1.86440348625),
+                SpinModifier = Utils.FloatAsUlong(0.00655560661107)
+            };
+
+            var catchPokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, new Request.Types.Requests() { Type = (int)RequestType.CATCH_POKEMON, Message = customRequest.ToByteString() });
+            return await _httpClient.PostProto<Request, CatchPokemonResponse>($"https://{_apiUrl}/rpc", catchPokemonRequest);
+        }
+
+
+
     }
 }

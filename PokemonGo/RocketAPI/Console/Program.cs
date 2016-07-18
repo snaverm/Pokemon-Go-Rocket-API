@@ -32,6 +32,7 @@ namespace PokemonGo.RocketAPI.Console
             var mapObjects = await client.GetMapObjects();
 
             await ExecuteFarmingPokestops(client);
+            await ExecuteCatchAllNearbyPokemons(client);
         }
 
         private static async Task ExecuteFarmingPokestops(Client client)
@@ -50,6 +51,22 @@ namespace PokemonGo.RocketAPI.Console
                 System.Console.WriteLine($"Farmed XP: {bag.XpAwarded}, Gems: { bag.GemsAwarded}, Eggs: {bag.EggPokemon} Items: {GetFriendlyItemsString(bag.Items)}");
                 await Task.Delay(15000);
             }
+        }
+
+        private static async Task ExecuteCatchAllNearbyPokemons(Client client)
+        {
+            var mapObjects = await client.GetMapObjects();
+
+            var pokemons = mapObjects.Payload[0].Profile.SelectMany(i => i.MapPokemon);
+
+            foreach (var pokemon in pokemons)
+            {
+                var update = await client.UpdatePlayerLocation(pokemon.Latitude, pokemon.Longitude);
+                var encounterPokemonRespone = await client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+                var caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude);
+                await Task.Delay(15000);
+            }
+
         }
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.Item> items)

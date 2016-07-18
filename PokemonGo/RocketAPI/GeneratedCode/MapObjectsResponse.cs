@@ -62,7 +62,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             "ZW1vbhgLIAMoCzJQLlBva2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJhdGVkQ29k",
             "ZS5NYXBPYmplY3RzUmVzcG9uc2UuUGF5bG9hZC5OZWFyYnlQb2tlbW9uUHJv",
             "dG8akgEKD01hcFBva2Vtb25Qcm90bxIUCgxTcGF3bnBvaW50SWQYASABKAkS",
-            "EwoLRW5jb3VudGVySWQYAiABKAQSFQoNUG9rZWRleFR5cGVJZBgDIAEoBRIY",
+            "EwoLRW5jb3VudGVySWQYAiABKAYSFQoNUG9rZWRleFR5cGVJZBgDIAEoBRIY",
             "ChBFeHBpcmF0aW9uVGltZU1zGAQgASgDEhAKCExhdGl0dWRlGAUgASgBEhEK",
             "CUxvbmdpdHVkZRgGIAEoARqUAwoQUG9rZW1vbkZvcnRQcm90bxIOCgZGb3J0",
             "SWQYASABKAkSFgoOTGFzdE1vZGlmaWVkTXMYAiABKAMSEAoITGF0aXR1ZGUY",
@@ -1488,8 +1488,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
                 output.WriteString(SpawnpointId);
               }
               if (EncounterId != 0UL) {
-                output.WriteRawTag(16);
-                output.WriteUInt64(EncounterId);
+                output.WriteRawTag(17);
+                output.WriteFixed64(EncounterId);
               }
               if (PokedexTypeId != 0) {
                 output.WriteRawTag(24);
@@ -1515,7 +1515,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
                 size += 1 + pb::CodedOutputStream.ComputeStringSize(SpawnpointId);
               }
               if (EncounterId != 0UL) {
-                size += 1 + pb::CodedOutputStream.ComputeUInt64Size(EncounterId);
+                size += 1 + 8;
               }
               if (PokedexTypeId != 0) {
                 size += 1 + pb::CodedOutputStream.ComputeInt32Size(PokedexTypeId);
@@ -1567,8 +1567,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
                     SpawnpointId = input.ReadString();
                     break;
                   }
-                  case 16: {
-                    EncounterId = input.ReadUInt64();
+                  case 17: {
+                    EncounterId = input.ReadFixed64();
                     break;
                   }
                   case 24: {
