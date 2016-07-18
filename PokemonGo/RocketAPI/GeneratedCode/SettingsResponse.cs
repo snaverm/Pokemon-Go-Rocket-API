@@ -24,53 +24,52 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChZTZXR0aW5nc1Jlc3BvbnNlLnByb3RvEiFQb2tlbW9uR28uUm9ja2V0QVBJ",
-            "LkdlbmVyYXRlZENvZGUipg4KEFNldHRpbmdzUmVzcG9uc2USEAoIdW5rbm93",
+            "LkdlbmVyYXRlZENvZGUimg4KEFNldHRpbmdzUmVzcG9uc2USEAoIdW5rbm93",
             "bjEYASABKAUSEAoIdW5rbm93bjIYAiABKAMSDwoHYXBpX3VybBgDIAEoCRJO",
             "Cgh1bmtub3duNhgGIAEoCzI8LlBva2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJh",
-            "dGVkQ29kZS5TZXR0aW5nc1Jlc3BvbnNlLlVua25vd242Ek4KCHVua25vd243",
-            "GAcgASgLMjwuUG9rZW1vbkdvLlJvY2tldEFQSS5HZW5lcmF0ZWRDb2RlLlNl",
-            "dHRpbmdzUmVzcG9uc2UuVW5rbm93bjcSTAoHcGF5bG9hZBhkIAMoCzI7LlBv",
-            "a2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJhdGVkQ29kZS5TZXR0aW5nc1Jlc3Bv",
-            "bnNlLlBheWxvYWQSFAoMZXJyb3JNZXNzYWdlGGUgASgJGpMBCghVbmtub3du",
-            "NhIQCgh1bmtub3duMRgBIAEoBRJXCgh1bmtub3duMhgCIAEoCzJFLlBva2Vt",
-            "b25Hby5Sb2NrZXRBUEkuR2VuZXJhdGVkQ29kZS5TZXR0aW5nc1Jlc3BvbnNl",
-            "LlVua25vd242LlVua25vd24yGhwKCFVua25vd24yEhAKCHVua25vd24xGAEg",
-            "ASgMGkMKCFVua25vd243EhEKCXVua25vd243MRgBIAEoDBIRCgl1bmtub3du",
-            "NzIYAiABKAMSEQoJdW5rbm93bjczGAMgASgMGv0JCgdQYXlsb2FkEgwKBGd1",
-            "aWQYAiABKAkSYQoIc2V0dGluZ3MYAyABKAsyTy5Qb2tlbW9uR28uUm9ja2V0",
-            "QVBJLkdlbmVyYXRlZENvZGUuU2V0dGluZ3NSZXNwb25zZS5QYXlsb2FkLkds",
-            "b2JhbFNldHRpbmdzUHJvdG8a0QMKE0dsb2JhbFNldHRpbmdzUHJvdG8SYwoM",
-            "Rm9ydFNldHRpbmdzGAIgASgLMk0uUG9rZW1vbkdvLlJvY2tldEFQSS5HZW5l",
-            "cmF0ZWRDb2RlLlNldHRpbmdzUmVzcG9uc2UuUGF5bG9hZC5Gb3J0U2V0dGlu",
-            "Z3NQcm90bxJhCgtNYXBTZXR0aW5ncxgDIAEoCzJMLlBva2Vtb25Hby5Sb2Nr",
-            "ZXRBUEkuR2VuZXJhdGVkQ29kZS5TZXR0aW5nc1Jlc3BvbnNlLlBheWxvYWQu",
-            "TWFwU2V0dGluZ3NQcm90bxJlCg1MZXZlbFNldHRpbmdzGAQgASgLMk4uUG9r",
-            "ZW1vbkdvLlJvY2tldEFQSS5HZW5lcmF0ZWRDb2RlLlNldHRpbmdzUmVzcG9u",
-            "c2UuUGF5bG9hZC5MZXZlbFNldHRpbmdzUHJvdG8SbQoRSW52ZW50b3J5U2V0",
-            "dGluZ3MYBSABKAsyUi5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENv",
-            "ZGUuU2V0dGluZ3NSZXNwb25zZS5QYXlsb2FkLkludmVudG9yeVNldHRpbmdz",
-            "UHJvdG8SHAoUTWluaW11bUNsaWVudFZlcnNpb24YBiABKAka2gEKEUZvcnRT",
-            "ZXR0aW5nc1Byb3RvEh4KFkludGVyYWN0aW9uUmFuZ2VNZXRlcnMYASABKAES",
-            "HwoXTWF4VG90YWxEZXBsb3llZFBva2Vtb24YAiABKAUSIAoYTWF4UGxheWVy",
-            "RGVwbG95ZWRQb2tlbW9uGAMgASgFEh8KF0RlcGxveVN0YW1pbmFNdWx0aXBs",
-            "aWVyGAQgASgBEh4KFkRlcGxveUF0dGFja011bHRpcGxpZXIYBSABKAESIQoZ",
-            "RmFySW50ZXJhY3Rpb25SYW5nZU1ldGVycxgGIAEoARr7AQoQTWFwU2V0dGlu",
-            "Z3NQcm90bxIbChNQb2tlbW9uVmlzaWJsZVJhbmdlGAEgASgBEhoKElBva2VO",
-            "YXZSYW5nZU1ldGVycxgCIAEoARIcChRFbmNvdW50ZXJSYW5nZU1ldGVycxgD",
-            "IAEoARImCh5HZXRNYXBPYmplY3RzTWluUmVmcmVzaFNlY29uZHMYBCABKAIS",
-            "JgoeR2V0TWFwT2JqZWN0c01heFJlZnJlc2hTZWNvbmRzGAUgASgCEiYKHkdl",
-            "dE1hcE9iamVjdHNNaW5EaXN0YW5jZU1ldGVycxgGIAEoAhIYChBHb29nbGVN",
-            "YXBzQXBpS2V5GAcgASgJGlIKEkxldmVsU2V0dGluZ3NQcm90bxIZChFUcmFp",
-            "bmVyQ3BNb2RpZmllchgCIAEoARIhChlUcmFpbmVyRGlmZmljdWx0eU1vZGlm",
-            "aWVyGAMgASgBGn4KFkludmVudG9yeVNldHRpbmdzUHJvdG8SEgoKTWF4UG9r",
-            "ZW1vbhgBIAEoBRITCgtNYXhCYWdJdGVtcxgCIAEoBRITCgtCYXNlUG9rZW1v",
-            "bhgDIAEoBRIUCgxCYXNlQmFnSXRlbXMYBCABKAUSEAoIQmFzZUVnZ3MYBSAB",
-            "KAViBnByb3RvMw=="));
+            "dGVkQ29kZS5TZXR0aW5nc1Jlc3BvbnNlLlVua25vd242EkYKBGF1dGgYByAB",
+            "KAsyOC5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENvZGUuU2V0dGlu",
+            "Z3NSZXNwb25zZS5BdXRoEkwKB3BheWxvYWQYZCADKAsyOy5Qb2tlbW9uR28u",
+            "Um9ja2V0QVBJLkdlbmVyYXRlZENvZGUuU2V0dGluZ3NSZXNwb25zZS5QYXls",
+            "b2FkEhQKDGVycm9yTWVzc2FnZRhlIAEoCRqTAQoIVW5rbm93bjYSEAoIdW5r",
+            "bm93bjEYASABKAUSVwoIdW5rbm93bjIYAiABKAsyRS5Qb2tlbW9uR28uUm9j",
+            "a2V0QVBJLkdlbmVyYXRlZENvZGUuU2V0dGluZ3NSZXNwb25zZS5Vbmtub3du",
+            "Ni5Vbmtub3duMhocCghVbmtub3duMhIQCgh1bmtub3duMRgBIAEoDBo/CgRB",
+            "dXRoEhEKCXVua25vd243MRgBIAEoDBIRCgl0aW1lc3RhbXAYAiABKAMSEQoJ",
+            "dW5rbm93bjczGAMgASgMGv0JCgdQYXlsb2FkEgwKBGd1aWQYAiABKAkSYQoI",
+            "c2V0dGluZ3MYAyABKAsyTy5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRl",
+            "ZENvZGUuU2V0dGluZ3NSZXNwb25zZS5QYXlsb2FkLkdsb2JhbFNldHRpbmdz",
+            "UHJvdG8a0QMKE0dsb2JhbFNldHRpbmdzUHJvdG8SYwoMRm9ydFNldHRpbmdz",
+            "GAIgASgLMk0uUG9rZW1vbkdvLlJvY2tldEFQSS5HZW5lcmF0ZWRDb2RlLlNl",
+            "dHRpbmdzUmVzcG9uc2UuUGF5bG9hZC5Gb3J0U2V0dGluZ3NQcm90bxJhCgtN",
+            "YXBTZXR0aW5ncxgDIAEoCzJMLlBva2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJh",
+            "dGVkQ29kZS5TZXR0aW5nc1Jlc3BvbnNlLlBheWxvYWQuTWFwU2V0dGluZ3NQ",
+            "cm90bxJlCg1MZXZlbFNldHRpbmdzGAQgASgLMk4uUG9rZW1vbkdvLlJvY2tl",
+            "dEFQSS5HZW5lcmF0ZWRDb2RlLlNldHRpbmdzUmVzcG9uc2UuUGF5bG9hZC5M",
+            "ZXZlbFNldHRpbmdzUHJvdG8SbQoRSW52ZW50b3J5U2V0dGluZ3MYBSABKAsy",
+            "Ui5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENvZGUuU2V0dGluZ3NS",
+            "ZXNwb25zZS5QYXlsb2FkLkludmVudG9yeVNldHRpbmdzUHJvdG8SHAoUTWlu",
+            "aW11bUNsaWVudFZlcnNpb24YBiABKAka2gEKEUZvcnRTZXR0aW5nc1Byb3Rv",
+            "Eh4KFkludGVyYWN0aW9uUmFuZ2VNZXRlcnMYASABKAESHwoXTWF4VG90YWxE",
+            "ZXBsb3llZFBva2Vtb24YAiABKAUSIAoYTWF4UGxheWVyRGVwbG95ZWRQb2tl",
+            "bW9uGAMgASgFEh8KF0RlcGxveVN0YW1pbmFNdWx0aXBsaWVyGAQgASgBEh4K",
+            "FkRlcGxveUF0dGFja011bHRpcGxpZXIYBSABKAESIQoZRmFySW50ZXJhY3Rp",
+            "b25SYW5nZU1ldGVycxgGIAEoARr7AQoQTWFwU2V0dGluZ3NQcm90bxIbChNQ",
+            "b2tlbW9uVmlzaWJsZVJhbmdlGAEgASgBEhoKElBva2VOYXZSYW5nZU1ldGVy",
+            "cxgCIAEoARIcChRFbmNvdW50ZXJSYW5nZU1ldGVycxgDIAEoARImCh5HZXRN",
+            "YXBPYmplY3RzTWluUmVmcmVzaFNlY29uZHMYBCABKAISJgoeR2V0TWFwT2Jq",
+            "ZWN0c01heFJlZnJlc2hTZWNvbmRzGAUgASgCEiYKHkdldE1hcE9iamVjdHNN",
+            "aW5EaXN0YW5jZU1ldGVycxgGIAEoAhIYChBHb29nbGVNYXBzQXBpS2V5GAcg",
+            "ASgJGlIKEkxldmVsU2V0dGluZ3NQcm90bxIZChFUcmFpbmVyQ3BNb2RpZmll",
+            "chgCIAEoARIhChlUcmFpbmVyRGlmZmljdWx0eU1vZGlmaWVyGAMgASgBGn4K",
+            "FkludmVudG9yeVNldHRpbmdzUHJvdG8SEgoKTWF4UG9rZW1vbhgBIAEoBRIT",
+            "CgtNYXhCYWdJdGVtcxgCIAEoBRITCgtCYXNlUG9rZW1vbhgDIAEoBRIUCgxC",
+            "YXNlQmFnSXRlbXMYBCABKAUSEAoIQmFzZUVnZ3MYBSABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Parser, new[]{ "Unknown1", "Unknown2", "ApiUrl", "Unknown6", "Unknown7", "Payload", "ErrorMessage" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Parser, new[]{ "Unknown1", "Unknown2" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Types.Unknown2), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Types.Unknown2.Parser, new[]{ "Unknown1" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7.Parser, new[]{ "Unknown71", "Unknown72", "Unknown73" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Parser, new[]{ "Unknown1", "Unknown2", "ApiUrl", "Unknown6", "Auth", "Payload", "ErrorMessage" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Parser, new[]{ "Unknown1", "Unknown2" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Types.Unknown2), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown6.Types.Unknown2.Parser, new[]{ "Unknown1" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth.Parser, new[]{ "Unknown71", "Timestamp", "Unknown73" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Parser, new[]{ "Guid", "Settings" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.GlobalSettingsProto), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.GlobalSettingsProto.Parser, new[]{ "FortSettings", "MapSettings", "LevelSettings", "InventorySettings", "MinimumClientVersion" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.FortSettingsProto), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.FortSettingsProto.Parser, new[]{ "InteractionRangeMeters", "MaxTotalDeployedPokemon", "MaxPlayerDeployedPokemon", "DeployStaminaMultiplier", "DeployAttackMultiplier", "FarInteractionRangeMeters" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.MapSettingsProto), global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Payload.Types.MapSettingsProto.Parser, new[]{ "PokemonVisibleRange", "PokeNavRangeMeters", "EncounterRangeMeters", "GetMapObjectsMinRefreshSeconds", "GetMapObjectsMaxRefreshSeconds", "GetMapObjectsMinDistanceMeters", "GoogleMapsApiKey" }, null, null, null),
@@ -106,7 +105,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       unknown2_ = other.unknown2_;
       apiUrl_ = other.apiUrl_;
       Unknown6 = other.unknown6_ != null ? other.Unknown6.Clone() : null;
-      Unknown7 = other.unknown7_ != null ? other.Unknown7.Clone() : null;
+      Auth = other.auth_ != null ? other.Auth.Clone() : null;
       payload_ = other.payload_.Clone();
       errorMessage_ = other.errorMessage_;
     }
@@ -155,13 +154,13 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
     }
 
-    /// <summary>Field number for the "unknown7" field.</summary>
-    public const int Unknown7FieldNumber = 7;
-    private global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7 unknown7_;
-    public global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7 Unknown7 {
-      get { return unknown7_; }
+    /// <summary>Field number for the "auth" field.</summary>
+    public const int AuthFieldNumber = 7;
+    private global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth auth_;
+    public global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth Auth {
+      get { return auth_; }
       set {
-        unknown7_ = value;
+        auth_ = value;
       }
     }
 
@@ -202,7 +201,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       if (Unknown2 != other.Unknown2) return false;
       if (ApiUrl != other.ApiUrl) return false;
       if (!object.Equals(Unknown6, other.Unknown6)) return false;
-      if (!object.Equals(Unknown7, other.Unknown7)) return false;
+      if (!object.Equals(Auth, other.Auth)) return false;
       if(!payload_.Equals(other.payload_)) return false;
       if (ErrorMessage != other.ErrorMessage) return false;
       return true;
@@ -214,7 +213,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       if (Unknown2 != 0L) hash ^= Unknown2.GetHashCode();
       if (ApiUrl.Length != 0) hash ^= ApiUrl.GetHashCode();
       if (unknown6_ != null) hash ^= Unknown6.GetHashCode();
-      if (unknown7_ != null) hash ^= Unknown7.GetHashCode();
+      if (auth_ != null) hash ^= Auth.GetHashCode();
       hash ^= payload_.GetHashCode();
       if (ErrorMessage.Length != 0) hash ^= ErrorMessage.GetHashCode();
       return hash;
@@ -241,9 +240,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         output.WriteRawTag(50);
         output.WriteMessage(Unknown6);
       }
-      if (unknown7_ != null) {
+      if (auth_ != null) {
         output.WriteRawTag(58);
-        output.WriteMessage(Unknown7);
+        output.WriteMessage(Auth);
       }
       payload_.WriteTo(output, _repeated_payload_codec);
       if (ErrorMessage.Length != 0) {
@@ -266,8 +265,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       if (unknown6_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Unknown6);
       }
-      if (unknown7_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Unknown7);
+      if (auth_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Auth);
       }
       size += payload_.CalculateSize(_repeated_payload_codec);
       if (ErrorMessage.Length != 0) {
@@ -295,11 +294,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         }
         Unknown6.MergeFrom(other.Unknown6);
       }
-      if (other.unknown7_ != null) {
-        if (unknown7_ == null) {
-          unknown7_ = new global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7();
+      if (other.auth_ != null) {
+        if (auth_ == null) {
+          auth_ = new global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth();
         }
-        Unknown7.MergeFrom(other.Unknown7);
+        Auth.MergeFrom(other.Auth);
       }
       payload_.Add(other.payload_);
       if (other.ErrorMessage.Length != 0) {
@@ -334,10 +333,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             break;
           }
           case 58: {
-            if (unknown7_ == null) {
-              unknown7_ = new global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Unknown7();
+            if (auth_ == null) {
+              auth_ = new global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Types.Auth();
             }
-            input.ReadMessage(unknown7_);
+            input.ReadMessage(auth_);
             break;
           }
           case 802: {
@@ -603,9 +602,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      public sealed partial class Unknown7 : pb::IMessage<Unknown7> {
-        private static readonly pb::MessageParser<Unknown7> _parser = new pb::MessageParser<Unknown7>(() => new Unknown7());
-        public static pb::MessageParser<Unknown7> Parser { get { return _parser; } }
+      public sealed partial class Auth : pb::IMessage<Auth> {
+        private static readonly pb::MessageParser<Auth> _parser = new pb::MessageParser<Auth>(() => new Auth());
+        public static pb::MessageParser<Auth> Parser { get { return _parser; } }
 
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.SettingsResponse.Descriptor.NestedTypes[1]; }
@@ -615,20 +614,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           get { return Descriptor; }
         }
 
-        public Unknown7() {
+        public Auth() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
-        public Unknown7(Unknown7 other) : this() {
+        public Auth(Auth other) : this() {
           unknown71_ = other.unknown71_;
-          unknown72_ = other.unknown72_;
+          timestamp_ = other.timestamp_;
           unknown73_ = other.unknown73_;
         }
 
-        public Unknown7 Clone() {
-          return new Unknown7(this);
+        public Auth Clone() {
+          return new Auth(this);
         }
 
         /// <summary>Field number for the "unknown71" field.</summary>
@@ -641,13 +640,13 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
-        /// <summary>Field number for the "unknown72" field.</summary>
-        public const int Unknown72FieldNumber = 2;
-        private long unknown72_;
-        public long Unknown72 {
-          get { return unknown72_; }
+        /// <summary>Field number for the "timestamp" field.</summary>
+        public const int TimestampFieldNumber = 2;
+        private long timestamp_;
+        public long Timestamp {
+          get { return timestamp_; }
           set {
-            unknown72_ = value;
+            timestamp_ = value;
           }
         }
 
@@ -662,10 +661,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         }
 
         public override bool Equals(object other) {
-          return Equals(other as Unknown7);
+          return Equals(other as Auth);
         }
 
-        public bool Equals(Unknown7 other) {
+        public bool Equals(Auth other) {
           if (ReferenceEquals(other, null)) {
             return false;
           }
@@ -673,7 +672,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             return true;
           }
           if (Unknown71 != other.Unknown71) return false;
-          if (Unknown72 != other.Unknown72) return false;
+          if (Timestamp != other.Timestamp) return false;
           if (Unknown73 != other.Unknown73) return false;
           return true;
         }
@@ -681,7 +680,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         public override int GetHashCode() {
           int hash = 1;
           if (Unknown71.Length != 0) hash ^= Unknown71.GetHashCode();
-          if (Unknown72 != 0L) hash ^= Unknown72.GetHashCode();
+          if (Timestamp != 0L) hash ^= Timestamp.GetHashCode();
           if (Unknown73.Length != 0) hash ^= Unknown73.GetHashCode();
           return hash;
         }
@@ -695,9 +694,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             output.WriteRawTag(10);
             output.WriteBytes(Unknown71);
           }
-          if (Unknown72 != 0L) {
+          if (Timestamp != 0L) {
             output.WriteRawTag(16);
-            output.WriteInt64(Unknown72);
+            output.WriteInt64(Timestamp);
           }
           if (Unknown73.Length != 0) {
             output.WriteRawTag(26);
@@ -710,8 +709,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           if (Unknown71.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeBytesSize(Unknown71);
           }
-          if (Unknown72 != 0L) {
-            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Unknown72);
+          if (Timestamp != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Timestamp);
           }
           if (Unknown73.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeBytesSize(Unknown73);
@@ -719,15 +718,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
-        public void MergeFrom(Unknown7 other) {
+        public void MergeFrom(Auth other) {
           if (other == null) {
             return;
           }
           if (other.Unknown71.Length != 0) {
             Unknown71 = other.Unknown71;
           }
-          if (other.Unknown72 != 0L) {
-            Unknown72 = other.Unknown72;
+          if (other.Timestamp != 0L) {
+            Timestamp = other.Timestamp;
           }
           if (other.Unknown73.Length != 0) {
             Unknown73 = other.Unknown73;
@@ -746,7 +745,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
                 break;
               }
               case 16: {
-                Unknown72 = input.ReadInt64();
+                Timestamp = input.ReadInt64();
                 break;
               }
               case 26: {

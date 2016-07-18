@@ -1,8 +1,8 @@
-﻿syntax = "proto3";
+﻿ syntax = "proto3";
 
 package PokemonGo.RocketAPI.GeneratedCode;
 
-message Request {
+message EncounterRequest {
   int32 unknown1 = 1;
   int64 rpc_id = 3;
   repeated Requests requests = 4;
@@ -10,21 +10,33 @@ message Request {
   fixed64 latitude = 7;
   fixed64 longitude = 8;
   fixed64 altitude = 9;
-  AuthInfo auth = 10;
-  UnknownAuth unknownauth = 11;
-  int64 unknown12 = 12;
-
+  //AuthInfo auth = 10;
+  Auth auth = 11;
   
-  message UnknownAuth {
-    bytes unknown71 = 1;
-    int64 timestamp = 2;
-    bytes unknown73 = 3;
-  }
+  int64 unknown12 = 12;
 
   message Requests {
     int32 type = 1;
     bytes message = 2;
   }
+
+  message RequestsMessage
+  {
+	bytes cellIds = 1;
+	bytes unknown14 = 2;
+	fixed64 latitude = 3;
+	fixed64 longitude = 4;
+  }
+
+	message SettingsGuid
+	{
+		bytes guid = 1;
+	}
+
+	message Time
+	{
+		int64 time = 1;
+	}
 
   message Unknown3 {
     string unknown4 = 1;
@@ -39,8 +51,15 @@ message Request {
     }
 
   }
+
   
-  message AuthInfo {
+  message Auth {
+    bytes unknown71 = 1;
+    int64 timestamp = 2;
+    bytes unknown73 = 3;
+  }
+  
+ /* message AuthInfo {
     string provider = 1;
     JWT token = 2;
 
@@ -49,4 +68,5 @@ message Request {
       int32 unknown13  = 2;
     }
   }
+  */
 }

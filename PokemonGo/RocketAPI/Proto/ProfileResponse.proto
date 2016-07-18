@@ -7,7 +7,7 @@ message ProfileResponse {
   int64 unknown2 = 2;
   string api_url = 3;
   Unknown6 unknown6 = 6;
-  Unknown7 unknown7 = 7;
+  Auth auth = 7;
   repeated Payload payload = 100;
   string errorMessage = 101; //Should be moved to an error-proto file if error is always 101 field
 
@@ -21,9 +21,9 @@ message ProfileResponse {
 
   }
 
-  message Unknown7 {
+  message Auth {
     bytes unknown71 = 1;
-    int64 unknown72 = 2;
+    int64 timestamp = 2;
     bytes unknown73 = 3;
   }
 

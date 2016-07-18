@@ -15,8 +15,8 @@ namespace PokemonGo.RocketAPI.Extensions
         public static async Task<V> PostProto<T, V>(this HttpClient client, string url, T request) where T : IMessage<T> where V : IMessage<V>, new()
         {
             //Encode message and send
-            var data = request.ToByteArray();
-            var result = await client.PostAsync(url, new ByteArrayContent(data));
+            var data = request.ToByteString();
+            var result = await client.PostAsync(url, new ByteArrayContent(data.ToByteArray()));
 
             //Decode message
             var responseData = await result.Content.ReadAsByteArrayAsync();

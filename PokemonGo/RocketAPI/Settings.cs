@@ -8,7 +8,7 @@ namespace PokemonGo.RocketAPI
 {
     public static class Settings
     {
-        //Fetch these settings from intercepting the /auth call in headers and body 
+        //Fetch these settings from intercepting the /auth call in headers and body (only needed for google auth)
         public const string DeviceId = "cool-device-id";
         public const string Email = "fake@gmail.com";
         public const string ClientSig = "fake";
