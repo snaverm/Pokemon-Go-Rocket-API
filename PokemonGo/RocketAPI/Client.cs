@@ -307,8 +307,9 @@ namespace PokemonGo.RocketAPI
                 Pokeball = (int) MiscEnums.Item.ITEM_POKE_BALL,
                 SpawnPointGuid = spawnPointGuid,
                 HitPokemon = 1,
-                NormalizedReticleSize = Utils.FloatAsUlong(1.01259324542),
-                SpinModifier = Utils.FloatAsUlong(0.896848684824)
+                NormalizedReticleSize = Utils.FloatAsUlong(1.950),
+                SpinModifier = Utils.FloatAsUlong(1),
+                NormalizedHitPosition = Utils.FloatAsUlong(1)
             };
 
             var catchPokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
