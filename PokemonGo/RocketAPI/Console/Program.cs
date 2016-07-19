@@ -31,11 +31,16 @@ namespace PokemonGo.RocketAPI.Console
             var settings = await client.GetSettings();
             var mapObjects = await client.GetMapObjects();
             var inventory = await client.GetInventory();
-            await ExecuteFarmingPokestops(client);
+            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonId != InventoryResponse.Types.PokemonProto.Types.PokemonIds.PokemonUnset);
+
+
+            await ExecuteFarmingPokestopsAndPokemons(client);
             //await ExecuteCatchAllNearbyPokemons(client);
+
+            
         }
 
-        private static async Task ExecuteFarmingPokestops(Client client)
+        private static async Task ExecuteFarmingPokestopsAndPokemons(Client client)
         {
             var mapObjects = await client.GetMapObjects();
 
@@ -58,7 +63,6 @@ namespace PokemonGo.RocketAPI.Console
 
         private static async Task ExecuteCatchAllNearbyPokemons(Client client)
         {
-
             var mapObjects = await client.GetMapObjects();
 
             var pokemons = mapObjects.Payload[0].Profile.SelectMany(i => i.MapPokemon);
