@@ -85,9 +85,15 @@ namespace PokemonGo.RocketAPI.Console
                 } 
                 while(caughtPokemonResponse.Payload[0].Status == 2);
 
-                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"We caught a {pokemon.PokedexTypeId}" : $"{pokemon.PokedexTypeId} got away..");
+                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"We caught a {GetFriendlyPokemonName(pokemon.PokedexTypeId)}" : $"{GetFriendlyPokemonName(pokemon.PokedexTypeId)} got away..");
                 await Task.Delay(5000);
             }
+        }
+
+        private static string GetFriendlyPokemonName(int id)
+        {
+            var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonIds), id);
+            return name?.Substring(name.IndexOf("Pokemon") + 7);
         }
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.Item> items)
