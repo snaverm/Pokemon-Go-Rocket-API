@@ -11,7 +11,7 @@ namespace PokemonGo.RocketAPI.Helpers
 {
     class RetryHandler : DelegatingHandler
     {
-        private const int MaxRetries = 10;
+        private const int MaxRetries = 100;
 
         public RetryHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
@@ -33,9 +33,10 @@ namespace PokemonGo.RocketAPI.Helpers
                 }
                 catch (Exception ex)
                 {
+                    System.Console.WriteLine($"retry request {request.RequestUri}");
                     if (i < MaxRetries)
                     {
-                        await Task.Delay(2000);
+                        await Task.Delay(1000);
                         continue;
                     }
                     throw;
