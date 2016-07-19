@@ -32,7 +32,7 @@ namespace PokemonGo.RocketAPI.Console
             var mapObjects = await client.GetMapObjects();
             var inventory = await client.GetInventory();
             await ExecuteFarmingPokestops(client);
-            await ExecuteCatchAllNearbyPokemons(client);
+            //await ExecuteCatchAllNearbyPokemons(client);
         }
 
         private static async Task ExecuteFarmingPokestops(Client client)
@@ -49,12 +49,16 @@ namespace PokemonGo.RocketAPI.Console
                 var bag = fortSearch.Payload[0];
 
                 System.Console.WriteLine($"Farmed XP: {bag.XpAwarded}, Gems: { bag.GemsAwarded}, Eggs: {bag.EggPokemon} Items: {GetFriendlyItemsString(bag.Items)}");
+
+                await ExecuteCatchAllNearbyPokemons(client);
+
                 await Task.Delay(15000);
             }
         }
 
         private static async Task ExecuteCatchAllNearbyPokemons(Client client)
         {
+
             var mapObjects = await client.GetMapObjects();
 
             var pokemons = mapObjects.Payload[0].Profile.SelectMany(i => i.MapPokemon);
@@ -63,10 +67,17 @@ namespace PokemonGo.RocketAPI.Console
             {
                 var update = await client.UpdatePlayerLocation(pokemon.Latitude, pokemon.Longitude);
                 var encounterPokemonRespone = await client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
-                var caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude);
-                await Task.Delay(15000);
-            }
 
+                CatchPokemonResponse caughtPokemonResponse;
+                do
+                {
+                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude);
+                } 
+                while(caughtPokemonResponse.Payload[0].Status == 2);
+
+                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"We caught a {pokemon.PokedexTypeId}" : $"{pokemon.PokedexTypeId} got away..");
+                await Task.Delay(5000);
+            }
         }
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.Item> items)

@@ -29,9 +29,10 @@ message CatchPokemonResponse {
 
   message Payload {  
 	int32 Status = 1;
-	int32 MissPercent = 2;
+	double MissPercent = 2;
 	int32 CapturedPokemonId = 3;
 	int32 Scores = 4;
 }
+
   
   }
