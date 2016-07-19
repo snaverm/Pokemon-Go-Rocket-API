@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -25,7 +26,9 @@ namespace PokemonGo.RocketAPI.Helpers
                 try
                 {
                     var response = await base.SendAsync(request, cancellationToken);
-                    response.EnsureSuccessStatusCode();
+                    if (response.StatusCode == HttpStatusCode.BadGateway)
+                        throw new Exception(); //todo: proper implementation
+                    
                     return response;
                 }
                 catch (Exception ex)
