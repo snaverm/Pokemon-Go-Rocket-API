@@ -90,7 +90,7 @@ namespace PokemonGo.RocketAPI.Console
             }
         }
 
-        private static string GetFriendlyPokemonName(int id)
+        private static string GetFriendlyPokemonName(MapObjectsResponse.Types.Payload.Types.PokemonIds id)
         {
             var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonIds), id);
             return name?.Substring(name.IndexOf("Pokemon") + 7);
