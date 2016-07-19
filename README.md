@@ -13,6 +13,7 @@ var serverResponse = await client.GetServer();
 var profile = await client.GetProfile();
 var settings = await client.GetSettings();
 var mapObjects = await client.GetMapObjects();
+var inventory = await client.GetInventory();
 
 await ExecuteFarmingPokestops(client);
 await ExecuteCatchAllNearbyPokemons(client);
@@ -21,7 +22,7 @@ await ExecuteCatchAllNearbyPokemons(client);
 Features
 ```
 #PTC Login / Google last part
-#Get Map Objects
+#Get Map Objects and Inventory
 #Search for gyms/pokestops/spawns
 #Farm pokestops
 #Farm all pokemons in neighbourhood
