@@ -24,7 +24,9 @@ namespace PokemonGo.RocketAPI.Helpers
             {
                 try
                 {
-                    return await base.SendAsync(request, cancellationToken);
+                    var response = await base.SendAsync(request, cancellationToken);
+                    response.EnsureSuccessStatusCode();
+                    return response;
                 }
                 catch (Exception ex)
                 {
