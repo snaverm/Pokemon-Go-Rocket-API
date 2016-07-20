@@ -70,51 +70,18 @@ namespace PokemonGo.RocketAPI
                 _accessToken = tokenResponse.id_token;
                 Settings.GoogleRefreshToken = tokenResponse.access_token;
                 Console.WriteLine($"Put RefreshToken in settings for direct login: {Settings.GoogleRefreshToken}");
-                }
+            }
                 else
-                {
+            {
                 var tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
                 _accessToken = tokenResponse.id_token;
+                _authType  = AuthType.Google;
             }
         }
 
-        public async Task LoginPtc(string username, string password)
+        public async Task DoPtcLogin(string username, string password)
         {
-            //Get session cookie
-            var sessionResp = await _httpClient.GetAsync(Resources.PtcLoginUrl);
-            var data = await sessionResp.Content.ReadAsStringAsync();
-            var lt = JsonHelper.GetValue(data, "lt");
-            var executionId = JsonHelper.GetValue(data, "execution");
-
-            //Login
-            var loginResp = await _httpClient.PostAsync(Resources.PtcLoginUrl,
-                new FormUrlEncodedContent(
-                    new[]
-                    {
-                        new KeyValuePair<string, string>("lt", lt),
-                        new KeyValuePair<string, string>("execution", executionId),
-                        new KeyValuePair<string, string>("_eventId", "submit"),
-                        new KeyValuePair<string, string>("username", username),
-                        new KeyValuePair<string, string>("password", password),
-                    }));
-
-            var ticketId = HttpUtility.ParseQueryString(loginResp.Headers.Location.Query)["ticket"];
-
-            //Get tokenvar 
-            var tokenResp = await _httpClient.PostAsync(Resources.PtcLoginOauth,
-                new FormUrlEncodedContent(
-                    new[]
-                    {
-                        new KeyValuePair<string, string>("client_id", "mobile-app_pokemon-go"),
-                        new KeyValuePair<string, string>("redirect_uri", "https://www.nianticlabs.com/pokemongo/error"),
-                        new KeyValuePair<string, string>("client_secret",
-                            "w8ScCUXJQc6kXKw8FiOhd8Fixzht18Dq3PEVkUCP5ZPxtgyWsbTvWHFLm2wNY0JR"),
-                        new KeyValuePair<string, string>("grant_type", "grant_type"),
-                        new KeyValuePair<string, string>("code", ticketId),
-                    }));
-
-            var tokenData = await tokenResp.Content.ReadAsStringAsync();
-            _accessToken = HttpUtility.ParseQueryString(tokenData)["access_token"];
+            _accessToken = await PtcLogin.GetAccessToken(username, password);
             _authType = AuthType.Ptc;
         }
 

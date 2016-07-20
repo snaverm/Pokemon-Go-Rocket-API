@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace PokemonGo.RocketAPI.Helpers
 {
-    public class HttpClientHelper
+    public static class HttpClientHelper
     {
         public static async Task<TResponse> PostFormEncodedAsync<TResponse>(string url, params KeyValuePair<string, string>[] keyValuePairs)
         {

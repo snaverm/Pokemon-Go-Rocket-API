@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -19,19 +20,16 @@ namespace PokemonGo.RocketAPI.Console
             Task.Run(() => Execute());
              System.Console.ReadLine();
         }
-
+        
         static async void Execute()
         {
             var client = new Client(Settings.DefaultLatitude, Settings.DefaultLongitude);
 
-            if (Settings.UsePTC)
-            {
-                await client.LoginPtc(Settings.PtcUsername, Settings.PtcPassword);
-            }
-            else
-            {
+            if (Settings.AuthType == AuthType.Ptc)
+                await client.DoPtcLogin(Settings.PtcUsername, Settings.PtcPassword);
+            else if (Settings.AuthType == AuthType.Google)
                 await client.DoGoogleLogin();
-            }
+            
             var serverResponse = await client.GetServer();
             var profile = await client.GetProfile();
             var settings = await client.GetSettings();
