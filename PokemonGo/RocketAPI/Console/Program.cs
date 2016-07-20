@@ -37,7 +37,7 @@ namespace PokemonGo.RocketAPI.Console
             var settings = await client.GetSettings();
             var mapObjects = await client.GetMapObjects();
             var inventory = await client.GetInventory();
-            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != InventoryResponse.Types.PokemonProto.Types.PokemonIds.PokemonUnset);
+            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != InventoryResponse.Types.PokemonProto.Types.PokemonTypes.PokemonUnset);
 
 
             await ExecuteFarmingPokestopsAndPokemons(client);
@@ -90,9 +90,9 @@ namespace PokemonGo.RocketAPI.Console
             }
         }
 
-        private static string GetFriendlyPokemonName(MapObjectsResponse.Types.Payload.Types.PokemonIds id)
+        private static string GetFriendlyPokemonName(MapObjectsResponse.Types.Payload.Types.PokemonTypes id)
         {
-            var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonIds), id);
+            var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonTypes), id);
             return name?.Substring(name.IndexOf("Pokemon") + 7);
         }
 

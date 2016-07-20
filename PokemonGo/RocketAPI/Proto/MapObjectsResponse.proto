@@ -60,7 +60,7 @@ message MapObjectsResponse {
   message MapPokemonProto {
     string SpawnpointId = 1;
     fixed64 EncounterId = 2;
-    PokemonIds PokedexTypeId = 3;
+    PokemonTypes PokedexTypeId = 3;
     int64 ExpirationTimeMs = 4;
     double Latitude = 5;
     double Longitude = 6;
@@ -122,7 +122,7 @@ message MapObjectsResponse {
   }
 
   
-	enum PokemonIds {
+	enum PokemonTypes {
 	POKEMON_UNSET = 0;
 	V0001_POKEMON_BULBASAUR = 1;
 	V0002_POKEMON_IVYSAUR = 2;

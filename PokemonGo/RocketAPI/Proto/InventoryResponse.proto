@@ -154,7 +154,7 @@ message EvolvePokemonOutProto {
 
 	 message PokemonProto {
 	fixed64 Id = 1;
-	PokemonIds PokemonType = 2;
+	PokemonTypes PokemonType = 2;
 	int32 Cp = 3;
 	int32 Stamina = 4;
 	int32 MaxStamina = 5;
@@ -184,7 +184,7 @@ message EvolvePokemonOutProto {
 	int32 Nickname = 30;
 	int32 FromFort = 31;
 
-	enum PokemonIds {
+	enum PokemonTypes {
 	POKEMON_UNSET = 0;
 	V0001_POKEMON_BULBASAUR = 1;
 	V0002_POKEMON_IVYSAUR = 2;
