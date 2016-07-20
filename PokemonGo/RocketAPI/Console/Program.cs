@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Console
                 var fortSearch = await client.SearchFort(pokeStop.FortId, pokeStop.Latitude, pokeStop.Longitude);
                 var bag = fortSearch.Payload[0];
 
-                System.Console.WriteLine($"Farmed XP: {bag.XpAwarded}, Gems: { bag.GemsAwarded}, Eggs: {bag.EggPokemon} Items: {GetFriendlyItemsString(bag.Items)}");
+                System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Farmed XP: {bag.XpAwarded}, Gems: { bag.GemsAwarded}, Eggs: {bag.EggPokemon} Items: {GetFriendlyItemsString(bag.Items)}");
 
                 await ExecuteCatchAllNearbyPokemons(client);
 
@@ -85,7 +85,7 @@ namespace PokemonGo.RocketAPI.Console
                 } 
                 while(caughtPokemonResponse.Payload[0].Status == 2);
 
-                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"We caught a {GetFriendlyPokemonName(pokemon.PokedexTypeId)}" : $"{GetFriendlyPokemonName(pokemon.PokedexTypeId)} got away..");
+                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {GetFriendlyPokemonName(pokemon.PokedexTypeId)}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {GetFriendlyPokemonName(pokemon.PokedexTypeId)} got away..");
                 await Task.Delay(5000);
             }
         }
