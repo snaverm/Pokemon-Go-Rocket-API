@@ -2,6 +2,7 @@
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
 using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace PokemonGo.RocketAPI.Console

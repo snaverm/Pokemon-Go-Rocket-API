@@ -102,30 +102,9 @@ namespace PokemonGo.RocketAPI.Console
                 } 
                 while(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
 
-                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"We caught a {GetFriendlyPokemonName(pokemon.PokedexTypeId)}" : $"{GetFriendlyPokemonName(pokemon.PokedexTypeId)} got away..");
-
-                checkForDuplicates++;
-                if (checkForDuplicates % 50 == 0)
-                {
-                    checkForDuplicates = 0;
-                    System.Console.WriteLine($"Check for duplicates");
-                    var inventory = await client.GetInventory();
-                    var allpokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != InventoryResponse.Types.PokemonProto.Types.PokemonIds.PokemonUnset);
-
-                    var dupes = allpokemons.OrderBy(x => x.Cp).Select((x, i) => new { index = i, value = x })
-                      .GroupBy(x => x.value.PokemonType)
-                      .Where(x => x.Skip(1).Any());
-
-                    for (int i = 0; i < dupes.Count(); i++)
-                    {
-                        for (int j = 0; j < dupes.ElementAt(i).Count() - 1; j++)
-                        {
-                            var dubpokemon = dupes.ElementAt(i).ElementAt(j).value;
-                            var transfer = await client.TransferPokemon(dubpokemon.Id);
-                            System.Console.WriteLine($"Transfer {dubpokemon.PokemonType} with {dubpokemon.Cp} CP (highest has {dupes.ElementAt(i).Last().value.Cp})");
-                        }
-                    }
-                }
+                System.Console.WriteLine(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {pokemon.PokemonId}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {pokemon.PokemonId} got away..");
+                await Task.Delay(5000);
+                
 
                 await Task.Delay(5000);
             }
@@ -143,6 +122,33 @@ namespace PokemonGo.RocketAPI.Console
                           .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
                           .Select(y => $"{y.Amount} x {y.ItemName}")
                           .Aggregate((a, b) => $"{a}, {b}");
+        }
+
+        private static async void TransferDuplicatePokemon(Client client)
+        {
+
+            checkForDuplicates++;
+            if (checkForDuplicates % 50 == 0)
+            {
+                checkForDuplicates = 0;
+                System.Console.WriteLine($"Check for duplicates");
+                var inventory = await client.GetInventory();
+                var allpokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId >0);
+
+                var dupes = allpokemons.OrderBy(x => x.Cp).Select((x, i) => new { index = i, value = x })
+                  .GroupBy(x => x.value.PokemonId)
+                  .Where(x => x.Skip(1).Any());
+
+                for (int i = 0; i < dupes.Count(); i++)
+                {
+                    for (int j = 0; j < dupes.ElementAt(i).Count() - 1; j++)
+                    {
+                        var dubpokemon = dupes.ElementAt(i).ElementAt(j).value;
+                        var transfer = await client.TransferPokemon(dubpokemon.Id);
+                        System.Console.WriteLine($"Transfer {dubpokemon.PokemonId} with {dubpokemon.Cp} CP (highest has {dupes.ElementAt(i).Last().value.Cp})");
+                    }
+                }
+            }
         }
     }
 }

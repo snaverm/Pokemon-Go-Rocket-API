@@ -291,21 +291,5 @@ namespace PokemonGo.RocketAPI
             var inventoryRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, RequestType.GET_INVENTORY);
             return await _httpClient.PostProtoPayload<Request, GetInventoryResponse>($"https://{_apiUrl}/rpc", inventoryRequest);
         }
-
-        public async Task<InventoryResponse.Types.TransferPokemonOutProto> TransferPokemon(ulong pokemonId)
-        {
-            var customRequest = new InventoryResponse.Types.TransferPokemonProto
-            {
-                PokemonId = pokemonId
-            };
-
-            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
-                new Request.Types.Requests()
-                {
-                    Type = (int)RequestType.RELEASE_POKEMON,
-                    Message = customRequest.ToByteString()
-                });
-            return await _httpClient.PostProto<Request, InventoryResponse.Types.TransferPokemonOutProto>($"https://{_apiUrl}/rpc", releasePokemonRequest);
-        }
     }
 }
