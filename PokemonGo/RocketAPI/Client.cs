@@ -177,7 +177,36 @@ namespace PokemonGo.RocketAPI
                     return null;
                 }
             }
+        }
 
+        public async void GoogleLoginByRefreshToken(string refreshToken)
+        {
+            var handler = new HttpClientHandler() {
+                AutomaticDecompression = DecompressionMethods.GZip,
+                AllowAutoRedirect = false
+            };
+
+            using (var tempHttpClient = new HttpClient(handler))
+            {
+                var response = tempHttpClient.PostAsync("https://www.googleapis.com/oauth2/v4/token",
+                    new FormUrlEncodedContent(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>("client_id", "848232511240-73ri3t7plvk96pj4f85uj8otdat2alem.apps.googleusercontent.com"),
+                            new KeyValuePair<string, string>("client_secret", "NCjF1TLi2CcY6t5mt0ZveuL7"),
+                            new KeyValuePair<string, string>("refresh_token", refreshToken),
+                            new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                            new KeyValuePair<string, string>("scope", "openid email https://www.googleapis.com/auth/userinfo.email")
+                        }));
+
+                var content = await response.Result.Content.ReadAsStringAsync();
+
+                JToken token = JObject.Parse(content);
+                string authToken = token.SelectToken("id_token").ToString();
+                Console.WriteLine("Sucessfully receieved token.");
+                _accessToken = authToken;
+                _authType = AuthType.Google;
+            }
         }
 
         public async Task LoginPtc(string username, string password)
