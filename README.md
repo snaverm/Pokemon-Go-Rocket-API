@@ -21,7 +21,7 @@ await ExecuteCatchAllNearbyPokemons(client);
 
 Features
 ```
-#PTC Login / Google last part
+#PTC Login / Google
 #Get Map Objects and Inventory
 #Search for gyms/pokestops/spawns
 #Farm pokestops
@@ -35,12 +35,3 @@ Todo
 #Map Enums
 ```
 
-To use the google login:
-```
-Install charles and follow ios/android:
-https://www.charlesproxy.com/documentation/using-charles/ssl-certificates/
-
-Disable firewall and login to Pokemon Go on phone. Look for android.google.com request and fetch the headers from the android.google.com/auth request and put them in Settings.cs.
-AndroidID = DeviceId
-Token = LongDurationToken (the oauth.#blabla token)
-```
