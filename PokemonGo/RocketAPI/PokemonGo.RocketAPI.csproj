@@ -78,6 +78,7 @@
     <Compile Include="Enums\AuthType.cs" />
     <Compile Include="Enums\MiscEnums.cs" />
     <Compile Include="Enums\RequestType.cs" />
+    <Compile Include="Exceptions\PtcOfflineException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="GeneratedCode\AllEnum.cs" />
     <Compile Include="GeneratedCode\Payloads.cs" />

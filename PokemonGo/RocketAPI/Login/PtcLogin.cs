@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Helpers;
 
 namespace PokemonGo.RocketAPI.Login
@@ -41,6 +42,8 @@ namespace PokemonGo.RocketAPI.Login
                         }));
 
                 var ticketId = HttpUtility.ParseQueryString(loginResp.Headers.Location.Query)["ticket"];
+                if (ticketId == null)
+                    throw new PtcOfflineException();
 
                 //Get tokenvar 
                 var tokenResp = await tempHttpClient.PostAsync(Resources.PtcLoginOauth,
