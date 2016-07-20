@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Helpers;
+using PokemonGo.RocketAPI.Extensions;
 
 namespace PokemonGo.RocketAPI
 {
@@ -15,6 +19,6 @@ namespace PokemonGo.RocketAPI
         public static string GoogleRefreshToken = string.Empty;
         public const double DefaultLatitude = 10;
         public const double DefaultLongitude = 10;
-
+        public const MiscEnums.Item UsedBall = MiscEnums.Item.ITEM_POKE_BALL;
     }
 }

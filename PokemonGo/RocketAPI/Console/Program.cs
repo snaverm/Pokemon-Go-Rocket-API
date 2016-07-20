@@ -81,7 +81,7 @@ namespace PokemonGo.RocketAPI.Console
                 CatchPokemonResponse caughtPokemonResponse;
                 do
                 {
-                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude);
+                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, Settings.UsedBall);
                 } 
                 while(caughtPokemonResponse.Payload[0].Status == 2);
 

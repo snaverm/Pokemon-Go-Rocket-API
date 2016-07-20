@@ -275,12 +275,13 @@ namespace PokemonGo.RocketAPI
         }
 
         public async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnPointGuid, double pokemonLat,
-            double pokemonLng)
+            double pokemonLng, MiscEnums.Item pokeball)
         {
+
             var customRequest = new Request.Types.CatchPokemonRequest()
             {
                 EncounterId = encounterId,
-                Pokeball = (int) MiscEnums.Item.ITEM_POKE_BALL,
+                Pokeball = (int) pokeball,
                 SpawnPointGuid = spawnPointGuid,
                 HitPokemon = 1,
                 NormalizedReticleSize = Utils.FloatAsUlong(1.950),
