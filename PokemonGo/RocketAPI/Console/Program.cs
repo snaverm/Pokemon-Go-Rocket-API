@@ -9,6 +9,7 @@ using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
+using static PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types;
 
 namespace PokemonGo.RocketAPI.Console
 {
@@ -37,7 +38,7 @@ namespace PokemonGo.RocketAPI.Console
             var settings = await client.GetSettings();
             var mapObjects = await client.GetMapObjects();
             var inventory = await client.GetInventory();
-            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != InventoryResponse.Types.PokemonProto.Types.PokemonIds.PokemonUnset);
+            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != PokemonProto.Types.PokemonIds.PokemonUnset);
 
 
             await ExecuteFarmingPokestopsAndPokemons(client);
@@ -89,10 +90,89 @@ namespace PokemonGo.RocketAPI.Console
                 await Task.Delay(5000);
             }
         }
+        private static async Task TransferAllGivenPokemons(Client client, IEnumerable<PokemonProto> unwantedPokemons)
+        {
+            foreach (var pokemon in unwantedPokemons)
+            {
+                var transferPokemonResponse = await client.TransferPokemon(pokemon.Id);
+
+                /*
+                ReleasePokemonOutProto.Status {
+	                UNSET = 0;
+	                SUCCESS = 1;
+	                POKEMON_DEPLOYED = 2;
+	                FAILED = 3;
+	                ERROR_POKEMON_IS_EGG = 4;
+                }*/
+
+                if (transferPokemonResponse.Status == 1)
+                {
+                    System.Console.WriteLine($"Shoved another {pokemon.PokemonType} down the meat grinder");
+                }
+                else
+                {
+                    var status = transferPokemonResponse.Status;
+
+                    System.Console.WriteLine($"Somehow failed to grind {pokemon.PokemonType}. " +
+                                             $"ReleasePokemonOutProto.Status was {status}");
+                }
+
+                await Task.Delay(3000);
+            }
+        }
+
+        private static async Task EvolveAllGivenPokemons(Client client, IEnumerable<PokemonProto> pokemonToEvolve)
+        {
+            foreach (var pokemon in pokemonToEvolve)
+            {
+                /*
+                enum Holoholo.Rpc.Types.EvolvePokemonOutProto.Result {
+	                UNSET = 0;
+	                SUCCESS = 1;
+	                FAILED_POKEMON_MISSING = 2;
+	                FAILED_INSUFFICIENT_RESOURCES = 3;
+	                FAILED_POKEMON_CANNOT_EVOLVE = 4;
+	                FAILED_POKEMON_IS_DEPLOYED = 5;
+                }
+                }*/
+
+                var countOfEvolvedUnits = 0;
+                var xpCount = 0;
+
+                EvolvePokemonOutProto evolvePokemonOutProto;
+                do
+                {
+                    evolvePokemonOutProto = await client.EvolvePokemon(pokemon.Id);
+
+                    if (evolvePokemonOutProto.Result == 1)
+                    {
+                        System.Console.WriteLine($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp");
+
+                        countOfEvolvedUnits++;
+                        xpCount += evolvePokemonOutProto.ExpAwarded;
+                    }
+                    else
+                    {
+                        var result = evolvePokemonOutProto.Result;
+
+                        System.Console.WriteLine($"Failed to evolve {pokemon.PokemonType}. " +
+                                                 $"EvolvePokemonOutProto.Result was {result}");
+
+                        System.Console.WriteLine($"Due to above error, stopping evolving {pokemon.PokemonType}");
+                    }
+                }
+                while (evolvePokemonOutProto.Result == 1);
+
+                System.Console.WriteLine($"Evolved {countOfEvolvedUnits} pieces of {pokemon.PokemonType} for {xpCount}xp");
+
+                await Task.Delay(3000);
+            }
+        }
+
 
         private static string GetFriendlyPokemonName(MapObjectsResponse.Types.Payload.Types.PokemonIds id)
         {
-            var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonIds), id);
+            var name = Enum.GetName(typeof (PokemonProto.Types.PokemonIds), id);
             return name?.Substring(name.IndexOf("Pokemon") + 7);
         }
 
