@@ -12,18 +12,31 @@ namespace PokemonGo.RocketAPI.Extensions
 {
     public static class HttpClientExtensions
     {
-        public static async Task<V> PostProto<T, V>(this HttpClient client, string url, T request) where T : IMessage<T> where V : IMessage<V>, new()
+        public static async Task<TResponsePayload> PostProtoPayload<TRequest, TResponsePayload>(this HttpClient client, string url, TRequest request) where TRequest : IMessage<TRequest> where TResponsePayload : IMessage<TResponsePayload>, new()
         {
-            //Encode message and send
+            var response = await PostProto<TRequest>(client, url, request);
+
+            //Decode payload
+            //todo: multi-payload support
+            var payload = response.Payload[0];
+            var parsedPayload = new TResponsePayload();
+            parsedPayload.MergeFrom(payload);
+                
+            return parsedPayload;
+        }
+
+        public static async Task<Response> PostProto<TRequest>(this HttpClient client, string url, TRequest request) where TRequest : IMessage<TRequest>
+        {
+            //Encode payload and put in envelop, then send
             var data = request.ToByteString();
             var result = await client.PostAsync(url, new ByteArrayContent(data.ToByteArray()));
 
             //Decode message
             var responseData = await result.Content.ReadAsByteArrayAsync();
             var codedStream = new CodedInputStream(responseData);
-            var decodedResponse = new V();
+            var decodedResponse = new Response();
             decodedResponse.MergeFrom(codedStream);
-                
+            
             return decodedResponse;
         }
     }

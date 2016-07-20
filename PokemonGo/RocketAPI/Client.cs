@@ -21,7 +21,6 @@ using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Extensions;
 using System.Threading;
 using PokemonGo.RocketAPI.Login;
-using static PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types;
 
 namespace PokemonGo.RocketAPI
 {
@@ -101,43 +100,41 @@ namespace PokemonGo.RocketAPI
                     Message = customRequest.ToByteString()
                 });
             var updateResponse =
-                await _httpClient.PostProto<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
+                await _httpClient.PostProtoPayload<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
             return updateResponse;
         }
 
-        public async Task<ProfileResponse> GetServer()
+        public async Task SetServer()
         {
             var serverRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10,
                 RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
                 RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
-            var serverResponse = await _httpClient.PostProto<Request, ProfileResponse>(Resources.RpcUrl, serverRequest);
+            var serverResponse = await _httpClient.PostProto<Request>(Resources.RpcUrl, serverRequest);
+            _unknownAuth = new Request.Types.UnknownAuth()
+            {
+                Unknown71 = serverResponse.Auth.Unknown71,
+                Timestamp = serverResponse.Auth.Timestamp,
+                Unknown73 = serverResponse.Auth.Unknown73,
+            };
+
             _apiUrl = serverResponse.ApiUrl;
-            return serverResponse;
         }
 
-        public async Task<ProfileResponse> GetProfile()
+        public async Task<GetPlayerResponse> GetProfile()
         {
             var profileRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10,
                 new Request.Types.Requests() {Type = (int) RequestType.GET_PLAYER});
-            var profileResponse =
-                await _httpClient.PostProto<Request, ProfileResponse>($"https://{_apiUrl}/rpc", profileRequest);
-            _unknownAuth = new Request.Types.UnknownAuth()
-            {
-                Unknown71 = profileResponse.Auth.Unknown71,
-                Timestamp = profileResponse.Auth.Timestamp,
-                Unknown73 = profileResponse.Auth.Unknown73,
-            };
-            return profileResponse;
+            return await _httpClient.PostProtoPayload<Request, GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
         }
 
-        public async Task<SettingsResponse> GetSettings()
+        public async Task<DownloadSettingsResponse> GetSettings()
         {
             var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10,
                 RequestType.DOWNLOAD_SETTINGS);
-            return await _httpClient.PostProto<Request, SettingsResponse>($"https://{_apiUrl}/rpc", settingsRequest);
+            return await _httpClient.PostProtoPayload<Request, DownloadSettingsResponse>($"https://{_apiUrl}/rpc", settingsRequest);
         }
 
-        public async Task<MapObjectsResponse> GetMapObjects()
+        public async Task<GetMapObjectsResponse> GetMapObjects()
         {
             var customRequest = new Request.Types.MapObjectsRequest()
             {
@@ -173,10 +170,10 @@ namespace PokemonGo.RocketAPI
                         }.ToByteString()
                 });
 
-            return await _httpClient.PostProto<Request, MapObjectsResponse>($"https://{_apiUrl}/rpc", mapRequest);
+            return await _httpClient.PostProtoPayload<Request, GetMapObjectsResponse>($"https://{_apiUrl}/rpc", mapRequest);
         }
 
-        public async Task<FortDetailResponse> GetFort(string fortId, double fortLat, double fortLng)
+        public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
         {
             var customRequest = new Request.Types.FortDetailsRequest()
             {
@@ -191,7 +188,7 @@ namespace PokemonGo.RocketAPI
                     Type = (int) RequestType.FORT_DETAILS,
                     Message = customRequest.ToByteString()
                 });
-            return await _httpClient.PostProto<Request, FortDetailResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
+            return await _httpClient.PostProtoPayload<Request, FortDetailsResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
 
         /*num Holoholo.Rpc.Types.FortSearchOutProto.Result {
@@ -219,7 +216,7 @@ namespace PokemonGo.RocketAPI
                     Type = (int) RequestType.FORT_SEARCH,
                     Message = customRequest.ToByteString()
                 });
-            return await _httpClient.PostProto<Request, FortSearchResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
+            return await _httpClient.PostProtoPayload<Request, FortSearchResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
 
         public async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnPointGuid)
@@ -238,7 +235,7 @@ namespace PokemonGo.RocketAPI
                     Type = (int) RequestType.ENCOUNTER,
                     Message = customRequest.ToByteString()
                 });
-            return await _httpClient.PostProto<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterResponse);
+            return await _httpClient.PostProtoPayload<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterResponse);
         }
 
         public async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnPointGuid, double pokemonLat,
@@ -264,12 +261,12 @@ namespace PokemonGo.RocketAPI
                 });
             return
                 await
-                    _httpClient.PostProto<Request, CatchPokemonResponse>($"https://{_apiUrl}/rpc", catchPokemonRequest);
+                    _httpClient.PostProtoPayload<Request, CatchPokemonResponse>($"https://{_apiUrl}/rpc", catchPokemonRequest);
         }
 
-        public async Task<TransferPokemonOutProto> TransferPokemon(ulong pokemonId)
+        public async Task<TransferPokemonOut> TransferPokemon(ulong pokemonId)
         {
-            var customRequest = new TransferPokemonProto
+            var customRequest = new TransferPokemon
             {
                 PokemonId = pokemonId
             };
@@ -280,14 +277,12 @@ namespace PokemonGo.RocketAPI
                     Type = (int)RequestType.RELEASE_POKEMON,
                     Message = customRequest.ToByteString()
                 });
-            return
-                await
-                    _httpClient.PostProto<Request, TransferPokemonOutProto>($"https://{_apiUrl}/rpc", releasePokemonRequest);
+            return await _httpClient.PostProtoPayload<Request, TransferPokemonOut>($"https://{_apiUrl}/rpc", releasePokemonRequest);
         }
 
-        public async Task<EvolvePokemonOutProto> EvolvePokemon(ulong pokemonId)
+        public async Task<EvolvePokemonOut> EvolvePokemon(ulong pokemonId)
         {
-            var customRequest = new EvolvePokemonProto
+            var customRequest = new EvolvePokemon
             {
                 PokemonId = pokemonId
             };
@@ -300,13 +295,13 @@ namespace PokemonGo.RocketAPI
                 });
             return
                 await
-                    _httpClient.PostProto<Request, EvolvePokemonOutProto>($"https://{_apiUrl}/rpc", releasePokemonRequest);
+                    _httpClient.PostProtoPayload<Request, EvolvePokemonOut>($"https://{_apiUrl}/rpc", releasePokemonRequest);
         }
 
-        public async Task<InventoryResponse> GetInventory()
+        public async Task<GetInventoryResponse> GetInventory()
         {
             var inventoryRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, RequestType.GET_INVENTORY);
-            return await _httpClient.PostProto<Request, InventoryResponse>($"https://{_apiUrl}/rpc", inventoryRequest);
+            return await _httpClient.PostProtoPayload<Request, GetInventoryResponse>($"https://{_apiUrl}/rpc", inventoryRequest);
         }
     }
 }

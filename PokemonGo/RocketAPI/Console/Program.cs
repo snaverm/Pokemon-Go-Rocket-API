@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AllEnum;
 using Google.Protobuf;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
@@ -30,12 +31,12 @@ namespace PokemonGo.RocketAPI.Console
             else if (Settings.AuthType == AuthType.Google)
                 await client.DoGoogleLogin();
             
-            var serverResponse = await client.GetServer();
+            await client.SetServer();
             var profile = await client.GetProfile();
             var settings = await client.GetSettings();
             var mapObjects = await client.GetMapObjects();
             var inventory = await client.GetInventory();
-            var pokemons = inventory.Payload[0].Bag.Items.Select(i => i.Item?.Pokemon).Where(p => p != null && p?.PokemonType != InventoryResponse.Types.PokemonProto.Types.PokemonTypes.PokemonUnset);
+            var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
 
 
             await ExecuteFarmingPokestopsAndPokemons(client);
@@ -48,16 +49,15 @@ namespace PokemonGo.RocketAPI.Console
         {
             var mapObjects = await client.GetMapObjects();
 
-            var pokeStops = mapObjects.Payload[0].Profile.SelectMany(i => i.Fort).Where(i => i.FortType == (int)MiscEnums.FortType.CHECKPOINT && i.CooldownCompleteMs < DateTime.UtcNow.ToUnixTime());
+            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts).Where(i => i.Type == FortType.Checkpoint && i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime());
 
             foreach (var pokeStop in pokeStops)
             {
                 var update = await client.UpdatePlayerLocation(pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = await client.GetFort(pokeStop.FortId, pokeStop.Latitude, pokeStop.Longitude);
-                var fortSearch = await client.SearchFort(pokeStop.FortId, pokeStop.Latitude, pokeStop.Longitude);
-                var bag = fortSearch.Payload[0];
+                var fortInfo = await client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                var fortSearch = await client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Farmed XP: {bag.XpAwarded}, Gems: { bag.GemsAwarded}, Eggs: {bag.EggPokemon} Items: {GetFriendlyItemsString(bag.Items)}");
+                System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Farmed XP: {fortSearch.ExperienceAwarded}, Gems: { fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {GetFriendlyItemsString(fortSearch.ItemsAwarded)}");
 
                 await ExecuteCatchAllNearbyPokemons(client);
 
@@ -69,7 +69,7 @@ namespace PokemonGo.RocketAPI.Console
         {
             var mapObjects = await client.GetMapObjects();
 
-            var pokemons = mapObjects.Payload[0].Profile.SelectMany(i => i.MapPokemon);
+            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
 
             foreach (var pokemon in pokemons)
             {
@@ -79,30 +79,30 @@ namespace PokemonGo.RocketAPI.Console
                 CatchPokemonResponse caughtPokemonResponse;
                 do
                 {
-                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, Settings.UsedBall);
+                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL); //note: reverted from settings because this should not be part of settings but part of logic
                 } 
-                while(caughtPokemonResponse.Payload[0].Status == 2);
+                while(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
 
-                System.Console.WriteLine(caughtPokemonResponse.Payload[0].Status == 1 ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {GetFriendlyPokemonName(pokemon.PokedexTypeId)}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {GetFriendlyPokemonName(pokemon.PokedexTypeId)} got away..");
+                System.Console.WriteLine(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {GetFriendlyPokemonName(pokemon.PokemonId)}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {GetFriendlyPokemonName(pokemon.PokemonId)} got away..");
                 await Task.Delay(5000);
             }
         }
 
-        private static string GetFriendlyPokemonName(MapObjectsResponse.Types.Payload.Types.PokemonTypes id)
+        private static string GetFriendlyPokemonName(PokemonId id)
         {
-            var name = Enum.GetName(typeof (InventoryResponse.Types.PokemonProto.Types.PokemonTypes), id);
+            var name = Enum.GetName(typeof (GetInventoryResponse), id);
             return name?.Substring(name.IndexOf("Pokemon") + 7);
         }
 
-        private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.Item> items)
+        private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.ItemAward> items)
         {
-            var enumerable = items as IList<FortSearchResponse.Types.Item> ?? items.ToList();
+            var enumerable = items as IList<FortSearchResponse.Types.ItemAward> ?? items.ToList();
 
             if (!enumerable.Any())
                 return string.Empty;
 
             return
-                enumerable.GroupBy(i => (MiscEnums.Item) i.Item_)
+                enumerable.GroupBy(i => i.ItemId)
                           .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
                           .Select(y => $"{y.Amount} x {y.ItemName}")
                           .Aggregate((a, b) => $"{a}, {b}");

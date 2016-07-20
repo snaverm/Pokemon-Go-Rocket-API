@@ -79,15 +79,10 @@
     <Compile Include="Enums\MiscEnums.cs" />
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="GeneratedCode\CatchPokemonResponse.cs" />
-    <Compile Include="GeneratedCode\EncounterResponse.cs" />
-    <Compile Include="GeneratedCode\FortDetailResponse.cs" />
-    <Compile Include="GeneratedCode\FortSearchResponse.cs" />
-    <Compile Include="GeneratedCode\InventoryResponse.cs" />
-    <Compile Include="GeneratedCode\MapObjectsResponse.cs" />
-    <Compile Include="GeneratedCode\PlayerUpdateResponse.cs" />
+    <Compile Include="GeneratedCode\AllEnum.cs" />
+    <Compile Include="GeneratedCode\Payloads.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
-    <Compile Include="GeneratedCode\SettingsResponse.cs" />
+    <Compile Include="GeneratedCode\Response.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\ProtoHelper.cs" />
@@ -100,7 +95,6 @@
     <None Include="app.config" />
     <Compile Include="Client.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
-    <Compile Include="GeneratedCode\ProfileResponse.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\RequestBuilder.cs" />
     <Compile Include="Resources.cs" />
@@ -108,18 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Proto\InventoryResponse.proto" />
-    <None Include="Proto\EncounterResponse.proto" />
-    <None Include="Proto\CatchPokemonResponse.proto" />
-    <None Include="Proto\FortDetailResponse.proto" />
-    <None Include="Proto\FortSearchResponse.proto" />
-    <None Include="Proto\PlayerUpdateResponse.proto" />
-    <None Include="Proto\MapObjectsResponse.proto" />
-    <None Include="Proto\SettingsResponse.proto" />
+    <None Include="Proto\AllEnum.proto" />
+    <None Include="Proto\Payloads.proto" />
+    <None Include="Proto\Response.proto" />
     <None Include="Proto\Request.proto" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Proto\ProfileResponse.proto" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
