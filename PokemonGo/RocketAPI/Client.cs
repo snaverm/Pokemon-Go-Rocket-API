@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Windows.Forms;
 using Google.Protobuf;
-using Google.Protobuf.Collections;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Extensions;
-using System.Threading;
 using PokemonGo.RocketAPI.Login;
 using static PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types;
 
@@ -27,6 +14,7 @@ namespace PokemonGo.RocketAPI
 {
     public class Client
     {
+        private readonly ISettings _settings;
         private readonly HttpClient _httpClient;
         private AuthType _authType = AuthType.Google;
         private string _accessToken;
@@ -36,9 +24,10 @@ namespace PokemonGo.RocketAPI
         private double _currentLat;
         private double _currentLng;
 
-        public Client(double lat, double lng)
+        public Client(ISettings settings)
         {
-            SetCoordinates(lat, lng);
+            _settings = settings;
+            SetCoordinates(_settings.DefaultLatitude, _settings.DefaultLongitude);
 
             //Setup HttpClient and create default headers
             HttpClientHandler handler = new HttpClientHandler()
@@ -64,16 +53,16 @@ namespace PokemonGo.RocketAPI
 
         public async Task DoGoogleLogin()
         {
-            if (Settings.GoogleRefreshToken == string.Empty)
+            if (_settings.GoogleRefreshToken == string.Empty)
             {
                 var tokenResponse = await GoogleLogin.GetAccessToken();
                 _accessToken = tokenResponse.id_token;
-                Settings.GoogleRefreshToken = tokenResponse.access_token;
-                Console.WriteLine($"Put RefreshToken in settings for direct login: {Settings.GoogleRefreshToken}");
+                _settings.GoogleRefreshToken = tokenResponse.access_token;
+                Console.WriteLine($"Put RefreshToken in settings for direct login: {_settings.GoogleRefreshToken}");
             }
                 else
             {
-                var tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
+                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
                 _accessToken = tokenResponse.id_token;
                 _authType  = AuthType.Google;
             }
