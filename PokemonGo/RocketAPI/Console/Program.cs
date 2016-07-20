@@ -98,11 +98,16 @@ namespace PokemonGo.RocketAPI.Console
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.Item> items)
         {
-            var sb = new StringBuilder();
-            foreach(var item in items)
-                sb.Append($"{item.ItemCount} x {(MiscEnums.Item)item.Item_}, ");
+            var enumerable = items as IList<FortSearchResponse.Types.Item> ?? items.ToList();
 
-            return sb.ToString();
+            if (!enumerable.Any())
+                return string.Empty;
+
+            return
+                enumerable.GroupBy(i => (MiscEnums.Item) i.Item_)
+                          .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
+                          .Select(y => $"{y.Amount} x {y.ItemName}")
+                          .Aggregate((a, b) => $"{a}, {b}");
         }
     }
 }
