@@ -12,6 +12,5 @@ namespace PokemonGo.RocketAPI.Console
         public  string GoogleRefreshToken { get; set; } = string.Empty;
         public  double DefaultLatitude { get; } = 10;
         public  double DefaultLongitude { get; } = 10;
-        public MiscEnums.Item UsedBall { get; } = MiscEnums.Item.ITEM_POKE_BALL;
     }
 }
