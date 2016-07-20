@@ -89,9 +89,9 @@
     <Compile Include="Helpers\RetryHandler.cs" />
     <Compile Include="Helpers\S2Helper.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="ISettings.cs" />
     <Compile Include="Login\GoogleLogin.cs" />
     <Compile Include="Login\PtcLogin.cs" />
-    <Compile Include="Settings.cs" />
     <None Include="app.config" />
     <Compile Include="Client.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />

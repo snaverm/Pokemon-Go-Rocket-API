@@ -16,6 +16,9 @@ namespace PokemonGo.RocketAPI.Console
 {
     class Program
     {
+
+        static readonly ISettings ClientSettings = new Settings();
+
         static void Main(string[] args)
         {
             Task.Run(() => Execute());
@@ -24,11 +27,11 @@ namespace PokemonGo.RocketAPI.Console
         
         static async void Execute()
         {
-            var client = new Client(Settings.DefaultLatitude, Settings.DefaultLongitude);
+            var client = new Client(ClientSettings);
 
-            if (Settings.AuthType == AuthType.Ptc)
-                await client.DoPtcLogin(Settings.PtcUsername, Settings.PtcPassword);
-            else if (Settings.AuthType == AuthType.Google)
+            if (ClientSettings.AuthType == AuthType.Ptc)
+                await client.DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword);
+            else if (ClientSettings.AuthType == AuthType.Google)
                 await client.DoGoogleLogin();
             
             await client.SetServer();
