@@ -52,7 +52,7 @@ namespace PokemonGo.RocketAPI.Login
                                 "https://www.nianticlabs.com/pokemongo/error"),
                             new KeyValuePair<string, string>("client_secret",
                                 "w8ScCUXJQc6kXKw8FiOhd8Fixzht18Dq3PEVkUCP5ZPxtgyWsbTvWHFLm2wNY0JR"),
-                            new KeyValuePair<string, string>("grant_type", "grant_type"),
+                            new KeyValuePair<string, string>("grant_type", "refresh_token"),
                             new KeyValuePair<string, string>("code", ticketId),
                         }));
 
