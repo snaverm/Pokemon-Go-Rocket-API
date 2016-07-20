@@ -187,7 +187,56 @@ namespace PokemonGo.RocketAPI.Console
                 await Task.Delay(3000);
             }
         }
-        
+
+        private static async Task TransferAllButStrongestUnwantedPokemon(Client client)
+        {
+            System.Console.WriteLine("[!] firing up the meat grinder");
+
+            var unwantedPokemonTypes = new[]
+            {
+                PokemonIds.V0016PokemonPidgey,
+                PokemonIds.V0019PokemonRattata,
+                PokemonIds.V0013PokemonWeedle,
+                PokemonIds.V0041PokemonZubat,
+                PokemonIds.V0010PokemonCaterpie,
+                PokemonIds.V0017PokemonPidgeotto,
+                PokemonIds.V0029PokemonNidoran,
+                PokemonIds.V0046PokemonParas,
+                PokemonIds.V0048PokemonVenonat,
+                PokemonIds.V0054PokemonPsyduck,
+                PokemonIds.V0060PokemonPoliwag,
+                PokemonIds.V0079PokemonSlowpoke,
+                PokemonIds.V0096PokemonDrowzee,
+                PokemonIds.V0092PokemonGastly,
+                PokemonIds.V0118PokemonGoldeen,
+                PokemonIds.V0120PokemonStaryu,
+                PokemonIds.V0129PokemonMagikarp,
+                PokemonIds.V0133PokemonEevee,
+                PokemonIds.V0147PokemonDratini
+            };
+
+            var inventory = await client.GetInventory();
+            var pokemons = inventory.Payload[0].Bag
+                                .Items
+                                .Select(i => i.Item?.Pokemon)
+                                .Where(p => p != null && p?.PokemonType != PokemonIds.PokemonUnset)
+                                .ToArray();
+
+            foreach (var unwantedPokemonType in unwantedPokemonTypes)
+            {
+                var pokemonOfDesiredType = pokemons.Where(p => p.PokemonType == unwantedPokemonType)
+                                                   .OrderByDescending(p => p.Cp)
+                                                   .ToList();
+
+                var unwantedPokemon = pokemonOfDesiredType.Skip(1) // keep the strongest one for potential battle-evolving
+                                                          .ToList();
+
+                System.Console.WriteLine($"Grinding {unwantedPokemon.Count} pokemons of type {unwantedPokemonType}");
+                await TransferAllGivenPokemons(client, unwantedPokemon);
+            }
+
+            System.Console.WriteLine("[!] finished grinding all the meat");
+        }
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.ItemAward> items)
         {
