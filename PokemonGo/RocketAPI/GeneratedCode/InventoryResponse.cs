@@ -10,7 +10,6 @@ using scg = global::System.Collections.Generic;
 namespace PokemonGo.RocketAPI.GeneratedCode {
 
   /// <summary>Holder for reflection information generated from InventoryResponse.proto</summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public static partial class InventoryResponseReflection {
 
     #region Descriptor
@@ -24,7 +23,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdJbnZlbnRvcnlSZXNwb25zZS5wcm90bxIhUG9rZW1vbkdvLlJvY2tldEFQ",
-            "SS5HZW5lcmF0ZWRDb2RlItNDChFJbnZlbnRvcnlSZXNwb25zZRIQCgh1bmtu",
+            "SS5HZW5lcmF0ZWRDb2RlItVDChFJbnZlbnRvcnlSZXNwb25zZRIQCgh1bmtu",
             "b3duMRgBIAEoBRIQCgh1bmtub3duMhgCIAEoAxIPCgdhcGlfdXJsGAMgASgJ",
             "Ek8KCHVua25vd242GAYgASgLMj0uUG9rZW1vbkdvLlJvY2tldEFQSS5HZW5l",
             "cmF0ZWRDb2RlLkludmVudG9yeVJlc3BvbnNlLlVua25vd242Ek8KCHVua25v",
@@ -108,115 +107,116 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             "IAEoBRJZCg5Fdm9sdmVkUG9rZW1vbhgCIAEoCzJBLlBva2Vtb25Hby5Sb2Nr",
             "ZXRBUEkuR2VuZXJhdGVkQ29kZS5JbnZlbnRvcnlSZXNwb25zZS5Qb2tlbW9u",
             "UHJvdG8SEgoKRXhwQXdhcmRlZBgDIAEoBRIUCgxDYW5keUF3YXJkZWQYBCAB",
-            "KAUanCYKDFBva2Vtb25Qcm90bxIKCgJJZBgBIAEoBRJfCglQb2tlbW9uSWQY",
-            "AiABKA4yTC5Qb2tlbW9uR28uUm9ja2V0QVBJLkdlbmVyYXRlZENvZGUuSW52",
-            "ZW50b3J5UmVzcG9uc2UuUG9rZW1vblByb3RvLlBva2Vtb25JZHMSCgoCQ3AY",
-            "AyABKAUSDwoHU3RhbWluYRgEIAEoBRISCgpNYXhTdGFtaW5hGAUgASgFEg0K",
-            "BU1vdmUxGAYgASgFEg0KBU1vdmUyGAcgASgFEhYKDkRlcGxveWVkRm9ydElk",
-            "GAggASgFEhEKCU93bmVyTmFtZRgJIAEoBRINCgVJc0VnZxgKIAEoBRIZChFF",
-            "Z2dLbVdhbGtlZFRhcmdldBgLIAEoBRIYChBFZ2dLbVdhbGtlZFN0YXJ0GAwg",
-            "ASgFEg4KBk9yaWdpbhgOIAEoBRIPCgdIZWlnaHRNGA8gASgHEhAKCFdlaWdo",
-            "dEtnGBAgASgHEhgKEEluZGl2aWR1YWxBdHRhY2sYESABKAUSGQoRSW5kaXZp",
-            "ZHVhbERlZmVuc2UYEiABKAUSGQoRSW5kaXZpZHVhbFN0YW1pbmEYEyABKAUS",
-            "FAoMQ3BNdWx0aXBsaWVyGBQgASgHEhAKCFBva2ViYWxsGBUgASgFEhgKEENh",
-            "cHR1cmVkUzJDZWxsSWQYFiABKAYSFwoPQmF0dGxlc0F0dGFja2VkGBcgASgF",
-            "EhcKD0JhdHRsZXNEZWZlbmRlZBgYIAEoBRIWCg5FZ2dJbmN1YmF0b3JJZBgZ",
-            "IAEoBRIWCg5DcmVhdGlvblRpbWVNcxgaIAEoAxITCgtOdW1VcGdyYWRlcxgb",
-            "IAEoBRIeChZBZGRpdGlvbmFsQ3BNdWx0aXBsaWVyGBwgASgFEhAKCEZhdm9y",
-            "aXRlGB0gASgFEhAKCE5pY2tuYW1lGB4gASgFEhAKCEZyb21Gb3J0GB8gASgF",
-            "Is4gCgpQb2tlbW9uSWRzEhEKDVBPS0VNT05fVU5TRVQQABIbChdWMDAwMV9Q",
-            "T0tFTU9OX0JVTEJBU0FVUhABEhkKFVYwMDAyX1BPS0VNT05fSVZZU0FVUhAC",
-            "EhoKFlYwMDAzX1BPS0VNT05fVkVOVVNBVVIQAxIcChhWMDAwNF9QT0tFTU9O",
-            "X0NIQVJNQU5ERVIQBBIcChhWMDAwNV9QT0tFTU9OX0NIQVJNRUxFT04QBRIb",
-            "ChdWMDAwNl9QT0tFTU9OX0NIQVJJWkFSRBAGEhoKFlYwMDA3X1BPS0VNT05f",
-            "U1FVSVJUTEUQBxIbChdWMDAwOF9QT0tFTU9OX1dBUlRPUlRMRRAIEhsKF1Yw",
-            "MDA5X1BPS0VNT05fQkxBU1RPSVNFEAkSGgoWVjAwMTBfUE9LRU1PTl9DQVRF",
-            "UlBJRRAKEhkKFVYwMDExX1BPS0VNT05fTUVUQVBPRBALEhwKGFYwMDEyX1BP",
-            "S0VNT05fQlVUVEVSRlJFRRAMEhgKFFYwMDEzX1BPS0VNT05fV0VFRExFEA0S",
-            "GAoUVjAwMTRfUE9LRU1PTl9LQUtVTkEQDhIaChZWMDAxNV9QT0tFTU9OX0JF",
-            "RURSSUxMEA8SGAoUVjAwMTZfUE9LRU1PTl9QSURHRVkQEBIbChdWMDAxN19Q",
-            "T0tFTU9OX1BJREdFT1RUTxAREhkKFVYwMDE4X1BPS0VNT05fUElER0VPVBAS",
-            "EhkKFVYwMDE5X1BPS0VNT05fUkFUVEFUQRATEhoKFlYwMDIwX1BPS0VNT05f",
-            "UkFUSUNBVEUQFBIZChVWMDAyMV9QT0tFTU9OX1NQRUFST1cQFRIYChRWMDAy",
-            "Ml9QT0tFTU9OX0ZFQVJPVxAWEhcKE1YwMDIzX1BPS0VNT05fRUtBTlMQFxIX",
-            "ChNWMDAyNF9QT0tFTU9OX0FSQk9LEBgSGQoVVjAwMjVfUE9LRU1PTl9QSUtB",
-            "Q0hVEBkSGAoUVjAwMjZfUE9LRU1PTl9SQUlDSFUQGhIbChdWMDAyN19QT0tF",
-            "TU9OX1NBTkRTSFJFVxAbEhsKF1YwMDI4X1BPS0VNT05fU0FORFNMQVNIEBwS",
-            "GQoVVjAwMjlfUE9LRU1PTl9OSURPUkFOEB0SGgoWVjAwMzBfUE9LRU1PTl9O",
-            "SURPUklOQRAeEhsKF1YwMDMxX1BPS0VNT05fTklET1FVRUVOEB8SGQoVVjAw",
-            "MzJfUE9LRU1PTl9OSURPUkFOECASGgoWVjAwMzNfUE9LRU1PTl9OSURPUklO",
-            "TxAhEhoKFlYwMDM0X1BPS0VNT05fTklET0tJTkcQIhIaChZWMDAzNV9QT0tF",
-            "TU9OX0NMRUZBSVJZECMSGgoWVjAwMzZfUE9LRU1PTl9DTEVGQUJMRRAkEhgK",
-            "FFYwMDM3X1BPS0VNT05fVlVMUElYECUSGwoXVjAwMzhfUE9LRU1PTl9OSU5F",
-            "VEFMRVMQJhIcChhWMDAzOV9QT0tFTU9OX0pJR0dMWVBVRkYQJxIcChhWMDA0",
-            "MF9QT0tFTU9OX1dJR0dMWVRVRkYQKBIXChNWMDA0MV9QT0tFTU9OX1pVQkFU",
-            "ECkSGAoUVjAwNDJfUE9LRU1PTl9HT0xCQVQQKhIYChRWMDA0M19QT0tFTU9O",
-            "X09ERElTSBArEhcKE1YwMDQ0X1BPS0VNT05fR0xPT00QLBIbChdWMDA0NV9Q",
-            "T0tFTU9OX1ZJTEVQTFVNRRAtEhcKE1YwMDQ2X1BPS0VNT05fUEFSQVMQLhIa",
-            "ChZWMDA0N19QT0tFTU9OX1BBUkFTRUNUEC8SGQoVVjAwNDhfUE9LRU1PTl9W",
-            "RU5PTkFUEDASGgoWVjAwNDlfUE9LRU1PTl9WRU5PTU9USBAxEhkKFVYwMDUw",
-            "X1BPS0VNT05fRElHTEVUVBAyEhkKFVYwMDUxX1BPS0VNT05fRFVHVFJJTxAz",
-            "EhgKFFYwMDUyX1BPS0VNT05fTUVPV1RIEDQSGQoVVjAwNTNfUE9LRU1PTl9Q",
-            "RVJTSUFOEDUSGQoVVjAwNTRfUE9LRU1PTl9QU1lEVUNLEDYSGQoVVjAwNTVf",
-            "UE9LRU1PTl9HT0xEVUNLEDcSGAoUVjAwNTZfUE9LRU1PTl9NQU5LRVkQOBIa",
-            "ChZWMDA1N19QT0tFTU9OX1BSSU1FQVBFEDkSGwoXVjAwNThfUE9LRU1PTl9H",
-            "Uk9XTElUSEUQOhIaChZWMDA1OV9QT0tFTU9OX0FSQ0FOSU5FEDsSGQoVVjAw",
-            "NjBfUE9LRU1PTl9QT0xJV0FHEDwSGwoXVjAwNjFfUE9LRU1PTl9QT0xJV0hJ",
-            "UkwQPRIbChdWMDA2Ml9QT0tFTU9OX1BPTElXUkFUSBA+EhYKElYwMDYzX1BP",
-            "S0VNT05fQUJSQRA/EhkKFVYwMDY0X1BPS0VNT05fS0FEQUJSQRBAEhoKFlYw",
-            "MDY1X1BPS0VNT05fQUxBS0FaQU0QQRIYChRWMDA2Nl9QT0tFTU9OX01BQ0hP",
-            "UBBCEhkKFVYwMDY3X1BPS0VNT05fTUFDSE9LRRBDEhkKFVYwMDY4X1BPS0VN",
-            "T05fTUFDSEFNUBBEEhwKGFYwMDY5X1BPS0VNT05fQkVMTFNQUk9VVBBFEhwK",
-            "GFYwMDcwX1BPS0VNT05fV0VFUElOQkVMTBBGEhwKGFYwMDcxX1BPS0VNT05f",
-            "VklDVFJFRUJFTBBHEhsKF1YwMDcyX1BPS0VNT05fVEVOVEFDT09MEEgSHAoY",
-            "VjAwNzNfUE9LRU1PTl9URU5UQUNSVUVMEEkSGQoVVjAwNzRfUE9LRU1PTl9H",
-            "RU9EVURFEEoSGgoWVjAwNzVfUE9LRU1PTl9HUkFWRUxFUhBLEhcKE1YwMDc2",
-            "X1BPS0VNT05fR09MRU0QTBIYChRWMDA3N19QT0tFTU9OX1BPTllUQRBNEhoK",
-            "FlYwMDc4X1BPS0VNT05fUkFQSURBU0gQThIaChZWMDA3OV9QT0tFTU9OX1NM",
-            "T1dQT0tFEE8SGQoVVjAwODBfUE9LRU1PTl9TTE9XQlJPEFASGwoXVjAwODFf",
-            "UE9LRU1PTl9NQUdORU1JVEUQURIaChZWMDA4Ml9QT0tFTU9OX01BR05FVE9O",
-            "EFISGwoXVjAwODNfUE9LRU1PTl9GQVJGRVRDSEQQUxIXChNWMDA4NF9QT0tF",
-            "TU9OX0RPRFVPEFQSGAoUVjAwODVfUE9LRU1PTl9ET0RSSU8QVRIWChJWMDA4",
-            "Nl9QT0tFTU9OX1NFRUwQVhIZChVWMDA4N19QT0tFTU9OX0RFV0dPTkcQVxIY",
-            "ChRWMDA4OF9QT0tFTU9OX0dSSU1FUhBYEhUKEVYwMDg5X1BPS0VNT05fTVVL",
-            "EFkSGgoWVjAwOTBfUE9LRU1PTl9TSEVMTERFUhBaEhoKFlYwMDkxX1BPS0VN",
-            "T05fQ0xPWVNURVIQWxIYChRWMDA5Ml9QT0tFTU9OX0dBU1RMWRBcEhkKFVYw",
-            "MDkzX1BPS0VNT05fSEFVTlRFUhBdEhgKFFYwMDk0X1BPS0VNT05fR0VOR0FS",
-            "EF4SFgoSVjAwOTVfUE9LRU1PTl9PTklYEF8SGQoVVjAwOTZfUE9LRU1PTl9E",
-            "Uk9XWkVFEGASFwoTVjAwOTdfUE9LRU1PTl9IWVBOTxBhEhgKFFYwMDk4X1BP",
-            "S0VNT05fS1JBQkJZEGISGQoVVjAwOTlfUE9LRU1PTl9LSU5HTEVSEGMSGQoV",
-            "VjAxMDBfUE9LRU1PTl9WT0xUT1JCEGQSGwoXVjAxMDFfUE9LRU1PTl9FTEVD",
-            "VFJPREUQZRIbChdWMDEwMl9QT0tFTU9OX0VYRUdHQ1VURRBmEhsKF1YwMTAz",
-            "X1BPS0VNT05fRVhFR0dVVE9SEGcSGAoUVjAxMDRfUE9LRU1PTl9DVUJPTkUQ",
-            "aBIZChVWMDEwNV9QT0tFTU9OX01BUk9XQUsQaRIbChdWMDEwNl9QT0tFTU9O",
-            "X0hJVE1PTkxFRRBqEhwKGFYwMTA3X1BPS0VNT05fSElUTU9OQ0hBThBrEhsK",
-            "F1YwMTA4X1BPS0VNT05fTElDS0lUVU5HEGwSGQoVVjAxMDlfUE9LRU1PTl9L",
-            "T0ZGSU5HEG0SGQoVVjAxMTBfUE9LRU1PTl9XRUVaSU5HEG4SGQoVVjAxMTFf",
-            "UE9LRU1PTl9SSFlIT1JOEG8SGAoUVjAxMTJfUE9LRU1PTl9SSFlET04QcBIZ",
-            "ChVWMDExM19QT0tFTU9OX0NIQU5TRVkQcRIZChVWMDExNF9QT0tFTU9OX1RB",
-            "TkdFTEEQchIcChhWMDExNV9QT0tFTU9OX0tBTkdBU0tIQU4QcxIYChRWMDEx",
-            "Nl9QT0tFTU9OX0hPUlNFQRB0EhgKFFYwMTE3X1BPS0VNT05fU0VBRFJBEHUS",
-            "GQoVVjAxMThfUE9LRU1PTl9HT0xERUVOEHYSGQoVVjAxMTlfUE9LRU1PTl9T",
-            "RUFLSU5HEHcSGAoUVjAxMjBfUE9LRU1PTl9TVEFSWVUQeBIZChVWMDEyMV9Q",
-            "T0tFTU9OX1NUQVJNSUUQeRIZChVWMDEyMl9QT0tFTU9OX01SX01JTUUQehIZ",
-            "ChVWMDEyM19QT0tFTU9OX1NDWVRIRVIQexIWChJWMDEyNF9QT0tFTU9OX0pZ",
-            "TlgQfBIcChhWMDEyNV9QT0tFTU9OX0VMRUNUQUJVWloQfRIYChRWMDEyNl9Q",
-            "T0tFTU9OX01BR01BUhB+EhgKFFYwMTI3X1BPS0VNT05fUElOU0lSEH8SGQoU",
-            "VjAxMjhfUE9LRU1PTl9UQVVST1MQgAESGwoWVjAxMjlfUE9LRU1PTl9NQUdJ",
-            "S0FSUBCBARIbChZWMDEzMF9QT0tFTU9OX0dZQVJBRE9TEIIBEhkKFFYwMTMx",
-            "X1BPS0VNT05fTEFQUkFTEIMBEhgKE1YwMTMyX1BPS0VNT05fRElUVE8QhAES",
-            "GAoTVjAxMzNfUE9LRU1PTl9FRVZFRRCFARIbChZWMDEzNF9QT0tFTU9OX1ZB",
-            "UE9SRU9OEIYBEhoKFVYwMTM1X1BPS0VNT05fSk9MVEVPThCHARIaChVWMDEz",
-            "Nl9QT0tFTU9OX0ZMQVJFT04QiAESGgoVVjAxMzdfUE9LRU1PTl9QT1JZR09O",
-            "EIkBEhoKFVYwMTM4X1BPS0VNT05fT01BTllURRCKARIaChVWMDEzOV9QT0tF",
-            "TU9OX09NQVNUQVIQiwESGQoUVjAxNDBfUE9LRU1PTl9LQUJVVE8QjAESGwoW",
-            "VjAxNDFfUE9LRU1PTl9LQUJVVE9QUxCNARIdChhWMDE0Ml9QT0tFTU9OX0FF",
-            "Uk9EQUNUWUwQjgESGgoVVjAxNDNfUE9LRU1PTl9TTk9STEFYEI8BEhsKFlYw",
-            "MTQ0X1BPS0VNT05fQVJUSUNVTk8QkAESGQoUVjAxNDVfUE9LRU1PTl9aQVBE",
-            "T1MQkQESGgoVVjAxNDZfUE9LRU1PTl9NT0xUUkVTEJIBEhoKFVYwMTQ3X1BP",
-            "S0VNT05fRFJBVElOSRCTARIcChdWMDE0OF9QT0tFTU9OX0RSQUdPTkFJUhCU",
-            "ARIcChdWMDE0OV9QT0tFTU9OX0RSQUdPTklURRCVARIZChRWMDE1MF9QT0tF",
-            "TU9OX01FV1RXTxCWARIWChFWMDE1MV9QT0tFTU9OX01FVxCXAWIGcHJvdG8z"));
+            "KAUaniYKDFBva2Vtb25Qcm90bxIKCgJJZBgBIAEoBhJhCgtQb2tlbW9uVHlw",
+            "ZRgCIAEoDjJMLlBva2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJhdGVkQ29kZS5J",
+            "bnZlbnRvcnlSZXNwb25zZS5Qb2tlbW9uUHJvdG8uUG9rZW1vbklkcxIKCgJD",
+            "cBgDIAEoBRIPCgdTdGFtaW5hGAQgASgFEhIKCk1heFN0YW1pbmEYBSABKAUS",
+            "DQoFTW92ZTEYBiABKAUSDQoFTW92ZTIYByABKAUSFgoORGVwbG95ZWRGb3J0",
+            "SWQYCCABKAUSEQoJT3duZXJOYW1lGAkgASgFEg0KBUlzRWdnGAogASgFEhkK",
+            "EUVnZ0ttV2Fsa2VkVGFyZ2V0GAsgASgFEhgKEEVnZ0ttV2Fsa2VkU3RhcnQY",
+            "DCABKAUSDgoGT3JpZ2luGA4gASgFEg8KB0hlaWdodE0YDyABKAcSEAoIV2Vp",
+            "Z2h0S2cYECABKAcSGAoQSW5kaXZpZHVhbEF0dGFjaxgRIAEoBRIZChFJbmRp",
+            "dmlkdWFsRGVmZW5zZRgSIAEoBRIZChFJbmRpdmlkdWFsU3RhbWluYRgTIAEo",
+            "BRIUCgxDcE11bHRpcGxpZXIYFCABKAcSEAoIUG9rZWJhbGwYFSABKAUSGAoQ",
+            "Q2FwdHVyZWRTMkNlbGxJZBgWIAEoBhIXCg9CYXR0bGVzQXR0YWNrZWQYFyAB",
+            "KAUSFwoPQmF0dGxlc0RlZmVuZGVkGBggASgFEhYKDkVnZ0luY3ViYXRvcklk",
+            "GBkgASgFEhYKDkNyZWF0aW9uVGltZU1zGBogASgDEhMKC051bVVwZ3JhZGVz",
+            "GBsgASgFEh4KFkFkZGl0aW9uYWxDcE11bHRpcGxpZXIYHCABKAUSEAoIRmF2",
+            "b3JpdGUYHSABKAUSEAoITmlja25hbWUYHiABKAUSEAoIRnJvbUZvcnQYHyAB",
+            "KAUiziAKClBva2Vtb25JZHMSEQoNUE9LRU1PTl9VTlNFVBAAEhsKF1YwMDAx",
+            "X1BPS0VNT05fQlVMQkFTQVVSEAESGQoVVjAwMDJfUE9LRU1PTl9JVllTQVVS",
+            "EAISGgoWVjAwMDNfUE9LRU1PTl9WRU5VU0FVUhADEhwKGFYwMDA0X1BPS0VN",
+            "T05fQ0hBUk1BTkRFUhAEEhwKGFYwMDA1X1BPS0VNT05fQ0hBUk1FTEVPThAF",
+            "EhsKF1YwMDA2X1BPS0VNT05fQ0hBUklaQVJEEAYSGgoWVjAwMDdfUE9LRU1P",
+            "Tl9TUVVJUlRMRRAHEhsKF1YwMDA4X1BPS0VNT05fV0FSVE9SVExFEAgSGwoX",
+            "VjAwMDlfUE9LRU1PTl9CTEFTVE9JU0UQCRIaChZWMDAxMF9QT0tFTU9OX0NB",
+            "VEVSUElFEAoSGQoVVjAwMTFfUE9LRU1PTl9NRVRBUE9EEAsSHAoYVjAwMTJf",
+            "UE9LRU1PTl9CVVRURVJGUkVFEAwSGAoUVjAwMTNfUE9LRU1PTl9XRUVETEUQ",
+            "DRIYChRWMDAxNF9QT0tFTU9OX0tBS1VOQRAOEhoKFlYwMDE1X1BPS0VNT05f",
+            "QkVFRFJJTEwQDxIYChRWMDAxNl9QT0tFTU9OX1BJREdFWRAQEhsKF1YwMDE3",
+            "X1BPS0VNT05fUElER0VPVFRPEBESGQoVVjAwMThfUE9LRU1PTl9QSURHRU9U",
+            "EBISGQoVVjAwMTlfUE9LRU1PTl9SQVRUQVRBEBMSGgoWVjAwMjBfUE9LRU1P",
+            "Tl9SQVRJQ0FURRAUEhkKFVYwMDIxX1BPS0VNT05fU1BFQVJPVxAVEhgKFFYw",
+            "MDIyX1BPS0VNT05fRkVBUk9XEBYSFwoTVjAwMjNfUE9LRU1PTl9FS0FOUxAX",
+            "EhcKE1YwMDI0X1BPS0VNT05fQVJCT0sQGBIZChVWMDAyNV9QT0tFTU9OX1BJ",
+            "S0FDSFUQGRIYChRWMDAyNl9QT0tFTU9OX1JBSUNIVRAaEhsKF1YwMDI3X1BP",
+            "S0VNT05fU0FORFNIUkVXEBsSGwoXVjAwMjhfUE9LRU1PTl9TQU5EU0xBU0gQ",
+            "HBIZChVWMDAyOV9QT0tFTU9OX05JRE9SQU4QHRIaChZWMDAzMF9QT0tFTU9O",
+            "X05JRE9SSU5BEB4SGwoXVjAwMzFfUE9LRU1PTl9OSURPUVVFRU4QHxIZChVW",
+            "MDAzMl9QT0tFTU9OX05JRE9SQU4QIBIaChZWMDAzM19QT0tFTU9OX05JRE9S",
+            "SU5PECESGgoWVjAwMzRfUE9LRU1PTl9OSURPS0lORxAiEhoKFlYwMDM1X1BP",
+            "S0VNT05fQ0xFRkFJUlkQIxIaChZWMDAzNl9QT0tFTU9OX0NMRUZBQkxFECQS",
+            "GAoUVjAwMzdfUE9LRU1PTl9WVUxQSVgQJRIbChdWMDAzOF9QT0tFTU9OX05J",
+            "TkVUQUxFUxAmEhwKGFYwMDM5X1BPS0VNT05fSklHR0xZUFVGRhAnEhwKGFYw",
+            "MDQwX1BPS0VNT05fV0lHR0xZVFVGRhAoEhcKE1YwMDQxX1BPS0VNT05fWlVC",
+            "QVQQKRIYChRWMDA0Ml9QT0tFTU9OX0dPTEJBVBAqEhgKFFYwMDQzX1BPS0VN",
+            "T05fT0RESVNIECsSFwoTVjAwNDRfUE9LRU1PTl9HTE9PTRAsEhsKF1YwMDQ1",
+            "X1BPS0VNT05fVklMRVBMVU1FEC0SFwoTVjAwNDZfUE9LRU1PTl9QQVJBUxAu",
+            "EhoKFlYwMDQ3X1BPS0VNT05fUEFSQVNFQ1QQLxIZChVWMDA0OF9QT0tFTU9O",
+            "X1ZFTk9OQVQQMBIaChZWMDA0OV9QT0tFTU9OX1ZFTk9NT1RIEDESGQoVVjAw",
+            "NTBfUE9LRU1PTl9ESUdMRVRUEDISGQoVVjAwNTFfUE9LRU1PTl9EVUdUUklP",
+            "EDMSGAoUVjAwNTJfUE9LRU1PTl9NRU9XVEgQNBIZChVWMDA1M19QT0tFTU9O",
+            "X1BFUlNJQU4QNRIZChVWMDA1NF9QT0tFTU9OX1BTWURVQ0sQNhIZChVWMDA1",
+            "NV9QT0tFTU9OX0dPTERVQ0sQNxIYChRWMDA1Nl9QT0tFTU9OX01BTktFWRA4",
+            "EhoKFlYwMDU3X1BPS0VNT05fUFJJTUVBUEUQORIbChdWMDA1OF9QT0tFTU9O",
+            "X0dST1dMSVRIRRA6EhoKFlYwMDU5X1BPS0VNT05fQVJDQU5JTkUQOxIZChVW",
+            "MDA2MF9QT0tFTU9OX1BPTElXQUcQPBIbChdWMDA2MV9QT0tFTU9OX1BPTElX",
+            "SElSTBA9EhsKF1YwMDYyX1BPS0VNT05fUE9MSVdSQVRIED4SFgoSVjAwNjNf",
+            "UE9LRU1PTl9BQlJBED8SGQoVVjAwNjRfUE9LRU1PTl9LQURBQlJBEEASGgoW",
+            "VjAwNjVfUE9LRU1PTl9BTEFLQVpBTRBBEhgKFFYwMDY2X1BPS0VNT05fTUFD",
+            "SE9QEEISGQoVVjAwNjdfUE9LRU1PTl9NQUNIT0tFEEMSGQoVVjAwNjhfUE9L",
+            "RU1PTl9NQUNIQU1QEEQSHAoYVjAwNjlfUE9LRU1PTl9CRUxMU1BST1VUEEUS",
+            "HAoYVjAwNzBfUE9LRU1PTl9XRUVQSU5CRUxMEEYSHAoYVjAwNzFfUE9LRU1P",
+            "Tl9WSUNUUkVFQkVMEEcSGwoXVjAwNzJfUE9LRU1PTl9URU5UQUNPT0wQSBIc",
+            "ChhWMDA3M19QT0tFTU9OX1RFTlRBQ1JVRUwQSRIZChVWMDA3NF9QT0tFTU9O",
+            "X0dFT0RVREUQShIaChZWMDA3NV9QT0tFTU9OX0dSQVZFTEVSEEsSFwoTVjAw",
+            "NzZfUE9LRU1PTl9HT0xFTRBMEhgKFFYwMDc3X1BPS0VNT05fUE9OWVRBEE0S",
+            "GgoWVjAwNzhfUE9LRU1PTl9SQVBJREFTSBBOEhoKFlYwMDc5X1BPS0VNT05f",
+            "U0xPV1BPS0UQTxIZChVWMDA4MF9QT0tFTU9OX1NMT1dCUk8QUBIbChdWMDA4",
+            "MV9QT0tFTU9OX01BR05FTUlURRBREhoKFlYwMDgyX1BPS0VNT05fTUFHTkVU",
+            "T04QUhIbChdWMDA4M19QT0tFTU9OX0ZBUkZFVENIRBBTEhcKE1YwMDg0X1BP",
+            "S0VNT05fRE9EVU8QVBIYChRWMDA4NV9QT0tFTU9OX0RPRFJJTxBVEhYKElYw",
+            "MDg2X1BPS0VNT05fU0VFTBBWEhkKFVYwMDg3X1BPS0VNT05fREVXR09ORxBX",
+            "EhgKFFYwMDg4X1BPS0VNT05fR1JJTUVSEFgSFQoRVjAwODlfUE9LRU1PTl9N",
+            "VUsQWRIaChZWMDA5MF9QT0tFTU9OX1NIRUxMREVSEFoSGgoWVjAwOTFfUE9L",
+            "RU1PTl9DTE9ZU1RFUhBbEhgKFFYwMDkyX1BPS0VNT05fR0FTVExZEFwSGQoV",
+            "VjAwOTNfUE9LRU1PTl9IQVVOVEVSEF0SGAoUVjAwOTRfUE9LRU1PTl9HRU5H",
+            "QVIQXhIWChJWMDA5NV9QT0tFTU9OX09OSVgQXxIZChVWMDA5Nl9QT0tFTU9O",
+            "X0RST1daRUUQYBIXChNWMDA5N19QT0tFTU9OX0hZUE5PEGESGAoUVjAwOThf",
+            "UE9LRU1PTl9LUkFCQlkQYhIZChVWMDA5OV9QT0tFTU9OX0tJTkdMRVIQYxIZ",
+            "ChVWMDEwMF9QT0tFTU9OX1ZPTFRPUkIQZBIbChdWMDEwMV9QT0tFTU9OX0VM",
+            "RUNUUk9ERRBlEhsKF1YwMTAyX1BPS0VNT05fRVhFR0dDVVRFEGYSGwoXVjAx",
+            "MDNfUE9LRU1PTl9FWEVHR1VUT1IQZxIYChRWMDEwNF9QT0tFTU9OX0NVQk9O",
+            "RRBoEhkKFVYwMTA1X1BPS0VNT05fTUFST1dBSxBpEhsKF1YwMTA2X1BPS0VN",
+            "T05fSElUTU9OTEVFEGoSHAoYVjAxMDdfUE9LRU1PTl9ISVRNT05DSEFOEGsS",
+            "GwoXVjAxMDhfUE9LRU1PTl9MSUNLSVRVTkcQbBIZChVWMDEwOV9QT0tFTU9O",
+            "X0tPRkZJTkcQbRIZChVWMDExMF9QT0tFTU9OX1dFRVpJTkcQbhIZChVWMDEx",
+            "MV9QT0tFTU9OX1JIWUhPUk4QbxIYChRWMDExMl9QT0tFTU9OX1JIWURPThBw",
+            "EhkKFVYwMTEzX1BPS0VNT05fQ0hBTlNFWRBxEhkKFVYwMTE0X1BPS0VNT05f",
+            "VEFOR0VMQRByEhwKGFYwMTE1X1BPS0VNT05fS0FOR0FTS0hBThBzEhgKFFYw",
+            "MTE2X1BPS0VNT05fSE9SU0VBEHQSGAoUVjAxMTdfUE9LRU1PTl9TRUFEUkEQ",
+            "dRIZChVWMDExOF9QT0tFTU9OX0dPTERFRU4QdhIZChVWMDExOV9QT0tFTU9O",
+            "X1NFQUtJTkcQdxIYChRWMDEyMF9QT0tFTU9OX1NUQVJZVRB4EhkKFVYwMTIx",
+            "X1BPS0VNT05fU1RBUk1JRRB5EhkKFVYwMTIyX1BPS0VNT05fTVJfTUlNRRB6",
+            "EhkKFVYwMTIzX1BPS0VNT05fU0NZVEhFUhB7EhYKElYwMTI0X1BPS0VNT05f",
+            "SllOWBB8EhwKGFYwMTI1X1BPS0VNT05fRUxFQ1RBQlVaWhB9EhgKFFYwMTI2",
+            "X1BPS0VNT05fTUFHTUFSEH4SGAoUVjAxMjdfUE9LRU1PTl9QSU5TSVIQfxIZ",
+            "ChRWMDEyOF9QT0tFTU9OX1RBVVJPUxCAARIbChZWMDEyOV9QT0tFTU9OX01B",
+            "R0lLQVJQEIEBEhsKFlYwMTMwX1BPS0VNT05fR1lBUkFET1MQggESGQoUVjAx",
+            "MzFfUE9LRU1PTl9MQVBSQVMQgwESGAoTVjAxMzJfUE9LRU1PTl9ESVRUTxCE",
+            "ARIYChNWMDEzM19QT0tFTU9OX0VFVkVFEIUBEhsKFlYwMTM0X1BPS0VNT05f",
+            "VkFQT1JFT04QhgESGgoVVjAxMzVfUE9LRU1PTl9KT0xURU9OEIcBEhoKFVYw",
+            "MTM2X1BPS0VNT05fRkxBUkVPThCIARIaChVWMDEzN19QT0tFTU9OX1BPUllH",
+            "T04QiQESGgoVVjAxMzhfUE9LRU1PTl9PTUFOWVRFEIoBEhoKFVYwMTM5X1BP",
+            "S0VNT05fT01BU1RBUhCLARIZChRWMDE0MF9QT0tFTU9OX0tBQlVUTxCMARIb",
+            "ChZWMDE0MV9QT0tFTU9OX0tBQlVUT1BTEI0BEh0KGFYwMTQyX1BPS0VNT05f",
+            "QUVST0RBQ1RZTBCOARIaChVWMDE0M19QT0tFTU9OX1NOT1JMQVgQjwESGwoW",
+            "VjAxNDRfUE9LRU1PTl9BUlRJQ1VOTxCQARIZChRWMDE0NV9QT0tFTU9OX1pB",
+            "UERPUxCRARIaChVWMDE0Nl9QT0tFTU9OX01PTFRSRVMQkgESGgoVVjAxNDdf",
+            "UE9LRU1PTl9EUkFUSU5JEJMBEhwKF1YwMTQ4X1BPS0VNT05fRFJBR09OQUlS",
+            "EJQBEhwKF1YwMTQ5X1BPS0VNT05fRFJBR09OSVRFEJUBEhkKFFYwMTUwX1BP",
+            "S0VNT05fTUVXVFdPEJYBEhYKEVYwMTUxX1BPS0VNT05fTUVXEJcBYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -237,32 +237,36 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.TransferPokemonOutProto), global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.TransferPokemonOutProto.Parser, new[]{ "Status", "CandyAwarded" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.EvolvePokemonProto), global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.EvolvePokemonProto.Parser, new[]{ "PokemonId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.EvolvePokemonOutProto), global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.EvolvePokemonOutProto.Parser, new[]{ "Result", "EvolvedPokemon", "ExpAwarded", "CandyAwarded" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto), global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Parser, new[]{ "Id", "PokemonId", "Cp", "Stamina", "MaxStamina", "Move1", "Move2", "DeployedFortId", "OwnerName", "IsEgg", "EggKmWalkedTarget", "EggKmWalkedStart", "Origin", "HeightM", "WeightKg", "IndividualAttack", "IndividualDefense", "IndividualStamina", "CpMultiplier", "Pokeball", "CapturedS2CellId", "BattlesAttacked", "BattlesDefended", "EggIncubatorId", "CreationTimeMs", "NumUpgrades", "AdditionalCpMultiplier", "Favorite", "Nickname", "FromFort" }, null, new[]{ typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds) }, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto), global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Parser, new[]{ "Id", "PokemonType", "Cp", "Stamina", "MaxStamina", "Move1", "Move2", "DeployedFortId", "OwnerName", "IsEgg", "EggKmWalkedTarget", "EggKmWalkedStart", "Origin", "HeightM", "WeightKg", "IndividualAttack", "IndividualDefense", "IndividualStamina", "CpMultiplier", "Pokeball", "CapturedS2CellId", "BattlesAttacked", "BattlesDefended", "EggIncubatorId", "CreationTimeMs", "NumUpgrades", "AdditionalCpMultiplier", "Favorite", "Nickname", "FromFort" }, null, new[]{ typeof(global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds) }, null)})
           }));
     }
     #endregion
 
   }
   #region Messages
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class InventoryResponse : pb::IMessage<InventoryResponse> {
     private static readonly pb::MessageParser<InventoryResponse> _parser = new pb::MessageParser<InventoryResponse>(() => new InventoryResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<InventoryResponse> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponseReflection.Descriptor.MessageTypes[0]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public InventoryResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public InventoryResponse(InventoryResponse other) : this() {
       unknown1_ = other.unknown1_;
       unknown2_ = other.unknown2_;
@@ -273,6 +277,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       errorMessage_ = other.errorMessage_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public InventoryResponse Clone() {
       return new InventoryResponse(this);
     }
@@ -280,6 +285,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>Field number for the "unknown1" field.</summary>
     public const int Unknown1FieldNumber = 1;
     private int unknown1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Unknown1 {
       get { return unknown1_; }
       set {
@@ -290,6 +296,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>Field number for the "unknown2" field.</summary>
     public const int Unknown2FieldNumber = 2;
     private long unknown2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Unknown2 {
       get { return unknown2_; }
       set {
@@ -300,6 +307,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>Field number for the "api_url" field.</summary>
     public const int ApiUrlFieldNumber = 3;
     private string apiUrl_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string ApiUrl {
       get { return apiUrl_; }
       set {
@@ -310,6 +318,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>Field number for the "unknown6" field.</summary>
     public const int Unknown6FieldNumber = 6;
     private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown6 unknown6_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown6 Unknown6 {
       get { return unknown6_; }
       set {
@@ -320,6 +329,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>Field number for the "unknown7" field.</summary>
     public const int Unknown7FieldNumber = 7;
     private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown7 unknown7_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown7 Unknown7 {
       get { return unknown7_; }
       set {
@@ -332,6 +342,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Payload> _repeated_payload_codec
         = pb::FieldCodec.ForMessage(802, global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Payload.Parser);
     private readonly pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Payload> payload_ = new pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Payload>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Payload> Payload {
       get { return payload_; }
     }
@@ -342,6 +353,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     /// <summary>
     /// Should be moved to an error-proto file if error is always 101 field
     /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string ErrorMessage {
       get { return errorMessage_; }
       set {
@@ -349,10 +361,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as InventoryResponse);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(InventoryResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -370,6 +384,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Unknown1 != 0) hash ^= Unknown1.GetHashCode();
@@ -382,10 +397,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Unknown1 != 0) {
         output.WriteRawTag(8);
@@ -414,6 +431,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Unknown1 != 0) {
@@ -438,6 +456,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(InventoryResponse other) {
       if (other == null) {
         return;
@@ -469,6 +488,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -516,32 +536,37 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
     #region Nested types
     /// <summary>Container for nested types declared in the InventoryResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class Unknown6 : pb::IMessage<Unknown6> {
         private static readonly pb::MessageParser<Unknown6> _parser = new pb::MessageParser<Unknown6>(() => new Unknown6());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<Unknown6> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[0]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown6() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown6(Unknown6 other) : this() {
           unknown1_ = other.unknown1_;
           Unknown2 = other.unknown2_ != null ? other.Unknown2.Clone() : null;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown6 Clone() {
           return new Unknown6(this);
         }
@@ -549,6 +574,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "unknown1" field.</summary>
         public const int Unknown1FieldNumber = 1;
         private int unknown1_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Unknown1 {
           get { return unknown1_; }
           set {
@@ -559,6 +585,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "unknown2" field.</summary>
         public const int Unknown2FieldNumber = 2;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown6.Types.Unknown2 unknown2_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown6.Types.Unknown2 Unknown2 {
           get { return unknown2_; }
           set {
@@ -566,10 +593,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as Unknown6);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(Unknown6 other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -582,6 +611,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Unknown1 != 0) hash ^= Unknown1.GetHashCode();
@@ -589,10 +619,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Unknown1 != 0) {
             output.WriteRawTag(8);
@@ -604,6 +636,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Unknown1 != 0) {
@@ -615,6 +648,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(Unknown6 other) {
           if (other == null) {
             return;
@@ -630,6 +664,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -654,31 +689,36 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
         #region Nested types
         /// <summary>Container for nested types declared in the Unknown6 message type.</summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static partial class Types {
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class Unknown2 : pb::IMessage<Unknown2> {
             private static readonly pb::MessageParser<Unknown2> _parser = new pb::MessageParser<Unknown2>(() => new Unknown2());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<Unknown2> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.Unknown6.Descriptor.NestedTypes[0]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public Unknown2() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public Unknown2(Unknown2 other) : this() {
               unknown1_ = other.unknown1_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public Unknown2 Clone() {
               return new Unknown2(this);
             }
@@ -686,6 +726,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "unknown1" field.</summary>
             public const int Unknown1FieldNumber = 1;
             private pb::ByteString unknown1_ = pb::ByteString.Empty;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public pb::ByteString Unknown1 {
               get { return unknown1_; }
               set {
@@ -693,10 +734,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as Unknown2);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(Unknown2 other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -708,16 +751,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Unknown1.Length != 0) hash ^= Unknown1.GetHashCode();
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Unknown1.Length != 0) {
                 output.WriteRawTag(10);
@@ -725,6 +771,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Unknown1.Length != 0) {
@@ -733,6 +780,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(Unknown2 other) {
               if (other == null) {
                 return;
@@ -742,6 +790,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -764,31 +813,36 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class Unknown7 : pb::IMessage<Unknown7> {
         private static readonly pb::MessageParser<Unknown7> _parser = new pb::MessageParser<Unknown7>(() => new Unknown7());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<Unknown7> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[1]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown7() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown7(Unknown7 other) : this() {
           unknown71_ = other.unknown71_;
           unknown72_ = other.unknown72_;
           unknown73_ = other.unknown73_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Unknown7 Clone() {
           return new Unknown7(this);
         }
@@ -796,6 +850,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "unknown71" field.</summary>
         public const int Unknown71FieldNumber = 1;
         private pb::ByteString unknown71_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pb::ByteString Unknown71 {
           get { return unknown71_; }
           set {
@@ -806,6 +861,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "unknown72" field.</summary>
         public const int Unknown72FieldNumber = 2;
         private long unknown72_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public long Unknown72 {
           get { return unknown72_; }
           set {
@@ -816,6 +872,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "unknown73" field.</summary>
         public const int Unknown73FieldNumber = 3;
         private pb::ByteString unknown73_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pb::ByteString Unknown73 {
           get { return unknown73_; }
           set {
@@ -823,10 +880,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as Unknown7);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(Unknown7 other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -840,6 +899,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Unknown71.Length != 0) hash ^= Unknown71.GetHashCode();
@@ -848,10 +908,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Unknown71.Length != 0) {
             output.WriteRawTag(10);
@@ -867,6 +929,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Unknown71.Length != 0) {
@@ -881,6 +944,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(Unknown7 other) {
           if (other == null) {
             return;
@@ -896,6 +960,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -921,30 +986,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class Payload : pb::IMessage<Payload> {
         private static readonly pb::MessageParser<Payload> _parser = new pb::MessageParser<Payload>(() => new Payload());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<Payload> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[2]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Payload() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Payload(Payload other) : this() {
           status_ = other.status_;
           Bag = other.bag_ != null ? other.Bag.Clone() : null;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Payload Clone() {
           return new Payload(this);
         }
@@ -952,6 +1022,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Status" field.</summary>
         public const int StatusFieldNumber = 1;
         private int status_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Status {
           get { return status_; }
           set {
@@ -962,6 +1033,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Bag" field.</summary>
         public const int BagFieldNumber = 2;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto bag_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto Bag {
           get { return bag_; }
           set {
@@ -969,10 +1041,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as Payload);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(Payload other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -985,6 +1059,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Status != 0) hash ^= Status.GetHashCode();
@@ -992,10 +1067,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Status != 0) {
             output.WriteRawTag(8);
@@ -1007,6 +1084,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Status != 0) {
@@ -1018,6 +1096,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(Payload other) {
           if (other == null) {
             return;
@@ -1033,6 +1112,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -1057,30 +1137,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class InventoryResponseProto : pb::IMessage<InventoryResponseProto> {
         private static readonly pb::MessageParser<InventoryResponseProto> _parser = new pb::MessageParser<InventoryResponseProto>(() => new InventoryResponseProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<InventoryResponseProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[3]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryResponseProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryResponseProto(InventoryResponseProto other) : this() {
           timestamp_ = other.timestamp_;
           items_ = other.items_.Clone();
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryResponseProto Clone() {
           return new InventoryResponseProto(this);
         }
@@ -1088,6 +1173,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "timestamp" field.</summary>
         public const int TimestampFieldNumber = 2;
         private long timestamp_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public long Timestamp {
           get { return timestamp_; }
           set {
@@ -1100,14 +1186,17 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Types.InventoryItemResponseProto> _repeated_items_codec
             = pb::FieldCodec.ForMessage(26, global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Types.InventoryItemResponseProto.Parser);
         private readonly pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Types.InventoryItemResponseProto> items_ = new pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Types.InventoryItemResponseProto>();
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Types.InventoryItemResponseProto> Items {
           get { return items_; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as InventoryResponseProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(InventoryResponseProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -1120,6 +1209,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Timestamp != 0L) hash ^= Timestamp.GetHashCode();
@@ -1127,10 +1217,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Timestamp != 0L) {
             output.WriteRawTag(16);
@@ -1139,6 +1231,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           items_.WriteTo(output, _repeated_items_codec);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Timestamp != 0L) {
@@ -1148,6 +1241,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(InventoryResponseProto other) {
           if (other == null) {
             return;
@@ -1158,6 +1252,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           items_.Add(other.items_);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -1179,32 +1274,37 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
         #region Nested types
         /// <summary>Container for nested types declared in the InventoryResponseProto message type.</summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static partial class Types {
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class InventoryItemResponseProto : pb::IMessage<InventoryItemResponseProto> {
             private static readonly pb::MessageParser<InventoryItemResponseProto> _parser = new pb::MessageParser<InventoryItemResponseProto>(() => new InventoryItemResponseProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<InventoryItemResponseProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryResponseProto.Descriptor.NestedTypes[0]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryItemResponseProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryItemResponseProto(InventoryItemResponseProto other) : this() {
               timestamp_ = other.timestamp_;
               Item = other.item_ != null ? other.Item.Clone() : null;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryItemResponseProto Clone() {
               return new InventoryItemResponseProto(this);
             }
@@ -1212,6 +1312,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "timestamp" field.</summary>
             public const int TimestampFieldNumber = 1;
             private long timestamp_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long Timestamp {
               get { return timestamp_; }
               set {
@@ -1222,6 +1323,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "item" field.</summary>
             public const int ItemFieldNumber = 3;
             private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto item_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto Item {
               get { return item_; }
               set {
@@ -1229,10 +1331,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as InventoryItemResponseProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(InventoryItemResponseProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -1245,6 +1349,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Timestamp != 0L) hash ^= Timestamp.GetHashCode();
@@ -1252,10 +1357,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Timestamp != 0L) {
                 output.WriteRawTag(8);
@@ -1267,6 +1374,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Timestamp != 0L) {
@@ -1278,6 +1386,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(InventoryItemResponseProto other) {
               if (other == null) {
                 return;
@@ -1293,6 +1402,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -1322,25 +1432,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class InventoryItemProto : pb::IMessage<InventoryItemProto> {
         private static readonly pb::MessageParser<InventoryItemProto> _parser = new pb::MessageParser<InventoryItemProto>(() => new InventoryItemProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<InventoryItemProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[4]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryItemProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryItemProto(InventoryItemProto other) : this() {
           Pokemon = other.pokemon_ != null ? other.Pokemon.Clone() : null;
           Item = other.item_ != null ? other.Item.Clone() : null;
@@ -1354,6 +1468,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           PokemonFamily = other.pokemonFamily_ != null ? other.PokemonFamily.Clone() : null;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public InventoryItemProto Clone() {
           return new InventoryItemProto(this);
         }
@@ -1361,6 +1476,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Pokemon" field.</summary>
         public const int PokemonFieldNumber = 1;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto pokemon_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto Pokemon {
           get { return pokemon_; }
           set {
@@ -1371,6 +1487,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Item" field.</summary>
         public const int ItemFieldNumber = 2;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.ItemProto item_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.ItemProto Item {
           get { return item_; }
           set {
@@ -1381,6 +1498,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PokedexEntry" field.</summary>
         public const int PokedexEntryFieldNumber = 3;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PokedexEntryProto pokedexEntry_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PokedexEntryProto PokedexEntry {
           get { return pokedexEntry_; }
           set {
@@ -1391,6 +1509,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PlayerStats" field.</summary>
         public const int PlayerStatsFieldNumber = 4;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerStatsProto playerStats_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerStatsProto PlayerStats {
           get { return playerStats_; }
           set {
@@ -1401,6 +1520,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PlayerCurrency" field.</summary>
         public const int PlayerCurrencyFieldNumber = 5;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerCurrencyProto playerCurrency_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerCurrencyProto PlayerCurrency {
           get { return playerCurrency_; }
           set {
@@ -1411,6 +1531,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PlayerCamera" field.</summary>
         public const int PlayerCameraFieldNumber = 6;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerCameraProto playerCamera_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PlayerCameraProto PlayerCamera {
           get { return playerCamera_; }
           set {
@@ -1421,6 +1542,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "InventoryUpgrades" field.</summary>
         public const int InventoryUpgradesFieldNumber = 7;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.InventoryUpgradesProto inventoryUpgrades_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.InventoryUpgradesProto InventoryUpgrades {
           get { return inventoryUpgrades_; }
           set {
@@ -1431,6 +1553,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "AppliedItem" field.</summary>
         public const int AppliedItemFieldNumber = 8;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.AppliedItemProto appliedItem_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.AppliedItemProto AppliedItem {
           get { return appliedItem_; }
           set {
@@ -1441,6 +1564,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "EggIncubators" field.</summary>
         public const int EggIncubatorsFieldNumber = 9;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.EggIncubatorProto eggIncubators_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.EggIncubatorProto EggIncubators {
           get { return eggIncubators_; }
           set {
@@ -1451,6 +1575,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PokemonFamily" field.</summary>
         public const int PokemonFamilyFieldNumber = 10;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PokemonFamilyProto pokemonFamily_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.PokemonFamilyProto PokemonFamily {
           get { return pokemonFamily_; }
           set {
@@ -1458,10 +1583,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as InventoryItemProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(InventoryItemProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -1482,6 +1609,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (pokemon_ != null) hash ^= Pokemon.GetHashCode();
@@ -1497,10 +1625,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (pokemon_ != null) {
             output.WriteRawTag(10);
@@ -1544,6 +1674,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (pokemon_ != null) {
@@ -1579,6 +1710,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(InventoryItemProto other) {
           if (other == null) {
             return;
@@ -1645,6 +1777,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -1728,33 +1861,38 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
         #region Nested types
         /// <summary>Container for nested types declared in the InventoryItemProto message type.</summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static partial class Types {
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class ItemProto : pb::IMessage<ItemProto> {
             private static readonly pb::MessageParser<ItemProto> _parser = new pb::MessageParser<ItemProto>(() => new ItemProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<ItemProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[0]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public ItemProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public ItemProto(ItemProto other) : this() {
               item_ = other.item_;
               count_ = other.count_;
               unseen_ = other.unseen_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public ItemProto Clone() {
               return new ItemProto(this);
             }
@@ -1762,6 +1900,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Item" field.</summary>
             public const int ItemFieldNumber = 1;
             private int item_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Item {
               get { return item_; }
               set {
@@ -1772,6 +1911,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Count" field.</summary>
             public const int CountFieldNumber = 2;
             private int count_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Count {
               get { return count_; }
               set {
@@ -1782,6 +1922,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Unseen" field.</summary>
             public const int UnseenFieldNumber = 3;
             private bool unseen_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Unseen {
               get { return unseen_; }
               set {
@@ -1789,10 +1930,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as ItemProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(ItemProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -1806,6 +1949,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Item != 0) hash ^= Item.GetHashCode();
@@ -1814,10 +1958,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Item != 0) {
                 output.WriteRawTag(8);
@@ -1833,6 +1979,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Item != 0) {
@@ -1847,6 +1994,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(ItemProto other) {
               if (other == null) {
                 return;
@@ -1862,6 +2010,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -1887,25 +2036,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class PokedexEntryProto : pb::IMessage<PokedexEntryProto> {
             private static readonly pb::MessageParser<PokedexEntryProto> _parser = new pb::MessageParser<PokedexEntryProto>(() => new PokedexEntryProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<PokedexEntryProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[1]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokedexEntryProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokedexEntryProto(PokedexEntryProto other) : this() {
               pokedexEntryNumber_ = other.pokedexEntryNumber_;
               timesEncountered_ = other.timesEncountered_;
@@ -1914,6 +2067,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               evolutionStones_ = other.evolutionStones_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokedexEntryProto Clone() {
               return new PokedexEntryProto(this);
             }
@@ -1921,6 +2075,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PokedexEntryNumber" field.</summary>
             public const int PokedexEntryNumberFieldNumber = 1;
             private int pokedexEntryNumber_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int PokedexEntryNumber {
               get { return pokedexEntryNumber_; }
               set {
@@ -1931,6 +2086,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "TimesEncountered" field.</summary>
             public const int TimesEncounteredFieldNumber = 2;
             private int timesEncountered_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int TimesEncountered {
               get { return timesEncountered_; }
               set {
@@ -1941,6 +2097,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "TimesCaptured" field.</summary>
             public const int TimesCapturedFieldNumber = 3;
             private int timesCaptured_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int TimesCaptured {
               get { return timesCaptured_; }
               set {
@@ -1951,6 +2108,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "EvolutionStonePieces" field.</summary>
             public const int EvolutionStonePiecesFieldNumber = 4;
             private int evolutionStonePieces_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int EvolutionStonePieces {
               get { return evolutionStonePieces_; }
               set {
@@ -1961,6 +2119,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "EvolutionStones" field.</summary>
             public const int EvolutionStonesFieldNumber = 5;
             private int evolutionStones_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int EvolutionStones {
               get { return evolutionStones_; }
               set {
@@ -1968,10 +2127,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as PokedexEntryProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(PokedexEntryProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -1987,6 +2148,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (PokedexEntryNumber != 0) hash ^= PokedexEntryNumber.GetHashCode();
@@ -1997,10 +2159,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (PokedexEntryNumber != 0) {
                 output.WriteRawTag(8);
@@ -2024,6 +2188,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (PokedexEntryNumber != 0) {
@@ -2044,6 +2209,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(PokedexEntryProto other) {
               if (other == null) {
                 return;
@@ -2065,6 +2231,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -2098,25 +2265,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class PlayerStatsProto : pb::IMessage<PlayerStatsProto> {
             private static readonly pb::MessageParser<PlayerStatsProto> _parser = new pb::MessageParser<PlayerStatsProto>(() => new PlayerStatsProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<PlayerStatsProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[2]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerStatsProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerStatsProto(PlayerStatsProto other) : this() {
               level_ = other.level_;
               experience_ = other.experience_;
@@ -2142,6 +2313,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               smallRattataCaught_ = other.smallRattataCaught_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerStatsProto Clone() {
               return new PlayerStatsProto(this);
             }
@@ -2149,6 +2321,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Level" field.</summary>
             public const int LevelFieldNumber = 1;
             private int level_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Level {
               get { return level_; }
               set {
@@ -2159,6 +2332,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Experience" field.</summary>
             public const int ExperienceFieldNumber = 2;
             private long experience_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long Experience {
               get { return experience_; }
               set {
@@ -2169,6 +2343,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PrevLevelExp" field.</summary>
             public const int PrevLevelExpFieldNumber = 3;
             private long prevLevelExp_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long PrevLevelExp {
               get { return prevLevelExp_; }
               set {
@@ -2179,6 +2354,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NextLevelExp" field.</summary>
             public const int NextLevelExpFieldNumber = 4;
             private long nextLevelExp_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long NextLevelExp {
               get { return nextLevelExp_; }
               set {
@@ -2189,6 +2365,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "KmWalked" field.</summary>
             public const int KmWalkedFieldNumber = 5;
             private float kmWalked_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public float KmWalked {
               get { return kmWalked_; }
               set {
@@ -2199,6 +2376,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumPokemonEncountered" field.</summary>
             public const int NumPokemonEncounteredFieldNumber = 6;
             private int numPokemonEncountered_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumPokemonEncountered {
               get { return numPokemonEncountered_; }
               set {
@@ -2209,6 +2387,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumUniquePokedexEntries" field.</summary>
             public const int NumUniquePokedexEntriesFieldNumber = 7;
             private int numUniquePokedexEntries_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumUniquePokedexEntries {
               get { return numUniquePokedexEntries_; }
               set {
@@ -2219,6 +2398,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumPokemonCaptured" field.</summary>
             public const int NumPokemonCapturedFieldNumber = 8;
             private int numPokemonCaptured_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumPokemonCaptured {
               get { return numPokemonCaptured_; }
               set {
@@ -2229,6 +2409,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumEvolutions" field.</summary>
             public const int NumEvolutionsFieldNumber = 9;
             private int numEvolutions_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumEvolutions {
               get { return numEvolutions_; }
               set {
@@ -2239,6 +2420,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PokeStopVisits" field.</summary>
             public const int PokeStopVisitsFieldNumber = 10;
             private int pokeStopVisits_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int PokeStopVisits {
               get { return pokeStopVisits_; }
               set {
@@ -2249,6 +2431,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumberOfPokeballThrown" field.</summary>
             public const int NumberOfPokeballThrownFieldNumber = 11;
             private int numberOfPokeballThrown_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumberOfPokeballThrown {
               get { return numberOfPokeballThrown_; }
               set {
@@ -2259,6 +2442,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumEggsHatched" field.</summary>
             public const int NumEggsHatchedFieldNumber = 12;
             private int numEggsHatched_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumEggsHatched {
               get { return numEggsHatched_; }
               set {
@@ -2269,6 +2453,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "BigMagikarpCaught" field.</summary>
             public const int BigMagikarpCaughtFieldNumber = 13;
             private int bigMagikarpCaught_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int BigMagikarpCaught {
               get { return bigMagikarpCaught_; }
               set {
@@ -2279,6 +2464,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumBattleAttackWon" field.</summary>
             public const int NumBattleAttackWonFieldNumber = 14;
             private int numBattleAttackWon_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumBattleAttackWon {
               get { return numBattleAttackWon_; }
               set {
@@ -2289,6 +2475,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumBattleAttackTotal" field.</summary>
             public const int NumBattleAttackTotalFieldNumber = 15;
             private int numBattleAttackTotal_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumBattleAttackTotal {
               get { return numBattleAttackTotal_; }
               set {
@@ -2299,6 +2486,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumBattleDefendedWon" field.</summary>
             public const int NumBattleDefendedWonFieldNumber = 16;
             private int numBattleDefendedWon_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumBattleDefendedWon {
               get { return numBattleDefendedWon_; }
               set {
@@ -2309,6 +2497,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumBattleTrainingWon" field.</summary>
             public const int NumBattleTrainingWonFieldNumber = 17;
             private int numBattleTrainingWon_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumBattleTrainingWon {
               get { return numBattleTrainingWon_; }
               set {
@@ -2319,6 +2508,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumBattleTrainingTotal" field.</summary>
             public const int NumBattleTrainingTotalFieldNumber = 18;
             private int numBattleTrainingTotal_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumBattleTrainingTotal {
               get { return numBattleTrainingTotal_; }
               set {
@@ -2329,6 +2519,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PrestigeRaisedTotal" field.</summary>
             public const int PrestigeRaisedTotalFieldNumber = 19;
             private int prestigeRaisedTotal_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int PrestigeRaisedTotal {
               get { return prestigeRaisedTotal_; }
               set {
@@ -2339,6 +2530,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PrestigeDroppedTotal" field.</summary>
             public const int PrestigeDroppedTotalFieldNumber = 20;
             private int prestigeDroppedTotal_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int PrestigeDroppedTotal {
               get { return prestigeDroppedTotal_; }
               set {
@@ -2349,6 +2541,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "NumPokemonDeployed" field.</summary>
             public const int NumPokemonDeployedFieldNumber = 21;
             private int numPokemonDeployed_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int NumPokemonDeployed {
               get { return numPokemonDeployed_; }
               set {
@@ -2359,6 +2552,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "SmallRattataCaught" field.</summary>
             public const int SmallRattataCaughtFieldNumber = 23;
             private int smallRattataCaught_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int SmallRattataCaught {
               get { return smallRattataCaught_; }
               set {
@@ -2366,10 +2560,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as PlayerStatsProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(PlayerStatsProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -2402,6 +2598,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Level != 0) hash ^= Level.GetHashCode();
@@ -2429,10 +2626,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Level != 0) {
                 output.WriteRawTag(8);
@@ -2524,6 +2723,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Level != 0) {
@@ -2595,6 +2795,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(PlayerStatsProto other) {
               if (other == null) {
                 return;
@@ -2667,6 +2868,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -2768,25 +2970,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class AppliedItemProto : pb::IMessage<AppliedItemProto> {
             private static readonly pb::MessageParser<AppliedItemProto> _parser = new pb::MessageParser<AppliedItemProto>(() => new AppliedItemProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<AppliedItemProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[3]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public AppliedItemProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public AppliedItemProto(AppliedItemProto other) : this() {
               item_ = other.item_;
               itemType_ = other.itemType_;
@@ -2794,6 +3000,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               appliedMs_ = other.appliedMs_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public AppliedItemProto Clone() {
               return new AppliedItemProto(this);
             }
@@ -2801,6 +3008,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Item" field.</summary>
             public const int ItemFieldNumber = 1;
             private int item_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Item {
               get { return item_; }
               set {
@@ -2811,6 +3019,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "ItemType" field.</summary>
             public const int ItemTypeFieldNumber = 2;
             private int itemType_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int ItemType {
               get { return itemType_; }
               set {
@@ -2821,6 +3030,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "ExpirationMs" field.</summary>
             public const int ExpirationMsFieldNumber = 3;
             private long expirationMs_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long ExpirationMs {
               get { return expirationMs_; }
               set {
@@ -2831,6 +3041,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "AppliedMs" field.</summary>
             public const int AppliedMsFieldNumber = 4;
             private long appliedMs_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long AppliedMs {
               get { return appliedMs_; }
               set {
@@ -2838,10 +3049,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as AppliedItemProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(AppliedItemProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -2856,6 +3069,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Item != 0) hash ^= Item.GetHashCode();
@@ -2865,10 +3079,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Item != 0) {
                 output.WriteRawTag(8);
@@ -2888,6 +3104,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Item != 0) {
@@ -2905,6 +3122,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(AppliedItemProto other) {
               if (other == null) {
                 return;
@@ -2923,6 +3141,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -2952,29 +3171,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class PlayerCameraProto : pb::IMessage<PlayerCameraProto> {
             private static readonly pb::MessageParser<PlayerCameraProto> _parser = new pb::MessageParser<PlayerCameraProto>(() => new PlayerCameraProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<PlayerCameraProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[4]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCameraProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCameraProto(PlayerCameraProto other) : this() {
               defaultCamera_ = other.defaultCamera_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCameraProto Clone() {
               return new PlayerCameraProto(this);
             }
@@ -2982,6 +3206,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "DefaultCamera" field.</summary>
             public const int DefaultCameraFieldNumber = 1;
             private bool defaultCamera_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool DefaultCamera {
               get { return defaultCamera_; }
               set {
@@ -2989,10 +3214,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as PlayerCameraProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(PlayerCameraProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -3004,16 +3231,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (DefaultCamera != false) hash ^= DefaultCamera.GetHashCode();
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (DefaultCamera != false) {
                 output.WriteRawTag(8);
@@ -3021,6 +3251,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (DefaultCamera != false) {
@@ -3029,6 +3260,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(PlayerCameraProto other) {
               if (other == null) {
                 return;
@@ -3038,6 +3270,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -3055,29 +3288,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class PlayerCurrencyProto : pb::IMessage<PlayerCurrencyProto> {
             private static readonly pb::MessageParser<PlayerCurrencyProto> _parser = new pb::MessageParser<PlayerCurrencyProto>(() => new PlayerCurrencyProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<PlayerCurrencyProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[5]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCurrencyProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCurrencyProto(PlayerCurrencyProto other) : this() {
               gems_ = other.gems_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PlayerCurrencyProto Clone() {
               return new PlayerCurrencyProto(this);
             }
@@ -3085,6 +3323,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Gems" field.</summary>
             public const int GemsFieldNumber = 1;
             private int gems_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Gems {
               get { return gems_; }
               set {
@@ -3092,10 +3331,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as PlayerCurrencyProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(PlayerCurrencyProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -3107,16 +3348,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (Gems != 0) hash ^= Gems.GetHashCode();
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (Gems != 0) {
                 output.WriteRawTag(8);
@@ -3124,6 +3368,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (Gems != 0) {
@@ -3132,6 +3377,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(PlayerCurrencyProto other) {
               if (other == null) {
                 return;
@@ -3141,6 +3387,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -3158,29 +3405,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class InventoryUpgradesProto : pb::IMessage<InventoryUpgradesProto> {
             private static readonly pb::MessageParser<InventoryUpgradesProto> _parser = new pb::MessageParser<InventoryUpgradesProto>(() => new InventoryUpgradesProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<InventoryUpgradesProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[6]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryUpgradesProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryUpgradesProto(InventoryUpgradesProto other) : this() {
               inventoryUpgrade_ = other.inventoryUpgrade_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public InventoryUpgradesProto Clone() {
               return new InventoryUpgradesProto(this);
             }
@@ -3188,6 +3440,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "InventoryUpgrade" field.</summary>
             public const int InventoryUpgradeFieldNumber = 1;
             private int inventoryUpgrade_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int InventoryUpgrade {
               get { return inventoryUpgrade_; }
               set {
@@ -3195,10 +3448,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as InventoryUpgradesProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(InventoryUpgradesProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -3210,16 +3465,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (InventoryUpgrade != 0) hash ^= InventoryUpgrade.GetHashCode();
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (InventoryUpgrade != 0) {
                 output.WriteRawTag(8);
@@ -3227,6 +3485,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (InventoryUpgrade != 0) {
@@ -3235,6 +3494,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(InventoryUpgradesProto other) {
               if (other == null) {
                 return;
@@ -3244,6 +3504,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -3261,25 +3522,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class EggIncubatorProto : pb::IMessage<EggIncubatorProto> {
             private static readonly pb::MessageParser<EggIncubatorProto> _parser = new pb::MessageParser<EggIncubatorProto>(() => new EggIncubatorProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<EggIncubatorProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[7]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public EggIncubatorProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public EggIncubatorProto(EggIncubatorProto other) : this() {
               itemId_ = other.itemId_;
               Item = other.item_ != null ? other.Item.Clone() : null;
@@ -3290,6 +3555,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               targetKmWalked_ = other.targetKmWalked_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public EggIncubatorProto Clone() {
               return new EggIncubatorProto(this);
             }
@@ -3297,6 +3563,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "ItemId" field.</summary>
             public const int ItemIdFieldNumber = 1;
             private string itemId_ = "";
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public string ItemId {
               get { return itemId_; }
               set {
@@ -3307,6 +3574,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Item" field.</summary>
             public const int ItemFieldNumber = 2;
             private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.ItemProto item_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Types.ItemProto Item {
               get { return item_; }
               set {
@@ -3317,6 +3585,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "IncubatorType" field.</summary>
             public const int IncubatorTypeFieldNumber = 3;
             private int incubatorType_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int IncubatorType {
               get { return incubatorType_; }
               set {
@@ -3327,6 +3596,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "UsesRemaining" field.</summary>
             public const int UsesRemainingFieldNumber = 4;
             private int usesRemaining_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int UsesRemaining {
               get { return usesRemaining_; }
               set {
@@ -3337,6 +3607,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "PokemonId" field.</summary>
             public const int PokemonIdFieldNumber = 5;
             private long pokemonId_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public long PokemonId {
               get { return pokemonId_; }
               set {
@@ -3347,6 +3618,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "StartKmWalked" field.</summary>
             public const int StartKmWalkedFieldNumber = 6;
             private double startKmWalked_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public double StartKmWalked {
               get { return startKmWalked_; }
               set {
@@ -3357,6 +3629,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "TargetKmWalked" field.</summary>
             public const int TargetKmWalkedFieldNumber = 7;
             private double targetKmWalked_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public double TargetKmWalked {
               get { return targetKmWalked_; }
               set {
@@ -3364,10 +3637,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as EggIncubatorProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(EggIncubatorProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -3385,6 +3660,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (ItemId.Length != 0) hash ^= ItemId.GetHashCode();
@@ -3397,10 +3673,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (ItemId.Length != 0) {
                 output.WriteRawTag(10);
@@ -3432,6 +3710,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (ItemId.Length != 0) {
@@ -3458,6 +3737,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(EggIncubatorProto other) {
               if (other == null) {
                 return;
@@ -3488,6 +3768,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -3532,30 +3813,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
           }
 
-          [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
           public sealed partial class PokemonFamilyProto : pb::IMessage<PokemonFamilyProto> {
             private static readonly pb::MessageParser<PokemonFamilyProto> _parser = new pb::MessageParser<PokemonFamilyProto>(() => new PokemonFamilyProto());
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pb::MessageParser<PokemonFamilyProto> Parser { get { return _parser; } }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public static pbr::MessageDescriptor Descriptor {
               get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.InventoryItemProto.Descriptor.NestedTypes[8]; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             pbr::MessageDescriptor pb::IMessage.Descriptor {
               get { return Descriptor; }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokemonFamilyProto() {
               OnConstruction();
             }
 
             partial void OnConstruction();
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokemonFamilyProto(PokemonFamilyProto other) : this() {
               familyId_ = other.familyId_;
               candy_ = other.candy_;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public PokemonFamilyProto Clone() {
               return new PokemonFamilyProto(this);
             }
@@ -3563,6 +3849,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "FamilyId" field.</summary>
             public const int FamilyIdFieldNumber = 1;
             private int familyId_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int FamilyId {
               get { return familyId_; }
               set {
@@ -3573,6 +3860,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             /// <summary>Field number for the "Candy" field.</summary>
             public const int CandyFieldNumber = 2;
             private int candy_;
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int Candy {
               get { return candy_; }
               set {
@@ -3580,10 +3868,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override bool Equals(object other) {
               return Equals(other as PokemonFamilyProto);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public bool Equals(PokemonFamilyProto other) {
               if (ReferenceEquals(other, null)) {
                 return false;
@@ -3596,6 +3886,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return true;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override int GetHashCode() {
               int hash = 1;
               if (FamilyId != 0) hash ^= FamilyId.GetHashCode();
@@ -3603,10 +3894,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return hash;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public override string ToString() {
               return pb::JsonFormatter.ToDiagnosticString(this);
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void WriteTo(pb::CodedOutputStream output) {
               if (FamilyId != 0) {
                 output.WriteRawTag(8);
@@ -3618,6 +3911,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public int CalculateSize() {
               int size = 0;
               if (FamilyId != 0) {
@@ -3629,6 +3923,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               return size;
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(PokemonFamilyProto other) {
               if (other == null) {
                 return;
@@ -3641,6 +3936,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               }
             }
 
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             public void MergeFrom(pb::CodedInputStream input) {
               uint tag;
               while ((tag = input.ReadTag()) != 0) {
@@ -3670,29 +3966,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       /// <summary>
       ///  POKEMON TRANSFER
       /// </summary>
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class TransferPokemonProto : pb::IMessage<TransferPokemonProto> {
         private static readonly pb::MessageParser<TransferPokemonProto> _parser = new pb::MessageParser<TransferPokemonProto>(() => new TransferPokemonProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<TransferPokemonProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[5]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonProto(TransferPokemonProto other) : this() {
           pokemonId_ = other.pokemonId_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonProto Clone() {
           return new TransferPokemonProto(this);
         }
@@ -3700,6 +4001,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PokemonId" field.</summary>
         public const int PokemonIdFieldNumber = 1;
         private ulong pokemonId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public ulong PokemonId {
           get { return pokemonId_; }
           set {
@@ -3707,10 +4009,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as TransferPokemonProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(TransferPokemonProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -3722,16 +4026,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (PokemonId != 0UL) hash ^= PokemonId.GetHashCode();
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (PokemonId != 0UL) {
             output.WriteRawTag(9);
@@ -3739,6 +4046,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (PokemonId != 0UL) {
@@ -3747,6 +4055,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(TransferPokemonProto other) {
           if (other == null) {
             return;
@@ -3756,6 +4065,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -3773,30 +4083,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class TransferPokemonOutProto : pb::IMessage<TransferPokemonOutProto> {
         private static readonly pb::MessageParser<TransferPokemonOutProto> _parser = new pb::MessageParser<TransferPokemonOutProto>(() => new TransferPokemonOutProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<TransferPokemonOutProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[6]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonOutProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonOutProto(TransferPokemonOutProto other) : this() {
           status_ = other.status_;
           candyAwarded_ = other.candyAwarded_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public TransferPokemonOutProto Clone() {
           return new TransferPokemonOutProto(this);
         }
@@ -3804,6 +4119,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Status" field.</summary>
         public const int StatusFieldNumber = 1;
         private int status_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Status {
           get { return status_; }
           set {
@@ -3814,6 +4130,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "CandyAwarded" field.</summary>
         public const int CandyAwardedFieldNumber = 2;
         private int candyAwarded_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CandyAwarded {
           get { return candyAwarded_; }
           set {
@@ -3821,10 +4138,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as TransferPokemonOutProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(TransferPokemonOutProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -3837,6 +4156,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Status != 0) hash ^= Status.GetHashCode();
@@ -3844,10 +4164,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Status != 0) {
             output.WriteRawTag(8);
@@ -3859,6 +4181,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Status != 0) {
@@ -3870,6 +4193,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(TransferPokemonOutProto other) {
           if (other == null) {
             return;
@@ -3882,6 +4206,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -3906,29 +4231,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
       /// <summary>
       ///  EVOLVE
       /// </summary>
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class EvolvePokemonProto : pb::IMessage<EvolvePokemonProto> {
         private static readonly pb::MessageParser<EvolvePokemonProto> _parser = new pb::MessageParser<EvolvePokemonProto>(() => new EvolvePokemonProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<EvolvePokemonProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[7]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonProto(EvolvePokemonProto other) : this() {
           pokemonId_ = other.pokemonId_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonProto Clone() {
           return new EvolvePokemonProto(this);
         }
@@ -3936,6 +4266,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "PokemonId" field.</summary>
         public const int PokemonIdFieldNumber = 1;
         private ulong pokemonId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public ulong PokemonId {
           get { return pokemonId_; }
           set {
@@ -3943,10 +4274,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as EvolvePokemonProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(EvolvePokemonProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -3958,16 +4291,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (PokemonId != 0UL) hash ^= PokemonId.GetHashCode();
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (PokemonId != 0UL) {
             output.WriteRawTag(9);
@@ -3975,6 +4311,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (PokemonId != 0UL) {
@@ -3983,6 +4320,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(EvolvePokemonProto other) {
           if (other == null) {
             return;
@@ -3992,6 +4330,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -4009,25 +4348,29 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class EvolvePokemonOutProto : pb::IMessage<EvolvePokemonOutProto> {
         private static readonly pb::MessageParser<EvolvePokemonOutProto> _parser = new pb::MessageParser<EvolvePokemonOutProto>(() => new EvolvePokemonOutProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<EvolvePokemonOutProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[8]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonOutProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonOutProto(EvolvePokemonOutProto other) : this() {
           result_ = other.result_;
           EvolvedPokemon = other.evolvedPokemon_ != null ? other.EvolvedPokemon.Clone() : null;
@@ -4035,6 +4378,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           candyAwarded_ = other.candyAwarded_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public EvolvePokemonOutProto Clone() {
           return new EvolvePokemonOutProto(this);
         }
@@ -4042,6 +4386,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Result" field.</summary>
         public const int ResultFieldNumber = 1;
         private int result_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Result {
           get { return result_; }
           set {
@@ -4052,6 +4397,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "EvolvedPokemon" field.</summary>
         public const int EvolvedPokemonFieldNumber = 2;
         private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto evolvedPokemon_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto EvolvedPokemon {
           get { return evolvedPokemon_; }
           set {
@@ -4062,6 +4408,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "ExpAwarded" field.</summary>
         public const int ExpAwardedFieldNumber = 3;
         private int expAwarded_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int ExpAwarded {
           get { return expAwarded_; }
           set {
@@ -4072,6 +4419,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "CandyAwarded" field.</summary>
         public const int CandyAwardedFieldNumber = 4;
         private int candyAwarded_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CandyAwarded {
           get { return candyAwarded_; }
           set {
@@ -4079,10 +4427,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as EvolvePokemonOutProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(EvolvePokemonOutProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -4097,6 +4447,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (Result != 0) hash ^= Result.GetHashCode();
@@ -4106,10 +4457,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (Result != 0) {
             output.WriteRawTag(8);
@@ -4129,6 +4482,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (Result != 0) {
@@ -4146,6 +4500,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(EvolvePokemonOutProto other) {
           if (other == null) {
             return;
@@ -4167,6 +4522,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -4199,28 +4555,32 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
       }
 
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
       public sealed partial class PokemonProto : pb::IMessage<PokemonProto> {
         private static readonly pb::MessageParser<PokemonProto> _parser = new pb::MessageParser<PokemonProto>(() => new PokemonProto());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<PokemonProto> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Descriptor.NestedTypes[9]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public PokemonProto() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public PokemonProto(PokemonProto other) : this() {
           id_ = other.id_;
-          pokemonId_ = other.pokemonId_;
+          pokemonType_ = other.pokemonType_;
           cp_ = other.cp_;
           stamina_ = other.stamina_;
           maxStamina_ = other.maxStamina_;
@@ -4251,33 +4611,37 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           fromFort_ = other.fromFort_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public PokemonProto Clone() {
           return new PokemonProto(this);
         }
 
         /// <summary>Field number for the "Id" field.</summary>
         public const int IdFieldNumber = 1;
-        private int id_;
-        public int Id {
+        private ulong id_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ulong Id {
           get { return id_; }
           set {
             id_ = value;
           }
         }
 
-        /// <summary>Field number for the "PokemonId" field.</summary>
-        public const int PokemonIdFieldNumber = 2;
-        private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds pokemonId_ = 0;
-        public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds PokemonId {
-          get { return pokemonId_; }
+        /// <summary>Field number for the "PokemonType" field.</summary>
+        public const int PokemonTypeFieldNumber = 2;
+        private global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds pokemonType_ = 0;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds PokemonType {
+          get { return pokemonType_; }
           set {
-            pokemonId_ = value;
+            pokemonType_ = value;
           }
         }
 
         /// <summary>Field number for the "Cp" field.</summary>
         public const int CpFieldNumber = 3;
         private int cp_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Cp {
           get { return cp_; }
           set {
@@ -4288,6 +4652,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Stamina" field.</summary>
         public const int StaminaFieldNumber = 4;
         private int stamina_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Stamina {
           get { return stamina_; }
           set {
@@ -4298,6 +4663,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "MaxStamina" field.</summary>
         public const int MaxStaminaFieldNumber = 5;
         private int maxStamina_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int MaxStamina {
           get { return maxStamina_; }
           set {
@@ -4308,6 +4674,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Move1" field.</summary>
         public const int Move1FieldNumber = 6;
         private int move1_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Move1 {
           get { return move1_; }
           set {
@@ -4318,6 +4685,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Move2" field.</summary>
         public const int Move2FieldNumber = 7;
         private int move2_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Move2 {
           get { return move2_; }
           set {
@@ -4328,6 +4696,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "DeployedFortId" field.</summary>
         public const int DeployedFortIdFieldNumber = 8;
         private int deployedFortId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int DeployedFortId {
           get { return deployedFortId_; }
           set {
@@ -4338,6 +4707,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "OwnerName" field.</summary>
         public const int OwnerNameFieldNumber = 9;
         private int ownerName_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int OwnerName {
           get { return ownerName_; }
           set {
@@ -4348,6 +4718,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "IsEgg" field.</summary>
         public const int IsEggFieldNumber = 10;
         private int isEgg_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int IsEgg {
           get { return isEgg_; }
           set {
@@ -4358,6 +4729,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "EggKmWalkedTarget" field.</summary>
         public const int EggKmWalkedTargetFieldNumber = 11;
         private int eggKmWalkedTarget_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int EggKmWalkedTarget {
           get { return eggKmWalkedTarget_; }
           set {
@@ -4368,6 +4740,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "EggKmWalkedStart" field.</summary>
         public const int EggKmWalkedStartFieldNumber = 12;
         private int eggKmWalkedStart_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int EggKmWalkedStart {
           get { return eggKmWalkedStart_; }
           set {
@@ -4378,6 +4751,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Origin" field.</summary>
         public const int OriginFieldNumber = 14;
         private int origin_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Origin {
           get { return origin_; }
           set {
@@ -4388,6 +4762,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "HeightM" field.</summary>
         public const int HeightMFieldNumber = 15;
         private uint heightM_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public uint HeightM {
           get { return heightM_; }
           set {
@@ -4398,6 +4773,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "WeightKg" field.</summary>
         public const int WeightKgFieldNumber = 16;
         private uint weightKg_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public uint WeightKg {
           get { return weightKg_; }
           set {
@@ -4408,6 +4784,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "IndividualAttack" field.</summary>
         public const int IndividualAttackFieldNumber = 17;
         private int individualAttack_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int IndividualAttack {
           get { return individualAttack_; }
           set {
@@ -4418,6 +4795,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "IndividualDefense" field.</summary>
         public const int IndividualDefenseFieldNumber = 18;
         private int individualDefense_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int IndividualDefense {
           get { return individualDefense_; }
           set {
@@ -4428,6 +4806,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "IndividualStamina" field.</summary>
         public const int IndividualStaminaFieldNumber = 19;
         private int individualStamina_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int IndividualStamina {
           get { return individualStamina_; }
           set {
@@ -4438,6 +4817,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "CpMultiplier" field.</summary>
         public const int CpMultiplierFieldNumber = 20;
         private uint cpMultiplier_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public uint CpMultiplier {
           get { return cpMultiplier_; }
           set {
@@ -4448,6 +4828,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Pokeball" field.</summary>
         public const int PokeballFieldNumber = 21;
         private int pokeball_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Pokeball {
           get { return pokeball_; }
           set {
@@ -4458,6 +4839,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "CapturedS2CellId" field.</summary>
         public const int CapturedS2CellIdFieldNumber = 22;
         private ulong capturedS2CellId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public ulong CapturedS2CellId {
           get { return capturedS2CellId_; }
           set {
@@ -4468,6 +4850,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "BattlesAttacked" field.</summary>
         public const int BattlesAttackedFieldNumber = 23;
         private int battlesAttacked_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int BattlesAttacked {
           get { return battlesAttacked_; }
           set {
@@ -4478,6 +4861,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "BattlesDefended" field.</summary>
         public const int BattlesDefendedFieldNumber = 24;
         private int battlesDefended_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int BattlesDefended {
           get { return battlesDefended_; }
           set {
@@ -4488,6 +4872,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "EggIncubatorId" field.</summary>
         public const int EggIncubatorIdFieldNumber = 25;
         private int eggIncubatorId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int EggIncubatorId {
           get { return eggIncubatorId_; }
           set {
@@ -4498,6 +4883,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "CreationTimeMs" field.</summary>
         public const int CreationTimeMsFieldNumber = 26;
         private long creationTimeMs_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public long CreationTimeMs {
           get { return creationTimeMs_; }
           set {
@@ -4508,6 +4894,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "NumUpgrades" field.</summary>
         public const int NumUpgradesFieldNumber = 27;
         private int numUpgrades_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int NumUpgrades {
           get { return numUpgrades_; }
           set {
@@ -4518,6 +4905,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "AdditionalCpMultiplier" field.</summary>
         public const int AdditionalCpMultiplierFieldNumber = 28;
         private int additionalCpMultiplier_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int AdditionalCpMultiplier {
           get { return additionalCpMultiplier_; }
           set {
@@ -4528,6 +4916,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Favorite" field.</summary>
         public const int FavoriteFieldNumber = 29;
         private int favorite_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Favorite {
           get { return favorite_; }
           set {
@@ -4538,6 +4927,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "Nickname" field.</summary>
         public const int NicknameFieldNumber = 30;
         private int nickname_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Nickname {
           get { return nickname_; }
           set {
@@ -4548,6 +4938,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         /// <summary>Field number for the "FromFort" field.</summary>
         public const int FromFortFieldNumber = 31;
         private int fromFort_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int FromFort {
           get { return fromFort_; }
           set {
@@ -4555,10 +4946,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as PokemonProto);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(PokemonProto other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -4567,7 +4960,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             return true;
           }
           if (Id != other.Id) return false;
-          if (PokemonId != other.PokemonId) return false;
+          if (PokemonType != other.PokemonType) return false;
           if (Cp != other.Cp) return false;
           if (Stamina != other.Stamina) return false;
           if (MaxStamina != other.MaxStamina) return false;
@@ -4599,10 +4992,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
-          if (Id != 0) hash ^= Id.GetHashCode();
-          if (PokemonId != 0) hash ^= PokemonId.GetHashCode();
+          if (Id != 0UL) hash ^= Id.GetHashCode();
+          if (PokemonType != 0) hash ^= PokemonType.GetHashCode();
           if (Cp != 0) hash ^= Cp.GetHashCode();
           if (Stamina != 0) hash ^= Stamina.GetHashCode();
           if (MaxStamina != 0) hash ^= MaxStamina.GetHashCode();
@@ -4634,18 +5028,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
-          if (Id != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(Id);
+          if (Id != 0UL) {
+            output.WriteRawTag(9);
+            output.WriteFixed64(Id);
           }
-          if (PokemonId != 0) {
+          if (PokemonType != 0) {
             output.WriteRawTag(16);
-            output.WriteEnum((int) PokemonId);
+            output.WriteEnum((int) PokemonType);
           }
           if (Cp != 0) {
             output.WriteRawTag(24);
@@ -4761,13 +5157,14 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          if (Id != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+          if (Id != 0UL) {
+            size += 1 + 8;
           }
-          if (PokemonId != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonId);
+          if (PokemonType != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonType);
           }
           if (Cp != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cp);
@@ -4856,15 +5253,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(PokemonProto other) {
           if (other == null) {
             return;
           }
-          if (other.Id != 0) {
+          if (other.Id != 0UL) {
             Id = other.Id;
           }
-          if (other.PokemonId != 0) {
-            PokemonId = other.PokemonId;
+          if (other.PokemonType != 0) {
+            PokemonType = other.PokemonType;
           }
           if (other.Cp != 0) {
             Cp = other.Cp;
@@ -4952,6 +5350,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {
@@ -4959,12 +5358,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
               default:
                 input.SkipLastField();
                 break;
-              case 8: {
-                Id = input.ReadInt32();
+              case 9: {
+                Id = input.ReadFixed64();
                 break;
               }
               case 16: {
-                pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds) input.ReadEnum();
+                pokemonType_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types.PokemonProto.Types.PokemonIds) input.ReadEnum();
                 break;
               }
               case 24: {
@@ -5085,7 +5484,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
         #region Nested types
         /// <summary>Container for nested types declared in the PokemonProto message type.</summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static partial class Types {
           public enum PokemonIds {
             [pbr::OriginalName("POKEMON_UNSET")] PokemonUnset = 0,

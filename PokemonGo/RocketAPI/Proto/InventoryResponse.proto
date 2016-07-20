@@ -153,8 +153,8 @@ message EvolvePokemonOutProto {
 }
 
 	 message PokemonProto {
-	int32 Id = 1;
-	PokemonIds PokemonId = 2;
+	fixed64 Id = 1;
+	PokemonIds PokemonType = 2;
 	int32 Cp = 3;
 	int32 Stamina = 4;
 	int32 MaxStamina = 5;
