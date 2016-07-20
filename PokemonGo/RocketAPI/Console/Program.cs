@@ -62,9 +62,8 @@ namespace PokemonGo.RocketAPI.Console
 
                 System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Farmed XP: {fortSearch.ExperienceAwarded}, Gems: { fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {GetFriendlyItemsString(fortSearch.ItemsAwarded)}");
 
-                await ExecuteCatchAllNearbyPokemons(client);
-
                 await Task.Delay(15000);
+                await ExecuteCatchAllNearbyPokemons(client);
             }
         }
 
@@ -86,15 +85,9 @@ namespace PokemonGo.RocketAPI.Console
                 } 
                 while(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
 
-                System.Console.WriteLine(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {GetFriendlyPokemonName(pokemon.PokemonId)}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {GetFriendlyPokemonName(pokemon.PokemonId)} got away..");
+                System.Console.WriteLine(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {pokemon.PokemonId}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {pokemon.PokemonId} got away..");
                 await Task.Delay(5000);
             }
-        }
-
-        private static string GetFriendlyPokemonName(PokemonId id)
-        {
-            var name = Enum.GetName(typeof (GetInventoryResponse), id);
-            return name?.Substring(name.IndexOf("Pokemon") + 7);
         }
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.ItemAward> items)
