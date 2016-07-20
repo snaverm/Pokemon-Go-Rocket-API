@@ -109,11 +109,11 @@ namespace PokemonGo.RocketAPI.Console
                 await Task.Delay(5000);
             }
         }
-        private static async Task TransferAllGivenPokemons(Client client, IEnumerable<Pokemon> unwantedPokemons)
+        private static async Task TransferAllGivenPokemons(Client client, IEnumerable<PokemonData> unwantedPokemons)
         {
             foreach (var pokemon in unwantedPokemons)
             {
-                var transferPokemonResponse = await client.TransferPokemon((ulong)pokemon.Id); //todo: someone check whether this still works
+                var transferPokemonResponse = await client.TransferPokemon(pokemon.Id);
 
                 /*
                 ReleasePokemonOutProto.Status {
@@ -126,13 +126,13 @@ namespace PokemonGo.RocketAPI.Console
 
                 if (transferPokemonResponse.Status == 1)
                 {
-                    System.Console.WriteLine($"Shoved another {pokemon.PokemonType} down the meat grinder");
+                    System.Console.WriteLine($"Shoved another {pokemon.PokemonId} down the meat grinder");
                 }
                 else
                 {
                     var status = transferPokemonResponse.Status;
 
-                    System.Console.WriteLine($"Somehow failed to grind {pokemon.PokemonType}. " +
+                    System.Console.WriteLine($"Somehow failed to grind {pokemon.PokemonId}. " +
                                              $"ReleasePokemonOutProto.Status was {status}");
                 }
 
@@ -194,37 +194,36 @@ namespace PokemonGo.RocketAPI.Console
 
             var unwantedPokemonTypes = new[]
             {
-                PokemonIds.V0016PokemonPidgey,
-                PokemonIds.V0019PokemonRattata,
-                PokemonIds.V0013PokemonWeedle,
-                PokemonIds.V0041PokemonZubat,
-                PokemonIds.V0010PokemonCaterpie,
-                PokemonIds.V0017PokemonPidgeotto,
-                PokemonIds.V0029PokemonNidoran,
-                PokemonIds.V0046PokemonParas,
-                PokemonIds.V0048PokemonVenonat,
-                PokemonIds.V0054PokemonPsyduck,
-                PokemonIds.V0060PokemonPoliwag,
-                PokemonIds.V0079PokemonSlowpoke,
-                PokemonIds.V0096PokemonDrowzee,
-                PokemonIds.V0092PokemonGastly,
-                PokemonIds.V0118PokemonGoldeen,
-                PokemonIds.V0120PokemonStaryu,
-                PokemonIds.V0129PokemonMagikarp,
-                PokemonIds.V0133PokemonEevee,
-                PokemonIds.V0147PokemonDratini
+                PokemonId.Pidgey,
+                PokemonId.Rattata,
+                PokemonId.Weedle,
+                PokemonId.Zubat,
+                PokemonId.Caterpie,
+                PokemonId.Pidgeotto,
+                PokemonId.NidoranFemale,
+                PokemonId.Paras,
+                PokemonId.Venonat,
+                PokemonId.Psyduck,
+                PokemonId.Poliwag,
+                PokemonId.Slowpoke,
+                PokemonId.Drowzee,
+                PokemonId.Gastly,
+                PokemonId.Goldeen,
+                PokemonId.Staryu,
+                PokemonId.Magikarp,
+                PokemonId.Eevee,
+                PokemonId.Dratini
             };
 
             var inventory = await client.GetInventory();
-            var pokemons = inventory.Payload[0].Bag
-                                .Items
-                                .Select(i => i.Item?.Pokemon)
-                                .Where(p => p != null && p?.PokemonType != PokemonIds.PokemonUnset)
+            var pokemons = inventory.InventoryDelta.InventoryItems
+                                .Select(i => i.InventoryItemData?.Pokemon)
+                                .Where(p => p != null && p?.PokemonId > 0)
                                 .ToArray();
 
             foreach (var unwantedPokemonType in unwantedPokemonTypes)
             {
-                var pokemonOfDesiredType = pokemons.Where(p => p.PokemonType == unwantedPokemonType)
+                var pokemonOfDesiredType = pokemons.Where(p => p.PokemonId == unwantedPokemonType)
                                                    .OrderByDescending(p => p.Cp)
                                                    .ToList();
 
