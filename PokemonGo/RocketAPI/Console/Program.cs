@@ -109,6 +109,85 @@ namespace PokemonGo.RocketAPI.Console
                 await Task.Delay(5000);
             }
         }
+        private static async Task TransferAllGivenPokemons(Client client, IEnumerable<Pokemon> unwantedPokemons)
+        {
+            foreach (var pokemon in unwantedPokemons)
+            {
+                var transferPokemonResponse = await client.TransferPokemon((ulong)pokemon.Id); //todo: someone check whether this still works
+
+                /*
+                ReleasePokemonOutProto.Status {
+	                UNSET = 0;
+	                SUCCESS = 1;
+	                POKEMON_DEPLOYED = 2;
+	                FAILED = 3;
+	                ERROR_POKEMON_IS_EGG = 4;
+                }*/
+
+                if (transferPokemonResponse.Status == 1)
+                {
+                    System.Console.WriteLine($"Shoved another {pokemon.PokemonType} down the meat grinder");
+                }
+                else
+                {
+                    var status = transferPokemonResponse.Status;
+
+                    System.Console.WriteLine($"Somehow failed to grind {pokemon.PokemonType}. " +
+                                             $"ReleasePokemonOutProto.Status was {status}");
+                }
+
+                await Task.Delay(3000);
+            }
+        }
+
+        private static async Task EvolveAllGivenPokemons(Client client, IEnumerable<Pokemon> pokemonToEvolve)
+        {
+            foreach (var pokemon in pokemonToEvolve)
+            {
+                /*
+                enum Holoholo.Rpc.Types.EvolvePokemonOutProto.Result {
+	                UNSET = 0;
+	                SUCCESS = 1;
+	                FAILED_POKEMON_MISSING = 2;
+	                FAILED_INSUFFICIENT_RESOURCES = 3;
+	                FAILED_POKEMON_CANNOT_EVOLVE = 4;
+	                FAILED_POKEMON_IS_DEPLOYED = 5;
+                }
+                }*/
+
+                var countOfEvolvedUnits = 0;
+                var xpCount = 0;
+
+                EvolvePokemonOut evolvePokemonOutProto;
+                do
+                {
+                    evolvePokemonOutProto = await client.EvolvePokemon((ulong)pokemon.Id); //todo: someone check whether this still works
+
+                    if (evolvePokemonOutProto.Result == 1)
+                    {
+                        System.Console.WriteLine($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp");
+
+                        countOfEvolvedUnits++;
+                        xpCount += evolvePokemonOutProto.ExpAwarded;
+                    }
+                    else
+                    {
+                        var result = evolvePokemonOutProto.Result;
+
+                        System.Console.WriteLine($"Failed to evolve {pokemon.PokemonType}. " +
+                                                 $"EvolvePokemonOutProto.Result was {result}");
+
+                        System.Console.WriteLine($"Due to above error, stopping evolving {pokemon.PokemonType}");
+                    }
+                }
+                while (evolvePokemonOutProto.Result == 1);
+
+                System.Console.WriteLine($"Evolved {countOfEvolvedUnits} pieces of {pokemon.PokemonType} for {xpCount}xp");
+
+                await Task.Delay(3000);
+            }
+        }
+        
 
         private static string GetFriendlyItemsString(IEnumerable<FortSearchResponse.Types.ItemAward> items)
         {
