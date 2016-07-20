@@ -57,9 +57,8 @@ namespace PokemonGo.RocketAPI
                 var tokenResponse = await GoogleLogin.GetAccessToken();
                 _accessToken = tokenResponse.id_token;
                 _settings.GoogleRefreshToken = tokenResponse.access_token;
-                Console.WriteLine($"Put RefreshToken in settings for direct login: {_settings.GoogleRefreshToken}");
             }
-                else
+            else
             {
                 var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
                 _accessToken = tokenResponse.id_token;

@@ -1,16 +1,32 @@
-﻿using PokemonGo.RocketAPI.Enums;
+﻿using System.Configuration;
+using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System;
 
 namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
-        //Fetch these settings from intercepting the /auth call in headers and body (only needed for google auth)
-        public AuthType AuthType { get;  } = Enums.AuthType.Google;
-        public  string PtcUsername { get; } = "User";
-        public  string PtcPassword { get; } = "alligator2";
-        public  string GoogleRefreshToken { get; set; } = string.Empty;
-        public  double DefaultLatitude { get; } = 10;
-        public  double DefaultLongitude { get; } = 10;
+        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), GetSetting("AuthType"));
+        public  string PtcUsername => GetSetting("PtcUsername") != string.Empty ? GetSetting("PtcUsername") : "username";
+        public  string PtcPassword => GetSetting("PtcPassword") != string.Empty? GetSetting("PtcPassword") : "password";
+        public double DefaultLatitude => GetSetting("DefaultLatitude") != string.Empty ? double.Parse(GetSetting("DefaultLatitude")) : 52.379189; //Default Amsterdam Central Station
+        public double DefaultLongitude => GetSetting("DefaultLongitude") != string.Empty ? double.Parse(GetSetting("DefaultLongitude")) : 4.899431;//Default Amsterdam Central Station
+        public  string GoogleRefreshToken
+        {
+            get { return GetSetting("GoogleRefreshToken") != string.Empty ? GetSetting("GoogleRefreshToken") : string.Empty; }
+            set { SetSetting("GoogleRefreshToken", value); }
+        }
+
+        private string GetSetting(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+        private void SetSetting(string key, string value)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configFile.AppSettings.Settings[key].Value = value;
+            configFile.Save();
+        }
     }
 }
