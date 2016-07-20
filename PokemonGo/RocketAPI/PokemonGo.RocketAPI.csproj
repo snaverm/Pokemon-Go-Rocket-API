@@ -88,11 +88,13 @@
     <Compile Include="GeneratedCode\PlayerUpdateResponse.cs" />
     <Compile Include="GeneratedCode\Request.cs" />
     <Compile Include="GeneratedCode\SettingsResponse.cs" />
+    <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\ProtoHelper.cs" />
     <Compile Include="Helpers\RetryHandler.cs" />
     <Compile Include="Helpers\S2Helper.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Login\GoogleLogin.cs" />
     <Compile Include="Settings.cs" />
     <None Include="app.config" />
     <Compile Include="Client.cs" />

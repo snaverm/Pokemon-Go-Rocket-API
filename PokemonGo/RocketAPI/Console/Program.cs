@@ -30,7 +30,7 @@ namespace PokemonGo.RocketAPI.Console
             }
             else
             {
-                await client.LoginGoogle(Settings.DeviceId, Settings.Email, Settings.LongDurationToken);
+                await client.DoGoogleLogin();
             }
             var serverResponse = await client.GetServer();
             var profile = await client.GetProfile();
