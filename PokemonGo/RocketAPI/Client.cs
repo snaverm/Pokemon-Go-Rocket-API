@@ -21,6 +21,7 @@ using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Extensions;
 using System.Threading;
 using PokemonGo.RocketAPI.Login;
+using static PokemonGo.RocketAPI.GeneratedCode.InventoryResponse.Types;
 
 namespace PokemonGo.RocketAPI
 {
@@ -47,7 +48,7 @@ namespace PokemonGo.RocketAPI
             };
             _httpClient = new HttpClient(new RetryHandler(handler));
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Niantic App");
-            //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
+                //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
             _httpClient.DefaultRequestHeaders.ExpectContinue = false;
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Connection", "keep-alive");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
@@ -69,14 +70,14 @@ namespace PokemonGo.RocketAPI
                 _accessToken = tokenResponse.id_token;
                 Settings.GoogleRefreshToken = tokenResponse.access_token;
                 Console.WriteLine($"Put RefreshToken in settings for direct login: {Settings.GoogleRefreshToken}");
-            }
-            else
-            {
+                }
+                else
+                {
                 var tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
                 _accessToken = tokenResponse.id_token;
             }
         }
-        
+
         public async Task LoginPtc(string username, string password)
         {
             //Get session cookie
@@ -298,6 +299,41 @@ namespace PokemonGo.RocketAPI
                     _httpClient.PostProto<Request, CatchPokemonResponse>($"https://{_apiUrl}/rpc", catchPokemonRequest);
         }
 
+        public async Task<TransferPokemonOutProto> TransferPokemon(ulong pokemonId)
+        {
+            var customRequest = new TransferPokemonProto
+            {
+                PokemonId = pokemonId
+            };
+
+            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
+                new Request.Types.Requests()
+                {
+                    Type = (int)RequestType.RELEASE_POKEMON,
+                    Message = customRequest.ToByteString()
+                });
+            return
+                await
+                    _httpClient.PostProto<Request, TransferPokemonOutProto>($"https://{_apiUrl}/rpc", releasePokemonRequest);
+        }
+
+        public async Task<EvolvePokemonOutProto> EvolvePokemon(ulong pokemonId)
+        {
+            var customRequest = new EvolvePokemonProto
+            {
+                PokemonId = pokemonId
+            };
+
+            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
+                new Request.Types.Requests()
+                {
+                    Type = (int)RequestType.EVOLVE_POKEMON,
+                    Message = customRequest.ToByteString()
+                });
+            return
+                await
+                    _httpClient.PostProto<Request, EvolvePokemonOutProto>($"https://{_apiUrl}/rpc", releasePokemonRequest);
+        }
 
         public async Task<InventoryResponse> GetInventory()
         {
