@@ -30,17 +30,17 @@ namespace PokemonGo.RocketAPI.Logic
 
             var client = new Client(_clientSettings);
 
+            if (_clientSettings.AuthType == AuthType.Ptc)
+                await client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
+            else if (_clientSettings.AuthType == AuthType.Google)
+                await client.DoGoogleLogin();
+
             while (true)
             {
                 try
                 {
-                    if (_clientSettings.AuthType == AuthType.Ptc)
-                        await client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
-                    else if (_clientSettings.AuthType == AuthType.Google)
-                        await client.DoGoogleLogin();
-
                     await client.SetServer();
-                    await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(client));
+                    //await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(client));
                     await TransferDuplicatePokemon();
 
                     /*
