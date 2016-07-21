@@ -40,9 +40,7 @@ namespace PokemonGo.RocketAPI.Logic
                         await client.DoGoogleLogin();
 
                     await client.SetServer();
-
-
-                    RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(client));
+                    await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(client));
                     await TransferDuplicatePokemon();
 
                     /*
@@ -64,10 +62,10 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
-        public void RepeatAction(int repeat, Action action)
+        public async Task RepeatAction(int repeat, Func<Task> action)
         {
             for (int i = 0; i < repeat; i++)
-                action();
+                await action();
         }
 
         private async Task ExecuteFarmingPokestopsAndPokemons(Client client)
