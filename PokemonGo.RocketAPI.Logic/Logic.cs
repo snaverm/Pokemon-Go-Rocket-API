@@ -155,7 +155,6 @@ namespace PokemonGo.RocketAPI.Logic
                 Logger.Write($"Recycled {item.Count}x {(AllEnum.ItemId)item.Item_}", LogLevel.Info);
                 await Task.Delay(500);
             }
-
         }
 
         private async Task<MiscEnums.Item> GetBestBall(int? pokemonCp)
