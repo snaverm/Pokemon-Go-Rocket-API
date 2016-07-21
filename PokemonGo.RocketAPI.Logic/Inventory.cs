@@ -52,10 +52,10 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(x => x.Count() > 1).ToList();
 
                 var myPokemonSettings = await GetPokemonSettings();
-                var pokemonSettings = myPokemonSettings as IList<PokemonSettings> ?? myPokemonSettings.ToList();
+                var pokemonSettings = myPokemonSettings.ToList();
 
                 var myPokemonFamilies = await GetPokemonFamilies();
-                var pokemonFamilies = myPokemonFamilies as PokemonFamily[] ?? myPokemonFamilies.ToArray();
+                var pokemonFamilies = myPokemonFamilies.ToArray();
 
                 foreach (var pokemon in pokemonsThatCanBeTransfered)
                 {
@@ -79,6 +79,38 @@ namespace PokemonGo.RocketAPI.Logic
                 .Where(x => x.Count() > 1)
                 .SelectMany(p => p.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Skip(1).ToList());
         }
+
+
+        public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve()
+        {
+            var myPokemons = await GetPokemons();
+            var pokemons = myPokemons.ToList();
+
+            var myPokemonSettings = await GetPokemonSettings();
+            var pokemonSettings = myPokemonSettings.ToList();
+
+            var myPokemonFamilies = await GetPokemonFamilies();
+            var pokemonFamilies = myPokemonFamilies.ToArray();
+            
+            var pokemonToEvolve = new List<PokemonData>();
+            foreach (var pokemon in pokemons)
+            {
+                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
+                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
+
+                //Don't evolve if we can't evolve it
+                if (settings.EvolutionIds.Count == 0)
+                    continue;
+
+                var pokemonCandyNeededAlready = pokemonToEvolve.Count(p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) * settings.CandyToEvolve;
+                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                    pokemonToEvolve.Add(pokemon);
+            }
+
+            return pokemonToEvolve;
+        }
+        
+
 
         public async Task<IEnumerable<Item>> GetItems()
         {

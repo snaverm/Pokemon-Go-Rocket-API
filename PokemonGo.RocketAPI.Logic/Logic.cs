@@ -38,6 +38,7 @@ namespace PokemonGo.RocketAPI.Logic
                 try
                 {
                     await _client.SetServer();
+                    await EvolveAllPokemonWithEnoughCandy();
                     await TransferDuplicatePokemon(true);
                     await RecycleItems();
                     await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(_client));
@@ -110,24 +111,19 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(15000);
             }
         }
-
-        private async Task EvolveAllGivenPokemons(IEnumerable<Pokemon> pokemonToEvolve)
+        
+        private async Task EvolveAllPokemonWithEnoughCandy()
         {
+            var pokemonToEvolve = await _inventory.GetPokemonToEvolve();
             foreach (var pokemon in pokemonToEvolve)
             {
-                EvolvePokemonOut evolvePokemonOutProto;
-                do
-                {
-                    evolvePokemonOutProto = await _client.EvolvePokemon((ulong)pokemon.Id);
+                var evolvePokemonOutProto = await _client.EvolvePokemon((ulong)pokemon.Id);
 
-                    if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
-                        Logger.Write($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp", LogLevel.Info);
-                    else
-                        Logger.Write($"Failed to evolve {pokemon.PokemonType}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonType}", LogLevel.Info);
-
-                    await Task.Delay(3000);
-                }
-                while (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess);
+                if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
+                    Logger.Write($"Evolved {pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp", LogLevel.Info);
+                else
+                        Logger.Write($"Failed to evolve {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}", LogLevel.Info);
+                    
 
                 await Task.Delay(3000);
             }
