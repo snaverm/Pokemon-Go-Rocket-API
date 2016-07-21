@@ -65,6 +65,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                     results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                         .OrderByDescending(x => x.Cp)
+                        .Where(x => x.Favorite == 0)
                         .ThenBy(n => n.StaminaMax)
                         .Skip(amountToSkip)
                         .ToList());
@@ -77,7 +78,7 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
-                .SelectMany(p => p.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Skip(1).ToList());
+                .SelectMany(p => p.Where(x => x.Favorite == 0).OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Skip(1).ToList());
         }
 
 
