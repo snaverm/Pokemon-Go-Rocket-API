@@ -1,5 +1,6 @@
 ﻿using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.Collections.Generic;
 
 namespace PokemonGo.RocketAPI
 {
@@ -11,5 +12,7 @@ namespace PokemonGo.RocketAPI
         string GoogleRefreshToken { get; set; }
         string PtcPassword { get; }
         string PtcUsername { get; }
+
+        ICollection<KeyValuePair<AllEnum.ItemId, int>> itemRecycleFilter { get; set; }
     }
 }

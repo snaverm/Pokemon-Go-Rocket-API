@@ -12,7 +12,7 @@ message GetPlayerResponse {
 message Profile {
   int64 creation_time = 1;
   string username = 2;
-  AllEnum.TeamColor team = 5;
+  .AllEnum.TeamColor team = 5;
   bytes tutorial = 7; 
   AvatarDetails avatar = 8; 
   int32 poke_storage = 9;
@@ -74,14 +74,19 @@ message InventoryItemData {
   PokemonFamily pokemon_family = 10;
 }
 
+message RecycleInventoryItem {
+	.AllEnum.ItemId item_id = 1;
+	int32 count = 2;
+}
+
 message Pokemon {
   int32 id = 1;
-  AllEnum.PokemonId pokemon_type = 2;
+  .AllEnum.PokemonId pokemon_type = 2;
   int32 cp = 3;
   int32 stamina = 4;
   int32 stamina_max = 5;
-  AllEnum.PokemonMove move_1 = 6;
-  AllEnum.PokemonMove move_2 = 7;
+  .AllEnum.PokemonMove move_1 = 6;
+  .AllEnum.PokemonMove move_2 = 7;
   int32 deployed_fort_id = 8;
   string owner_name = 9;
   bool is_egg = 10;
@@ -108,7 +113,7 @@ message Pokemon {
 }
 
 message Item {
-  AllEnum.ItemType item = 1;
+  .AllEnum.ItemType item = 1;
   int32 count = 2;
   bool unseen = 3;
 }
@@ -160,8 +165,8 @@ message InventoryUpgrades {
 }
 
 message InventoryUpgrade {
-  AllEnum.ItemType item = 1;
-  AllEnum.InventoryUpgradeType upgrade_type = 2;
+  .AllEnum.ItemType item = 1;
+  .AllEnum.InventoryUpgradeType upgrade_type = 2;
   int32 additional_storage = 3;
 }
 
@@ -170,8 +175,8 @@ message AppliedItems {
 }
 
 message AppliedItem {
-  AllEnum.ItemId item_type = 1;
-  AllEnum.ItemType item_type_category = 2;
+  .AllEnum.ItemId item_type = 1;
+  .AllEnum.ItemType item_type_category = 2;
   int64 expire_ms = 3;
   int64 applied_ms = 4;
 }
@@ -182,8 +187,8 @@ message EggIncubators {
 
 message EggIncubator {
   string item_id = 1;
-  AllEnum.ItemType item_type = 2;
-  AllEnum.EggIncubatorType incubator_type = 3;
+  .AllEnum.ItemType item_type = 2;
+  .AllEnum.EggIncubatorType incubator_type = 3;
   int32 uses_remaining = 4;
   int64 pokemon_id = 5; // TODO: Check if is PokemonType
   double start_km_walked = 6;
@@ -191,7 +196,7 @@ message EggIncubator {
 }
 
 message PokemonFamily {
-  AllEnum.PokemonFamilyId family_id = 1;
+  .AllEnum.PokemonFamilyId family_id = 1;
   int32 candy = 2;
 }
 
@@ -204,7 +209,7 @@ message GetMapObjectsRequest {
 
 message GetMapObjectsResponse {
   repeated MapCell map_cells = 1;
-  AllEnum.MapObjectsStatus status = 2;
+  .AllEnum.MapObjectsStatus status = 2;
 }
 
 message MapCell {
@@ -232,15 +237,15 @@ message FortData {
   double latitude = 3;
   double longitude = 4;
   bool enabled = 8;
-  AllEnum.FortType type = 9;
+  .AllEnum.FortType type = 9;
 
   //// Fields related to gyms only
 
   // Team that owns the gym
-  AllEnum.TeamColor owned_by_team = 5;
+  .AllEnum.TeamColor owned_by_team = 5;
 
   // Highest CP Pokemon at the gym
-  AllEnum.PokemonId guard_pokemon_id = 6;
+  .AllEnum.PokemonId guard_pokemon_id = 6;
   int32 guard_pokemon_cp = 7;
 
   // Prestigate / experience of the gym
@@ -254,8 +259,8 @@ message FortData {
   // Timestamp when the pokestop can be activated again to get items / xp
   int64 cooldown_complete_timestamp_ms = 14;
 
-  AllEnum.FortSponsor sponsor = 15;
-  AllEnum.FortRenderingType rendering_type = 16;
+  .AllEnum.FortSponsor sponsor = 15;
+  .AllEnum.FortRenderingType rendering_type = 16;
 
   // Might represent the type of item applied to the pokestop, right now only lures can be applied
   bytes active_fort_modifier = 12;
@@ -265,7 +270,7 @@ message FortData {
 message FortLureInfo {
   string fort_id = 1;
   double unknown2 = 2;
-  AllEnum.PokemonId active_pokemon_id = 3;
+  .AllEnum.PokemonId active_pokemon_id = 3;
   int64 lure_expires_timestamp_ms = 4;
 }
 
@@ -293,12 +298,12 @@ message WildPokemon {
 
 message PokemonData {
   fixed64 id = 1;
-  AllEnum.PokemonId pokemon_id = 2;
+  .AllEnum.PokemonId pokemon_id = 2;
   int32 cp = 3;
   int32 stamina = 4;
   int32 stamina_max = 5;
-  AllEnum.PokemonMove move_1 = 6;
-  AllEnum.PokemonMove move_2 = 7;
+  .AllEnum.PokemonMove move_1 = 6;
+  .AllEnum.PokemonMove move_2 = 7;
   int32 deployed_fort_id = 8;
   string owner_name = 9;
   bool is_egg = 10;
@@ -327,7 +332,7 @@ message PokemonData {
 message MapPokemon {
   string spawnpoint_id = 1;
   fixed64 encounter_id = 2;
-  AllEnum.PokemonId pokemon_id = 3;
+  .AllEnum.PokemonId pokemon_id = 3;
   // After this timestamp, the pokemon will be gone.
   int64 expiration_timestamp_ms = 4;
   double latitude = 5;
@@ -335,7 +340,7 @@ message MapPokemon {
 }
 
 message NearbyPokemon {
-  AllEnum.PokemonId pokemon_id = 1;
+  .AllEnum.PokemonId pokemon_id = 1;
   float distance_in_meters = 2;
   fixed64 encounter_id = 3;
 }
@@ -428,7 +433,7 @@ message DownloadItemTemplatesResponse {
 }
 
 message UseItemCaptureRequest {
-  AllEnum.ItemId item_id = 1;
+  .AllEnum.ItemId item_id = 1;
   fixed64 encounter_id = 2;
   string spawn_point_guid = 3;
 }
@@ -491,7 +496,7 @@ message FortSearchResponse {
   int32 chain_hack_sequence_number = 7;
 
   message ItemAward {
-    AllEnum.ItemId item_id = 1;
+    .AllEnum.ItemId item_id = 1;
     int32 item_count = 2;
   }
 
@@ -512,14 +517,14 @@ message FortDetailsRequest {
 
 message FortDetailsResponse {
   string fort_id = 1;
-  AllEnum.TeamColor team_color = 2;
+  .AllEnum.TeamColor team_color = 2;
   PokemonData pokemon_data = 3;
   string name = 4;
   repeated string image_urls = 5;
   int32 fp = 6;
   int32 stamina = 7;
   int32 max_stamina = 8;
-  AllEnum.FortType type = 9;
+  .AllEnum.FortType type = 9;
   double latitude = 10;
   double longitude = 11;
   string description = 12;
@@ -527,7 +532,7 @@ message FortDetailsResponse {
 }
 
 message FortModifier {
-  AllEnum.ItemId item_id = 1;
+  .AllEnum.ItemId item_id = 1;
   int64 expiration_timestamp_ms = 2;
   string deployer_player_codename = 3;
 }
@@ -563,7 +568,7 @@ message EncounterResponse {
 }
 
 message CaptureProbability {
-  repeated AllEnum.ItemId pokeball_type = 1;
+  repeated .AllEnum.ItemId pokeball_type = 1;
   repeated float capture_probability = 2;
   double reticle_difficulty_scale = 12;
 }
@@ -616,7 +621,7 @@ message CatchPokemonResponse {
 }
 
 message CaptureScore {
-  repeated AllEnum.ActivityType activity_type = 1;
+  repeated .AllEnum.ActivityType activity_type = 1;
   repeated int32 xp = 2;
   repeated int32 candy = 3;
   repeated int32 stardust = 4;
@@ -629,7 +634,7 @@ message CheckAwardedBadgesRequest {
 // Confirm if this is correct, I think that it should be "repeated AwardedBadge awarded_badges" or something like that.
 message CheckAwardedBadgesResponse {
   bool success = 1;
-  repeated AllEnum.BadgeType awarded_badges = 2;
+  repeated .AllEnum.BadgeType awarded_badges = 2;
   repeated int32 awarded_badge_levels = 3;
 }
 
@@ -658,9 +663,9 @@ message IapSettings {
 
 message IapItemDisplay {
   string sku = 1;
-  AllEnum.HoloIapItemCategory category = 2;
+  .AllEnum.HoloIapItemCategory category = 2;
   int32 sort_order = 3;
-  repeated AllEnum.ItemId item_ids = 4;
+  repeated .AllEnum.ItemId item_ids = 4;
   repeated int32 counts = 5;
 }
 
@@ -706,8 +711,8 @@ message PlayerLevelSettings {
 
 message CameraSettings {
 	string next_camera = 1;
-	repeated AllEnum.CameraInterpolation interpolation = 2;
-	repeated AllEnum.CameraTarget target_type = 3;
+	repeated .AllEnum.CameraInterpolation interpolation = 2;
+	repeated .AllEnum.CameraTarget target_type = 3;
 	repeated float ease_in_speed = 4;
 	repeated float east_out_speed = 5;
 	repeated float duration_seconds = 6;
@@ -724,14 +729,14 @@ message CameraSettings {
 }
 
 message BadgeSettings {
-  AllEnum.BadgeType badge_type = 1;
+  .AllEnum.BadgeType badge_type = 1;
   int32 badge_rank = 2;
   repeated int32 targets = 3;
 }
 
 message TypeEffectiveSettings {
   repeated float attack_scalar = 1;
-  AllEnum.PokemonType attack_type = 2;
+  .AllEnum.PokemonType attack_type = 2;
 }
 
 message MoveSequenceSettings {
@@ -739,9 +744,9 @@ message MoveSequenceSettings {
 }
 
 message MoveSettings {
-  AllEnum.PokemonMovementType movement_id = 1;
+  .AllEnum.PokemonMovementType movement_id = 1;
   int32 animation_id = 2;
-  AllEnum.PokemonType pokemon_type = 3;
+  .AllEnum.PokemonType pokemon_type = 3;
   float power = 4;
   float accuracy_chance = 5;
   float critical_chance = 6;
@@ -757,26 +762,26 @@ message MoveSettings {
 }
 
 message PokemonSettings {
-  AllEnum.PokemonId pokemon_id = 1;
+  .AllEnum.PokemonId pokemon_id = 1;
   float model_scale = 3;
-  AllEnum.PokemonType type = 4;
-  AllEnum.PokemonType type_2 = 5;
+  .AllEnum.PokemonType type = 4;
+  .AllEnum.PokemonType type_2 = 5;
   CameraAttributes camera = 6;
   EncounterAttributes encounter = 7;
   StatsAttributes stats = 8;
-  repeated AllEnum.PokemonMove quick_moves = 9;
-  repeated AllEnum.PokemonMove cinematic_moves = 10;
+  repeated .AllEnum.PokemonMove quick_moves = 9;
+  repeated .AllEnum.PokemonMove cinematic_moves = 10;
   repeated float animation_time = 11;
-  repeated AllEnum.PokemonId evolution_ids = 12;
+  repeated .AllEnum.PokemonId evolution_ids = 12;
   int32 evolution_pips = 13;
-  AllEnum.PokemonClass class = 14;
+  .AllEnum.PokemonClass class = 14;
   float pokedex_height_m = 15;
   float pokedex_weight_kg = 16;
-  AllEnum.PokemonId parent_pokemon_id = 17;
+  .AllEnum.PokemonId parent_pokemon_id = 17;
   float height_std_dev = 18;
   float weight_std_dev = 19;
   float km_distance_to_hatch = 20;
-  AllEnum.PokemonFamilyId family_id = 21;
+  .AllEnum.PokemonFamilyId family_id = 21;
   int32 candy_to_evolve = 22;
 }
 
@@ -794,7 +799,7 @@ message EncounterAttributes {
   float collision_radius_m = 3;
   float collision_height_m = 4;
   float collision_head_radius_m = 5;
-  AllEnum.PokemonMovementType movement_type = 6;
+  .AllEnum.PokemonMovementType movement_type = 6;
   float movement_timer_s = 7;
   float jump_time_s = 8;
   float attack_timer_s = 9;
@@ -808,9 +813,9 @@ message StatsAttributes {
 }
 
 message ItemSettings {
-  AllEnum.ItemId item_id = 1;
-  AllEnum.ItemType item_type = 2;
-  AllEnum.ItemCategory category = 3;
+  .AllEnum.ItemId item_id = 1;
+  .AllEnum.ItemType item_type = 2;
+  .AllEnum.ItemCategory category = 3;
   float drop_freq = 4;
   int32 drop_trainer_level = 5;
 
@@ -833,7 +838,7 @@ message BattleAttributes {
 }
 
 message EggIncubatorAttributes {
-  AllEnum.EggIncubatorType incubator_type = 1;
+  .AllEnum.EggIncubatorType incubator_type = 1;
   int32 uses = 2;
   float distance_multiplier = 3;
 }
@@ -844,7 +849,7 @@ message ExperienceBoostAttributes {
 }
 
 message FoodAttributes {
-  repeated AllEnum.ItemEffect item_effect = 1;
+  repeated .AllEnum.ItemEffect item_effect = 1;
   repeated float item_effect_percent = 2;
   float growth_percent = 3;
 }
@@ -856,7 +861,7 @@ message FortModifierAttributes {
 
 message IncenseAttributes {
   int32 incense_lifetime_seconds = 1;
-  repeated AllEnum.PokemonType pokemon_type = 2;
+  repeated .AllEnum.PokemonType pokemon_type = 2;
   float pokemon_incense_type_probability = 3;
   int32 standing_time_between_encounters_seconds = 4;
   int32 moving_time_between_encounter_seconds = 5;
@@ -866,11 +871,11 @@ message IncenseAttributes {
 
 message InventoryUpgradeAttributes {
   int32 additional_storage = 1;
-  AllEnum.InventoryUpgradeType upgrade_type = 2;
+  .AllEnum.InventoryUpgradeType upgrade_type = 2;
 }
 
 message PokeballAttributes {
-  AllEnum.ItemEffect item_effect = 1;
+  .AllEnum.ItemEffect item_effect = 1;
   float capture_multi = 2;
   float capture_multi_effect = 3;
   float item_effect_mod = 4;
