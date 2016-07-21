@@ -29,10 +29,11 @@ Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pok
 #Get Map Objects and Inventory
 #Search for gyms/pokestops/spawns
 #Farm pokestops
-#Farm all pokemons in neighbourhood
-#Transfer pokemon
-#Evolve pokemon
-#Recycle items
+#Farm all pokemons in neighbourhood and throw berries/use best pokeball
+#Transfers duplicate pokemons
+#Evolve all pokemons
+#Throws away unneeded items
+
 ```
 
 Todo
