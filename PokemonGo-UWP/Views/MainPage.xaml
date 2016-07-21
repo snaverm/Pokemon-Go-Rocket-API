@@ -1,0 +1,65 @@
+<Page x:Class="PokemonGo_UWP.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:PokemonGo_UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+      mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <ProgressRing RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      Width="128"
+                      Height="128"
+                      Canvas.ZIndex="1000"
+                      IsActive="{Binding IsLoggingIn}" />
+
+        <Rectangle Fill="{ThemeResource AppBarBackgroundThemeBrush}"
+                   RelativePanel.AlignBottomWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   Opacity="0.8"
+                   Visibility="{Binding IsLoggingIn, Converter={StaticResource VisibleWhenTrueConverter}}"
+                   Canvas.ZIndex="999" />
+
+        <controls:PageHeader x:Name="pageHeader"
+                             Content="PTC Login"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True" />
+
+        <TextBox x:Name="usernameTextBox"
+                 Margin="16,12"
+                 Header="username:"
+                 Text="{Binding PtcUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 RelativePanel.AlignLeftWithPanel="True"
+                 RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.Below="pageHeader" />
+
+        <PasswordBox x:Name="passwordBox"
+                     Margin="16,0"
+                     Header="password:"
+                     Password="{Binding PtcPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.Below="usernameTextBox" />
+
+        <Button Margin="16,12"
+                Content="login"
+                Command="{Binding DoPtcLoginCommand}"
+                HorizontalAlignment="Stretch"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True" />
+
+    </RelativePanel>
+
+</Page>

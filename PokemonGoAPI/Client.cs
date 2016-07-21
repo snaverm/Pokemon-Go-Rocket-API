@@ -68,10 +68,17 @@ namespace PokemonGo.RocketAPI
             }
         }
 
-        public async Task DoPtcLogin(string username, string password)
+        /// <summary>
+        /// Returns true if the login worked
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public async Task<bool> DoPtcLogin(string username, string password)
         {
             _accessToken = await PtcLogin.GetAccessToken(username, password);
             _authType = AuthType.Ptc;
+            return !string.IsNullOrEmpty(_accessToken);
         }
 
         public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng)

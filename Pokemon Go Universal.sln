@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonGoAPI", "PokemonGoAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Protobuf", "Google.Protobuf\Google.Protobuf.csproj", "{8A901EED-55B1-4355-B3E4-79BC08D129F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonGo-UWP", "PokemonGo-UWP\PokemonGo-UWP.csproj", "{498AE076-ECDF-4E50-BD1A-171E89D908B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,26 @@ Global
 		{8A901EED-55B1-4355-B3E4-79BC08D129F6}.Release|x64.Build.0 = Release|x64
 		{8A901EED-55B1-4355-B3E4-79BC08D129F6}.Release|x86.ActiveCfg = Release|x86
 		{8A901EED-55B1-4355-B3E4-79BC08D129F6}.Release|x86.Build.0 = Release|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|ARM.ActiveCfg = Debug|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|ARM.Build.0 = Debug|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|ARM.Deploy.0 = Debug|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x64.ActiveCfg = Debug|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x64.Build.0 = Debug|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x64.Deploy.0 = Debug|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x86.ActiveCfg = Debug|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x86.Build.0 = Debug|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Debug|x86.Deploy.0 = Debug|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|Any CPU.ActiveCfg = Release|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|ARM.ActiveCfg = Release|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|ARM.Build.0 = Release|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|ARM.Deploy.0 = Release|ARM
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x64.ActiveCfg = Release|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x64.Build.0 = Release|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x64.Deploy.0 = Release|x64
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.ActiveCfg = Release|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.Build.0 = Release|x86
+		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
