@@ -63,9 +63,8 @@ namespace PokemonGo.RocketAPI.Logic
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = (familyCandy.Candy + settings.CandyToEvolve - 1)/settings.CandyToEvolve;
 
-                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key && x.Favorite == 0)
                         .OrderByDescending(x => x.Cp)
-                        .Where(x => x.Favorite == 0)
                         .ThenBy(n => n.StaminaMax)
                         .Skip(amountToSkip)
                         .ToList());
