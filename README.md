@@ -19,6 +19,9 @@ await ExecuteCatchAllNearbyPokemons(client);
 ```
 
 Features
+
+Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
+
 ```
 #PTC Login / Google
 #Get Map Objects and Inventory
