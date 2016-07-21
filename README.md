@@ -1,47 +1,15 @@
-# Pokemon-Go-Rocket-API
+# Pokemon-Go-Universal
 
-# Pokemon Go Client API Library in C# #
-
-General chat: https://discord.gg/5CMa3CY
-
-GitHub issues will be deleted if they are not API related. PR's about improved logic is welcome.
-
-Example:
-
-```
-var client = new Client(Settings.DefaultLatitude, Settings.DefaultLongitude);
-
-await client.LoginPtc("FeroxRev", "Sekret");
-var serverResponse = await client.GetServer();
-var profile = await client.GetProfile();
-var settings = await client.GetSettings();
-var mapObjects = await client.GetMapObjects();
-var inventory = await client.GetInventory();
-
-await ExecuteFarmingPokestops(client);
-await ExecuteCatchAllNearbyPokemons(client);
-```
-
-*Features*
-
-Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
-
-```
-#PTC Login / Google
-#Get Map Objects and Inventory
-#Search for gyms/pokestops/spawns
-#Farm pokestops
-#Farm all pokemons in neighbourhood and throw berries/use best pokeball
-#Transfers duplicate pokemons
-#Evolve all pokemons
-#Throws away unneeded items
-
-```
+# Pokemon Go Client for Universal Windows based on [Pokemon-Go-Rocket-API](https://github.com/FeroxRev/Pokemon-Go-Rocket-API) #
 
 *Todo*
 
-```
-#Gotta catch them all
-#Map Enums
-```
-
+- [x] Port [Pokemon-Go-Rocket-API](https://github.com/FeroxRev/Pokemon-Go-Rocket-API) to Universal Windows Platform
+- [ ] Build a game manager class 
+- [ ] Create a basic UI
+- [ ] Implementing GPS-based movement
+- [ ] Adding map and catching feature [Probable Alpha Version]
+- [ ] Adding PokeStop interactions
+- [ ] Adding inventory support
+- [ ] Adding eggs support
+- [ ] Other stuff
