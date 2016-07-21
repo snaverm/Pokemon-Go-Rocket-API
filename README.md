@@ -18,6 +18,8 @@ await ExecuteFarmingPokestops(client);
 await ExecuteCatchAllNearbyPokemons(client);
 ```
 
+General chat: https://discord.gg/xPCyNau
+
 Features
 
 Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
