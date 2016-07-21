@@ -8,6 +8,7 @@ using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.Login;
+using static PokemonGo.RocketAPI.GeneratedCode.Response.Types;
 
 namespace PokemonGo.RocketAPI
 {
@@ -36,7 +37,7 @@ namespace PokemonGo.RocketAPI
             };
             _httpClient = new HttpClient(new RetryHandler(handler));
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Niantic App");
-                //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
+            //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
             _httpClient.DefaultRequestHeaders.ExpectContinue = false;
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Connection", "keep-alive");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
@@ -52,18 +53,17 @@ namespace PokemonGo.RocketAPI
 
         public async Task DoGoogleLogin()
         {
-            _authType = AuthType.Google;
-            if (_settings.GoogleRefreshToken != string.Empty)
-            {
-                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
-                _accessToken = tokenResponse.id_token;
-            }
-            
-            if(_accessToken == null)           
+            if (_settings.GoogleRefreshToken == string.Empty)
             {
                 var tokenResponse = await GoogleLogin.GetAccessToken();
                 _accessToken = tokenResponse.id_token;
                 _settings.GoogleRefreshToken = tokenResponse.access_token;
+            }
+            else
+            {
+                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
+                _accessToken = tokenResponse.id_token;
+                _authType = AuthType.Google;
             }
         }
 
@@ -85,7 +85,7 @@ namespace PokemonGo.RocketAPI
             var updateRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.PLAYER_UPDATE,
+                    Type = (int)RequestType.PLAYER_UPDATE,
                     Message = customRequest.ToByteString()
                 });
             var updateResponse =
@@ -112,7 +112,7 @@ namespace PokemonGo.RocketAPI
         public async Task<GetPlayerResponse> GetProfile()
         {
             var profileRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10,
-                new Request.Types.Requests() {Type = (int) RequestType.GET_PLAYER});
+                new Request.Types.Requests() { Type = (int)RequestType.GET_PLAYER });
             return await _httpClient.PostProtoPayload<Request, GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
         }
 
@@ -139,19 +139,19 @@ namespace PokemonGo.RocketAPI
             var mapRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.GET_MAP_OBJECTS,
+                    Type = (int)RequestType.GET_MAP_OBJECTS,
                     Message = customRequest.ToByteString()
                 },
-                new Request.Types.Requests() {Type = (int) RequestType.GET_HATCHED_OBJECTS},
+                new Request.Types.Requests() { Type = (int)RequestType.GET_HATCHED_OBJECTS },
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.GET_INVENTORY,
-                    Message = new Request.Types.Time() {Time_ = DateTime.UtcNow.ToUnixTime()}.ToByteString()
+                    Type = (int)RequestType.GET_INVENTORY,
+                    Message = new Request.Types.Time() { Time_ = DateTime.UtcNow.ToUnixTime() }.ToByteString()
                 },
-                new Request.Types.Requests() {Type = (int) RequestType.CHECK_AWARDED_BADGES},
+                new Request.Types.Requests() { Type = (int)RequestType.CHECK_AWARDED_BADGES },
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.DOWNLOAD_SETTINGS,
+                    Type = (int)RequestType.DOWNLOAD_SETTINGS,
                     Message =
                         new Request.Types.SettingsGuid()
                         {
@@ -174,11 +174,19 @@ namespace PokemonGo.RocketAPI
             var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.FORT_DETAILS,
+                    Type = (int)RequestType.FORT_DETAILS,
                     Message = customRequest.ToByteString()
                 });
             return await _httpClient.PostProtoPayload<Request, FortDetailsResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
+
+        /*num Holoholo.Rpc.Types.FortSearchOutProto.Result {
+         NO_RESULT_SET = 0;
+         SUCCESS = 1;
+         OUT_OF_RANGE = 2;
+         IN_COOLDOWN_PERIOD = 3;
+         INVENTORY_FULL = 4;
+        }*/
 
         public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)
         {
@@ -194,7 +202,7 @@ namespace PokemonGo.RocketAPI
             var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.FORT_SEARCH,
+                    Type = (int)RequestType.FORT_SEARCH,
                     Message = customRequest.ToByteString()
                 });
             return await _httpClient.PostProtoPayload<Request, FortSearchResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
@@ -213,7 +221,7 @@ namespace PokemonGo.RocketAPI
             var encounterResponse = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.ENCOUNTER,
+                    Type = (int)RequestType.ENCOUNTER,
                     Message = customRequest.ToByteString()
                 });
             return await _httpClient.PostProtoPayload<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterResponse);
@@ -226,7 +234,7 @@ namespace PokemonGo.RocketAPI
             var customRequest = new Request.Types.CatchPokemonRequest()
             {
                 EncounterId = encounterId,
-                Pokeball = (int) pokeball,
+                Pokeball = (int)pokeball,
                 SpawnPointGuid = spawnPointGuid,
                 HitPokemon = 1,
                 NormalizedReticleSize = Utils.FloatAsUlong(1.950),
@@ -237,7 +245,7 @@ namespace PokemonGo.RocketAPI
             var catchPokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
                 new Request.Types.Requests()
                 {
-                    Type = (int) RequestType.CATCH_POKEMON,
+                    Type = (int)RequestType.CATCH_POKEMON,
                     Message = customRequest.ToByteString()
                 });
             return
@@ -285,6 +293,21 @@ namespace PokemonGo.RocketAPI
             return await _httpClient.PostProtoPayload<Request, GetInventoryResponse>($"https://{_apiUrl}/rpc", inventoryRequest);
         }
 
+        public async Task<RecycleInventoryItemResponse> RecycleItem(AllEnum.ItemId itemId, int amount)
+        {
+            var customRequest = new RecycleInventoryItem
+            {
+                ItemId = (AllEnum.ItemId)Enum.Parse(typeof(AllEnum.ItemId), itemId.ToString()),
+                Count = amount
+            };
 
+            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
+                new Request.Types.Requests()
+                {
+                    Type = (int)RequestType.RECYCLE_INVENTORY_ITEM,
+                    Message = customRequest.ToByteString()
+                });
+            return await _httpClient.PostProtoPayload<Request, RecycleInventoryItemResponse>($"https://{_apiUrl}/rpc", releasePokemonRequest);
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async void Execute()
         {
             Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
-            
+
             if (_clientSettings.AuthType == AuthType.Ptc)
                 await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
             else if (_clientSettings.AuthType == AuthType.Google)
@@ -39,6 +39,7 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     await _client.SetServer();
                     await TransferDuplicatePokemon();
+                    await RecycleItems();
                     await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(_client));
 
                     /*
@@ -117,7 +118,7 @@ namespace PokemonGo.RocketAPI.Logic
                 EvolvePokemonOut evolvePokemonOutProto;
                 do
                 {
-                    evolvePokemonOutProto = await _client.EvolvePokemon((ulong)pokemon.Id); 
+                    evolvePokemonOutProto = await _client.EvolvePokemon((ulong)pokemon.Id);
 
                     if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
                         Logger.Write($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp", LogLevel.Info);
@@ -135,7 +136,7 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task TransferDuplicatePokemon()
         {
             var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer();
-            
+
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
@@ -143,14 +144,27 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(500);
             }
         }
-        
+
+        private async Task RecycleItems()
+        {
+            var items = await _inventory.GetItemsToRecycle(_clientSettings);
+
+            foreach (var item in items)
+            {
+                var transfer = await _client.RecycleItem((AllEnum.ItemId)item.Item_, item.Count);
+                Logger.Write($"Recycled {item.Count}x {(AllEnum.ItemId)item.Item_}", LogLevel.Info);
+                await Task.Delay(500);
+            }
+
+        }
+
         private async Task<MiscEnums.Item> GetBestBall(int? pokemonCp)
         {
             var pokeBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL);
             var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
-            
+
             if (masterBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
             else if (ultraBallsCount > 0 && pokemonCp >= 1000)
@@ -160,7 +174,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             if (ultraBallsCount > 0 && pokemonCp >= 600)
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
-            else if(greatBallsCount > 0 && pokemonCp >= 600)
+            else if (greatBallsCount > 0 && pokemonCp >= 600)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (greatBallsCount > 0 && pokemonCp >= 350)
