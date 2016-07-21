@@ -179,14 +179,6 @@ namespace PokemonGo.RocketAPI
             return await _httpClient.PostProtoPayload<Request, FortDetailsResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
 
-        /*num Holoholo.Rpc.Types.FortSearchOutProto.Result {
-         NO_RESULT_SET = 0;
-         SUCCESS = 1;
-         OUT_OF_RANGE = 2;
-         IN_COOLDOWN_PERIOD = 3;
-         INVENTORY_FULL = 4;
-        }*/
-
         public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)
         {
             var customRequest = new Request.Types.FortSearchRequest()
@@ -291,5 +283,7 @@ namespace PokemonGo.RocketAPI
             var inventoryRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30, RequestType.GET_INVENTORY);
             return await _httpClient.PostProtoPayload<Request, GetInventoryResponse>($"https://{_apiUrl}/rpc", inventoryRequest);
         }
+
+
     }
 }
