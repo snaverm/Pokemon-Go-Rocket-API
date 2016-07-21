@@ -2,6 +2,10 @@
 
 # Pokemon Go Client API Library in C# #
 
+General chat: https://discord.gg/xPCyNau
+
+GitHub issues will be deleted if they are not API related. PR's about improved logic is welcome.
+
 Example:
 
 ```
@@ -18,9 +22,7 @@ await ExecuteFarmingPokestops(client);
 await ExecuteCatchAllNearbyPokemons(client);
 ```
 
-General chat: https://discord.gg/xPCyNau
-
-Features
+*Features*
 
 Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
 
@@ -36,7 +38,7 @@ Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pok
 
 ```
 
-Todo
+*Todo*
 
 ```
 #Gotta catch them all
