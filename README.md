@@ -8,7 +8,6 @@ Example:
 var client = new Client(Settings.DefaultLatitude, Settings.DefaultLongitude);
 
 await client.LoginPtc("FeroxRev", "Sekret");
-//await client.LoginGoogle(Settings.DeviceId, Settings.Email, Settings.LongDurationToken);
 var serverResponse = await client.GetServer();
 var profile = await client.GetProfile();
 var settings = await client.GetSettings();
@@ -26,6 +25,8 @@ Features
 #Search for gyms/pokestops/spawns
 #Farm pokestops
 #Farm all pokemons in neighbourhood
+#Transfer pokemon
+#Evolve pokemon
 ```
 
 Todo
