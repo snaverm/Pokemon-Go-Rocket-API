@@ -26,7 +26,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async void Execute()
         {
-            Console.WriteLine($"Starting Execute on login server: {_clientSettings.AuthType}");
+            Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
             
             if (_clientSettings.AuthType == AuthType.Ptc)
                 await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
@@ -53,7 +53,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Exception: {ex}");
+                    Logger.Write($"Exception: {ex}", LogLevel.Error);
                 }
 
                 await Task.Delay(10000);
@@ -78,7 +78,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var fortInfo = await client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Farmed XP: {fortSearch.ExperienceAwarded}, Gems: { fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}");
+                Logger.Write($"Farmed XP: {fortSearch.ExperienceAwarded}, Gems: { fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Info);
 
                 await Task.Delay(15000);
                 await ExecuteCatchAllNearbyPokemons(client);
@@ -103,7 +103,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
 
-                System.Console.WriteLine(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"[{DateTime.Now.ToString("HH:mm:ss")}] We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp}" : $"[{DateTime.Now.ToString("HH:mm:ss")}] {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away..");
+                Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away..", LogLevel.Info);
                 await Task.Delay(5000);
             }
         }
@@ -118,9 +118,9 @@ namespace PokemonGo.RocketAPI.Logic
                     evolvePokemonOutProto = await _client.EvolvePokemon((ulong)pokemon.Id); 
 
                     if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
-                        System.Console.WriteLine($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp");
+                        Logger.Write($"Evolved {pokemon.PokemonType} successfully for {evolvePokemonOutProto.ExpAwarded}xp", LogLevel.Info);
                     else
-                        System.Console.WriteLine($"Failed to evolve {pokemon.PokemonType}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonType}");
+                        Logger.Write($"Failed to evolve {pokemon.PokemonType}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonType}", LogLevel.Info);
 
                     await Task.Delay(3000);
                 }
@@ -132,13 +132,13 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon()
         {
-            System.Console.WriteLine($"Transfering duplicate Pokemon");
+            Logger.Write($"Transfering duplicate Pokemon", LogLevel.Info);
 
             var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer();
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
-                System.Console.WriteLine($"Transfer {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp})");
+                Logger.Write($"Transfer {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp})", LogLevel.Info);
                 await Task.Delay(500);
             }
         }

@@ -22,7 +22,7 @@ namespace PokemonGo.RocketAPI.Login
         internal static async Task<TokenResponseModel> GetAccessToken()
         {
             var deviceCodeResponse = await GetDeviceCode();
-            Console.WriteLine("Please visit " + deviceCodeResponse.verification_url + " and enter " + deviceCodeResponse.user_code);
+            Logger.Write("Please visit " + deviceCodeResponse.verification_url + " and enter " + deviceCodeResponse.user_code, LogLevel.None);
 
             //Poll until user submitted code..
             TokenResponseModel tokenResponse;
