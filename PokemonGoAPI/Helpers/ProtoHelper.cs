@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Protobuf;
 
 namespace PokemonGo.RocketAPI.Helpers
 {
@@ -25,70 +21,70 @@ namespace PokemonGo.RocketAPI.Helpers
     public class VarintBitConverter
     {
         /// <summary>
-        /// Returns the specified byte value as varint encoded array of bytes.   
+        ///     Returns the specified byte value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">Byte value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(byte value)
         {
-            return GetVarintBytes((ulong)value);
+            return GetVarintBytes((ulong) value);
         }
 
         /// <summary>
-        /// Returns the specified 16-bit signed value as varint encoded array of bytes.   
+        ///     Returns the specified 16-bit signed value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">16-bit signed value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(short value)
         {
             var zigzag = EncodeZigZag(value, 16);
-            return GetVarintBytes((ulong)zigzag);
+            return GetVarintBytes((ulong) zigzag);
         }
 
         /// <summary>
-        /// Returns the specified 16-bit unsigned value as varint encoded array of bytes.   
+        ///     Returns the specified 16-bit unsigned value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">16-bit unsigned value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(ushort value)
         {
-            return GetVarintBytes((ulong)value);
+            return GetVarintBytes((ulong) value);
         }
 
         /// <summary>
-        /// Returns the specified 32-bit signed value as varint encoded array of bytes.   
+        ///     Returns the specified 32-bit signed value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">32-bit signed value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(int value)
         {
             var zigzag = EncodeZigZag(value, 32);
-            return GetVarintBytes((ulong)zigzag);
+            return GetVarintBytes((ulong) zigzag);
         }
 
         /// <summary>
-        /// Returns the specified 32-bit unsigned value as varint encoded array of bytes.   
+        ///     Returns the specified 32-bit unsigned value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">32-bit unsigned value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(uint value)
         {
-            return GetVarintBytes((ulong)value);
+            return GetVarintBytes((ulong) value);
         }
 
         /// <summary>
-        /// Returns the specified 64-bit signed value as varint encoded array of bytes.   
+        ///     Returns the specified 64-bit signed value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">64-bit signed value</param>
         /// <returns>Varint array of bytes.</returns>
         public static byte[] GetVarintBytes(long value)
         {
             var zigzag = EncodeZigZag(value, 64);
-            return GetVarintBytes((ulong)zigzag);
+            return GetVarintBytes((ulong) zigzag);
         }
 
         /// <summary>
-        /// Returns the specified 64-bit unsigned value as varint encoded array of bytes.   
+        ///     Returns the specified 64-bit unsigned value as varint encoded array of bytes.
         /// </summary>
         /// <param name="value">64-bit unsigned value</param>
         /// <returns>Varint array of bytes.</returns>
@@ -106,8 +102,7 @@ namespace PokemonGo.RocketAPI.Helpers
                     byteVal |= 0x80;
                 }
 
-                buffer[pos++] = (byte)byteVal;
-
+                buffer[pos++] = (byte) byteVal;
             } while (value != 0);
 
             var result = new byte[pos];
@@ -117,59 +112,59 @@ namespace PokemonGo.RocketAPI.Helpers
         }
 
         /// <summary>
-        /// Returns byte value from varint encoded array of bytes.
+        ///     Returns byte value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>Byte value</returns>
         public static byte ToByte(byte[] bytes)
         {
-            return (byte)ToTarget(bytes, 8);
+            return (byte) ToTarget(bytes, 8);
         }
 
         /// <summary>
-        /// Returns 16-bit signed value from varint encoded array of bytes.
+        ///     Returns 16-bit signed value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>16-bit signed value</returns>
         public static short ToInt16(byte[] bytes)
         {
             var zigzag = ToTarget(bytes, 16);
-            return (short)DecodeZigZag(zigzag);
+            return (short) DecodeZigZag(zigzag);
         }
 
         /// <summary>
-        /// Returns 16-bit usigned value from varint encoded array of bytes.
+        ///     Returns 16-bit usigned value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>16-bit usigned value</returns>
         public static ushort ToUInt16(byte[] bytes)
         {
-            return (ushort)ToTarget(bytes, 16);
+            return (ushort) ToTarget(bytes, 16);
         }
 
         /// <summary>
-        /// Returns 32-bit signed value from varint encoded array of bytes.
+        ///     Returns 32-bit signed value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>32-bit signed value</returns>
         public static int ToInt32(byte[] bytes)
         {
             var zigzag = ToTarget(bytes, 32);
-            return (int)DecodeZigZag(zigzag);
+            return (int) DecodeZigZag(zigzag);
         }
 
         /// <summary>
-        /// Returns 32-bit unsigned value from varint encoded array of bytes.
+        ///     Returns 32-bit unsigned value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>32-bit unsigned value</returns>
         public static uint ToUInt32(byte[] bytes)
         {
-            return (uint)ToTarget(bytes, 32);
+            return (uint) ToTarget(bytes, 32);
         }
 
         /// <summary>
-        /// Returns 64-bit signed value from varint encoded array of bytes.
+        ///     Returns 64-bit signed value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>64-bit signed value</returns>
@@ -180,7 +175,7 @@ namespace PokemonGo.RocketAPI.Helpers
         }
 
         /// <summary>
-        /// Returns 64-bit unsigned value from varint encoded array of bytes.
+        ///     Returns 64-bit unsigned value from varint encoded array of bytes.
         /// </summary>
         /// <param name="bytes">Varint encoded array of bytes.</param>
         /// <returns>64-bit unsigned value</returns>
@@ -198,20 +193,20 @@ namespace PokemonGo.RocketAPI.Helpers
         {
             if ((value & 0x1) == 0x1)
             {
-                return (-1 * ((long)(value >> 1) + 1));
+                return -1*((long) (value >> 1) + 1);
             }
 
-            return (long)(value >> 1);
+            return (long) (value >> 1);
         }
 
         private static ulong ToTarget(byte[] bytes, int sizeBites)
         {
-            int shift = 0;
+            var shift = 0;
             ulong result = 0;
 
             foreach (ulong byteValue in bytes)
             {
-                ulong tmp = byteValue & 0x7f;
+                var tmp = byteValue & 0x7f;
                 result |= tmp << shift;
 
                 if (shift > sizeBites)

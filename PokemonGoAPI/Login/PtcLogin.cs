@@ -12,7 +12,7 @@ namespace PokemonGo.RocketAPI.Login
     {
         public static async Task<string> GetAccessToken(string username, string password)
         {
-            var handler = new HttpClientHandler()
+            var handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip,
                 AllowAutoRedirect = false
@@ -35,12 +35,12 @@ namespace PokemonGo.RocketAPI.Login
                             new KeyValuePair<string, string>("execution", executionId),
                             new KeyValuePair<string, string>("_eventId", "submit"),
                             new KeyValuePair<string, string>("username", username),
-                            new KeyValuePair<string, string>("password", password),
+                            new KeyValuePair<string, string>("password", password)
                         }));
 
                 var decoder = new WwwFormUrlDecoder(loginResp.Headers.Location.Query);
                 var ticketId = decoder.GetFirstValueByName("ticket");
-                if (ticketId == null)
+                if (string.IsNullOrEmpty(ticketId))
                     throw new PtcOfflineException();
 
                 //Get tokenvar 
@@ -54,7 +54,7 @@ namespace PokemonGo.RocketAPI.Login
                             new KeyValuePair<string, string>("client_secret",
                                 "w8ScCUXJQc6kXKw8FiOhd8Fixzht18Dq3PEVkUCP5ZPxtgyWsbTvWHFLm2wNY0JR"),
                             new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                            new KeyValuePair<string, string>("code", ticketId),
+                            new KeyValuePair<string, string>("code", ticketId)
                         }));
 
                 var tokenData = await tokenResp.Content.ReadAsStringAsync();

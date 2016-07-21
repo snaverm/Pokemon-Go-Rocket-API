@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Helpers;
 
 namespace PokemonGo.RocketAPI.Login
@@ -22,7 +14,9 @@ namespace PokemonGo.RocketAPI.Login
         internal static async Task<TokenResponseModel> GetAccessToken()
         {
             var deviceCodeResponse = await GetDeviceCode();
-            Logger.Write("Please visit " + deviceCodeResponse.verification_url + " and enter " + deviceCodeResponse.user_code, LogLevel.None);
+            Logger.Write(
+                "Please visit " + deviceCodeResponse.verification_url + " and enter " + deviceCodeResponse.user_code,
+                LogLevel.None);
 
             //Poll until user submitted code..
             TokenResponseModel tokenResponse;
@@ -88,6 +82,5 @@ namespace PokemonGo.RocketAPI.Login
             public string device_code { get; set; }
             public string user_code { get; set; }
         }
-
     }
 }
