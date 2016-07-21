@@ -75,7 +75,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var pokeStop in pokeStops)
             {
                 var update = await client.UpdatePlayerLocation(pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = await client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                //var fortInfo = await client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 Logger.Write($"Farmed XP: {fortSearch.ExperienceAwarded}, Gems: { fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Info);
@@ -95,16 +95,18 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var update = await client.UpdatePlayerLocation(pokemon.Latitude, pokemon.Longitude);
                 var encounterPokemonResponse = await client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+                var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;
+                var pokeball = await GetBestBall(pokemonCP);
 
                 CatchPokemonResponse caughtPokemonResponse;
                 do
                 {
-                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL); //note: reverted from settings because this should not be part of settings but part of logic
+                    caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, pokeball);
                 }
                 while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
 
                 Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away..", LogLevel.Info);
-                await Task.Delay(5000);
+                await Task.Delay(15000);
             }
         }
 
@@ -132,15 +134,48 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon()
         {
-            Logger.Write($"Transfering duplicate Pokemon", LogLevel.Info);
-
             var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer();
+            
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
-                Logger.Write($"Transfer {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp})", LogLevel.Info);
+                Logger.Write($"Transfer {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP", LogLevel.Info);
                 await Task.Delay(500);
             }
+        }
+        
+        private async Task<MiscEnums.Item> GetBestBall(int? pokemonCp)
+        {
+            var pokeBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL);
+            var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
+            var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
+            var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
+            
+            if (masterBallsCount > 0 && pokemonCp >= 1000)
+                return MiscEnums.Item.ITEM_MASTER_BALL;
+            else if (ultraBallsCount > 0 && pokemonCp >= 1000)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            else if (greatBallsCount > 0 && pokemonCp >= 1000)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (ultraBallsCount > 0 && pokemonCp >= 600)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            else if(greatBallsCount > 0 && pokemonCp >= 600)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (greatBallsCount > 0 && pokemonCp >= 350)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (pokeBallsCount > 0)
+                return MiscEnums.Item.ITEM_POKE_BALL;
+            if (greatBallsCount > 0)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+            if (ultraBallsCount > 0)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            if (masterBallsCount > 0)
+                return MiscEnums.Item.ITEM_MASTER_BALL;
+
+            return MiscEnums.Item.ITEM_POKE_BALL;
         }
     }
 }
