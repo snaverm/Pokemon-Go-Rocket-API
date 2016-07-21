@@ -482,10 +482,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             "ZXJjZW50GAEgASgCIiQKD1RyYW5zZmVyUG9rZW1vbhIRCglQb2tlbW9uSWQY",
             "ASABKAYiOgoSVHJhbnNmZXJQb2tlbW9uT3V0Eg4KBlN0YXR1cxgBIAEoBRIU",
             "CgxDYW5keUF3YXJkZWQYAiABKAUiIgoNRXZvbHZlUG9rZW1vbhIRCglQb2tl",
-            "bW9uSWQYASABKAYikAEKEEV2b2x2ZVBva2Vtb25PdXQSDgoGUmVzdWx0GAEg",
-            "ASgFEkIKDkV2b2x2ZWRQb2tlbW9uGAIgASgLMiouUG9rZW1vbkdvLlJvY2tl",
-            "dEFQSS5HZW5lcmF0ZWRDb2RlLlBva2Vtb24SEgoKRXhwQXdhcmRlZBgDIAEo",
-            "BRIUCgxDYW5keUF3YXJkZWQYBCABKAViBnByb3RvMw=="));
+            "bW9uSWQYASABKAYiqgMKEEV2b2x2ZVBva2Vtb25PdXQSVwoGUmVzdWx0GAEg",
+            "ASgOMkcuUG9rZW1vbkdvLlJvY2tldEFQSS5HZW5lcmF0ZWRDb2RlLkV2b2x2",
+            "ZVBva2Vtb25PdXQuRXZvbHZlUG9rZW1vblN0YXR1cxJCCg5Fdm9sdmVkUG9r",
+            "ZW1vbhgCIAEoCzIqLlBva2Vtb25Hby5Sb2NrZXRBUEkuR2VuZXJhdGVkQ29k",
+            "ZS5Qb2tlbW9uEhIKCkV4cEF3YXJkZWQYAyABKAUSFAoMQ2FuZHlBd2FyZGVk",
+            "GAQgASgFIs4BChNFdm9sdmVQb2tlbW9uU3RhdHVzEhkKFVBPS0VNT05fRVZP",
+            "TFZFRF9VTlNFVBAAEhsKF1BPS0VNT05fRVZPTFZFRF9TVUNDRVNTEAESGgoW",
+            "RkFJTEVEX1BPS0VNT05fTUlTU0lORxACEiEKHUZBSUxFRF9JTlNVRkZJQ0lF",
+            "TlRfUkVTT1VSQ0VTEAMSIAocRkFJTEVEX1BPS0VNT05fQ0FOTk9UX0VWT0xW",
+            "RRAEEh4KGkZBSUxFRF9QT0tFTU9OX0lTX0RFUExPWUVEEAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::AllEnum.AllEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -585,7 +591,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.TransferPokemon), global::PokemonGo.RocketAPI.GeneratedCode.TransferPokemon.Parser, new[]{ "PokemonId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.TransferPokemonOut), global::PokemonGo.RocketAPI.GeneratedCode.TransferPokemonOut.Parser, new[]{ "Status", "CandyAwarded" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemon), global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemon.Parser, new[]{ "PokemonId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut), global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Parser, new[]{ "Result", "EvolvedPokemon", "ExpAwarded", "CandyAwarded" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut), global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Parser, new[]{ "Result", "EvolvedPokemon", "ExpAwarded", "CandyAwarded" }, null, new[]{ typeof(global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus) }, null)
           }));
     }
     #endregion
@@ -22083,8 +22089,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
     /// <summary>Field number for the "Result" field.</summary>
     public const int ResultFieldNumber = 1;
-    private int result_;
-    public int Result {
+    private global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus result_ = 0;
+    public global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus Result {
       get { return result_; }
       set {
         result_ = value;
@@ -22155,7 +22161,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     public void WriteTo(pb::CodedOutputStream output) {
       if (Result != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Result);
+        output.WriteEnum((int) Result);
       }
       if (evolvedPokemon_ != null) {
         output.WriteRawTag(18);
@@ -22174,7 +22180,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     public int CalculateSize() {
       int size = 0;
       if (Result != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Result);
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
       }
       if (evolvedPokemon_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(EvolvedPokemon);
@@ -22217,7 +22223,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
             input.SkipLastField();
             break;
           case 8: {
-            Result = input.ReadInt32();
+            result_ = (global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus) input.ReadEnum();
             break;
           }
           case 18: {
@@ -22238,6 +22244,22 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the EvolvePokemonOut message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public static partial class Types {
+      public enum EvolvePokemonStatus {
+        [pbr::OriginalName("POKEMON_EVOLVED_UNSET")] PokemonEvolvedUnset = 0,
+        [pbr::OriginalName("POKEMON_EVOLVED_SUCCESS")] PokemonEvolvedSuccess = 1,
+        [pbr::OriginalName("FAILED_POKEMON_MISSING")] FailedPokemonMissing = 2,
+        [pbr::OriginalName("FAILED_INSUFFICIENT_RESOURCES")] FailedInsufficientResources = 3,
+        [pbr::OriginalName("FAILED_POKEMON_CANNOT_EVOLVE")] FailedPokemonCannotEvolve = 4,
+        [pbr::OriginalName("FAILED_POKEMON_IS_DEPLOYED")] FailedPokemonIsDeployed = 5,
+      }
+
+    }
+    #endregion
 
   }
 

@@ -902,8 +902,18 @@ message EvolvePokemon {
 
 
 message EvolvePokemonOut {
-    int32 Result = 1;
+    EvolvePokemonStatus Result = 1;
     Pokemon EvolvedPokemon = 2;
     int32 ExpAwarded = 3;
     int32 CandyAwarded = 4;
+
+	
+	enum EvolvePokemonStatus {
+		POKEMON_EVOLVED_UNSET = 0;
+		POKEMON_EVOLVED_SUCCESS = 1;
+		FAILED_POKEMON_MISSING = 2;
+		FAILED_INSUFFICIENT_RESOURCES = 3;
+		FAILED_POKEMON_CANNOT_EVOLVE = 4;
+		FAILED_POKEMON_IS_DEPLOYED = 5;
+	}
 }
