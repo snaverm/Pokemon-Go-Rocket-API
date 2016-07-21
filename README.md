@@ -2,7 +2,7 @@
 
 # Pokemon Go Client API Library in C# #
 
-General chat: https://discord.gg/xPCyNau
+General chat: https://discord.gg/5CMa3CY
 
 GitHub issues will be deleted if they are not API related. PR's about improved logic is welcome.
 
