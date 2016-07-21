@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using AllEnum;
 
 namespace PokemonGo.RocketAPI.Console
 {
@@ -16,11 +17,11 @@ namespace PokemonGo.RocketAPI.Console
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
 
-        ICollection<KeyValuePair<AllEnum.ItemId, int>> ISettings.itemRecycleFilter
+        ICollection<KeyValuePair<ItemId, int>> ISettings.itemRecycleFilter
         {
             get
             {
-                ICollection<KeyValuePair<AllEnum.ItemId, int>> itemFilter = new Dictionary<AllEnum.ItemId, int>();
+                ICollection<KeyValuePair<ItemId, int>> itemFilter = new Dictionary<ItemId, int>();
 
                 //itemFilter.Add(new KeyValuePair<AllEnum.ItemId, int>(ItemId.ItemPokeBall, 0));
                 //itemFilter.Add(new KeyValuePair<AllEnum.ItemId, int>(ItemId.ItemGreatBall, 50));
