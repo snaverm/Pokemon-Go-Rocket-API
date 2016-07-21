@@ -930,7 +930,8 @@ namespace AllEnum {
     [pbr::OriginalName("ITEM_TYPE_INCENSE")] Incense = 10,
     [pbr::OriginalName("ITEM_TYPE_XP_BOOST")] XpBoost = 11,
     [pbr::OriginalName("ITEM_TYPE_INVENTORY_UPGRADE")] InventoryUpgrade = 12,
-  }
+    [pbr::OriginalName("ITEM_TYPE_INVENTORY_UPGRADE")] ItemRazzBerry = 701,
+    }
 
   public enum ItemCategory {
     [pbr::OriginalName("ITEM_CATEGORY_NONE")] None = 0,

@@ -100,9 +100,20 @@ namespace PokemonGo.RocketAPI.Logic
                 var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;
                 var pokeball = await GetBestBall(pokemonCP);
 
+                var berryUsed = false;
+                var inventoryBalls = await client.GetInventory();
+                var items = inventoryBalls.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData.Item).Where(p => p != null);
                 CatchPokemonResponse caughtPokemonResponse;
                 do
                 {
+                    if (!berryUsed && encounterPokemonResponse.CaptureProbability.CaptureProbability_.First() < 0.4 && items.Where(p => p.Item_ == ItemType.ItemRazzBerry).Count() > 0)
+                    {
+                        berryUsed = true;
+                        Logger.Write($"Use Rasperry (" + items.Where(p => p.Item_ == ItemType.ItemRazzBerry).First().Count + ")!", LogLevel.Info);
+                        UseItemCaptureRequest useRaspberry = await client.UseCaptureItem(pokemon.EncounterId, AllEnum.ItemId.ItemRazzBerry, pokemon.SpawnpointId);
+                        await Task.Delay(3000);
+                    }
+
                     caughtPokemonResponse = await client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, pokeball);
                 }
                 while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
