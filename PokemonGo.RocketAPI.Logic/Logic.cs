@@ -27,33 +27,31 @@ namespace PokemonGo.RocketAPI.Logic
         public async void Execute()
         {
             Console.WriteLine($"Starting Execute on login server: {_clientSettings.AuthType}");
-
-            var client = new Client(_clientSettings);
-
+            
             if (_clientSettings.AuthType == AuthType.Ptc)
-                await client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
+                await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
             else if (_clientSettings.AuthType == AuthType.Google)
-                await client.DoGoogleLogin();
+                await _client.DoGoogleLogin();
 
             while (true)
             {
                 try
                 {
-                    await client.SetServer();
-                    //await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(client));
+                    await _client.SetServer();
+                    await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(_client));
                     await TransferDuplicatePokemon();
 
                     /*
                 * Example calls below
                 *
-                var profile = await client.GetProfile();
-                var settings = await client.GetSettings();
-                var mapObjects = await client.GetMapObjects();
-                var inventory = await client.GetInventory();
+                var profile = await _client.GetProfile();
+                var settings = await _client.GetSettings();
+                var mapObjects = await _client.GetMapObjects();
+                var inventory = await _client.GetInventory();
                 var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
                 */
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine($"Exception: {ex}");
                 }
@@ -141,6 +139,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 System.Console.WriteLine($"Transfer {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp})");
+                await Task.Delay(500);
             }
         }
     }
