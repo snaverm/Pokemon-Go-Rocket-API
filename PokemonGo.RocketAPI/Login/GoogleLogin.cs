@@ -55,6 +55,7 @@ namespace PokemonGo.RocketAPI.Login
         public static async Task<TokenResponseModel> GetAccessToken(string refreshToken)
         {
             return await HttpClientHelper.PostFormEncodedAsync<TokenResponseModel>(OauthTokenEndpoint,
+                new KeyValuePair<string, string>("access_type", "offline"),
                 new KeyValuePair<string, string>("client_id", ClientId),
                 new KeyValuePair<string, string>("client_secret", ClientSecret),
                 new KeyValuePair<string, string>("refresh_token", refreshToken),
