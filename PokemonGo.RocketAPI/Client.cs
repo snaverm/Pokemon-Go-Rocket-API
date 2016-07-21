@@ -52,17 +52,18 @@ namespace PokemonGo.RocketAPI
 
         public async Task DoGoogleLogin()
         {
-            if (_settings.GoogleRefreshToken == string.Empty)
+            _authType = AuthType.Google;
+            if (_settings.GoogleRefreshToken != string.Empty)
+            {
+                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
+                _accessToken = tokenResponse.id_token;
+            }
+            
+            if(_accessToken == null)           
             {
                 var tokenResponse = await GoogleLogin.GetAccessToken();
                 _accessToken = tokenResponse.id_token;
                 _settings.GoogleRefreshToken = tokenResponse.access_token;
-            }
-            else
-            {
-                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
-                _accessToken = tokenResponse.id_token;
-                _authType  = AuthType.Google;
             }
         }
 
