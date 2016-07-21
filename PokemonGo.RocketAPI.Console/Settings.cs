@@ -14,7 +14,6 @@ namespace PokemonGo.RocketAPI.Console
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
-        public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public  string GoogleRefreshToken
         {
             get { return UserSettings.Default.GoogleRefreshToken; }
