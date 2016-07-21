@@ -37,7 +37,7 @@ namespace PokemonGo.RocketAPI
             };
             _httpClient = new HttpClient(new RetryHandler(handler));
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Niantic App");
-            //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
+                //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
             _httpClient.DefaultRequestHeaders.ExpectContinue = false;
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Connection", "keep-alive");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI
                 var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
                 _accessToken = tokenResponse.id_token;
             }
-
+            
             if (_accessToken == null)
             {
                 var tokenResponse = await GoogleLogin.GetAccessToken();
@@ -90,7 +90,8 @@ namespace PokemonGo.RocketAPI
                     Message = customRequest.ToByteString()
                 });
             var updateResponse =
-                await _httpClient.PostProtoPayload<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
+                await
+                    _httpClient.PostProtoPayload<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
             return updateResponse;
         }
 
@@ -123,6 +124,18 @@ namespace PokemonGo.RocketAPI
                 RequestType.DOWNLOAD_SETTINGS);
             return await _httpClient.PostProtoPayload<Request, DownloadSettingsResponse>($"https://{_apiUrl}/rpc", settingsRequest);
         }
+
+        public async Task<DownloadItemTemplatesResponse> GetItemTemplates()
+        {
+            var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 10,
+                RequestType.DOWNLOAD_ITEM_TEMPLATES);
+            return
+                await
+                    _httpClient.PostProtoPayload<Request, DownloadItemTemplatesResponse>($"https://{_apiUrl}/rpc",
+                        settingsRequest);
+        }
+
+
 
         public async Task<GetMapObjectsResponse> GetMapObjects()
         {
@@ -180,14 +193,6 @@ namespace PokemonGo.RocketAPI
                 });
             return await _httpClient.PostProtoPayload<Request, FortDetailsResponse>($"https://{_apiUrl}/rpc", fortDetailRequest);
         }
-
-        /*num Holoholo.Rpc.Types.FortSearchOutProto.Result {
-         NO_RESULT_SET = 0;
-         SUCCESS = 1;
-         OUT_OF_RANGE = 2;
-         IN_COOLDOWN_PERIOD = 3;
-         INVENTORY_FULL = 4;
-        }*/
 
         public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)
         {

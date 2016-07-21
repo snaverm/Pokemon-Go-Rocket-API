@@ -38,7 +38,7 @@ namespace PokemonGo.RocketAPI.Logic
                 try
                 {
                     await _client.SetServer();
-                    await TransferDuplicatePokemon();
+                    await TransferDuplicatePokemon(true);
                     await RecycleItems();
                     await RepeatAction(10, async () => await ExecuteFarmingPokestopsAndPokemons(_client));
 
@@ -133,7 +133,7 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
-        private async Task TransferDuplicatePokemon()
+        private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
             var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer();
 
