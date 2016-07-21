@@ -30,7 +30,7 @@ namespace PokemonGo.RocketAPI.Logic
             return myPokemon
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
-                .SelectMany(p => p.OrderByDescending(x => x.Cp).Skip(1).ToList());
+                .SelectMany(p => p.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Skip(1).ToList());
         }
     }
 }
