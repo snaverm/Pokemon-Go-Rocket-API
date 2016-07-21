@@ -32,6 +32,7 @@ Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pok
 #Farm all pokemons in neighbourhood
 #Transfer pokemon
 #Evolve pokemon
+#Recycle items
 ```
 
 Todo
