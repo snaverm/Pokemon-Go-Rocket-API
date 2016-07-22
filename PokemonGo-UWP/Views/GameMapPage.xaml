@@ -24,7 +24,8 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"                                                  
+                         RelativePanel.AlignRightWithPanel="True"  
+                         Center="{Binding CurrentGeoposition.Coordinate.Point}"                         
                          x:Name="MapControl" />
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
@@ -98,10 +99,10 @@
                 </Grid>
             </Grid>
 
+            <!--<Button></Button>-->
             <Image Source="../Assets/UI/Pokeball.png"
-                   Stretch="UniformToFill"
-                   Width="75"
-                   Height="75"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Stretch"
                    Grid.Column="1">
                 <Image.RenderTransform>
                     <TranslateTransform Y="-30" />
@@ -129,19 +130,19 @@
                            Stretch="UniformToFill"
                            Width="24"
                            Height="24"                           
-                           Margin="0,0,20,0"/>
+                           Margin="6,0"/>
 
                     <Image Source="../Assets/UI/Pokeball.png"
                            Stretch="UniformToFill"
                            Width="24"
                            Height="24"
-                           Margin="20,0"/>
+                           Margin="6,0"/>
 
                     <Image Source="../Assets/UI/Pokeball.png"
                            Stretch="UniformToFill"
                            Width="24"
                            Height="24"
-                           Margin="20,0,0,0"/>
+                           Margin="6,0"/>
                 </StackPanel>
             </Grid>
         </Grid>

@@ -76,9 +76,11 @@ namespace PokemonGo.RocketAPI
         /// <returns></returns>
         public async Task<bool> DoPtcLogin(string username, string password)
         {
+            Logger.Write("Starting PTC login");
             _accessToken = await PtcLogin.GetAccessToken(username, password);
             _authType = AuthType.Ptc;
             await SetServer();
+            Logger.Write("PTC login completed (" + !string.IsNullOrEmpty(_accessToken) + ")");
             return !string.IsNullOrEmpty(_accessToken);
         }
 

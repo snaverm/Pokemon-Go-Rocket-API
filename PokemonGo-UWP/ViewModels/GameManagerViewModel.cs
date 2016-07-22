@@ -1,50 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using Windows.Devices.Sensors;
 using Windows.UI.Popups;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Logging;
 using PokemonGo_UWP.Views;
+using Template10.Common;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP.ViewModels
 {
     /// <summary>
-    /// Main class for the game.
-    /// This handles connection to client and UI updating via binding.
+    ///     Main class for the game.
+    ///     This handles connection to client and UI updating via binding.
     /// </summary>
     public class GameManagerViewModel : ViewModelBase
     {
+        public GameManagerViewModel()
+        {
+            // Client init
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+            _clientSettings = new Settings();
+            _client = new Client(_clientSettings);
+        }
 
         #region Logic
 
         private readonly Client _client;
         private readonly ISettings _clientSettings;
-        #endregion
-
-        #region Bindable Game Vars        
-
-        /// <summary>
-        /// Player's profile, we use it just for the username
-        /// </summary>
-        public Profile PlayerProfile { get; private set; }
-
-        /// <summary>
-        /// Stats for the current player, including current level and experience related stuff
-        /// </summary>
-        public PlayerStats PlayerStats { get; private set; }
 
         #endregion
-
-        public GameManagerViewModel()
-        {
-            _clientSettings = new Settings();
-            _client = new Client(_clientSettings);            
-        }
 
         #region PTC Login
 
@@ -77,39 +67,139 @@ namespace PokemonGo_UWP.ViewModels
         public bool IsLoggedIn
         {
             get { return _isLoggedIn; }
-            set
-            {
-                Set(ref _isLoggedIn, value);
-            }
+            set { Set(ref _isLoggedIn, value); }
         }
 
         private DelegateCommand _doPtcLoginCommand;
 
         public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
             _doPtcLoginCommand = new DelegateCommand(async () =>
-            {                
-                Busy.SetBusy(true, "Logging in...");                
-                IsLoggedIn = await _client.DoPtcLogin(PtcUsername, PtcPassword);                
-                if (!IsLoggedIn)
+            {
+                Busy.SetBusy(true, "Logging in...");
+                try
                 {
-                    // Login failed, show a message
-                    await new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsync();
+                    IsLoggedIn = await _client.DoPtcLogin(PtcUsername, PtcPassword);
+                    if (!IsLoggedIn)
+                    {
+                        // Login failed, show a message
+                        await
+                            new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsync();
+                    }
+                    else
+                    {
+                        // Login worked, update data and go to game page
+                        Busy.SetBusy(true, "Getting GPS position");
+                        await InitGps();
+                        Busy.SetBusy(true, "Getting player data");
+                        PlayerProfile = (await _client.GetProfile()).Profile;
+                        PlayerStats =
+                            (await _client.GetInventory()).InventoryDelta.InventoryItems.First(
+                                item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+                        await NavigationService.NavigateAsync(typeof(GameMapPage));
+                        // Avoid going back to login page using back button
+                        NavigationService.ClearHistory();
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    // Login worked, update data and go to game page
-                    PlayerProfile = (await _client.GetProfile()).Profile;
-                    var items = (await _client.GetInventory()).InventoryDelta.InventoryItems;
-                    PlayerStats = items.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
-                    await NavigationService.NavigateAsync(typeof(GameMapPage));                    
-                    // Avoid going back to login page using back button
-                    NavigationService.ClearHistory();
+                    await new MessageDialog("PTC login is probably down, please retry later.").ShowAsync();
                 }
-                Busy.SetBusy(false);
+                finally
+                {
+                    Busy.SetBusy(false);
+                }                
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
             );
 
         #endregion
 
+        #region Bindable Game Vars        
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        public Profile PlayerProfile { get; private set; }
+
+        /// <summary>
+        ///     Stats for the current player, including current level and experience related stuff
+        /// </summary>
+        public PlayerStats PlayerStats { get; private set; }
+
+        /// <summary>
+        /// Current GPS position
+        /// </summary>
+        public Geoposition CurrentGeoposition
+        {
+            get { return _currentGeoposition; }
+            set { Set(ref _currentGeoposition, value); }
+        }
+
+        ///// <summary>
+        ///// Current reading from Compass
+        ///// </summary>
+        //public double CompassHeading
+        //{
+        //    get { return _compassHeading; }
+        //    set { Set(ref _compassHeading, value); }
+        //}
+
+        #endregion
+
+        #region GPS
+
+        //private Compass _compass;
+
+        private Geolocator _geolocator;
+
+        private Geoposition _currentGeoposition;
+
+        //private double _compassHeading;
+
+        private async Task InitGps()
+        {
+            // Set your current location.
+            var accessStatus = await Geolocator.RequestAccessAsync();
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                    // Get the current location.
+                    Logger.Write("GPS activated");
+                    _geolocator = new Geolocator
+                    {
+                        DesiredAccuracy = PositionAccuracy.High,
+                        DesiredAccuracyInMeters = 5,
+                        ReportInterval = 5000,
+                        MovementThreshold = 10
+                    };
+                    CurrentGeoposition = await _geolocator.GetGeopositionAsync();
+                    //_compass = Compass.GetDefault();
+                    //if (_compass != null)
+                    //{
+                    //    Logger.Write("Compass activated");
+                    //    _compass.ReportInterval = 100;
+                    //    _compass.ReadingChanged += CompassOnReadingChanged;
+                    //}
+                    break;
+                default:
+                    Logger.Write("Error during GPS activation");
+                    await new MessageDialog("GPS error, sorry :(").ShowAsync();
+                    BootStrapper.Current.Exit();
+                    break;
+            }
+            _geolocator.PositionChanged += GeolocatorOnPositionChanged;
+        }
+
+        //private void CompassOnReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
+        //{
+        //    if (Math.Abs(CompassHeading - args.Reading.HeadingMagneticNorth) > 20)
+        //        CompassHeading = args.Reading.HeadingMagneticNorth;
+        //}
+
+        private void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            CurrentGeoposition = args.Position;
+        }
+
+        #endregion
     }
 }

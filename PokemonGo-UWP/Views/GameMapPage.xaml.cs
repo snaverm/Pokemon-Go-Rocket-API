@@ -28,12 +28,7 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             this.InitializeComponent();
-            MapControl.Center = new Geopoint(new BasicGeoposition()
-            {
-                Latitude = 48.8530,
-                Longitude = 2.3498
-            });
-        }
+        }        
 
     }
 }
