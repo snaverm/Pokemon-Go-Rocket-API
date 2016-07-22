@@ -8,6 +8,7 @@
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:WinRTXamlToolkit.Controls"
+    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
     <RelativePanel Background="Green">
@@ -59,13 +60,14 @@
                 <controls:Gauge Grid.Column="0"
                                 Padding="5"
                                 ScaleWidth="10"                                
-                                Value="18"                                 
+                                Value="{Binding PlayerStats.Experience}"    
+                                Maximum="{Binding PlayerStats.NextLevelXp}"
                                 ValueBrush="Transparent"
                                 ScaleTickBrush="Transparent"
                                 TickBrush="Transparent"                                 
                                 NeedleBrush="Transparent"
                                 ScaleBrush="Gray"
-                                TrailBrush="White"                                
+                                TrailBrush="White"                                                                   
                                 />
                 
                 <Grid Grid.Column="1">
@@ -81,15 +83,15 @@
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                    FontSize="20"
                                    Margin="12,30,0,0"/>
-                        <TextBlock Text="9"
+                        <TextBlock Text="{Binding PlayerStats.Level}"
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                    FontSize="40"
-                                   Margin="6,10,0,0"
+                                   Margin="6,14,0,0"
                                    Style="{ThemeResource BodyTextBlockStyle}"/>
                     </StackPanel>
                     <MenuFlyoutSeparator Grid.Row="1"/>
                     <TextBlock Grid.Row="2"
-                               Text="Username"
+                               Text="{Binding PlayerProfile.Username}"
                                FontSize="18"
                                FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                Margin="12,0,0,20"/>

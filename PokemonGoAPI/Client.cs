@@ -78,6 +78,7 @@ namespace PokemonGo.RocketAPI
         {
             _accessToken = await PtcLogin.GetAccessToken(username, password);
             _authType = AuthType.Ptc;
+            await SetServer();
             return !string.IsNullOrEmpty(_accessToken);
         }
 
