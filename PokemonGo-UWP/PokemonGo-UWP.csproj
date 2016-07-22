@@ -90,6 +90,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Fonts\Generica Bold.otf" />
+    <Content Include="Assets\Fonts\Generica.otf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +119,7 @@
     <None Include="PokemonGo-UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\UI\avatar.png" />
     <Content Include="Assets\UI\Pokeball.png" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />

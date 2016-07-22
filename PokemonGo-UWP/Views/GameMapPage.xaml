@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
     mc:Ignorable="d">
 
     <RelativePanel Background="Green">
@@ -13,7 +15,7 @@
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
                          ColorScheme="Light"
-                         DesiredPitch="80"
+                         DesiredPitch="50"
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
                          TransitFeaturesVisible="False"
@@ -21,40 +23,124 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"
-                         x:Name="MapControl"/>
+                         RelativePanel.AlignRightWithPanel="True"                                                  
+                         x:Name="MapControl" />
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               Canvas.ZIndex="2"
-              Height="100">
+              Height="110">
             <Grid.Background>
                 <SolidColorBrush Color="White"
-                                 Opacity="0.40" />
+                                 Opacity="0.4" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="UserDetailsGrid"
                   Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Grid.Column="0"
+                         Width="64"
+                         Height="64">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Assets/UI/avatar.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <controls:Gauge Grid.Column="0"
+                                Padding="5"
+                                ScaleWidth="10"                                
+                                Value="18"                                 
+                                ValueBrush="Transparent"
+                                ScaleTickBrush="Transparent"
+                                TickBrush="Transparent"                                 
+                                NeedleBrush="Transparent"
+                                ScaleBrush="Gray"
+                                TrailBrush="White"                                
+                                />
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0">
+                        <TextBlock Text="Lv"
+                                   FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                                   FontSize="20"
+                                   Margin="12,30,0,0"/>
+                        <TextBlock Text="9"
+                                   FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                                   FontSize="40"
+                                   Margin="6,10,0,0"
+                                   Style="{ThemeResource BodyTextBlockStyle}"/>
+                    </StackPanel>
+                    <MenuFlyoutSeparator Grid.Row="1"/>
+                    <TextBlock Grid.Row="2"
+                               Text="Username"
+                               FontSize="18"
+                               FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                               Margin="12,0,0,20"/>
+                </Grid>
             </Grid>
-            
+
             <Image Source="../Assets/UI/Pokeball.png"
                    Stretch="UniformToFill"
-                   Width="64"
-                   Height="64"                   
+                   Width="75"
+                   Height="75"
                    Grid.Column="1">
                 <Image.RenderTransform>
-                    <TranslateTransform Y="-30"/>
+                    <TranslateTransform Y="-30" />
                 </Image.RenderTransform>
-                </Image>
+            </Image>
 
-            <Grid x:Name="NearPokemonGrid"
+            <Grid x:Name="NearbyPokemonGrid"
                   Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                               Text="Nearby"
+                               FontSize="15"
+                               FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                           TextAlignment="Center"
+                               Margin="0,24,0,20"/>
+                
+                <StackPanel Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Image Source="../Assets/UI/Pokeball.png"
+                           Stretch="UniformToFill"
+                           Width="24"
+                           Height="24"                           
+                           Margin="0,0,20,0"/>
+
+                    <Image Source="../Assets/UI/Pokeball.png"
+                           Stretch="UniformToFill"
+                           Width="24"
+                           Height="24"
+                           Margin="20,0"/>
+
+                    <Image Source="../Assets/UI/Pokeball.png"
+                           Stretch="UniformToFill"
+                           Width="24"
+                           Height="24"
+                           Margin="20,0,0,0"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </RelativePanel>

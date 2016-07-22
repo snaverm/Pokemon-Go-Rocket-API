@@ -1873,6 +1873,14 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -3607,6 +3615,14 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -5298,6 +5314,14 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
         }
       }
     },
@@ -7041,6 +7065,14 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -8732,6 +8764,14 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
         }
       }
     },
@@ -10475,6 +10515,14 @@
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
         }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -12166,6 +12214,14 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+        "compile": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
         }
       }
     }
@@ -15709,14 +15765,59 @@
         "lib/uap10.0/Template10Library/Themes/PageHeader.xaml",
         "lib/uap10.0/Template10Library/Themes/Resizer.xaml"
       ]
+    },
+    "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
+      "sha512": "xL+bvFJkIctSD1YnwnJkweMBJjXaxi1lt24EZrQ9x+wQzpcDzZgJ3jzb0zz3tSWsXsIZkOrEe0xsf0M1eY7Tnw==",
+      "type": "package",
+      "files": [
+        "WinRTXamlToolkit.Controls.Gauge.UWP.2.0.0.nupkg.sha512",
+        "WinRTXamlToolkit.Controls.Gauge.UWP.nuspec",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.pri",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/Properties/WinRTXamlToolkit.Controls.Gauge.UWP.rd.xml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/Themes/Generic.xbf",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/WinRTXamlToolkit.Controls.Gauge.xr.xml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/ARM/Debug/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/ARM/Release/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/Debug/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/Release/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/x64/Debug/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/x64/Release/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/x86/Debug/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/bin/x86/Release/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/ARM/Debug/TempPE/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/ARM/Debug/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/ARM/Debug/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/ARM/Debug/intermediatexaml/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/Release/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/Release/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/Release/intermediatexaml/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Debug/TempPE/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Debug/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Debug/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Debug/intermediatexaml/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Release/TempPE/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Release/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Release/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x64/Release/intermediatexaml/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Debug/TempPE/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Debug/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Debug/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Debug/intermediatexaml/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Release/TempPE/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Release/Themes/Generic.xaml",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Release/WinRTXamlToolkit.Controls.Gauge/Themes/_._",
+        "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge/obj/x86/Release/intermediatexaml/_._"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
-      "Microsoft.Xaml.Behaviors.Uwp.Managed >= 1.1.0",
       "Newtonsoft.Json >= 9.0.1",
-      "Template10 >= 1.1.12-preview-160712"
+      "Template10 >= 1.1.12-preview-160712",
+      "WinRTXamlToolkit.Controls.Gauge.UWP >= 2.0.0"
     ],
     "UAP,Version=v10.0": []
   }
