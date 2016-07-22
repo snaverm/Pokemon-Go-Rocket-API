@@ -28,7 +28,21 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             this.InitializeComponent();
-        }        
+        }
 
+        #region Menu Animation
+
+        private bool _isMenuOpen;
+
+        private void PokeMenuMainButton_OnClick(object sender, RoutedEventArgs e)
+        {            
+            if (!_isMenuOpen)
+                ShowPokeMenuStoryboard.Begin();
+            else            
+                HidePokeMenuStoryboard.Begin();            
+            _isMenuOpen = !_isMenuOpen;
+        }
+
+        #endregion
     }
 }
