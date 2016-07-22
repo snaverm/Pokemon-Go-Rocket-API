@@ -12,24 +12,6 @@
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <ProgressRing RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignTopWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignRightWithPanel="True"
-                      Width="128"
-                      Height="128"
-                      Canvas.ZIndex="1000"
-                      IsActive="{Binding IsLoggingIn}" />
-
-        <Rectangle Fill="{ThemeResource AppBarBackgroundThemeBrush}"
-                   RelativePanel.AlignBottomWithPanel="True"
-                   RelativePanel.AlignTopWithPanel="True"
-                   RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.AlignRightWithPanel="True"
-                   Opacity="0.8"
-                   Visibility="{Binding IsLoggingIn, Converter={StaticResource VisibleWhenTrueConverter}}"
-                   Canvas.ZIndex="999" />
-
         <controls:PageHeader x:Name="pageHeader"
                              Content="PTC Login"
                              RelativePanel.AlignLeftWithPanel="True"
@@ -52,13 +34,24 @@
                      RelativePanel.AlignRightWithPanel="True"
                      RelativePanel.Below="usernameTextBox" />
 
-        <Button Margin="16,12"
+        <Grid Margin="16,12"              
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignBottomWithPanel="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock TextWrapping="WrapWholeWords"
+                       Margin="16,12"
+                       Text="WARNING: to login to PTC server you'll need to insert your username and password in this app. If you don't trust it, please, close it before going on." />
+
+            <Button HorizontalAlignment="Stretch"
+                    Grid.Row="1"
+                x:Name="loginButton"
                 Content="login"
-                Command="{Binding DoPtcLoginCommand}"
-                HorizontalAlignment="Stretch"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True" />
+                Command="{Binding DoPtcLoginCommand}" />
+        </Grid>
 
     </RelativePanel>
 

@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.GameMapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PokemonGo_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="Green">
+
+        <maps:MapControl BusinessLandmarksVisible="False"
+                         LandmarksVisible="False"
+                         ColorScheme="Light"
+                         DesiredPitch="80"
+                         PedestrianFeaturesVisible="False"
+                         TrafficFlowVisible="False"
+                         TransitFeaturesVisible="False"
+                         ZoomLevel="20"
+                         RelativePanel.AlignTopWithPanel="True"
+                         RelativePanel.AlignBottomWithPanel="True"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True"
+                         x:Name="MapControl"/>
+
+        <Grid RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              Canvas.ZIndex="2"
+              Height="100">
+            <Grid.Background>
+                <SolidColorBrush Color="White"
+                                 Opacity="0.40" />
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="UserDetailsGrid"
+                  Grid.Column="0">
+            </Grid>
+            
+            <Image Source="../Assets/UI/Pokeball.png"
+                   Stretch="UniformToFill"
+                   Width="64"
+                   Height="64"                   
+                   Grid.Column="1">
+                <Image.RenderTransform>
+                    <TranslateTransform Y="-30"/>
+                </Image.RenderTransform>
+                </Image>
+
+            <Grid x:Name="NearPokemonGrid"
+                  Grid.Column="2">
+            </Grid>
+        </Grid>
+    </RelativePanel>
+</Page>

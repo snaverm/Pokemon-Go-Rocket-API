@@ -28,7 +28,7 @@ namespace PokemonGo_UWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            NavigationService.Navigate(typeof(Views.MainPage));
+            NavigationService.Navigate(typeof(Views.GameMapPage));
             await Task.CompletedTask;
         }
     }

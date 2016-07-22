@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
+using PokemonGo_UWP.Views;
 using Template10.Mvvm;
+using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -54,17 +57,6 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
-        private bool _isLoggingIn;
-
-        public bool IsLoggingIn
-        {
-            get { return _isLoggingIn; }
-            set
-            {
-                Set(ref _isLoggingIn, value);
-            }
-        }
-
         private bool _isLoggedIn;
 
         public bool IsLoggedIn
@@ -80,11 +72,22 @@ namespace PokemonGo_UWP.ViewModels
 
         public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
             _doPtcLoginCommand = new DelegateCommand(async () =>
-            {
-                IsLoggingIn = true;
-                // TODO: report failed login/server offline
+            {                
+                Busy.SetBusy(true, "Logging in...");                
                 IsLoggedIn = await _client.DoPtcLogin(PtcUsername, PtcPassword);
-                IsLoggingIn = false;                
+                Busy.SetBusy(false);
+                if (!IsLoggedIn)
+                {
+                    // Login failed, show a message
+                    await new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsync();
+                }
+                else
+                {
+                    // Login worked, let's go to game page
+                    await NavigationService.NavigateAsync(typeof(GameMapPage));
+                    // Avoid going back to login page using back button
+                    NavigationService.ClearHistory();
+                }
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
             );
 
