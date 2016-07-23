@@ -75,9 +75,44 @@
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
                          RelativePanel.AlignRightWithPanel="True"
-                         Center="{Binding CurrentGeoposition.Coordinate.Point}"
+                         Center="{Binding CurrentGeoposition.Coordinate.Point, Mode=TwoWay}"
                          MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
-                         x:Name="MapControl" />
+                         x:Name="MapControl">
+
+            <Image Source="../Assets/UI/ash.png"
+                   maps:MapControl.Location="{Binding CurrentGeoposition.Coordinate.Point}"
+                   maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                   Stretch="Uniform"
+                   Height="48"
+                   Width="48" />
+
+            <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!--<maps:MapIcon Title="{Binding PokemonId}"
+                                      Image="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                      maps:MapControl.Location="{Binding Geoposition}"
+                                      maps:MapControl.NormalizedAnchorPoint="0.5,1"/>-->
+
+                        <!--<Image Source="../Assets/UI/Pokeball.png"
+                               maps:MapControl.Location="{Binding Geoposition, Mode=OneWay, Converter={StaticResource EmptyConverter}}"
+                               maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                               Stretch="Uniform"
+                               Height="48"
+                               Width="48" />-->
+
+                        <StackPanel Background="Black" >
+                            <TextBlock maps:MapControl.Location="{Binding Geoposition}" 
+                                       Text="{Binding PokemonId}" 
+                                       maps:MapControl.NormalizedAnchorPoint="0.5,0.5" 
+                                       FontSize="20" 
+                                       Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+
+        </maps:MapControl>
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
@@ -131,15 +166,15 @@
                     <Grid VerticalAlignment="Bottom"
                           Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Lv"
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Bottom"
                                    FontSize="20"
-                                   Grid.Column="0"/>
+                                   Grid.Column="0" />
                         <TextBlock Text="{Binding PlayerStats.Level}"
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                    HorizontalAlignment="Right"
@@ -151,17 +186,17 @@
                     </Grid>
                     <MenuFlyoutSeparator Grid.Row="1"
                                          Padding="0"
-                                         Margin="0"/>
+                                         Margin="0" />
                     <TextBlock Grid.Row="2"
                                Text="{Binding PlayerProfile.Username}"
                                FontSize="18"
-                               FontFamily="../Assets/Fonts/Generica.otf#Generica"/>
+                               FontFamily="../Assets/Fonts/Generica.otf#Generica" />
                 </Grid>
             </Grid>
 
             <!-- Pokeball main button -->
             <Button Grid.Column="1"
-                    Style="{ThemeResource PokeballButtonStyle}"
+                    Style="{ThemeResource ImageButtonStyle}"
                     Click="PokeMenuMainButton_OnClick"
                     x:Name="PokeMenuMainButton">
                 <Button.RenderTransform>
@@ -174,14 +209,14 @@
 
             <!-- Menu button #1 -->
             <Button Grid.Column="1"
-                    Style="{ThemeResource PokeballButtonStyle}"
+                    Style="{ThemeResource ImageButtonStyle}"
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="PokeMenuButton1">
                 <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-40"                                        
+                    <CompositeTransform TranslateY="-40"
                                         ScaleX="0"
-                                        ScaleY="0"                                         
-                                        x:Name="PokeButton1CompositeTransform"/>
+                                        ScaleY="0"
+                                        x:Name="PokeButton1CompositeTransform" />
                 </Button.RenderTransform>
                 <Image Source="../Assets/UI/avatar.png"
                        Stretch="Uniform"
@@ -204,25 +239,32 @@
 
                 <StackPanel Grid.Row="1"
                             HorizontalAlignment="Center"
+                            Margin="0,-12,0,0"
                             Orientation="Horizontal">
 
-                    <Image Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
-                           Width="32"
-                           Height="32"
-                           Margin="6,0" />
+                    <Image
+                        Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48"
+                        Margin="3,0" />
 
-                    <Image Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
-                           Width="32"
-                           Height="32"
-                           Margin="6,0" />
+                    <Image
+                        Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48"
+                        Margin="3,0" />
 
-                    <Image Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
-                           Width="32"
-                           Height="32"
-                           Margin="6,0" />
+                    <Image
+                        Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48"
+                        Margin="3,0" />
                 </StackPanel>
             </Grid>
         </Grid>

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Data;
+using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -23,4 +26,22 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+
+    public class EmptyConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
 }

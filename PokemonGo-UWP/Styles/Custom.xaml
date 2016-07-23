@@ -4,7 +4,7 @@
                     xmlns:controls="using:Template10.Controls">
         
     <!-- Default style for Windows.UI.Xaml.Controls.Button -->
-    <Style TargetType="Button" x:Key="PokeballButtonStyle">
+    <Style TargetType="Button" x:Key="ImageButtonStyle">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />

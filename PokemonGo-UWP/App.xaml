@@ -28,6 +28,7 @@
             </converters:ValueWhenConverter>
 
             <utils:PokemonIdToPokemonSpriteConverter x:Key="PokemonIdToPokemonSpriteConverter"/>
+            <utils:EmptyConverter x:Key="EmptyConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

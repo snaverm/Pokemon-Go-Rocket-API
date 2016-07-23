@@ -134,17 +134,12 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Collection of Pokemon in 1 step from current position
         /// </summary>
-        public ObservableCollection<MapPokemon> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemon>();
+        public ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
 
         /// <summary>
         /// Collection of Pokemon in 2 steps from current position
         /// </summary>
         public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
-
-        /// <summary>
-        /// Links to nearby Pokemons sprites
-        /// </summary>
-        public ObservableCollection<Uri> NearbyPokemonsSprites { get; set; } = new ObservableCollection<Uri>();
 
         /// <summary>
         /// Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
@@ -194,8 +189,8 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         DesiredAccuracy = PositionAccuracy.High,
                         DesiredAccuracyInMeters = 5,
-                        ReportInterval = 5000,
-                        MovementThreshold = 10
+                        ReportInterval = 3000,
+                        MovementThreshold = 5
                     };
                     CurrentGeoposition = await _geolocator.GetGeopositionAsync();
                     //_compass = Compass.GetDefault();
@@ -224,16 +219,23 @@ namespace PokemonGo_UWP.ViewModels
         private async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
             // Get new position
-            CurrentGeoposition = args.Position;
+            await Dispatcher.DispatchAsync(() => {
+                CurrentGeoposition = args.Position;
+            });            
             // Report it to client and find things nearby
             await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
             var mapObjects = await _client.GetMapObjects();
-            // Replace data with the new ones
-            CatchablePokemons.Clear();
-            foreach (var pokemon in mapObjects.MapCells.SelectMany(i => i.CatchablePokemons))
-            {
-                CatchablePokemons.Add(pokemon);
-            }
+            // Replace data with the new ones          
+            //TODO: i.WildPokemons  
+            var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
+            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");
+            await Dispatcher.DispatchAsync(() => {
+                CatchablePokemons.Clear();
+                foreach (var pokemon in catchableTmp)
+                {                    
+                    CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
+                }
+            });
             var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
             await Dispatcher.DispatchAsync(() => { 
                 NearbyPokemons.Clear();
