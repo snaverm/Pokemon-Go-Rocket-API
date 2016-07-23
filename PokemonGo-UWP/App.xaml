@@ -3,6 +3,8 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:common="using:Template10.Common"
                      xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+                     xmlns:converters="using:Template10.Converters"
+                     xmlns:utils="using:PokemonGo_UWP.Utils"
                      RequestedTheme="Light">
 
     <Application.Resources>
@@ -10,7 +12,23 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Custom.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <viewModels:ViewModelLocator x:Key="Locator" />
+
+            <converters:ValueWhenConverter x:Key="VisibleWhenTrueConverter">
+                <converters:ValueWhenConverter.When>
+                    <x:Boolean>True</x:Boolean>
+                </converters:ValueWhenConverter.When>
+                <converters:ValueWhenConverter.Value>
+                    <Visibility>Visible</Visibility>
+                </converters:ValueWhenConverter.Value>
+                <converters:ValueWhenConverter.Otherwise>
+                    <Visibility>Collapsed</Visibility>
+                </converters:ValueWhenConverter.Otherwise>
+            </converters:ValueWhenConverter>
+
+            <utils:PokemonIdToPokemonSpriteConverter x:Key="PokemonIdToPokemonSpriteConverter"/>
+
         </ResourceDictionary>
     </Application.Resources>
 

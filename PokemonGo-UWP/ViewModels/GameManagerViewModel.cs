@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.UI.Popups;
+using PokeAPI;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logging;
+using PokemonGo_UWP.Entities;
+using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Common;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
+using Pokemon = PokeAPI.Pokemon;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -25,6 +30,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             // Client init
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+            DataFetcher.ShouldCacheData = true;
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
         }
@@ -97,7 +103,7 @@ namespace PokemonGo_UWP.ViewModels
                                 item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
                         // Avoid going back to login page using back button
-                        NavigationService.ClearHistory();
+                        NavigationService.ClearHistory();                        
                     }
                 }
                 catch (Exception)
@@ -124,6 +130,26 @@ namespace PokemonGo_UWP.ViewModels
         ///     Stats for the current player, including current level and experience related stuff
         /// </summary>
         public PlayerStats PlayerStats { get; private set; }
+
+        /// <summary>
+        /// Collection of Pokemon in 1 step from current position
+        /// </summary>
+        public ObservableCollection<MapPokemon> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemon>();
+
+        /// <summary>
+        /// Collection of Pokemon in 2 steps from current position
+        /// </summary>
+        public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+
+        /// <summary>
+        /// Links to nearby Pokemons sprites
+        /// </summary>
+        public ObservableCollection<Uri> NearbyPokemonsSprites { get; set; } = new ObservableCollection<Uri>();
+
+        /// <summary>
+        /// Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
+        /// </summary>
+        public string MapServiceToken => BingKey.MapServiceToken;
 
         /// <summary>
         /// Current GPS position
@@ -195,9 +221,27 @@ namespace PokemonGo_UWP.ViewModels
         //        CompassHeading = args.Reading.HeadingMagneticNorth;
         //}
 
-        private void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        private async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
+            // Get new position
             CurrentGeoposition = args.Position;
+            // Report it to client and find things nearby
+            await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
+            var mapObjects = await _client.GetMapObjects();
+            // Replace data with the new ones
+            CatchablePokemons.Clear();
+            foreach (var pokemon in mapObjects.MapCells.SelectMany(i => i.CatchablePokemons))
+            {
+                CatchablePokemons.Add(pokemon);
+            }
+            var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
+            await Dispatcher.DispatchAsync(() => { 
+                NearbyPokemons.Clear();
+                foreach (var pokemon in nearbyTmp)
+                {
+                    NearbyPokemons.Add(pokemon);
+                }
+            });
         }
 
         #endregion

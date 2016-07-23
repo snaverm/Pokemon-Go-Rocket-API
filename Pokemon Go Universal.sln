@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Protobuf", "Google.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonGo-UWP", "PokemonGo-UWP\PokemonGo-UWP.csproj", "{498AE076-ECDF-4E50-BD1A-171E89D908B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeApi.NET", "A:\Desktop\PokeApi.NET-v2-e8e3883f4cbee430620cc57f25214505f18691f5\PokeApi.NET\PokeApi.NET.csproj", "{B957F608-502A-496E-B26C-666EAFBEC985}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,22 @@ Global
 		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.ActiveCfg = Release|x86
 		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.Build.0 = Release|x86
 		{498AE076-ECDF-4E50-BD1A-171E89D908B5}.Release|x86.Deploy.0 = Release|x86
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|x64.Build.0 = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Debug|x86.Build.0 = Debug|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|ARM.Build.0 = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|x64.ActiveCfg = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|x64.Build.0 = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|x86.ActiveCfg = Release|Any CPU
+		{B957F608-502A-496E-B26C-666EAFBEC985}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

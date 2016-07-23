@@ -75,7 +75,8 @@
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
                          RelativePanel.AlignRightWithPanel="True"
-                         Center="{Binding CurrentGeoposition.Coordinate.Point}"                        
+                         Center="{Binding CurrentGeoposition.Coordinate.Point}"
+                         MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
                          x:Name="MapControl" />
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
@@ -84,13 +85,13 @@
               Canvas.ZIndex="2"
               Height="110">
             <Grid.Background>
-                <SolidColorBrush Color="White"
-                                 Opacity="0.4" />
+                <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                 Opacity="0.35" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="UserDetailsGrid"
@@ -101,8 +102,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Ellipse Grid.Column="0"
-                         Width="64"
-                         Height="64">
+                         Width="48"
+                         Height="48">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="../Assets/UI/avatar.png" />
                     </Ellipse.Fill>
@@ -122,29 +123,39 @@
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="8*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="8*" />
                     </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal"
-                                Grid.Row="0">
+                    <Grid VerticalAlignment="Bottom"
+                          Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <TextBlock Text="Lv"
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom"
                                    FontSize="20"
-                                   Margin="12,30,0,0" />
+                                   Grid.Column="0"/>
                         <TextBlock Text="{Binding PlayerStats.Level}"
                                    FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Bottom"
+                                   Margin="5,0,5,-6"
                                    FontSize="40"
-                                   Margin="6,14,0,0"
+                                   Grid.Column="1"
                                    Style="{ThemeResource BodyTextBlockStyle}" />
-                    </StackPanel>
-                    <MenuFlyoutSeparator Grid.Row="1" />
+                    </Grid>
+                    <MenuFlyoutSeparator Grid.Row="1"
+                                         Padding="0"
+                                         Margin="0"/>
                     <TextBlock Grid.Row="2"
                                Text="{Binding PlayerProfile.Username}"
                                FontSize="18"
-                               FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                               Margin="12,0,0,20" />
+                               FontFamily="../Assets/Fonts/Generica.otf#Generica"/>
                 </Grid>
             </Grid>
 
@@ -154,7 +165,7 @@
                     Click="PokeMenuMainButton_OnClick"
                     x:Name="PokeMenuMainButton">
                 <Button.RenderTransform>
-                    <TranslateTransform Y="-30" />
+                    <TranslateTransform Y="-40" />
                 </Button.RenderTransform>
                 <Image Source="../Assets/UI/Pokeball.png"
                        Stretch="Uniform"
@@ -167,7 +178,7 @@
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="PokeMenuButton1">
                 <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-30"                                        
+                    <CompositeTransform TranslateY="-40"                                        
                                         ScaleX="0"
                                         ScaleY="0"                                         
                                         x:Name="PokeButton1CompositeTransform"/>
@@ -194,22 +205,23 @@
                 <StackPanel Grid.Row="1"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
-                    <Image Source="../Assets/UI/Pokeball.png"
+
+                    <Image Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
-                           Width="24"
-                           Height="24"
+                           Width="32"
+                           Height="32"
                            Margin="6,0" />
 
-                    <Image Source="../Assets/UI/Pokeball.png"
+                    <Image Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
-                           Width="24"
-                           Height="24"
+                           Width="32"
+                           Height="32"
                            Margin="6,0" />
 
-                    <Image Source="../Assets/UI/Pokeball.png"
+                    <Image Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
-                           Width="24"
-                           Height="24"
+                           Width="32"
+                           Height="32"
                            Margin="6,0" />
                 </StackPanel>
             </Grid>

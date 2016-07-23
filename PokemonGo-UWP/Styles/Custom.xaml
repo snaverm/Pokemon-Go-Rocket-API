@@ -2,20 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="using:Template10.Converters"
                     xmlns:controls="using:Template10.Controls">
-
-    <!--  custom styles here  -->
-    <converters:ValueWhenConverter x:Key="VisibleWhenTrueConverter">
-        <converters:ValueWhenConverter.When>
-            <x:Boolean>True</x:Boolean>
-        </converters:ValueWhenConverter.When>
-        <converters:ValueWhenConverter.Value>
-            <Visibility>Visible</Visibility>
-        </converters:ValueWhenConverter.Value>
-        <converters:ValueWhenConverter.Otherwise>
-            <Visibility>Collapsed</Visibility>
-        </converters:ValueWhenConverter.Otherwise>
-    </converters:ValueWhenConverter>
-
+        
     <!-- Default style for Windows.UI.Xaml.Controls.Button -->
     <Style TargetType="Button" x:Key="PokeballButtonStyle">
         <Setter Property="Background" Value="Transparent" />
