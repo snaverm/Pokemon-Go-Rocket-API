@@ -21,11 +21,11 @@ namespace PokemonGo_UWP.Entities
 
         public string SpawnPointId => _mapPokemon.SpawnpointId;
 
-        public BasicGeoposition Geoposition { get; private set; }
+        public Geopoint Geoposition { get; private set; }
 
-        public double Latitude => Geoposition.Latitude;
+        public double Latitude => Geoposition.Position.Latitude;
 
-        public double Longitude => Geoposition.Longitude;
+        public double Longitude => Geoposition.Position.Longitude;
 
         #endregion
 
@@ -33,8 +33,8 @@ namespace PokemonGo_UWP.Entities
 
         public MapPokemonWrapper(MapPokemon mapPokemon)
         {
-            _mapPokemon = mapPokemon;
-            Geoposition = new BasicGeoposition {Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude};
+            _mapPokemon = mapPokemon;            
+            Geoposition = new Geopoint(new BasicGeoposition {Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude});
         }
     }
 }

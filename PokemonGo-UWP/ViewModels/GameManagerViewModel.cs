@@ -225,8 +225,7 @@ namespace PokemonGo_UWP.ViewModels
             // Report it to client and find things nearby
             await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
             var mapObjects = await _client.GetMapObjects();
-            // Replace data with the new ones          
-            //TODO: i.WildPokemons  
+            // Replace data with the new ones                      
             var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
             Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");
             await Dispatcher.DispatchAsync(() => {
@@ -237,7 +236,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
             });
             var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
-            await Dispatcher.DispatchAsync(() => { 
+            await Dispatcher.DispatchAsync(() => {                 
                 NearbyPokemons.Clear();
                 foreach (var pokemon in nearbyTmp)
                 {
