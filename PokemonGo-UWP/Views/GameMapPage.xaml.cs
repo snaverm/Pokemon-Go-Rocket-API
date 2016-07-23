@@ -45,5 +45,6 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
+
     }
 }

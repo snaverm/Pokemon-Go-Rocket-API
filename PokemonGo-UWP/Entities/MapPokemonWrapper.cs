@@ -19,7 +19,7 @@ namespace PokemonGo_UWP.Entities
 
         public long ExpirationTimestampMs => _mapPokemon.ExpirationTimestampMs;
 
-        public string SpawnPointId => _mapPokemon.SpawnpointId;
+        public string SpawnpointId => _mapPokemon.SpawnpointId;
 
         public Geopoint Geoposition { get; private set; }
 

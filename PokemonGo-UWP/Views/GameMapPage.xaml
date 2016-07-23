@@ -9,6 +9,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:WinRTXamlToolkit.Controls"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    x:Name="GamePage"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -89,13 +90,15 @@
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Canvas>
+                        <Button Style="{ThemeResource ImageButtonStyle}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding TryCatchPokemon, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
                             <Image Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                    maps:MapControl.Location="{Binding Geoposition}"
-                                   maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                                   maps:MapControl.NormalizedAnchorPoint="0,1"
                                    Stretch="Uniform"
-                                   Height="48"
-                                   Width="48" />
+                                   Height="64"
+                                   Width="64" />
                             
                             <!--<Ellipse Width="48"
                                      Height="48"
@@ -109,7 +112,7 @@
                                 </Ellipse.RenderTransform>
                             </Ellipse>-->
                             
-                        </Canvas>
+                        </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>

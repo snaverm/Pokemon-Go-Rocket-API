@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
+using Windows.Phone.Devices.Notification;
 using Windows.UI.Popups;
 using PokeAPI;
 using PokemonGo.RocketAPI;
@@ -35,7 +36,7 @@ namespace PokemonGo_UWP.ViewModels
             _client = new Client(_clientSettings);
         }
 
-        #region Logic
+        #region Client
 
         private readonly Client _client;
         private readonly ISettings _clientSettings;
@@ -117,6 +118,75 @@ namespace PokemonGo_UWP.ViewModels
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
             );
 
+        #endregion
+
+        #region Base Logic
+
+        /// <summary>
+        /// We use it to notify that we found at least one catchable Pokemon in our area
+        /// </summary>
+        private VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+
+        /// <summary>
+        /// Retrieves data for the current position
+        /// </summary>
+        private async void UpdateMapData()
+        {
+            // Report it to client and find things nearby
+            await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
+            var mapObjects = await _client.GetMapObjects();
+            // Replace data with the new ones                      
+            var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
+            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");
+            if (catchableTmp.Any()) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+            await Dispatcher.DispatchAsync(() => {
+                CatchablePokemons.Clear();
+                foreach (var pokemon in catchableTmp)
+                {
+                    CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
+                }
+            });
+            var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
+            await Dispatcher.DispatchAsync(() => {
+                NearbyPokemons.Clear();
+                foreach (var pokemon in nearbyTmp)
+                {
+                    NearbyPokemons.Add(pokemon);
+                }
+            });
+        }
+        #endregion
+
+        #region Pokemon Catching
+
+        private DelegateCommand<MapPokemonWrapper> _tryCatchPokemon;
+
+        public DelegateCommand<MapPokemonWrapper> TryCatchPokemon => _tryCatchPokemon ?? (
+            _tryCatchPokemon = new DelegateCommand<MapPokemonWrapper>(async pokemon =>
+            {
+                Logger.Write($"Catching {pokemon.PokemonId}");
+                var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+                //var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
+
+                CatchPokemonResponse caughtPokemonResponse;
+                do
+                {
+                    //if (encounterPokemonResponse?.CaptureProbability.CaptureProbability_.First() < 0.4)
+                    //{
+                    //    //Throw berry is we can
+                    //    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
+                    //}
+                    // TODO: proper capturing!
+                    caughtPokemonResponse = await _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL);
+                    await Task.Delay(2000);
+                }
+                while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
+                Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..");
+                await new MessageDialog((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..")).ShowAsync();
+                UpdateMapData();
+                // After capturing we need to update the map because the Pokemon may be no longer there                
+            }, pokemon => true)
+            );
         #endregion
 
         #region Bindable Game Vars        
@@ -221,28 +291,8 @@ namespace PokemonGo_UWP.ViewModels
             // Get new position
             await Dispatcher.DispatchAsync(() => {
                 CurrentGeoposition = args.Position;
-            });            
-            // Report it to client and find things nearby
-            await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
-            var mapObjects = await _client.GetMapObjects();
-            // Replace data with the new ones                      
-            var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
-            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");
-            await Dispatcher.DispatchAsync(() => {
-                CatchablePokemons.Clear();
-                foreach (var pokemon in catchableTmp)
-                {                    
-                    CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
-                }
-            });
-            var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
-            await Dispatcher.DispatchAsync(() => {                 
-                NearbyPokemons.Clear();
-                foreach (var pokemon in nearbyTmp)
-                {
-                    NearbyPokemons.Add(pokemon);
-                }
-            });
+            });      
+            UpdateMapData();                  
         }
 
         #endregion
