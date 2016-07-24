@@ -178,10 +178,6 @@
       <Project>{c7fe57c5-a786-4b6e-b2c9-c026f347d461}</Project>
       <Name>PokemonGoAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="A:\Desktop\PokeApi.NET-v2-e8e3883f4cbee430620cc57f25214505f18691f5\PokeApi.NET\PokeApi.NET.csproj">
-      <Project>{b957f608-502a-496e-b26c-666eafbec985}</Project>
-      <Name>PokeApi.NET</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">

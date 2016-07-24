@@ -9,7 +9,6 @@ using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.UI.Popups;
 using AllEnum;
-using PokeAPI;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.GeneratedCode;
@@ -22,7 +21,6 @@ using Template10.Common;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
 using Item = PokemonGo.RocketAPI.GeneratedCode.Item;
-using Pokemon = PokeAPI.Pokemon;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -32,23 +30,160 @@ namespace PokemonGo_UWP.ViewModels
     /// </summary>
     public class GameManagerViewModel : ViewModelBase
     {
+        #region ctor
+
         public GameManagerViewModel()
         {
             // Client init            
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
-            DataFetcher.ShouldCacheData = true;
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
             _inventory = new Inventory(_client);
         }
 
-        #region Client
+        #endregion
+
+        #region Client Vars
 
         private readonly Client _client;
         private readonly ISettings _clientSettings;
         private readonly Inventory _inventory;
 
         #endregion
+
+        #region Game Management Vars
+
+        /// <summary>
+        /// We use it to notify that we found at least one catchable Pokemon in our area
+        /// </summary>
+        private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        private Profile _playerProfile;
+
+        /// <summary>
+        ///     Stats for the current player, including current level and experience related stuff
+        /// </summary>
+        private PlayerStats _playerStats;
+
+        /// <summary>
+        /// Player's inventory
+        /// TODO: do we really need it?
+        /// </summary>
+        private InventoryDelta _inventoryDelta;        
+
+        /// <summary>
+        /// Pokemon that we're trying to capture
+        /// </summary>
+        private MapPokemonWrapper _currentPokemon;
+
+        /// <summary>
+        /// Encounter for the Pokemon that we're trying to capture
+        /// </summary>
+        private EncounterResponse _currentEncounter;
+
+        /// <summary>
+        /// Current item for capture page
+        /// </summary>
+        private Item _selectedItem;
+
+        #endregion
+
+        #region Bindable Game Vars
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        public Profile PlayerProfile {
+            get
+            {
+                return _playerProfile;                
+            }
+            set
+            {
+                Set(ref _playerProfile, value); 
+                
+            }
+        }
+
+        /// <summary>
+        ///     Stats for the current player, including current level and experience related stuff
+        /// </summary>
+        public PlayerStats PlayerStats {
+            get
+            {
+                return _playerStats;
+            }
+            set
+            {
+                Set(ref _playerStats, value);
+
+            }
+        }
+
+        public InventoryDelta InventoryDelta
+        {
+            get { return _inventoryDelta; }
+            set { Set(ref _inventoryDelta, value); }
+        }
+
+        /// <summary>
+        /// Collection of Pokemon in 1 step from current position
+        /// </summary>
+        public ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
+
+        /// <summary>
+        /// Collection of Pokemon in 2 steps from current position
+        /// </summary>
+        public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+
+        /// <summary>
+        /// Stores the current inventory
+        /// </summary>
+        public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
+        
+        /// <summary>
+        /// Pokemon that we're trying to capture
+        /// </summary>
+        public MapPokemonWrapper CurrentPokemon
+        {
+            get
+            {                
+                return _currentPokemon;
+            }
+            set { Set(ref _currentPokemon, value); }
+        }
+
+        /// <summary>
+        /// Encounter for the Pokemon that we're trying to capture
+        /// </summary>
+        public EncounterResponse CurrentEncounter
+        {
+            get
+            {
+                return _currentEncounter;
+            }
+            set
+            {
+                Set(ref _currentEncounter, value); 
+                
+            }
+        }
+
+        /// <summary>
+        /// Current item for capture page
+        /// </summary>
+        public Item SelectedItem
+        {
+            get { return _selectedItem; }
+            set { Set(ref _selectedItem, value); }
+        }
+
+        #endregion
+
+        #region Game Logic
 
         #region PTC Login
 
@@ -76,13 +211,6 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
-        private bool _isLoggedIn;
-
-        public bool IsLoggedIn
-        {
-            get { return _isLoggedIn; }
-            set { Set(ref _isLoggedIn, value); }
-        }
 
         private DelegateCommand _doPtcLoginCommand;
 
@@ -91,9 +219,8 @@ namespace PokemonGo_UWP.ViewModels
             {
                 Busy.SetBusy(true, "Logging in...");
                 try
-                {
-                    IsLoggedIn = await _client.DoPtcLogin(PtcUsername, PtcPassword);
-                    if (!IsLoggedIn)
+                {                    
+                    if (!await _client.DoPtcLogin(PtcUsername, PtcPassword))
                     {
                         // Login failed, show a message
                         await
@@ -105,15 +232,15 @@ namespace PokemonGo_UWP.ViewModels
                         Busy.SetBusy(true, "Getting GPS position");
                         await InitGps();
                         Busy.SetBusy(true, "Getting player data");
-                        PlayerProfile = (await _client.GetProfile()).Profile;                        
-                        InventoryDelta = (await _client.GetInventory()).InventoryDelta;                        
+                        PlayerProfile = (await _client.GetProfile()).Profile;
+                        InventoryDelta = (await _client.GetInventory()).InventoryDelta;
                         PlayerStats = InventoryDelta.InventoryItems.First(
                                 item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
                         Busy.SetBusy(true, "Getting player items");
                         UpdateInventory();
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
                         // Avoid going back to login page using back button
-                        NavigationService.ClearHistory();                        
+                        NavigationService.ClearHistory();
                     }
                 }
                 catch (Exception)
@@ -123,23 +250,13 @@ namespace PokemonGo_UWP.ViewModels
                 finally
                 {
                     Busy.SetBusy(false);
-                }                
+                }
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
             );
 
         #endregion
 
-        #region Base Logic
-
-        /// <summary>
-        /// Player's inventory
-        /// </summary>
-        private InventoryDelta _inventoryDelta;
-
-        /// <summary>
-        /// We use it to notify that we found at least one catchable Pokemon in our area
-        /// </summary>
-        private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+        #region Data Update
 
         /// <summary>
         /// Retrieves data for the current position
@@ -150,9 +267,9 @@ namespace PokemonGo_UWP.ViewModels
             await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
             var mapObjects = await _client.GetMapObjects();
             // Replace data with the new ones                                  
-            var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
-            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");            
-            if (catchableTmp.Count() != CatchablePokemons.Count) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+            var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
+            Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
+            if (catchableTmp.Count != CatchablePokemons.Count) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
             await Dispatcher.DispatchAsync(() => {
                 CatchablePokemons.Clear();
                 foreach (var pokemon in catchableTmp)
@@ -160,7 +277,8 @@ namespace PokemonGo_UWP.ViewModels
                     CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
                 }
             });
-            var nearbyTmp = mapObjects.MapCells.SelectMany(i => i.NearbyPokemons);
+            var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
+            Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
             await Dispatcher.DispatchAsync(() => {
                 NearbyPokemons.Clear();
                 foreach (var pokemon in nearbyTmp)
@@ -168,19 +286,22 @@ namespace PokemonGo_UWP.ViewModels
                     NearbyPokemons.Add(pokemon);
                 }
             });
+            // TODO: PokeStops
         }
 
         /// <summary>
-        /// Retrieves the inventory for the player
+        /// Retrieves inventory for the player
         /// </summary>
         private async void UpdateInventory()
         {
-            var allItems = await _inventory.GetItems();
-            foreach (ItemId itemType in Enum.GetValues(typeof(ItemId)))
-            {                
-                Inventory[itemType] = allItems.Where(p => (ItemId)p.Item_ == itemType);
-                //Inventory[itemType] = await _inventory.GetItemAmountByType(itemType);
-            }
+            var inventoryTmp = new List<Item>(await _inventory.GetItems());
+            await Dispatcher.DispatchAsync(() => {
+                Inventory.Clear();
+                foreach (var item in inventoryTmp)
+                {                    
+                    Inventory.Add(item);
+                }
+            });
         }
         #endregion
 
@@ -189,12 +310,9 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand<MapPokemonWrapper> _tryCatchPokemon;
 
         /// <summary>
-        /// Pokemon that we're trying to capture
+        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
         /// </summary>
-        private MapPokemonWrapper _currentPokemon;
-
-        private EncounterResponse _currentEncounter;
-
         public DelegateCommand<MapPokemonWrapper> TryCatchPokemon => _tryCatchPokemon ?? (
             _tryCatchPokemon = new DelegateCommand<MapPokemonWrapper>(async pokemon =>
             {
@@ -202,88 +320,28 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, $"Loading encounter with {pokemon.PokemonId}");
                 // Get the pokemon and navigate to capture page where we can handle capturing
                 CurrentPokemon = pokemon;
-                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                   
-                NavigationService.Navigate(typeof(CapturePokemonPage));
+                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
                 Busy.SetBusy(false);
-                
-                //var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
-                ////var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
-
-                //CatchPokemonResponse caughtPokemonResponse;
-                //do
-                //{
-                //    //if (encounterPokemonResponse?.CaptureProbability.CaptureProbability_.First() < 0.4)
-                //    //{
-                //    //    //Throw berry is we can
-                //    //    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
-                //    //}
-                //    // TODO: proper capturing!
-                //    caughtPokemonResponse = await _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL);
-                //    await Task.Delay(2000);
-                //}
-                //while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
-                //Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..");
-                //await new MessageDialog((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..")).ShowAsync();
-                //UpdateMapData();
-                // After capturing we need to update the map because the Pokemon may be no longer there                
+                if (CurrentEncounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                    NavigationService.Navigate(typeof(CapturePokemonPage));
+                else
+                {
+                    // Encounter failed, probably the Pokemon ran away
+                    await new MessageDialog("Pokemon ran away, sorry :(").ShowAsync();
+                }
             }, pokemon => true)
             );
         #endregion
 
-        #region Bindable Game Vars        
+        #endregion        
 
-        /// <summary>
-        ///     Player's profile, we use it just for the username
-        /// </summary>
-        public Profile PlayerProfile { get; private set; }
+        #region GPS & Maps
 
-        /// <summary>
-        ///     Stats for the current player, including current level and experience related stuff
-        /// </summary>
-        public PlayerStats PlayerStats { get; private set; }
+        //private Compass _compass;
 
-        public InventoryDelta InventoryDelta
-        {
-            get { return _inventoryDelta; }
-            set { Set(ref _inventoryDelta, value); }
-        }
+        private Geolocator _geolocator;
 
-        /// <summary>
-        /// Stores (Item, count) pairs
-        /// </summary>
-        public ObservableDictionary<ItemId, IEnumerable<Item>> Inventory { get; set; } = new ObservableDictionary<ItemId, IEnumerable<Item>>();
-
-        /// <summary>
-        /// Collection of Pokemon in 1 step from current position
-        /// </summary>
-        public ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
-
-        /// <summary>
-        /// Collection of Pokemon in 2 steps from current position
-        /// </summary>
-        public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
-
-        public ItemId SelectedBall { get; set; } = ItemId.ItemPokeBall;
-
-        public int SelectedBallCount => Inventory[SelectedBall].First().Count;
-
-        public MapPokemonWrapper CurrentPokemon
-        {
-            get
-            {
-                return _currentPokemon;
-            }
-            set { Set(ref _currentPokemon, value); }
-        }
-
-        public EncounterResponse CurrentEncounter
-        {
-            get
-            {
-                return _currentEncounter;
-            }
-            set { Set(ref _currentEncounter, value); }
-        }
+        private Geoposition _currentGeoposition;
 
         /// <summary>
         /// Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
@@ -298,25 +356,6 @@ namespace PokemonGo_UWP.ViewModels
             get { return _currentGeoposition; }
             set { Set(ref _currentGeoposition, value); }
         }
-
-        ///// <summary>
-        ///// Current reading from Compass
-        ///// </summary>
-        //public double CompassHeading
-        //{
-        //    get { return _compassHeading; }
-        //    set { Set(ref _compassHeading, value); }
-        //}
-
-        #endregion
-
-        #region GPS
-
-        //private Compass _compass;
-
-        private Geolocator _geolocator;
-
-        private Geoposition _currentGeoposition;
 
         //private double _compassHeading;
 
