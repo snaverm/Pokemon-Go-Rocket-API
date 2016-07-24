@@ -60,13 +60,31 @@
                 Duration="0:0:0.2" />
         </Storyboard>
 
+        <Storyboard x:Name="ShowNearbyGridStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="NearbyGridTranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="350"
+                To="0"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Name="HideNearbyGridStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="NearbyGridTranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="0"
+                To="350"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
     </Page.Resources>
 
     <RelativePanel Background="Green">
 
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
-                         ColorScheme="Light"
+                         ColorScheme="Dark"
                          DesiredPitch="50"
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
@@ -93,13 +111,14 @@
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 CommandParameter="{Binding}"
                                 Command="{Binding TryCatchPokemon, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
-                            <Image Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                   maps:MapControl.Location="{Binding Geoposition}"
-                                   maps:MapControl.NormalizedAnchorPoint="0,1"
-                                   Stretch="Uniform"
-                                   Height="64"
-                                   Width="64" />
-                            
+                            <Image
+                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                maps:MapControl.Location="{Binding Geoposition}"
+                                maps:MapControl.NormalizedAnchorPoint="0,1"
+                                Stretch="Uniform"
+                                Height="64"
+                                Width="64" />
+
                             <!--<Ellipse Width="48"
                                      Height="48"
                                      Stroke="Green"
@@ -111,7 +130,7 @@
                                                         TranslateX="-2.5"/>
                                 </Ellipse.RenderTransform>
                             </Ellipse>-->
-                            
+
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -119,94 +138,127 @@
 
         </maps:MapControl>
 
+        <Border RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True"
+                x:Name="NearbyPokemonsBorder"
+                Background="AntiqueWhite"
+                CornerRadius="8,8,0,0"
+                Padding="8"
+                Margin="8,0"
+                Height="350"
+                Canvas.ZIndex="5">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="NearbyGridTranslateTransform"
+                                    Y="350" />
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="nearby"
+                           Grid.Row="0"
+                           FontSize="25"
+                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                           TextAlignment="Center"
+                           Margin="0,0,0,8" />
+
+                <GridView ItemsSource="{Binding NearbyPokemons}"
+                          Grid.Row="1">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image
+                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                Stretch="UniformToFill"
+                                VerticalAlignment="Center"
+                                Width="64"
+                                Height="64"
+                                Margin="3,0" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                    <GridView.RenderTransform>
+                        <CompositeTransform />
+                    </GridView.RenderTransform>
+                </GridView>
+
+                <Button Style="{ThemeResource ImageButtonStyle}"
+                        Height="52"
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Margin="0,8,0,0"
+                        Tapped="NearbyPokemonGrid_OnTapped"
+                        x:Name="CloseNearbyGridViewButton">
+                    <Image Source="../Assets/UI/Pokeball.png"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Stretch" />
+                </Button>
+            </Grid>
+        </Border>
+
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               Canvas.ZIndex="2"
-              Height="110">
-            <Grid.Background>
-                <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
-                                 Opacity="0.35" />
-            </Grid.Background>
+              Background="Transparent"
+              Height="100">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="UserDetailsGrid"
-                  Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <RelativePanel x:Name="UserDetailsPanel"
+                           Padding="10"
+                           Grid.Column="0">
 
-                <Ellipse Grid.Column="0"
-                         Width="48"
-                         Height="48">
+                <Ellipse Width="64"
+                         Height="64"
+                         Stroke="{ThemeResource SystemControlForegroundAccentBrush}"
+                         StrokeThickness="2.5"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignTopWithPanel="True"
+                         x:Name="AvatarEllipse">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="../Assets/UI/avatar.png" />
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <controls:Gauge Grid.Column="0"
-                                Padding="5"
-                                ScaleWidth="10"
-                                Value="{Binding PlayerStats.Experience}"
-                                Maximum="{Binding PlayerStats.NextLevelXp}"
-                                ValueBrush="Transparent"
-                                ScaleTickBrush="Transparent"
-                                TickBrush="Transparent"
-                                NeedleBrush="Transparent"
-                                ScaleBrush="Gray"
-                                TrailBrush="White" />
+                <ProgressBar Value="{Binding PlayerStats.Experience}"
+                             Maximum="{Binding PlayerStats.NextLevelXp}"
+                             Height="5"
+                             Margin="0,-5,0,0"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="AvatarEllipse"
+                             x:Name="ExperienceProgressBar" />
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="8*" />
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="8*" />
-                    </Grid.RowDefinitions>
+                <TextBlock Text="{Binding PlayerStats.Level}"
+                           FontSize="38"
+                           Foreground="White"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           FontWeight="SemiBold"
+                           RelativePanel.RightOf="AvatarEllipse"
+                           RelativePanel.Above="ExperienceProgressBar"
+                           Margin="-10,0,0,-4" />
 
-                    <Grid VerticalAlignment="Bottom"
-                          Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Lv"
-                                   FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Bottom"
-                                   FontSize="20"
-                                   Grid.Column="0" />
-                        <TextBlock Text="{Binding PlayerStats.Level}"
-                                   FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Bottom"
-                                   Margin="5,0,5,-6"
-                                   FontSize="40"
-                                   Grid.Column="1"
-                                   Style="{ThemeResource BodyTextBlockStyle}" />
-                    </Grid>
-                    <MenuFlyoutSeparator Grid.Row="1"
-                                         Padding="0"
-                                         Margin="0" />
-                    <TextBlock Grid.Row="2"
-                               Text="{Binding PlayerProfile.Username}"
-                               FontSize="18"
-                               FontFamily="../Assets/Fonts/Generica.otf#Generica" />
-                </Grid>
-            </Grid>
+                <TextBlock Text="{Binding PlayerProfile.Username}"
+                           FontSize="15"
+                           Foreground="White"
+                           RelativePanel.Below="ExperienceProgressBar" />
+
+            </RelativePanel>
 
             <!-- Pokeball main button -->
             <Button Grid.Column="1"
                     Style="{ThemeResource ImageButtonStyle}"
+                    Height="52"
+                    HorizontalAlignment="Center"
                     Click="PokeMenuMainButton_OnClick"
                     x:Name="PokeMenuMainButton">
-                <Button.RenderTransform>
-                    <TranslateTransform Y="-40" />
-                </Button.RenderTransform>
                 <Image Source="../Assets/UI/Pokeball.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
@@ -228,19 +280,60 @@
                        HorizontalAlignment="Stretch" />
             </Button>
 
-            <Grid x:Name="NearbyPokemonGrid"
+            <Border CornerRadius="8,0,0,8"
+                    x:Name="NearbyPokemonGrid"
+                    Background="AntiqueWhite"
+                    VerticalAlignment="Center"
+                    Grid.Column="2"
+                    Height="40"
+                    Tapped="NearbyPokemonGrid_OnTapped">
+
+                <Grid HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0"
+                        Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48" />
+
+                    <Image Grid.Column="1"
+                        Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48"/>
+
+                    <Image Grid.Column="2"
+                        Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                        Stretch="UniformToFill"
+                        VerticalAlignment="Center"
+                        Width="48"
+                        Height="48" />
+                </Grid>
+
+            </Border>
+
+            <!--<Grid x:Name="NearbyPokemonGrid"
+                  Background="AntiqueWhite"
+                  VerticalAlignment="Center"
                   Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0"
+                --><!--<TextBlock Grid.Row="0"
                            Text="Nearby"
                            FontSize="15"
                            FontFamily="../Assets/Fonts/Generica.otf#Generica"
                            TextAlignment="Center"
-                           Margin="0,24,0,20" />
+                           Margin="0,24,0,20" />--><!--
 
                 <StackPanel Grid.Row="1"
                             HorizontalAlignment="Center"
@@ -271,7 +364,7 @@
                         Height="48"
                         Margin="3,0" />
                 </StackPanel>
-            </Grid>
+            </Grid>-->
         </Grid>
     </RelativePanel>
 </Page>

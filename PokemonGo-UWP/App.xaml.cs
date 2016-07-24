@@ -28,6 +28,7 @@ namespace PokemonGo_UWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
+            // TODO: SettingsService to store/load auth token and use it instead of logging in everytime
             NavigationService.Navigate(typeof(Views.MainPage));
             await Task.CompletedTask;
         }

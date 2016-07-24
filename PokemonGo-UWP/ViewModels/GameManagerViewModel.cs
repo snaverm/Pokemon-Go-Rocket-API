@@ -29,7 +29,7 @@ namespace PokemonGo_UWP.ViewModels
     {
         public GameManagerViewModel()
         {
-            // Client init
+            // Client init            
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
             DataFetcher.ShouldCacheData = true;
             _clientSettings = new Settings();
@@ -125,7 +125,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
-        private VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+        private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
 
         /// <summary>
         /// Retrieves data for the current position
@@ -135,10 +135,10 @@ namespace PokemonGo_UWP.ViewModels
             // Report it to client and find things nearby
             await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
             var mapObjects = await _client.GetMapObjects();
-            // Replace data with the new ones                      
+            // Replace data with the new ones                                  
             var catchableTmp = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons);
-            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");
-            if (catchableTmp.Any()) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+            Logger.Write($"Found {catchableTmp.Count()} catchable pokemons");            
+            if (catchableTmp.Count() != CatchablePokemons.Count) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
             await Dispatcher.DispatchAsync(() => {
                 CatchablePokemons.Clear();
                 foreach (var pokemon in catchableTmp)

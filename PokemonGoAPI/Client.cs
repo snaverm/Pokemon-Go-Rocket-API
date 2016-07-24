@@ -76,6 +76,7 @@ namespace PokemonGo.RocketAPI
         /// <returns></returns>
         public async Task<bool> DoPtcLogin(string username, string password)
         {
+            // TODO: SettingsService to store/load auth token and use it instead of logging in everytime            
             Logger.Write("Starting PTC login");
             _accessToken = await PtcLogin.GetAccessToken(username, password);
             _authType = AuthType.Ptc;

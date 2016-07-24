@@ -21,8 +21,7 @@ using PokemonGo.RocketAPI.GeneratedCode;
 namespace PokemonGo_UWP.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// TODO: bottom bar blur on AU http://stackoverflow.com/questions/36276856/uwp-app-realtime-blur-background-using-dx-compositor/36441888#36441888
+    /// An empty page that can be used on its own or navigated to within a Frame.    
     /// </summary>
     public sealed partial class GameMapPage : Page
     {
@@ -34,6 +33,7 @@ namespace PokemonGo_UWP.Views
         #region Menu Animation
 
         private bool _isMenuOpen;
+        private bool _isNearbyOpen;
 
         private void PokeMenuMainButton_OnClick(object sender, RoutedEventArgs e)
         {            
@@ -44,7 +44,15 @@ namespace PokemonGo_UWP.Views
             _isMenuOpen = !_isMenuOpen;
         }
 
-        #endregion
+        private void NearbyPokemonGrid_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!_isNearbyOpen)
+                ShowNearbyGridStoryboard.Begin();
+            else
+                HideNearbyGridStoryboard.Begin();
+            _isNearbyOpen = !_isNearbyOpen;
+        }
 
+        #endregion        
     }
 }
