@@ -212,8 +212,9 @@
             </Grid.ColumnDefinitions>
 
             <RelativePanel x:Name="UserDetailsPanel"
-                           Padding="10"
-                           Grid.Column="0">
+                           Padding="10,0,0,0"
+                           Grid.Column="0"
+                           VerticalAlignment="Center">
 
                 <Ellipse Width="64"
                          Height="64"
@@ -255,7 +256,7 @@
             <!-- Pokeball main button -->
             <Button Grid.Column="1"
                     Style="{ThemeResource ImageButtonStyle}"
-                    Height="52"
+                    Height="48"
                     HorizontalAlignment="Center"
                     Click="PokeMenuMainButton_OnClick"
                     x:Name="PokeMenuMainButton">
