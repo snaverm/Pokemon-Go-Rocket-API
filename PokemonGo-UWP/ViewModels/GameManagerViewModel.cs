@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.UI.Popups;
+using AllEnum;
 using PokeAPI;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
@@ -18,6 +21,7 @@ using PokemonGo_UWP.Views;
 using Template10.Common;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
+using Item = PokemonGo.RocketAPI.GeneratedCode.Item;
 using Pokemon = PokeAPI.Pokemon;
 
 namespace PokemonGo_UWP.ViewModels
@@ -171,9 +175,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdateInventory()
         {
-            foreach (MiscEnums.Item itemType in Enum.GetValues(typeof(MiscEnums.Item)))
-            {
-                Inventory[itemType] = await _inventory.GetItemAmountByType(itemType);
+            var allItems = await _inventory.GetItems();
+            foreach (ItemId itemType in Enum.GetValues(typeof(ItemId)))
+            {                
+                Inventory[itemType] = allItems.Where(p => (ItemId)p.Item_ == itemType);
+                //Inventory[itemType] = await _inventory.GetItemAmountByType(itemType);
             }
         }
         #endregion
@@ -245,7 +251,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Stores (Item, count) pairs
         /// </summary>
-        public ObservableDictionary<MiscEnums.Item, int> Inventory { get; set; } = new ObservableDictionary<MiscEnums.Item, int>();
+        public ObservableDictionary<ItemId, IEnumerable<Item>> Inventory { get; set; } = new ObservableDictionary<ItemId, IEnumerable<Item>>();
 
         /// <summary>
         /// Collection of Pokemon in 1 step from current position
@@ -257,9 +263,9 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
 
-        public MiscEnums.Item SelectedBall { get; set; } = MiscEnums.Item.ITEM_POKE_BALL;
+        public ItemId SelectedBall { get; set; } = ItemId.ItemPokeBall;
 
-        public int SelectedBallCount => Inventory[SelectedBall];
+        public int SelectedBallCount => Inventory[SelectedBall].First().Count;
 
         public MapPokemonWrapper CurrentPokemon
         {
