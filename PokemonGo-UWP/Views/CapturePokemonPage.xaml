@@ -37,8 +37,15 @@
                 <SolidColorBrush Color="Black"
                                  Opacity="0.5"/>
             </Border.Background>
-            <TextBlock Text="{Binding CurrentPokemon.PokemonId}"
-                       Foreground="White"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding CurrentPokemon.PokemonId}"
+                           Foreground="White"/>
+                <TextBlock Text="/ CP"
+                           Margin="6,0"
+                           Foreground="White"/>
+                <TextBlock Text="{Binding CurrentEncounter.WildPokemon.PokemonData.Cp}"
+                           Foreground="White"/>
+            </StackPanel>
         </Border>
         
 
@@ -49,7 +56,7 @@
                 Height="48"
                 HorizontalAlignment="Center"
                 x:Name="EscapeEncounterButton">
-            <Image Source="../Assets/UI/Pokeball.png"
+            <Image Source="../Assets/UI/escape.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
         </Button>

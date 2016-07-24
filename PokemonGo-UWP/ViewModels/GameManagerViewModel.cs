@@ -172,10 +172,12 @@ namespace PokemonGo_UWP.ViewModels
             _tryCatchPokemon = new DelegateCommand<MapPokemonWrapper>(async pokemon =>
             {
                 Logger.Write($"Catching {pokemon.PokemonId}");
+                Busy.SetBusy(true, $"Loading encounter with {pokemon.PokemonId}");
                 // Get the pokemon and navigate to capture page where we can handle capturing
                 CurrentPokemon = pokemon;
                 CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                   
                 NavigationService.Navigate(typeof(CapturePokemonPage));
+                Busy.SetBusy(false);
                 //var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
                 ////var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
 
