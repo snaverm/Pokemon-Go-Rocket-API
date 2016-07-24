@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <Storyboard x:Name="LaunchPokeballStoryboard">
             <DoubleAnimation
@@ -45,6 +45,24 @@
                 To="360"
                 Duration="0:0:0.2" />
         </Storyboard>
+
+        <Storyboard x:Name="ShowInventoryMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryMenuTranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="500"
+                To="0"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Name="HideInventoryMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryMenuTranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="0"
+                To="500"
+                Duration="0:0:0.2" />
+        </Storyboard>
     </Page.Resources>
 
     <RelativePanel>
@@ -55,38 +73,141 @@
                 Stretch="UniformToFill" />
         </RelativePanel.Background>
 
+        <Border RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True"
+                x:Name="InventoryMenuBorder"
+                Background="AntiqueWhite"
+                CornerRadius="8,8,0,0"
+                Padding="8"
+                Margin="8,0"
+                Height="500"
+                Canvas.ZIndex="5">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="InventoryMenuTranslateTransform"
+                                    Y="500" />
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="items"
+                           Grid.Row="0"
+                           FontSize="25"
+                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                           TextAlignment="Center"
+                           Margin="0,0,0,8" />
+
+                <ListView ItemsSource="{Binding Inventory}"
+                          Grid.Row="1">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Count}"
+                                           Grid.Column="0"
+                                           FontSize="18"
+                                           VerticalAlignment="Bottom"
+                                           HorizontalAlignment="Left" />
+
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemIdConverter}}"
+                                               Grid.Column="0"
+                                               Grid.Row="0"
+                                               FontSize="18"
+                                               FontWeight="SemiBold" />
+
+                                    <Button IsEnabled="False"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                        <SymbolIcon Symbol="Delete" />
+                                    </Button>
+
+                                    <TextBlock Text="Description"
+                                               Grid.Column="0"
+                                               Grid.Row="1"
+                                               FontSize="18"
+                                               FontWeight="SemiLight" />
+                                </Grid>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+                <Button Style="{ThemeResource ImageButtonStyle}"
+                        Height="52"
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Margin="0,8,0,0"
+                        Click="CloseInventoryMenuButton_OnClick"
+                        x:Name="CloseInventoryMenuButton">
+                    <Image Source="../Assets/UI/avatar.png"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Stretch" />
+                </Button>
+            </Grid>
+        </Border>
+
         <Image RelativePanel.AlignHorizontalCenterWithPanel="True"
                RelativePanel.AlignVerticalCenterWithPanel="True"
                Height="400"
                Width="400"
                RenderTransformOrigin="0.5,1"
                Stretch="Uniform"
-               Source="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}" 
-               x:Name="CurrentPokemonIcon"/>
+               Source="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+               x:Name="CurrentPokemonIcon" />
 
-        <Border CornerRadius="20"       
+        <Border CornerRadius="20"
                 Padding="12"
                 RelativePanel.AlignHorizontalCenterWithPanel="True"
                 RelativePanel.AlignVerticalCenterWith="CurrentPokemonIcon"
                 RelativePanel.Above="CurrentPokemonIcon">
             <Border.RenderTransform>
-                <TranslateTransform Y="-100"/>
+                <TranslateTransform Y="-100" />
             </Border.RenderTransform>
             <Border.Background>
                 <SolidColorBrush Color="Black"
-                                 Opacity="0.5"/>
+                                 Opacity="0.5" />
             </Border.Background>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding CurrentPokemon.PokemonId}"
-                           Foreground="White"/>
+                           Foreground="White" />
                 <TextBlock Text="/ CP"
                            Margin="6,0"
-                           Foreground="White"/>
+                           Foreground="White" />
                 <TextBlock Text="{Binding CurrentEncounter.WildPokemon.PokemonData.Cp}"
-                           Foreground="White"/>
+                           Foreground="White" />
             </StackPanel>
         </Border>
-        
+
 
         <Button Style="{ThemeResource ImageButtonStyle}"
                 RelativePanel.AlignLeftWithPanel="True"
@@ -106,22 +227,23 @@
                 Margin="5"
                 Height="48"
                 HorizontalAlignment="Center"
+                Click="InventoryButton_OnClick"
                 x:Name="InventoryButton">
             <Image Source="../Assets/UI/avatar.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
         </Button>
-        
+
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True"
                        RelativePanel.AlignBottomWithPanel="True">
             <Button Style="{ThemeResource ImageButtonStyle}"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                Margin="5"
-                Height="128"
-                HorizontalAlignment="Center"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="5"
+                    Height="100"
+                    HorizontalAlignment="Center"
                     Click="LaunchPokeballButton_OnClick"
-                x:Name="LaunchPokeballButton">
+                    x:Name="LaunchPokeballButton">
                 <Button.RenderTransform>
                     <CompositeTransform x:Name="PokeballTransform"
                                         Rotation="0"
@@ -130,20 +252,20 @@
                                         ScaleY="1"
                                         ScaleX="1"
                                         TranslateY="0"
-                                        TranslateX="0"/>
+                                        TranslateX="0" />
                 </Button.RenderTransform>
                 <Image Source="../Assets/UI/Pokeball.png"
-                   Stretch="Uniform"
-                   HorizontalAlignment="Stretch" />
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
             </Button>
 
-            <TextBlock Text="{Binding SelectedBallCount}"
-                     Foreground="White"
-                     FontSize="18"
+            <TextBlock Text="{Binding SelectedCaptureItem.Count}"
+                       Foreground="White"
+                       FontSize="18"
                        FontWeight="SemiBold"
-                     RelativePanel.AlignRightWith="LaunchPokeballButton"
-                     RelativePanel.AlignBottomWithPanel="True"
-                     Margin="5"/>
+                       RelativePanel.AlignRightWith="LaunchPokeballButton"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       Margin="5" />
         </RelativePanel>
 
     </RelativePanel>

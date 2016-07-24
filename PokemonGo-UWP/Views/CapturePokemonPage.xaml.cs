@@ -34,5 +34,16 @@ namespace PokemonGo_UWP.Views
             // TODO: Pokemon scale inside ball
             //LaunchPokeballStoryboard.Completed
         }
+
+        private void InventoryButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: replace code-behind for animations with Template10's behaviors?
+            ShowInventoryMenuStoryboard.Begin();
+        }
+
+        private void CloseInventoryMenuButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            HideInventoryMenuStoryboard.Begin();
+        }
     }
 }

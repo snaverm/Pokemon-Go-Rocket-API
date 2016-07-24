@@ -31,6 +31,7 @@
             <utils:EmptyConverter x:Key="EmptyConverter"/>
             <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter"/>
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter"/>
+            <utils:ItemToItemIdConverter x:Key="ItemToItemIdConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

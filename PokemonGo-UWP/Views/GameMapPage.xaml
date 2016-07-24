@@ -179,10 +179,6 @@
                                 Margin="3,0" />
                         </DataTemplate>
                     </GridView.ItemTemplate>
-
-                    <GridView.RenderTransform>
-                        <CompositeTransform />
-                    </GridView.RenderTransform>
                 </GridView>
 
                 <Button Style="{ThemeResource ImageButtonStyle}"

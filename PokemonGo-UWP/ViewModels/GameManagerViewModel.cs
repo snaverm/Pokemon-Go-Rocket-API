@@ -87,7 +87,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Current item for capture page
         /// </summary>
-        private Item _selectedItem;
+        private Item _selectedCaptureItem;
 
         #endregion
 
@@ -175,10 +175,10 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Current item for capture page
         /// </summary>
-        public Item SelectedItem
+        public Item SelectedCaptureItem
         {
-            get { return _selectedItem; }
-            set { Set(ref _selectedItem, value); }
+            get { return _selectedCaptureItem; }
+            set { Set(ref _selectedCaptureItem, value); }
         }
 
         #endregion
@@ -232,10 +232,7 @@ namespace PokemonGo_UWP.ViewModels
                         Busy.SetBusy(true, "Getting GPS position");
                         await InitGps();
                         Busy.SetBusy(true, "Getting player data");
-                        PlayerProfile = (await _client.GetProfile()).Profile;
-                        InventoryDelta = (await _client.GetInventory()).InventoryDelta;
-                        PlayerStats = InventoryDelta.InventoryItems.First(
-                                item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+                        UpdatePlayerData();
                         Busy.SetBusy(true, "Getting player items");
                         UpdateInventory();
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
@@ -290,6 +287,17 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
+        /// Updates player data like profile and stats
+        /// </summary>
+        private async void UpdatePlayerData()
+        {
+            PlayerProfile = (await _client.GetProfile()).Profile;
+            InventoryDelta = (await _client.GetInventory()).InventoryDelta;
+            PlayerStats = InventoryDelta.InventoryItems.First(
+                    item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+        }
+
+        /// <summary>
         /// Retrieves inventory for the player
         /// </summary>
         private async void UpdateInventory()
@@ -321,6 +329,8 @@ namespace PokemonGo_UWP.ViewModels
                 // Get the pokemon and navigate to capture page where we can handle capturing
                 CurrentPokemon = pokemon;
                 CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+                // Reset selected item to default one
+                SelectedCaptureItem = Inventory.First(item => item.Item_ == ItemType.Pokeball);
                 Busy.SetBusy(false);
                 if (CurrentEncounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     NavigationService.Navigate(typeof(CapturePokemonPage));

@@ -67,6 +67,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class ItemToItemIdConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            // HACK - we probably need some kind of database with item names and descriptions, this will work for now
+            return ((ItemId) value).ToString().Replace("Item", "");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class EmptyConverter : IValueConverter
     {
         #region Implementation of IValueConverter
