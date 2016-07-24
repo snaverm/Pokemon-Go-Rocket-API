@@ -11,6 +11,7 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logging;
+using PokemonGo.RocketAPI.Logic;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
@@ -34,12 +35,14 @@ namespace PokemonGo_UWP.ViewModels
             DataFetcher.ShouldCacheData = true;
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
+            _inventory = new Inventory(_client);
         }
 
         #region Client
 
         private readonly Client _client;
         private readonly ISettings _clientSettings;
+        private readonly Inventory _inventory;
 
         #endregion
 
@@ -98,10 +101,12 @@ namespace PokemonGo_UWP.ViewModels
                         Busy.SetBusy(true, "Getting GPS position");
                         await InitGps();
                         Busy.SetBusy(true, "Getting player data");
-                        PlayerProfile = (await _client.GetProfile()).Profile;
-                        PlayerStats =
-                            (await _client.GetInventory()).InventoryDelta.InventoryItems.First(
+                        PlayerProfile = (await _client.GetProfile()).Profile;                        
+                        InventoryDelta = (await _client.GetInventory()).InventoryDelta;                        
+                        PlayerStats = InventoryDelta.InventoryItems.First(
                                 item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+                        Busy.SetBusy(true, "Getting player items");
+                        UpdateInventory();
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
                         // Avoid going back to login page using back button
                         NavigationService.ClearHistory();                        
@@ -121,6 +126,11 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Base Logic
+
+        /// <summary>
+        /// Player's inventory
+        /// </summary>
+        private InventoryDelta _inventoryDelta;
 
         /// <summary>
         /// We use it to notify that we found at least one catchable Pokemon in our area
@@ -155,6 +165,17 @@ namespace PokemonGo_UWP.ViewModels
                 }
             });
         }
+
+        /// <summary>
+        /// Retrieves the inventory for the player
+        /// </summary>
+        private async void UpdateInventory()
+        {
+            foreach (MiscEnums.Item itemType in Enum.GetValues(typeof(MiscEnums.Item)))
+            {
+                Inventory[itemType] = await _inventory.GetItemAmountByType(itemType);
+            }
+        }
         #endregion
 
         #region Pokemon Catching
@@ -178,6 +199,7 @@ namespace PokemonGo_UWP.ViewModels
                 CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                   
                 NavigationService.Navigate(typeof(CapturePokemonPage));
                 Busy.SetBusy(false);
+                
                 //var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
                 ////var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
 
@@ -214,6 +236,17 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public PlayerStats PlayerStats { get; private set; }
 
+        public InventoryDelta InventoryDelta
+        {
+            get { return _inventoryDelta; }
+            set { Set(ref _inventoryDelta, value); }
+        }
+
+        /// <summary>
+        /// Stores (Item, count) pairs
+        /// </summary>
+        public ObservableDictionary<MiscEnums.Item, int> Inventory { get; set; } = new ObservableDictionary<MiscEnums.Item, int>();
+
         /// <summary>
         /// Collection of Pokemon in 1 step from current position
         /// </summary>
@@ -223,6 +256,10 @@ namespace PokemonGo_UWP.ViewModels
         /// Collection of Pokemon in 2 steps from current position
         /// </summary>
         public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+
+        public MiscEnums.Item SelectedBall { get; set; } = MiscEnums.Item.ITEM_POKE_BALL;
+
+        public int SelectedBallCount => Inventory[SelectedBall];
 
         public MapPokemonWrapper CurrentPokemon
         {

@@ -131,6 +131,7 @@
     <Compile Include="Helpers\RetryHandler.cs" />
     <Compile Include="Helpers\S2Helper.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />

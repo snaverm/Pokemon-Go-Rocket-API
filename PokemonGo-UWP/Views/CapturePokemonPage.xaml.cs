@@ -26,5 +26,13 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void LaunchPokeballButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            LaunchPokeballStoryboard.SpeedRatio = 0.25;
+            LaunchPokeballStoryboard.Begin();
+            // TODO: Pokemon scale inside ball
+            //LaunchPokeballStoryboard.Completed
+        }
     }
 }

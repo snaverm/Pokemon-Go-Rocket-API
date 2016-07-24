@@ -7,6 +7,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    
+    <Page.Resources>
+        <Storyboard x:Name="LaunchPokeballStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="PokeballTransform"
+                Storyboard.TargetProperty="TranslateX"
+                From="0"
+                To="100"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokeballTransform"
+                Storyboard.TargetProperty="TranslateY"
+                From="0"
+                To="-350"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokeballTransform"
+                Storyboard.TargetProperty="ScaleX"
+                From="1"
+                To="0.3"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokeballTransform"
+                Storyboard.TargetProperty="ScaleY"
+                From="1"
+                To="0.3"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokeballTransform"
+                Storyboard.TargetProperty="Rotation"
+                From="0"
+                To="360"
+                Duration="0:0:0.2" />
+        </Storyboard>
+    </Page.Resources>
 
     <RelativePanel>
         <RelativePanel.Background>
@@ -68,10 +107,44 @@
                 Height="48"
                 HorizontalAlignment="Center"
                 x:Name="InventoryButton">
-            <Image Source="../Assets/UI/Pokeball.png"
+            <Image Source="../Assets/UI/avatar.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
         </Button>
+        
+        <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignBottomWithPanel="True">
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True"
+                Margin="5"
+                Height="128"
+                HorizontalAlignment="Center"
+                    Click="LaunchPokeballButton_OnClick"
+                x:Name="LaunchPokeballButton">
+                <Button.RenderTransform>
+                    <CompositeTransform x:Name="PokeballTransform"
+                                        Rotation="0"
+                                        CenterY="0.5"
+                                        CenterX="0.5"
+                                        ScaleY="1"
+                                        ScaleX="1"
+                                        TranslateY="0"
+                                        TranslateX="0"/>
+                </Button.RenderTransform>
+                <Image Source="../Assets/UI/Pokeball.png"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Stretch" />
+            </Button>
+
+            <TextBlock Text="{Binding SelectedBallCount}"
+                     Foreground="White"
+                     FontSize="18"
+                       FontWeight="SemiBold"
+                     RelativePanel.AlignRightWith="LaunchPokeballButton"
+                     RelativePanel.AlignBottomWithPanel="True"
+                     Margin="5"/>
+        </RelativePanel>
 
     </RelativePanel>
 </Page>
