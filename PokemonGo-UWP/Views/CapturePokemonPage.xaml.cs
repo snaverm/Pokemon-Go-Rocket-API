@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Template10.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,13 +28,65 @@ namespace PokemonGo_UWP.Views
             this.InitializeComponent();
         }
 
-        private void LaunchPokeballButton_OnClick(object sender, RoutedEventArgs e)
+        #region Overrides of Page
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            LaunchPokeballStoryboard.SpeedRatio = 0.25;
-            LaunchPokeballStoryboard.Begin();
-            // TODO: Pokemon scale inside ball
-            //LaunchPokeballStoryboard.Completed
+            base.OnNavigatedTo(e);
+            SubscribeToCaptureEvents();
         }
+
+        #region Overrides of Page
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            UnsubscribeToCaptureEvents();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Handlers
+
+        private void SubscribeToCaptureEvents()
+        {
+            App.ViewModelLocator.GameManagerViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
+            App.ViewModelLocator.GameManagerViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
+            App.ViewModelLocator.GameManagerViewModel.CatchMissed += GameManagerViewModelOnCatchMissed;
+            // Add also handlers to enable the button once the animation is done
+            CatchSuccess.Completed += (s, e) => LaunchPokeballButton.IsEnabled = true;
+            CatchEscape.Completed += (s, e) => BootStrapper.Current.NavigationService.GoBack();
+            CatchMissed.Completed += (s, e) => LaunchPokeballButton.IsEnabled = true;
+        }
+
+        private void UnsubscribeToCaptureEvents()
+        {
+            App.ViewModelLocator.GameManagerViewModel.CatchSuccess -= GameManagerViewModelOnCatchSuccess;
+            App.ViewModelLocator.GameManagerViewModel.CatchEscape -= GameManagerViewModelOnCatchEscape;
+            App.ViewModelLocator.GameManagerViewModel.CatchMissed -= GameManagerViewModelOnCatchMissed;
+        }
+
+        private void GameManagerViewModelOnCatchMissed(object sender, EventArgs eventArgs)
+        {
+            LaunchPokeballButton.IsEnabled = false;
+            CatchMissed.Begin();
+        }
+
+        private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
+        {
+            LaunchPokeballButton.IsEnabled = false;
+            CatchEscape.Begin();
+        }
+
+        private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
+        {
+            LaunchPokeballButton.IsEnabled = false;
+            CatchSuccess.Begin();
+        }
+
+        #endregion
 
         private void InventoryButton_OnClick(object sender, RoutedEventArgs e)
         {

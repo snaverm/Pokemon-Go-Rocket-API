@@ -89,6 +89,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private Item _selectedCaptureItem;
 
+        /// <summary>
+        /// Score for the current capture, updated only if we captured the Pokemon
+        /// </summary>
+        private CaptureScore _currentCaptureScore;
+
         #endregion
 
         #region Bindable Game Vars
@@ -143,7 +148,7 @@ namespace PokemonGo_UWP.ViewModels
         /// Stores the current inventory
         /// </summary>
         public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
-        
+
         /// <summary>
         /// Pokemon that we're trying to capture
         /// </summary>
@@ -179,6 +184,15 @@ namespace PokemonGo_UWP.ViewModels
         {
             get { return _selectedCaptureItem; }
             set { Set(ref _selectedCaptureItem, value); }
+        }
+
+        /// <summary>
+        /// Score for the current capture, updated only if we captured the Pokemon
+        /// </summary>
+        public CaptureScore CurrentCaptureScore
+        {
+            get { return _currentCaptureScore; }
+            set { Set(ref _currentCaptureScore, value); }
         }
 
         #endregion
@@ -293,8 +307,13 @@ namespace PokemonGo_UWP.ViewModels
         {
             PlayerProfile = (await _client.GetProfile()).Profile;
             InventoryDelta = (await _client.GetInventory()).InventoryDelta;
-            PlayerStats = InventoryDelta.InventoryItems.First(
+            var tmpStats = InventoryDelta.InventoryItems.First(
                     item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+            if (PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            {
+                // TODO: report level increase
+            }
+            PlayerStats = tmpStats;
         }
 
         /// <summary>
@@ -315,6 +334,24 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Pokemon Catching
 
+        #region Catching Events
+
+        /// <summary>
+        /// Event fired if the user was able to catch the Pokemon
+        /// </summary>
+        public event EventHandler CatchSuccess;
+
+        /// <summary>
+        /// Event fired if the user missed the Pokemon
+        /// </summary>
+        public event EventHandler CatchMissed;
+
+        /// <summary>
+        /// Event fired if the Pokemon escapes
+        /// </summary>
+        public event EventHandler CatchEscape;
+        #endregion
+
         private DelegateCommand<MapPokemonWrapper> _tryCatchPokemon;
 
         /// <summary>
@@ -328,9 +365,10 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, $"Loading encounter with {pokemon.PokemonId}");
                 // Get the pokemon and navigate to capture page where we can handle capturing
                 CurrentPokemon = pokemon;
-                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
-                // Reset selected item to default one
+                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
+                // Reset selected item to default one and score to null
                 SelectedCaptureItem = Inventory.First(item => item.Item_ == ItemType.Pokeball);
+                CurrentCaptureScore = null;
                 Busy.SetBusy(false);
                 if (CurrentEncounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     NavigationService.Navigate(typeof(CapturePokemonPage));
@@ -341,9 +379,55 @@ namespace PokemonGo_UWP.ViewModels
                 }
             }, pokemon => true)
             );
+
+        private DelegateCommand _launchBall;
+
+        /// <summary>
+        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
+        /// </summary>
+        public DelegateCommand LaunchBall => _launchBall ?? (
+            _launchBall = new DelegateCommand(async () =>
+            {
+                Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
+                var caughtPokemonResponse = await _client.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, CurrentPokemon.Latitude, CurrentPokemon.Longitude, (MiscEnums.Item) SelectedCaptureItem.Item_);
+                switch (caughtPokemonResponse.Status)
+                {
+                    case CatchPokemonResponse.Types.CatchStatus.CatchError:
+                        Logger.Write("CatchError!");
+                        // TODO: what can we do?
+                        break;
+                    case CatchPokemonResponse.Types.CatchStatus.CatchSuccess:
+                        CurrentCaptureScore = caughtPokemonResponse.Scores;
+                        Logger.Write($"We caught {CurrentPokemon.PokemonId}");
+                        CatchSuccess?.Invoke(this, null);                        
+                        UpdateMapData();
+                        UpdateInventory();
+                        UpdatePlayerData();
+                        break;
+                    case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
+                        Logger.Write($"{CurrentPokemon.PokemonId} escaped");
+                        CatchEscape?.Invoke(this, null);
+                        // TODO: update map
+                        break;
+                    case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
+                        Logger.Write($"{CurrentPokemon.PokemonId} escaped");
+                        CatchEscape?.Invoke(this, null);
+                        // TODO: update map
+                        break;
+                    case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
+                        Logger.Write($"We missed {CurrentPokemon.PokemonId}");
+                        // TODO: update inventory and counter for current item since we wasted one
+                        CatchMissed?.Invoke(this, null);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }, () => true));
+
         #endregion
 
-        #endregion        
+        #endregion
 
         #region GPS & Maps
 
@@ -380,10 +464,7 @@ namespace PokemonGo_UWP.ViewModels
                     Logger.Write("GPS activated");
                     _geolocator = new Geolocator
                     {
-                        DesiredAccuracy = PositionAccuracy.High,
-                        DesiredAccuracyInMeters = 5,
-                        ReportInterval = 3000,
-                        MovementThreshold = 5
+                        DesiredAccuracy = PositionAccuracy.High, DesiredAccuracyInMeters = 5, ReportInterval = 3000, MovementThreshold = 5
                     };
                     CurrentGeoposition = await _geolocator.GetGeopositionAsync();
                     //_compass = Compass.GetDefault();
@@ -412,10 +493,8 @@ namespace PokemonGo_UWP.ViewModels
         private async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
             // Get new position
-            await Dispatcher.DispatchAsync(() => {
-                CurrentGeoposition = args.Position;
-            });      
-            UpdateMapData();                  
+            await Dispatcher.DispatchAsync(() => { CurrentGeoposition = args.Position; });
+            UpdateMapData();
         }
 
         #endregion
