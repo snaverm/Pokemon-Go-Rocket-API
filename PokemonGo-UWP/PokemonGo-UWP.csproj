@@ -106,6 +106,9 @@
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="ViewModels\GameManagerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\CapturePokemonPage.xaml.cs">
+      <DependentUpon>CapturePokemonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,8 @@
   <ItemGroup>
     <Content Include="Assets\UI\ash.png" />
     <Content Include="Assets\UI\avatar.png" />
+    <Content Include="Assets\UI\Desert.jpg" />
+    <Content Include="Assets\UI\Park.jpg" />
     <Content Include="Assets\UI\Pokeball.png" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />
@@ -145,6 +150,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\CapturePokemonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\Busy.xaml">
       <Generator>MSBuild:Compile</Generator>

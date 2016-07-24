@@ -161,29 +161,40 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand<MapPokemonWrapper> _tryCatchPokemon;
 
+        /// <summary>
+        /// Pokemon that we're trying to capture
+        /// </summary>
+        private MapPokemonWrapper _currentPokemon;
+
+        private EncounterResponse _currentEncounter;
+
         public DelegateCommand<MapPokemonWrapper> TryCatchPokemon => _tryCatchPokemon ?? (
             _tryCatchPokemon = new DelegateCommand<MapPokemonWrapper>(async pokemon =>
             {
                 Logger.Write($"Catching {pokemon.PokemonId}");
-                var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
-                //var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
+                // Get the pokemon and navigate to capture page where we can handle capturing
+                CurrentPokemon = pokemon;
+                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                   
+                NavigationService.Navigate(typeof(CapturePokemonPage));
+                //var encounterPokemonResponse = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
+                ////var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;                
 
-                CatchPokemonResponse caughtPokemonResponse;
-                do
-                {
-                    //if (encounterPokemonResponse?.CaptureProbability.CaptureProbability_.First() < 0.4)
-                    //{
-                    //    //Throw berry is we can
-                    //    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
-                    //}
-                    // TODO: proper capturing!
-                    caughtPokemonResponse = await _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL);
-                    await Task.Delay(2000);
-                }
-                while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
-                Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..");
-                await new MessageDialog((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..")).ShowAsync();
-                UpdateMapData();
+                //CatchPokemonResponse caughtPokemonResponse;
+                //do
+                //{
+                //    //if (encounterPokemonResponse?.CaptureProbability.CaptureProbability_.First() < 0.4)
+                //    //{
+                //    //    //Throw berry is we can
+                //    //    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
+                //    //}
+                //    // TODO: proper capturing!
+                //    caughtPokemonResponse = await _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, MiscEnums.Item.ITEM_POKE_BALL);
+                //    await Task.Delay(2000);
+                //}
+                //while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed);
+                //Logger.Write(caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..");
+                //await new MessageDialog((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess ? $"We caught a {pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} using a {MiscEnums.Item.ITEM_POKE_BALL}" : $"{pokemon.PokemonId} with CP {encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp} got away while using a {MiscEnums.Item.ITEM_POKE_BALL}..")).ShowAsync();
+                //UpdateMapData();
                 // After capturing we need to update the map because the Pokemon may be no longer there                
             }, pokemon => true)
             );
@@ -210,6 +221,24 @@ namespace PokemonGo_UWP.ViewModels
         /// Collection of Pokemon in 2 steps from current position
         /// </summary>
         public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+
+        public MapPokemonWrapper CurrentPokemon
+        {
+            get
+            {
+                return _currentPokemon;
+            }
+            set { Set(ref _currentPokemon, value); }
+        }
+
+        public EncounterResponse CurrentEncounter
+        {
+            get
+            {
+                return _currentEncounter;
+            }
+            set { Set(ref _currentEncounter, value); }
+        }
 
         /// <summary>
         /// Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
