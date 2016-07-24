@@ -9,6 +9,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using AllEnum;
+using Google.Protobuf.Collections;
 using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo_UWP.Utils
@@ -75,6 +76,24 @@ namespace PokemonGo_UWP.Utils
         {
             // HACK - we probably need some kind of database with item names and descriptions, this will work for now
             return ((ItemId) value).ToString().Replace("Item", "");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class CaptureXpToTotalCaptureXpConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var xp = (RepeatedField<int>) value;
+            return xp.Sum();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

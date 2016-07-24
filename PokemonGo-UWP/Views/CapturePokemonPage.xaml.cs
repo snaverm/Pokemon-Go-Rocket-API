@@ -56,7 +56,9 @@ namespace PokemonGo_UWP.Views
             App.ViewModelLocator.GameManagerViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
             App.ViewModelLocator.GameManagerViewModel.CatchMissed += GameManagerViewModelOnCatchMissed;
             // Add also handlers to enable the button once the animation is done
-            CatchSuccess.Completed += (s, e) => LaunchPokeballButton.IsEnabled = true;
+            // TODO: ok button after capture leaves the page
+            // TODO: fix names for actions in capture score and choose a proper font
+            CatchSuccess.Completed += (s, e) => ShowCaptureStatsStoryboard.Begin();
             CatchEscape.Completed += (s, e) => BootStrapper.Current.NavigationService.GoBack();
             CatchMissed.Completed += (s, e) => LaunchPokeballButton.IsEnabled = true;
         }

@@ -28,6 +28,15 @@
                 Duration="0:0:0.2" />
         </Storyboard>
 
+        <Storyboard x:Name="ShowCaptureStatsStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="CatchStatsTranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="500"
+                To="150"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
         <Storyboard x:Name="CatchSuccess">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="LaunchPokeballButton">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -268,6 +277,103 @@
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
+            </Grid>
+        </Border>
+
+        <Border RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                x:Name="CatchStatsBorder"
+                Background="AntiqueWhite"
+                CornerRadius="8,8,0,0"
+                Padding="8"
+                Margin="8,0"
+                Height="350"
+                Canvas.ZIndex="5">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="CatchStatsTranslateTransform"
+                                    Y="800" />
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Grid.Row="0">
+                    <TextBlock Text="Stardust"/>
+                    <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
+                               Margin="0,0,24,0"/>
+                    <TextBlock Text="Candy"/>
+                    <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView ItemsSource="{Binding CurrentCaptureScore.ActivityType}"
+                              SelectionMode="None"
+                              Grid.Column="0">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" 
+                                        Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"
+                                           HorizontalAlignment="Left"
+                                           Margin="0,6,0,0"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <ListView ItemsSource="{Binding CurrentCaptureScore.Xp}"
+                              SelectionMode="None"
+                              Grid.Column="1">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" 
+                                        Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,6,0,0"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Text="TOTAL XP:"
+                               HorizontalAlignment="Left"
+                               Grid.Column="0"/>
+
+                    <TextBlock Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
+                               HorizontalAlignment="Right"
+                               Grid.Column="1"/>
+                </Grid>
+
+                <Button Content="OK"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="3"/>
             </Grid>
         </Border>
 
