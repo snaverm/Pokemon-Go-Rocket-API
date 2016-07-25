@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
+using Windows.System.Threading;
 using Windows.UI.Popups;
 using AllEnum;
 using PokemonGo.RocketAPI;
@@ -38,7 +40,7 @@ namespace PokemonGo_UWP.ViewModels
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
-            _inventory = new Inventory(_client);
+            _inventory = new Inventory(_client);                     
         }
 
         #endregion
@@ -252,6 +254,16 @@ namespace PokemonGo_UWP.ViewModels
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
                         // Avoid going back to login page using back button
                         NavigationService.ClearHistory();
+                        // Start a timer to update map data every 5 seconds
+                        var timer = ThreadPoolTimer.CreatePeriodicTimer((t) =>
+                        {
+                            Logger.Write("Updating map");
+                            UpdateMapData();
+                        }, TimeSpan.FromSeconds(5));
+                        //var _updateMapTimer = new Timer((p) =>
+                        //{
+                        //    UpdateMapData();
+                        //}, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
                     }
                 }
                 catch (Exception)
