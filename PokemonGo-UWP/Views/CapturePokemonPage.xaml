@@ -176,10 +176,10 @@
                 Stretch="UniformToFill" />
         </RelativePanel.Background>
 
-        <Border RelativePanel.AlignLeftWithPanel="True"
+        <Border x:Name="InventoryMenuBorder"
+                RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                x:Name="InventoryMenuBorder"
+                RelativePanel.AlignBottomWithPanel="True"                
                 Background="AntiqueWhite"
                 CornerRadius="8"
                 Padding="8"
@@ -272,16 +272,16 @@
                         Margin="0,8,0,0"
                         Click="CloseInventoryMenuButton_OnClick"
                         x:Name="CloseInventoryMenuButton">
-                    <Image Source="../Assets/UI/avatar.png"
+                    <Image Source="../Assets/UI/close.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
             </Grid>
         </Border>
 
-        <Border RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                x:Name="CatchStatsBorder"
+        <Border x:Name="CatchStatsBorder"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"                
                 Background="AntiqueWhite"
                 CornerRadius="8"
                 Padding="8"
@@ -307,15 +307,21 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Stardust: "
-                               Grid.Column="0"/>
+                    <Image Source="../Assets/UI/stardust.png"
+                           Stretch="Uniform"
+                           Width="48"
+                           Grid.Column="0"/>
                     <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
                                Margin="24,0"
+                               VerticalAlignment="Center"
                                Grid.Column="1"/>
-                    <TextBlock Text="Candy: "
-                               Grid.Column="2"/>
+                    <Image Source="../Assets/UI/candy.png"
+                           Stretch="Uniform"                           
+                           Width="48"
+                           Grid.Column="2"/>
                     <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
                                Margin="24,0"
+                               VerticalAlignment="Center"
                                Grid.Column="3"/>
                 </Grid>
 
@@ -423,7 +429,6 @@
             </StackPanel>
         </Border>
 
-
         <Button Style="{ThemeResource ImageButtonStyle}"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignTopWithPanel="True"
@@ -445,19 +450,20 @@
                 HorizontalAlignment="Center"
                 Click="InventoryButton_OnClick"
                 x:Name="InventoryButton">
-            <Image Source="../Assets/UI/avatar.png"
+            <Image Source="../Assets/UI/inventory.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
         </Button>
 
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True"
-                       RelativePanel.AlignBottomWithPanel="True">
+                       RelativePanel.AlignBottomWithPanel="True"
+                       Background="Transparent">
             <Button Style="{ThemeResource ImageButtonStyle}"
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
                     Margin="5"
                     Height="100"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Center"                    
                     Command="{Binding LaunchBall}"
                     x:Name="LaunchPokeballButton">
                 <Button.RenderTransform>

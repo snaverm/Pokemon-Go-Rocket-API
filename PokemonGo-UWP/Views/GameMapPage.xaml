@@ -188,7 +188,7 @@
                         Margin="0,8,0,0"
                         Tapped="NearbyPokemonGrid_OnTapped"
                         x:Name="CloseNearbyGridViewButton">
-                    <Image Source="../Assets/UI/Pokeball.png"
+                    <Image Source="../Assets/UI/close.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
@@ -239,9 +239,10 @@
                            Foreground="White"
                            Style="{ThemeResource BodyTextBlockStyle}"
                            FontWeight="SemiBold"
+                           TextAlignment="Right"
                            RelativePanel.RightOf="AvatarEllipse"
                            RelativePanel.Above="ExperienceProgressBar"
-                           Margin="-10,0,0,-4" />
+                           Margin="-6,0,0,-4" />
 
                 <TextBlock Text="{Binding PlayerProfile.Username}"
                            FontSize="15"
