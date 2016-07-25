@@ -104,6 +104,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class ActivityTypeToActivityNameConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var activityType = (ActivityType) value;
+            return activityType.ToString().Replace("Activity", "");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class EmptyConverter : IValueConverter
     {
         #region Implementation of IValueConverter

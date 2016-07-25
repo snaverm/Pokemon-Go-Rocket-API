@@ -96,6 +96,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private CaptureScore _currentCaptureScore;
 
+        /// <summary>
+        /// True if we're in catching mode, so that we can avoid updating the map 
+        /// </summary>
+        private bool _isCatching;
+
         #endregion
 
         #region Bindable Game Vars
@@ -257,6 +262,7 @@ namespace PokemonGo_UWP.ViewModels
                         // Start a timer to update map data every 5 seconds
                         var timer = ThreadPoolTimer.CreatePeriodicTimer((t) =>
                         {
+                            if (_isCatching) return;
                             Logger.Write("Updating map");
                             UpdateMapData();
                         }, TimeSpan.FromSeconds(5));
@@ -383,7 +389,11 @@ namespace PokemonGo_UWP.ViewModels
                 CurrentCaptureScore = null;
                 Busy.SetBusy(false);
                 if (CurrentEncounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                {
+                    // report that we started catching a Pokemon
+                    _isCatching = true;
                     NavigationService.Navigate(typeof(CapturePokemonPage));
+                }
                 else
                 {
                     // Encounter failed, probably the Pokemon ran away
@@ -436,6 +446,22 @@ namespace PokemonGo_UWP.ViewModels
                         throw new ArgumentOutOfRangeException();
                 }
             }, () => true));
+
+        private DelegateCommand _exitCatchScreen;
+
+        /// <summary>
+        /// Since we handled everything in the LaunchBall method, we use this command to get back to main game page
+        /// </summary>
+        public DelegateCommand ExitCatchScreen => _exitCatchScreen ?? (
+            _exitCatchScreen = new DelegateCommand(() =>
+            {
+                NavigationService.GoBack();    
+                // Clear history to avoid issues when using back button    
+                NavigationService.ClearHistory();
+                // Start updating map again
+                _isCatching = false;
+            }, () => true)
+            );
 
         #endregion
 

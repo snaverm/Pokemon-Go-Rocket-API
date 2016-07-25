@@ -33,6 +33,7 @@
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter"/>
             <utils:ItemToItemIdConverter x:Key="ItemToItemIdConverter"/>
             <utils:CaptureXpToTotalCaptureXpConverter x:Key="CaptureXpToTotalCaptureXpConverter"/>
+            <utils:ActivityTypeToActivityNameConverter x:Key="ActivityTypeToActivityNameConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

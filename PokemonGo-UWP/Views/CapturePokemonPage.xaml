@@ -181,10 +181,9 @@
                 RelativePanel.AlignBottomWithPanel="True"
                 x:Name="InventoryMenuBorder"
                 Background="AntiqueWhite"
-                CornerRadius="8,8,0,0"
+                CornerRadius="8"
                 Padding="8"
                 Margin="8,0"
-                Height="500"
                 Canvas.ZIndex="5">
             <Border.RenderTransform>
                 <TranslateTransform x:Name="InventoryMenuTranslateTransform"
@@ -284,10 +283,9 @@
                 RelativePanel.AlignRightWithPanel="True"
                 x:Name="CatchStatsBorder"
                 Background="AntiqueWhite"
-                CornerRadius="8,8,0,0"
+                CornerRadius="8"
                 Padding="8"
                 Margin="8,0"
-                Height="350"
                 Canvas.ZIndex="5">
             <Border.RenderTransform>
                 <TranslateTransform x:Name="CatchStatsTranslateTransform"
@@ -301,19 +299,29 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
+                <Grid HorizontalAlignment="Center"
                             Grid.Row="0">
-                    <TextBlock Text="Stardust"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Stardust: "
+                               Grid.Column="0"/>
                     <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
-                               Margin="0,0,24,0"/>
-                    <TextBlock Text="Candy"/>
-                    <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"/>
-                </StackPanel>
+                               Margin="24,0"
+                               Grid.Column="1"/>
+                    <TextBlock Text="Candy: "
+                               Grid.Column="2"/>
+                    <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
+                               Margin="24,0"
+                               Grid.Column="3"/>
+                </Grid>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -329,7 +337,7 @@
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}"
+                                <TextBlock Text="{Binding Converter={StaticResource ActivityTypeToActivityNameConverter}}"
                                            HorizontalAlignment="Left"
                                            Margin="0,6,0,0"/>
                             </DataTemplate>
@@ -356,7 +364,8 @@
                     </ListView>
                 </Grid>
                 
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Padding="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -373,6 +382,7 @@
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
+                        Command="{Binding ExitCatchScreen}"
                         Grid.Row="3"/>
             </Grid>
         </Border>
@@ -418,8 +428,9 @@
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignTopWithPanel="True"
                 Margin="5"
-                Height="48"
+                Height="36"
                 HorizontalAlignment="Center"
+                Command="{Binding ExitCatchScreen}"
                 x:Name="EscapeEncounterButton">
             <Image Source="../Assets/UI/escape.png"
                    Stretch="Uniform"
