@@ -464,7 +464,7 @@
                     Margin="5"
                     Height="100"
                     HorizontalAlignment="Center"                    
-                    Command="{Binding LaunchBall}"
+                    Command="{Binding UseSelectedCaptureItem}"
                     x:Name="LaunchPokeballButton">
                 <Button.RenderTransform>
                     <CompositeTransform x:Name="PokeballTransform"

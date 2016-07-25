@@ -400,52 +400,87 @@ namespace PokemonGo_UWP.ViewModels
                     await new MessageDialog("Pokemon ran away, sorry :(").ShowAsync();
                 }
             }, pokemon => true)
-            );
+            );        
 
-        private DelegateCommand _launchBall;
+        private DelegateCommand _useSelectedCaptureItem;
 
         /// <summary>
         /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
+        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.        
         /// </summary>
-        public DelegateCommand LaunchBall => _launchBall ?? (
-            _launchBall = new DelegateCommand(async () =>
+        public DelegateCommand UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
+            _useSelectedCaptureItem = new DelegateCommand(async () =>
             {
                 Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
-                var caughtPokemonResponse = await _client.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, CurrentPokemon.Latitude, CurrentPokemon.Longitude, (MiscEnums.Item) SelectedCaptureItem.Item_);
-                switch (caughtPokemonResponse.Status)
+                // TODO: we need to see what happens if the user is throwing a different kind of ball
+                if (SelectedCaptureItem.Item_ == ItemType.Pokeball)
                 {
-                    case CatchPokemonResponse.Types.CatchStatus.CatchError:
-                        Logger.Write("CatchError!");
-                        // TODO: what can we do?
-                        break;
-                    case CatchPokemonResponse.Types.CatchStatus.CatchSuccess:
-                        CurrentCaptureScore = caughtPokemonResponse.Scores;
-                        Logger.Write($"We caught {CurrentPokemon.PokemonId}");
-                        CatchSuccess?.Invoke(this, null);                        
-                        UpdateMapData();
-                        UpdateInventory();
-                        UpdatePlayerData();
-                        break;
-                    case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
-                        Logger.Write($"{CurrentPokemon.PokemonId} escaped");
-                        CatchEscape?.Invoke(this, null);
-                        // TODO: update map
-                        break;
-                    case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
-                        Logger.Write($"{CurrentPokemon.PokemonId} escaped");
-                        CatchEscape?.Invoke(this, null);
-                        // TODO: update map
-                        break;
-                    case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
-                        Logger.Write($"We missed {CurrentPokemon.PokemonId}");
-                        // TODO: update inventory and counter for current item since we wasted one
-                        CatchMissed?.Invoke(this, null);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    // Player's using a PokeBall so we try to catch the Pokemon
+                    await ThrowPokeball();
+                }
+                else
+                {
+                    // TODO: check if player can only use a ball or a berry during an encounter, and maybe avoid displaying useless items in encounter's inventory
+                    // He's using a berry
+                    await ThrowBerry();
                 }
             }, () => true));
+
+        /// <summary>
+        /// Launches the PokeBall for the current encounter, handling the different catch responses
+        /// </summary>
+        /// <returns></returns>
+        private async Task ThrowPokeball()
+        {
+            var caughtPokemonResponse = await _client.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, CurrentPokemon.Latitude, CurrentPokemon.Longitude, (MiscEnums.Item)SelectedCaptureItem.Item_);
+            switch (caughtPokemonResponse.Status)
+            {
+                case CatchPokemonResponse.Types.CatchStatus.CatchError:
+                    Logger.Write("CatchError!");
+                    // TODO: what can we do?
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchSuccess:
+                    CurrentCaptureScore = caughtPokemonResponse.Scores;
+                    Logger.Write($"We caught {CurrentPokemon.PokemonId}");
+                    CatchSuccess?.Invoke(this, null);
+                    UpdateMapData();
+                    UpdateInventory();
+                    UpdatePlayerData();
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
+                    Logger.Write($"{CurrentPokemon.PokemonId} escaped");
+                    CatchEscape?.Invoke(this, null);
+                    UpdateMapData();
+                    UpdateInventory();
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
+                    Logger.Write($"{CurrentPokemon.PokemonId} escaped");
+                    CatchEscape?.Invoke(this, null);
+                    UpdateMapData();
+                    UpdateInventory();
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
+                    Logger.Write($"We missed {CurrentPokemon.PokemonId}");
+                    CatchMissed?.Invoke(this, null);
+                    UpdateInventory();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        /// <summary>
+        /// Uses the selected berry for the current encounter
+        /// TODO: what happens when the berry is used? Do we need some kind of animation or visual feedback?
+        /// </summary>
+        /// <returns></returns>
+        public async Task ThrowBerry()
+        {
+            if (SelectedCaptureItem == null)
+                return;
+            var berryResult = await _client.UseCaptureItem(CurrentPokemon.EncounterId, (ItemId) SelectedCaptureItem.Item_, CurrentPokemon.SpawnpointId);            
+            Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");            
+        }
 
         private DelegateCommand _exitCatchScreen;
 
