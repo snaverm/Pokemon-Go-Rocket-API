@@ -34,13 +34,13 @@
                      RelativePanel.AlignRightWithPanel="True"
                      RelativePanel.Below="usernameTextBox" />
 
-        <Grid Margin="16,12"              
+        <Grid Margin="16,12"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.AlignBottomWithPanel="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock TextWrapping="WrapWholeWords"
                        Margin="16,12"
@@ -48,9 +48,9 @@
 
             <Button HorizontalAlignment="Stretch"
                     Grid.Row="1"
-                x:Name="loginButton"
-                Content="login"
-                Command="{Binding DoPtcLoginCommand}" />
+                    x:Name="loginButton"
+                    Content="login"
+                    Command="{Binding DoPtcLoginCommand}" />
         </Grid>
 
     </RelativePanel>

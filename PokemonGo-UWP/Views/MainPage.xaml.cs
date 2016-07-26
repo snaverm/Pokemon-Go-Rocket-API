@@ -1,5 +1,5 @@
-using System;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace PokemonGo_UWP.Views
 {
@@ -8,7 +8,7 @@ namespace PokemonGo_UWP.Views
         public MainPage()
         {
             InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

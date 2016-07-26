@@ -38,132 +38,178 @@
         </Storyboard>
 
         <Storyboard x:Name="CatchSuccess">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="45"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="45" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-220"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-220" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="CatchMissed">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="1"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="1" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="1"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="1" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="-70"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="-70" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="CatchEscape">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="360" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="100" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LaunchPokeballButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="LaunchPokeballButton">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-250" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-500"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-500" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="CurrentPokemonIcon">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
@@ -179,7 +225,7 @@
         <Border x:Name="InventoryMenuBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"                
+                RelativePanel.AlignBottomWithPanel="True"
                 Background="AntiqueWhite"
                 CornerRadius="8"
                 Padding="8"
@@ -281,7 +327,7 @@
 
         <Border x:Name="CatchStatsBorder"
                 RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"                
+                RelativePanel.AlignRightWithPanel="True"
                 Background="AntiqueWhite"
                 CornerRadius="8"
                 Padding="8"
@@ -300,35 +346,35 @@
                 </Grid.RowDefinitions>
 
                 <Grid HorizontalAlignment="Center"
-                            Grid.Row="0">
+                      Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image Source="../Assets/UI/stardust.png"
                            Stretch="Uniform"
                            Width="48"
-                           Grid.Column="0"/>
+                           Grid.Column="0" />
                     <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
                                Margin="24,0"
                                VerticalAlignment="Center"
-                               Grid.Column="1"/>
+                               Grid.Column="1" />
                     <Image Source="../Assets/UI/candy.png"
-                           Stretch="Uniform"                           
+                           Stretch="Uniform"
                            Width="48"
-                           Grid.Column="2"/>
+                           Grid.Column="2" />
                     <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
                                Margin="24,0"
                                VerticalAlignment="Center"
-                               Grid.Column="3"/>
+                               Grid.Column="3" />
                 </Grid>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <ListView ItemsSource="{Binding CurrentCaptureScore.ActivityType}"
@@ -336,16 +382,17 @@
                               Grid.Column="0">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" 
+                                <Setter Property="HorizontalContentAlignment"
                                         Value="Stretch" />
                             </Style>
                         </ListView.ItemContainerStyle>
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource ActivityTypeToActivityNameConverter}}"
-                                           HorizontalAlignment="Left"
-                                           Margin="0,6,0,0"/>
+                                <TextBlock
+                                    Text="{Binding Converter={StaticResource ActivityTypeToActivityNameConverter}}"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,6,0,0" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -355,7 +402,7 @@
                               Grid.Column="1">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" 
+                                <Setter Property="HorizontalContentAlignment"
                                         Value="Stretch" />
                             </Style>
                         </ListView.ItemContainerStyle>
@@ -364,32 +411,33 @@
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"
                                            HorizontalAlignment="Right"
-                                           Margin="0,6,0,0"/>
+                                           Margin="0,6,0,0" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
-                
+
                 <Grid Grid.Row="2"
                       Padding="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Text="TOTAL XP:"
                                HorizontalAlignment="Left"
-                               Grid.Column="0"/>
+                               Grid.Column="0" />
 
-                    <TextBlock Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
-                               HorizontalAlignment="Right"
-                               Grid.Column="1"/>
+                    <TextBlock
+                        Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
+                        HorizontalAlignment="Right"
+                        Grid.Column="1" />
                 </Grid>
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
                         Command="{Binding ReturnToGameScreen}"
-                        Grid.Row="3"/>
+                        Grid.Row="3" />
             </Grid>
         </Border>
 
@@ -400,9 +448,9 @@
                RenderTransformOrigin="0.5,1"
                Stretch="Uniform"
                Source="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-               x:Name="CurrentPokemonIcon" >
+               x:Name="CurrentPokemonIcon">
             <Image.RenderTransform>
-                <CompositeTransform/>
+                <CompositeTransform />
             </Image.RenderTransform>
         </Image>
 
@@ -463,7 +511,7 @@
                     RelativePanel.AlignBottomWithPanel="True"
                     Margin="5"
                     Height="100"
-                    HorizontalAlignment="Center"                    
+                    HorizontalAlignment="Center"
                     Command="{Binding UseSelectedCaptureItem}"
                     x:Name="LaunchPokeballButton">
                 <Button.RenderTransform>

@@ -18,9 +18,9 @@
                           Height="128"
                           Foreground="{StaticResource ExtendedSplashForegroundColorBrush}"
                           IsActive="{x:Bind IsBusy, Mode=OneWay}" />
-            <TextBlock Grid.Row="1" 
+            <TextBlock Grid.Row="1"
                        Margin="0,12,0,0"
-                       VerticalAlignment="Center" 
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        TextAlignment="Center"
                        Foreground="{StaticResource ExtendedSplashForegroundColorBrush}"

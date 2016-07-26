@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AllEnum;
 using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo_UWP.Entities
 {
     /// <summary>
-    /// We need to wrap <see cref="NearbyPokemon"/> to add the sprite
+    ///     We need to wrap <see cref="NearbyPokemon" /> to add the sprite
     /// </summary>
     public class NearbyPokemonWrapper
     {
+        private readonly NearbyPokemon _nearbyPokemon;
+
+        public NearbyPokemonWrapper(NearbyPokemon nearbyPokemon, Uri sprite)
+        {
+            _nearbyPokemon = nearbyPokemon;
+            PokemonSprite = sprite;
+        }
+
+        public Uri PokemonSprite { get; }
 
         #region Wrapped Properties
 
@@ -23,15 +28,5 @@ namespace PokemonGo_UWP.Entities
         public ulong EncounterId => _nearbyPokemon.EncounterId;
 
         #endregion
-
-        private readonly NearbyPokemon _nearbyPokemon;
-
-        public Uri PokemonSprite { get; }
-
-        public NearbyPokemonWrapper(NearbyPokemon nearbyPokemon, Uri sprite)
-        {
-            _nearbyPokemon = nearbyPokemon;
-            PokemonSprite = sprite;
-        }
     }
 }

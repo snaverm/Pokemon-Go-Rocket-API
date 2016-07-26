@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Template10.Common;
 
@@ -19,13 +9,24 @@ using Template10.Common;
 namespace PokemonGo_UWP.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class CapturePokemonPage : Page
     {
         public CapturePokemonPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        private void InventoryButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: replace code-behind for animations with Template10's behaviors?
+            ShowInventoryMenuStoryboard.Begin();
+        }
+
+        private void CloseInventoryMenuButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            HideInventoryMenuStoryboard.Begin();
         }
 
         #region Overrides of Page
@@ -42,7 +43,6 @@ namespace PokemonGo_UWP.Views
             base.OnNavigatingFrom(e);
             UnsubscribeToCaptureEvents();
         }
-
 
         #endregion
 
@@ -86,16 +86,5 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
-
-        private void InventoryButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            // TODO: replace code-behind for animations with Template10's behaviors?
-            ShowInventoryMenuStoryboard.Begin();
-        }
-
-        private void CloseInventoryMenuButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            HideInventoryMenuStoryboard.Begin();
-        }
     }
 }

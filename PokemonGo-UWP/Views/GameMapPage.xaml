@@ -144,12 +144,12 @@
                                 Background="Transparent"
                                 Command="{Binding TrySearchPokestop, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
                             <Image Source="../Assets/UI/poksetop.png"
-                                maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
-                                maps:MapControl.NormalizedAnchorPoint="0,1"
-                                Stretch="Uniform"
-                                Height="64"
-                                Width="64" />
-                            
+                                   maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
+                                   maps:MapControl.NormalizedAnchorPoint="0,1"
+                                   Stretch="Uniform"
+                                   Height="64"
+                                   Width="64" />
+
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -173,11 +173,11 @@
             </Border.RenderTransform>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock Text="nearby"
                            Grid.Row="0"
                            FontSize="25"
@@ -308,31 +308,31 @@
 
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image Grid.Column="0"
-                        Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48" />
+                           Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                           Stretch="UniformToFill"
+                           VerticalAlignment="Center"
+                           Width="48"
+                           Height="48" />
 
                     <Image Grid.Column="1"
-                        Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"/>
+                           Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                           Stretch="UniformToFill"
+                           VerticalAlignment="Center"
+                           Width="48"
+                           Height="48" />
 
                     <Image Grid.Column="2"
-                        Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48" />
+                           Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                           Stretch="UniformToFill"
+                           VerticalAlignment="Center"
+                           Width="48"
+                           Height="48" />
                 </Grid>
 
             </Border>

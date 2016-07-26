@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
@@ -23,7 +20,6 @@ using PokemonGo_UWP.Views;
 using Template10.Common;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
-using Item = PokemonGo.RocketAPI.GeneratedCode.Item;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -41,7 +37,7 @@ namespace PokemonGo_UWP.ViewModels
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
-            _inventory = new Inventory(_client);                     
+            _inventory = new Inventory(_client);
         }
 
         #endregion
@@ -57,7 +53,7 @@ namespace PokemonGo_UWP.ViewModels
         #region Game Management Vars
 
         /// <summary>
-        /// We use it to notify that we found at least one catchable Pokemon in our area
+        ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
         private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
 
@@ -72,48 +68,48 @@ namespace PokemonGo_UWP.ViewModels
         private PlayerStats _playerStats;
 
         /// <summary>
-        /// Player's inventory
-        /// TODO: do we really need it?
+        ///     Player's inventory
+        ///     TODO: do we really need it?
         /// </summary>
-        private InventoryDelta _inventoryDelta;        
+        private InventoryDelta _inventoryDelta;
 
         /// <summary>
-        /// Pokemon that we're trying to capture
+        ///     Pokemon that we're trying to capture
         /// </summary>
         private MapPokemonWrapper _currentPokemon;
 
         /// <summary>
-        /// Encounter for the Pokemon that we're trying to capture
+        ///     Encounter for the Pokemon that we're trying to capture
         /// </summary>
         private EncounterResponse _currentEncounter;
 
         /// <summary>
-        /// Current item for capture page
+        ///     Current item for capture page
         /// </summary>
         private Item _selectedCaptureItem;
 
         /// <summary>
-        /// Score for the current capture, updated only if we captured the Pokemon
+        ///     Score for the current capture, updated only if we captured the Pokemon
         /// </summary>
         private CaptureScore _currentCaptureScore;
 
         /// <summary>
-        /// True if we're in catching mode or in fort searching, so that we can avoid updating the map with the timer
+        ///     True if we're in catching mode or in fort searching, so that we can avoid updating the map with the timer
         /// </summary>
         private bool _stopUpdatingMap;
 
         /// <summary>
-        /// Pokestop that the user is visiting
+        ///     Pokestop that the user is visiting
         /// </summary>
         private FortData _currentPokestop;
 
         /// <summary>
-        /// Infos on the current Pokestop
+        ///     Infos on the current Pokestop
         /// </summary>
         private FortDetailsResponse _currentPokestopInfo;
 
         /// <summary>
-        /// Results of the current Pokestop search
+        ///     Results of the current Pokestop search
         /// </summary>
         private FortSearchResponse _currentSearchResponse;
 
@@ -124,31 +120,19 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Player's profile, we use it just for the username
         /// </summary>
-        public Profile PlayerProfile {
-            get
-            {
-                return _playerProfile;                
-            }
-            set
-            {
-                Set(ref _playerProfile, value); 
-                
-            }
+        public Profile PlayerProfile
+        {
+            get { return _playerProfile; }
+            set { Set(ref _playerProfile, value); }
         }
 
         /// <summary>
         ///     Stats for the current player, including current level and experience related stuff
         /// </summary>
-        public PlayerStats PlayerStats {
-            get
-            {
-                return _playerStats;
-            }
-            set
-            {
-                Set(ref _playerStats, value);
-
-            }
+        public PlayerStats PlayerStats
+        {
+            get { return _playerStats; }
+            set { Set(ref _playerStats, value); }
         }
 
         public InventoryDelta InventoryDelta
@@ -158,55 +142,47 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Collection of Pokemon in 1 step from current position
+        ///     Collection of Pokemon in 1 step from current position
         /// </summary>
-        public ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
+        public ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } =
+            new ObservableCollection<MapPokemonWrapper>();
 
         /// <summary>
-        /// Collection of Pokemon in 2 steps from current position
+        ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
-        public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+        public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } =
+            new ObservableCollection<NearbyPokemon>();
 
         /// <summary>
-        /// Collection of Pokestops in the current area
+        ///     Collection of Pokestops in the current area
         /// </summary>
         public ObservableCollection<FortData> NearbyPokestops { get; set; } = new ObservableCollection<FortData>();
 
         /// <summary>
-        /// Stores the current inventory
+        ///     Stores the current inventory
         /// </summary>
         public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
 
         /// <summary>
-        /// Pokemon that we're trying to capture
+        ///     Pokemon that we're trying to capture
         /// </summary>
         public MapPokemonWrapper CurrentPokemon
         {
-            get
-            {                
-                return _currentPokemon;
-            }
+            get { return _currentPokemon; }
             set { Set(ref _currentPokemon, value); }
         }
 
         /// <summary>
-        /// Encounter for the Pokemon that we're trying to capture
+        ///     Encounter for the Pokemon that we're trying to capture
         /// </summary>
         public EncounterResponse CurrentEncounter
         {
-            get
-            {
-                return _currentEncounter;
-            }
-            set
-            {
-                Set(ref _currentEncounter, value); 
-                
-            }
+            get { return _currentEncounter; }
+            set { Set(ref _currentEncounter, value); }
         }
 
         /// <summary>
-        /// Current item for capture page
+        ///     Current item for capture page
         /// </summary>
         public Item SelectedCaptureItem
         {
@@ -215,7 +191,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Score for the current capture, updated only if we captured the Pokemon
+        ///     Score for the current capture, updated only if we captured the Pokemon
         /// </summary>
         public CaptureScore CurrentCaptureScore
         {
@@ -224,7 +200,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Pokestop that the user is visiting
+        ///     Pokestop that the user is visiting
         /// </summary>
         public FortData CurrentPokestop
         {
@@ -233,7 +209,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Infos on the current Pokestop
+        ///     Infos on the current Pokestop
         /// </summary>
         public FortDetailsResponse CurrentPokestopInfo
         {
@@ -242,7 +218,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Results of the current Pokestop search
+        ///     Results of the current Pokestop search
         /// </summary>
         public FortSearchResponse CurrentSearchResponse
         {
@@ -288,7 +264,7 @@ namespace PokemonGo_UWP.ViewModels
             {
                 Busy.SetBusy(true, "Logging in...");
                 try
-                {                    
+                {
                     if (!await _client.DoPtcLogin(PtcUsername, PtcPassword))
                     {
                         // Login failed, show a message
@@ -308,7 +284,7 @@ namespace PokemonGo_UWP.ViewModels
                         // Avoid going back to login page using back button
                         NavigationService.ClearHistory();
                         // Start a timer to update map data every 5 seconds
-                        var timer = ThreadPoolTimer.CreatePeriodicTimer((t) =>
+                        var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
                         {
                             if (_stopUpdatingMap) return;
                             Logger.Write("Updating map");
@@ -338,7 +314,7 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _returnToGameScreen;
 
         /// <summary>
-        /// Since we handled everything in the LaunchBall method, we use this command to get back to main game page
+        ///     Since we handled everything in the LaunchBall method, we use this command to get back to main game page
         /// </summary>
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
             _returnToGameScreen = new DelegateCommand(() =>
@@ -356,18 +332,21 @@ namespace PokemonGo_UWP.ViewModels
         #region Data Update
 
         /// <summary>
-        /// Retrieves data for the current position
+        ///     Retrieves data for the current position
         /// </summary>
         private async void UpdateMapData(bool updateOnlyPokemonData = true)
         {
             // Report it to client and find things nearby
-            await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
+            await
+                _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude,
+                    CurrentGeoposition.Coordinate.Point.Position.Longitude);
             var mapObjects = await _client.GetMapObjects();
             // Replace data with the new ones                                  
             var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
             Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
             if (catchableTmp.Count != CatchablePokemons.Count) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
-            await Dispatcher.DispatchAsync(() => {
+            await Dispatcher.DispatchAsync(() =>
+            {
                 CatchablePokemons.Clear();
                 foreach (var pokemon in catchableTmp)
                 {
@@ -376,7 +355,8 @@ namespace PokemonGo_UWP.ViewModels
             });
             var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
             Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
-            await Dispatcher.DispatchAsync(() => {
+            await Dispatcher.DispatchAsync(() =>
+            {
                 NearbyPokemons.Clear();
                 foreach (var pokemon in nearbyTmp)
                 {
@@ -386,29 +366,32 @@ namespace PokemonGo_UWP.ViewModels
             // We only need to update Pokemons
             if (updateOnlyPokemonData) return;
             // Retrieves PokeStops but not Gyms
-            var pokeStopsTmp = new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts).Where(i => i.Type == FortType.Checkpoint));
+            var pokeStopsTmp =
+                new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
+                    .Where(i => i.Type == FortType.Checkpoint));
             Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
-            await Dispatcher.DispatchAsync(() => {
+            await Dispatcher.DispatchAsync(() =>
+            {
                 NearbyPokestops.Clear();
                 foreach (var pokestop in pokeStopsTmp)
                 {
                     NearbyPokestops.Add(pokestop);
                 }
-            });            
+            });
             // TODO: PokeStops -> wrapper to bind to map (and maybe join data from the results below)
             //(await _client.GetFort(id,lat,lon))
             //pokeStopsTmp[0]  
         }
 
         /// <summary>
-        /// Updates player data like profile and stats
+        ///     Updates player data like profile and stats
         /// </summary>
         private async void UpdatePlayerData()
         {
             PlayerProfile = (await _client.GetProfile()).Profile;
             InventoryDelta = (await _client.GetInventory()).InventoryDelta;
             var tmpStats = InventoryDelta.InventoryItems.First(
-                    item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+                item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
             if (PlayerStats != null && PlayerStats.Level != tmpStats.Level)
             {
                 // TODO: report level increase
@@ -417,19 +400,21 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Retrieves inventory for the player
+        ///     Retrieves inventory for the player
         /// </summary>
         private async void UpdateInventory()
         {
             var inventoryTmp = new List<Item>(await _inventory.GetItems());
-            await Dispatcher.DispatchAsync(() => {
+            await Dispatcher.DispatchAsync(() =>
+            {
                 Inventory.Clear();
                 foreach (var item in inventoryTmp)
-                {                    
+                {
                     Inventory.Add(item);
                 }
             });
         }
+
         #endregion
 
         #region Pokemon Catching
@@ -437,26 +422,28 @@ namespace PokemonGo_UWP.ViewModels
         #region Catching Events
 
         /// <summary>
-        /// Event fired if the user was able to catch the Pokemon
+        ///     Event fired if the user was able to catch the Pokemon
         /// </summary>
         public event EventHandler CatchSuccess;
 
         /// <summary>
-        /// Event fired if the user missed the Pokemon
+        ///     Event fired if the user missed the Pokemon
         /// </summary>
         public event EventHandler CatchMissed;
 
         /// <summary>
-        /// Event fired if the Pokemon escapes
+        ///     Event fired if the Pokemon escapes
         /// </summary>
         public event EventHandler CatchEscape;
+
         #endregion
 
         private DelegateCommand<MapPokemonWrapper> _tryCatchPokemon;
 
         /// <summary>
-        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        ///     The only logic here is to check if the encounter was successful before navigating, everything else is handled by
+        ///     the actual capture method.
         /// </summary>
         public DelegateCommand<MapPokemonWrapper> TryCatchPokemon => _tryCatchPokemon ?? (
             _tryCatchPokemon = new DelegateCommand<MapPokemonWrapper>(async pokemon =>
@@ -465,7 +452,7 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, $"Loading encounter with {pokemon.PokemonId}");
                 // Get the pokemon and navigate to capture page where we can handle capturing
                 CurrentPokemon = pokemon;
-                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);                
+                CurrentEncounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
                 // Reset selected item to default one and score to null
                 SelectedCaptureItem = Inventory.First(item => item.Item_ == ItemType.Pokeball);
                 CurrentCaptureScore = null;
@@ -482,13 +469,14 @@ namespace PokemonGo_UWP.ViewModels
                     await new MessageDialog("Pokemon ran away, sorry :(").ShowAsync();
                 }
             }, pokemon => true)
-            );        
+            );
 
         private DelegateCommand _useSelectedCaptureItem;
 
         /// <summary>
-        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.        
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        ///     The only logic here is to check if the encounter was successful before navigating, everything else is handled by
+        ///     the actual capture method.
         /// </summary>
         public DelegateCommand UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
             _useSelectedCaptureItem = new DelegateCommand(async () =>
@@ -509,12 +497,15 @@ namespace PokemonGo_UWP.ViewModels
             }, () => true));
 
         /// <summary>
-        /// Launches the PokeBall for the current encounter, handling the different catch responses
+        ///     Launches the PokeBall for the current encounter, handling the different catch responses
         /// </summary>
         /// <returns></returns>
         private async Task ThrowPokeball()
         {
-            var caughtPokemonResponse = await _client.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, CurrentPokemon.Latitude, CurrentPokemon.Longitude, (MiscEnums.Item)SelectedCaptureItem.Item_);
+            var caughtPokemonResponse =
+                await
+                    _client.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
+                        CurrentPokemon.Latitude, CurrentPokemon.Longitude, (MiscEnums.Item) SelectedCaptureItem.Item_);
             switch (caughtPokemonResponse.Status)
             {
                 case CatchPokemonResponse.Types.CatchStatus.CatchError:
@@ -552,17 +543,20 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Uses the selected berry for the current encounter
-        /// TODO: what happens when the berry is used? Do we need some kind of animation or visual feedback?
+        ///     Uses the selected berry for the current encounter
+        ///     TODO: what happens when the berry is used? Do we need some kind of animation or visual feedback?
         /// </summary>
         /// <returns></returns>
         public async Task ThrowBerry()
         {
             if (SelectedCaptureItem == null)
                 return;
-            var berryResult = await _client.UseCaptureItem(CurrentPokemon.EncounterId, (ItemId) SelectedCaptureItem.Item_, CurrentPokemon.SpawnpointId);            
-            Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");            
-        }        
+            var berryResult =
+                await
+                    _client.UseCaptureItem(CurrentPokemon.EncounterId, (ItemId) SelectedCaptureItem.Item_,
+                        CurrentPokemon.SpawnpointId);
+            Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");
+        }
 
         #endregion
 
@@ -571,31 +565,33 @@ namespace PokemonGo_UWP.ViewModels
         #region Search Events
 
         /// <summary>
-        /// Event fired if the user was able to get items from the Pokestop
+        ///     Event fired if the user was able to get items from the Pokestop
         /// </summary>
         public event EventHandler SearchSuccess;
 
         /// <summary>
-        /// Event fired if the user tried to search a Pokestop which is out of range
+        ///     Event fired if the user tried to search a Pokestop which is out of range
         /// </summary>
         public event EventHandler SearchOutOfRange;
 
         /// <summary>
-        /// Event fired if the Pokestop is currently on cooldown and can't be searched
+        ///     Event fired if the Pokestop is currently on cooldown and can't be searched
         /// </summary>
         public event EventHandler SearchInCooldown;
 
         /// <summary>
-        /// Event fired if the Player's inventory is full and he can't get items from the Pokestop
+        ///     Event fired if the Player's inventory is full and he can't get items from the Pokestop
         /// </summary>
         public event EventHandler SearchInventoryFull;
+
         #endregion
 
         private DelegateCommand<FortData> _trySearchPokestop;
 
         /// <summary>
-        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        ///     The only logic here is to check if the encounter was successful before navigating, everything else is handled by
+        ///     the actual capture method.
         /// </summary>
         public DelegateCommand<FortData> TrySearchPokestop => _trySearchPokestop ?? (
             _trySearchPokestop = new DelegateCommand<FortData>(async pokestop =>
@@ -605,13 +601,13 @@ namespace PokemonGo_UWP.ViewModels
                 // Get the pokestop and navigate to search page where we can handle searching
                 CurrentPokestop = pokestop;
                 CurrentPokestopInfo = await _client.GetFort(pokestop.Id, pokestop.Latitude, pokestop.Longitude);
-                Busy.SetBusy(false);      
+                Busy.SetBusy(false);
                 // If timeout is expired we can go to to pokestop page          
                 if (CurrentPokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
                 {
                     // report that we entered a pokestop
                     _stopUpdatingMap = true;
-                    CurrentSearchResponse = null;                 
+                    CurrentSearchResponse = null;
                     NavigationService.Navigate(typeof(SearchPokestopPage));
                 }
                 else
@@ -625,13 +621,14 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _searchCurrentPokestop;
 
         /// <summary>
-        /// Searches the current PokeStop, trying to get items from it
+        ///     Searches the current PokeStop, trying to get items from it
         /// </summary>
         public DelegateCommand SearchCurrentPokestop => _searchCurrentPokestop ?? (
             _searchCurrentPokestop = new DelegateCommand(async () =>
             {
                 Logger.Write($"Searching {CurrentPokestopInfo.Name} [ID = {CurrentPokestop.Id}]");
-                CurrentSearchResponse = await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);                                
+                CurrentSearchResponse =
+                    await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
                 switch (CurrentSearchResponse.Result)
                 {
                     case FortSearchResponse.Types.Result.NoResultSet:
@@ -648,11 +645,11 @@ namespace PokemonGo_UWP.ViewModels
                     case FortSearchResponse.Types.Result.InCooldownPeriod:
                         // PokeStop can't be used because it's on cooldown, there's nothing that we can do
                         SearchInCooldown?.Invoke(this, null);
-                    break;
+                        break;
                     case FortSearchResponse.Types.Result.InventoryFull:
                         // Items can't be gathered because player's inventory is full, there's nothing that we can do
                         SearchInventoryFull?.Invoke(this, null);
-                    break;
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -671,12 +668,12 @@ namespace PokemonGo_UWP.ViewModels
         private Geoposition _currentGeoposition;
 
         /// <summary>
-        /// Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
+        ///     Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
         /// </summary>
         public string MapServiceToken => BingKey.MapServiceToken;
 
         /// <summary>
-        /// Current GPS position
+        ///     Current GPS position
         /// </summary>
         public Geoposition CurrentGeoposition
         {
@@ -697,7 +694,10 @@ namespace PokemonGo_UWP.ViewModels
                     Logger.Write("GPS activated");
                     _geolocator = new Geolocator
                     {
-                        DesiredAccuracy = PositionAccuracy.High, DesiredAccuracyInMeters = 5, ReportInterval = 3000, MovementThreshold = 5
+                        DesiredAccuracy = PositionAccuracy.High,
+                        DesiredAccuracyInMeters = 5,
+                        ReportInterval = 3000,
+                        MovementThreshold = 5
                     };
                     CurrentGeoposition = await _geolocator.GetGeopositionAsync();
                     //_compass = Compass.GetDefault();

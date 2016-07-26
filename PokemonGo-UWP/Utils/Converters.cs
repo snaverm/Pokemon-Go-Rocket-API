@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.UI;
 using Windows.UI.Xaml.Data;
@@ -19,8 +15,8 @@ namespace PokemonGo_UWP.Utils
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
-        {            
-            return new Uri($"http://pokeapi.co/media/sprites/pokemon/{(int)value}.png");
+        {
+            return new Uri($"http://pokeapi.co/media/sprites/pokemon/{(int) value}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -57,7 +53,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new Uri($"ms-appx:///Assets/UI/{(EncounterResponse.Types.Background) value}.jpg");            
+            return new Uri($"ms-appx:///Assets/UI/{(EncounterResponse.Types.Background) value}.jpg");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -123,8 +119,8 @@ namespace PokemonGo_UWP.Utils
     }
 
     /// <summary>
-    /// Converts a generic map object to its coordinates (Geopoint).
-    /// Converter parameter tells if we're converting a MapPokemon or a FortData
+    ///     Converts a generic map object to its coordinates (Geopoint).
+    ///     Converter parameter tells if we're converting a MapPokemon or a FortData
     /// </summary>
     public class MapObjectToGeopointConverter : IValueConverter
     {
@@ -139,7 +135,8 @@ namespace PokemonGo_UWP.Utils
                 var pokemon = (MapPokemon) value;
                 geoposition.Latitude = pokemon.Latitude;
                 geoposition.Longitude = pokemon.Longitude;
-            } else if (objectType.Equals("pokestop"))
+            }
+            else if (objectType.Equals("pokestop"))
             {
                 var pokestop = (FortData) value;
                 geoposition.Latitude = pokestop.Latitude;
@@ -172,5 +169,4 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
-
 }

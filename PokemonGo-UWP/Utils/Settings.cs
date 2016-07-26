@@ -1,10 +1,7 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
-using System;
-using System.Globalization;
-using System.Runtime.CompilerServices;
+﻿using System;
 using System.Collections.Generic;
 using AllEnum;
+using PokemonGo.RocketAPI.Enums;
 
 namespace PokemonGo.RocketAPI.Console
 {
@@ -28,10 +25,7 @@ namespace PokemonGo.RocketAPI.Console
                 };
             }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set { throw new NotImplementedException(); }
         }
 
         public string GoogleRefreshToken

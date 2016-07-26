@@ -10,3 +10,4 @@ obj/
 /PokemonGo-UWP/PokemonGo-UWP.csproj.user
 /PokemonGo-UWP/null
 /PokemonGo-UWP/Utils/BingKey.cs
+/.vs/config/applicationhost.config
