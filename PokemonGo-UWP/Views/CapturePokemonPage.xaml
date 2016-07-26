@@ -388,7 +388,7 @@
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
-                        Command="{Binding ExitCatchScreen}"
+                        Command="{Binding ReturnToGameScreen}"
                         Grid.Row="3"/>
             </Grid>
         </Border>
@@ -435,7 +435,7 @@
                 Margin="5"
                 Height="36"
                 HorizontalAlignment="Center"
-                Command="{Binding ExitCatchScreen}"
+                Command="{Binding ReturnToGameScreen}"
                 x:Name="EscapeEncounterButton">
             <Image Source="../Assets/UI/escape.png"
                    Stretch="Uniform"

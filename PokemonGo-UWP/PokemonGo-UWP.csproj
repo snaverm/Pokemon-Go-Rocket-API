@@ -92,6 +92,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\UI\candy.png" />
     <Content Include="Assets\UI\close.png" />
+    <Content Include="Assets\UI\egg.png" />
     <Content Include="Assets\UI\escape.png" />
     <Content Include="Assets\Fonts\Generica Bold.otf" />
     <Content Include="Assets\Fonts\Generica.otf" />
@@ -135,6 +136,7 @@
     <Content Include="Assets\UI\ash.png" />
     <Content Include="Assets\UI\avatar.png" />
     <Content Include="Assets\UI\Desert.jpg" />
+    <Content Include="Assets\UI\gem.png" />
     <Content Include="Assets\UI\inventory.png" />
     <Content Include="Assets\UI\Park.jpg" />
     <Content Include="Assets\UI\Pokeball.png" />

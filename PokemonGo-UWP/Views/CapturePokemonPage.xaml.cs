@@ -36,7 +36,6 @@ namespace PokemonGo_UWP.Views
             SubscribeToCaptureEvents();
         }
 
-        #region Overrides of Page
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
@@ -44,7 +43,6 @@ namespace PokemonGo_UWP.Views
             UnsubscribeToCaptureEvents();
         }
 
-        #endregion
 
         #endregion
 

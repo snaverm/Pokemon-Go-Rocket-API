@@ -112,6 +112,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private FortDetailsResponse _currentPokestopInfo;
 
+        /// <summary>
+        /// Results of the current Pokestop search
+        /// </summary>
+        private FortSearchResponse _currentSearchResponse;
+
         #endregion
 
         #region Bindable Game Vars
@@ -236,6 +241,15 @@ namespace PokemonGo_UWP.ViewModels
             set { Set(ref _currentPokestopInfo, value); }
         }
 
+        /// <summary>
+        /// Results of the current Pokestop search
+        /// </summary>
+        public FortSearchResponse CurrentSearchResponse
+        {
+            get { return _currentSearchResponse; }
+            set { Set(ref _currentSearchResponse, value); }
+        }
+
         #endregion
 
         #region Game Logic
@@ -315,6 +329,26 @@ namespace PokemonGo_UWP.ViewModels
                     Busy.SetBusy(false);
                 }
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            );
+
+        #endregion
+
+        #region Shared Logic
+
+        private DelegateCommand _returnToGameScreen;
+
+        /// <summary>
+        /// Since we handled everything in the LaunchBall method, we use this command to get back to main game page
+        /// </summary>
+        public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
+            _returnToGameScreen = new DelegateCommand(() =>
+            {
+                NavigationService.GoBack();
+                // Clear history to avoid issues when using back button    
+                NavigationService.ClearHistory();
+                // Start updating map again
+                _stopUpdatingMap = false;
+            }, () => true)
             );
 
         #endregion
@@ -528,23 +562,7 @@ namespace PokemonGo_UWP.ViewModels
                 return;
             var berryResult = await _client.UseCaptureItem(CurrentPokemon.EncounterId, (ItemId) SelectedCaptureItem.Item_, CurrentPokemon.SpawnpointId);            
             Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");            
-        }
-
-        private DelegateCommand _exitCatchScreen;
-
-        /// <summary>
-        /// Since we handled everything in the LaunchBall method, we use this command to get back to main game page
-        /// </summary>
-        public DelegateCommand ExitCatchScreen => _exitCatchScreen ?? (
-            _exitCatchScreen = new DelegateCommand(() =>
-            {
-                NavigationService.GoBack();    
-                // Clear history to avoid issues when using back button    
-                NavigationService.ClearHistory();
-                // Start updating map again
-                _stopUpdatingMap = false;
-            }, () => true)
-            );
+        }        
 
         #endregion
 
@@ -592,7 +610,8 @@ namespace PokemonGo_UWP.ViewModels
                 if (CurrentPokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
                 {
                     // report that we entered a pokestop
-                    _stopUpdatingMap = true;                    
+                    _stopUpdatingMap = true;
+                    CurrentSearchResponse = null;                 
                     NavigationService.Navigate(typeof(SearchPokestopPage));
                 }
                 else
@@ -611,24 +630,32 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand SearchCurrentPokestop => _searchCurrentPokestop ?? (
             _searchCurrentPokestop = new DelegateCommand(async () =>
             {
-                Logger.Write($"Searching {CurrentPokestop.Id}");
-                var fortSearchResponse = await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);                    
-                // TODO: launch events and update inventory if everything goes right
-                    switch (fortSearchResponse.Result)
-                    {
-                        case FortSearchResponse.Types.Result.NoResultSet:
-                            break;
-                        case FortSearchResponse.Types.Result.Success:
-                            break;
-                        case FortSearchResponse.Types.Result.OutOfRange:
-                            break;
-                        case FortSearchResponse.Types.Result.InCooldownPeriod:
-                            break;
-                        case FortSearchResponse.Types.Result.InventoryFull:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                Logger.Write($"Searching {CurrentPokestopInfo.Name} [ID = {CurrentPokestop.Id}]");
+                CurrentSearchResponse = await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);                                
+                switch (CurrentSearchResponse.Result)
+                {
+                    case FortSearchResponse.Types.Result.NoResultSet:
+                        break;
+                    case FortSearchResponse.Types.Result.Success:
+                        // Success, we play the animation and update inventory
+                        SearchSuccess?.Invoke(this, null);
+                        UpdateInventory();
+                        break;
+                    case FortSearchResponse.Types.Result.OutOfRange:
+                        // PokeStop can't be used because it's out of range, there's nothing that we can do
+                        SearchOutOfRange?.Invoke(this, null);
+                        break;
+                    case FortSearchResponse.Types.Result.InCooldownPeriod:
+                        // PokeStop can't be used because it's on cooldown, there's nothing that we can do
+                        SearchInCooldown?.Invoke(this, null);
+                    break;
+                    case FortSearchResponse.Types.Result.InventoryFull:
+                        // Items can't be gathered because player's inventory is full, there's nothing that we can do
+                        SearchInventoryFull?.Invoke(this, null);
+                    break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }, () => true));
 
         #endregion

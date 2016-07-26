@@ -25,11 +25,72 @@ namespace PokemonGo_UWP.Views
         public SearchPokestopPage()
         {
             this.InitializeComponent();
-            Loaded += (s, e) =>
-            {
-                // TODO: animate based on events, this one's here just to see how the animation looks
-                SpinPokestopImage.Begin();
-            };
         }
+
+        #region Overrides of Page
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            SubscribeToCaptureEvents();
+        }
+
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            UnsubscribeToCaptureEvents();
+        }
+
+
+        #endregion
+
+        #region Handlers
+
+        private void SubscribeToCaptureEvents()
+        {
+            App.ViewModelLocator.GameManagerViewModel.SearchInCooldown += GameManagerViewModelOnSearchInCooldown;
+            App.ViewModelLocator.GameManagerViewModel.SearchInventoryFull += GameManagerViewModelOnSearchInventoryFull;
+            App.ViewModelLocator.GameManagerViewModel.SearchOutOfRange += GameManagerViewModelOnSearchOutOfRange;
+            App.ViewModelLocator.GameManagerViewModel.SearchSuccess += GameManagerViewModelOnSearchSuccess;
+            // Add also handlers to report which items the user gained after the animation
+            SpinPokestopImage.Completed += (s, e) => ShowGatheredItemsMenu.Begin(); ;
+        }
+
+        private void UnsubscribeToCaptureEvents()
+        {
+            App.ViewModelLocator.GameManagerViewModel.SearchInCooldown -= GameManagerViewModelOnSearchInCooldown;
+            App.ViewModelLocator.GameManagerViewModel.SearchInventoryFull -= GameManagerViewModelOnSearchInventoryFull;
+            App.ViewModelLocator.GameManagerViewModel.SearchOutOfRange -= GameManagerViewModelOnSearchOutOfRange;
+            App.ViewModelLocator.GameManagerViewModel.SearchSuccess -= GameManagerViewModelOnSearchSuccess;
+        }
+
+        private void GameManagerViewModelOnSearchOutOfRange(object sender, EventArgs eventArgs)
+        {
+            SearchPokestopButton.IsEnabled = false;
+            OutOfRangeTextBlock.Visibility = Visibility.Visible;
+
+        }
+
+        private void GameManagerViewModelOnSearchInventoryFull(object sender, EventArgs eventArgs)
+        {
+            SearchPokestopButton.IsEnabled = false;
+            InventoryFulleTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void GameManagerViewModelOnSearchInCooldown(object sender, EventArgs eventArgs)
+        {
+            SearchPokestopButton.IsEnabled = false;
+            CooldownTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void GameManagerViewModelOnSearchSuccess(object sender, EventArgs eventArgs)
+        {
+            SearchPokestopButton.IsEnabled = false;
+            SpinPokestopImage.Begin();
+        }
+
+        #endregion
+
     }
 }
