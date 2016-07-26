@@ -2,7 +2,7 @@
 
 # Pokemon Go Client for Universal Windows based on [Pokemon-Go-Rocket-API](https://github.com/FeroxRev/Pokemon-Go-Rocket-API) #
 
-*Tasklist: *
+*Tasklist:*
 
 - [x] Port [Pokemon-Go-Rocket-API](https://github.com/FeroxRev/Pokemon-Go-Rocket-API) to Universal Windows Platform
 - [x] Build a basic game manager class 
