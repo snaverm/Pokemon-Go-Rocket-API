@@ -13,6 +13,7 @@ using Windows.UI.Popups;
 using AllEnum;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
+using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logging;
 using PokemonGo.RocketAPI.Logic;
@@ -97,9 +98,19 @@ namespace PokemonGo_UWP.ViewModels
         private CaptureScore _currentCaptureScore;
 
         /// <summary>
-        /// True if we're in catching mode, so that we can avoid updating the map 
+        /// True if we're in catching mode or in fort searching, so that we can avoid updating the map with the timer
         /// </summary>
-        private bool _isCatching;
+        private bool _stopUpdatingMap;
+
+        /// <summary>
+        /// Pokestop that the user is visiting
+        /// </summary>
+        private FortData _currentPokestop;
+
+        /// <summary>
+        /// Infos on the current Pokestop
+        /// </summary>
+        private FortDetailsResponse _currentPokestopInfo;
 
         #endregion
 
@@ -152,6 +163,11 @@ namespace PokemonGo_UWP.ViewModels
         public ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
 
         /// <summary>
+        /// Collection of Pokestops in the current area
+        /// </summary>
+        public ObservableCollection<FortData> NearbyPokestops { get; set; } = new ObservableCollection<FortData>();
+
+        /// <summary>
         /// Stores the current inventory
         /// </summary>
         public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
@@ -200,6 +216,24 @@ namespace PokemonGo_UWP.ViewModels
         {
             get { return _currentCaptureScore; }
             set { Set(ref _currentCaptureScore, value); }
+        }
+
+        /// <summary>
+        /// Pokestop that the user is visiting
+        /// </summary>
+        public FortData CurrentPokestop
+        {
+            get { return _currentPokestop; }
+            set { Set(ref _currentPokestop, value); }
+        }
+
+        /// <summary>
+        /// Infos on the current Pokestop
+        /// </summary>
+        public FortDetailsResponse CurrentPokestopInfo
+        {
+            get { return _currentPokestopInfo; }
+            set { Set(ref _currentPokestopInfo, value); }
         }
 
         #endregion
@@ -262,7 +296,7 @@ namespace PokemonGo_UWP.ViewModels
                         // Start a timer to update map data every 5 seconds
                         var timer = ThreadPoolTimer.CreatePeriodicTimer((t) =>
                         {
-                            if (_isCatching) return;
+                            if (_stopUpdatingMap) return;
                             Logger.Write("Updating map");
                             UpdateMapData();
                         }, TimeSpan.FromSeconds(5));
@@ -290,7 +324,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Retrieves data for the current position
         /// </summary>
-        private async void UpdateMapData()
+        private async void UpdateMapData(bool updateOnlyPokemonData = true)
         {
             // Report it to client and find things nearby
             await _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude, CurrentGeoposition.Coordinate.Point.Position.Longitude);
@@ -315,7 +349,21 @@ namespace PokemonGo_UWP.ViewModels
                     NearbyPokemons.Add(pokemon);
                 }
             });
-            // TODO: PokeStops
+            // We only need to update Pokemons
+            if (updateOnlyPokemonData) return;
+            // Retrieves PokeStops but not Gyms
+            var pokeStopsTmp = new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts).Where(i => i.Type == FortType.Checkpoint));
+            Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
+            await Dispatcher.DispatchAsync(() => {
+                NearbyPokestops.Clear();
+                foreach (var pokestop in pokeStopsTmp)
+                {
+                    NearbyPokestops.Add(pokestop);
+                }
+            });            
+            // TODO: PokeStops -> wrapper to bind to map (and maybe join data from the results below)
+            //(await _client.GetFort(id,lat,lon))
+            //pokeStopsTmp[0]  
         }
 
         /// <summary>
@@ -391,7 +439,7 @@ namespace PokemonGo_UWP.ViewModels
                 if (CurrentEncounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
                     // report that we started catching a Pokemon
-                    _isCatching = true;
+                    _stopUpdatingMap = true;
                     NavigationService.Navigate(typeof(CapturePokemonPage));
                 }
                 else
@@ -494,9 +542,95 @@ namespace PokemonGo_UWP.ViewModels
                 // Clear history to avoid issues when using back button    
                 NavigationService.ClearHistory();
                 // Start updating map again
-                _isCatching = false;
+                _stopUpdatingMap = false;
             }, () => true)
             );
+
+        #endregion
+
+        #region Pokestop Handling
+
+        #region Search Events
+
+        /// <summary>
+        /// Event fired if the user was able to get items from the Pokestop
+        /// </summary>
+        public event EventHandler SearchSuccess;
+
+        /// <summary>
+        /// Event fired if the user tried to search a Pokestop which is out of range
+        /// </summary>
+        public event EventHandler SearchOutOfRange;
+
+        /// <summary>
+        /// Event fired if the Pokestop is currently on cooldown and can't be searched
+        /// </summary>
+        public event EventHandler SearchInCooldown;
+
+        /// <summary>
+        /// Event fired if the Player's inventory is full and he can't get items from the Pokestop
+        /// </summary>
+        public event EventHandler SearchInventoryFull;
+        #endregion
+
+        private DelegateCommand<FortData> _trySearchPokestop;
+
+        /// <summary>
+        /// We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        /// The only logic here is to check if the encounter was successful before navigating, everything else is handled by the actual capture method.
+        /// </summary>
+        public DelegateCommand<FortData> TrySearchPokestop => _trySearchPokestop ?? (
+            _trySearchPokestop = new DelegateCommand<FortData>(async pokestop =>
+            {
+                Logger.Write($"Searching {pokestop.Id}");
+                Busy.SetBusy(true, "Loading Pokestop");
+                // Get the pokestop and navigate to search page where we can handle searching
+                CurrentPokestop = pokestop;
+                CurrentPokestopInfo = await _client.GetFort(pokestop.Id, pokestop.Latitude, pokestop.Longitude);
+                Busy.SetBusy(false);      
+                // If timeout is expired we can go to to pokestop page          
+                if (CurrentPokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
+                {
+                    // report that we entered a pokestop
+                    _stopUpdatingMap = true;
+                    // TODO: pokestop page
+                    NavigationService.Navigate(typeof(CapturePokemonPage));
+                }
+                else
+                {
+                    // Timeout is not expired yet, player can't get items from the fort
+                    await new MessageDialog("This PokeStop is still on cooldown, please retry later.").ShowAsync();
+                }
+            }, pokemon => true)
+            );
+
+        private DelegateCommand _searchCurrentPokestop;
+
+        /// <summary>
+        /// Searches the current PokeStop, trying to get items from it
+        /// </summary>
+        public DelegateCommand SearchCurrentPokestop => _searchCurrentPokestop ?? (
+            _searchCurrentPokestop = new DelegateCommand(async () =>
+            {
+                Logger.Write($"Searching {CurrentPokestop.Id}");
+                var fortSearchResponse = await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);                    
+                // TODO: launch events and update inventory if everything goes right
+                    switch (fortSearchResponse.Result)
+                    {
+                        case FortSearchResponse.Types.Result.NoResultSet:
+                            break;
+                        case FortSearchResponse.Types.Result.Success:
+                            break;
+                        case FortSearchResponse.Types.Result.OutOfRange:
+                            break;
+                        case FortSearchResponse.Types.Result.InCooldownPeriod:
+                            break;
+                        case FortSearchResponse.Types.Result.InventoryFull:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+            }, () => true));
 
         #endregion
 
@@ -567,7 +701,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             // Get new position
             await Dispatcher.DispatchAsync(() => { CurrentGeoposition = args.Position; });
-            UpdateMapData();
+            // We update pokestops also
+            UpdateMapData(false);
         }
 
         #endregion

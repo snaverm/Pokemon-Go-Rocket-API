@@ -122,6 +122,40 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    /// <summary>
+    /// Converts a generic map object to its coordinates (Geopoint).
+    /// Converter parameter tells if we're converting a MapPokemon or a FortData
+    /// </summary>
+    public class MapObjectToGeopointConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var objectType = (string) parameter;
+            var geoposition = new BasicGeoposition();
+            if (objectType.Equals("pokemon"))
+            {
+                var pokemon = (MapPokemon) value;
+                geoposition.Latitude = pokemon.Latitude;
+                geoposition.Longitude = pokemon.Longitude;
+            } else if (objectType.Equals("pokestop"))
+            {
+                var pokestop = (FortData) value;
+                geoposition.Latitude = pokestop.Latitude;
+                geoposition.Longitude = pokestop.Longitude;
+            }
+            return new Geopoint(geoposition);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class EmptyConverter : IValueConverter
     {
         #region Implementation of IValueConverter

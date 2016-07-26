@@ -135,6 +135,7 @@
     <Content Include="Assets\UI\inventory.png" />
     <Content Include="Assets\UI\Park.jpg" />
     <Content Include="Assets\UI\Pokeball.png" />
+    <Content Include="Assets\UI\poksetop.png" />
     <Content Include="Assets\UI\stardust.png" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />
