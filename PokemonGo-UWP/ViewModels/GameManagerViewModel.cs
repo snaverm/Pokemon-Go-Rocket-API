@@ -592,9 +592,8 @@ namespace PokemonGo_UWP.ViewModels
                 if (CurrentPokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
                 {
                     // report that we entered a pokestop
-                    _stopUpdatingMap = true;
-                    // TODO: pokestop page
-                    NavigationService.Navigate(typeof(CapturePokemonPage));
+                    _stopUpdatingMap = true;                    
+                    NavigationService.Navigate(typeof(SearchPokestopPage));
                 }
                 else
                 {

@@ -142,7 +142,7 @@
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 CommandParameter="{Binding}"
                                 Background="Transparent"
-                                Command="{Binding TryCatchPokemon, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
+                                Command="{Binding TrySearchPokestop, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
                             <Image Source="../Assets/UI/poksetop.png"
                                 maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
                                 maps:MapControl.NormalizedAnchorPoint="0,1"

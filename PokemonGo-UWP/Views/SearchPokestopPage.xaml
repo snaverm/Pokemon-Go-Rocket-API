@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.SearchPokestopPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PokemonGo_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    
+    <Page.Resources>
+        <Storyboard x:Name="SpinPokestopImage" 
+                    SpeedRatio="5">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" 
+                                           Storyboard.TargetName="ImageEllipse">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="360"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <TextBlock Text="{Binding CurrentPokestopInfo.Name}"
+                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   TextAlignment="Left"
+                   Margin="24"/>
+
+        <Ellipse x:Name="ImageEllipse" 
+                 RelativePanel.AlignHorizontalCenterWithPanel="True"
+                 RelativePanel.AlignVerticalCenterWithPanel="True"
+                 Height="256"
+                 Width="256"
+                 Stroke="Blue"
+                 StrokeThickness="10">
+            <Ellipse.Projection>
+                <PlaneProjection/>
+            </Ellipse.Projection>
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding CurrentPokestopInfo.ImageUrls[0]}"
+                            Stretch="UniformToFill"/>
+            </Ellipse.Fill>
+        </Ellipse>
+    </RelativePanel>
+</Page>
