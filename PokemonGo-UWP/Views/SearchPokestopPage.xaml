@@ -33,7 +33,12 @@
         </Storyboard>
     </Page.Resources>
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel>
+        
+        <RelativePanel.Background>
+            <ImageBrush ImageSource="../Assets/UI/pokestopBG.png"
+                        Stretch="Fill"/>
+        </RelativePanel.Background>
 
         <Border x:Name="GatheredItemsBorder"
                 RelativePanel.AlignLeftWithPanel="True"
@@ -143,10 +148,10 @@
         </Border>
 
         <TextBlock Text="{Binding CurrentPokestopInfo.Name}"
-                   RelativePanel.AlignHorizontalCenterWithPanel="True"
                    RelativePanel.AlignTopWithPanel="True"
                    TextAlignment="Left"
-                   Margin="24" />
+                   Margin="18,48,0,0"
+                   FontSize="28"/>
 
         <Button Style="{ThemeResource ImageButtonStyle}"
                 RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -161,7 +166,8 @@
                      Height="256"
                      Width="256"
                      Stroke="Blue"
-                     StrokeThickness="10">
+                     Margin="-2,-10,0,0"
+                     StrokeThickness="5">
                 <Ellipse.Projection>
                     <PlaneProjection />
                 </Ellipse.Projection>
@@ -177,6 +183,7 @@
                    RelativePanel.AlignBottomWithPanel="True"
                    TextAlignment="Center"
                    Margin="24"
+                   FontSize="32"
                    Visibility="Collapsed"
                    x:Name="OutOfRangeTextBlock" />
 
@@ -185,6 +192,7 @@
                    RelativePanel.AlignBottomWithPanel="True"
                    TextAlignment="Center"
                    Margin="24"
+                   FontSize="32"
                    Visibility="Collapsed"
                    x:Name="CooldownTextBlock" />
 
@@ -193,6 +201,7 @@
                    RelativePanel.AlignBottomWithPanel="True"
                    TextAlignment="Center"
                    Margin="24"
+                   FontSize="32"
                    Visibility="Collapsed"
                    x:Name="InventoryFulleTextBlock" />
 
