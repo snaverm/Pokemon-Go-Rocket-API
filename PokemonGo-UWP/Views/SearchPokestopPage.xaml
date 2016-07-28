@@ -34,24 +34,30 @@
     </Page.Resources>
 
     <RelativePanel>
-        
+
         <RelativePanel.Background>
             <ImageBrush ImageSource="../Assets/UI/pokestopBG.png"
-                        Stretch="Fill"/>
+                        Stretch="Fill" />
         </RelativePanel.Background>
 
         <Border x:Name="GatheredItemsBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Background="AntiqueWhite"
                 CornerRadius="8"
-                Padding="8"
+                Padding="12"
                 Margin="8,0"
                 Canvas.ZIndex="5">
+
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/UI/panelBG.png"
+                            Stretch="UniformToFill" />
+            </Border.Background>
+
             <Border.RenderTransform>
                 <TranslateTransform x:Name="GatheredItemsTranslateTransform"
                                     Y="800" />
             </Border.RenderTransform>
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -60,36 +66,39 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Grid HorizontalAlignment="Center"
-                      Grid.Row="0">
+                <Grid Grid.Row="0"
+                      Padding="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="../Assets/UI/gem.png"
-                           Stretch="Uniform"
-                           Width="48"
-                           Grid.Column="0" />
-                    <TextBlock Text="{Binding CurrentSearchResponse.GemsAwarded}"
-                               Margin="24,0"
-                               VerticalAlignment="Center"
-                               Grid.Column="1" />
-                    <TextBlock Text="XP"
-                               Width="48"
-                               VerticalAlignment="Center"
-                               Grid.Column="2" />
-                    <TextBlock Text="{Binding CurrentSearchResponse.ExperienceAwarded}"
-                               Margin="24,0"
-                               VerticalAlignment="Center"
-                               Grid.Column="3" />
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left">
+                        <Image Source="../Assets/UI/gem.png"
+                               Stretch="Uniform"
+                               Width="48" />
+                        <TextBlock Text="{Binding CurrentSearchResponse.GemsAwarded}"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <TextBlock Text="XP"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding CurrentSearchResponse.ExperienceAwarded}"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
                 </Grid>
 
                 <ListView ItemsSource="{Binding CurrentSearchResponse.ItemsAwarded}"
                           SelectionMode="None"
+                          HorizontalAlignment="Stretch"
                           Grid.Row="1"
-                          HorizontalAlignment="Stretch">
+                          BorderThickness="0,0.2,0,0"
+                          BorderBrush="Gray">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment"
@@ -101,28 +110,35 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-
+                                
                                 <TextBlock Text="{Binding ItemId}"
                                            HorizontalAlignment="Left"
-                                           Margin="0,6,0,0" />
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,6,0" />
 
-                                <StackPanel Grid.Column="1"
-                                            Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Grid.Column="1">
                                     <TextBlock Text="#"
                                                VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding ItemCount}"
                                                HorizontalAlignment="Right"
+                                               VerticalAlignment="Center" 
                                                Margin="0,6,0,0" />
                                 </StackPanel>
+
                             </Grid>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <Grid Grid.Row="2"
+                      BorderThickness="0,0.2,0,0"
+                      BorderBrush="Gray"
                       Padding="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -138,20 +154,34 @@
                     <TextBlock Text="{Binding CurrentSearchResponse.PokemonDataEgg.PokemonId}"
                                HorizontalAlignment="Right"
                                Grid.Column="1" />
+
                 </Grid>
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
                         Command="{Binding ReturnToGameScreen}"
-                        Grid.Row="3" />
+                        Grid.Row="3"
+                        Foreground="White"
+                        Style="{StaticResource RoundedButton}"
+                        Margin="8">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,4">
+                            <GradientStop Color="#FFA2DB96" />
+                            <GradientStop Color="#FF24CCA9"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </Grid>
+
         </Border>
 
         <TextBlock Text="{Binding CurrentPokestopInfo.Name}"
                    RelativePanel.AlignTopWithPanel="True"
                    TextAlignment="Left"
+                   TextWrapping="WrapWholeWords"
                    Margin="18,48,0,0"
-                   FontSize="28"/>
+                   FontSize="22" />
 
         <Button Style="{ThemeResource ImageButtonStyle}"
                 RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -178,32 +208,55 @@
             </Ellipse>
         </Button>
 
-        <TextBlock Text="out of range"
-                   RelativePanel.AlignHorizontalCenterWithPanel="True"
-                   RelativePanel.AlignBottomWithPanel="True"
-                   TextAlignment="Center"
-                   Margin="24"
-                   FontSize="32"
-                   Visibility="Collapsed"
-                   x:Name="OutOfRangeTextBlock" />
+        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="24"
+                    Padding="8">
 
-        <TextBlock Text="cooldown"
-                   RelativePanel.AlignHorizontalCenterWithPanel="True"
-                   RelativePanel.AlignBottomWithPanel="True"
-                   TextAlignment="Center"
-                   Margin="24"
-                   FontSize="32"
-                   Visibility="Collapsed"
-                   x:Name="CooldownTextBlock" />
+            <Border CornerRadius="15"
+                    Padding="8"
+                    Margin="0,12,0,-12"
+                    x:Name="ErrorMessageBorder"
+                    Visibility="Collapsed"
+                    Background="#e481b7">
+                
+                <StackPanel>
+                    <TextBlock Text="out of range"
+                               TextAlignment="Center"
+                               FontSize="20"
+                               Foreground="White"
+                               Visibility="Collapsed"
+                               VerticalAlignment="Center"
+                               x:Name="OutOfRangeTextBlock" />
 
-        <TextBlock Text="inventory full"
-                   RelativePanel.AlignHorizontalCenterWithPanel="True"
-                   RelativePanel.AlignBottomWithPanel="True"
-                   TextAlignment="Center"
-                   Margin="24"
-                   FontSize="32"
-                   Visibility="Collapsed"
-                   x:Name="InventoryFulleTextBlock" />
+                    <TextBlock Text="cooldown"
+                               TextAlignment="Center"
+                               FontSize="20"
+                               Foreground="White"
+                               Visibility="Collapsed"
+                               VerticalAlignment="Center"
+                               x:Name="CooldownTextBlock" />
+
+                    <TextBlock Text="inventory full"
+                               TextAlignment="Center"
+                               FontSize="20"
+                               Foreground="White"
+                               Visibility="Collapsed"
+                               VerticalAlignment="Center"
+                               x:Name="InventoryFulleTextBlock" />
+                </StackPanel>
+            </Border>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="52"
+                    HorizontalAlignment="Center"
+                    Margin="0,8,0,0"
+                    Command="{Binding ReturnToGameScreen}">
+                <Image Source="../Assets/UI/close.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+        </StackPanel>
 
     </RelativePanel>
 </Page>

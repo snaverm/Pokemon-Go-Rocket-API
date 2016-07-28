@@ -256,6 +256,32 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
+        /// <summary>
+        /// Sets things up before being able to play
+        /// </summary>
+        public async Task InitGame(bool hadAuthTokenStored = false)
+        {
+            if (hadAuthTokenStored)
+                await _client.SetServer(SettingsService.Instance.PtcAuthToken);
+            Busy.SetBusy(true, "Getting GPS position");
+            await InitGps();
+            Busy.SetBusy(true, "Getting player data");
+            UpdatePlayerData();
+            Busy.SetBusy(true, "Getting player items");
+            UpdateInventory();
+            if (!hadAuthTokenStored)
+                await NavigationService.NavigateAsync(typeof(GameMapPage));
+            // Avoid going back to login page using back button
+            NavigationService.ClearHistory();
+            // Start a timer to update map data every 5 seconds
+            var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+            {
+                if (_stopUpdatingMap) return;
+                Logger.Write("Updating map");
+                UpdateMapData();
+            }, TimeSpan.FromSeconds(5));
+        }
+
 
         private DelegateCommand _doPtcLoginCommand;
 
@@ -265,7 +291,10 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    if (!await _client.DoPtcLogin(PtcUsername, PtcPassword))
+                    var authToken = await _client.DoPtcLogin(PtcUsername, PtcPassword);
+                    // Update current token even if it's null
+                    SettingsService.Instance.PtcAuthToken = authToken;
+                    if (string.IsNullOrEmpty(authToken))
                     {
                         // Login failed, show a message
                         await
@@ -273,27 +302,8 @@ namespace PokemonGo_UWP.ViewModels
                     }
                     else
                     {
-                        // Login worked, update data and go to game page
-                        Busy.SetBusy(true, "Getting GPS position");
-                        await InitGps();
-                        Busy.SetBusy(true, "Getting player data");
-                        UpdatePlayerData();
-                        Busy.SetBusy(true, "Getting player items");
-                        UpdateInventory();
-                        await NavigationService.NavigateAsync(typeof(GameMapPage));
-                        // Avoid going back to login page using back button
-                        NavigationService.ClearHistory();
-                        // Start a timer to update map data every 5 seconds
-                        var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
-                        {
-                            if (_stopUpdatingMap) return;
-                            Logger.Write("Updating map");
-                            UpdateMapData();
-                        }, TimeSpan.FromSeconds(5));
-                        //var _updateMapTimer = new Timer((p) =>
-                        //{
-                        //    UpdateMapData();
-                        //}, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+                        // Login worked, init game
+                        await InitGame();
                     }
                 }
                 catch (Exception)

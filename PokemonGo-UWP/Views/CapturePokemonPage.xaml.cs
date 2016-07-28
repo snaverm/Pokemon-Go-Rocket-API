@@ -16,6 +16,11 @@ namespace PokemonGo_UWP.Views
         public CapturePokemonPage()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                // Of course binding doesn't work so we need to manually setup height for animations
+                ShowInventoryDoubleAnimation.From = HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight;                
+            };
         }
 
         private void InventoryButton_OnClick(object sender, RoutedEventArgs e)

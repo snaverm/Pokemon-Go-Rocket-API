@@ -58,19 +58,19 @@ namespace PokemonGo_UWP.Views
         private void GameManagerViewModelOnSearchOutOfRange(object sender, EventArgs eventArgs)
         {
             SearchPokestopButton.IsEnabled = false;
-            OutOfRangeTextBlock.Visibility = Visibility.Visible;
+            OutOfRangeTextBlock.Visibility = ErrorMessageBorder.Visibility = Visibility.Visible;
         }
 
         private void GameManagerViewModelOnSearchInventoryFull(object sender, EventArgs eventArgs)
         {
             SearchPokestopButton.IsEnabled = false;
-            InventoryFulleTextBlock.Visibility = Visibility.Visible;
+            InventoryFulleTextBlock.Visibility = ErrorMessageBorder.Visibility = Visibility.Visible;
         }
 
         private void GameManagerViewModelOnSearchInCooldown(object sender, EventArgs eventArgs)
         {
             SearchPokestopButton.IsEnabled = false;
-            CooldownTextBlock.Visibility = Visibility.Visible;
+            CooldownTextBlock.Visibility = ErrorMessageBorder.Visibility = Visibility.Visible;
         }
 
         private void GameManagerViewModelOnSearchSuccess(object sender, EventArgs eventArgs)

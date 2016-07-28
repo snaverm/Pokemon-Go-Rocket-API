@@ -6,25 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    x:Name="Page"
     mc:Ignorable="d">
 
     <Page.Resources>
 
         <Storyboard x:Name="ShowInventoryMenuStoryboard">
-            <DoubleAnimation
+            <DoubleAnimation x:Name="ShowInventoryDoubleAnimation"
                 Storyboard.TargetName="InventoryMenuTranslateTransform"
                 Storyboard.TargetProperty="Y"
-                From="500"
                 To="0"
                 Duration="0:0:0.2" />
         </Storyboard>
 
         <Storyboard x:Name="HideInventoryMenuStoryboard">
-            <DoubleAnimation
+            <DoubleAnimation x:Name="HideInventoryDoubleAnimation"
                 Storyboard.TargetName="InventoryMenuTranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="0"
-                To="500"
                 Duration="0:0:0.2" />
         </Storyboard>
 
@@ -225,15 +224,19 @@
         <Border x:Name="InventoryMenuBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                Background="AntiqueWhite"
+                RelativePanel.AlignBottomWithPanel="True"                
+                RelativePanel.AlignTopWithPanel="True"  
                 CornerRadius="8"
                 Padding="8"
                 Margin="8,0"
                 Canvas.ZIndex="5">
+
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/UI/panelBG.png"/>
+            </Border.Background>
+
             <Border.RenderTransform>
-                <TranslateTransform x:Name="InventoryMenuTranslateTransform"
-                                    Y="500" />
+                <TranslateTransform x:Name="InventoryMenuTranslateTransform" />
             </Border.RenderTransform>
             <Grid>
                 <Grid.RowDefinitions>
@@ -270,7 +273,7 @@
                                 <TextBlock Text="{Binding Count}"
                                            Grid.Column="0"
                                            FontSize="18"
-                                           VerticalAlignment="Bottom"
+                                           VerticalAlignment="Center"
                                            HorizontalAlignment="Left" />
 
                                 <Grid Grid.Column="1">
@@ -286,22 +289,23 @@
                                     <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemIdConverter}}"
                                                Grid.Column="0"
                                                Grid.Row="0"
-                                               FontSize="18"
+                                               FontSize="22"
                                                FontWeight="SemiBold" />
 
-                                    <Button IsEnabled="False"
+                                    <!--<Button IsEnabled="False"
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Padding="0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                                         <SymbolIcon Symbol="Delete" />
-                                    </Button>
+                                    </Button>-->
 
-                                    <TextBlock Text="Description"
+                                    <TextBlock Text="Missing item description, leave a feedback if you can provide it."
+                                               TextWrapping="WrapWholeWords"
                                                Grid.Column="0"
                                                Grid.Row="1"
-                                               FontSize="18"
+                                               FontSize="14"
                                                FontWeight="SemiLight" />
                                 </Grid>
 
@@ -328,15 +332,21 @@
         <Border x:Name="CatchStatsBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Background="AntiqueWhite"
                 CornerRadius="8"
-                Padding="8"
+                Padding="12"
                 Margin="8,0"
                 Canvas.ZIndex="5">
+
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/UI/panelBG.png"
+                            Stretch="UniformToFill"/>
+            </Border.Background>
+
             <Border.RenderTransform>
                 <TranslateTransform x:Name="CatchStatsTranslateTransform"
                                     Y="800" />
             </Border.RenderTransform>
+            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -345,33 +355,38 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Grid HorizontalAlignment="Center"
-                      Grid.Row="0">
+                <Grid Grid.Row="0"
+                      Padding="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="../Assets/UI/stardust.png"
-                           Stretch="Uniform"
-                           Width="48"
-                           Grid.Column="0" />
-                    <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
-                               Margin="24,0"
-                               VerticalAlignment="Center"
-                               Grid.Column="1" />
-                    <Image Source="../Assets/UI/candy.png"
-                           Stretch="Uniform"
-                           Width="48"
-                           Grid.Column="2" />
-                    <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
-                               Margin="24,0"
-                               VerticalAlignment="Center"
-                               Grid.Column="3" />
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <Image Source="../Assets/UI/stardust.png"
+                               Stretch="Uniform"
+                               Width="48"/>
+                        <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Image Source="../Assets/UI/candy.png"
+                               Stretch="Uniform"
+                               Width="48" />
+                        <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
                 </Grid>
 
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1"
+                      BorderThickness="0,0.2,0,0"
+                      BorderBrush="Gray">
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="*" />
@@ -409,35 +424,64 @@
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,6,0,0" />
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding}"
+                                               Foreground="Red"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,6,0" />
+                                    <TextBlock Text="XP"
+                                               VerticalAlignment="Center"
+                                               Foreground="Red"/>
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
 
                 <Grid Grid.Row="2"
+                      BorderThickness="0,0.2,0,0"
+                      BorderBrush="Gray"
                       Padding="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="TOTAL XP:"
+                    <TextBlock Text="TOTAL"
                                HorizontalAlignment="Left"
                                Grid.Column="0" />
 
-                    <TextBlock
-                        Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
-                        HorizontalAlignment="Right"
-                        Grid.Column="1" />
+                    <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                Grid.Column="1">
+                        <TextBlock Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
+                                               Foreground="Red"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,6,0" />
+                        <TextBlock Text="XP"
+                                               VerticalAlignment="Center"
+                                               Foreground="Red"/>
+                    </StackPanel>
                 </Grid>
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
                         Command="{Binding ReturnToGameScreen}"
-                        Grid.Row="3" />
+                        Grid.Row="3" 
+                        Foreground="White" 
+                        Style="{StaticResource RoundedButton}"
+                        Margin="8">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,4" >
+                            <GradientStop Color="#FFA2DB96"/>
+                            <GradientStop Color="#FF24CCA9" 
+                                          Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </Grid>
         </Border>
 

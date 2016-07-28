@@ -103,7 +103,7 @@
                    maps:MapControl.NormalizedAnchorPoint="0.5,1"
                    Stretch="Uniform"
                    Height="48"
-                   Width="48" />
+                   Width="48"/>
 
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
@@ -157,16 +157,21 @@
 
         </maps:MapControl>
 
-        <Border RelativePanel.AlignLeftWithPanel="True"
+        <Border x:Name="NearbyPokemonsBorder"
+                RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                x:Name="NearbyPokemonsBorder"
-                Background="AntiqueWhite"
+                RelativePanel.AlignBottomWithPanel="True"                                
                 CornerRadius="8,8,0,0"
                 Padding="8"
                 Margin="8,0"
                 Height="350"
                 Canvas.ZIndex="5">
+            
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/UI/panelBG.png"
+                            Stretch="Fill"/>
+            </Border.Background>
+            
             <Border.RenderTransform>
                 <TranslateTransform x:Name="NearbyGridTranslateTransform"
                                     Y="350" />
@@ -276,6 +281,7 @@
                     Height="48"
                     HorizontalAlignment="Center"
                     Click="PokeMenuMainButton_OnClick"
+                    IsEnabled="False"
                     x:Name="PokeMenuMainButton">
                 <Image Source="../Assets/UI/Pokeball.png"
                        Stretch="Uniform"

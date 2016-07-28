@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Data;
 using PokemonGo_UWP.ViewModels;
 using PokemonGo_UWP.Views;
 using Template10.Common;
+using System;
+using PokemonGo_UWP.Utils;
 
 namespace PokemonGo_UWP
 {
@@ -31,9 +33,17 @@ namespace PokemonGo_UWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            // TODO: SettingsService to store/load auth token and use it instead of logging in everytime
-            NavigationService.Navigate(typeof(MainPage));
+            if (string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
+                NavigationService.Navigate(typeof(MainPage)); // No stored tokens
+            else
+            {
+                // We have a stored token, let's go to game page 
+                await ViewModelLocator.GameManagerViewModel.InitGame(true);
+                NavigationService.Navigate(typeof(GameMapPage));                               
+            }
             await Task.CompletedTask;
         }
+
+
     }
 }

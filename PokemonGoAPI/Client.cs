@@ -16,7 +16,7 @@ namespace PokemonGo.RocketAPI
     {
         private readonly ISettings _settings;
         private readonly HttpClient _httpClient;
-        private AuthType _authType = AuthType.Google;
+        private AuthType _authType = AuthType.Ptc;
         private string _accessToken;
         private string _apiUrl;
         private Request.Types.UnknownAuth _unknownAuth;
@@ -74,7 +74,7 @@ namespace PokemonGo.RocketAPI
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<bool> DoPtcLogin(string username, string password)
+        public async Task<string> DoPtcLogin(string username, string password)
         {
             // TODO: SettingsService to store/load auth token and use it instead of logging in everytime            
             Logger.Write("Starting PTC login");
@@ -82,7 +82,7 @@ namespace PokemonGo.RocketAPI
             _authType = AuthType.Ptc;
             await SetServer();
             Logger.Write("PTC login completed (" + !string.IsNullOrEmpty(_accessToken) + ")");
-            return !string.IsNullOrEmpty(_accessToken);
+            return _accessToken;
         }
 
         public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng)
@@ -106,8 +106,9 @@ namespace PokemonGo.RocketAPI
             return updateResponse;
         }
 
-        public async Task SetServer()
+        public async Task SetServer(string authToken = null)
         {
+            if (authToken != null) _accessToken = authToken;
             var serverRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10,
                 RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
                 RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
