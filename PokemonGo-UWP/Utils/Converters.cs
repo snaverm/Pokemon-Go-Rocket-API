@@ -34,9 +34,9 @@ namespace PokemonGo_UWP.Utils
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
-        {            
+        {
             var itemId = (ItemId) ((Item) value).Item_;
-            return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
+            return new Uri($"ms-appx:///Assets/Items/Item_{(int) itemId}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -53,8 +53,8 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var itemId = ((FortSearchResponse.Types.ItemAward)value).ItemId;
-            return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
+            var itemId = ((FortSearchResponse.Types.ItemAward) value).ItemId;
+            return new Uri($"ms-appx:///Assets/Items/Item_{(int) itemId}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -197,7 +197,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (PokemonData)value != null ? Visibility.Visible : Visibility.Collapsed;
+            return (PokemonData) value != null ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -215,7 +215,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var distance = (int) (float) value;
-            var distanceString = (distance < 125) ? (distance < 70 ? "Near" : "Mid") : "Far";
+            var distanceString = distance < 125 ? (distance < 70 ? "Near" : "Mid") : "Far";
             return new Uri($"ms-appx:///Assets/Icons/Footprint_{distanceString}.png");
         }
 

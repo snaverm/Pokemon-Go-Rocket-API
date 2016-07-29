@@ -14,8 +14,8 @@
                 Storyboard.TargetName="GatheredItemsTranslateTransform"
                 Storyboard.TargetProperty="Y"
                 To="50"
-                Duration="0:0:0.2" 
-                x:Name="ShowGatheredItemsMenuAnimation"/>
+                Duration="0:0:0.2"
+                x:Name="ShowGatheredItemsMenuAnimation" />
         </Storyboard>
 
         <Storyboard x:Name="SpinPokestopImage"
@@ -116,22 +116,24 @@
 
                                 <StackPanel Grid.Column="0"
                                             HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
+                                            VerticalAlignment="Center"
                                             Orientation="Horizontal"
                                             Margin="0,0,8,0">
 
-                                    <Image Source="{Binding Converter={StaticResource ItemAwardToPokemonSpriteConverter}}"
-                                           Height="76"
-                                           Stretch="Uniform"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Stretch" />
+                                    <Image
+                                        Source="{Binding Converter={StaticResource ItemAwardToPokemonSpriteConverter}}"
+                                        Height="76"
+                                        Stretch="Uniform"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch" />
 
-                                    <TextBlock Text="{Binding ItemId, Converter={StaticResource ItemToItemNameConverter}}"                                               
-                                               FontSize="18"
-                                               FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
-                                               Foreground="#FF45686A"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left" />
+                                    <TextBlock
+                                        Text="{Binding ItemId, Converter={StaticResource ItemToItemNameConverter}}"
+                                        FontSize="18"
+                                        FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                        Foreground="#FF45686A"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left" />
 
                                 </StackPanel>
 
@@ -142,7 +144,7 @@
                                                VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding ItemCount}"
                                                HorizontalAlignment="Right"
-                                               VerticalAlignment="Center" 
+                                               VerticalAlignment="Center"
                                                Margin="6,0,0,0" />
                                 </StackPanel>
 
@@ -237,7 +239,7 @@
                     x:Name="ErrorMessageBorder"
                     Visibility="Collapsed"
                     Background="#e481b7">
-                
+
                 <StackPanel>
                     <TextBlock Text="out of range"
                                TextAlignment="Center"

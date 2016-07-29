@@ -103,7 +103,7 @@
                    maps:MapControl.NormalizedAnchorPoint="0.5,1"
                    Stretch="Uniform"
                    Height="48"
-                   Width="48"/>
+                   Width="48" />
 
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
@@ -160,18 +160,18 @@
         <Border x:Name="NearbyPokemonsBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"                                
+                RelativePanel.AlignBottomWithPanel="True"
                 CornerRadius="8,8,0,0"
                 Padding="8"
                 Margin="8,0"
                 Height="350"
                 Canvas.ZIndex="5">
-            
+
             <Border.Background>
                 <ImageBrush ImageSource="../Assets/UI/panelBG.png"
-                            Stretch="Fill"/>
+                            Stretch="Fill" />
             </Border.Background>
-            
+
             <Border.RenderTransform>
                 <TranslateTransform x:Name="NearbyGridTranslateTransform"
                                     Y="350" />
@@ -202,13 +202,14 @@
                                     Width="48"
                                     Height="48"
                                     Margin="3,0" />
-                                <Image Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
-                                       Stretch="Uniform"
+                                <Image
+                                    Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
+                                    Stretch="Uniform"
                                     VerticalAlignment="Top"
-                                       Margin="0,-12,0,0"
+                                    Margin="0,-12,0,0"
                                     Width="48"
                                     Height="48"
-                                       HorizontalAlignment="Center"/>
+                                    HorizontalAlignment="Center" />
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -227,7 +228,7 @@
                 </Button>
             </Grid>
         </Border>
-        
+
         <Ellipse RelativePanel.AlignRightWithPanel="True"
                  RelativePanel.AlignTopWithPanel="True"
                  Margin="24"
@@ -241,7 +242,7 @@
                     <ImageBrush.RelativeTransform>
                         <RotateTransform CenterX="0.5"
                                          CenterY="0.5"
-                                         Angle="{Binding CompassHeading}"/>
+                                         Angle="{Binding CompassHeading}" />
                     </ImageBrush.RelativeTransform>
                 </ImageBrush>
             </Ellipse.Fill>

@@ -19,7 +19,8 @@ namespace PokemonGo_UWP.Views
             Loaded += (s, e) =>
             {
                 // Of course binding doesn't work so we need to manually setup height for animations
-                ShowInventoryDoubleAnimation.From = HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight;                
+                ShowInventoryDoubleAnimation.From =
+                    HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight;
             };
         }
 

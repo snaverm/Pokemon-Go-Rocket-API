@@ -264,7 +264,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Sets things up before being able to play
+        ///     Sets things up before being able to play
         /// </summary>
         public async Task InitGame(bool hadAuthTokenStored = false)
         {
@@ -277,12 +277,12 @@ namespace PokemonGo_UWP.ViewModels
             Busy.SetBusy(true, "Getting player items");
             UpdateInventory();
             //Start a timer to update map data every 5 seconds
-           var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
-           {
-               if (_stopUpdatingMap) return;
-               Logger.Write("Updating map");
-               UpdateMapData();
-           }, TimeSpan.FromSeconds(5));
+            var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+            {
+                if (_stopUpdatingMap) return;
+                Logger.Write("Updating map");
+                UpdateMapData();
+            }, TimeSpan.FromSeconds(5));
             Busy.SetBusy(false);
         }
 
@@ -350,14 +350,13 @@ namespace PokemonGo_UWP.ViewModels
         #region Data Update
 
         /// <summary>
-        /// This exception means that something went wrong with the server, so we close the app and remove the saved token
+        ///     This exception means that something went wrong with the server, so we close the app and remove the saved token
         /// </summary>
         private async void HandleException()
         {
-            await Dispatcher.DispatchAsync(async () =>
-            {
-                await new MessageDialog("Something went wrong, please restart the app").ShowAsync();
-            });            
+            await
+                Dispatcher.DispatchAsync(
+                    async () => { await new MessageDialog("Something went wrong, please restart the app").ShowAsync(); });
             SettingsService.Instance.PtcAuthToken = null;
             //BootStrapper.Current.Exit();
         }
@@ -424,7 +423,8 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdatePlayerData()
         {
-            try {  
+            try
+            {
                 PlayerProfile = (await _client.GetProfile()).Profile;
                 InventoryDelta = (await _client.GetInventory()).InventoryDelta;
                 var tmpStats = InventoryDelta.InventoryItems.First(
@@ -434,7 +434,7 @@ namespace PokemonGo_UWP.ViewModels
                     // TODO: report level increase
                 }
                 PlayerStats = tmpStats;
-                }
+            }
             catch (Exception)
             {
                 HandleException();
@@ -446,7 +446,8 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdateInventory()
         {
-            try { 
+            try
+            {
                 var inventoryTmp = new List<Item>(await _inventory.GetItems());
                 await Dispatcher.DispatchAsync(() =>
                 {
@@ -456,7 +457,7 @@ namespace PokemonGo_UWP.ViewModels
                         Inventory.Add(item);
                     }
                 });
-                }
+            }
             catch (Exception)
             {
                 HandleException();
@@ -528,7 +529,7 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public DelegateCommand UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
             _useSelectedCaptureItem = new DelegateCommand(async () =>
-            {                
+            {
                 Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
                 // TODO: we need to see what happens if the user is throwing a different kind of ball
                 if (SelectedCaptureItem.Item_ == ItemType.Pokeball)

@@ -13,18 +13,18 @@
 
         <Storyboard x:Name="ShowInventoryMenuStoryboard">
             <DoubleAnimation x:Name="ShowInventoryDoubleAnimation"
-                Storyboard.TargetName="InventoryMenuTranslateTransform"
-                Storyboard.TargetProperty="Y"
-                To="0"
-                Duration="0:0:0.2" />
+                             Storyboard.TargetName="InventoryMenuTranslateTransform"
+                             Storyboard.TargetProperty="Y"
+                             To="0"
+                             Duration="0:0:0.2" />
         </Storyboard>
 
         <Storyboard x:Name="HideInventoryMenuStoryboard">
             <DoubleAnimation x:Name="HideInventoryDoubleAnimation"
-                Storyboard.TargetName="InventoryMenuTranslateTransform"
-                Storyboard.TargetProperty="Y"
-                From="0"
-                Duration="0:0:0.2" />
+                             Storyboard.TargetName="InventoryMenuTranslateTransform"
+                             Storyboard.TargetProperty="Y"
+                             From="0"
+                             Duration="0:0:0.2" />
         </Storyboard>
 
         <Storyboard x:Name="ShowCaptureStatsStoryboard">
@@ -224,15 +224,15 @@
         <Border x:Name="InventoryMenuBorder"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"                
-                RelativePanel.AlignTopWithPanel="True"  
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignTopWithPanel="True"
                 CornerRadius="8"
                 Padding="8"
                 Margin="8,0"
                 Canvas.ZIndex="5">
 
             <Border.Background>
-                <ImageBrush ImageSource="../Assets/UI/panelBG.png"/>
+                <ImageBrush ImageSource="../Assets/UI/panelBG.png" />
             </Border.Background>
 
             <Border.RenderTransform>
@@ -277,8 +277,8 @@
                                            Height="76"
                                            Stretch="Uniform"
                                            HorizontalAlignment="Stretch" />
-                                    
-                                    <TextBlock Text="{Binding Count}"                                               
+
+                                    <TextBlock Text="{Binding Count}"
                                                FontSize="18"
                                                Margin="0,-16,0,0"
                                                VerticalAlignment="Bottom"
@@ -292,12 +292,13 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemNameConverter}}"
-                                               FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
-                                               Foreground="#FF45686A"
-                                               Grid.Row="0"
-                                               FontSize="22"
-                                               FontWeight="SemiBold" />
+                                    <TextBlock
+                                        Text="{Binding Item_, Converter={StaticResource ItemToItemNameConverter}}"
+                                        FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                        Foreground="#FF45686A"
+                                        Grid.Row="0"
+                                        FontSize="22"
+                                        FontWeight="SemiBold" />
 
                                     <!--<Button IsEnabled="False"
                                             Grid.Row="0"
@@ -347,14 +348,14 @@
 
             <Border.Background>
                 <ImageBrush ImageSource="../Assets/UI/panelBG.png"
-                            Stretch="UniformToFill"/>
+                            Stretch="UniformToFill" />
             </Border.Background>
 
             <Border.RenderTransform>
                 <TranslateTransform x:Name="CatchStatsTranslateTransform"
                                     Y="800" />
             </Border.RenderTransform>
-            
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -370,11 +371,11 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0"
-                                Orientation="Horizontal" 
+                                Orientation="Horizontal"
                                 HorizontalAlignment="Left">
                         <Image Source="../Assets/Icons/stardust_painted.png"
                                Stretch="Uniform"
-                               Width="48"/>
+                               Width="48" />
                         <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
                                    Margin="8,0,0,0"
                                    VerticalAlignment="Center" />
@@ -441,7 +442,7 @@
                                                Margin="0,0,6,0" />
                                     <TextBlock Text="XP"
                                                VerticalAlignment="Center"
-                                               Foreground="Red"/>
+                                               Foreground="Red" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -462,31 +463,32 @@
                                Grid.Column="0" />
 
                     <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Right"
+                                HorizontalAlignment="Right"
                                 Grid.Column="1">
-                        <TextBlock Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
-                                               Foreground="Red"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               Margin="0,0,6,0" />
+                        <TextBlock
+                            Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
+                            Foreground="Red"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,6,0" />
                         <TextBlock Text="XP"
-                                               VerticalAlignment="Center"
-                                               Foreground="Red"/>
+                                   VerticalAlignment="Center"
+                                   Foreground="Red" />
                     </StackPanel>
                 </Grid>
 
                 <Button Content="OK"
                         HorizontalAlignment="Stretch"
                         Command="{Binding ReturnToGameScreen}"
-                        Grid.Row="3" 
-                        Foreground="White" 
+                        Grid.Row="3"
+                        Foreground="White"
                         Style="{StaticResource RoundedButton}"
                         Margin="8">
                     <Button.Background>
-                        <LinearGradientBrush StartPoint="0,4" >
-                            <GradientStop Color="#FFA2DB96"/>
-                            <GradientStop Color="#FF24CCA9" 
-                                          Offset="1"/>
+                        <LinearGradientBrush StartPoint="0,4">
+                            <GradientStop Color="#FFA2DB96" />
+                            <GradientStop Color="#FF24CCA9"
+                                          Offset="1" />
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
@@ -576,9 +578,10 @@
                                         TranslateY="0"
                                         TranslateX="0" />
                 </Button.RenderTransform>
-                <Image Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" />
+                <Image
+                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                    Stretch="Uniform"
+                    HorizontalAlignment="Stretch" />
             </Button>
 
             <TextBlock Text="{Binding SelectedCaptureItem.Count}"
