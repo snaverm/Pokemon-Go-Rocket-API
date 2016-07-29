@@ -2,6 +2,7 @@
 using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using AllEnum;
@@ -35,6 +36,24 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {            
             var itemId = (ItemId) ((Item) value).Item_;
+            return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class ItemAwardToPokemonSpriteConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var itemId = ((FortSearchResponse.Types.ItemAward)value).ItemId;
             return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
         }
 
@@ -83,14 +102,14 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class ItemToItemIdConverter : IValueConverter
+    public class ItemToItemNameConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             // HACK - we probably need some kind of database with item names and descriptions, this will work for now
-            return ((ItemId) value).ToString().Replace("Item", "");
+            return value.ToString().Replace("Item", "");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -171,6 +190,24 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+
+    public class PokemonDataToVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return (PokemonData)value != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
 
     public class EmptyConverter : IValueConverter
     {

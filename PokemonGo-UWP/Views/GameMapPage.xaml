@@ -143,7 +143,7 @@
                                 CommandParameter="{Binding}"
                                 Background="Transparent"
                                 Command="{Binding TrySearchPokestop, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
-                            <Image Source="../Assets/UI/poksetop.png"
+                            <Image Source="../Assets/Icons/pokestop_near.png"
                                    maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
                                    maps:MapControl.NormalizedAnchorPoint="0,1"
                                    Stretch="Uniform"

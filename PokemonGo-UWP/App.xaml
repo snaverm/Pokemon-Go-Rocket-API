@@ -15,27 +15,17 @@
 
             <viewModels:ViewModelLocator x:Key="Locator" />
 
-            <converters:ValueWhenConverter x:Key="VisibleWhenTrueConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:Boolean>True</x:Boolean>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <Visibility>Visible</Visibility>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <Visibility>Collapsed</Visibility>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>
-
             <utils:PokemonIdToPokemonSpriteConverter x:Key="PokemonIdToPokemonSpriteConverter" />
             <utils:EmptyConverter x:Key="EmptyConverter" />
             <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter" />
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter" />
-            <utils:ItemToItemIdConverter x:Key="ItemToItemIdConverter" />
+            <utils:ItemToItemNameConverter x:Key="ItemToItemNameConverter" />
             <utils:CaptureXpToTotalCaptureXpConverter x:Key="CaptureXpToTotalCaptureXpConverter" />
             <utils:ActivityTypeToActivityNameConverter x:Key="ActivityTypeToActivityNameConverter" />
             <utils:MapObjectToGeopointConverter x:Key="MapObjectToGeopointConverter" />
             <utils:ItemIdToPokemonSpriteConverter x:Key="ItemIdToPokemonSpriteConverter"/>
+            <utils:PokemonDataToVisibilityConverter x:Key="PokemonDataToVisibilityConverter"/>
+            <utils:ItemAwardToPokemonSpriteConverter x:Key="ItemAwardToPokemonSpriteConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

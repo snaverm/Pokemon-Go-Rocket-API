@@ -343,6 +343,12 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Data Update
 
+        private async void HandleException()
+        {
+            await new MessageDialog("Something went wrong, please retry").ShowAsync();
+            NavigationService.Navigate(typeof(MainPage));
+        }
+
         /// <summary>
         ///     Retrieves data for the current position
         /// </summary>
@@ -396,6 +402,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             catch (Exception)
             {
+                HandleException();
             }
         }
 
@@ -417,6 +424,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
             catch (Exception)
             {
+                HandleException();
             }
         }
 
@@ -438,6 +446,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
             catch (Exception)
             {
+                HandleException();
             }
         }
 

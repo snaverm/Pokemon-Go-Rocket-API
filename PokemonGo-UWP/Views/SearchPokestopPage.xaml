@@ -113,11 +113,27 @@
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
-                                <TextBlock Text="{Binding ItemId}"
-                                           HorizontalAlignment="Left"
+
+                                <StackPanel Grid.Column="0"
+                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
-                                           Margin="0,0,6,0" />
+                                            Orientation="Horizontal"
+                                            Margin="0,0,8,0">
+
+                                    <Image Source="{Binding Converter={StaticResource ItemAwardToPokemonSpriteConverter}}"
+                                           Height="76"
+                                           Stretch="Uniform"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Stretch" />
+
+                                    <TextBlock Text="{Binding ItemId, Converter={StaticResource ItemToItemNameConverter}}"                                               
+                                               FontSize="18"
+                                               FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                               Foreground="#FF45686A"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left" />
+
+                                </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Right"
@@ -127,7 +143,7 @@
                                     <TextBlock Text="{Binding ItemCount}"
                                                HorizontalAlignment="Right"
                                                VerticalAlignment="Center" 
-                                               Margin="0,6,0,0" />
+                                               Margin="6,0,0,0" />
                                 </StackPanel>
 
                             </Grid>
@@ -139,20 +155,22 @@
                 <Grid Grid.Row="2"
                       BorderThickness="0,0.2,0,0"
                       BorderBrush="Gray"
-                      Padding="10">
+                      Padding="10"
+                      Visibility="{Binding CurrentSearchResponse.PokemonDataEgg, Converter={StaticResource PokemonDataToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Source="../Assets/UI/egg.png"
+                    <Image Source="../Assets/Items/Egg.png"
                            Stretch="Uniform"
-                           Width="48"
+                           Width="{ThemeResource UiButtonSize}"
                            HorizontalAlignment="Left"
                            Grid.Column="0" />
 
                     <TextBlock Text="{Binding CurrentSearchResponse.PokemonDataEgg.PokemonId}"
                                HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
                                Grid.Column="1" />
 
                 </Grid>
@@ -248,11 +266,11 @@
             </Border>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
-                    Height="52"
+                    Height="{ThemeResource UiButtonSize}"
                     HorizontalAlignment="Center"
-                    Margin="0,8,0,0"
+                    Margin="0,16,0,0"
                     Command="{Binding ReturnToGameScreen}">
-                <Image Source="../Assets/UI/close.png"
+                <Image Source="../Assets/Buttons/btn_close_normal.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>

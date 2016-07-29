@@ -292,7 +292,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemIdConverter}}"
+                                    <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemNameConverter}}"
                                                FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
                                                Foreground="#FF45686A"
                                                Grid.Row="0"
