@@ -13,13 +13,13 @@
             <DoubleAnimation
                 Storyboard.TargetName="GatheredItemsTranslateTransform"
                 Storyboard.TargetProperty="Y"
-                From="500"
-                To="150"
-                Duration="0:0:0.2" />
+                To="50"
+                Duration="0:0:0.2" 
+                x:Name="ShowGatheredItemsMenuAnimation"/>
         </Storyboard>
 
         <Storyboard x:Name="SpinPokestopImage"
-                    SpeedRatio="5">
+                    SpeedRatio="2.5">
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
                 Storyboard.TargetName="PokestopImageEllipse">
