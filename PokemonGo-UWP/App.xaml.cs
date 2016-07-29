@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
+using Microsoft.HockeyApp;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.ViewModels;
 using PokemonGo_UWP.Views;
@@ -32,6 +33,9 @@ namespace PokemonGo_UWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
+            // Init HockeySDK
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.Configure(ApplicationKeys.HockeyAppToken);
             await NavigationService.NavigateAsync(typeof(MainPage));
             if (!string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
             {

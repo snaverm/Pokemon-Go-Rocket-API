@@ -724,7 +724,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
         /// </summary>
-        public string MapServiceToken => BingKey.MapServiceToken;
+        public string MapServiceToken => ApplicationKeys.MapServiceToken;
 
         /// <summary>
         ///     Current GPS position
