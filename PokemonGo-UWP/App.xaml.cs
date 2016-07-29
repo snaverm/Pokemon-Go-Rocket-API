@@ -33,15 +33,16 @@ namespace PokemonGo_UWP
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            if (string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
-                NavigationService.Navigate(typeof(MainPage)); // No stored tokens
-            else
-            {
-                // We have a stored token, let's go to game page 
-                await ViewModelLocator.GameManagerViewModel.InitGame(true);
-                NavigationService.Navigate(typeof(GameMapPage));                               
-            }
-            await Task.CompletedTask;
+            await NavigationService.NavigateAsync(typeof(MainPage));
+            //if (string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
+            //    NavigationService.Navigate(typeof(MainPage)); // No stored tokens
+            //else
+            //{
+            //    // We have a stored token, let's go to game page 
+            //    await ViewModelLocator.GameManagerViewModel.InitGame(true);
+            //    NavigationService.Navigate(typeof(GameMapPage));                               
+            //}
+            //await Task.CompletedTask;
         }
 
 

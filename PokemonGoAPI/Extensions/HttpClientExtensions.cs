@@ -32,6 +32,7 @@ namespace PokemonGo.RocketAPI.Extensions
         {
             //Encode payload and put in envelop, then send
             var data = request.ToByteString();
+            await Task.Delay(1000);
             var result = await client.PostAsync(url, new ByteArrayContent(data.ToByteArray()));
 
             //Decode message

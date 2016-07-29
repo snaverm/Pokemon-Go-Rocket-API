@@ -116,8 +116,8 @@
                                 maps:MapControl.Location="{Binding Geoposition}"
                                 maps:MapControl.NormalizedAnchorPoint="0,1"
                                 Stretch="Uniform"
-                                Height="64"
-                                Width="64" />
+                                Height="48"
+                                Width="48" />
 
                             <!--<Ellipse Width="48"
                                      Height="48"
@@ -198,8 +198,8 @@
                                 Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                 Stretch="UniformToFill"
                                 VerticalAlignment="Center"
-                                Width="64"
-                                Height="64"
+                                Width="52"
+                                Height="52"
                                 Margin="3,0" />
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -212,7 +212,7 @@
                         Margin="0,8,0,0"
                         Tapped="NearbyPokemonGrid_OnTapped"
                         x:Name="CloseNearbyGridViewButton">
-                    <Image Source="../Assets/UI/close.png"
+                    <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
@@ -283,7 +283,7 @@
                     Click="PokeMenuMainButton_OnClick"
                     IsEnabled="False"
                     x:Name="PokeMenuMainButton">
-                <Image Source="../Assets/UI/Pokeball.png"
+                <Image Source="../Assets/Buttons/btn_action_menu.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>
@@ -323,22 +323,22 @@
                            Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
                            VerticalAlignment="Center"
-                           Width="48"
-                           Height="48" />
+                           Width="36"
+                           Height="36" />
 
                     <Image Grid.Column="1"
                            Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
                            VerticalAlignment="Center"
-                           Width="48"
-                           Height="48" />
+                           Width="36"
+                           Height="36" />
 
                     <Image Grid.Column="2"
                            Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                            Stretch="UniformToFill"
                            VerticalAlignment="Center"
-                           Width="48"
-                           Height="48" />
+                           Width="36"
+                           Height="36" />
                 </Grid>
 
             </Border>

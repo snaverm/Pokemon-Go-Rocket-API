@@ -16,7 +16,8 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new Uri($"http://pokeapi.co/media/sprites/pokemon/{(int) value}.png");
+            //return new Uri($"http://pokeapi.co/media/sprites/pokemon/{(int) value}.png");
+            return new Uri($"ms-appx:///Assets/Pokemons/{(int) value}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -270,16 +270,18 @@ namespace PokemonGo_UWP.ViewModels
             Busy.SetBusy(true, "Getting player items");
             UpdateInventory();
             if (!hadAuthTokenStored)
-                await NavigationService.NavigateAsync(typeof(GameMapPage));
-            // Avoid going back to login page using back button
-            NavigationService.ClearHistory();
-            // Start a timer to update map data every 5 seconds
-            var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
             {
-                if (_stopUpdatingMap) return;
-                Logger.Write("Updating map");
-                UpdateMapData();
-            }, TimeSpan.FromSeconds(5));
+                await NavigationService.NavigateAsync(typeof(GameMapPage));
+                // Avoid going back to login page using back button
+                NavigationService.ClearHistory();
+            }
+            // Start a timer to update map data every 5 seconds
+            //var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+            //{
+            //    if (_stopUpdatingMap) return;
+            //    Logger.Write("Updating map");
+            //    UpdateMapData();
+            //}, TimeSpan.FromSeconds(5));
         }
 
 
@@ -369,7 +371,7 @@ namespace PokemonGo_UWP.ViewModels
             {
                 NearbyPokemons.Clear();
                 foreach (var pokemon in nearbyTmp)
-                {
+                {                    
                     NearbyPokemons.Add(pokemon);
                 }
             });

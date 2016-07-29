@@ -487,8 +487,8 @@
 
         <Image RelativePanel.AlignHorizontalCenterWithPanel="True"
                RelativePanel.AlignVerticalCenterWithPanel="True"
-               Height="400"
-               Width="400"
+               Height="300"
+               Width="300"
                RenderTransformOrigin="0.5,1"
                Stretch="Uniform"
                Source="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
