@@ -208,6 +208,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class NearbyPokemonDistanceToDistanceImageConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var distance = (int) (float) value;
+            var distanceString = (distance < 125) ? (distance < 70 ? "Near" : "Mid") : "Far";
+            return new Uri($"ms-appx:///Assets/Icons/Footprint_{distanceString}.png");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
 
     public class EmptyConverter : IValueConverter
     {

@@ -194,13 +194,22 @@
                           Grid.Row="1">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Image
-                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                Stretch="Uniform"
-                                VerticalAlignment="Center"
-                                Width="48"
-                                Height="48"
-                                Margin="3,0" />
+                            <StackPanel>
+                                <Image
+                                    Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                    Stretch="Uniform"
+                                    VerticalAlignment="Center"
+                                    Width="48"
+                                    Height="48"
+                                    Margin="3,0" />
+                                <Image Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
+                                       Stretch="Uniform"
+                                    VerticalAlignment="Top"
+                                       Margin="0,-12,0,0"
+                                    Width="48"
+                                    Height="48"
+                                       HorizontalAlignment="Center"/>
+                            </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
@@ -218,6 +227,25 @@
                 </Button>
             </Grid>
         </Border>
+        
+        <Ellipse RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.AlignTopWithPanel="True"
+                 Margin="24"
+                 Stroke="White"
+                 StrokeThickness="5"
+                 Height="{ThemeResource UiButtonSize}"
+                 Width="{ThemeResource UiButtonSize}">
+            <Ellipse.Fill>
+                <ImageBrush Stretch="Uniform"
+                            ImageSource="../Assets/Icons/CompassIcon.png">
+                    <ImageBrush.RelativeTransform>
+                        <RotateTransform CenterX="0.5"
+                                         CenterY="0.5"
+                                         Angle="{Binding CompassHeading}"/>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"

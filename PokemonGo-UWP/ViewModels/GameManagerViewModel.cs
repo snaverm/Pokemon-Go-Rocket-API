@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
@@ -226,6 +227,12 @@ namespace PokemonGo_UWP.ViewModels
             set { Set(ref _currentSearchResponse, value); }
         }
 
+        public double CompassHeading
+        {
+            get { return _compassHeading; }
+            set { Set(ref _compassHeading, value); }
+        }
+
         #endregion
 
         #region Game Logic
@@ -342,13 +349,17 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Data Update
 
+        /// <summary>
+        /// This exception means that something went wrong with the server, so we close the app and remove the saved token
+        /// </summary>
         private async void HandleException()
         {
-            await new MessageDialog("Something went wrong, please retry").ShowAsync();
-            await Dispatcher.DispatchAsync(() => { 
-                Busy.SetBusy(false);
-                NavigationService.Navigate(typeof(MainPage));
-            });
+            await Dispatcher.DispatchAsync(async () =>
+            {
+                await new MessageDialog("Something went wrong, please restart the app").ShowAsync();
+            });            
+            SettingsService.Instance.PtcAuthToken = null;
+            //BootStrapper.Current.Exit();
         }
 
         /// <summary>
@@ -517,20 +528,23 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public DelegateCommand UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
             _useSelectedCaptureItem = new DelegateCommand(async () =>
-            {
+            {                
                 Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
                 // TODO: we need to see what happens if the user is throwing a different kind of ball
                 if (SelectedCaptureItem.Item_ == ItemType.Pokeball)
                 {
                     // Player's using a PokeBall so we try to catch the Pokemon
+                    Busy.SetBusy(true, "Throwing Pokeball");
                     await ThrowPokeball();
                 }
                 else
                 {
                     // TODO: check if player can only use a ball or a berry during an encounter, and maybe avoid displaying useless items in encounter's inventory
                     // He's using a berry
+                    Busy.SetBusy(true, "Throwing Berry");
                     await ThrowBerry();
                 }
+                Busy.SetBusy(false);
             }, () => true));
 
         /// <summary>
@@ -663,9 +677,11 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand SearchCurrentPokestop => _searchCurrentPokestop ?? (
             _searchCurrentPokestop = new DelegateCommand(async () =>
             {
+                Busy.SetBusy(true, "Searching PokeStop");
                 Logger.Write($"Searching {CurrentPokestopInfo.Name} [ID = {CurrentPokestop.Id}]");
                 CurrentSearchResponse =
                     await _client.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
+                Busy.SetBusy(false);
                 switch (CurrentSearchResponse.Result)
                 {
                     case FortSearchResponse.Types.Result.NoResultSet:
@@ -698,7 +714,7 @@ namespace PokemonGo_UWP.ViewModels
 
         #region GPS & Maps
 
-        //private Compass _compass;
+        private Compass _compass;
 
         private Geolocator _geolocator;
 
@@ -718,7 +734,7 @@ namespace PokemonGo_UWP.ViewModels
             set { Set(ref _currentGeoposition, value); }
         }
 
-        //private double _compassHeading;
+        private double _compassHeading;
 
         private async Task InitGps()
         {
@@ -737,13 +753,13 @@ namespace PokemonGo_UWP.ViewModels
                         MovementThreshold = 5
                     };
                     CurrentGeoposition = await _geolocator.GetGeopositionAsync();
-                    //_compass = Compass.GetDefault();
-                    //if (_compass != null)
-                    //{
-                    //    Logger.Write("Compass activated");
-                    //    _compass.ReportInterval = 100;
-                    //    _compass.ReadingChanged += CompassOnReadingChanged;
-                    //}
+                    _compass = Compass.GetDefault();
+                    if (_compass != null)
+                    {
+                        Logger.Write("Compass activated");
+                        _compass.ReportInterval = 100;
+                        _compass.ReadingChanged += CompassOnReadingChanged;
+                    }
                     break;
                 default:
                     Logger.Write("Error during GPS activation");
@@ -754,11 +770,10 @@ namespace PokemonGo_UWP.ViewModels
             _geolocator.PositionChanged += GeolocatorOnPositionChanged;
         }
 
-        //private void CompassOnReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
-        //{
-        //    if (Math.Abs(CompassHeading - args.Reading.HeadingMagneticNorth) > 20)
-        //        CompassHeading = args.Reading.HeadingMagneticNorth;
-        //}
+        private void CompassOnReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
+        {
+            CompassHeading = args.Reading.HeadingMagneticNorth;
+        }
 
         private async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
