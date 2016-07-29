@@ -268,7 +268,7 @@ namespace PokemonGo_UWP.ViewModels
             Busy.SetBusy(true, "Getting player data");
             UpdatePlayerData();
             Busy.SetBusy(true, "Getting player items");
-            UpdateInventory();
+            UpdateInventory();            
             if (!hadAuthTokenStored)
             {
                 await NavigationService.NavigateAsync(typeof(GameMapPage));
@@ -348,51 +348,55 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdateMapData(bool updateOnlyPokemonData = true)
         {
-            // Report it to client and find things nearby
-            await
-                _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude,
-                    CurrentGeoposition.Coordinate.Point.Position.Longitude);
-            var mapObjects = await _client.GetMapObjects();
-            // Replace data with the new ones                                  
-            var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
-            Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
-            if (catchableTmp.Count != CatchablePokemons.Count) _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
-            await Dispatcher.DispatchAsync(() =>
+            try
             {
-                CatchablePokemons.Clear();
-                foreach (var pokemon in catchableTmp)
+                // Report it to client and find things nearby
+                await
+                    _client.UpdatePlayerLocation(CurrentGeoposition.Coordinate.Point.Position.Latitude,
+                        CurrentGeoposition.Coordinate.Point.Position.Longitude);
+                var mapObjects = await _client.GetMapObjects();
+                // Replace data with the new ones                                  
+                var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
+                Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
+                if (catchableTmp.Count != CatchablePokemons.Count)
+                    _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+                await Dispatcher.DispatchAsync(() =>
                 {
-                    CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
-                }
-            });
-            var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
-            Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
-            await Dispatcher.DispatchAsync(() =>
-            {
-                NearbyPokemons.Clear();
-                foreach (var pokemon in nearbyTmp)
-                {                    
-                    NearbyPokemons.Add(pokemon);
-                }
-            });
-            // We only need to update Pokemons
-            if (updateOnlyPokemonData) return;
-            // Retrieves PokeStops but not Gyms
-            var pokeStopsTmp =
-                new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(i => i.Type == FortType.Checkpoint));
-            Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
-            await Dispatcher.DispatchAsync(() =>
-            {
-                NearbyPokestops.Clear();
-                foreach (var pokestop in pokeStopsTmp)
+                    CatchablePokemons.Clear();
+                    foreach (var pokemon in catchableTmp)
+                    {
+                        CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
+                    }
+                });
+                var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
+                Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
+                await Dispatcher.DispatchAsync(() =>
                 {
-                    NearbyPokestops.Add(pokestop);
-                }
-            });
-            // TODO: PokeStops -> wrapper to bind to map (and maybe join data from the results below)
-            //(await _client.GetFort(id,lat,lon))
-            //pokeStopsTmp[0]  
+                    NearbyPokemons.Clear();
+                    foreach (var pokemon in nearbyTmp)
+                    {
+                        NearbyPokemons.Add(pokemon);
+                    }
+                });
+                // We only need to update Pokemons
+                if (updateOnlyPokemonData) return;
+                // Retrieves PokeStops but not Gyms
+                var pokeStopsTmp =
+                    new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
+                        .Where(i => i.Type == FortType.Checkpoint));
+                Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
+                await Dispatcher.DispatchAsync(() =>
+                {
+                    NearbyPokestops.Clear();
+                    foreach (var pokestop in pokeStopsTmp)
+                    {
+                        NearbyPokestops.Add(pokestop);
+                    }
+                });
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -400,15 +404,20 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdatePlayerData()
         {
-            PlayerProfile = (await _client.GetProfile()).Profile;
-            InventoryDelta = (await _client.GetInventory()).InventoryDelta;
-            var tmpStats = InventoryDelta.InventoryItems.First(
-                item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
-            if (PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            try {  
+                PlayerProfile = (await _client.GetProfile()).Profile;
+                InventoryDelta = (await _client.GetInventory()).InventoryDelta;
+                var tmpStats = InventoryDelta.InventoryItems.First(
+                    item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+                if (PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+                {
+                    // TODO: report level increase
+                }
+                PlayerStats = tmpStats;
+                }
+            catch (Exception)
             {
-                // TODO: report level increase
             }
-            PlayerStats = tmpStats;
         }
 
         /// <summary>
@@ -416,15 +425,20 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private async void UpdateInventory()
         {
-            var inventoryTmp = new List<Item>(await _inventory.GetItems());
-            await Dispatcher.DispatchAsync(() =>
-            {
-                Inventory.Clear();
-                foreach (var item in inventoryTmp)
+            try { 
+                var inventoryTmp = new List<Item>(await _inventory.GetItems());
+                await Dispatcher.DispatchAsync(() =>
                 {
-                    Inventory.Add(item);
+                    Inventory.Clear();
+                    foreach (var item in inventoryTmp)
+                    {
+                        Inventory.Add(item);
+                    }
+                });
                 }
-            });
+            catch (Exception)
+            {
+            }
         }
 
         #endregion

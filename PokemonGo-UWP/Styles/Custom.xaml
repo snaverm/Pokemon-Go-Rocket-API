@@ -63,6 +63,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <x:Double x:Key="UiButtonSize">64</x:Double>
 
 
     <!-- themes -->

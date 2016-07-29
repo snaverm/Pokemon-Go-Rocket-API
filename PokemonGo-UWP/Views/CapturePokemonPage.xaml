@@ -264,30 +264,37 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid Margin="0,8">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="6*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{Binding Count}"
-                                           Grid.Column="0"
-                                           FontSize="18"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left" />
+                                <StackPanel Grid.Column="0"
+                                            Margin="0,0,8,0">
+
+                                    <Image Source="{Binding Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                                           Height="76"
+                                           Stretch="Uniform"
+                                           HorizontalAlignment="Stretch" />
+                                    
+                                    <TextBlock Text="{Binding Count}"                                               
+                                               FontSize="18"
+                                               Margin="0,-16,0,0"
+                                               VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Left" />
+
+                                </StackPanel>
 
                                 <Grid Grid.Column="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Text="{Binding Item_, Converter={StaticResource ItemToItemIdConverter}}"
-                                               Grid.Column="0"
+                                               FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                               Foreground="#FF45686A"
                                                Grid.Row="0"
                                                FontSize="22"
                                                FontWeight="SemiBold" />
@@ -303,7 +310,8 @@
 
                                     <TextBlock Text="Missing item description, leave a feedback if you can provide it."
                                                TextWrapping="WrapWholeWords"
-                                               Grid.Column="0"
+                                               FontFamily="../Assets/Fonts/Lato-Light.ttf#Lato"
+                                               Foreground="#FF45686A"
                                                Grid.Row="1"
                                                FontSize="14"
                                                FontWeight="SemiLight" />
@@ -316,13 +324,13 @@
                 </ListView>
 
                 <Button Style="{ThemeResource ImageButtonStyle}"
-                        Height="52"
+                        Height="{ThemeResource UiButtonSize}"
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
                         Click="CloseInventoryMenuButton_OnClick"
                         x:Name="CloseInventoryMenuButton">
-                    <Image Source="../Assets/UI/close.png"
+                    <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
@@ -364,7 +372,7 @@
                     <StackPanel Grid.Column="0"
                                 Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
-                        <Image Source="../Assets/UI/stardust.png"
+                        <Image Source="../Assets/Icons/stardust_painted.png"
                                Stretch="Uniform"
                                Width="48"/>
                         <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
@@ -525,11 +533,11 @@
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignTopWithPanel="True"
                 Margin="5"
-                Height="36"
+                Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
                 Command="{Binding ReturnToGameScreen}"
                 x:Name="EscapeEncounterButton">
-            <Image Source="../Assets/UI/escape.png"
+            <Image Source="../Assets/Buttons/btn_run_away.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
         </Button>
@@ -538,7 +546,7 @@
                 RelativePanel.AlignRightWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
                 Margin="5"
-                Height="48"
+                Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
                 Click="InventoryButton_OnClick"
                 x:Name="InventoryButton">
@@ -568,7 +576,7 @@
                                         TranslateY="0"
                                         TranslateX="0" />
                 </Button.RenderTransform>
-                <Image Source="../Assets/UI/Pokeball.png"
+                <Image Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>

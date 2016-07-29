@@ -35,6 +35,7 @@
             <utils:CaptureXpToTotalCaptureXpConverter x:Key="CaptureXpToTotalCaptureXpConverter" />
             <utils:ActivityTypeToActivityNameConverter x:Key="ActivityTypeToActivityNameConverter" />
             <utils:MapObjectToGeopointConverter x:Key="MapObjectToGeopointConverter" />
+            <utils:ItemIdToPokemonSpriteConverter x:Key="ItemIdToPokemonSpriteConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

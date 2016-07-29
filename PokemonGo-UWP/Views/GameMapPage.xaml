@@ -196,17 +196,17 @@
                         <DataTemplate>
                             <Image
                                 Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                Stretch="UniformToFill"
+                                Stretch="Uniform"
                                 VerticalAlignment="Center"
-                                Width="52"
-                                Height="52"
+                                Width="48"
+                                Height="48"
                                 Margin="3,0" />
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
 
                 <Button Style="{ThemeResource ImageButtonStyle}"
-                        Height="52"
+                        Height="{ThemeResource UiButtonSize}"
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
@@ -321,21 +321,21 @@
 
                     <Image Grid.Column="0"
                            Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
+                           Stretch="Uniform"
                            VerticalAlignment="Center"
                            Width="36"
                            Height="36" />
 
                     <Image Grid.Column="1"
                            Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
+                           Stretch="Uniform"
                            VerticalAlignment="Center"
                            Width="36"
                            Height="36" />
 
                     <Image Grid.Column="2"
                            Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="UniformToFill"
+                           Stretch="Uniform"
                            VerticalAlignment="Center"
                            Width="36"
                            Height="36" />

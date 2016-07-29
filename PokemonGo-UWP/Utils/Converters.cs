@@ -28,6 +28,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class ItemIdToPokemonSpriteConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {            
+            var itemId = (ItemId) ((Item) value).Item_;
+            return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PlayerTeamToTeamColorBrushConverter : IValueConverter
     {
         #region Implementation of IValueConverter
