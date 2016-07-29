@@ -8,7 +8,9 @@ using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Navigation;
 using AllEnum;
+using Google.Protobuf.WellKnownTypes;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Extensions;
@@ -20,6 +22,7 @@ using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Common;
 using Template10.Mvvm;
+using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP.ViewModels
@@ -43,6 +46,36 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Lifecycle Handlers
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        {
+            if (suspensionState.Any())
+            {
+                // Restoring from suspend means that we need to initialize the game again
+                await InitGame(true);
+            }
+            await Task.CompletedTask;
+        }
+
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
+        {
+            if (suspending)
+            {
+                // We save this value just to report that suspension happened with an open session
+                suspensionState[nameof(SettingsService.Instance.PtcAuthToken)] = SettingsService.Instance.PtcAuthToken;
+            }
+            await Task.CompletedTask;
+        }
+
+        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            args.Cancel = false;
+            await Task.CompletedTask;
+        }
+
+        #endregion
+
         #region Client Vars
 
         private readonly Client _client;
@@ -57,6 +90,11 @@ namespace PokemonGo_UWP.ViewModels
         ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
         private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+
+        /// <summary>
+        /// True if the phone can vibrate (e.g. the app is not in background)
+        /// </summary>
+        public bool CanVibrate;
 
         /// <summary>
         ///     Player's profile, we use it just for the username
@@ -276,13 +314,15 @@ namespace PokemonGo_UWP.ViewModels
             UpdatePlayerData();
             Busy.SetBusy(true, "Getting player items");
             UpdateInventory();
-            //Start a timer to update map data every 5 seconds
+            // Prevent from going back to login page
+            NavigationService.ClearHistory();
+            //Start a timer to update map data every 10 seconds
             var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
             {
                 if (_stopUpdatingMap) return;
                 Logger.Write("Updating map");
                 UpdateMapData();
-            }, TimeSpan.FromSeconds(5));
+            }, TimeSpan.FromSeconds(10));
             Busy.SetBusy(false);
         }
 
@@ -310,8 +350,6 @@ namespace PokemonGo_UWP.ViewModels
                         await InitGame();
                         // Goto game page
                         await NavigationService.NavigateAsync(typeof(GameMapPage));
-                        // Avoid going back to login page using back button
-                        NavigationService.ClearHistory();
                     }
                 }
                 catch (Exception)
@@ -356,7 +394,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             await
                 Dispatcher.DispatchAsync(
-                    async () => { await new MessageDialog("Something went wrong, please restart the app").ShowAsync(); });
+                    async () => { await new MessageDialog("Unexpected server response, app may be unstable now.").ShowAsync(); });
             SettingsService.Instance.PtcAuthToken = null;
             //BootStrapper.Current.Exit();
         }
@@ -376,7 +414,7 @@ namespace PokemonGo_UWP.ViewModels
                 // Replace data with the new ones                                  
                 var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
                 Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
-                if (catchableTmp.Count != CatchablePokemons.Count)
+                if (CanVibrate && catchableTmp.Count != CatchablePokemons.Count)
                     _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
                 await Dispatcher.DispatchAsync(() =>
                 {

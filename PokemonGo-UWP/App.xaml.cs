@@ -21,7 +21,7 @@ namespace PokemonGo_UWP
 
         public App()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)

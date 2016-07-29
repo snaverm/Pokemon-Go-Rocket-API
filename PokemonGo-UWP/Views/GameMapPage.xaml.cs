@@ -1,6 +1,9 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using PokemonGo_UWP.ViewModels;
+using Template10.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -14,7 +17,21 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             InitializeComponent();
+            WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
+            {                
+                if (App.ViewModelLocator.GameManagerViewModel != null)
+                {
+                    // We need to disable vibration
+                    App.ViewModelLocator.GameManagerViewModel.CanVibrate = e.Visible;
+                }
+            };
+            SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
+            {
+                // TODO: clearing navigation history before reaching this page doesn't seem enough because this idiot gets back to login page, so we need brutally close the app
+                BootStrapper.Current.Exit();
+            };
         }
+        
 
         #region Menu Animation
 
