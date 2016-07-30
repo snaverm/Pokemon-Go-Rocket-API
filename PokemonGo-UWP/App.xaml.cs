@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Data;
 using Microsoft.HockeyApp;
 using PokemonGo_UWP.Utils;
@@ -26,6 +29,12 @@ namespace PokemonGo_UWP
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            // If we have a phone contract, hide the status bar
+            if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                await statusBar.HideAsync();
+            }
             // Get a static reference to viewmodel locator to use it within viewmodels
             ViewModelLocator = (ViewModelLocator) Current.Resources["Locator"];
             await Task.CompletedTask;
