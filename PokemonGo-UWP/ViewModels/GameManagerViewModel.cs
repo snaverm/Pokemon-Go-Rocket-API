@@ -10,7 +10,6 @@ using Windows.System.Threading;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 using AllEnum;
-using Google.Protobuf.WellKnownTypes;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Extensions;
@@ -48,7 +47,8 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Lifecycle Handlers
 
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
+            IDictionary<string, object> suspensionState)
         {
             if (suspensionState.Any())
             {
@@ -92,7 +92,7 @@ namespace PokemonGo_UWP.ViewModels
         private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
 
         /// <summary>
-        /// True if the phone can vibrate (e.g. the app is not in background)
+        ///     True if the phone can vibrate (e.g. the app is not in background)
         /// </summary>
         public bool CanVibrate;
 
@@ -388,7 +388,8 @@ namespace PokemonGo_UWP.ViewModels
         #region Data Update
 
         /// <summary>
-        /// True if we're already handling the exception, to prevent multiple dialogs and avoid throwing a System.UnauthorizedAccessException
+        ///     True if we're already handling the exception, to prevent multiple dialogs and avoid throwing a
+        ///     System.UnauthorizedAccessException
         /// </summary>
         private bool _isHandlingException;
 
@@ -398,14 +399,16 @@ namespace PokemonGo_UWP.ViewModels
         private async void HandleException()
         {
             if (_isHandlingException) return;
-            _isHandlingException = true;          
+            _isHandlingException = true;
             await
                 Dispatcher.DispatchAsync(
                     async () =>
                     {
-                        var dialog = new MessageDialog("Unexpected server response, app may be unstable now. Do you want to logout and restart?");
-                        dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
-                        dialog.Commands.Add(new UICommand("No") { Id = 1 });
+                        var dialog =
+                            new MessageDialog(
+                                "Unexpected server response, app may be unstable now. Do you want to logout and restart?");
+                        dialog.Commands.Add(new UICommand("Yes") {Id = 0});
+                        dialog.Commands.Add(new UICommand("No") {Id = 1});
                         dialog.DefaultCommandIndex = 0;
                         dialog.CancelCommandIndex = 1;
                         var result = await dialog.ShowAsync();
@@ -415,7 +418,7 @@ namespace PokemonGo_UWP.ViewModels
                             BootStrapper.Current.Exit();
                         }
                         _isHandlingException = false;
-                    });            
+                    });
         }
 
         /// <summary>
@@ -470,7 +473,7 @@ namespace PokemonGo_UWP.ViewModels
                 });
             }
             catch (Exception)
-            {                
+            {
                 HandleException();
             }
         }

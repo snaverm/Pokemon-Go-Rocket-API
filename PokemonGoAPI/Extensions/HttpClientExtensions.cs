@@ -1,15 +1,13 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Google.Protobuf;
-using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo.RocketAPI.Extensions
 {
     public static class HttpClientExtensions
     {
-
-        private static bool waitingForResponse = false;
+        private static bool waitingForResponse;
 
         //public static async Task<TResponsePayload> PostProtoPayload<TRequest, TResponsePayload>(this HttpClient client,
         //    string url, TRequest request) where TRequest : IMessage<TRequest>
@@ -31,8 +29,8 @@ namespace PokemonGo.RocketAPI.Extensions
         //}
 
         public static async Task<TResponsePayload> PostProtoPayload<TRequest, TResponsePayload>(this HttpClient client,
-    string url, TRequest request) where TRequest : IMessage<TRequest>
-    where TResponsePayload : IMessage<TResponsePayload>, new()
+            string url, TRequest request) where TRequest : IMessage<TRequest>
+            where TResponsePayload : IMessage<TResponsePayload>, new()
         {
             while (waitingForResponse)
                 await Task.Delay(30);
@@ -42,11 +40,11 @@ namespace PokemonGo.RocketAPI.Extensions
             var count = 0;
             do
             {
-                count++;                
+                count++;
                 response = await PostProto(client, url, request);
                 waitingForResponse = false;
 
-                await Task.Delay(30);// request every 30ms, up this value for not spam their server
+                await Task.Delay(30); // request every 30ms, up this value for not spam their server
             } while (response.Payload.Count < 1 && count < 30);
 
             var payload = response.Payload[0];
@@ -59,7 +57,7 @@ namespace PokemonGo.RocketAPI.Extensions
             where TRequest : IMessage<TRequest>
         {
             //Encode payload and put in envelop, then send
-            var data = request.ToByteString();            
+            var data = request.ToByteString();
             var result = await client.PostAsync(url, new ByteArrayContent(data.ToByteArray()));
 
             //Decode message

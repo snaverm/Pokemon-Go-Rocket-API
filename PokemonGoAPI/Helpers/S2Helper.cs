@@ -11,7 +11,7 @@ namespace PokemonGo.RocketAPI.Helpers
             var nearbyCellIds = new List<S2CellId>();
 
             var cellId = S2CellId.FromLatLng(S2LatLng.FromDegrees(latitude, longitude)).ParentForLevel(15);
-                //.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent;
+            //.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent;
 
             nearbyCellIds.Add(cellId);
             for (var i = 0; i < 10; i++)

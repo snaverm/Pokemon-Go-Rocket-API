@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Metadata;
@@ -24,7 +23,7 @@ namespace PokemonGo_UWP
 
         public App()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)

@@ -2,7 +2,6 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using PokemonGo_UWP.ViewModels;
 using Template10.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -18,7 +17,7 @@ namespace PokemonGo_UWP.Views
         {
             InitializeComponent();
             WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
-            {                
+            {
                 if (App.ViewModelLocator.GameManagerViewModel != null)
                 {
                     // We need to disable vibration
@@ -31,7 +30,6 @@ namespace PokemonGo_UWP.Views
                 BootStrapper.Current.Exit();
             };
         }
-        
 
         #region Menu Animation
 
