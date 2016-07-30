@@ -388,10 +388,17 @@ namespace PokemonGo_UWP.ViewModels
         #region Data Update
 
         /// <summary>
+        /// True if we're already handling the exception, to prevent multiple dialogs and avoid throwing a System.UnauthorizedAccessException
+        /// </summary>
+        private bool _isHandlingException;
+
+        /// <summary>
         ///     This exception means that something went wrong with the server, so we close the app and remove the saved token
         /// </summary>
         private async void HandleException()
         {
+            if (_isHandlingException) return;
+            _isHandlingException = true;          
             await
                 Dispatcher.DispatchAsync(
                     async () =>
@@ -407,6 +414,7 @@ namespace PokemonGo_UWP.ViewModels
                             SettingsService.Instance.PtcAuthToken = null;
                             BootStrapper.Current.Exit();
                         }
+                        _isHandlingException = false;
                     });            
         }
 
@@ -462,7 +470,7 @@ namespace PokemonGo_UWP.ViewModels
                 });
             }
             catch (Exception)
-            {
+            {                
                 HandleException();
             }
         }
