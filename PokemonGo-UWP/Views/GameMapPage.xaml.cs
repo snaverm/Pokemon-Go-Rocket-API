@@ -26,7 +26,7 @@ namespace PokemonGo_UWP.Views
             };
             SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
             {
-                // TODO: clearing navigation history before reaching this page doesn't seem enough because this idiot gets back to login page, so we need brutally close the app
+                // TODO: clearing navigation history before reaching this page doesn't seem enough because back button brings us back to login page, so we need to brutally close the app
                 BootStrapper.Current.Exit();
             };
         }
