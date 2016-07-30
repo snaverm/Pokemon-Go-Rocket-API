@@ -49,7 +49,6 @@ namespace PokemonGo_UWP.Views
             App.ViewModelLocator.GameManagerViewModel.SearchSuccess += GameManagerViewModelOnSearchSuccess;
             // Add also handlers to report which items the user gained after the animation
             SpinPokestopImage.Completed += (s, e) => ShowGatheredItemsMenu.Begin();
-            ;
         }
 
         private void UnsubscribeToCaptureEvents()

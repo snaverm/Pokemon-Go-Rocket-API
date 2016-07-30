@@ -8,6 +8,7 @@ using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.ViewModels;
 using PokemonGo_UWP.Views;
 using Template10.Common;
+using System;
 
 namespace PokemonGo_UWP
 {

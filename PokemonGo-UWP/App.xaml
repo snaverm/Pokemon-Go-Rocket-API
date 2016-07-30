@@ -3,7 +3,6 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:common="using:Template10.Common"
                      xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
-                     xmlns:converters="using:Template10.Converters"
                      xmlns:utils="using:PokemonGo_UWP.Utils"
                      RequestedTheme="Light">
 

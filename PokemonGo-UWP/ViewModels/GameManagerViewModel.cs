@@ -306,24 +306,34 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public async Task InitGame(bool hadAuthTokenStored = false)
         {
-            if (hadAuthTokenStored)
-                await _client.SetServer(SettingsService.Instance.PtcAuthToken);
-            Busy.SetBusy(true, "Getting GPS position");
-            await InitGps();
-            Busy.SetBusy(true, "Getting player data");
-            UpdatePlayerData();
-            Busy.SetBusy(true, "Getting player items");
-            UpdateInventory();
-            // Prevent from going back to login page
-            NavigationService.ClearHistory();
-            //Start a timer to update map data every 10 seconds
-            var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+            try
             {
-                if (_stopUpdatingMap) return;
-                Logger.Write("Updating map");
-                UpdateMapData();
-            }, TimeSpan.FromSeconds(10));
-            Busy.SetBusy(false);
+                if (hadAuthTokenStored)
+                    await _client.SetServer(SettingsService.Instance.PtcAuthToken);
+                Busy.SetBusy(true, "Getting GPS position");
+                await InitGps();
+                Busy.SetBusy(true, "Getting player data");
+                UpdatePlayerData();
+                Busy.SetBusy(true, "Getting player items");
+                UpdateInventory();
+                // Prevent from going back to login page
+                NavigationService.ClearHistory();
+                //Start a timer to update map data every 10 seconds
+                var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+                {
+                    if (_stopUpdatingMap) return;
+                    Logger.Write("Updating map");
+                    UpdateMapData();
+                }, TimeSpan.FromSeconds(10));
+            }
+            catch (Exception)
+            {
+                HandleException();
+            }
+            finally
+            {
+                Busy.SetBusy(false);
+            }
         }
 
 
@@ -406,7 +416,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         var dialog =
                             new MessageDialog(
-                                "Unexpected server response, app may be unstable now. Do you want to logout and restart?");
+                                "Something went wrong and app may be unstable now. Do you want to logout and restart?");
                         dialog.Commands.Add(new UICommand("Yes") {Id = 0});
                         dialog.Commands.Add(new UICommand("No") {Id = 1});
                         dialog.DefaultCommandIndex = 0;
