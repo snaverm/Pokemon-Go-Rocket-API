@@ -394,9 +394,20 @@ namespace PokemonGo_UWP.ViewModels
         {
             await
                 Dispatcher.DispatchAsync(
-                    async () => { await new MessageDialog("Unexpected server response, app may be unstable now.").ShowAsync(); });
-            SettingsService.Instance.PtcAuthToken = null;
-            //BootStrapper.Current.Exit();
+                    async () =>
+                    {
+                        var dialog = new MessageDialog("Unexpected server response, app may be unstable now. Do you want to logout and restart?");
+                        dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
+                        dialog.Commands.Add(new UICommand("No") { Id = 1 });
+                        dialog.DefaultCommandIndex = 0;
+                        dialog.CancelCommandIndex = 1;
+                        var result = await dialog.ShowAsync();
+                        if ((int) result.Id == 0)
+                        {
+                            SettingsService.Instance.PtcAuthToken = null;
+                            BootStrapper.Current.Exit();
+                        }
+                    });            
         }
 
         /// <summary>
