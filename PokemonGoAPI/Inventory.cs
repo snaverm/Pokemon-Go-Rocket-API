@@ -20,7 +20,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
-                    .Where(p => p != null && p?.PokemonId > 0);
+                    .Where(p => p != null && p.PokemonId > 0);
         }
         
         public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
@@ -28,7 +28,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
@@ -36,7 +36,7 @@ namespace PokemonGo.RocketAPI.Logic
             var templates = await _client.GetItemTemplates();
             return
                 templates.ItemTemplates.Select(i => i.PokemonSettings)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         } 
 
 
@@ -131,8 +131,8 @@ namespace PokemonGo.RocketAPI.Logic
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.itemRecycleFilter.Any(f => f.Key == ((ItemId)x.Item_) && x.Count > f.Value))
-                .Select(x => new Item { Item_ = x.Item_, Count = x.Count - settings.itemRecycleFilter.Single(f => f.Key == (AllEnum.ItemId)x.Item_).Value, Unseen = x.Unseen });
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == ((ItemId)x.Item_) && x.Count > f.Value))
+                .Select(x => new Item { Item_ = x.Item_, Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId)x.Item_).Value, Unseen = x.Unseen });
         }
     }
 }

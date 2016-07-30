@@ -211,7 +211,7 @@ namespace PokemonGo.RocketAPI.Helpers
 
                 if (shift > sizeBites)
                 {
-                    throw new ArgumentOutOfRangeException("bytes", "Byte array is too large.");
+                    throw new ArgumentOutOfRangeException(nameof(bytes), "Byte array is too large.");
                 }
 
                 if ((byteValue & 0x80) != 0x80)
@@ -222,7 +222,7 @@ namespace PokemonGo.RocketAPI.Helpers
                 shift += 7;
             }
 
-            throw new ArgumentException("Cannot decode varint from byte array.", "bytes");
+            throw new ArgumentException("Cannot decode varint from byte array.", nameof(bytes));
         }
     }
 }

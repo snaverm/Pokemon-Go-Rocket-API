@@ -1,5 +1,4 @@
 ﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
 using System.Collections.Generic;
 
 namespace PokemonGo.RocketAPI
@@ -13,6 +12,6 @@ namespace PokemonGo.RocketAPI
         string PtcPassword { get; }
         string PtcUsername { get; }
 
-        ICollection<KeyValuePair<AllEnum.ItemId, int>> itemRecycleFilter { get; set; }
+        ICollection<KeyValuePair<AllEnum.ItemId, int>> ItemRecycleFilter { get; set; }
     }
 }

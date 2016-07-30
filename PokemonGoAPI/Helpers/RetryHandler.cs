@@ -35,7 +35,7 @@ namespace PokemonGo.RocketAPI.Helpers
                         LogLevel.Warning);
                     if (i < MaxRetries)
                     {
-                        await Task.Delay(1000);
+                        await Task.Delay(1000, cancellationToken);
                         continue;
                     }
                     throw;

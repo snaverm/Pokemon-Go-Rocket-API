@@ -13,7 +13,7 @@ namespace PokemonGo.RocketAPI.Console
         public double DefaultLatitude => 0;
         public double DefaultLongitude => 0;
 
-        ICollection<KeyValuePair<ItemId, int>> ISettings.itemRecycleFilter
+        ICollection<KeyValuePair<ItemId, int>> ISettings.ItemRecycleFilter
         {
             get
             {

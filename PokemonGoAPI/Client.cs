@@ -87,7 +87,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng)
         {
-            this.SetCoordinates(lat, lng);
+            SetCoordinates(lat, lng);
             var customRequest = new Request.Types.PlayerUpdateProto()
             {
                 Lat = Utils.FloatAsUlong(_currentLat),
@@ -112,7 +112,7 @@ namespace PokemonGo.RocketAPI
             var serverRequest = RequestBuilder.GetInitialRequest(_accessToken, _authType, _currentLat, _currentLng, 10,
                 RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
                 RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
-            var serverResponse = await _httpClient.PostProto<Request>(Resources.RpcUrl, serverRequest);
+            var serverResponse = await _httpClient.PostProto(Resources.RpcUrl, serverRequest);
             _unknownAuth = new Request.Types.UnknownAuth()
             {
                 Unknown71 = serverResponse.Auth.Unknown71,
