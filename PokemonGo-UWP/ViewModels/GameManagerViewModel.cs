@@ -850,8 +850,6 @@ namespace PokemonGo_UWP.ViewModels
         {
             // Get new position
             await Dispatcher.DispatchAsync(() => { CurrentGeoposition = args.Position; });
-            // We update pokestops also
-            UpdateMapData(false);
         }
 
         #endregion
