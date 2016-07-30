@@ -331,7 +331,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<RecycleInventoryItemResponse> RecycleItem(AllEnum.ItemId itemId, int amount)
         {
-            var customRequest = new RecycleInventoryItem
+            var customRequest = new InventoryItemData.RecycleInventoryItem
             {
                 ItemId = (AllEnum.ItemId)Enum.Parse(typeof(AllEnum.ItemId), itemId.ToString()),
                 Count = amount
