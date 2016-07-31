@@ -9,7 +9,9 @@ using PokemonGo_UWP.ViewModels;
 using PokemonGo_UWP.Views;
 using Template10.Common;
 using System;
+using Windows.System;
 using Windows.System.Display;
+using Windows.UI.Popups;
 
 namespace PokemonGo_UWP
 {
@@ -32,9 +34,13 @@ namespace PokemonGo_UWP
         {
             InitializeComponent();
 
+            // Init HockeySDK
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.Configure(ApplicationKeys.HockeyAppToken);
+
             // Forces the display to stay on while we play
             DisplayRequest = new DisplayRequest();
-            DisplayRequest.RequestActive();            
+            DisplayRequest.RequestActive();                            
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
@@ -51,16 +57,30 @@ namespace PokemonGo_UWP
         }
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
-        {
-            // Init HockeySDK
-            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
-                HockeyClient.Current.Configure(ApplicationKeys.HockeyAppToken);
+        {            
             await NavigationService.NavigateAsync(typeof(MainPage));
             if (!string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
             {
                 // We have a stored token, let's go to game page 
                 NavigationService.Navigate(typeof(GameMapPage));
                 await ViewModelLocator.GameManagerViewModel.InitGame(true);
+            }
+
+            // Check for updates
+            var latestVersionUri = await UpdateManager.IsUpdateAvailable();
+            if (latestVersionUri != null)
+            {                
+                var dialog = new MessageDialog(
+                $"An updated version is available on\n{latestVersionUri}\nDo you want to visit the link?");
+
+                dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
+                dialog.Commands.Add(new UICommand("No") { Id = 1 });
+                dialog.DefaultCommandIndex = 0;
+                dialog.CancelCommandIndex = 1;
+                
+                var result = await dialog.ShowAsyncQueue();
+                if ((int) result.Id != 0) return;
+                await Launcher.LaunchUriAsync(new Uri(latestVersionUri));
             }
             await Task.CompletedTask;
         }

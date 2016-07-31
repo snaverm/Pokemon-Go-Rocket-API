@@ -368,7 +368,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsync();
+                            new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsyncQueue();
                     }
                     else
                     {
@@ -380,7 +380,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (Exception)
                 {
-                    await new MessageDialog("PTC login is probably down, please retry later.").ShowAsync();
+                    await new MessageDialog("PTC login is probably down, please retry later.").ShowAsyncQueue();
                 }
                 finally
                 {
@@ -437,7 +437,7 @@ namespace PokemonGo_UWP.ViewModels
                         dialog.Commands.Add(new UICommand("No") {Id = 1});
                         dialog.DefaultCommandIndex = 0;
                         dialog.CancelCommandIndex = 1;
-                        var result = await dialog.ShowAsync();
+                        var result = await dialog.ShowAsyncQueue();
                         if ((int) result.Id == 0)
                         {
                             SettingsService.Instance.PtcAuthToken = null;
@@ -601,7 +601,7 @@ namespace PokemonGo_UWP.ViewModels
                 else
                 {
                     // Encounter failed, probably the Pokemon ran away
-                    await new MessageDialog("Pokemon ran away, sorry :(").ShowAsync();
+                    await new MessageDialog("Pokemon ran away, sorry :(").ShowAsyncQueue();
                     UpdateMapData();
                 }
             }, pokemon => true)
@@ -662,14 +662,14 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
-                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsync();
+                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
                     UpdateMapData();
                     UpdateInventory();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
-                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsync();
+                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
                     UpdateMapData();
                     UpdateInventory();
                     break;
@@ -754,7 +754,7 @@ namespace PokemonGo_UWP.ViewModels
                 else
                 {
                     // Timeout is not expired yet, player can't get items from the fort
-                    await new MessageDialog("This PokeStop is still on cooldown, please retry later.").ShowAsync();
+                    await new MessageDialog("This PokeStop is still on cooldown, please retry later.").ShowAsyncQueue();
                 }
             }, pokemon => true)
             );
@@ -853,7 +853,7 @@ namespace PokemonGo_UWP.ViewModels
                     break;
                 default:
                     Logger.Write("Error during GPS activation");
-                    await new MessageDialog("GPS error, sorry :(").ShowAsync();
+                    await new MessageDialog("GPS error, sorry :(").ShowAsyncQueue();
                     BootStrapper.Current.Exit();
                     break;
             }
