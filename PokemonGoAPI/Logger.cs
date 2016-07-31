@@ -26,9 +26,7 @@ namespace PokemonGo.RocketAPI
 		/// <param name="level">Optional level to log. Default <see cref="LogLevel.Info"/>.</param>
 		public static void Write(string message, LogLevel level = LogLevel.Info)
 		{
-			if (_logger == null)
-				return;
-			_logger.Write(message, level);
+		    _logger?.Write(message, level);
 		}
 	}
 
