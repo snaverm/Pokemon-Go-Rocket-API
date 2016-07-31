@@ -20,7 +20,7 @@ namespace PokemonGo_UWP.Views
             {
                 // Of course binding doesn't work so we need to manually setup height for animations
                 ShowInventoryDoubleAnimation.From =
-                    HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight;
+                    HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight*3/2;
             };
         }
 
@@ -62,7 +62,7 @@ namespace PokemonGo_UWP.Views
             // Add also handlers to enable the button once the animation is done            
             // TODO: fix names for actions in capture score and choose a proper font
             CatchSuccess.Completed += (s, e) => ShowCaptureStatsStoryboard.Begin();
-            CatchEscape.Completed += (s, e) => BootStrapper.Current.NavigationService.GoBack();
+            CatchEscape.Completed += (s, e) => ShowCaptureStatsStoryboard.Begin();
             CatchMissed.Completed += (s, e) => LaunchPokeballButton.IsEnabled = true;
         }
 
