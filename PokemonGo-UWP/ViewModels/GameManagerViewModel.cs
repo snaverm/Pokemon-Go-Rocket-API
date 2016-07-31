@@ -328,6 +328,8 @@ namespace PokemonGo_UWP.ViewModels
                 await InitGps();
                 Busy.SetBusy(true, "Getting player data");
                 UpdatePlayerData();
+                Busy.SetBusy(true, "Updating map");
+                UpdateMapData(false);
                 Busy.SetBusy(true, "Getting player items");
                 UpdateInventory();
                 // Prevent from going back to login page

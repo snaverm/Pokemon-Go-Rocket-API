@@ -265,6 +265,10 @@ namespace PokemonGo.RocketAPI
         public async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnPointGuid, double pokemonLat,
             double pokemonLng, MiscEnums.Item pokeball)
         {
+            // Randomized a little bit to avoid always perfect shots (#12)
+            var reticleSize = Utils.FloatAsUlong(RandomHelper.GetFloatRandom(0, 1.950f));
+            var spinModifier = Utils.FloatAsUlong(RandomHelper.GetFloatRandom(0, 1));
+            var hitPosition = Utils.FloatAsUlong(1); //Utils.FloatAsUlong(RandomHelper.GetFloatRandom(0, 1));
 
             var customRequest = new Request.Types.CatchPokemonRequest()
             {
@@ -272,10 +276,12 @@ namespace PokemonGo.RocketAPI
                 Pokeball = (int)pokeball,
                 SpawnPointGuid = spawnPointGuid,
                 HitPokemon = 1,
-                NormalizedReticleSize = Utils.FloatAsUlong(1.950),
-                SpinModifier = Utils.FloatAsUlong(1),
-                NormalizedHitPosition = Utils.FloatAsUlong(1)
+                NormalizedReticleSize = reticleSize, //Utils.FloatAsUlong(1.950),
+                SpinModifier = spinModifier, //Utils.FloatAsUlong(1),
+                NormalizedHitPosition = hitPosition, //Utils.FloatAsUlong(1)
             };
+
+            Logger.Write($"Trying to catch with parameters {customRequest.NormalizedReticleSize}, {customRequest.SpinModifier}, {customRequest.NormalizedHitPosition}");
 
             var catchPokemonRequest = RequestBuilder.GetRequest(_unknownAuth, _currentLat, _currentLng, 30,
                 new Request.Types.Requests()
