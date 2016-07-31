@@ -56,7 +56,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState)
         {            
-            if (suspensionState.Any() || parameter != null)
+            if (suspensionState.Any() || (parameter != null && mode == NavigationMode.New))
             {
                 // Restoring from suspend or having that parameter means that we need to initialize the game again
                 await InitGame(true);
@@ -659,20 +659,13 @@ namespace PokemonGo_UWP.ViewModels
                     UpdateInventory();
                     UpdatePlayerData();
                     break;
-                case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
+                case CatchPokemonResponse.Types.CatchStatus.CatchEscape | CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
                     await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
                     UpdateMapData();
                     UpdateInventory();
-                    NavigationService.GoBack();
-                    break;
-                case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
-                    Logger.Write($"{CurrentPokemon.PokemonId} escaped");
-                    CatchEscape?.Invoke(this, null);
-                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
-                    UpdateMapData();
-                    UpdateInventory();
+                    ReturnToGameScreen.Execute();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
                     Logger.Write($"We missed {CurrentPokemon.PokemonId}");
