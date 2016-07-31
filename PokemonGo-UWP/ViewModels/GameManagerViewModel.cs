@@ -461,9 +461,8 @@ namespace PokemonGo_UWP.ViewModels
                 // Replace data with the new ones                                  
                 var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
                 Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
-                if (CanVibrate && catchableTmp.Count != CatchablePokemons.Count)
-                    if(this._vibrationDevice != null)
-                        _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+                if (_vibrationDevice != null && CanVibrate && catchableTmp.Count != CatchablePokemons.Count)
+                    _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
                 await Dispatcher.DispatchAsync(() =>
                 {
                     CatchablePokemons.Clear();
