@@ -663,6 +663,7 @@ namespace PokemonGo_UWP.ViewModels
                     UpdatePlayerData();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
+                    CurrentCaptureScore = caughtPokemonResponse.Scores;
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
                     await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
