@@ -55,10 +55,10 @@ namespace PokemonGo_UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState)
-        {
-            if (suspensionState.Any())
+        {            
+            if (suspensionState.Any() || parameter != null)
             {
-                // Restoring from suspend means that we need to initialize the game again
+                // Restoring from suspend or having that parameter means that we need to initialize the game again
                 await InitGame(true);
             }
             await Task.CompletedTask;
@@ -665,6 +665,7 @@ namespace PokemonGo_UWP.ViewModels
                     await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
                     UpdateMapData();
                     UpdateInventory();
+                    NavigationService.GoBack();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
