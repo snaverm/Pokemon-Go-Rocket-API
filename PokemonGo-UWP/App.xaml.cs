@@ -62,8 +62,8 @@ namespace PokemonGo_UWP
             if (!string.IsNullOrEmpty(SettingsService.Instance.PtcAuthToken))
             {
                 // We have a stored token, let's go to game page 
-                NavigationService.Navigate(typeof(GameMapPage));
-                await ViewModelLocator.GameManagerViewModel.InitGame(true);
+                NavigationService.Navigate(typeof(GameMapPage), true);
+                //await ViewModelLocator.GameManagerViewModel.InitGame(true);
             }
 
             // Check for updates
