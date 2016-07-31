@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
@@ -64,6 +65,9 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // We save this value just to report that suspension happened with an open session
                 suspensionState[nameof(SettingsService.Instance.PtcAuthToken)] = SettingsService.Instance.PtcAuthToken;
+                // Don't update data if app is in background
+                _updateDataTimer.Cancel();
+                _updateDataTimer = null;
             }
             await Task.CompletedTask;
         }
@@ -151,6 +155,11 @@ namespace PokemonGo_UWP.ViewModels
         ///     Results of the current Pokestop search
         /// </summary>
         private FortSearchResponse _currentSearchResponse;
+
+        /// <summary>
+        /// Timer used to update game data
+        /// </summary>
+        private ThreadPoolTimer _updateDataTimer;
 
         #endregion
 
@@ -319,12 +328,12 @@ namespace PokemonGo_UWP.ViewModels
                 // Prevent from going back to login page
                 NavigationService.ClearHistory();
                 //Start a timer to update map data every 10 seconds
-                var timer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+                _updateDataTimer = ThreadPoolTimer.CreatePeriodicTimer(t =>
                 {
                     if (_stopUpdatingMap) return;
                     Logger.Write("Updating map");
-                    UpdateMapData();
-                }, TimeSpan.FromSeconds(10));
+                    UpdateMapData(false);
+                }, TimeSpan.FromSeconds(15));                
             }
             catch (Exception)
             {
@@ -416,7 +425,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         var dialog =
                             new MessageDialog(
-                                "Something went wrong and app may be unstable now. Do you want to logout and restart?");
+                                "Something went wrong and app may be unstable now. Do you want to logout and restart the app?");
                         dialog.Commands.Add(new UICommand("Yes") {Id = 0});
                         dialog.Commands.Add(new UICommand("No") {Id = 1});
                         dialog.DefaultCommandIndex = 0;
@@ -586,6 +595,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     // Encounter failed, probably the Pokemon ran away
                     await new MessageDialog("Pokemon ran away, sorry :(").ShowAsync();
+                    UpdateMapData();
                 }
             }, pokemon => true)
             );
@@ -645,12 +655,14 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
+                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsync();
                     UpdateMapData();
                     UpdateInventory();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
+                    await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsync();
                     UpdateMapData();
                     UpdateInventory();
                     break;

@@ -8,13 +8,14 @@ namespace PokemonGo.RocketAPI.Extensions
     public static class HttpClientExtensions
     {
         private static bool _waitingForResponse;
+        private static int _retryDelayMs = 100;
 
         public static async Task<TResponsePayload> PostProtoPayload<TRequest, TResponsePayload>(this HttpClient client,
             string url, TRequest request) where TRequest : IMessage<TRequest>
             where TResponsePayload : IMessage<TResponsePayload>, new()
         {
             while (_waitingForResponse)
-                await Task.Delay(30);
+                await Task.Delay(_retryDelayMs);
             _waitingForResponse = true;
 
             Response response;
@@ -25,7 +26,7 @@ namespace PokemonGo.RocketAPI.Extensions
                 response = await PostProto(client, url, request);
                 _waitingForResponse = false;
 
-                await Task.Delay(30); // request every 30ms, up this value for not spam their server
+                await Task.Delay(_retryDelayMs);
             } while (response.Payload.Count < 1 && count < 30);
 
             var payload = response.Payload[0];

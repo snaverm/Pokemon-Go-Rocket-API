@@ -187,10 +187,11 @@
                            Margin="0,0,0,8" />
 
                 <GridView ItemsSource="{Binding NearbyPokemons}"
+                          SelectionMode="None"
                           Grid.Row="1">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <!--<StackPanel>-->
                                 <Image
                                     Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                     Stretch="Uniform"
@@ -198,7 +199,7 @@
                                     Width="48"
                                     Height="48"
                                     Margin="3,0" />
-                                <Image
+                                <!--<Image
                                     Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
                                     Stretch="Uniform"
                                     VerticalAlignment="Top"
@@ -206,7 +207,7 @@
                                     Width="48"
                                     Height="48"
                                     HorizontalAlignment="Center" />
-                            </StackPanel>
+                            </StackPanel>-->
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
