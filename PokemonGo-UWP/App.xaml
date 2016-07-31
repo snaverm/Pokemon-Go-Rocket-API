@@ -26,6 +26,7 @@
             <utils:PokemonDataToVisibilityConverter x:Key="PokemonDataToVisibilityConverter" />
             <utils:ItemAwardToPokemonSpriteConverter x:Key="ItemAwardToPokemonSpriteConverter" />
             <utils:NearbyPokemonDistanceToDistanceImageConverter x:Key="NearbyPokemonDistanceToDistanceImageConverter" />
+            <utils:PokestopToIconConverter x:Key="PokestopToIconConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

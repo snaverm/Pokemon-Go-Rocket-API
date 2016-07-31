@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Media;
 using AllEnum;
 using Google.Protobuf.Collections;
 using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Extensions;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -217,6 +218,26 @@ namespace PokemonGo_UWP.Utils
             var distance = (int) (float) value;
             var distanceString = distance < 125 ? (distance < 70 ? "Near" : "Mid") : "Far";
             return new Uri($"ms-appx:///Assets/Icons/Footprint_{distanceString}.png");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokestopToIconConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var cooldown = (long)value;
+            var inactve = "_inactive";
+            if (cooldown < DateTime.UtcNow.ToUnixTime()) inactve = "";
+            return new Uri($"ms-appx:///Assets/Icons/pokestop_near{inactve}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
