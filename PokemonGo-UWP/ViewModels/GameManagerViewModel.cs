@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
+using Windows.Foundation.Metadata;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
@@ -42,6 +43,11 @@ namespace PokemonGo_UWP.ViewModels
             _clientSettings = new Settings();
             _client = new Client(_clientSettings);
             _inventory = new Inventory(_client);
+
+            if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice"))
+            {
+                _vibrationDevice = VibrationDevice.GetDefault();
+            }
         }
 
         #endregion
@@ -93,7 +99,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
-        private readonly VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+        private readonly VibrationDevice _vibrationDevice;
 
         /// <summary>
         ///     True if the phone can vibrate (e.g. the app is not in background)
@@ -456,7 +462,8 @@ namespace PokemonGo_UWP.ViewModels
                 var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
                 Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
                 if (CanVibrate && catchableTmp.Count != CatchablePokemons.Count)
-                    _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
+                    if(this._vibrationDevice != null)
+                        _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(500));
                 await Dispatcher.DispatchAsync(() =>
                 {
                     CatchablePokemons.Clear();
