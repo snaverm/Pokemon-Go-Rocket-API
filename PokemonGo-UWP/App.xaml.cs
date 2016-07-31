@@ -9,6 +9,7 @@ using PokemonGo_UWP.ViewModels;
 using PokemonGo_UWP.Views;
 using Template10.Common;
 using System;
+using Windows.System.Display;
 
 namespace PokemonGo_UWP
 {
@@ -22,9 +23,18 @@ namespace PokemonGo_UWP
         /// </summary>
         public static ViewModelLocator ViewModelLocator;
 
+        /// <summary>
+        /// Used to prevent lockscreen while playing
+        /// </summary>
+        public static DisplayRequest DisplayRequest;
+
         public App()
         {
             InitializeComponent();
+
+            // Forces the display to stay on while we play
+            DisplayRequest = new DisplayRequest();
+            DisplayRequest.RequestActive();            
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
