@@ -71,7 +71,7 @@ namespace PokemonGo_UWP.ViewModels
                 // We save this value just to report that suspension happened with an open session
                 suspensionState[nameof(SettingsService.Instance.PtcAuthToken)] = SettingsService.Instance.PtcAuthToken;
                 // Don't update data if app is in background
-                _updateDataTimer.Cancel();
+                _updateDataTimer?.Cancel();
                 _updateDataTimer = null;
             }
             await Task.CompletedTask;
