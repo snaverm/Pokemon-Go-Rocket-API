@@ -335,12 +335,15 @@ namespace PokemonGo_UWP.ViewModels
                 // Prevent from going back to login page
                 NavigationService.ClearHistory();
                 //Start a timer to update map data every 10 seconds
-                _updateDataTimer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+                if (_updateDataTimer == null)
                 {
-                    if (_stopUpdatingMap) return;
-                    Logger.Write("Updating map");
-                    UpdateMapData(false);
-                }, TimeSpan.FromSeconds(15));                
+                    _updateDataTimer = ThreadPoolTimer.CreatePeriodicTimer(t =>
+                    {
+                        if (_stopUpdatingMap) return;
+                        Logger.Write("Updating map");
+                        UpdateMapData(false);
+                    }, TimeSpan.FromSeconds(15));
+                }
             }
             catch (Exception)
             {
