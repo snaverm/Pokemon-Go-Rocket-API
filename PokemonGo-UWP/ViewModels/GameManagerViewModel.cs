@@ -24,6 +24,7 @@ using Template10.Common;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
+using System.Threading;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -165,6 +166,16 @@ namespace PokemonGo_UWP.ViewModels
         /// Timer used to update game data
         /// </summary>
         private ThreadPoolTimer _updateDataTimer;
+
+        /// <summary>
+        /// Mutex to secure the parallel access to the data update
+        /// </summary>
+        private Mutex _updateDataMutex = new Mutex();
+
+        /// <summary>
+        /// If a forced refresh caused an update we should skip the next update
+        /// </summary>
+        private bool _skipNextUpdate = false;
 
         #endregion
 
@@ -340,8 +351,20 @@ namespace PokemonGo_UWP.ViewModels
                     _updateDataTimer = ThreadPoolTimer.CreatePeriodicTimer(t =>
                     {
                         if (_stopUpdatingMap) return;
-                        Logger.Write("Updating map");
-                        UpdateMapData(false);
+                        if (_updateDataMutex.WaitOne(0))
+                        {
+                            if (_skipNextUpdate)
+                            {
+                                _skipNextUpdate = false;
+                            }
+                            else
+                            {
+                                Logger.Write("Updating map");
+                                UpdateMapData(false);
+                            }
+                            
+                            _updateDataMutex.ReleaseMutex();
+                        }
                     }, TimeSpan.FromSeconds(15));
                 }
             }
@@ -448,6 +471,16 @@ namespace PokemonGo_UWP.ViewModels
                         }
                         _isHandlingException = false;
                     });
+        }
+
+        private void ForcedUpdateMapData()
+        {
+            if (_updateDataMutex.WaitOne(0))
+            {
+                _skipNextUpdate = true;
+                UpdateMapData(true);
+                _updateDataMutex.ReleaseMutex();
+            }                
         }
 
         /// <summary>
@@ -605,7 +638,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     // Encounter failed, probably the Pokemon ran away
                     await new MessageDialog("Pokemon ran away, sorry :(").ShowAsyncQueue();
-                    UpdateMapData();
+                    ForcedUpdateMapData();
                 }
             }, pokemon => true)
             );
@@ -658,7 +691,7 @@ namespace PokemonGo_UWP.ViewModels
                     CurrentCaptureScore = caughtPokemonResponse.Scores;
                     Logger.Write($"We caught {CurrentPokemon.PokemonId}");
                     CatchSuccess?.Invoke(this, null);
-                    UpdateMapData();
+                    ForcedUpdateMapData();
                     UpdateInventory();
                     UpdatePlayerData();
                     break;
@@ -667,7 +700,7 @@ namespace PokemonGo_UWP.ViewModels
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
                     await new MessageDialog($"{CurrentPokemon.PokemonId} escaped").ShowAsyncQueue();
-                    UpdateMapData();
+                    ForcedUpdateMapData();
                     UpdateInventory();
                     UpdatePlayerData();
                     break;
@@ -675,7 +708,7 @@ namespace PokemonGo_UWP.ViewModels
                     Logger.Write($"{CurrentPokemon.PokemonId} fleed");
                     CatchEscape?.Invoke(this, null);
                     await new MessageDialog($"{CurrentPokemon.PokemonId} fleed").ShowAsyncQueue();
-                    UpdateMapData();
+                    ForcedUpdateMapData();
                     UpdateInventory();
                     ReturnToGameScreen.Execute();
                     break;
