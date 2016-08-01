@@ -228,7 +228,8 @@
                 CornerRadius="8"
                 Padding="8"
                 Margin="8,0"
-                Canvas.ZIndex="5">
+                Canvas.ZIndex="5"
+                 Visibility="Collapsed">
 
             <Border.Background>
                 <ImageBrush ImageSource="../Assets/UI/panelBG.png" />
@@ -559,6 +560,7 @@
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True"
                        RelativePanel.AlignBottomWithPanel="True"
                        Background="Transparent">
+                
             <Button Style="{ThemeResource ImageButtonStyle}"
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
@@ -566,7 +568,11 @@
                     Height="100"
                     HorizontalAlignment="Center"
                     Command="{Binding UseSelectedCaptureItem}"
-                    x:Name="LaunchPokeballButton">
+                    x:Name="LaunchPokeballButton"
+                    ManipulationMode="TranslateX, TranslateY"
+                    ManipulationStarted="LaunchPokeballButton_ManipulationStarted"
+                    ManipulationDelta="LaunchPokeballButton_ManipulationDelta"
+                    ManipulationCompleted="LaunchPokeballButton_ManipulationCompleted">
                 <Button.RenderTransform>
                     <CompositeTransform x:Name="PokeballTransform"
                                         Rotation="0"
