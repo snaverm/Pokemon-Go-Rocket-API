@@ -127,7 +127,8 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"                         
+                         RelativePanel.AlignRightWithPanel="True"   
+                         RotateInteractionMode="GestureAndControl"
                          TiltInteractionMode="GestureAndControl"
                          MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"    
                          Canvas.ZIndex="1"
@@ -164,7 +165,7 @@
                                 Command="{x:Bind TrySearchPokestop}">
                             <Image Source="{Binding CooldownCompleteTimestampMs, Converter={StaticResource PokestopToIconConverter}}"
                                    maps:MapControl.Location="{Binding Geoposition}"
-                                   maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                                   maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                    Stretch="Uniform"
                                    Height="64"
                                    Width="64" />
@@ -324,26 +325,6 @@
             </Button>
 
         </RelativePanel>
-
-        <Ellipse RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.AlignTopWithPanel="True"
-                 Margin="24"
-                 Stroke="White"
-                 StrokeThickness="5"
-                 Height="{ThemeResource UiButtonSize}"
-                 Width="{ThemeResource UiButtonSize}"
-                 x:Name="CompassEllipse">
-            <Ellipse.Fill>
-                <ImageBrush Stretch="Uniform"
-                            ImageSource="../Assets/Icons/CompassIcon.png">
-                    <ImageBrush.RelativeTransform>
-                        <RotateTransform CenterX="0.5"
-                                         CenterY="0.5"
-                                         x:Name="CompassEllipseTransform" />
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"

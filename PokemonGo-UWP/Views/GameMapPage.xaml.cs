@@ -70,7 +70,6 @@ namespace PokemonGo_UWP.Views
             {
                 // Set player icon's position
                 MapControl.SetLocation(PlayerImage, position.Coordinate.Point);
-                CompassEllipseTransform.Angle = position.Coordinate.Heading ?? CompassEllipseTransform.Angle;
                 // Update angle and center only if map is not being manipulated 
                 // TODO: set this to false on gesture
                 if (!_canUpdateMap) return;
