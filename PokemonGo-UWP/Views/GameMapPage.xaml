@@ -490,5 +490,13 @@
             </Border>
             
         </Grid>
+
+        <TextBlock Text="{Binding CurrentVersion}"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   Margin="6"
+                   Canvas.ZIndex="100"
+                   />
+        
     </RelativePanel>
 </Page>
