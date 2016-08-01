@@ -24,17 +24,6 @@ namespace PokemonGo_UWP.Views
             };
         }
 
-        private void InventoryButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            // TODO: replace code-behind for animations with Template10's behaviors?
-            ShowInventoryMenuStoryboard.Begin();
-        }
-
-        private void CloseInventoryMenuButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            HideInventoryMenuStoryboard.Begin();
-        }
-
         #region Overrides of Page
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

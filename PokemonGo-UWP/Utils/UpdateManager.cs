@@ -23,16 +23,23 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         /// <returns></returns>
         public static async Task<string> IsUpdateAvailable()
-        {            
-            var releases = await GitHubClient.Repository.Release.GetAll("ST-Apps", "PoGo-UWP");
-            var latestRelease = releases[0];
-            // We skip prereleases, only stable ones
-            if (latestRelease.Prerelease) return null;
-            // Check if version number matches
-            var currentVersion = Package.Current.Id.Version;
-            var version = $"{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
-            var tagVersion = latestRelease.TagName.Replace("v", "");
-            return !version.Equals(tagVersion) ? latestRelease.HtmlUrl : null;
+        {
+            try
+            {
+                var releases = await GitHubClient.Repository.Release.GetAll("ST-Apps", "PoGo-UWP");
+                var latestRelease = releases[0];
+                // We skip prereleases, only stable ones
+                if (latestRelease.Prerelease) return null;
+                // Check if version number matches
+                var currentVersion = Package.Current.Id.Version;
+                var version = $"{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
+                var tagVersion = latestRelease.TagName.Replace("v", "");
+                return !version.Equals(tagVersion) ? latestRelease.HtmlUrl : null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

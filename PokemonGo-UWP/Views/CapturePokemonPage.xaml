@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
     x:Name="Page"
     mc:Ignorable="d">
@@ -216,7 +218,6 @@
         <RelativePanel.Background>
             <ImageBrush
                 ImageSource="{Binding CurrentEncounter.Background, Converter={StaticResource EncounterBackgroundToBackgroundImageConverter}}"
-                Opacity="0.5"
                 Stretch="UniformToFill" />
         </RelativePanel.Background>
 
@@ -328,8 +329,15 @@
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
-                        Click="CloseInventoryMenuButton_OnClick"
                         x:Name="CloseInventoryMenuButton">
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HideInventoryMenuStoryboard}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
                     <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
@@ -549,8 +557,15 @@
                 Margin="5"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
-                Click="InventoryButton_OnClick"
                 x:Name="InventoryButton">
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowInventoryMenuStoryboard}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+
             <Image Source="../Assets/UI/inventory.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
