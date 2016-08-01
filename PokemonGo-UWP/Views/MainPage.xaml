@@ -29,7 +29,8 @@
                      Password="{Binding PtcPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      RelativePanel.AlignLeftWithPanel="True"
                      RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.Below="usernameTextBox" />
+                     RelativePanel.Below="usernameTextBox" 
+                     KeyDown="passwordBox_KeyDown" />
 
         <Grid Margin="16,12"
               RelativePanel.AlignLeftWithPanel="True"
