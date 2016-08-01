@@ -6,9 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     x:Name="Page"
     mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <viewModels:CapturePokemonPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Page.Resources>
 
@@ -273,7 +277,7 @@
                                 <StackPanel Grid.Column="0"
                                             Margin="0,0,8,0">
 
-                                    <Image Source="{Binding Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                                    <Image Source="{Binding Converter={StaticResource ItemIdToItemIconConverter}}"
                                            Height="76"
                                            Stretch="Uniform"
                                            HorizontalAlignment="Stretch" />
@@ -593,7 +597,7 @@
                                         TranslateX="0" />
                 </Button.RenderTransform>
                 <Image
-                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToItemIconConverter}}"
                     Stretch="Uniform"
                     HorizontalAlignment="Stretch" />
             </Button>

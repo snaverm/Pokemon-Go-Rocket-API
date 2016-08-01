@@ -45,9 +45,9 @@ namespace PokemonGo_UWP.Views
 
         private void SubscribeToCaptureEvents()
         {
-            App.ViewModelLocator.GameManagerViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
-            App.ViewModelLocator.GameManagerViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
-            App.ViewModelLocator.GameManagerViewModel.CatchMissed += GameManagerViewModelOnCatchMissed;
+            ViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
+            ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchMissed += GameManagerViewModelOnCatchMissed;
             // Add also handlers to enable the button once the animation is done            
             // TODO: fix names for actions in capture score and choose a proper font
             CatchSuccess.Completed += (s, e) => ShowCaptureStatsStoryboard.Begin();
@@ -57,9 +57,9 @@ namespace PokemonGo_UWP.Views
 
         private void UnsubscribeToCaptureEvents()
         {
-            App.ViewModelLocator.GameManagerViewModel.CatchSuccess -= GameManagerViewModelOnCatchSuccess;
-            App.ViewModelLocator.GameManagerViewModel.CatchEscape -= GameManagerViewModelOnCatchEscape;
-            App.ViewModelLocator.GameManagerViewModel.CatchMissed -= GameManagerViewModelOnCatchMissed;
+            ViewModel.CatchSuccess -= GameManagerViewModelOnCatchSuccess;
+            ViewModel.CatchEscape -= GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchMissed -= GameManagerViewModelOnCatchMissed;
         }
 
         private void GameManagerViewModelOnCatchMissed(object sender, EventArgs eventArgs)
