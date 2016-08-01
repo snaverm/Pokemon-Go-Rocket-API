@@ -82,7 +82,7 @@
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
                          ColorScheme="Dark"
-                         DesiredPitch="50"
+                         DesiredPitch="50"                         
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
                          TransitFeaturesVisible="False"
