@@ -92,7 +92,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new Uri($"ms-appx:///Assets/UI/{(EncounterResponse.Types.Background) value}.jpg");
+            return new Uri($"ms-appx:///Assets/Backgrounds/{(EncounterResponse.Types.Background) value}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -216,7 +216,6 @@
         <RelativePanel.Background>
             <ImageBrush
                 ImageSource="{Binding CurrentEncounter.Background, Converter={StaticResource EncounterBackgroundToBackgroundImageConverter}}"
-                Opacity="0.5"
                 Stretch="UniformToFill" />
         </RelativePanel.Background>
 

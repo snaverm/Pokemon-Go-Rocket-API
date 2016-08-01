@@ -93,6 +93,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Backgrounds\Park.png" />
     <Content Include="Assets\Backgrounds\Parkscene_Background.png" />
     <Content Include="Assets\Backgrounds\Parkscene_Background_Night.png" />
     <Content Include="Assets\Backgrounds\ui_bg_blue_02.png" />
