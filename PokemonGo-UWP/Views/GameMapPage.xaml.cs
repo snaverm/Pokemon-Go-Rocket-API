@@ -31,29 +31,5 @@ namespace PokemonGo_UWP.Views
             };
         }
 
-        #region Menu Animation
-
-        private bool _isMenuOpen;
-        private bool _isNearbyOpen;
-
-        private void PokeMenuMainButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (!_isMenuOpen)
-                ShowPokeMenuStoryboard.Begin();
-            else
-                HidePokeMenuStoryboard.Begin();
-            _isMenuOpen = !_isMenuOpen;
-        }
-
-        private void NearbyPokemonGrid_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (!_isNearbyOpen)
-                ShowNearbyGridStoryboard.Begin();
-            else
-                HideNearbyGridStoryboard.Begin();
-            _isNearbyOpen = !_isNearbyOpen;
-        }
-
-        #endregion
     }
 }

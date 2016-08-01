@@ -5,6 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
     x:Name="GamePage"
     mc:Ignorable="d">
@@ -13,47 +16,47 @@
 
         <Storyboard x:Name="ShowPokeMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="TranslateY"
-                From="-30"
-                To="-300"
-                Duration="0:0:0.2" />
-
-            <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleY"
+                Storyboard.TargetName="PokeMenuBorder"
+                Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
 
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleX"
-                From="0"
-                To="1"
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="CompassEllipse"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
                 Duration="0:0:0.2" />
         </Storyboard>
 
         <Storyboard x:Name="HidePokeMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="TranslateY"
-                From="-300"
-                To="-30"
-                Duration="0:0:0.2" />
-
-            <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleY"
+                Storyboard.TargetName="PokeMenuBorder"
+                Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
 
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleX"
-                From="1"
-                To="0"
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="CompassEllipse"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
                 Duration="0:0:0.2" />
         </Storyboard>
 
@@ -93,6 +96,7 @@
                          RelativePanel.AlignRightWithPanel="True"
                          Center="{Binding CurrentGeoposition.Coordinate.Point, Mode=TwoWay}"
                          MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
+                         Canvas.ZIndex="1"
                          x:Name="MapControl">
 
             <Image Source="../Assets/UI/ash.png"
@@ -217,13 +221,35 @@
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
-                        Tapped="NearbyPokemonGrid_OnTapped"
                         x:Name="CloseNearbyGridViewButton">
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HideNearbyGridStoryboard}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
                     <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
                 </Button>
             </Grid>
+        </Border>
+
+        <Border x:Name="PokeMenuBorder"
+                RelativePanel.AlignTopWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Opacity="0"
+                Canvas.ZIndex="0">
+
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
+                            Stretch="Fill" />
+            </Border.Background>
+
         </Border>
 
         <Ellipse RelativePanel.AlignRightWithPanel="True"
@@ -232,7 +258,8 @@
                  Stroke="White"
                  StrokeThickness="5"
                  Height="{ThemeResource UiButtonSize}"
-                 Width="{ThemeResource UiButtonSize}">
+                 Width="{ThemeResource UiButtonSize}"
+                 x:Name="CompassEllipse">
             <Ellipse.Fill>
                 <ImageBrush Stretch="Uniform"
                             ImageSource="../Assets/Icons/CompassIcon.png">
@@ -250,7 +277,8 @@
               RelativePanel.AlignRightWithPanel="True"
               Canvas.ZIndex="2"
               Background="Transparent"
-              Height="100">
+              Height="100"
+              x:Name="UIBottomPanel">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -304,39 +332,36 @@
             <!-- Pokeball main button -->
             <Button Grid.Column="1"
                     Style="{ThemeResource ImageButtonStyle}"
-                    Height="48"
+                    Height="{ThemeResource UiButtonSize}"
                     HorizontalAlignment="Center"
-                    Click="PokeMenuMainButton_OnClick"
-                    IsEnabled="False"
                     x:Name="PokeMenuMainButton">
+                
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowPokeMenuStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
                 <Image Source="../Assets/Buttons/btn_action_menu.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>
 
-            <!-- Menu button #1 -->
-            <Button Grid.Column="1"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    RenderTransformOrigin="0.5,0.5"
-                    x:Name="PokeMenuButton1">
-                <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-40"
-                                        ScaleX="0"
-                                        ScaleY="0"
-                                        x:Name="PokeButton1CompositeTransform" />
-                </Button.RenderTransform>
-                <Image Source="../Assets/UI/avatar.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" />
-            </Button>
 
             <Border CornerRadius="8,0,0,8"
                     x:Name="NearbyPokemonGrid"
                     Background="AntiqueWhite"
                     VerticalAlignment="Center"
                     Grid.Column="2"
-                    Height="40"
-                    Tapped="NearbyPokemonGrid_OnTapped">
+                    Height="40">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowNearbyGridStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
 
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -368,53 +393,7 @@
                 </Grid>
 
             </Border>
-
-            <!--<Grid x:Name="NearbyPokemonGrid"
-                  Background="AntiqueWhite"
-                  VerticalAlignment="Center"
-                  Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                --><!--<TextBlock Grid.Row="0"
-                           Text="Nearby"
-                           FontSize="15"
-                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                           TextAlignment="Center"
-                           Margin="0,24,0,20" />--><!--
-
-                <StackPanel Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            Margin="0,-12,0,0"
-                            Orientation="Horizontal">
-
-                    <Image
-                        Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-
-                    <Image
-                        Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-
-                    <Image
-                        Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-                </StackPanel>
-            </Grid>-->
+            
         </Grid>
     </RelativePanel>
 </Page>

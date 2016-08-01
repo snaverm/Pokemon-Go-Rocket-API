@@ -351,20 +351,18 @@ namespace PokemonGo_UWP.ViewModels
                     _updateDataTimer = ThreadPoolTimer.CreatePeriodicTimer(t =>
                     {
                         if (_stopUpdatingMap) return;
-                        if (_updateDataMutex.WaitOne(0))
+                        if (!_updateDataMutex.WaitOne(0)) return;
+                        if (_skipNextUpdate)
                         {
-                            if (_skipNextUpdate)
-                            {
-                                _skipNextUpdate = false;
-                            }
-                            else
-                            {
-                                Logger.Write("Updating map");
-                                UpdateMapData(false);
-                            }
-                            
-                            _updateDataMutex.ReleaseMutex();
+                            _skipNextUpdate = false;
                         }
+                        else
+                        {
+                            Logger.Write("Updating map");
+                            UpdateMapData(false);
+                        }
+                            
+                        _updateDataMutex.ReleaseMutex();
                     }, TimeSpan.FromSeconds(15));
                 }
             }
@@ -413,6 +411,22 @@ namespace PokemonGo_UWP.ViewModels
                     Busy.SetBusy(false);
                 }
             }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            );
+
+        private DelegateCommand _doPtcLogoutCommand;
+
+        public DelegateCommand DoPtcLogoutCommand => _doPtcLogoutCommand ?? (
+            _doPtcLogoutCommand = new DelegateCommand(() =>
+            {
+                // Clear stored token
+                SettingsService.Instance.PtcAuthToken = null;
+                // Stop the timer
+                _updateDataTimer.Cancel();
+                _updateDataTimer = null;
+                _updateDataMutex = null;
+                // Navigate to login page
+                NavigationService.Navigate(typeof(MainPage));
+            }, () => true)
             );
 
         #endregion
