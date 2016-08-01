@@ -472,7 +472,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         var dialog =
                             new MessageDialog(
-                                "Something went wrong and app may be unstable now. Do you want to logout and restart the app?");
+                                "Something went wrong and app may be unstable now. Do you want to logout and try again?");
                         dialog.Commands.Add(new UICommand("Yes") {Id = 0});
                         dialog.Commands.Add(new UICommand("No") {Id = 1});
                         dialog.DefaultCommandIndex = 0;
@@ -480,8 +480,9 @@ namespace PokemonGo_UWP.ViewModels
                         var result = await dialog.ShowAsyncQueue();
                         if ((int) result.Id == 0)
                         {
-                            SettingsService.Instance.PtcAuthToken = null;
-                            BootStrapper.Current.Exit();
+                            //SettingsService.Instance.PtcAuthToken = null;
+                            //BootStrapper.Current.Exit();
+                            DoPtcLogoutCommand.Execute();
                         }
                         _isHandlingException = false;
                     });

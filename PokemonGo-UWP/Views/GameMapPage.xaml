@@ -15,8 +15,9 @@
     <Page.Resources>
 
         <Storyboard x:Name="ShowPokeMenuStoryboard">
+
             <DoubleAnimation
-                Storyboard.TargetName="PokeMenuBorder"
+                Storyboard.TargetName="PokeMenuPanel"
                 Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="1"
@@ -35,11 +36,25 @@
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+                                           Storyboard.TargetName="PokeMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="HidePokeMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="PokeMenuBorder"
+                Storyboard.TargetName="PokeMenuPanel"
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
@@ -58,6 +73,20 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+                                           Storyboard.TargetName="PokeMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="ShowNearbyGridStoryboard">
@@ -237,7 +266,7 @@
             </Grid>
         </Border>
 
-        <Border x:Name="PokeMenuBorder"
+        <RelativePanel x:Name="PokeMenuPanel"
                 RelativePanel.AlignTopWithPanel="True"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
@@ -245,12 +274,78 @@
                 Opacity="0"
                 Canvas.ZIndex="0">
 
-            <Border.Background>
+            <RelativePanel.Background>
                 <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
                             Stretch="Fill" />
-            </Border.Background>
+            </RelativePanel.Background>
 
-        </Border>
+            <Button RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Style="{ThemeResource ImageButtonStyle}"
+                    Command="{Binding DoPtcLogoutCommand}"
+                    Margin="0,24,24,0">
+                <TextBlock FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                           FontSize="14"
+                           Foreground="#619BB1"
+                           FontWeight="SemiBold"
+                           Text="LOGOUT"/>
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    x:Name="PokedexButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="24,0,0,128"
+                    x:Name="PokemonButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,24,128"
+                    x:Name="ToolsButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="0,0,0,24">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HidePokeMenuStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <Image Source="../Assets/Buttons/btn_close_normal.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+        </RelativePanel>
 
         <Ellipse RelativePanel.AlignRightWithPanel="True"
                  RelativePanel.AlignTopWithPanel="True"

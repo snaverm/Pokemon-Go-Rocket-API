@@ -109,6 +109,7 @@
     <Content Include="Assets\Buttons\btn_back_normal_dark.png" />
     <Content Include="Assets\Buttons\btn_close_normal.png" />
     <Content Include="Assets\Buttons\btn_close_normal_dark.png" />
+    <Content Include="Assets\Buttons\btn_empty.png" />
     <Content Include="Assets\Buttons\btn_incubator.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
     <Content Include="Assets\Buttons\btn_ok_normal_dark.png" />
