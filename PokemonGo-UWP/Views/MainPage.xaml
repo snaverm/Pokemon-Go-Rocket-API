@@ -6,11 +6,51 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
       mc:Ignorable="d">
-    
+
     <Page.DataContext>
         <viewModels:LoginPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#a8e090" Offset="0"/>
+                <GradientStop Color="#35908f" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="../Assets/Logos/logo_transparent.png" MaxWidth="300" />
+        <Grid Grid.Row="1" Style="{StaticResource GridContainer}">
+            <StackPanel>
+                <TextBox x:Name="usernameTextBox"
+                         PlaceholderText="Username"
+                         Text="{Binding PtcUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="15,20,15,0" 
+                         InputScope="NameOrPhoneNumber"
+                         Style="{StaticResource TextBox}" />
+
+                <PasswordBox x:Name="passwordBox"
+                             PlaceholderText="Password"
+                             Password="{Binding PtcPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="15,20,15,20"
+                             KeyDown="passwordBox_KeyDown" Style="{StaticResource PasswordBox}" />
+                <Button x:Name="loginButton"
+                        Command="{Binding DoPtcLoginCommand}"
+                        Style="{StaticResource ButtonSubmit}">
+                    <TextBlock Text="LOGIN" />
+                </Button>
+            </StackPanel>
+        </Grid>
+        <TextBlock Grid.Row="2" Text="{Binding CurrentVersion}" 
+                   Style="{StaticResource TextNormal}" 
+                   Margin="20,15,20,15"/>
+    </Grid>
+
+    <!--
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader"
@@ -61,6 +101,6 @@
                    Margin="6"
                    />
 
-    </RelativePanel>
+    </RelativePanel>-->
 
 </Page>
