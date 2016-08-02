@@ -4,9 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     x:Name="Page"
     mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <viewModels:CapturePokemonPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Page.Resources>
 
@@ -216,7 +222,6 @@
         <RelativePanel.Background>
             <ImageBrush
                 ImageSource="{Binding CurrentEncounter.Background, Converter={StaticResource EncounterBackgroundToBackgroundImageConverter}}"
-                Opacity="0.5"
                 Stretch="UniformToFill" />
         </RelativePanel.Background>
 
@@ -273,7 +278,7 @@
                                 <StackPanel Grid.Column="0"
                                             Margin="0,0,8,0">
 
-                                    <Image Source="{Binding Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                                    <Image Source="{Binding Converter={StaticResource ItemIdToItemIconConverter}}"
                                            Height="76"
                                            Stretch="Uniform"
                                            HorizontalAlignment="Stretch" />
@@ -329,8 +334,15 @@
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
-                        Click="CloseInventoryMenuButton_OnClick"
                         x:Name="CloseInventoryMenuButton">
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HideInventoryMenuStoryboard}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
                     <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
@@ -550,8 +562,15 @@
                 Margin="5"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
-                Click="InventoryButton_OnClick"
                 x:Name="InventoryButton">
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowInventoryMenuStoryboard}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+
             <Image Source="../Assets/UI/inventory.png"
                    Stretch="Uniform"
                    HorizontalAlignment="Stretch" />
@@ -584,7 +603,7 @@
                                         TranslateX="0" />
                 </Button.RenderTransform>
                 <Image
-                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToPokemonSpriteConverter}}"
+                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToItemIconConverter}}"
                     Stretch="Uniform"
                     HorizontalAlignment="Stretch" />
             </Button>

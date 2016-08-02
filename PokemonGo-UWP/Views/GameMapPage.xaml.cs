@@ -2,7 +2,14 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using PokemonGo_UWP.Utils;
 using Template10.Common;
+using System;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Navigation;
+using PokemonGo.RocketAPI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -13,47 +20,83 @@ namespace PokemonGo_UWP.Views
     /// </summary>
     public sealed partial class GameMapPage : Page
     {
+
+        /// <summary>
+        /// False when the map is being manipulated, so that we don't override user interaction
+        /// </summary>
+        private bool _canUpdateMap = true;
+
         public GameMapPage()
         {
             InitializeComponent();
-            WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
-            {
-                if (App.ViewModelLocator.GameManagerViewModel != null)
-                {
-                    // We need to disable vibration
-                    App.ViewModelLocator.GameManagerViewModel.CanVibrate = e.Visible;
-                }
-            };
-            SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
-            {
-                // TODO: clearing navigation history before reaching this page doesn't seem enough because back button brings us back to login page, so we need to brutally close the app
-                BootStrapper.Current.Exit();
-            };
+            //WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
+            //{
+            //    if (App.ViewModelLocator.GameManagerViewModel != null)
+            //    {
+            //        // We need to disable vibration
+            //        App.ViewModelLocator.GameManagerViewModel.CanVibrate = e.Visible;
+            //    }
+            //};
+            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
+            //{
+            //    // TODO: clearing navigation history before reaching this page doesn't seem enough because back button brings us back to login page, so we need to brutally close the app
+            //    BootStrapper.Current.Exit();
+            //};
         }
 
-        #region Menu Animation
+        #region Overrides of Page
 
-        private bool _isMenuOpen;
-        private bool _isNearbyOpen;
-
-        private void PokeMenuMainButton_OnClick(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!_isMenuOpen)
-                ShowPokeMenuStoryboard.Begin();
-            else
-                HidePokeMenuStoryboard.Begin();
-            _isMenuOpen = !_isMenuOpen;
+            base.OnNavigatedTo(e);
+            if (GameClient.Geoposition != null)
+                UpdateMap(GameClient.Geoposition);
+            SubscribeToCaptureEvents();
         }
 
-        private void NearbyPokemonGrid_OnTapped(object sender, TappedRoutedEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (!_isNearbyOpen)
-                ShowNearbyGridStoryboard.Begin();
-            else
-                HideNearbyGridStoryboard.Begin();
-            _isNearbyOpen = !_isNearbyOpen;
+            base.OnNavigatingFrom(e);
+            UnsubscribeToCaptureEvents();
         }
 
         #endregion
+
+        #region Handlers
+
+        private async void UpdateMap(Geoposition position)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                // Set player icon's position
+                MapControl.SetLocation(PlayerImage, position.Coordinate.Point);
+                // Update angle and center only if map is not being manipulated 
+                // TODO: set this to false on gesture
+                if (!_canUpdateMap) return;
+                GameMapControl.Center = position.Coordinate.Point;
+                if (position.Coordinate.Heading != null)
+                {
+                    GameMapControl.Heading = position.Coordinate.Heading.Value;
+                }
+            });
+        }
+
+        private void SubscribeToCaptureEvents()
+        {
+            GameClient.GeopositionUpdated += GeopositionUpdated;
+        }        
+
+        private void UnsubscribeToCaptureEvents()
+        {
+            GameClient.GeopositionUpdated -= GeopositionUpdated;
+        }
+
+        private void GeopositionUpdated(object sender, Geoposition e)
+        {
+            UpdateMap(e);
+        }
+
+        #endregion
+
     }
 }

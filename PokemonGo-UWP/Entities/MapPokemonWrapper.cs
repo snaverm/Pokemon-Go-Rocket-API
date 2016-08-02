@@ -1,6 +1,11 @@
 ﻿using Windows.Devices.Geolocation;
 using AllEnum;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo_UWP.Utils;
+using PokemonGo_UWP.Views;
+using Template10.Common;
+using Template10.Mvvm;
 
 namespace PokemonGo_UWP.Entities
 {
@@ -15,6 +20,20 @@ namespace PokemonGo_UWP.Entities
                 new Geopoint(new BasicGeoposition {Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude});
         }
 
+        private DelegateCommand _tryCatchPokemon;
+
+        /// <summary>
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        /// </summary>
+        public DelegateCommand TryCatchPokemon => _tryCatchPokemon ?? (
+            _tryCatchPokemon = new DelegateCommand(() =>
+            {
+                NavigationHelper.NavigationState["CurrentPokemon"] = this;
+                BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage), true);
+            }, () => true)
+            );
+
+
         #region Wrapped Properties
 
         public PokemonId PokemonId => _mapPokemon.PokemonId;
@@ -25,11 +44,11 @@ namespace PokemonGo_UWP.Entities
 
         public string SpawnpointId => _mapPokemon.SpawnpointId;
 
-        public Geopoint Geoposition { get; }
+        public Geopoint Geoposition { get; set; }
 
-        public double Latitude => Geoposition.Position.Latitude;
+        public double Latitude => _mapPokemon.Latitude;
 
-        public double Longitude => Geoposition.Position.Longitude;
+        public double Longitude => _mapPokemon.Longitude;
 
         #endregion
     }

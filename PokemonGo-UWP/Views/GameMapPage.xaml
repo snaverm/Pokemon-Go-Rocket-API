@@ -5,56 +5,93 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
-    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    xmlns:entities="using:PokemonGo_UWP.Entities"
     x:Name="GamePage"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:GameMapPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Page.Resources>
 
         <Storyboard x:Name="ShowPokeMenuStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="TranslateY"
-                From="-30"
-                To="-300"
-                Duration="0:0:0.2" />
 
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleY"
+                Storyboard.TargetName="PokeMenuPanel"
+                Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
 
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleX"
-                From="0"
-                To="1"
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
                 Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="CompassEllipse"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+                                           Storyboard.TargetName="PokeMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="HidePokeMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="TranslateY"
-                From="-300"
-                To="-30"
-                Duration="0:0:0.2" />
-
-            <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleY"
+                Storyboard.TargetName="PokeMenuPanel"
+                Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
 
             <DoubleAnimation
-                Storyboard.TargetName="PokeButton1CompositeTransform"
-                Storyboard.TargetProperty="ScaleX"
-                From="1"
-                To="0"
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
                 Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="CompassEllipse"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+                                           Storyboard.TargetName="PokeMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Name="ShowNearbyGridStoryboard">
@@ -77,12 +114,12 @@
 
     </Page.Resources>
 
-    <RelativePanel Background="Green">
+    <RelativePanel>
 
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
                          ColorScheme="Dark"
-                         DesiredPitch="50"
+                         DesiredPitch="50"                         
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
                          TransitFeaturesVisible="False"
@@ -90,24 +127,25 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"
-                         Center="{Binding CurrentGeoposition.Coordinate.Point, Mode=TwoWay}"
-                         MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
-                         x:Name="MapControl">
-
-            <Image Source="../Assets/UI/ash.png"
-                   maps:MapControl.Location="{Binding CurrentGeoposition.Coordinate.Point}"
+                         RelativePanel.AlignRightWithPanel="True"   
+                         RotateInteractionMode="GestureAndControl"
+                         TiltInteractionMode="GestureAndControl"
+                         MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"    
+                         Canvas.ZIndex="1"
+                         x:Name="GameMapControl">
+            
+            <Image Source="../Assets/UI/ash.png"                   
                    maps:MapControl.NormalizedAnchorPoint="0.5,1"
                    Stretch="Uniform"
                    Height="48"
-                   Width="48" />
+                   Width="48" 
+                   x:Name="PlayerImage"/>
 
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="entities:MapPokemonWrapper">
                         <Button Style="{ThemeResource ImageButtonStyle}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding TryCatchPokemon, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
+                                Command="{x:Bind TryCatchPokemon}">
                             <Image
                                 Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                 maps:MapControl.Location="{Binding Geoposition}"
@@ -115,19 +153,6 @@
                                 Stretch="Uniform"
                                 Height="48"
                                 Width="48" />
-
-                            <!--<Ellipse Width="48"
-                                     Height="48"
-                                     Stroke="Green"
-                                     StrokeThickness="2.5">
-                                <Ellipse.RenderTransform>
-                                    <CompositeTransform Rotation="50"
-                                                        SkewX="25"
-                                                        SkewY="-50"
-                                                        TranslateX="-2.5"/>
-                                </Ellipse.RenderTransform>
-                            </Ellipse>-->
-
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -135,17 +160,15 @@
 
             <maps:MapItemsControl ItemsSource="{Binding NearbyPokestops}">
                 <maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="entities:FortDataWrapper">
                         <Button Style="{ThemeResource ImageButtonStyle}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding TrySearchPokestop, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
+                                Command="{x:Bind TrySearchPokestop}">
                             <Image Source="{Binding CooldownCompleteTimestampMs, Converter={StaticResource PokestopToIconConverter}}"
-                                   maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
-                                   maps:MapControl.NormalizedAnchorPoint="0,1"
+                                   maps:MapControl.Location="{Binding Geoposition}"
+                                   maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                    Stretch="Uniform"
                                    Height="64"
                                    Width="64" />
-
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -191,23 +214,12 @@
                           Grid.Row="1">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <!--<StackPanel>-->
-                                <Image
-                                    Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                            <Image Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                     Stretch="Uniform"
                                     VerticalAlignment="Center"
                                     Width="48"
                                     Height="48"
                                     Margin="3,0" />
-                                <!--<Image
-                                    Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
-                                    Stretch="Uniform"
-                                    VerticalAlignment="Top"
-                                    Margin="0,-12,0,0"
-                                    Width="48"
-                                    Height="48"
-                                    HorizontalAlignment="Center" />
-                            </StackPanel>-->
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
@@ -217,8 +229,15 @@
                         Grid.Row="2"
                         HorizontalAlignment="Center"
                         Margin="0,8,0,0"
-                        Tapped="NearbyPokemonGrid_OnTapped"
                         x:Name="CloseNearbyGridViewButton">
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HideNearbyGridStoryboard}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
                     <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
@@ -226,31 +245,94 @@
             </Grid>
         </Border>
 
-        <Ellipse RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.AlignTopWithPanel="True"
-                 Margin="24"
-                 Stroke="White"
-                 StrokeThickness="5"
-                 Height="{ThemeResource UiButtonSize}"
-                 Width="{ThemeResource UiButtonSize}">
-            <Ellipse.Fill>
-                <ImageBrush Stretch="Uniform"
-                            ImageSource="../Assets/Icons/CompassIcon.png">
-                    <ImageBrush.RelativeTransform>
-                        <RotateTransform CenterX="0.5"
-                                         CenterY="0.5"
-                                         Angle="{Binding CompassHeading}" />
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+        <RelativePanel x:Name="PokeMenuPanel"
+                RelativePanel.AlignTopWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Opacity="0"
+                Canvas.ZIndex="0">
+
+            <RelativePanel.Background>
+                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
+                            Stretch="Fill" />
+            </RelativePanel.Background>
+
+            <Button RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Style="{ThemeResource ImageButtonStyle}"
+                    Command="{Binding DoPtcLogoutCommand}"
+                    Margin="0,24,24,0">
+                <TextBlock FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                           FontSize="14"
+                           Foreground="#619BB1"
+                           FontWeight="SemiBold"
+                           Text="LOGOUT"/>
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    x:Name="PokedexButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="24,0,0,128"
+                    x:Name="PokemonButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,24,128"
+                    x:Name="ToolsButton">
+
+                <Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="0,0,0,24">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=HidePokeMenuStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <Image Source="../Assets/Buttons/btn_close_normal.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
+
+        </RelativePanel>
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               Canvas.ZIndex="2"
               Background="Transparent"
-              Height="100">
+              Height="100"
+              x:Name="UIBottomPanel">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -304,39 +386,36 @@
             <!-- Pokeball main button -->
             <Button Grid.Column="1"
                     Style="{ThemeResource ImageButtonStyle}"
-                    Height="48"
+                    Height="{ThemeResource UiButtonSize}"
                     HorizontalAlignment="Center"
-                    Click="PokeMenuMainButton_OnClick"
-                    IsEnabled="False"
                     x:Name="PokeMenuMainButton">
+                
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowPokeMenuStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
                 <Image Source="../Assets/Buttons/btn_action_menu.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>
 
-            <!-- Menu button #1 -->
-            <Button Grid.Column="1"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    RenderTransformOrigin="0.5,0.5"
-                    x:Name="PokeMenuButton1">
-                <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-40"
-                                        ScaleX="0"
-                                        ScaleY="0"
-                                        x:Name="PokeButton1CompositeTransform" />
-                </Button.RenderTransform>
-                <Image Source="../Assets/UI/avatar.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" />
-            </Button>
 
             <Border CornerRadius="8,0,0,8"
                     x:Name="NearbyPokemonGrid"
                     Background="AntiqueWhite"
                     VerticalAlignment="Center"
                     Grid.Column="2"
-                    Height="40"
-                    Tapped="NearbyPokemonGrid_OnTapped">
+                    Height="40">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:CallMethodAction MethodName="Begin" 
+                                               TargetObject="{Binding ElementName=ShowNearbyGridStoryboard}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
 
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -368,53 +447,15 @@
                 </Grid>
 
             </Border>
-
-            <!--<Grid x:Name="NearbyPokemonGrid"
-                  Background="AntiqueWhite"
-                  VerticalAlignment="Center"
-                  Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                --><!--<TextBlock Grid.Row="0"
-                           Text="Nearby"
-                           FontSize="15"
-                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                           TextAlignment="Center"
-                           Margin="0,24,0,20" />--><!--
-
-                <StackPanel Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            Margin="0,-12,0,0"
-                            Orientation="Horizontal">
-
-                    <Image
-                        Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-
-                    <Image
-                        Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-
-                    <Image
-                        Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                        Stretch="UniformToFill"
-                        VerticalAlignment="Center"
-                        Width="48"
-                        Height="48"
-                        Margin="3,0" />
-                </StackPanel>
-            </Grid>-->
+            
         </Grid>
+
+        <TextBlock Text="{Binding CurrentVersion}"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   Margin="6"
+                   Canvas.ZIndex="100"
+                   />
+        
     </RelativePanel>
 </Page>
