@@ -257,7 +257,7 @@
                            TextAlignment="Center"
                            Margin="0,0,0,8" />
 
-                <ListView ItemsSource="{Binding Inventory}"
+                <ListView ItemsSource="{Binding ItemsInventory}"
                           SelectedItem="{Binding SelectedCaptureItem}"
                           Grid.Row="1">
 
@@ -278,7 +278,7 @@
                                 <StackPanel Grid.Column="0"
                                             Margin="0,0,8,0">
 
-                                    <Image Source="{Binding Converter={StaticResource ItemIdToItemIconConverter}}"
+                                    <Image Source="{Binding Converter={StaticResource ItemIdToItemIconConverter}, ConverterParameter=Inventory}"
                                            Height="76"
                                            Stretch="Uniform"
                                            HorizontalAlignment="Stretch" />
@@ -298,7 +298,7 @@
                                     </Grid.RowDefinitions>
 
                                     <TextBlock
-                                        Text="{Binding Item_, Converter={StaticResource ItemToItemNameConverter}}"
+                                        Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
                                         FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
                                         Foreground="#FF45686A"
                                         Grid.Row="0"
@@ -388,7 +388,7 @@
                         <Image Source="../Assets/Icons/stardust_painted.png"
                                Stretch="Uniform"
                                Width="48" />
-                        <TextBlock Text="{Binding CurrentCaptureScore.Stardust[0]}"
+                        <TextBlock Text="{Binding CurrentCaptureAward.Stardust[0]}"
                                    Margin="8,0,0,0"
                                    VerticalAlignment="Center" />
                     </StackPanel>
@@ -398,7 +398,7 @@
                         <Image Source="../Assets/UI/candy.png"
                                Stretch="Uniform"
                                Width="48" />
-                        <TextBlock Text="{Binding CurrentCaptureScore.Candy[0]}"
+                        <TextBlock Text="{Binding CurrentCaptureAward.Candy[0]}"
                                    Margin="8,0,0,0"
                                    VerticalAlignment="Center" />
                     </StackPanel>
@@ -413,7 +413,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView ItemsSource="{Binding CurrentCaptureScore.ActivityType}"
+                    <ListView ItemsSource="{Binding CurrentCaptureAward.ActivityType}"
                               SelectionMode="None"
                               Grid.Column="0">
                         <ListView.ItemContainerStyle>
@@ -433,7 +433,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <ListView ItemsSource="{Binding CurrentCaptureScore.Xp}"
+                    <ListView ItemsSource="{Binding CurrentCaptureAward.Xp}"
                               SelectionMode="None"
                               Grid.Column="1">
                         <ListView.ItemContainerStyle>
@@ -478,7 +478,7 @@
                                 HorizontalAlignment="Right"
                                 Grid.Column="1">
                         <TextBlock
-                            Text="{Binding CurrentCaptureScore.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
+                            Text="{Binding CurrentCaptureAward.Xp, Converter={StaticResource CaptureXpToTotalCaptureXpConverter}}"
                             Foreground="Red"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
@@ -602,7 +602,7 @@
                                         TranslateX="0" />
                 </Button.RenderTransform>
                 <Image
-                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToItemIconConverter}}"
+                    Source="{Binding SelectedCaptureItem, Converter={StaticResource ItemIdToItemIconConverter}, ConverterParameter=SelectedCaptureItem}"
                     Stretch="Uniform"
                     HorizontalAlignment="Stretch" />
             </Button>

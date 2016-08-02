@@ -1,9 +1,10 @@
 ﻿using Windows.Devices.Geolocation;
-using AllEnum;
-using Newtonsoft.Json;
-using PokemonGo.RocketAPI.GeneratedCode;
+using Windows.Foundation;
+
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
+using POGOProtos.Enums;
+using POGOProtos.Map.Pokemon;
 using Template10.Common;
 using Template10.Mvvm;
 
@@ -19,6 +20,11 @@ namespace PokemonGo_UWP.Entities
             Geoposition =
                 new Geopoint(new BasicGeoposition {Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude});
         }
+
+        /// <summary>
+        /// HACK - this should fix Pokestop floating on map
+        /// </summary>
+        public Point Anchor => new Point(0.5, 1);
 
         private DelegateCommand _tryCatchPokemon;
 
@@ -42,7 +48,7 @@ namespace PokemonGo_UWP.Entities
 
         public long ExpirationTimestampMs => _mapPokemon.ExpirationTimestampMs;
 
-        public string SpawnpointId => _mapPokemon.SpawnpointId;
+        public string SpawnpointId => _mapPokemon.SpawnPointId;
 
         public Geopoint Geoposition { get; set; }
 
