@@ -43,6 +43,10 @@
                         Style="{StaticResource ButtonSubmit}">
                     <TextBlock Text="LOGIN" />
                 </Button>
+                <TextBlock Text="Use your Pokèmon Training Club Account" 
+                           Style="{StaticResource TextNormal}" 
+                           TextAlignment="Center"
+                           Margin="15,0,15,20" />
             </StackPanel>
         </Grid>
         <TextBlock Grid.Row="2" Text="{Binding CurrentVersion}" 
