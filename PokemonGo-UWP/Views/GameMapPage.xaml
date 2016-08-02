@@ -34,14 +34,7 @@
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
-
-            <DoubleAnimation
-                Storyboard.TargetName="CompassEllipse"
-                Storyboard.TargetProperty="Opacity"
-                From="1"
-                To="0"
-                Duration="0:0:0.2" />
-
+            
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
                                            Storyboard.TargetName="PokeMenuPanel">
                 <DiscreteObjectKeyFrame KeyTime="0">
@@ -71,13 +64,7 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
-
-            <DoubleAnimation
-                Storyboard.TargetName="CompassEllipse"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="1"
-                Duration="0:0:0.2" />
+            
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
                                            Storyboard.TargetName="PokeMenuPanel">

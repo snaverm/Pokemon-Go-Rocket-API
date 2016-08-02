@@ -13,6 +13,7 @@ using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic;
 using PokemonGo_UWP.Entities;
+using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -151,6 +152,7 @@ namespace PokemonGo_UWP.Utils
                 ReportInterval = 5000,
                 MovementThreshold = 5
             };
+            Busy.SetBusy(true, "Getting GPS signal...");
             Geoposition = await _geolocator.GetGeopositionAsync();
             _geolocator.PositionChanged += (s, e) =>
             {
@@ -177,9 +179,11 @@ namespace PokemonGo_UWP.Utils
                 UpdateDataMutex.ReleaseMutex();                
             };
             // Update before starting timer
+            Busy.SetBusy(true, "Getting user data...");
             await UpdateMapObjects();
             await UpdateInventory();
             _mapUpdateTimer.Start();
+            Busy.SetBusy(false);
         }
 
         /// <summary>
