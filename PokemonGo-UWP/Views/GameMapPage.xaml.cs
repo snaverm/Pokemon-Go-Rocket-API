@@ -29,6 +29,10 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                NearbyGridTranslateTransform.Y = ActualHeight*3/2;
+            };
             //WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
             //{
             //    if (App.ViewModelLocator.GameManagerViewModel != null)
