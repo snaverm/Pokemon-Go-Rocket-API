@@ -586,7 +586,6 @@
                     Margin="5"
                     Height="100"
                     HorizontalAlignment="Center"
-                    Command="{Binding UseSelectedCaptureItem}"
                     x:Name="LaunchPokeballButton"
                     ManipulationMode="TranslateX, TranslateY"
                     ManipulationStarted="LaunchPokeballButton_ManipulationStarted"

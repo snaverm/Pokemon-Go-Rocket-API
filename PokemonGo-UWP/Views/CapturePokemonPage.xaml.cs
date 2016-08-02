@@ -69,19 +69,19 @@ namespace PokemonGo_UWP.Views
         private void GameManagerViewModelOnCatchMissed(object sender, EventArgs eventArgs)
         {
             LaunchPokeballButton.IsEnabled = false;
-            //CatchMissed.Begin();
+            CatchMissed.Begin();
         }
 
         private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
         {
             LaunchPokeballButton.IsEnabled = false;
-            //CatchEscape.Begin();
+            CatchEscape.Begin();
         }
 
         private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
         {
             LaunchPokeballButton.IsEnabled = false;
-            //CatchSuccess.Begin();
+            CatchSuccess.Begin();
         }
 
         #endregion
@@ -105,30 +105,38 @@ namespace PokemonGo_UWP.Views
                 DateTime curTime = DateTime.Now;
 
                 float timeDelta = (curTime - prevTime).Milliseconds / 1000f;
-                Vector3 gravity = new Vector3(0, 9.8f, 0);
+                Vector3 gravity = new Vector3(0, 300f, 0);
 
                 ThrowItemPosition += (ThrowItemVelocity * timeDelta) + (.5f * gravity * timeDelta * timeDelta);
                 ThrowItemVelocity += (gravity * timeDelta);
 
-                Logger.Write("Position" + ThrowItemPosition.X + ", " + ThrowItemPosition.X + ", " + ThrowItemPosition.Z);
-                Logger.Write("Velocity" + ThrowItemVelocity.X + ", " + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Z);
+                Logger.Write("Position" + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " + ThrowItemPosition.Z);
+                Logger.Write("Velocity" + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Y + ", " + ThrowItemVelocity.Z);
 
                 prevTime = curTime;
 
-                if (ThrowItemPosition.X < 3.3695)
+                var translateX = ThrowItemPosition.X;
+                var translateY = ThrowItemPosition.Y + (ThrowItemPosition.Z * 50.0f);
+                var scaleX = Math.Max(1.0f - ThrowItemPosition.Z, 0.2f);
+                var scaleY = scaleX;
+                var pokeballStopped = false;
+
+                if (ThrowItemPosition.Y > -50)
                 {
                     timer.Cancel();
-                    //TODO: End the capture
+                    pokeballStopped = true;
                 }
+
 
                 UpdateLoopMutex.ReleaseMutex();
 
                 await PokeballTransform.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
                 {
-                    PokeballTransform.TranslateX = ThrowItemPosition.X;
-                    PokeballTransform.TranslateY = ThrowItemPosition.Y;
-                    PokeballTransform.ScaleX = 1.0f - ThrowItemPosition.Z;
-                    PokeballTransform.ScaleY = 1.0f - ThrowItemPosition.Z;
+                    PokeballTransform.TranslateX = translateX;
+                    PokeballTransform.TranslateY = translateY;
+                    PokeballTransform.ScaleX = scaleX;
+                    PokeballTransform.ScaleY = scaleY;
+                    if(pokeballStopped) ViewModel.UseSelectedCaptureItem.Execute();
                 });
             }
         }
@@ -160,12 +168,12 @@ namespace PokemonGo_UWP.Views
             var displacement = new Vector2(StartingX - EndingX, StartingY - EndingY);
             var distance = -1 * displacement.Length();
             var throwDirection = Vector3.Normalize(new Vector3(displacement.X, displacement.Y, 1.0f));
-            var speed = 400000.0f / (StartingTime - DateTime.Now).Milliseconds;
+            var speed = 3200000.0f / (StartingTime - DateTime.Now).Milliseconds;
             prevTime = DateTime.Now;
 
             ThrowItemPosition = new Vector3(EndingX, EndingY, 0);
             ThrowItemVelocity = (speed / distance) * throwDirection;
-            ThrowItemVelocity.Z *= 10;
+            //ThrowItemVelocity.Z *= 2;
 
             Logger.Write("Init Position" + ThrowItemPosition.X + ", " + ThrowItemPosition.X + ", " + ThrowItemPosition.Z);
             Logger.Write("Init Velocity" + ThrowItemVelocity.X + ", " + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Z);
