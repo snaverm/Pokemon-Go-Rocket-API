@@ -8,9 +8,14 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    DataContext="{Binding GameManagerViewModel, Source={StaticResource Locator}}"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    xmlns:entities="using:PokemonGo_UWP.Entities"
     x:Name="GamePage"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:GameMapPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Page.Resources>
 
@@ -109,7 +114,7 @@
 
     </Page.Resources>
 
-    <RelativePanel Background="Green">
+    <RelativePanel>
 
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
@@ -122,25 +127,25 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"
-                         Center="{Binding CurrentGeoposition.Coordinate.Point, Mode=TwoWay}"
-                         MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
+                         RelativePanel.AlignRightWithPanel="True"   
+                         RotateInteractionMode="GestureAndControl"
+                         TiltInteractionMode="GestureAndControl"
+                         MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"    
                          Canvas.ZIndex="1"
-                         x:Name="MapControl">
-
-            <Image Source="../Assets/UI/ash.png"
-                   maps:MapControl.Location="{Binding CurrentGeoposition.Coordinate.Point}"
+                         x:Name="GameMapControl">
+            
+            <Image Source="../Assets/UI/ash.png"                   
                    maps:MapControl.NormalizedAnchorPoint="0.5,1"
                    Stretch="Uniform"
                    Height="48"
-                   Width="48" />
+                   Width="48" 
+                   x:Name="PlayerImage"/>
 
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="entities:MapPokemonWrapper">
                         <Button Style="{ThemeResource ImageButtonStyle}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding TryCatchPokemon, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
+                                Command="{x:Bind TryCatchPokemon}">
                             <Image
                                 Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                 maps:MapControl.Location="{Binding Geoposition}"
@@ -148,19 +153,6 @@
                                 Stretch="Uniform"
                                 Height="48"
                                 Width="48" />
-
-                            <!--<Ellipse Width="48"
-                                     Height="48"
-                                     Stroke="Green"
-                                     StrokeThickness="2.5">
-                                <Ellipse.RenderTransform>
-                                    <CompositeTransform Rotation="50"
-                                                        SkewX="25"
-                                                        SkewY="-50"
-                                                        TranslateX="-2.5"/>
-                                </Ellipse.RenderTransform>
-                            </Ellipse>-->
-
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -168,17 +160,15 @@
 
             <maps:MapItemsControl ItemsSource="{Binding NearbyPokestops}">
                 <maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="entities:FortDataWrapper">
                         <Button Style="{ThemeResource ImageButtonStyle}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding TrySearchPokestop, Source={Binding GameManagerViewModel, Source={StaticResource Locator}}}">
+                                Command="{x:Bind TrySearchPokestop}">
                             <Image Source="{Binding CooldownCompleteTimestampMs, Converter={StaticResource PokestopToIconConverter}}"
-                                   maps:MapControl.Location="{Binding Converter={StaticResource MapObjectToGeopointConverter}, ConverterParameter=pokestop}"
-                                   maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                                   maps:MapControl.Location="{Binding Geoposition}"
+                                   maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                    Stretch="Uniform"
                                    Height="64"
                                    Width="64" />
-
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -224,23 +214,12 @@
                           Grid.Row="1">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <!--<StackPanel>-->
-                                <Image
-                                    Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                            <Image Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                     Stretch="Uniform"
                                     VerticalAlignment="Center"
                                     Width="48"
                                     Height="48"
                                     Margin="3,0" />
-                                <!--<Image
-                                    Source="{Binding DistanceInMeters, Converter={StaticResource NearbyPokemonDistanceToDistanceImageConverter}}"
-                                    Stretch="Uniform"
-                                    VerticalAlignment="Top"
-                                    Margin="0,-12,0,0"
-                                    Width="48"
-                                    Height="48"
-                                    HorizontalAlignment="Center" />
-                            </StackPanel>-->
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
@@ -346,26 +325,6 @@
             </Button>
 
         </RelativePanel>
-
-        <Ellipse RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.AlignTopWithPanel="True"
-                 Margin="24"
-                 Stroke="White"
-                 StrokeThickness="5"
-                 Height="{ThemeResource UiButtonSize}"
-                 Width="{ThemeResource UiButtonSize}"
-                 x:Name="CompassEllipse">
-            <Ellipse.Fill>
-                <ImageBrush Stretch="Uniform"
-                            ImageSource="../Assets/Icons/CompassIcon.png">
-                    <ImageBrush.RelativeTransform>
-                        <RotateTransform CenterX="0.5"
-                                         CenterY="0.5"
-                                         Angle="{Binding CompassHeading}" />
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
 
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
@@ -490,5 +449,13 @@
             </Border>
             
         </Grid>
+
+        <TextBlock Text="{Binding CurrentVersion}"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   Margin="6"
+                   Canvas.ZIndex="100"
+                   />
+        
     </RelativePanel>
 </Page>

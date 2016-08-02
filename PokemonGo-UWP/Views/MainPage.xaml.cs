@@ -10,5 +10,13 @@ namespace PokemonGo_UWP.Views
             InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
+
+        private void passwordBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter && loginButton.Command.CanExecute(null) == true)
+            {
+                loginButton.Command.Execute(null);
+            }
+        }
     }
 }
