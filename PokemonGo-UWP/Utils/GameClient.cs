@@ -149,11 +149,11 @@ namespace PokemonGo_UWP.Utils
             {
                 DesiredAccuracy = PositionAccuracy.High,
                 DesiredAccuracyInMeters = 5,
-                ReportInterval = 5000,
-                MovementThreshold = 5
+                ReportInterval = 1000,
+                MovementThreshold = 2
             };
             Busy.SetBusy(true, "Getting GPS signal...");
-            Geoposition = await _geolocator.GetGeopositionAsync();
+            Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             _geolocator.PositionChanged += (s, e) =>
             {
                 Geoposition = e.Position;
@@ -178,7 +178,7 @@ namespace PokemonGo_UWP.Utils
 
                 UpdateDataMutex.ReleaseMutex();                
             };
-            // Update before starting timer
+            // Update before starting timer            
             Busy.SetBusy(true, "Getting user data...");
             await UpdateMapObjects();
             await UpdateInventory();

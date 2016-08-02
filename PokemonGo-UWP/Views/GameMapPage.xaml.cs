@@ -74,7 +74,7 @@ namespace PokemonGo_UWP.Views
                 // TODO: set this to false on gesture
                 if (!_canUpdateMap) return;
                 GameMapControl.Center = position.Coordinate.Point;
-                if (position.Coordinate.Heading != null)
+                if (position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
                 {
                     GameMapControl.Heading = position.Coordinate.Heading.Value;
                 }
