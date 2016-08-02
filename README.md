@@ -4,6 +4,17 @@ Check [Wiki](https://github.com/ST-Apps/PoGo-UWP/wiki) for infos.
 
 # Changelog
 
+## (01/08/2016) [v 1.0.8.0-beta] - Bug fixes and improvements
+* App renamed to PoGo
+* Fixed a problem that caused you to get Candy and XP when a Pokemon escapes.
+* Background on Catching screen replaced with original.
+* Fixed PokeStop floating over map
+* Added app version on both Login Screen and Game Page
+* Did huge refactoring on view models
+* Trying to fix problem that is causing Pokestops/Pokemon not to show when in fast motion.
+* Working on making maintenance easier(this can cause more issues)
+
+
 ## (01/08/2016) [v 1.0.7.0-beta] - Bug fixes and improvements 
 * Fixed Pokestop dissappear while moving [#15](https://github.com/ST-Apps/PoGo-UWP/issues/15)
 * Fixed Pokemon dissappear issue [#27](https://github.com/ST-Apps/PoGo-UWP/issues/27)
