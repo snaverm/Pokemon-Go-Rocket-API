@@ -182,28 +182,26 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public static ObservableCollection<FortDataWrapper> NearbyPokestops => GameClient.NearbyPokestops;
 
-        #endregion
+		#endregion
 
-        #region Game Logic
+		#region Game Logic
 
-        #region Logout
+		#region Settings
 
-        private DelegateCommand _doPtcLogoutCommand;
+		private DelegateCommand _openSettingsCommand;
 
-        public DelegateCommand DoPtcLogoutCommand => _doPtcLogoutCommand ?? (
-            _doPtcLogoutCommand = new DelegateCommand(() =>
-            {
-                // Clear stored token
-                GameClient.DoLogout();
-                // Navigate to login page
-                NavigationService.Navigate(typeof(MainPage));
-            }, () => true)
-            );
+		public DelegateCommand SettingsCommand => _openSettingsCommand ?? (
+			_openSettingsCommand = new DelegateCommand(() =>
+			{
+				// Navigate back
+				NavigationService.Navigate(typeof(SettingsPage));
+			}, () => true)
+			);
 
 
-        #endregion       
+		#endregion
 
-        #endregion
+		#endregion
 
-    }
+	}
 }

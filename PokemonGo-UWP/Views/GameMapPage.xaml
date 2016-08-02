@@ -237,27 +237,28 @@
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Opacity="0"
-                Canvas.ZIndex="0">
+                Opacity="1"
+                Canvas.ZIndex="1">
 
             <RelativePanel.Background>
                 <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
                             Stretch="Fill" />
             </RelativePanel.Background>
 
-            <Button RelativePanel.AlignRightWithPanel="True"
+			<Button RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignTopWithPanel="True"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    Command="{Binding DoPtcLogoutCommand}"
-                    Margin="0,24,24,0">
-                <TextBlock FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
-                           FontSize="14"
-                           Foreground="#619BB1"
-                           FontWeight="SemiBold"
-                           Text="LOGOUT"/>
-            </Button>
+					Style="{ThemeResource ImageButtonStyle}"
+                    Height="80"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    x:Name="SettingsButton">
 
-            <Button Style="{ThemeResource ImageButtonStyle}"
+				<Image Source="../Assets/Buttons/btn_empty.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+			</Button>
+
+			<Button Style="{ThemeResource ImageButtonStyle}"
                     Height="80"
                     RelativePanel.AlignHorizontalCenterWithPanel="True"
                     RelativePanel.AlignVerticalCenterWithPanel="True"
@@ -436,13 +437,6 @@
             </Border>
             
         </Grid>
-
-        <TextBlock Text="{Binding CurrentVersion}"
-                   RelativePanel.AlignTopWithPanel="True"
-                   RelativePanel.AlignRightWithPanel="True"
-                   Margin="6"
-                   Canvas.ZIndex="100"
-                   />
         
     </RelativePanel>
 </Page>
