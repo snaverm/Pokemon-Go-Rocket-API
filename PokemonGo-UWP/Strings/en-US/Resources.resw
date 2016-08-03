@@ -156,4 +156,10 @@
   <data name="XPText.Text" xml:space="preserve">
     <value>XP</value>
   </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="LoadingEncounter" xml:space="preserve">
+    <value>Loading encounter with </value>
+  </data>
 </root>

@@ -183,6 +183,7 @@
                 </Grid>
 
                 <Button Content="OK"
+                        x:Uid="OKButton"
                         HorizontalAlignment="Stretch"
                         Command="{Binding ReturnToGameScreen}"
                         Grid.Row="3"
