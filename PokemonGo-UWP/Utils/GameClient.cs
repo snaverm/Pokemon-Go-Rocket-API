@@ -26,81 +26,90 @@ using GetHatchedEggsResponse = POGOProtos.Networking.Responses.GetHatchedEggsRes
 using GetInventoryResponse = POGOProtos.Networking.Responses.GetInventoryResponse;
 using GetMapObjectsResponse = POGOProtos.Networking.Responses.GetMapObjectsResponse;
 using GetPlayerResponse = POGOProtos.Networking.Responses.GetPlayerResponse;
-using InventoryItem = POGOProtos.Inventory.InventoryItem;
 using MapPokemon = POGOProtos.Map.Pokemon.MapPokemon;
 using NearbyPokemon = POGOProtos.Map.Pokemon.NearbyPokemon;
 using UseItemCaptureResponse = POGOProtos.Networking.Responses.UseItemCaptureResponse;
-using Windows.Storage;
 
 namespace PokemonGo_UWP.Utils
 {
-    /// <summary>
-    ///     Static class containing game's state and wrapped client methods to update data
-    /// </summary>
-    public static class GameClient
-    {
-        #region Client Vars
+	/// <summary>
+	///     Static class containing game's state and wrapped client methods to update data
+	/// </summary>
+	public static class GameClient
+	{
+		#region Client Vars
 
-        private static ISettings ClientSettings;
-        private static Client Client;
+		private static ISettings ClientSettings;
+		private static Client Client;
 
-        /// <summary>
-        /// Handles failures by having a fixed number of retries
-        /// </summary>
-        internal class APIFailure : IApiFailureStrategy
-        {
+		/// <summary>
+		/// Handles failures by having a fixed number of retries
+		/// </summary>
+		internal class APIFailure : IApiFailureStrategy
+		{
 
-            private int _retryCount;
-            private const int _maxRetries = 50;
+			private int _retryCount;
+			private const int MaxRetries = 50;
 
-            public async Task<ApiOperation> HandleApiFailure(RequestEnvelope request, ResponseEnvelope response)
-            {
-                await Task.Delay(500);
-                _retryCount++;
-                return _retryCount < _maxRetries ? ApiOperation.Retry : ApiOperation.Abort;
-            }
 
-            public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
-            {
-                _retryCount = 0;
-            }
-        }
+			public async Task<ApiOperation> HandleApiFailure(RequestEnvelope request, ResponseEnvelope response)
+			{
+				if (_retryCount == MaxRetries)
+					return ApiOperation.Abort;
 
-        #endregion
+				await Task.Delay(500);
+				_retryCount++;
 
-        #region Game Vars
+				if (_retryCount % 5 == 0)
+				{
+					// Let's try to refresh the session by getting a new token
+					await (ClientSettings.AuthType == AuthType.Google ? DoGoogleLogin(ClientSettings.GoogleUsername, ClientSettings.GooglePassword) : DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword));
+				}
 
-        /// <summary>
-        ///     App's current version
-        /// </summary>
-        public static string CurrentVersion
-        {
-            get
-            {
-                var currentVersion = Package.Current.Id.Version;
-                return $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
-            }
-        }
+				return ApiOperation.Retry;
+			}
 
-        /// <summary>
-        ///     Collection of Pokemon in 1 step from current position
-        /// </summary>
-        public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
+			public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
+			{
+				_retryCount = 0;
+			}
+		}
 
-        /// <summary>
-        ///     Collection of Pokemon in 2 steps from current position
-        /// </summary>
-        public static ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+		#endregion
 
-        /// <summary>
-        ///     Collection of Pokestops in the current area
-        /// </summary>
-        public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
+		#region Game Vars
 
-        /// <summary>
-        ///     Stores the current inventory
-        /// </summary>
-        public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+		/// <summary>
+		///     App's current version
+		/// </summary>
+		public static string CurrentVersion
+		{
+			get
+			{
+				var currentVersion = Package.Current.Id.Version;
+				return $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
+			}
+		}
+
+		/// <summary>
+		///     Collection of Pokemon in 1 step from current position
+		/// </summary>
+		public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
+
+		/// <summary>
+		///     Collection of Pokemon in 2 steps from current position
+		/// </summary>
+		public static ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+
+		/// <summary>
+		///     Collection of Pokestops in the current area
+		/// </summary>
+		public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
+
+		/// <summary>
+		///     Stores the current inventory
+		/// </summary>
+		public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
 
 		#endregion
 
@@ -112,308 +121,338 @@ namespace PokemonGo_UWP.Utils
 		///     Sets things up if we didn't come from the login page
 		/// </summary>
 		/// <returns></returns>
-		public static async Task InitializeClient()
-        {
-            ClientSettings = new Settings
-            {                
-                AuthType = AuthType.Ptc
-            };
-            Client = new Client(ClientSettings, new APIFailure()) {AuthToken = SettingsService.Instance.PtcAuthToken};
-            await Client.Login.DoLogin();
-        }
+		public static async Task InitializeClient(bool isPtcAccount)
+		{
+			var isPtcLogin = !String.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
 
-        /// <summary>
-        ///     Starts a PTC session for the given user
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns>true if login worked</returns>
-        public static async Task<bool> DoPtcLogin(string username, string password)
-        {
-            ClientSettings = new Settings
-            {
-                PtcUsername = username,
-                PtcPassword = password,
-                AuthType = AuthType.Ptc
-            };
-            Client = new Client(ClientSettings, new APIFailure());
-            // Get PTC token
-            var authToken = await Client.Login.DoLogin();
-            // Update current token even if it's null
-            SettingsService.Instance.PtcAuthToken = authToken;
-            // Return true if login worked, meaning that we have a token
-            return authToken != null;
-        }
+			ClientSettings = new Settings
+			{
+				AuthType = isPtcLogin ? AuthType.Ptc : AuthType.Google
+			};
 
-        /// <summary>
-        /// Logs the user out by clearing data and timers
-        /// </summary>
-        public static void DoLogout()
-        {
-            // Clear stored token
-            SettingsService.Instance.PtcAuthToken = null;
-            _mapUpdateTimer?.Stop();
-            _mapUpdateTimer = null;
-            _geolocator = null;
-            CatchablePokemons.Clear();
-            NearbyPokemons.Clear();
-            NearbyPokestops.Clear();            
-        }
+			Client = new Client(ClientSettings, new APIFailure()) { AuthToken = SettingsService.Instance.PtcAuthToken ?? SettingsService.Instance.GoogleAuthToken };
 
-        #endregion
+			await Client.Login.DoLogin();
+		}
 
-        #region Data Updating
-        
-        private static Geolocator _geolocator;
+		/// <summary>
+		///     Starts a PTC session for the given user
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <returns>true if login worked</returns>
+		public static async Task<bool> DoPtcLogin(string username, string password)
+		{
+			ClientSettings = new Settings
+			{
+				PtcUsername = username,
+				PtcPassword = password,
+				AuthType = AuthType.Ptc
+			};
+			Client = new Client(ClientSettings, new APIFailure());
+			// Get PTC token
+			var authToken = await Client.Login.DoLogin();
+			// Update current token even if it's null and clear the token for the other identity provide
+			SettingsService.Instance.PtcAuthToken = authToken;
+			SettingsService.Instance.GoogleAuthToken = null;
+			// Return true if login worked, meaning that we have a token
+			return authToken != null;
+		}
 
-        public static Geoposition Geoposition { get; private set; }
+		/// <summary>
+		///     Starts a Google session for the given user
+		/// </summary>
+		/// <param name="email"></param>
+		/// <param name="password"></param>
+		/// <returns>true if login worked</returns>
+		public static async Task<bool> DoGoogleLogin(string email, string password)
+		{
+			ClientSettings = new Settings
+			{
+				GoogleUsername = email,
+				GooglePassword = password,
+				AuthType = AuthType.Google,
+			};
 
-        private static DispatcherTimer _mapUpdateTimer;
+			Client = new Client(ClientSettings, new APIFailure());
+			// Get Google token
+			var authToken = await Client.Login.DoLogin();
+			// Update current token even if it's null
+			SettingsService.Instance.GoogleAuthToken = authToken;
+			// Return true if login worked, meaning that we have a token
+			return authToken != null;
+		}
 
-        /// <summary>
-        /// Mutex to secure the parallel access to the data update
-        /// </summary>
-        private static readonly Mutex UpdateDataMutex = new Mutex();
+		/// <summary>
+		/// Logs the user out by clearing data and timers
+		/// </summary>
+		public static void DoLogout()
+		{
+			// Clear stored token
+			SettingsService.Instance.PtcAuthToken = null;
+			SettingsService.Instance.GoogleAuthToken = null;
+			_mapUpdateTimer?.Stop();
+			_mapUpdateTimer = null;
+			_geolocator = null;
+			CatchablePokemons.Clear();
+			NearbyPokemons.Clear();
+			NearbyPokestops.Clear();
+		}
 
-        /// <summary>
-        /// If a forced refresh caused an update we should skip the next update
-        /// </summary>
-        private static bool _skipNextUpdate;
+		#endregion
 
-        /// <summary>
-        /// We fire this event when the current position changes
-        /// </summary>
-        public static event EventHandler<Geoposition> GeopositionUpdated;
+		#region Data Updating
 
-        /// <summary>
-        /// We fire this event when we have found new Pokemons on the map
-        /// </summary>
-        public static event EventHandler MapPokemonUpdated;
+		private static Geolocator _geolocator;
 
-        /// <summary>
-        /// Starts the timer to update map objects and the handler to update position
-        /// </summary>
-        public static async Task InitializeDataUpdate()
-        {
-            _geolocator = new Geolocator
-            {
-                DesiredAccuracy = PositionAccuracy.High,
-                DesiredAccuracyInMeters = 5,
-                ReportInterval = 5000,
-                MovementThreshold = 5
-            };
-            Busy.SetBusy(true, "Getting GPS signal...");
-            Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
-            GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += (s, e) =>
-            {
-                Geoposition = e.Position;
-                GeopositionUpdated?.Invoke(null, Geoposition);
-            };
-            _mapUpdateTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(10)
-            };
-            _mapUpdateTimer.Tick += async (s, e) =>
-            {
-                if (!UpdateDataMutex.WaitOne(0)) return;
-                if (_skipNextUpdate)
-                {
-                    _skipNextUpdate = false;
-                }
-                else
-                {
-                    Logger.Write("Updating map");
-                    await UpdateMapObjects();
-                }
+		public static Geoposition Geoposition { get; private set; }
 
-                UpdateDataMutex.ReleaseMutex();                
-            };
-            // Update before starting timer            
-            Busy.SetBusy(true, "Getting user data...");
-            await UpdateMapObjects();
-            await UpdateInventory();
-            _mapUpdateTimer.Start();
-            Busy.SetBusy(false);
-        }
+		private static DispatcherTimer _mapUpdateTimer;
 
-        /// <summary>
-        /// Updates catcheable and nearby Pokemons + Pokestops.
-        /// We're using a single method so that we don't need two separate calls to the server, making things faster.
-        /// </summary>
-        /// <returns></returns>
-        private static async Task UpdateMapObjects()
-        {
-            // Get all map objects from server            
-            var mapObjects = (await GetMapObjects(Geoposition)).Item1;            
-            // Replace data with the new ones                                  
-            var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
-            Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
-            if (catchableTmp.Count != CatchablePokemons.Count)
-            {
-                MapPokemonUpdated?.Invoke(null, null);
-            }
-            CatchablePokemons.Clear();
-            foreach (var pokemon in catchableTmp)
-            {
-                CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
-            }
-            var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
-            Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
-            NearbyPokemons.Clear();           
-            foreach (var pokemon in nearbyTmp)
-            {
-                NearbyPokemons.Add(pokemon);
-            }
-            // Retrieves PokeStops but not Gyms
-            var pokeStopsTmp =
-                new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(i => i.Type == FortType.Checkpoint));
-            Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
-            NearbyPokestops.Clear();
-            foreach (var pokestop in pokeStopsTmp)
-            {
-                NearbyPokestops.Add(new FortDataWrapper(pokestop));
-            }
-            Logger.Write("Finished updating map objects");
-        }
+		/// <summary>
+		/// Mutex to secure the parallel access to the data update
+		/// </summary>
+		private static readonly Mutex UpdateDataMutex = new Mutex();
 
-        public static async Task ForcedUpdateMapData()
-        {
-            if (!UpdateDataMutex.WaitOne(0)) return;
-            _skipNextUpdate = true;
-            await UpdateMapObjects();
-            UpdateDataMutex.ReleaseMutex();
-        }
+		/// <summary>
+		/// If a forced refresh caused an update we should skip the next update
+		/// </summary>
+		private static bool _skipNextUpdate;
 
-        #endregion
+		/// <summary>
+		/// We fire this event when the current position changes
+		/// </summary>
+		public static event EventHandler<Geoposition> GeopositionUpdated;
 
-        #region Map & Position
+		/// <summary>
+		/// We fire this event when we have found new Pokemons on the map
+		/// </summary>
+		public static event EventHandler MapPokemonUpdated;
 
-        /// <summary>
-        ///     Gets updated map data based on provided position
-        /// </summary>
-        /// <param name="geoposition"></param>
-        /// <returns></returns>
-        public static async Task<Tuple<GetMapObjectsResponse, GetHatchedEggsResponse, POGOProtos.Networking.Responses.GetInventoryResponse, CheckAwardedBadgesResponse, DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
-        {            
-            // Sends the updated position to the client
-            await
-                Client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
-                    geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);            
-            return await Client.Map.GetMapObjects();
-        }
+		/// <summary>
+		/// Starts the timer to update map objects and the handler to update position
+		/// </summary>
+		public static async Task InitializeDataUpdate()
+		{
+			_geolocator = new Geolocator
+			{
+				DesiredAccuracy = PositionAccuracy.High,
+				DesiredAccuracyInMeters = 5,
+				ReportInterval = 5000,
+				MovementThreshold = 5
+			};
+			Busy.SetBusy(true, "Getting GPS signal...");
+			Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
+			GeopositionUpdated?.Invoke(null, Geoposition);
+			_geolocator.PositionChanged += (s, e) =>
+			{
+				Geoposition = e.Position;
+				GeopositionUpdated?.Invoke(null, Geoposition);
+			};
+			_mapUpdateTimer = new DispatcherTimer
+			{
+				Interval = TimeSpan.FromSeconds(10)
+			};
+			_mapUpdateTimer.Tick += async (s, e) =>
+			{
+				if (!UpdateDataMutex.WaitOne(0)) return;
+				if (_skipNextUpdate)
+				{
+					_skipNextUpdate = false;
+				}
+				else
+				{
+					Logger.Write("Updating map");
+					await UpdateMapObjects();
+				}
 
-        #endregion
+				UpdateDataMutex.ReleaseMutex();
+			};
+			// Update before starting timer            
+			Busy.SetBusy(true, "Getting user data...");
+			await UpdateMapObjects();
+			await UpdateInventory();
+			_mapUpdateTimer.Start();
+			Busy.SetBusy(false);
+		}
 
-        #region Player Data & Inventory
+		/// <summary>
+		/// Updates catcheable and nearby Pokemons + Pokestops.
+		/// We're using a single method so that we don't need two separate calls to the server, making things faster.
+		/// </summary>
+		/// <returns></returns>
+		private static async Task UpdateMapObjects()
+		{
+			// Get all map objects from server            
+			var mapObjects = (await GetMapObjects(Geoposition)).Item1;
+			// Replace data with the new ones                                  
+			var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
+			Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
+			if (catchableTmp.Count != CatchablePokemons.Count)
+			{
+				MapPokemonUpdated?.Invoke(null, null);
+			}
+			CatchablePokemons.Clear();
+			foreach (var pokemon in catchableTmp)
+			{
+				CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
+			}
+			var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
+			Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
+			NearbyPokemons.Clear();
+			foreach (var pokemon in nearbyTmp)
+			{
+				NearbyPokemons.Add(pokemon);
+			}
+			// Retrieves PokeStops but not Gyms
+			var pokeStopsTmp =
+				new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
+					.Where(i => i.Type == FortType.Checkpoint));
+			Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
+			NearbyPokestops.Clear();
+			foreach (var pokestop in pokeStopsTmp)
+			{
+				NearbyPokestops.Add(new FortDataWrapper(pokestop));
+			}
+			Logger.Write("Finished updating map objects");
+		}
 
-        /// <summary>
-        ///     Gets user's profile
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<GetPlayerResponse> GetProfile()
-        {
-            return await Client.Player.GetPlayer();
-        }
+		public static async Task ForcedUpdateMapData()
+		{
+			if (!UpdateDataMutex.WaitOne(0)) return;
+			_skipNextUpdate = true;
+			await UpdateMapObjects();
+			UpdateDataMutex.ReleaseMutex();
+		}
 
-        /// <summary>
-        ///     Gets player's inventoryDelta
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<GetInventoryResponse> GetInventory()
-        {
-            return await Client.Inventory.GetInventory();
-        }
+		#endregion
 
-        /// <summary>
-        ///     Updates inventory data
-        /// </summary>
-        public static async Task UpdateInventory()
-        {            
-            // Get ALL the items
-            var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
-            var tmpItemsInventory = fullInventory.Where(item => item.InventoryItemData.Item != null).GroupBy(item => item.InventoryItemData.Item);
-            ItemsInventory.Clear();
-            foreach (var item in tmpItemsInventory)
-            {
-                ItemsInventory.Add(item.First().InventoryItemData.Item);
-            }
-        }
+		#region Map & Position
 
-        #endregion
+		/// <summary>
+		///     Gets updated map data based on provided position
+		/// </summary>
+		/// <param name="geoposition"></param>
+		/// <returns></returns>
+		public static async Task<Tuple<GetMapObjectsResponse, GetHatchedEggsResponse, POGOProtos.Networking.Responses.GetInventoryResponse, CheckAwardedBadgesResponse, DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
+		{
+			// Sends the updated position to the client
+			await
+				Client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
+					geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);
+			return await Client.Map.GetMapObjects();
+		}
 
-        #region Pokemon Handling
+		#endregion
 
-        #region Catching
+		#region Player Data & Inventory
 
-        /// <summary>
-        /// Encounters the selected Pokemon
-        /// </summary>
-        /// <param name="encounterId"></param>
-        /// <param name="spawnpointId"></param>
-        /// <returns></returns>
-        public static async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnpointId)
-        {            
-            return await Client.Encounter.EncounterPokemon(encounterId, spawnpointId);
-        }
+		/// <summary>
+		///     Gets user's profile
+		/// </summary>
+		/// <returns></returns>
+		public static async Task<GetPlayerResponse> GetProfile()
+		{
+			return await Client.Player.GetPlayer();
+		}
 
-        /// <summary>
-        /// Executes Pokemon catching
-        /// </summary>
-        /// <param name="encounterId"></param>
-        /// <param name="spawnpointId"></param>
-        /// <param name="longitude"></param>
-        /// <param name="captureItem"></param>
-        /// <param name="latitude"></param>
-        /// <returns></returns>
-        public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId, ItemId captureItem)
-        {                        
-            var random = new Random();
-            return await Client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble()*1.95D, random.NextDouble());
-        }
+		/// <summary>
+		///     Gets player's inventoryDelta
+		/// </summary>
+		/// <returns></returns>
+		public static async Task<GetInventoryResponse> GetInventory()
+		{
+			return await Client.Inventory.GetInventory();
+		}
 
-        /// <summary>
-        /// Throws a capture item to the Pokemon
-        /// </summary>
-        /// <param name="encounterId"></param>
-        /// <param name="spawnpointId"></param>
-        /// <param name="captureItem"></param>
-        /// <returns></returns>
-        public static async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, string spawnpointId,ItemId captureItem)
-        {            
-            return await Client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
-        }
+		/// <summary>
+		///     Updates inventory data
+		/// </summary>
+		public static async Task UpdateInventory()
+		{
+			// Get ALL the items
+			var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
+			var tmpItemsInventory = fullInventory.Where(item => item.InventoryItemData.Item != null).GroupBy(item => item.InventoryItemData.Item);
+			ItemsInventory.Clear();
+			foreach (var item in tmpItemsInventory)
+			{
+				ItemsInventory.Add(item.First().InventoryItemData.Item);
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#region Pokemon Handling
 
-        #region Pokestop Handling
+		#region Catching
 
-        /// <summary>
-        /// Gets fort data for the given Id
-        /// </summary>
-        /// <param name="pokestopId"></param>
-        /// <param name="latitude"></param>
-        /// <param name="longitude"></param>
-        /// <returns></returns>
-        public static async Task<FortDetailsResponse> GetFort(string pokestopId, double latitude, double longitude)
-        {
-            return await Client.Fort.GetFort(pokestopId, latitude, longitude);
-        }
+		/// <summary>
+		/// Encounters the selected Pokemon
+		/// </summary>
+		/// <param name="encounterId"></param>
+		/// <param name="spawnpointId"></param>
+		/// <returns></returns>
+		public static async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnpointId)
+		{
+			return await Client.Encounter.EncounterPokemon(encounterId, spawnpointId);
+		}
 
-        /// <summary>
-        /// Searches the given fort
-        /// </summary>
-        /// <param name="pokestopId"></param>
-        /// <param name="latitude"></param>
-        /// <param name="longitude"></param>
-        /// <returns></returns>
-        public static async Task<FortSearchResponse> SearchFort(string pokestopId, double latitude, double longitude)
-        {
-            return await Client.Fort.SearchFort(pokestopId, latitude, longitude);
-        }
+		/// <summary>
+		/// Executes Pokemon catching
+		/// </summary>
+		/// <param name="encounterId"></param>
+		/// <param name="spawnpointId"></param>
+		/// <param name="longitude"></param>
+		/// <param name="captureItem"></param>
+		/// <param name="latitude"></param>
+		/// <returns></returns>
+		public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId, ItemId captureItem)
+		{
+			var random = new Random();
+			return await Client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble() * 1.95D, random.NextDouble());
+		}
+
+		/// <summary>
+		/// Throws a capture item to the Pokemon
+		/// </summary>
+		/// <param name="encounterId"></param>
+		/// <param name="spawnpointId"></param>
+		/// <param name="captureItem"></param>
+		/// <returns></returns>
+		public static async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, string spawnpointId, ItemId captureItem)
+		{
+			return await Client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Pokestop Handling
+
+		/// <summary>
+		/// Gets fort data for the given Id
+		/// </summary>
+		/// <param name="pokestopId"></param>
+		/// <param name="latitude"></param>
+		/// <param name="longitude"></param>
+		/// <returns></returns>
+		public static async Task<FortDetailsResponse> GetFort(string pokestopId, double latitude, double longitude)
+		{
+			return await Client.Fort.GetFort(pokestopId, latitude, longitude);
+		}
+
+		/// <summary>
+		/// Searches the given fort
+		/// </summary>
+		/// <param name="pokestopId"></param>
+		/// <param name="latitude"></param>
+		/// <param name="longitude"></param>
+		/// <returns></returns>
+		public static async Task<FortSearchResponse> SearchFort(string pokestopId, double latitude, double longitude)
+		{
+			return await Client.Fort.SearchFort(pokestopId, latitude, longitude);
+		}
 
 		#endregion
 
