@@ -202,6 +202,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="nearby"
+                                           x:Uid="nearbyText"
                                            Grid.Row="0"
                                            FontSize="25"
                                            Foreground="Black"
@@ -277,7 +278,8 @@
                            FontSize="14"
                            Foreground="#619BB1"
                            FontWeight="SemiBold"
-                           Text="LOGOUT" />
+                           Text="LOGOUT"
+                           x:Uid="logoutText"/>
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
