@@ -33,8 +33,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state                
-                PtcUsername = (string) suspensionState[nameof(PtcUsername)];
-                PtcPassword = (string) suspensionState[nameof(PtcPassword)];
+                Username = (string) suspensionState[nameof(Username)];
+                Email = (string) suspensionState[nameof(Email)];
             }
             await Task.CompletedTask;
         }
@@ -49,8 +49,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(PtcUsername)] = PtcUsername;
-                suspensionState[nameof(PtcPassword)] = PtcPassword;
+                suspensionState[nameof(Username)] = Username;
+                suspensionState[nameof(Email)] = Email;
             }
             await Task.CompletedTask;
         }
@@ -75,7 +75,7 @@ namespace PokemonGo_UWP.ViewModels
 
         public string CurrentVersion => GameClient.CurrentVersion;
 
-        public string PtcUsername
+        public string Username
         {
             get { return _username; }
             set
@@ -86,7 +86,7 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
-        public string PtcPassword
+        public string Email
         {
             get { return _password; }
             set
@@ -109,7 +109,7 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    var loginSuccess = await GameClient.DoPtcLogin(PtcUsername, PtcPassword);
+                    var loginSuccess = await GameClient.DoPtcLogin(Username, Email);
 
                     if (!loginSuccess)
                     {
@@ -138,7 +138,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     Busy.SetBusy(false);
                 }
-            }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            }, () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email))
             );
 
         private DelegateCommand _doGoogleLoginCommand;
@@ -149,7 +149,7 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    if (!await GameClient.DoGoogleLogin(PtcUsername.Trim(), PtcPassword.Trim()))
+                    if (!await GameClient.DoGoogleLogin(Username.Trim(), Email.Trim()))
                     {
                         // Login failed, show a message
                         await
@@ -174,7 +174,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     Busy.SetBusy(false);
                 }
-            }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            }, () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email))
             );
 
         #endregion
