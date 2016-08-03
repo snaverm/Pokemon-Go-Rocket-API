@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 
 namespace PokemonGo.RocketAPI.Login
 {
@@ -35,7 +36,13 @@ namespace PokemonGo.RocketAPI.Login
             var response = await client.PerformMasterLogin(androidId: GoogleLoginAndroidId);
 
             if (response.ContainsKey("Error"))
-                throw new GoogleException(response["Error"]);
+            {
+                if (response.ContainsKey("Url"))
+                {
+                    await Launcher.LaunchUriAsync(new Uri(response["Url"]));
+                } else
+                    throw new GoogleException(response["Error"]);
+            }
 
             //Todo: captcha/2fa implementation
 
