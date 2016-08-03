@@ -286,7 +286,8 @@
                            FontSize="14"
                            Foreground="#619BB1"
                            FontWeight="SemiBold"
-                           Text="LOGOUT" />
+                           Text="LOGOUT"
+                           x:Uid="logoutText"/>
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
