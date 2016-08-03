@@ -140,13 +140,13 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Bindable Game Vars   
 
-        public ApplicationTheme CurrentTheme
+        public ElementTheme CurrentTheme
         {
             get
             {
                 // Set theme
                 var currentTime = int.Parse(DateTime.Now.ToString("HH"));
-                return currentTime > 7 && currentTime < 19 ? ApplicationTheme.Light : ApplicationTheme.Dark;
+                return currentTime > 7 && currentTime < 19 ? ElementTheme.Light : ElementTheme.Dark;
             }
         }
 

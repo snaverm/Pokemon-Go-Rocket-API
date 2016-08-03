@@ -10,12 +10,13 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:entities="using:PokemonGo_UWP.Entities"
+    xmlns:controls="using:Template10.Controls"
     x:Name="GamePage"
     RequestedTheme="{Binding CurrentTheme, Mode=OneWay}"
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <viewModels:GameMapPageViewModel x:Name="ViewModel"/>
+        <viewModels:GameMapPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <Page.Resources>
@@ -35,8 +36,8 @@
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
-            
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
                                            Storyboard.TargetName="PokeMenuPanel">
                 <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
@@ -65,9 +66,9 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
-            
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)" 
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
                                            Storyboard.TargetName="PokeMenuPanel">
                 <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
@@ -82,8 +83,8 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
-        <Storyboard x:Name="ShowNearbyGridStoryboard">
-            <DoubleAnimation
+        <Storyboard x:Name="ShowNearbyModalStoryboard">
+            <DoubleAnimation x:Name="ShowNearbyModalAnimation"
                 Storyboard.TargetName="NearbyGridTranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="350"
@@ -91,8 +92,8 @@
                 Duration="0:0:0.2" />
         </Storyboard>
 
-        <Storyboard x:Name="HideNearbyGridStoryboard">
-            <DoubleAnimation
+        <Storyboard x:Name="HideNearbyModalStoryboard">
+            <DoubleAnimation x:Name="HideNearbyModalAnimation"
                 Storyboard.TargetName="NearbyGridTranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="0"
@@ -107,7 +108,7 @@
         <maps:MapControl BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
                          ColorScheme="{ThemeResource MapColorScheme}"
-                         DesiredPitch="50"                         
+                         DesiredPitch="50"
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
                          TransitFeaturesVisible="False"
@@ -115,19 +116,19 @@
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"   
+                         RelativePanel.AlignRightWithPanel="True"
                          RotateInteractionMode="GestureAndControl"
                          TiltInteractionMode="GestureAndControl"
-                         MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"    
+                         MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"
                          Canvas.ZIndex="1"
                          x:Name="GameMapControl">
-            
-            <Image Source="../Assets/UI/ash.png"                   
+
+            <Image Source="../Assets/UI/ash.png"
                    maps:MapControl.NormalizedAnchorPoint="0.5,1"
                    Stretch="Uniform"
                    Height="48"
-                   Width="48" 
-                   x:Name="PlayerImage"/>
+                   Width="48"
+                   x:Name="PlayerImage" />
 
             <maps:MapItemsControl ItemsSource="{Binding CatchablePokemons}">
                 <maps:MapItemsControl.ItemTemplate>
@@ -151,12 +152,13 @@
                     <DataTemplate x:DataType="entities:FortDataWrapper">
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 Command="{x:Bind TrySearchPokestop}">
-                            <Image Source="{Binding CooldownCompleteTimestampMs, Converter={StaticResource PokestopToIconConverter}}"
-                                   maps:MapControl.Location="{Binding Geoposition}"
-                                   maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
-                                   Stretch="Uniform"
-                                   Height="64"
-                                   Width="64" />
+                            <Image
+                                Source="{Binding CooldownCompleteTimestampMs, Converter={StaticResource PokestopToIconConverter}}"
+                                maps:MapControl.Location="{Binding Geoposition}"
+                                maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
+                                Stretch="Uniform"
+                                Height="64"
+                                Width="64" />
                         </Button>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
@@ -164,82 +166,111 @@
 
         </maps:MapControl>
 
-        <Border x:Name="NearbyPokemonsBorder"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                CornerRadius="8,8,0,0"
-                Padding="8"
-                Margin="8,0"
-                Height="350"
-                Canvas.ZIndex="5">
+        <Grid RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True"
+              Canvas.ZIndex="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="NearbyGridTranslateTransform"/>
+            </Grid.RenderTransform>
 
-            <Border.Background>
-                <ImageBrush ImageSource="../Assets/UI/panelBG.png"
-                            Stretch="Fill" />
-            </Border.Background>
+            <controls:ModalDialog x:Name="NearbyPokemonModal"
+                                  Grid.Row="1"
+                                  Grid.RowSpan="2"
+                                  CanBackButtonDismiss="True"
+                                  DisableBackButtonWhenModal="True"
+                                  ModalBackground="Transparent">
+                <controls:ModalDialog.ModalContent>
+                    <Border CornerRadius="8,8,0,0"
+                            Margin="16,0"
+                            Background="White"
+                            x:Name="NarbyPokemonGrid">
+                        <Border Padding="8">
 
-            <Border.RenderTransform>
-                <TranslateTransform x:Name="NearbyGridTranslateTransform"
-                                    Y="350" />
-            </Border.RenderTransform>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                            <Border.Background>
+                                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
+                                            Opacity="0.1"
+                                            Stretch="Fill" />
+                            </Border.Background>
 
-                <TextBlock Text="nearby"
-                           Grid.Row="0"
-                           FontSize="25"
-                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
-                           TextAlignment="Center"
-                           Margin="0,0,0,8" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                <GridView ItemsSource="{Binding NearbyPokemons}"
-                          SelectionMode="None"
-                          Grid.Row="1">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                    Stretch="Uniform"
-                                    VerticalAlignment="Center"
-                                    Width="48"
-                                    Height="48"
-                                    Margin="3,0" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                                <TextBlock Text="nearby"
+                                           Grid.Row="0"
+                                           FontSize="25"
+                                           FontFamily="../Assets/Fonts/Generica.otf#Generica"
+                                           TextAlignment="Center"
+                                           Margin="0,0,0,8" />
 
-                <Button Style="{ThemeResource ImageButtonStyle}"
-                        Height="{ThemeResource UiButtonSize}"
-                        Grid.Row="2"
-                        HorizontalAlignment="Center"
-                        Margin="0,8,0,0"
-                        x:Name="CloseNearbyGridViewButton">
+                                <GridView ItemsSource="{Binding NearbyPokemons}"
+                                          HorizontalAlignment="Stretch"
+                                          HorizontalContentAlignment="Stretch"
+                                          SelectionMode="None"
+                                          Grid.Row="1">
 
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:CallMethodAction MethodName="Begin" 
-                                               TargetObject="{Binding ElementName=HideNearbyGridStoryboard}"/>
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapGrid Orientation="Horizontal" 
+                                                      VerticalChildrenAlignment="Top"
+                                                      HorizontalAlignment="Center"
+                                                      MaximumRowsOrColumns="4"/>
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
 
-                    <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
-                           Stretch="Uniform"
-                           HorizontalAlignment="Stretch" />
-                </Button>
-            </Grid>
-        </Border>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image
+                                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                                Stretch="Uniform"       
+                                                Height="54"
+                                                Width="54"
+                                                VerticalAlignment="Center"                                                
+                                                HorizontalAlignment="Center"
+                                                Margin="6,0" />
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+
+                                <Button Style="{ThemeResource ImageButtonStyle}"
+                                        Height="{ThemeResource UiButtonSize}"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,8,0,0"
+                                        Tapped="ToggleNearbyPokemonModal"
+                                        x:Name="CloseNearbyGridViewButton">
+
+                                    <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
+                                           Stretch="Uniform"
+                                           HorizontalAlignment="Stretch" />
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Border>
+
+                </controls:ModalDialog.ModalContent>
+            </controls:ModalDialog>
+
+        </Grid>
 
         <RelativePanel x:Name="PokeMenuPanel"
-                RelativePanel.AlignTopWithPanel="True"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                Opacity="0"
-                Canvas.ZIndex="0">
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       Opacity="0"
+                       Canvas.ZIndex="0">
 
             <RelativePanel.Background>
                 <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
@@ -255,7 +286,7 @@
                            FontSize="14"
                            Foreground="#619BB1"
                            FontWeight="SemiBold"
-                           Text="LOGOUT"/>
+                           Text="LOGOUT" />
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
@@ -302,8 +333,8 @@
 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:CallMethodAction MethodName="Begin" 
-                                               TargetObject="{Binding ElementName=HidePokeMenuStoryboard}"/>
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=HidePokeMenuStoryboard}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
 
@@ -376,14 +407,14 @@
                     Height="{ThemeResource UiButtonSize}"
                     HorizontalAlignment="Center"
                     x:Name="PokeMenuMainButton">
-                
+
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:CallMethodAction MethodName="Begin" 
-                                               TargetObject="{Binding ElementName=ShowPokeMenuStoryboard}"/>
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=ShowPokeMenuStoryboard}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-                
+
                 <Image Source="../Assets/Buttons/btn_action_menu.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
@@ -396,22 +427,16 @@
                     Background="AntiqueWhite"
                     VerticalAlignment="Center"
                     Grid.Column="2"
+                    Tapped="ToggleNearbyPokemonModal"
                     Height="40">
-                
+
                 <Border.BorderBrush>
-                    <LinearGradientBrush StartPoint="0,0" 
+                    <LinearGradientBrush StartPoint="0,0"
                                          EndPoint="1,1">
-                        <GradientStop Color="#a8e090" Offset="0"/>
-                        <GradientStop Color="#35908f" Offset="0.8"/>
+                        <GradientStop Color="#a8e090" Offset="0" />
+                        <GradientStop Color="#35908f" Offset="0.8" />
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <core:CallMethodAction MethodName="Begin" 
-                                               TargetObject="{Binding ElementName=ShowNearbyGridStoryboard}"/>
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
 
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -443,15 +468,14 @@
                 </Grid>
 
             </Border>
-            
+
         </Grid>
 
         <TextBlock Text="{Binding CurrentVersion}"
                    RelativePanel.AlignTopWithPanel="True"
                    RelativePanel.AlignRightWithPanel="True"
                    Margin="6"
-                   Canvas.ZIndex="100"
-                   />
-        
+                   Canvas.ZIndex="100" />
+
     </RelativePanel>
 </Page>
