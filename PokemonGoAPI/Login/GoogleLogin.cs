@@ -1,5 +1,4 @@
-﻿using DankMemes.GPSOAuthSharp;
-using PokemonGo.RocketAPI.Exceptions;
+﻿using PokemonGo.RocketAPI.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,11 @@ namespace PokemonGo.RocketAPI.Login
 {
     public class GoogleLogin : ILoginType
     {
+        public const string GoogleLoginAndroidId = "9774d56d682e549c";
+        public const string GoogleLoginService = "audience:server:client_id:848232511240-7so421jotr2609rmqakceuu1luuq0ptb.apps.googleusercontent.com";
+        public const string GoogleLoginApp = "com.nianticlabs.pokemongo";
+        public const string GoogleLoginClientSig = "321187995bc7cdc2b5fc91b11a96e2baa8602c62";
+
         private readonly string password;
         private readonly string email;
 

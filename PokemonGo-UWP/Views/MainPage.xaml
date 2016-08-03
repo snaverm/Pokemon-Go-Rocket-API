@@ -14,23 +14,31 @@
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader"
-                             Content="PTC Login"
+                             Content="Login"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" />
+        
+        <ComboBox x:Name="selectLoginType"
+                  Margin="16,12"
+                  ItemsSource="{Binding LoginTypes, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedLoginType, Mode=TwoWay}"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.Below="pageHeader"/>
 
         <TextBox x:Name="usernameTextBox"
                  Margin="16,12"
                  Header="username:"
-                 Text="{Binding PtcUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.Below="pageHeader" />
+                 RelativePanel.Below="selectLoginType" />
 
         <PasswordBox x:Name="passwordBox"
                      Margin="16,0"
                      Header="password:"
-                     Password="{Binding PtcPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      RelativePanel.AlignLeftWithPanel="True"
                      RelativePanel.AlignRightWithPanel="True"
                      RelativePanel.Below="usernameTextBox" 
@@ -52,7 +60,7 @@
                     Grid.Row="1"
                     x:Name="loginButton"
                     Content="login"
-                    Command="{Binding DoPtcLoginCommand}" />
+                    Command="{Binding DoLoginCommand}" />
         </Grid>
         
         <TextBlock Text="{Binding CurrentVersion}"

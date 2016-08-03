@@ -8,6 +8,7 @@ using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 using Universal_Authenticator_v2.Views;
+using System.Collections.ObjectModel;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -16,9 +17,9 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Management Vars
 
-        private string _ptcUsername;
+        private string _username;
 
-        private string _ptcPassword;
+        private string _password;
 
         #endregion
 
@@ -26,23 +27,49 @@ namespace PokemonGo_UWP.ViewModels
 
         public string CurrentVersion => GameClient.CurrentVersion;
 
-        public string PtcUsername
+        public string Username
         {
-            get { return _ptcUsername; }
+            get { return _username; }
             set
             {
-                Set(ref _ptcUsername, value);
-                DoPtcLoginCommand.RaiseCanExecuteChanged();
+                Set(ref _username, value);
+                DoLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public string PtcPassword
+        public string Password
         {
-            get { return _ptcPassword; }
+            get { return _password; }
             set
             {
-                Set(ref _ptcPassword, value);
-                DoPtcLoginCommand.RaiseCanExecuteChanged();
+                Set(ref _password, value);
+                DoLoginCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public ObservableCollection<string> LoginTypes => new ObservableCollection<string>
+        {
+            "PTC",
+            "Google"
+        };
+
+        public string _selectedLoginType;
+        
+        public string SelectedLoginType
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_selectedLoginType))
+                {
+                    SelectedLoginType = LoginTypes.First();
+                }
+
+                return _selectedLoginType;
+            }
+            set
+            {
+                Set(ref _selectedLoginType, value);
+                DoLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -50,15 +77,26 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Logic        
 
-        private DelegateCommand _doPtcLoginCommand;
+        private DelegateCommand _doLoginCommand;
 
-        public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
-            _doPtcLoginCommand = new DelegateCommand(async () =>
+        public DelegateCommand DoLoginCommand => _doLoginCommand ?? (
+            _doLoginCommand = new DelegateCommand(async () =>
             {
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    if (!await GameClient.DoPtcLogin(PtcUsername, PtcPassword))
+                    var loginSuccess = false;
+
+                    if (SelectedLoginType == "Google")
+                    {
+                        loginSuccess = await GameClient.DoGoogleLogin(Username, Password);
+                    }
+                    else
+                    {
+                        loginSuccess = await GameClient.DoPtcLogin(Username, Password);
+                    }
+
+                    if (!loginSuccess)
                     {
                         // Login failed, show a message
                         await
@@ -78,7 +116,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     Busy.SetBusy(false);
                 }
-            }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            }, () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             );
 
         #endregion

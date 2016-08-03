@@ -113,11 +113,15 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient()
         {
+            var isPtcLogin = !String.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
+
             ClientSettings = new Settings
             {                
-                AuthType = AuthType.Ptc
+                AuthType = isPtcLogin ? AuthType.Ptc : AuthType.Google
             };
-            Client = new Client(ClientSettings, new APIFailure()) {AuthToken = SettingsService.Instance.PtcAuthToken};
+            
+            Client = new Client(ClientSettings, new APIFailure()) {AuthToken = SettingsService.Instance.PtcAuthToken ?? SettingsService.Instance.GoogleAuthToken};
+
             await Client.Login.DoLogin();
         }
 
@@ -145,12 +149,37 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
+        ///     Starts a Google session for the given user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns>true if login worked</returns>
+        public static async Task<bool> DoGoogleLogin(string email, string password)
+        {
+            ClientSettings = new Settings
+            {
+                GoogleUsername = email,
+                GooglePassword = password,
+                AuthType = AuthType.Google,
+            };
+
+            Client = new Client(ClientSettings, new APIFailure());
+            // Get Google token
+            var authToken = await Client.Login.DoLogin();
+            // Update current token even if it's null
+            SettingsService.Instance.GoogleAuthToken = authToken;
+            // Return true if login worked, meaning that we have a token
+            return authToken != null;
+        }
+
+        /// <summary>
         /// Logs the user out by clearing data and timers
         /// </summary>
         public static void DoLogout()
         {
             // Clear stored token
             SettingsService.Instance.PtcAuthToken = null;
+            SettingsService.Instance.GoogleAuthToken = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
             _geolocator = null;
