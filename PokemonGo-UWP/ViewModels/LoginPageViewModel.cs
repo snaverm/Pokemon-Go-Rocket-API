@@ -105,7 +105,7 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    if (!await GameClient.DoPtcLogin(PtcUsername, PtcPassword))
+                    if (!await GameClient.DoPtcLogin(PtcUsername.Trim(), PtcPassword.Trim()))
                     {
                         // Login failed, show a message
                         await
