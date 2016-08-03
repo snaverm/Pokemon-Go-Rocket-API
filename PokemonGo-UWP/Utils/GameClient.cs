@@ -124,11 +124,15 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient(bool isPtcAccount)
         {
+            var isPtcLogin = !String.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
+
             ClientSettings = new Settings
             {                
-                AuthType = isPtcAccount ? AuthType.Ptc : AuthType.Google
+                AuthType = isPtcLogin ? AuthType.Ptc : AuthType.Google
             };
-            Client = new Client(ClientSettings, new APIFailure()) {AuthToken = isPtcAccount ? SettingsService.Instance.PtcAuthToken : SettingsService.Instance.GoogleAuthToken};
+            
+            Client = new Client(ClientSettings, new APIFailure()) {AuthToken = SettingsService.Instance.PtcAuthToken ?? SettingsService.Instance.GoogleAuthToken};
+
             await Client.Login.DoLogin();
         }
 
@@ -168,14 +172,14 @@ namespace PokemonGo_UWP.Utils
             {
                 GoogleUsername = email,
                 GooglePassword = password,
-                AuthType = AuthType.Google
+                AuthType = AuthType.Google,
             };
+
             Client = new Client(ClientSettings, new APIFailure());
-            // Get PTC token
+            // Get Google token
             var authToken = await Client.Login.DoLogin();
-            // Update current token even if it's null and clear the token for the other identity provide
+            // Update current token even if it's null
             SettingsService.Instance.GoogleAuthToken = authToken;
-            SettingsService.Instance.PtcAuthToken = null;
             // Return true if login worked, meaning that we have a token
             return authToken != null;
         }
@@ -186,7 +190,8 @@ namespace PokemonGo_UWP.Utils
         public static void DoLogout()
         {
             // Clear stored token
-            SettingsService.Instance.PtcAuthToken = SettingsService.Instance.GoogleAuthToken = null;
+            SettingsService.Instance.PtcAuthToken = null;
+            SettingsService.Instance.GoogleAuthToken = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
             _geolocator = null;

@@ -11,6 +11,7 @@ using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
+using System.Collections.ObjectModel;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -64,9 +65,9 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Management Vars
 
-        private string _ptcUsername;
+        private string _username;
 
-        private string _ptcPassword;
+        private string _password;
 
         #endregion
 
@@ -76,10 +77,10 @@ namespace PokemonGo_UWP.ViewModels
 
         public string PtcUsername
         {
-            get { return _ptcUsername; }
+            get { return _username; }
             set
             {
-                Set(ref _ptcUsername, value);
+                Set(ref _username, value);
                 DoPtcLoginCommand.RaiseCanExecuteChanged();
                 DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
@@ -87,10 +88,10 @@ namespace PokemonGo_UWP.ViewModels
 
         public string PtcPassword
         {
-            get { return _ptcPassword; }
+            get { return _password; }
             set
             {
-                Set(ref _ptcPassword, value);
+                Set(ref _password, value);
                 DoPtcLoginCommand.RaiseCanExecuteChanged();
                 DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
@@ -108,7 +109,9 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    if (!await GameClient.DoPtcLogin(PtcUsername.Trim(), PtcPassword.Trim()))
+                    var loginSuccess = await GameClient.DoPtcLogin(PtcUsername, PtcPassword);
+
+                    if (!loginSuccess)
                     {
                         // Login failed, show a message
                         await
