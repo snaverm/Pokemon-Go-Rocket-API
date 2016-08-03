@@ -210,6 +210,7 @@
                                 <TextBlock Text="nearby"
                                            Grid.Row="0"
                                            FontSize="25"
+                                           Foreground="Black"
                                            FontFamily="../Assets/Fonts/Generica.otf#Generica"
                                            TextAlignment="Center"
                                            Margin="0,0,0,8" />
@@ -273,8 +274,14 @@
                        Canvas.ZIndex="0">
 
             <RelativePanel.Background>
-                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
-                            Stretch="Fill" />
+
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#a8e090" Offset="0" />
+                    <GradientStop Color="#35908f" Offset="0.8" />
+                </LinearGradientBrush>
+
+                <!--<ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
+                            Stretch="Fill" />-->
             </RelativePanel.Background>
 
             <Button RelativePanel.AlignRightWithPanel="True"
@@ -424,48 +431,45 @@
             <Border CornerRadius="8,0,0,8"
                     x:Name="NearbyPokemonGrid"
                     BorderThickness="2,2,0,2"
-                    Background="AntiqueWhite"
+                    BorderBrush="#abefca"
                     VerticalAlignment="Center"
                     Grid.Column="2"
-                    Tapped="ToggleNearbyPokemonModal"
-                    Height="40">
+                    Padding="8,8,0,8"                    
+                    Height="60">
 
-                <Border.BorderBrush>
-                    <LinearGradientBrush StartPoint="0,0"
-                                         EndPoint="1,1">
-                        <GradientStop Color="#a8e090" Offset="0" />
-                        <GradientStop Color="#35908f" Offset="0.8" />
-                    </LinearGradientBrush>
-                </Border.BorderBrush>
+                <Border CornerRadius="8,0,0,8"                        
+                        Background="Gray"
+                        Tapped="ToggleNearbyPokemonModal">
 
-                <Grid HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0"
-                           Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"
-                           Width="36"
-                           Height="36" />
+                        <Image Grid.Column="0"
+                               Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                               Stretch="Uniform"
+                               VerticalAlignment="Center"
+                               Width="36"
+                               Height="36" />
 
-                    <Image Grid.Column="1"
-                           Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"
-                           Width="36"
-                           Height="36" />
+                        <Image Grid.Column="1"
+                               Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                               Stretch="Uniform"
+                               VerticalAlignment="Center"
+                               Width="36"
+                               Height="36" />
 
-                    <Image Grid.Column="2"
-                           Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"
-                           Width="36"
-                           Height="36" />
-                </Grid>
+                        <Image Grid.Column="2"
+                               Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                               Stretch="Uniform"
+                               VerticalAlignment="Center"
+                               Width="36"
+                               Height="36" />
+                    </Grid>
+                </Border>
 
             </Border>
 
