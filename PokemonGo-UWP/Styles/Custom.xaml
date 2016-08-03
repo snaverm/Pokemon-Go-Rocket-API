@@ -1,6 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="using:Template10.Controls">
+                    xmlns:controls="using:Template10.Controls"
+                    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps">
 
     <!-- STYLE - BUTTONS -->
 
@@ -905,13 +906,13 @@
 
         <ResourceDictionary x:Key="Light">
 
+            <maps:MapColorScheme x:Key="MapColorScheme">Light</maps:MapColorScheme>
             <Color x:Key="BaseColor">White</Color>
             <Color x:Key="ContrastColor">Black</Color>
-            <SolidColorBrush x:Key="ContrastColorBrush" Color="{ThemeResource ContrastColor}" />
 
+            <SolidColorBrush x:Key="ContrastColorBrush" Color="{ThemeResource ContrastColor}" />
             <SolidColorBrush x:Key="ExtendedSplashBackgroundColorBrush" Color="{ThemeResource SystemAccentColor}" />
             <SolidColorBrush x:Key="ExtendedSplashForegroundColorBrush" Color="{ThemeResource BaseColor}" />
-
             <SolidColorBrush x:Key="PageHeaderBackgroundColorBrush" Color="LightGray" />
             <SolidColorBrush x:Key="ApplicationPageBackgroundThemeColorBrush" Color="White" />
             <SolidColorBrush x:Key="OtpEntryBackgroundColorBrush" Color="#BBBBBB" />
@@ -927,6 +928,7 @@
 
         <ResourceDictionary x:Key="Default">
 
+            <maps:MapColorScheme x:Key="MapColorScheme">Dark</maps:MapColorScheme>
             <Color x:Key="BaseColor">Black</Color>
             <Color x:Key="ContrastColor">White</Color>
 

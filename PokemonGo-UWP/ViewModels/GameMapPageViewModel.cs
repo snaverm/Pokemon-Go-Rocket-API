@@ -10,6 +10,7 @@ using Windows.Devices.Sensors;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Entities;
@@ -41,7 +42,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             // Prevent from going back to other pages
-            NavigationService.ClearHistory();
+            NavigationService.ClearHistory();            
             if (parameter is bool)
             {
                 // First time navigating here, we need to initialize data updating but only if we have GPS access
@@ -138,6 +139,16 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Bindable Game Vars   
+
+        public ApplicationTheme CurrentTheme
+        {
+            get
+            {
+                // Set theme
+                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+                return currentTime > 7 && currentTime < 19 ? ApplicationTheme.Light : ApplicationTheme.Dark;
+            }
+        }
 
         public string CurrentVersion => GameClient.CurrentVersion;
 
