@@ -160,16 +160,15 @@ namespace DankMemes.GPSOAuthSharp
 
         // signature
         public static string CreateSignature(string email, string password, RSAParameters key)
-        {
-            // TODO: implement!
-            return "";
-            //var rsa = new  RSACryptoServiceProvider();
-            //rsa.ImportParameters(key);
-            //SHA1 sha1 = SHA1.Create();
-            //byte[] prefix = { 0x00 };
-            //byte[] hash = sha1.ComputeHash(KeyToStruct(key)).Take(4).ToArray();
-            //byte[] encrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(email + "\x00" + password), true);
-            //return DataTypeUtils.UrlSafeBase64(DataTypeUtils.CombineBytes(prefix, hash, encrypted));
+        {           
+            var rsa = RSA.Create();
+            rsa.ImportParameters(key);
+            rsa.ImportParameters(key);
+            SHA1 sha1 = SHA1.Create();
+            byte[] prefix = { 0x00 };
+            byte[] hash = sha1.ComputeHash(KeyToStruct(key)).Take(4).ToArray();            
+            byte[] encrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(email + "\x00" + password), RSAEncryptionPadding.OaepSHA1);
+            return DataTypeUtils.UrlSafeBase64(DataTypeUtils.CombineBytes(prefix, hash, encrypted));
         }
     }
 

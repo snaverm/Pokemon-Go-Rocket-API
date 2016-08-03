@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
+using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Mvvm;
@@ -80,6 +81,7 @@ namespace PokemonGo_UWP.ViewModels
             {
                 Set(ref _ptcUsername, value);
                 DoPtcLoginCommand.RaiseCanExecuteChanged();
+                DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -90,6 +92,7 @@ namespace PokemonGo_UWP.ViewModels
             {
                 Set(ref _ptcPassword, value);
                 DoPtcLoginCommand.RaiseCanExecuteChanged();
+                DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -109,7 +112,8 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog("Wrong username/password or offline server, please try again.").ShowAsyncQueue();
+                            new MessageDialog("Wrong username/password or offline server, please try again.")
+                                .ShowAsyncQueue();
                     }
                     else
                     {
@@ -117,9 +121,51 @@ namespace PokemonGo_UWP.ViewModels
                         await NavigationService.NavigateAsync(typeof(GameMapPage), true);
                     }
                 }
-                catch (Exception)
+                catch (PtcOfflineException)
                 {
                     await new MessageDialog("PTC login is probably down, please retry later.").ShowAsyncQueue();
+                }
+                catch (LoginFailedException)
+                {
+                    await
+                            new MessageDialog("WLogin failed, please try again.")
+                                .ShowAsyncQueue();
+                }
+                finally
+                {
+                    Busy.SetBusy(false);
+                }
+            }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
+            );
+
+        private DelegateCommand _doGoogleLoginCommand;
+
+        public DelegateCommand DoGoogleLoginCommand => _doGoogleLoginCommand ?? (
+            _doGoogleLoginCommand = new DelegateCommand(async () =>
+            {
+                Busy.SetBusy(true, "Logging in...");
+                try
+                {
+                    if (!await GameClient.DoGoogleLogin(PtcUsername.Trim(), PtcPassword.Trim()))
+                    {
+                        // Login failed, show a message
+                        await
+                            new MessageDialog("Wrong username/password or offline server, please try again.")
+                                .ShowAsyncQueue();
+                    }
+                    else
+                    {
+                        // Goto game page
+                        await NavigationService.NavigateAsync(typeof(GameMapPage), true);
+                    }
+                }
+                catch (GoogleOfflineException)
+                {
+                    await new MessageDialog("Google is not responding, please try again later.").ShowAsyncQueue();
+                }
+                catch (GoogleException e)
+                {
+                    await new MessageDialog($"Google retuned error:{e.Message}").ShowAsyncQueue();
                 }
                 finally
                 {
@@ -129,6 +175,6 @@ namespace PokemonGo_UWP.ViewModels
             );
 
         #endregion
-        
+
     }
 }
