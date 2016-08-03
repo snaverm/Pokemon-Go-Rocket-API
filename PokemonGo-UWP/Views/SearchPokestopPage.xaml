@@ -90,6 +90,7 @@
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right">
                         <TextBlock Text="XP"
+                                   x:Uid="XPText"
                                    VerticalAlignment="Center" />
                         <TextBlock Text="{Binding CurrentSearchResponse.ExperienceAwarded}"
                                    Margin="8,0,0,0"
@@ -246,6 +247,7 @@
 
                 <StackPanel>
                     <TextBlock Text="out of range"
+                               x:Uid="OutOfRangeText"
                                TextAlignment="Center"
                                FontSize="20"
                                Foreground="White"
@@ -254,6 +256,7 @@
                                x:Name="OutOfRangeTextBlock" />
 
                     <TextBlock Text="cooldown"
+                               x:Uid="CoolDownText"
                                TextAlignment="Center"
                                FontSize="20"
                                Foreground="White"
@@ -262,6 +265,7 @@
                                x:Name="CooldownTextBlock" />
 
                     <TextBlock Text="inventory full"
+                               x:Uid="InventoryFullText"
                                TextAlignment="Center"
                                FontSize="20"
                                Foreground="White"
