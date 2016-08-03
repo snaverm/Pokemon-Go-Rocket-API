@@ -6,22 +6,26 @@ namespace PokemonGo_UWP.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
 	{
-		#region Game Management Vars
-
-		private bool _isVibrationActivated;
-
-		#endregion
 		#region Bindable Game Vars
 
-		public string CurrentVersion => GameClient.CurrentVersion;        
-		
+		public string CurrentVersion => GameClient.CurrentVersion;
+
+		/// <summary>
+		/// Whether the player wants music
+		/// </summary>
+		public bool IsMusicEnabled
+		{
+			get { return LocalStorage.GetStorageValue<bool>("MusicEnabled"); }
+			set { LocalStorage.SetStorageValue("MusicEnabled", value); }
+		}
+
 		/// <summary>
 		/// Whether the player wants vibration (when a Pokémon is nearby)
 		/// </summary>
-		public bool IsVibrationActivated
+		public bool IsVibrationEnabled
 		{
-			get { return _isVibrationActivated; }
-			set { Set(ref _isVibrationActivated, value); }
+			get { return LocalStorage.GetStorageValue<bool>("VibrationEnabled"); }
+			set { LocalStorage.SetStorageValue("VibrationEnabled", value); }
 		}
 
 		#endregion
@@ -39,6 +43,8 @@ namespace PokemonGo_UWP.ViewModels
 				GameClient.DoLogout();
 				// Navigate to login page
 				NavigationService.Navigate(typeof(MainPage));
+				// Remove all pages from the history
+				NavigationService.ClearHistory();
 			}, () => true)
 			);
 

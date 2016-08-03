@@ -237,8 +237,8 @@
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Opacity="1"
-                Canvas.ZIndex="1">
+                Opacity="0"
+                Canvas.ZIndex="0">
 
             <RelativePanel.Background>
                 <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_04.png"
@@ -248,7 +248,7 @@
 			<Button RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignTopWithPanel="True"
 					Style="{ThemeResource ImageButtonStyle}"
-                    Height="80"
+                    Height="80" Command="{Binding SettingsCommand}"
                     RelativePanel.AlignHorizontalCenterWithPanel="True"
                     RelativePanel.AlignVerticalCenterWithPanel="True"
                     x:Name="SettingsButton">

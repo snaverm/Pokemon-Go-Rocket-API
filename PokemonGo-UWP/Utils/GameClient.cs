@@ -30,6 +30,7 @@ using InventoryItem = POGOProtos.Inventory.InventoryItem;
 using MapPokemon = POGOProtos.Map.Pokemon.MapPokemon;
 using NearbyPokemon = POGOProtos.Map.Pokemon.NearbyPokemon;
 using UseItemCaptureResponse = POGOProtos.Networking.Responses.UseItemCaptureResponse;
+using Windows.Storage;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -101,17 +102,17 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
 
-        #endregion
+		#endregion
 
-        #region Game Logic
+		#region Game Logic
 
-        #region Login/Logout
+		#region Login/Logout
 
-        /// <summary>
-        ///     Sets things up if we didn't come from the login page
-        /// </summary>
-        /// <returns></returns>
-        public static async Task InitializeClient()
+		/// <summary>
+		///     Sets things up if we didn't come from the login page
+		/// </summary>
+		/// <returns></returns>
+		public static async Task InitializeClient()
         {
             ClientSettings = new Settings
             {                
@@ -414,8 +415,8 @@ namespace PokemonGo_UWP.Utils
             return await Client.Fort.SearchFort(pokestopId, latitude, longitude);
         }
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }
