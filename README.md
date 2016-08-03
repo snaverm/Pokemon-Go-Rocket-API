@@ -2,7 +2,11 @@
 
 Check [Wiki](https://github.com/ST-Apps/PoGo-UWP/wiki) for information about the project, installing instructions and more.
 
-# Social chat groups
+# Social
+
+[Reddit](https://www.reddit.com/r/PoGoUWP/)
+
+We have an official reddit made to discuss, talk and guide about PoGo. Make sure to follow the subreddit rules and you're good to go.
 
 We decided to have 3 social chat groups to make sure everyone can use their favorite service to disscuss. Feel free to join any of them, or all at once. You're not limited to just one.
 
@@ -26,7 +30,7 @@ A: PoGo is an UWP (Universal Windows Platform) client for Niantic's Pokemon™ G
 
 Q: Why PoGo?
 
-A: Because learning new things is always cool. Because it could be done. Because Microsoft rejected ST-Apps job application saying that they wasn't showing enough "passion", and this proves them wrong.
+A: Because learning new things is always cool. Because it could be done. Because Microsoft rejected ST-Apps job application saying that he wasn't showing enough "passion", and this proves them wrong.
  
 Q: Will this app feature 3D graphics and AR?
 
