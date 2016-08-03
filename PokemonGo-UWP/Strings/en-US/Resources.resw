@@ -136,7 +136,7 @@
     <value>LOGIN with PTC Account</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsable for anything.</value>
+    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
     <value>LOGOUT</value>
