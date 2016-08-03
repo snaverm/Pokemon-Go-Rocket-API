@@ -201,7 +201,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
-        public static ObservableCollection<NearbyPokemon> NearbyPokemons => GameClient.NearbyPokemons;
+        public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons => GameClient.NearbyPokemons;
 
         /// <summary>
         ///     Collection of Pokestops in the current area
