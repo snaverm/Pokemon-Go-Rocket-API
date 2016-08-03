@@ -343,8 +343,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <ProgressBar Value="{Binding PlayerStats.Experience}"
-                             Maximum="{Binding PlayerStats.NextLevelXp}"
+                <ProgressBar Value="{Binding ExperienceValue}"
                              Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                              Height="5"
                              Margin="0,-5,0,0"
