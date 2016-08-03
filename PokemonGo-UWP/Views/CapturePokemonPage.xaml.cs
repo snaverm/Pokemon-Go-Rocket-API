@@ -7,6 +7,7 @@ using PokemonGo.RocketAPI;
 using Windows.System.Threading;
 using System.Numerics;
 using System.Threading;
+using System.Collections.Generic;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,6 +28,54 @@ namespace PokemonGo_UWP.Views
                     HideInventoryDoubleAnimation.To = InventoryMenuTranslateTransform.Y = ActualHeight*3/2;
             };
         }
+
+        #region Item Throw Members
+
+        /// <summary>
+        /// The X Position of the item before initiaiating a throw. We use this
+        /// track of where we started so that we can revert back to there.
+        /// Note: There is probably a better way of doing this...
+        /// </summary>
+        private float InitItemX;
+        /// <summary>
+        /// The Y Position of the item before initiaiating a throw. We use this
+        /// track of where we started so that we can revert back to there.
+        /// Note: There is probably a better way of doing this...
+        /// </summary>
+        private float InitItemY;
+        /// <summary>
+        /// List of the past positions while finger is down for the throw.
+        /// We will only consider the most recent 300ms of finger down.
+        /// </summary>
+        private Queue<Tuple<Vector3, DateTime>> PastPositions = new Queue<Tuple<Vector3, DateTime>>();
+        /// <summary>
+        /// The position of the pokemon in world space
+        /// TODO: Load this from the pokemon and update with pokemon movement (ie. flying pokemon should move up and down) 
+        /// </summary>
+        private Vector3 PokemonPosition = new Vector3(0, -50, 100);
+        /// <summary>
+        /// The radius of the pokemon in world space, squared to avoid a sqrt later
+        /// TODO: Load this from the pokemon and update with pokemon movement (ie. flying pokemon should move up and down) 
+        /// </summary>
+        private float PokemonRadiusSq = 60 * 60;
+        /// <summary>
+        /// Current velocity of the item durring a throw in world space
+        /// </summary>
+        private Vector3 ThrowItemVelocity;
+        /// <summary>
+        /// Current position of the item durring a throw in world space
+        /// </summary>
+        private Vector3 ThrowItemPosition;
+        /// <summary>
+        /// Lock for the update loop
+        /// </summary>
+        private volatile Mutex UpdateLoopMutex = new Mutex();
+        /// <summary>
+        /// Time that the previous update executed
+        /// </summary>
+        private DateTime prevTime;
+
+        #endregion
 
         #region Overrides of Page
 
@@ -84,49 +133,134 @@ namespace PokemonGo_UWP.Views
             CatchSuccess.Begin();
         }
 
+
+        private void LaunchPokeballButton_ManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
+        {
+            Logger.Write("Manipulation Started...");
+
+            // Show the ball a little bigger when held
+            PokeballTransform.ScaleX *= 1.05f;
+            PokeballTransform.ScaleY *= 1.05f;
+
+            // Store this so that we can revert back to this poition
+            InitItemX = (float)PokeballTransform.TranslateX;
+            InitItemY = (float)PokeballTransform.TranslateY;
+
+            PastPositions.Clear();
+            PastPositions.Enqueue(new Tuple<Vector3, DateTime>(
+                new Vector3(InitItemX, InitItemY, 0),
+                DateTime.Now
+                ));
+        }
+
+        private void LaunchPokeballButton_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        {
+            PokeballTransform.TranslateX += e.Delta.Translation.X;
+            PokeballTransform.TranslateY += e.Delta.Translation.Y;
+
+            // Track where we are now to use in later calculation
+            PastPositions.Enqueue(new Tuple<Vector3, DateTime>(
+                new Vector3((float)PokeballTransform.TranslateX, (float)PokeballTransform.TranslateY, 0),
+                DateTime.Now
+            ));
+
+            // Remove anything from the queue that is more than 300ms old, we don't 
+            // want to track that far in the past
+            while ((PastPositions.Count > 1 && (PastPositions.Peek().Item2 - DateTime.Now).Milliseconds > 300))
+            {
+                PastPositions.Dequeue();
+            }
+        }
+
+        private void LaunchPokeballButton_ManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
+        {
+            Logger.Write("Manipulation Completed...");
+
+            // Disable the pokeball so that we can't try and throw it again
+            LaunchPokeballButton.IsEnabled = false;
+
+            var EndingX = (float)PokeballTransform.TranslateX;
+            var EndingY = (float)PokeballTransform.TranslateY;
+
+            // Pull out of the history where our finger was ~300ms ago
+            var start = PastPositions.Peek();
+            var startTime = start.Item2;
+            var startPos = start.Item1;
+
+            // TODO: Use PastPositions to determine if this is a curve ball, and if it is
+            // apply a force in the direction of the curve
+
+            // Get some details that we will need to do math with
+            var displacement = new Vector2(EndingX - startPos.X, EndingY - startPos.Y);
+            var distance = displacement.Length();
+            var throwDirection = Vector3.Normalize(new Vector3(displacement.X, displacement.Y, 100.0f));
+            var timeDelta = (DateTime.Now - startTime).Milliseconds;
+
+            // Set our initial position and velocity in world space
+            ThrowItemPosition = new Vector3(EndingX, EndingY, 0);
+            ThrowItemVelocity = ((distance * 100.0f) / timeDelta) * throwDirection;
+
+            /*
+            Logger.Write("Init throwDirection " + throwDirection.X + ", " + throwDirection.X + ", " + throwDirection.Z);
+            Logger.Write("Init TimeDelta " + timeDelta);
+            Logger.Write("Init Position " + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " + ThrowItemPosition.Z);
+            Logger.Write("Init Velocity " + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Y + ", " + ThrowItemVelocity.Z);
+            */
+
+            prevTime = DateTime.Now;
+            ThreadPoolTimer.CreatePeriodicTimer(PokeballUpdateLoop, TimeSpan.FromMilliseconds(20));
+        }
         #endregion
 
-        private float StartingX;
-        private float StartingY;
-        private DateTime StartingTime;
+        #region Item Throw Update
 
-        private float PokemonPosition;
-        private float PokemonRadius;
-
-        private Vector3 ThrowItemVelocity;
-        private Vector3 ThrowItemPosition;
-        private volatile Mutex UpdateLoopMutex = new Mutex();
-
-        private DateTime prevTime;
         private async void PokeballUpdateLoop(ThreadPoolTimer timer)
         {
             if (UpdateLoopMutex.WaitOne(0))
             {
                 DateTime curTime = DateTime.Now;
 
+                // timeDelta is the seconds since last update
                 float timeDelta = (curTime - prevTime).Milliseconds / 1000f;
+                
                 Vector3 gravity = new Vector3(0, 300f, 0);
 
+                // Apply basic Kinematics
                 ThrowItemPosition += (ThrowItemVelocity * timeDelta) + (.5f * gravity * timeDelta * timeDelta);
                 ThrowItemVelocity += (gravity * timeDelta);
 
+                /*
                 Logger.Write("Position" + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " + ThrowItemPosition.Z);
                 Logger.Write("Velocity" + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Y + ", " + ThrowItemVelocity.Z);
+                */
 
                 prevTime = curTime;
 
-                var translateX = ThrowItemPosition.X;
-                var translateY = ThrowItemPosition.Y + (ThrowItemPosition.Z * 50.0f);
-                var scaleX = Math.Max(1.0f - ThrowItemPosition.Z, 0.2f);
+                // Shotty attempt at converting from world space to screen space without a matrix
+                var translateX = ThrowItemPosition.X * Math.Max(1.0f - (ThrowItemPosition.Z / 400.0f), 0.0f);
+                var translateY = ThrowItemPosition.Y - (ThrowItemPosition.Z);
+                var scaleX = Math.Max(1.0f - (ThrowItemPosition.Z / 200.0f), 0.0f);
                 var scaleY = scaleX;
+                
                 var pokeballStopped = false;
+                var pokemonHit = false;
 
-                if (ThrowItemPosition.Y > -50)
+                if (Vector3.DistanceSquared(PokemonPosition, ThrowItemPosition) < PokemonRadiusSq)
                 {
+                    // We hit the pokemon!
+                    pokeballStopped = true;
+                    pokemonHit = true;
+                    timer.Cancel();
+                    Logger.Write("Hit Pokemon! " + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " + ThrowItemPosition.Z);
+                }
+                else if (ThrowItemPosition.Y > 50)
+                {
+                    // We missed the pokemon...
                     timer.Cancel();
                     pokeballStopped = true;
+                    Logger.Write("Missed Pokemon! " + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " + ThrowItemPosition.Z);
+                    // TODO: We need to use up a pokeball on the missed throw
                 }
-
 
                 UpdateLoopMutex.ReleaseMutex();
 
@@ -136,49 +270,26 @@ namespace PokemonGo_UWP.Views
                     PokeballTransform.TranslateY = translateY;
                     PokeballTransform.ScaleX = scaleX;
                     PokeballTransform.ScaleY = scaleY;
-                    if(pokeballStopped) ViewModel.UseSelectedCaptureItem.Execute();
+                    if (pokeballStopped)
+                    {
+                        if (pokemonHit)
+                        {
+                            ViewModel.UseSelectedCaptureItem.Execute();
+                        }
+                        else
+                        {
+                            PokeballTransform.TranslateX = InitItemX;
+                            PokeballTransform.TranslateY = InitItemY;
+                            PokeballTransform.ScaleX = 1;
+                            PokeballTransform.ScaleY = 1;
+                            LaunchPokeballButton.IsEnabled = true;
+                        }
+                    }
                 });
             }
         }
-                
-        private void LaunchPokeballButton_ManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
-        {
-            Logger.Write("Manipulation Started...");
-            PokeballTransform.ScaleX *= 1.05f;
-            PokeballTransform.ScaleY *= 1.05f;
-            StartingX = (float)PokeballTransform.TranslateX;
-            StartingY = (float)PokeballTransform.TranslateY;
-            StartingTime = DateTime.Now;
-        }
 
-        private void LaunchPokeballButton_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
-        {
-            Logger.Write("Manipulation Delta...");
-            PokeballTransform.TranslateX += e.Delta.Translation.X;
-            PokeballTransform.TranslateY += e.Delta.Translation.Y;
-        }
+        #endregion
 
-        private void LaunchPokeballButton_ManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
-        {
-            Logger.Write("Manipulation Completed...");
-
-            var EndingX = (float)PokeballTransform.TranslateX;
-            var EndingY = (float)PokeballTransform.TranslateY;
-
-            var displacement = new Vector2(StartingX - EndingX, StartingY - EndingY);
-            var distance = -1 * displacement.Length();
-            var throwDirection = Vector3.Normalize(new Vector3(displacement.X, displacement.Y, 1.0f));
-            var speed = 3200000.0f / (StartingTime - DateTime.Now).Milliseconds;
-            prevTime = DateTime.Now;
-
-            ThrowItemPosition = new Vector3(EndingX, EndingY, 0);
-            ThrowItemVelocity = (speed / distance) * throwDirection;
-            //ThrowItemVelocity.Z *= 2;
-
-            Logger.Write("Init Position" + ThrowItemPosition.X + ", " + ThrowItemPosition.X + ", " + ThrowItemPosition.Z);
-            Logger.Write("Init Velocity" + ThrowItemVelocity.X + ", " + ThrowItemVelocity.X + ", " + ThrowItemVelocity.Z);
-
-            ThreadPoolTimer.CreatePeriodicTimer(PokeballUpdateLoop, TimeSpan.FromMilliseconds(20));
-        }
     }
 }
