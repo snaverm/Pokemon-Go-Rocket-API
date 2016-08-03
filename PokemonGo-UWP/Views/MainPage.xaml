@@ -56,7 +56,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock
-                    Text="To login to PTC server you'll need to insert your username and password in this app. If you don't trust it, please, close it before going on. We are not responsable for anythink."
+                    Text="To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsable for anything."
                     Style="{StaticResource TextNormal}"
                     TextAlignment="Center"
                     Margin="15,0,15,20" />
