@@ -404,7 +404,7 @@
                                  Opacity="0.5" />
             </Border.Background>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding CurrentPokemon.PokemonId}"
+                <TextBlock Text="{Binding CurrentPokemon.Name}"
                            Foreground="White" />
                 <TextBlock Text="/ CP"
                            Margin="6,0"

@@ -321,6 +321,7 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\en-US\Pokemon.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -336,6 +337,7 @@
     <Compile Include="Utils\GameClient.cs" />
     <Compile Include="Utils\MessageDialogExtensions.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
+    <Compile Include="Utils\Resources.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\SettingsService.cs" />
     <Compile Include="Utils\UpdateManager.cs" />
