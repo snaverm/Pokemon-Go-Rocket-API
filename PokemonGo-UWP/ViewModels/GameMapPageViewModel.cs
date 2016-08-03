@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
+using Windows.Foundation.Metadata;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Entities;
@@ -80,6 +83,12 @@ namespace PokemonGo_UWP.ViewModels
                 PlayerStats = tmpStats;
                 RaisePropertyChanged(nameof(ExperienceValue));
             }
+            // Setup vibration and sound
+            if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice") && _vibrationDevice == null)
+            {
+                _vibrationDevice = VibrationDevice.GetDefault();
+            }
+            GameClient.MapPokemonUpdated += GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
         }
 
@@ -102,6 +111,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
             args.Cancel = false;
+            GameClient.MapPokemonUpdated -= GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
         }
 
@@ -112,7 +122,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
-        private readonly VibrationDevice _vibrationDevice;
+        private VibrationDevice _vibrationDevice;
 
         /// <summary>
         ///     True if the phone can vibrate (e.g. the app is not in background)
@@ -138,6 +148,16 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Bindable Game Vars   
+
+        public ElementTheme CurrentTheme
+        {
+            get
+            {
+                // Set theme
+                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+                return currentTime > 7 && currentTime < 19 ? ElementTheme.Light : ElementTheme.Dark;
+            }
+        }
 
         public string CurrentVersion => GameClient.CurrentVersion;
 
@@ -188,26 +208,40 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public static ObservableCollection<FortDataWrapper> NearbyPokestops => GameClient.NearbyPokestops;
 
-		#endregion
+        #endregion
 
-		#region Game Logic
+        #region Game Logic
 
-		#region Settings
+        #region Settings
 
-		private DelegateCommand _openSettingsCommand;
+        private DelegateCommand _openSettingsCommand;
 
-		public DelegateCommand SettingsCommand => _openSettingsCommand ?? (
-			_openSettingsCommand = new DelegateCommand(() =>
-			{
-				// Navigate back
-				NavigationService.Navigate(typeof(SettingsPage));
-			}, () => true)
-			);
+        public DelegateCommand SettingsCommand => _openSettingsCommand ?? (
+            _openSettingsCommand = new DelegateCommand(() =>
+            {
+                // Navigate back
+                NavigationService.Navigate(typeof(SettingsPage));
+            }, () => true)
+            );
 
+        #endregion
 
-		#endregion
+        #region Notify
 
-		#endregion
+        /// <summary>
+        /// Vibrates and/or plays a sound when new pokemons are in the area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private async void GameClientOnMapPokemonUpdated(object sender, EventArgs eventArgs)
+        {
+            _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
+            await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
+        }
 
-	}
+        #endregion
+
+        #endregion
+
+    }
 }
