@@ -202,6 +202,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="nearby"
+                                           x:Uid="nearbyText"
                                            Grid.Row="0"
                                            FontSize="25"
                                            Foreground="Black"

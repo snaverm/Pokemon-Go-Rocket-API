@@ -106,7 +106,7 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
             _doPtcLoginCommand = new DelegateCommand(async () =>
             {
-                Busy.SetBusy(true, "Logging in...");
+                Busy.SetBusy(true, Resources.Translation.GetString("LoggingIn"));
                 try
                 {
                     var loginSuccess = await GameClient.DoPtcLogin(Username, Password);
