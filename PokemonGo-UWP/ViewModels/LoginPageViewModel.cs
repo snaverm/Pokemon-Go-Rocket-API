@@ -75,49 +75,25 @@ namespace PokemonGo_UWP.ViewModels
 
         public string CurrentVersion => GameClient.CurrentVersion;
 
-        public string Username
+        public string PtcUsername
         {
             get { return _username; }
             set
             {
                 Set(ref _username, value);
-                DoLoginCommand.RaiseCanExecuteChanged();
+                DoPtcLoginCommand.RaiseCanExecuteChanged();
+                DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public string Password
+        public string PtcPassword
         {
             get { return _password; }
             set
             {
                 Set(ref _password, value);
-                DoLoginCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public ObservableCollection<string> LoginTypes => new ObservableCollection<string>
-        {
-            "PTC",
-            "Google"
-        };
-
-        public string _selectedLoginType;
-        
-        public string SelectedLoginType
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_selectedLoginType))
-                {
-                    SelectedLoginType = LoginTypes.First();
-                }
-
-                return _selectedLoginType;
-            }
-            set
-            {
-                Set(ref _selectedLoginType, value);
-                DoLoginCommand.RaiseCanExecuteChanged();
+                DoPtcLoginCommand.RaiseCanExecuteChanged();
+                DoGoogleLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -125,24 +101,15 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Logic        
 
-        private DelegateCommand _doLoginCommand;
+        private DelegateCommand _doPtcLoginCommand;
 
-        public DelegateCommand DoLoginCommand => _doLoginCommand ?? (
-            _doLoginCommand = new DelegateCommand(async () =>
+        public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
+            _doPtcLoginCommand = new DelegateCommand(async () =>
             {
                 Busy.SetBusy(true, "Logging in...");
                 try
                 {
-                    var loginSuccess = false;
-
-                    if (SelectedLoginType == "Google")
-                    {
-                        loginSuccess = await GameClient.DoGoogleLogin(Username, Password);
-                    }
-                    else
-                    {
-                        loginSuccess = await GameClient.DoPtcLogin(Username, Password);
-                    }
+                    var loginSuccess = await GameClient.DoPtcLogin(PtcUsername, PtcPassword);
 
                     if (!loginSuccess)
                     {
@@ -171,7 +138,7 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     Busy.SetBusy(false);
                 }
-            }, () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            }, () => !string.IsNullOrEmpty(PtcUsername) && !string.IsNullOrEmpty(PtcPassword))
             );
 
         private DelegateCommand _doGoogleLoginCommand;

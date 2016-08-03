@@ -44,6 +44,7 @@
                     <TextBlock Text="LOGIN with PTC" />
                 </Button>
                 <Button x:Name="googleButton"
+                        Command="{Binding DoGoogleLoginCommand}"
                         Style="{StaticResource ButtonSubmitRed}"
                         Margin="12,0,15,15">
                     <StackPanel Orientation="Horizontal" 
