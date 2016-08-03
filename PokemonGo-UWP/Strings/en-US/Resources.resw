@@ -162,4 +162,7 @@
   <data name="LoadingEncounter" xml:space="preserve">
     <value>Loading encounter with </value>
   </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Logging in...</value>
+  </data>
 </root>

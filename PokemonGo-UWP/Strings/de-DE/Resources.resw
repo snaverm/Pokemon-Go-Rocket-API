@@ -162,4 +162,7 @@
   <data name="LoadingEncounter" xml:space="preserve">
     <value>Lädt Begegnung mit </value>
   </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Anmelden...</value>
+  </data>
 </root>
