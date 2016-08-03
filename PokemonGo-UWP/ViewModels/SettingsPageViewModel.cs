@@ -15,8 +15,8 @@ namespace PokemonGo_UWP.ViewModels
 		/// </summary>
 		public bool IsMusicEnabled
 		{
-			get { return LocalStorage.GetStorageValue<bool>("MusicEnabled"); }
-			set { LocalStorage.SetStorageValue("MusicEnabled", value); }
+			get { return SettingsService.Instance.IsMusicEnabled; }
+			set { SettingsService.Instance.IsMusicEnabled = value; }
 		}
 
 		/// <summary>
@@ -24,8 +24,8 @@ namespace PokemonGo_UWP.ViewModels
 		/// </summary>
 		public bool IsVibrationEnabled
 		{
-			get { return LocalStorage.GetStorageValue<bool>("VibrationEnabled"); }
-			set { LocalStorage.SetStorageValue("VibrationEnabled", value); }
+			get { return SettingsService.Instance.IsVibrationEnabled; }
+			set { SettingsService.Instance.IsVibrationEnabled = value; }
 		}
 
 		#endregion
