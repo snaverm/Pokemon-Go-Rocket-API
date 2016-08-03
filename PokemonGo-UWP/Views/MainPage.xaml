@@ -36,7 +36,7 @@
 
                 <PasswordBox x:Name="passwordBox"
                              PlaceholderText="Password"
-                             Password="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Margin="15,20,15,20"
                              KeyDown="passwordBox_KeyDown" 
                              Style="{StaticResource PasswordBox}" />
