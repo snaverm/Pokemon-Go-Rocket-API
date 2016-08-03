@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
+using Windows.Foundation.Metadata;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Threading;
 using Windows.UI.Popups;
@@ -81,8 +83,14 @@ namespace PokemonGo_UWP.ViewModels
                 PlayerStats = tmpStats;
                 RaisePropertyChanged(nameof(ExperienceValue));
             }
+            // Setup vibration and sound
+            if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice") && _vibrationDevice == null)
+            {
+                _vibrationDevice = VibrationDevice.GetDefault();                
+            }
+            GameClient.MapPokemonUpdated += GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
-        }
+        }        
 
         /// <summary>
         /// Save state before navigating
@@ -103,6 +111,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
             args.Cancel = false;
+            GameClient.MapPokemonUpdated -= GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
         }
 
@@ -113,7 +122,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
-        private readonly VibrationDevice _vibrationDevice;
+        private VibrationDevice _vibrationDevice;
 
         /// <summary>
         ///     True if the phone can vibrate (e.g. the app is not in background)
@@ -218,9 +227,24 @@ namespace PokemonGo_UWP.ViewModels
             );
 
 
-        #endregion       
-
         #endregion
 
-    }
+        #region Notify
+
+        /// <summary>
+        /// Vibrates and/or plays a sound when new pokemons are in the area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private async void GameClientOnMapPokemonUpdated(object sender, EventArgs eventArgs)
+        {
+            _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
+            await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
+        }
+
+    #endregion
+
+    #endregion
+
+}
 }
