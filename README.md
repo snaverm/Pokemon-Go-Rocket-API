@@ -6,7 +6,7 @@ Check [Wiki](https://github.com/ST-Apps/PoGo-UWP/wiki) for information about the
 
 [Reddit](https://www.reddit.com/r/PoGoUWP/)
 
-We have an official reddit made to discuss, talk and guide about PoGo. Make sure to follow the subreddit rules and you're good to go.
+We have an official reddit made to discuss about PoGo. Make sure to follow the subreddit rules and you're good to go.
 
 We decided to have 3 social chat groups to make sure everyone can use their favorite service to disscuss. Feel free to join any of them, or all at once. You're not limited to just one.
 
@@ -30,11 +30,11 @@ A: PoGo is an UWP (Universal Windows Platform) client for Niantic's Pokemon™ G
 
 Q: Why PoGo?
 
-A: Because learning new things is always cool. Because it could be done. Because Microsoft rejected ST-Apps job application saying that he wasn't showing enough "passion", and this proves them wrong.
+A: Because learning new things is always cool. Because it could be done. Because Microsoft rejected my job application saying that I wasn't showing enough "passion", and this proves them wrong :)
  
 Q: Will this app feature 3D graphics and AR?
 
-A: No, for both of them. ST-Apps is just a single dev, He is not Niantic. If you feel that you could do this, clone the repo, add the changes and submit a pull request.
+A: No, for both of them, it just takes too much work. If you feel that you could do this, clone the repo, add the changes and submit a pull request.
 
 Q: Will this work on Windows Phone 8.1?
 
@@ -42,7 +42,7 @@ A: Not officialy. This is an open-source project, so people might fork it and po
 
 Q: Can I play with the same account that I'm using on my Android/iOS device?
 
-A: Yes.
+A: Yes, but **not at the same time or you may end up having a duplicated account** so, please, logout from the Android app before logging in PoGo.
 
 Q: Will it run on low-end devices?
 
