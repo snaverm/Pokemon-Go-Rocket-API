@@ -45,7 +45,8 @@ namespace PokemonGo_UWP.ViewModels
             if (parameter is bool)
             {
                 // First time navigating here, we need to initialize data updating but only if we have GPS access
-                await Dispatcher.DispatchAsync(async () => { 
+                await Dispatcher.DispatchAsync(async () =>
+                {
                     var accessStatus = await Geolocator.RequestAccessAsync();
                     switch (accessStatus)
                     {
@@ -63,8 +64,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state                
-                PlayerProfile = (PlayerData) suspensionState[nameof(PlayerProfile)];
-                PlayerStats = (PlayerStats) suspensionState[nameof(PlayerStats)];                
+                PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
+                PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
             }
             else
             {
@@ -77,6 +78,7 @@ namespace PokemonGo_UWP.ViewModels
                     // TODO: report level increase
                 }
                 PlayerStats = tmpStats;
+                RaisePropertyChanged(nameof(ExperienceValue));
             }
             await Task.CompletedTask;
         }
@@ -161,6 +163,9 @@ namespace PokemonGo_UWP.ViewModels
             get { return _playerStats; }
             set { Set(ref _playerStats, value); }
         }
+
+        public int ExperienceValue => _playerStats == null ? 0 : (int)(((double)_playerStats.Experience - _playerStats.PrevLevelXp) /
+            (_playerStats.NextLevelXp - _playerStats.PrevLevelXp) * 100);
 
         public InventoryDelta InventoryDelta
         {
