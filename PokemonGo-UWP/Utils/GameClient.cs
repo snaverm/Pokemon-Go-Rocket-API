@@ -108,9 +108,14 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
-        ///     Stores items in the current inventory
+        ///     Stores Items in the current inventory
         /// </summary>
         public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+
+        /// <summary>
+        ///     Stores Incubators in the current inventory
+        /// </summary>
+        public static ObservableCollection<ItemData> IncubatorsInventory { get; set; } = new ObservableCollection<ItemData>();
 
         /// <summary>
         /// Stores Pokemons in the current inventory
@@ -221,16 +226,6 @@ namespace PokemonGo_UWP.Utils
         private static DispatcherTimer _mapUpdateTimer;
 
         /// <summary>
-        /// Mutex to secure the parallel access to the data update
-        /// </summary>
-        private static readonly Mutex UpdateDataMutex = new Mutex();
-
-        /// <summary>
-        /// If a forced refresh caused an update we should skip the next update
-        /// </summary>
-        private static bool _skipNextUpdate;
-
-        /// <summary>
         /// We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
@@ -328,14 +323,6 @@ namespace PokemonGo_UWP.Utils
             Logger.Write("Finished updating map objects");
         }
 
-        public static async Task ForcedUpdateMapData()
-        {
-            if (!UpdateDataMutex.WaitOne(0)) return;
-            _skipNextUpdate = true;
-            await UpdateMapObjects();
-            UpdateDataMutex.ReleaseMutex();
-        }
-
         #endregion
 
         #region Map & Position
@@ -387,9 +374,16 @@ namespace PokemonGo_UWP.Utils
             var tmpItemsInventory = fullInventory.Where(item => item.InventoryItemData.Item != null).GroupBy(item => item.InventoryItemData.Item);
             ItemsInventory.Clear();
             foreach (var item in tmpItemsInventory)
-            {
+            {                               
                 ItemsInventory.Add(item.First().InventoryItemData.Item);
             }
+            // Update incbuators
+            //var tmpIncubatorsInventory = fullInventory.Where(item => item.InventoryItemData.EggIncubators != null).GroupBy(item => item.InventoryItemData.EggIncubators);
+            //IncubatorsInventory.Clear();
+            //foreach (var item in tmpIncubatorsInventory)
+            //{
+            //    IncubatorsInventory.Add(item.First().InventoryItemData.Item);
+            //}
             // Update Pokemons
             var tmpPokemonsInventory = fullInventory.Where(item => item.InventoryItemData.PokemonData != null).Select(itemt => itemt.InventoryItemData.PokemonData);
             PokemonsInventory.Clear();
