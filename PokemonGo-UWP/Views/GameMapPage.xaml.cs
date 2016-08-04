@@ -52,12 +52,21 @@ namespace PokemonGo_UWP.Views
             if (GameClient.Geoposition != null)
                 UpdateMap(GameClient.Geoposition);            
             SubscribeToCaptureEvents();
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            if (!(PokeMenuPanel.Opacity > 0)) return;
+            backRequestedEventArgs.Handled = true;
+            HidePokeMenuStoryboard.Begin();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
             UnsubscribeToCaptureEvents();
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
         }
 
         #endregion
