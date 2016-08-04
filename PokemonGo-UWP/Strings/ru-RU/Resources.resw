@@ -118,51 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
-    <value>cooldown</value>
+    <value>Вернитесь позже</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Getting GPS signal...</value>
+    <value>Получение GPS сигнала...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Getting user data...</value>
+    <value>Загрузка аккаунта...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
-    <value>GOOGLE</value>
+    <value>Гугл</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>inventory full</value>
+    <value>Инвентарь полон</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>LOGIN with PTC Account</value>
+    <value>Вход через PTC Аккаунт</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
     <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>LOGOUT</value>
+    <value>Выйти</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
     <value>nearby</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>out of range</value>
+    <value>Слишком далеко</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
-    <value>Password</value>
+    <value>Пароль</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Username/email</value>
+    <value>Логин/EMail</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
-    <value>XP</value>
+    <value>Опыт</value>
   </data>
   <data name="OKButton.Content" xml:space="preserve">
-    <value>OK</value>
+    <value>Ок</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
     <value>Loading encounter with </value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Logging in...</value>
+    <value>Авторизация...</value>
   </data>
 </root>
