@@ -18,6 +18,24 @@ using POGOProtos.Networking.Responses;
 
 namespace PokemonGo_UWP.Utils
 {
+
+    public class PokemonIdToPokemonNameConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return Resources.Pokemon.GetString(value.ToString());
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonIdToPokemonSpriteConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -265,6 +283,24 @@ namespace PokemonGo_UWP.Utils
         {
             var currentTime = int.Parse(DateTime.Now.ToString("HH"));
             return (currentTime > 7 && currentTime < 19) ? MapColorScheme.Light : MapColorScheme.Dark;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonDataToPokemonStaminaConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var pokemon = (PokemonData) value;
+            return (int) (pokemon.Stamina/(double) pokemon.StaminaMax)*100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

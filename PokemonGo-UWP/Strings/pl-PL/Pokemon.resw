@@ -385,10 +385,10 @@
     <value>Nidoqueen</value>
   </data>
   <data name="NidoranFemale" xml:space="preserve">
-    <value>Nidoran ♀</value>
+    <value>NidoranFemale</value>
   </data>
   <data name="NidoranMale" xml:space="preserve">
-    <value>Nidoran ♂</value>
+    <value>NidoranMale</value>
   </data>
   <data name="Nidorina" xml:space="preserve">
     <value>Nidorina</value>

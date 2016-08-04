@@ -299,6 +299,7 @@
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
                     Margin="24,0,0,128"
+                    Command="{Binding GotoPokemonInventoryPageCommand}"
                     x:Name="PokemonButton">
 
                 <Image Source="../Assets/Buttons/btn_empty.png"

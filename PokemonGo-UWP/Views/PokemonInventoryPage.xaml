@@ -1,0 +1,115 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.PokemonInventoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PokemonGo_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:PokemonInventoryPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <RelativePanel>
+
+        <RelativePanel.Background>
+            <ImageBrush ImageSource="../Assets/UI/panelBG.png"
+                        Stretch="Uniform" />
+        </RelativePanel.Background>
+
+        <StackPanel Margin="0,10,0,0"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    x:Name="PageSelector">
+            <TextBlock VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Foreground="#5a7878"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       Text="POKÉMON" />
+            <TextBlock VerticalAlignment="Center"
+                       TextAlignment="Center" />
+        </StackPanel>
+
+        <GridView RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.Below="PageSelector"
+                  ItemsSource="{Binding PokemonInventory}"
+                  SelectionMode="None">
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Horizontal"
+                              VerticalChildrenAlignment="Top"
+                              HorizontalAlignment="Center"
+                              MaximumRowsOrColumns="4" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="8,4,8,4"
+                                Width="100">
+                        <TextBlock TextAlignment="Center">
+                            <Run FontSize="12" Text="CP" /> <Run FontSize="16" Text="{Binding Cp}" />
+                        </TextBlock>
+                        <Image
+                            Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                            Stretch="Uniform"
+                            VerticalAlignment="Center"
+                            Width="48"
+                            Height="48"
+                            Margin="3,0" />
+                        <TextBlock Text="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   TextAlignment="Center" />
+
+                        <ProgressBar Value="{Binding Converter={StaticResource PokemonDataToPokemonStaminaConverter}}"
+                                     Margin="0,2,0,0"
+                                     Foreground="#6ee8b7"
+                                     IsIndeterminate="False"
+                                     HorizontalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <Button RelativePanel.AlignBottomWithPanel="True" 
+                RelativePanel.AlignRightWithPanel="True"
+                Style="{ThemeResource ImageButtonStyle}"
+                Height="{ThemeResource UiButtonSize}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,24,24"
+                Command="{Binding ReturnToGameScreen}">
+            <Grid>
+                <Image Source="../Assets/Buttons/btn_master.png"
+                           Stretch="Uniform"
+                       VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch" />
+                <TextBlock Text="CP"
+                           Foreground="#aef6b4"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Button>
+
+        <Button RelativePanel.AlignBottomWithPanel="True" 
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                Style="{ThemeResource ImageButtonStyle}"
+                Height="{ThemeResource UiButtonSize}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,24"
+                Command="{Binding ReturnToGameScreen}">
+            <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Stretch" />
+        </Button>
+    </RelativePanel>
+</Page>

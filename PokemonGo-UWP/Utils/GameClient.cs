@@ -12,6 +12,7 @@ using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
+using POGOProtos.Data;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Envelopes;
@@ -107,9 +108,14 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
-        ///     Stores the current inventory
+        ///     Stores items in the current inventory
         /// </summary>
         public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+
+        /// <summary>
+        /// Stores Pokemons in the current inventory
+        /// </summary>
+        public static ObservableCollection<PokemonData> PokemonsInventory { get; set; } = new ObservableCollection<PokemonData>();
 
         #endregion
 
@@ -372,11 +378,19 @@ namespace PokemonGo_UWP.Utils
         {
             // Get ALL the items
             var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
+            // Update items
             var tmpItemsInventory = fullInventory.Where(item => item.InventoryItemData.Item != null).GroupBy(item => item.InventoryItemData.Item);
             ItemsInventory.Clear();
             foreach (var item in tmpItemsInventory)
             {
                 ItemsInventory.Add(item.First().InventoryItemData.Item);
+            }
+            // Update Pokemons
+            var tmpPokemonsInventory = fullInventory.Where(item => item.InventoryItemData.PokemonData != null).Select(itemt => itemt.InventoryItemData.PokemonData);
+            PokemonsInventory.Clear();
+            foreach (var pokemon in tmpPokemonsInventory)
+            {
+                PokemonsInventory.Add(pokemon);
             }
         }
 
