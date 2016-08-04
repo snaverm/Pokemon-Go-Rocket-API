@@ -165,4 +165,43 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Anmelden...</value>
   </data>
+  <data name="Fleed" xml:space="preserve">
+    <value> ist geflohen</value>
+  </data>
+  <data name="GoogleError" xml:space="preserve">
+    <value>Google gab folgenden Fehler zurück: </value>
+  </data>
+  <data name="GoogleNotResponding" xml:space="preserve">
+    <value>Google antwortet nicht. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="NoGPSPermissions" xml:space="preserve">
+    <value>Wir benötigen Berechtigungen für GPS um das Spiel zu starten. Bitte aktiviere diese und versuche es erneut.</value>
+  </data>
+  <data name="PokemonRanAway" xml:space="preserve">
+    <value>Pokémon lief weg, Endschuldigung :(</value>
+  </data>
+  <data name="PTCDown" xml:space="preserve">
+    <value>PTC Anmeldung ist nicht möglich. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Irgendetwas lief schief und die App ist eventuell unstabil. Wollen Sie sich abmelden und es erneut versuchen?</value>
+  </data>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>Eine neue Version ist verfügbar:</value>
+  </data>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>Wollen Sie den Link öffnen?</value>
+  </data>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>Benutzername/E-Mail sind falsch oder die Server sind offline. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
 </root>

@@ -58,7 +58,7 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                         default:
                             Logger.Write("Error during GPS activation");
-                            await new MessageDialog("We need GPS permissions to run the game, please enable it and try again.").ShowAsyncQueue();
+                            await new MessageDialog(Utils.Resources.Translation.GetString("NoGPSPermissions")).ShowAsyncQueue();
                             BootStrapper.Current.Exit();
                             break;
                     }
