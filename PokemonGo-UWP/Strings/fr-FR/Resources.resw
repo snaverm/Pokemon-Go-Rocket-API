@@ -151,7 +151,7 @@
     <value>Mot de passe</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Identifiant/value>
+    <value>Identifiant</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
     <value>EXP</value>
