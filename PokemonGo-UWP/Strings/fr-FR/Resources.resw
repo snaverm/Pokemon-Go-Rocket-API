@@ -118,51 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
-    <value>Abklingzeit</value>
+    <value>Veuilez patienter</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>GPS Signal abrufen...</value>
+    <value>Optention du signal GPS...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Benutzerdaten abrufen...</value>
+    <value>Chargement des données de l'utilisateur...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
     <value>GOOGLE</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>Inventar voll</value>
+    <value>Inventaire complet</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>ANMELDEN mit PTC Account</value>
+    <value>Connexion avec PTC</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Um sich anzumelden müssen Benutzername/E-Mail und Ihr Passwort in dieser App eingefügt werden. Wenn Sie der App nicht vertauen, schließen Sie sie bitte. Wir übernehmen keine Haftung.</value>
+    <value>ATTENTION : pour vous connecter au serveur PTC vous aurez besoin d'entrer vos identifiant et mot de passe. Si vous n'avez pas confiance, fermez l'application. </value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>ABMELDEN</value>
+    <value>DECONNEXION</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>In der Nähe</value>
+    <value>Proche</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>Nicht erreichbar</value>
+    <value>Trop loin</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Mot de passe</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Benutzername/E-Mail</value>
+    <value>Identifiant/value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
-    <value>EP</value>
+    <value>EXP</value>
   </data>
   <data name="OKButton.Content" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
-    <value>Lädt Begegnung mit </value>
+    <value>Veuilez patienter</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Anmelden...</value>
+    <value>Connexion...</value>
   </data>
 </root>
