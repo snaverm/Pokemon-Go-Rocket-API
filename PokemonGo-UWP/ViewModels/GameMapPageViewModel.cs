@@ -45,7 +45,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             // Prevent from going back to other pages
             NavigationService.ClearHistory();
-            if (parameter is bool)
+            if (parameter is bool && mode != NavigationMode.Back)
             {
                 // First time navigating here, we need to initialize data updating but only if we have GPS access
                 await Dispatcher.DispatchAsync(async () =>

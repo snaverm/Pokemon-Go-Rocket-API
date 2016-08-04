@@ -170,6 +170,7 @@
               RelativePanel.AlignRightWithPanel="True"
               RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignTopWithPanel="True"
+              x:Name="NearbyPokemonContainer"
               Canvas.ZIndex="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

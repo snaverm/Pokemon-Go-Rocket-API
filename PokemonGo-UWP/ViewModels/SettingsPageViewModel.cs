@@ -59,7 +59,7 @@ namespace PokemonGo_UWP.ViewModels
 			_closeCommand = new DelegateCommand(() =>
 			{
 				// Navigate back
-				NavigationService.GoBack();
+				NavigationService.Navigate(typeof(GameMapPage));
 			}, () => true)
 			);
 
