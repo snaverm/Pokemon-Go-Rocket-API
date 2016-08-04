@@ -54,7 +54,7 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class ItemAwardToPokemonSpriteConverter : IValueConverter
+    public class ItemAwardToItemIconConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 

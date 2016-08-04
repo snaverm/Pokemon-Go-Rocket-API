@@ -23,7 +23,7 @@
             <utils:MapObjectToGeopointConverter x:Key="MapObjectToGeopointConverter" />
             <utils:ItemIdToItemIconConverter x:Key="ItemIdToItemIconConverter" />
             <utils:PokemonDataToVisibilityConverter x:Key="PokemonDataToVisibilityConverter" />
-            <utils:ItemAwardToPokemonSpriteConverter x:Key="ItemAwardToPokemonSpriteConverter" />
+            <utils:ItemAwardToItemIconConverter x:Key="ItemAwardToPokemonSpriteConverter" />
             <utils:NearbyPokemonDistanceToDistanceImageConverter x:Key="NearbyPokemonDistanceToDistanceImageConverter" />
             <utils:PokestopToIconConverter x:Key="PokestopToIconConverter" />
             <utils:CurrentTimeToMapColorSchemeConverter x:Key="CurrentTimeToMapColorSchemeConverter"/>
