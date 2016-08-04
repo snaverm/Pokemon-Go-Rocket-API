@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,5 +27,30 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
         }
+
+        #region Overrides of Page
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            if (!(SortMenuPanel.Opacity > 0)) return;
+            backRequestedEventArgs.Handled = true;
+            HideSortMenuStoryboard.Begin();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+        }
+
+        #endregion
+
     }
+
 }

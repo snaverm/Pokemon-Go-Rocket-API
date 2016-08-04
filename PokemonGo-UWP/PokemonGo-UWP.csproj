@@ -123,6 +123,12 @@
     <Content Include="Assets\Icons\Footprint_Mid.png" />
     <Content Include="Assets\Icons\Footprint_Near.png" />
     <Content Include="Assets\Icons\FrontPortraitRing.png" />
+    <Content Include="Assets\Icons\ic_combat.png" />
+    <Content Include="Assets\Icons\ic_date.png" />
+    <Content Include="Assets\Icons\ic_fav.png" />
+    <Content Include="Assets\Icons\ic_health.png" />
+    <Content Include="Assets\Icons\ic_name.png" />
+    <Content Include="Assets\Icons\ic_number.png" />
     <Content Include="Assets\Icons\pokestop_near.png" />
     <Content Include="Assets\Icons\pokestop_near_inactive.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
@@ -362,6 +368,7 @@
     <Compile Include="Utils\Resources.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\SettingsService.cs" />
+    <Compile Include="Utils\SortingModes.cs" />
     <Compile Include="Utils\UpdateManager.cs" />
     <Compile Include="ViewModels\CapturePokemonPageViewModel.cs" />
     <Compile Include="ViewModels\GameMapPageViewModel.cs" />

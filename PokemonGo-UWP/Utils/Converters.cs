@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.UI;
@@ -41,8 +42,7 @@ namespace PokemonGo_UWP.Utils
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            //return new Uri($"http://pokeapi.co/media/sprites/pokemon/{(int) value}.png");
+        {            
             return new Uri($"ms-appx:///Assets/Pokemons/{(int) value}.png");
         }
 
@@ -301,6 +301,41 @@ namespace PokemonGo_UWP.Utils
         {
             var pokemon = (PokemonData) value;
             return (int) (pokemon.Stamina/(double) pokemon.StaminaMax)*100;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonSortingModesToSortingModesListConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return Enum.GetValues(typeof(PokemonSortingModes)).Cast<PokemonSortingModes>().ToList();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonSortingModesToIconConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var sortingMode = (PokemonSortingModes) value;            
+            return new Uri($"ms-appx:///Assets/Icons/ic_{sortingMode.ToString().ToLowerInvariant()}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

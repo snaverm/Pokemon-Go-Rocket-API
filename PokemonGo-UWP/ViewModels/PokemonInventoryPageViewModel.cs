@@ -38,11 +38,13 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Recovering the state
                 PokemonInventory = (ObservableCollection<PokemonData>) suspensionState[nameof(PokemonInventory)];
+                CurrentPokemonSortingMode = (PokemonSortingModes) suspensionState[nameof(CurrentPokemonSortingMode)];
             }
             else if (parameter is bool)
             {
-                // Navigating from game page, so we need to actually load the inventory                
+                // Navigating from game page, so we need to actually load the inventory and set default sorting mode             
                 PokemonInventory.AddRange(GameClient.PokemonsInventory);
+                CurrentPokemonSortingMode = PokemonSortingModes.Combat;
             }
             await Task.CompletedTask;
         }
@@ -58,6 +60,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspending)
             {
                 suspensionState[nameof(PokemonInventory)] = PokemonInventory;
+                suspensionState[nameof(CurrentPokemonSortingMode)] = CurrentPokemonSortingMode;
             }
             await Task.CompletedTask;
         }
@@ -70,12 +73,35 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Game Management Vars
+
+        /// <summary>
+        ///     Sorting mode for current Pokemon view
+        /// </summary>
+        private PokemonSortingModes _currentPokemonSortingMode;
+
+        #endregion
+
         #region Bindable Game Vars
+
+        /// <summary>
+        ///     Sorting mode for current Pokemon view
+        /// </summary>
+        public PokemonSortingModes CurrentPokemonSortingMode
+        {
+            get { return _currentPokemonSortingMode; }
+            set
+            {
+                Set(ref _currentPokemonSortingMode, value);
+                // When this changes we need to sort the collection again     
+                UpdateSorting();           
+            }
+        }
 
         /// <summary>
         /// Reference to Pokemon inventory
         /// </summary>
-        public ObservableCollection<PokemonData> PokemonInventory {get; private set;} = new ObservableCollection<PokemonData>();
+        public ObservableCollection<PokemonData> PokemonInventory { get; private set; } = new ObservableCollection<PokemonData>();
 
         #endregion
 
@@ -88,52 +114,44 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Going back to map page
         /// </summary>
-        public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
-            _returnToGameScreen = new DelegateCommand(() =>
-            {                
-                NavigationService.Navigate(typeof(GameMapPage));
-            }, () => true)
-            );
+        public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (_returnToGameScreen = new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
 
         #endregion
 
         #region Pokemon Inventory Handling
 
-        private DelegateCommand _sortByCpCommand;
-
-        public DelegateCommand SortByCpCommand => _sortByCpCommand ?? (
-            _sortByCpCommand = new DelegateCommand(() =>
+        private void UpdateSorting()
+        {
+            switch (CurrentPokemonSortingMode)
             {
-                PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.Cp));
-            }, () => true));
-
-        private DelegateCommand _sortByNumberCommand;
-
-        public DelegateCommand SortByNumberCommand => _sortByNumberCommand ?? (
-            _sortByNumberCommand = new DelegateCommand(() =>
-            {
-                PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderBy(pokemon => pokemon.PokemonId));
-            }, () => true));
-
-        private DelegateCommand _sortByNameCommand;
-
-        public DelegateCommand SortByNameCommand => _sortByNameCommand ?? (
-            _sortByNameCommand = new DelegateCommand(() =>
-            {
-                PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderBy(pokemon => pokemon.PokemonId.ToString()));
-            }, () => true));
-
-        private DelegateCommand _sortByDateCommand;
-
-        public DelegateCommand SortByDateCommand => _sortByDateCommand ?? (
-            _sortByDateCommand = new DelegateCommand(() =>
-            {
-                PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.CreationTimeMs));
-            }, () => true));
+                case PokemonSortingModes.Date:
+                    PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.CreationTimeMs));
+                    break;
+                case PokemonSortingModes.Fav:
+                    PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.Favorite));
+                    break;
+                case PokemonSortingModes.Number:
+                    PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderBy(pokemon => pokemon.PokemonId));
+                    break;
+                case PokemonSortingModes.Health:
+                    PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.Stamina));
+                    break;
+                case PokemonSortingModes.Name:
+                    PokemonInventory =
+                        new ObservableCollection<PokemonData>(
+                            PokemonInventory.OrderBy(pokemon => pokemon.PokemonId.ToString()));
+                    break;
+                case PokemonSortingModes.Combat:
+                    PokemonInventory = new ObservableCollection<PokemonData>(PokemonInventory.OrderByDescending(pokemon => pokemon.Cp));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(CurrentPokemonSortingMode), CurrentPokemonSortingMode, null);
+            }            
+            RaisePropertyChanged(() => PokemonInventory);
+        }
 
         #endregion
 
         #endregion
-
     }
 }
