@@ -145,7 +145,7 @@
     <value>Incubatore Base Illimitato</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Aggiornamento inventario oggetti</value>
+    <value>Miglioramento Inventario Oggetti</value>
   </data>
   <data name="ItemLuckyEgg" xml:space="preserve">
     <value>Fortunuovo</value>
@@ -169,7 +169,7 @@
     <value>PokeBall</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Aggiornamento inventario Pokemon</value>
+    <value>Miglioramento Inventario Pokemon</value>
   </data>
   <data name="ItemPotion" xml:space="preserve">
     <value>Pozione</value>
