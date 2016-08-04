@@ -118,10 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
+<<<<<<< HEAD
     <value>Veuilez patienter</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
     <value>Optention du signal GPS...</value>
+=======
+    <value>cooldown</value>
+  </data>
+  <data name="GettingGPSSignal" xml:space="preserve">
+    <value>Détection du signal GPS...</value>
+>>>>>>> master
   </data>
   <data name="GettingUserData" xml:space="preserve">
     <value>Chargement des données de l'utilisateur...</value>
@@ -130,6 +137,7 @@
     <value>GOOGLE</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
+<<<<<<< HEAD
     <value>Inventaire complet</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
@@ -146,11 +154,39 @@
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
     <value>Trop loin</value>
+=======
+    <value>inventaire complet</value>
+  </data>
+  <data name="LoadingEncounter" xml:space="preserve">
+    <value>Chargement du combat avec </value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Connexion en cours</value>
+  </data>
+  <data name="loginButton.Text" xml:space="preserve">
+    <value>Connexion avec un compte PTC</value>
+  </data>
+  <data name="loginInfoText.Text" xml:space="preserve">
+    <value>Vous devez entrer votre nom d'utilisateur/email et votre mot de passe pour vous connecter dans cette application. Veuillez quitter cette application si vous ne lui faites pas confiance. Nous ne sommes pas responsable en cas de problème.</value>
+  </data>
+  <data name="logoutText.Text" xml:space="preserve">
+    <value>Fermer la session</value>
+  </data>
+  <data name="nearbyText.Text" xml:space="preserve">
+    <value>proche</value>
+  </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OutOfRangeText.Text" xml:space="preserve">
+    <value>hors de portée</value>
+>>>>>>> master
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
+<<<<<<< HEAD
     <value>Identifiant</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
@@ -164,5 +200,11 @@
   </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Connexion...</value>
+=======
+    <value>Nom d'utilisateur/Email</value>
+  </data>
+  <data name="XPText.Text" xml:space="preserve">
+    <value>XP</value>
+>>>>>>> master
   </data>
 </root>
