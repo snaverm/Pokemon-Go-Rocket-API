@@ -12,12 +12,9 @@ namespace PokemonGo.RocketAPI.Exceptions
         }
         public HttpResponseMessage LoginResponse { get; private set; }
 
-        public string LoginResponseContentString
+        public async Task<string> GetLoginResponseContentAsString()
         {
-            get
-            {
-                return Task.Run(async () => await this.LoginResponse.Content.ReadAsStringAsync()).Result;
-            }
+            return await this.LoginResponse.Content.ReadAsStringAsync();
         }
     }
 }
