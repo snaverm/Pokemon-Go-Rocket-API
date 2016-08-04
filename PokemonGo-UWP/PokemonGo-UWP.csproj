@@ -369,6 +369,10 @@
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\ExceptionHandler.cs" />
     <Compile Include="Utils\GameClient.cs" />
+    <Compile Include="Utils\Maps\BaseHttpTileSource.cs" />
+    <Compile Include="Utils\Maps\ITileSource.cs" />
+    <Compile Include="Utils\Maps\MapBoxMapSource.cs" />
+    <Compile Include="Utils\Maps\OpenStreetMapSource.cs" />
     <Compile Include="Utils\MessageDialogExtensions.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
     <Compile Include="Utils\Resources.cs" />

@@ -10,6 +10,7 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
+using PokemonGo_UWP.Utils.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,10 @@ namespace PokemonGo_UWP.Views
             // Setup nearby translation
             Loaded += (s, e) =>
             {
+
+                GameMapControl.TileSources.Clear();
+                GameMapControl.TileSources.Add(new MapTileSource(new MapBoxMapSource().TileSource) {AllowOverstretch = true, IsFadingEnabled = true});
+
                 ShowNearbyModalAnimation.From =
                     HideNearbyModalAnimation.To = NearbyPokemonModal.ActualHeight;
                 HideNearbyModalAnimation.Completed += (ss, ee) =>

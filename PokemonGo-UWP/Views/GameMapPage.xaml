@@ -106,13 +106,14 @@
     <RelativePanel>
 
         <maps:MapControl BusinessLandmarksVisible="False"
-                         LandmarksVisible="False"
+                         LandmarksVisible="False"                         
                          ColorScheme="{ThemeResource MapColorScheme}"
                          DesiredPitch="50"
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False"
                          TransitFeaturesVisible="False"
                          ZoomLevel="20"
+                         Style="None"
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignBottomWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
@@ -425,9 +426,13 @@
                     Padding="8,8,0,8"                    
                     Height="60">
 
-				<Border CornerRadius="8,0,0,8"                        
-                        Background="Gray"
+				<Border CornerRadius="8,0,0,8"                                                
                         Tapped="ToggleNearbyPokemonModal">
+                    
+                    <Border.Background>
+                        <SolidColorBrush Color="White"
+                                         Opacity="0.7"/>
+                    </Border.Background>
 
 					<Grid HorizontalAlignment="Stretch">
 						<Grid.ColumnDefinitions>

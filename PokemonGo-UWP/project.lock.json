@@ -2246,6 +2246,40 @@
           "lib/uap10.0/Template10Library.dll": {}
         }
       },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
+      },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
         "compile": {
           "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
@@ -4582,6 +4616,29 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
@@ -6961,6 +7018,29 @@
           "lib/uap10.0/Template10Library.dll": {}
         }
       },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
         "compile": {
           "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
@@ -9306,6 +9386,29 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
@@ -11694,6 +11797,29 @@
           "lib/uap10.0/Template10Library.dll": {}
         }
       },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
         "compile": {
           "lib/uap10.0/WinRTXamlToolkit.Controls.Gauge.dll": {}
@@ -14039,6 +14165,29 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
@@ -16425,6 +16574,29 @@
         },
         "runtime": {
           "lib/uap10.0/Template10Library.dll": {}
+        }
+      },
+      "UniversalMapControl/0.3.36": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.17.0"
+        },
+        "compile": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/UniversalMapControl.dll": {}
+        }
+      },
+      "Win2D.uwp/1.17.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
@@ -22862,6 +23034,32 @@
         "lib/uap10.0/Template10Library/Themes/Resizer.xaml"
       ]
     },
+    "UniversalMapControl/0.3.36": {
+      "sha512": "lI2hF/AdRLPzicDbnBvWh/72tFEWvGhgAYtdxHki1ow0Ps+gxlsVj21EJ+foGKZXe9VCumzZHmn63abdaDAiAg==",
+      "type": "package",
+      "files": [
+        "UniversalMapControl.0.3.36.nupkg.sha512",
+        "UniversalMapControl.nuspec",
+        "lib/netcore45/UniversalMapControl.dll"
+      ]
+    },
+    "Win2D.uwp/1.17.0": {
+      "sha512": "G5rG8c4dBX4Aq1RKzjvmtjM3Q/us7GdzllyqF1rsiy65eQg3UE5Kc8R09ROSnHeptqf5l6W6GDZ7uJMKdHKP0Q==",
+      "type": "package",
+      "files": [
+        "Win2D.uwp.1.17.0.nupkg.sha512",
+        "Win2D.uwp.nuspec",
+        "Win2d.githash.txt",
+        "build/native/Win2D.uwp.targets",
+        "include/Microsoft.Graphics.Canvas.h",
+        "include/Microsoft.Graphics.Canvas.native.h",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
+        "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
+      ]
+    },
     "WinRTXamlToolkit.Controls.Gauge.UWP/2.0.0": {
       "sha512": "xL+bvFJkIctSD1YnwnJkweMBJjXaxi1lt24EZrQ9x+wQzpcDzZgJ3jzb0zz3tSWsXsIZkOrEe0xsf0M1eY7Tnw==",
       "type": "package",
@@ -22916,6 +23114,7 @@
       "Newtonsoft.Json >= 9.0.1",
       "Octokit >= 0.21.1",
       "Template10 >= 1.1.12-preview-160712",
+      "UniversalMapControl >= 0.3.36",
       "WinRTXamlToolkit.Controls.Gauge.UWP >= 2.0.0"
     ],
     "UAP,Version=v10.0": []

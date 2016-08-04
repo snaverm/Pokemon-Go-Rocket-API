@@ -182,7 +182,7 @@ namespace PokemonGo_UWP.ViewModels
         ///     Going back to map page
         /// </summary>
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
-            _returnToGameScreen = new DelegateCommand(async () =>
+            _returnToGameScreen = new DelegateCommand(() =>
             {
                 NavigationService.Navigate(typeof(GameMapPage));
             }, () => true)
