@@ -235,8 +235,10 @@ namespace PokemonGo_UWP.ViewModels
         /// <param name="eventArgs"></param>
         private async void GameClientOnMapPokemonUpdated(object sender, EventArgs eventArgs)
         {
-            _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
-            await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
+            if (SettingsService.Instance.IsVibrationEnabled)
+                _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
+            if (SettingsService.Instance.IsMusicEnabled)
+                await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
         }
 
         #endregion
