@@ -1,6 +1,6 @@
-﻿using Windows.Devices.Geolocation;
+﻿using System.ComponentModel;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
-
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using POGOProtos.Enums;
@@ -10,15 +10,28 @@ using Template10.Mvvm;
 
 namespace PokemonGo_UWP.Entities
 {
-    public class MapPokemonWrapper
+    public class MapPokemonWrapper : IUpdatable<MapPokemon>, INotifyPropertyChanged
     {
-        private readonly MapPokemon _mapPokemon;
+        private MapPokemon _mapPokemon;
 
         public MapPokemonWrapper(MapPokemon mapPokemon)
         {
             _mapPokemon = mapPokemon;
             Geoposition =
-                new Geopoint(new BasicGeoposition {Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude});
+                new Geopoint(new BasicGeoposition { Latitude = _mapPokemon.Latitude, Longitude = _mapPokemon.Longitude });
+        }
+
+        public void Update(MapPokemon update)
+        {
+            _mapPokemon = update;
+
+            OnPropertyChanged(nameof(PokemonId));
+            OnPropertyChanged(nameof(EncounterId));
+            OnPropertyChanged(nameof(ExpirationTimestampMs));
+            OnPropertyChanged(nameof(SpawnpointId));
+            OnPropertyChanged(nameof(Geoposition));
+            OnPropertyChanged(nameof(Latitude));
+            OnPropertyChanged(nameof(Longitude));
         }
 
         /// <summary>
@@ -66,6 +79,17 @@ namespace PokemonGo_UWP.Entities
             {
                 return Resources.Pokemon.GetString(PokemonId.ToString());
             }
+        }
+
+        #endregion
+
+		#region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

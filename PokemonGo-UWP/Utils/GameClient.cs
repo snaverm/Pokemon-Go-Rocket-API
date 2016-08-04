@@ -100,7 +100,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
-        public static ObservableCollection<NearbyPokemon> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemon>();
+        public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemonWrapper>();
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -294,37 +294,32 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         private static async Task UpdateMapObjects()
         {
-            // Get all map objects from server            
+            // Get all map objects from server
             var mapObjects = (await GetMapObjects(Geoposition)).Item1;
-            // Replace data with the new ones                                  
-            var catchableTmp = new List<MapPokemon>(mapObjects.MapCells.SelectMany(i => i.CatchablePokemons));
-            Logger.Write($"Found {catchableTmp.Count} catchable pokemons");
-            if (catchableTmp.Count != CatchablePokemons.Count)
+
+            // update catchable pokemons
+            var newCatchablePokemons = mapObjects.MapCells.SelectMany(x => x.CatchablePokemons).ToArray();
+            Logger.Write($"Found {newCatchablePokemons.Length} catchable pokemons");
+            if (newCatchablePokemons.Length != CatchablePokemons.Count)
             {
                 MapPokemonUpdated?.Invoke(null, null);
             }
-            CatchablePokemons.Clear();
-            foreach (var pokemon in catchableTmp)
-            {
-                CatchablePokemons.Add(new MapPokemonWrapper(pokemon));
-            }
-            var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
-            Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
-            NearbyPokemons.Clear();
-            foreach (var pokemon in nearbyTmp)
-            {
-                NearbyPokemons.Add(pokemon);
-            }
-            // Retrieves PokeStops but not Gyms
-            var pokeStopsTmp =
-                new List<FortData>(mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(i => i.Type == FortType.Checkpoint));
-            Logger.Write($"Found {pokeStopsTmp.Count} nearby PokeStops");
-            NearbyPokestops.Clear();
-            foreach (var pokestop in pokeStopsTmp)
-            {
-                NearbyPokestops.Add(new FortDataWrapper(pokestop));
-            }
+            CatchablePokemons.UpdateWith(newCatchablePokemons, x => new MapPokemonWrapper(x), (x, y) => x.EncounterId == y.EncounterId);
+
+            // update nearby pokemons
+            var newNearByPokemons = mapObjects.MapCells.SelectMany(x => x.NearbyPokemons).ToArray();
+            Logger.Write($"Found {newNearByPokemons.Length} nearby pokemons");
+            // for this collection the ordering is important, so we follow a slightly different update mechanism 
+            NearbyPokemons.UpdateByIndexWith(newNearByPokemons, x => new NearbyPokemonWrapper(x));
+
+            // update poke stops on map (gyms are ignored for now)
+            var newPokeStops = mapObjects.MapCells
+                    .SelectMany(x => x.Forts)
+                    .Where(x => x.Type == FortType.Checkpoint)
+                    .ToArray();
+            Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
+            NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
+
             Logger.Write("Finished updating map objects");
         }
 
