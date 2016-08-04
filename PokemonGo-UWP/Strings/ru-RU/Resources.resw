@@ -127,7 +127,7 @@
     <value>Загрузка аккаунта...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
-    <value>Гугл</value>
+    <value>Google</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
     <value>Инвентарь полон</value>
