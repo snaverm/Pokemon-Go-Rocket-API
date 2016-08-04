@@ -139,7 +139,7 @@
 
 		<!--#region Header-->
 
-		<TextBlock x:Name="Header" Text="SETTINGS" Foreground="{StaticResource SettingsForegroundBrush}"
+		<TextBlock x:Name="Header" x:Uid="SettingsHeaderText" Text="SETTINGS" Foreground="{StaticResource SettingsForegroundBrush}"
 				   FontSize="{StaticResource SettingsHeaderFontSize}" Margin="0,10" 
 				   RelativePanel.AlignHorizontalCenterWithPanel="True" />
 		<Line x:Name="HeaderUnderline" X1="0" X2="155" Y1="0" Y2="0" RelativePanel.Below="Header" RelativePanel.AlignHorizontalCenterWith="Header" Stroke="{StaticResource SettingsForegroundBrush}" StrokeThickness="3" />
@@ -157,7 +157,7 @@
 			</ListView.ItemContainerStyle>
 			<ListViewItem HorizontalAlignment="Stretch">
 				<RelativePanel>
-					<TextBlock x:Name="MusicTitle" Text="Music" RelativePanel.AlignVerticalCenterWith="MusicCheckbox" Foreground="{StaticResource SettingsForegroundBrush}"
+                    <TextBlock x:Name="MusicTitle" x:Uid="MusicTitleText" Text="Music" RelativePanel.AlignVerticalCenterWith="MusicCheckbox" Foreground="{StaticResource SettingsForegroundBrush}"
 						   FontSize="{StaticResource SettingsFontSize}" FontWeight="SemiBold" VerticalAlignment="Center" />
 
 					<CheckBox x:Name="MusicCheckbox" IsChecked="{Binding IsMusicEnabled, Mode=TwoWay}" Style="{StaticResource SettingsCheckbox}" RelativePanel.AlignRightWithPanel="True" />
@@ -165,7 +165,7 @@
 			</ListViewItem>
 			<ListViewItem HorizontalAlignment="Stretch" Margin="0,10">
 				<RelativePanel>
-					<TextBlock x:Name="VibrationTitle" Text="Vibration" RelativePanel.AlignVerticalCenterWith="VibrationCheckbox" Foreground="{StaticResource SettingsForegroundBrush}"
+                    <TextBlock x:Name="VibrationTitle" x:Uid="VibrationTitleText" Text="Vibration" RelativePanel.AlignVerticalCenterWith="VibrationCheckbox" Foreground="{StaticResource SettingsForegroundBrush}"
 						   FontSize="{StaticResource SettingsFontSize}" FontWeight="SemiBold" VerticalAlignment="Center" />
 
 					<CheckBox x:Name="VibrationCheckbox" IsChecked="{Binding IsVibrationEnabled, Mode=TwoWay}" Style="{StaticResource SettingsCheckbox}" RelativePanel.AlignRightWithPanel="True" />
@@ -193,7 +193,7 @@
 			</ListView.ItemContainerStyle>
 			<ListViewItem HorizontalAlignment="Stretch">
 				<RelativePanel>
-					<Button Content="Sign Out" Style="{StaticResource ActionButton}" 
+					<Button Content="Sign Out" x:Uid="SignOutButton" Style="{StaticResource ActionButton}" 
 							RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
 							Command="{Binding DoPtcLogoutCommand}"/>
 				</RelativePanel>

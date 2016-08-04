@@ -204,4 +204,22 @@
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
+  <data name="EggsText.Text" xml:space="preserve">
+    <value>EIER</value>
+  </data>
+  <data name="MusicTitleText.Text" xml:space="preserve">
+    <value>Musik</value>
+  </data>
+  <data name="PokemonText.Text" xml:space="preserve">
+    <value>POKÉMON</value>
+  </data>
+  <data name="SettingsHeaderText.Text" xml:space="preserve">
+    <value>EINSTELLUNGEN</value>
+  </data>
+  <data name="SignOutButton.Content" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="VibrationTitleText" xml:space="preserve">
+    <value>Vibration</value>
+  </data>
 </root>
