@@ -154,19 +154,19 @@
     <value>Usta Top</value>
   </data>
   <data name="ItemMaxPotion" xml:space="preserve">
-    <value>En Yüksek İksir</value>
+    <value>En İyi İksir</value>
   </data>
   <data name="ItemMaxRevive" xml:space="preserve">
-    <value>En yüksek Canlandırma</value>
+    <value>En İyi Canlandırma</value>
   </data>
   <data name="ItemNanabBerry" xml:space="preserve">
     <value>Nanab Meyve</value>
   </data>
   <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Oinap Meyve</value>
+    <value>Pinap Meyve</value>
   </data>
   <data name="ItemPokeBall" xml:space="preserve">
-    <value>Poke Ball</value>
+    <value>Poke Topu</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
     <value>Pokemon Depolama Alanını Yükseltme</value>
@@ -196,7 +196,7 @@
     <value>Bilinmeyen</value>
   </data>
   <data name="ItemWeparBerry" xml:space="preserve">
-    <value>Wepar Meyve</value>
+    <value>Wepar Berry</value>
   </data>
   <data name="ItemXAttack" xml:space="preserve">
     <value>X Saldırı</value>
