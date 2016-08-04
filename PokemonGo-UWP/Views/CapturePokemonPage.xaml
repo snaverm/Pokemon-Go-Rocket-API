@@ -202,7 +202,7 @@
                                         <SymbolIcon Symbol="Delete" />
                                     </Button>-->
 
-                                    <TextBlock Text="Missing item description, leave a feedback if you can provide it."
+                                    <TextBlock Text="{Binding Converter={StaticResource ItemToItemDescriptionConverter}}"
                                                TextWrapping="WrapWholeWords"
                                                FontFamily="../Assets/Fonts/Lato-Light.ttf#Lato"
                                                Foreground="#FF45686A"
