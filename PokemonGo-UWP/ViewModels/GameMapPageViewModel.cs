@@ -64,6 +64,8 @@ namespace PokemonGo_UWP.ViewModels
                     }
                 });
             }
+            // Restarts map timer
+            GameClient.ToggleUpdateTimer();
             if (suspensionState.Any())
             {
                 // Recovering the state                
@@ -111,6 +113,8 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
             args.Cancel = false;
+            // Stops map timer
+            GameClient.ToggleUpdateTimer(false);
             GameClient.MapPokemonUpdated -= GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
         }

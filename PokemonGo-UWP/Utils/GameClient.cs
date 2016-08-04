@@ -266,25 +266,30 @@ namespace PokemonGo_UWP.Utils
             };
             _mapUpdateTimer.Tick += async (s, e) =>
             {
-                if (!UpdateDataMutex.WaitOne(0)) return;
-                if (_skipNextUpdate)
-                {
-                    _skipNextUpdate = false;
-                }
-                else
-                {
-                    Logger.Write("Updating map");
-                    await UpdateMapObjects();
-                }
-
-                UpdateDataMutex.ReleaseMutex();
-            };
+                Logger.Write("Updating map");
+                await UpdateMapObjects();
+            };            
             // Update before starting timer            
             Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
             await UpdateMapObjects();
             await UpdateInventory();
-            _mapUpdateTimer.Start();
             Busy.SetBusy(false);
+        }
+
+        /// <summary>
+        /// Toggles the update timer based on the isEnabled value
+        /// </summary>
+        /// <param name="isEnabled"></param>
+        public static void ToggleUpdateTimer(bool isEnabled = true)
+        {
+            if (isEnabled)
+            {      
+                _mapUpdateTimer.Start();          
+            }
+            else
+            {
+                _mapUpdateTimer.Stop();
+            }
         }
 
         /// <summary>
