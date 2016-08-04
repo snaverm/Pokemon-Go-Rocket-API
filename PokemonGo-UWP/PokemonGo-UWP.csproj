@@ -322,6 +322,9 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\ru-RU\Resources.resw" />
+    <PRIResource Include="Strings\ru-RU\Pokemon.resw" />
+    <PRIResource Include="Strings\ru-RU\Items.resw" />
     <PRIResource Include="Strings\fr-FR\Resources.resw" />
     <PRIResource Include="Strings\fr-FR\Pokemon.resw" />
     <PRIResource Include="Strings\fr-FR\Items.resw" />
