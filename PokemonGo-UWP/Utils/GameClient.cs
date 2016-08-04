@@ -117,6 +117,11 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static ObservableCollection<PokemonData> PokemonsInventory { get; set; } = new ObservableCollection<PokemonData>();
 
+        /// <summary>
+        /// Stores Eggs in the current inventory
+        /// </summary>
+        public static ObservableCollection<PokemonData> EggsInventory { get; set; } = new ObservableCollection<PokemonData>();
+
         #endregion
 
         #region Game Logic
@@ -388,9 +393,13 @@ namespace PokemonGo_UWP.Utils
             // Update Pokemons
             var tmpPokemonsInventory = fullInventory.Where(item => item.InventoryItemData.PokemonData != null).Select(itemt => itemt.InventoryItemData.PokemonData);
             PokemonsInventory.Clear();
+            EggsInventory.Clear();
             foreach (var pokemon in tmpPokemonsInventory)
             {
-                PokemonsInventory.Add(pokemon);
+                if (pokemon.IsEgg)
+                    EggsInventory.Add(pokemon);
+                else
+                    PokemonsInventory.Add(pokemon);
             }
         }
 

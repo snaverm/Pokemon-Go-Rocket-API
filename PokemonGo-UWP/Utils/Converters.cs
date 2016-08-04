@@ -311,6 +311,25 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class EggDataToEggProgressConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var pokemon = (PokemonData)value;
+            return (int)(pokemon.EggKmWalkedStart / pokemon.EggKmWalkedTarget) * 100;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+
     public class PokemonSortingModesToSortingModesListConverter : IValueConverter
     {
         #region Implementation of IValueConverter

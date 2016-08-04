@@ -26,6 +26,12 @@ namespace PokemonGo_UWP.Views
         public PokemonInventoryPage()
         {
             this.InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                // TODO: Fix header alignment
+                //PokemonsPivotHeader.Width = EggsPivotHeader.Width = this.ActualWidth/2;
+            };
         }
 
         #region Overrides of Page

@@ -38,12 +38,14 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Recovering the state
                 PokemonInventory = (ObservableCollection<PokemonData>) suspensionState[nameof(PokemonInventory)];
+                EggsInventory = (ObservableCollection<PokemonData>)suspensionState[nameof(EggsInventory)];
                 CurrentPokemonSortingMode = (PokemonSortingModes) suspensionState[nameof(CurrentPokemonSortingMode)];
             }
             else if (parameter is bool)
             {
                 // Navigating from game page, so we need to actually load the inventory and set default sorting mode             
                 PokemonInventory.AddRange(GameClient.PokemonsInventory);
+                EggsInventory.AddRange(GameClient.EggsInventory);
                 CurrentPokemonSortingMode = PokemonSortingModes.Combat;
             }
             await Task.CompletedTask;
@@ -60,6 +62,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspending)
             {
                 suspensionState[nameof(PokemonInventory)] = PokemonInventory;
+                suspensionState[nameof(EggsInventory)] = EggsInventory;
                 suspensionState[nameof(CurrentPokemonSortingMode)] = CurrentPokemonSortingMode;
             }
             await Task.CompletedTask;
@@ -102,6 +105,11 @@ namespace PokemonGo_UWP.ViewModels
         /// Reference to Pokemon inventory
         /// </summary>
         public ObservableCollection<PokemonData> PokemonInventory { get; private set; } = new ObservableCollection<PokemonData>();
+
+        /// <summary>
+        /// Reference to Eggs inventory
+        /// </summary>
+        public ObservableCollection<PokemonData> EggsInventory { get; private set; } = new ObservableCollection<PokemonData>();
 
         #endregion
 
