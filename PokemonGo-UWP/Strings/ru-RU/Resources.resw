@@ -136,13 +136,13 @@
     <value>Вход через PTC Аккаунт</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
+    <value>Для входа в игру необходимо ввести ваш логин/EMail и пароль в этом приложении . Если вы не доверяете ему , пожалуйста , закройте его перед входом на сервер  . Мы не несем ответственности ни за что .</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
     <value>Выйти</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>nearby</value>
+    <value>Рядом</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
     <value>Слишком далеко</value>
@@ -164,5 +164,65 @@
   </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Авторизация...</value>
+  </data>
+  <data name="Fleed" xml:space="preserve">
+    <value> fleed</value>
+  </data>
+  <data name="GoogleError" xml:space="preserve">
+    <value>Google вернул ошибку: </value>
+  </data>
+  <data name="GoogleNotResponding" xml:space="preserve">
+    <value>Google не отвечает , пожалуйста, повторите попытку позже .</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Вход не выполнен. Пожалуйста попробуйте еще раз.</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NoGPSPermissions" xml:space="preserve">
+    <value>Нет доступа к GPS, пожалуйста включите и попробуйте еще раз.</value>
+  </data>
+  <data name="PokemonRanAway" xml:space="preserve">
+    <value>Покемон сбежал, сорри :(</value>
+  </data>
+  <data name="PTCDown" xml:space="preserve">
+    <value>проблемы в авторизации на PTC, пожалуйста попробуйте позже.</value>
+  </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Что-то пошло не так и теперь приложение может работать нестабильно . Вы хотите, выйти и попробовать еще раз?</value>
+  </data>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>Обновленная версия доступна на</value>
+  </data>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>Вы хотите посетить ссылку ?</value>
+  </data>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>Направельный логин/пароль или сервер  недоступен, пожалуйста, попробуйте еще раз .</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+    <data name="CPText.Text" xml:space="preserve">
+    <value>БМ</value>
+  </data>
+  <data name="EggsText.Text" xml:space="preserve">
+    <value>Яйца</value>
+  </data>
+  <data name="MusicTitleText.Text" xml:space="preserve">
+    <value>Музыка</value>
+  </data>
+  <data name="PokemonText.Text" xml:space="preserve">
+    <value>Покемон</value>
+  </data>
+  <data name="SettingsHeaderText.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SignOutButton.Content" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="VibrationTitleText" xml:space="preserve">
+    <value>Вибрация</value>
   </data>
 </root>
