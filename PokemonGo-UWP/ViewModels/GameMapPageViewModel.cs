@@ -44,7 +44,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             // Prevent from going back to other pages
-            NavigationService.ClearHistory();            
+            NavigationService.ClearHistory();
             if (parameter is bool)
             {
                 // First time navigating here, we need to initialize data updating but only if we have GPS access
@@ -86,11 +86,11 @@ namespace PokemonGo_UWP.ViewModels
             // Setup vibration and sound
             if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice") && _vibrationDevice == null)
             {
-                _vibrationDevice = VibrationDevice.GetDefault();                
+                _vibrationDevice = VibrationDevice.GetDefault();
             }
             GameClient.MapPokemonUpdated += GameClientOnMapPokemonUpdated;
             await Task.CompletedTask;
-        }        
+        }
 
         /// <summary>
         /// Save state before navigating
@@ -212,20 +212,17 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Logic
 
-        #region Logout
+        #region Settings
 
-        private DelegateCommand _doPtcLogoutCommand;
+        private DelegateCommand _openSettingsCommand;
 
-        public DelegateCommand DoPtcLogoutCommand => _doPtcLogoutCommand ?? (
-            _doPtcLogoutCommand = new DelegateCommand(() =>
+        public DelegateCommand SettingsCommand => _openSettingsCommand ?? (
+            _openSettingsCommand = new DelegateCommand(() =>
             {
-                // Clear stored token
-                GameClient.DoLogout();
-                // Navigate to login page
-                NavigationService.Navigate(typeof(MainPage));
+                // Navigate back
+                NavigationService.Navigate(typeof(SettingsPage));
             }, () => true)
             );
-
 
         #endregion
 
@@ -242,9 +239,9 @@ namespace PokemonGo_UWP.ViewModels
             await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
         }
 
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
-}
+    }
 }

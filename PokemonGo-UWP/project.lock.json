@@ -16460,8 +16460,9 @@
       ]
     },
     "HockeySDK.UWP/4.1.3": {
-      "sha512": "TlWuK1HomLUrqpUAzvBLIDj4tQhpYozlamJYZYhJe3v5a9Kn7gsGIvXJnOdZUidsvcfHfbrO46g8WwFEkGZgpQ==",
+      "sha512": "BRzV7TcYkw9Yzhd6ek/HAxSoEdnk3UVXPZ44GV7faCdS6IygGUeokEWQ8t0RUYxx47JyDdqH7KezZXbwfjhiYA==",
       "type": "package",
+      "path": "HockeySDK.UWP/4.1.3",
       "files": [
         "HockeySDK.UWP.4.1.3.nupkg.sha512",
         "HockeySDK.UWP.nuspec",
@@ -22844,8 +22845,9 @@
       ]
     },
     "Template10/1.1.12-preview-160712": {
-      "sha512": "u4NR7bSrzTW2f1V0N4QoU3SMjw2NBdnH/BhbfZ9xLAet1TGnVw9PAyfFtMHmYNTFjxgfdA3DxwHwv9NYoiGQMg==",
+      "sha512": "ZZmenDRyFeflPdGw58Pju52bypeXhnfqtp5Nqb2Qs8Ws9uOIBIaznk4vGvsHBB6LC2pYsxJzZ3OTSYvts1V6yA==",
       "type": "package",
+      "path": "Template10/1.1.12-preview-160712",
       "files": [
         "Template10.1.1.12-preview-160712.nupkg.sha512",
         "Template10.nuspec",
