@@ -89,21 +89,28 @@ namespace PokemonGo_UWP
                 await NavigationService.NavigateAsync(typeof(MainPage));
             }
 
-            // Check for updates
-            var latestVersionUri = await UpdateManager.IsUpdateAvailable();
-            if (latestVersionUri != null)
-            {                
-                var dialog = new MessageDialog(Utils.Resources.Translation.GetString("UpdatedVersion1") +
-                $"\n{latestVersionUri}\n" + Utils.Resources.Translation.GetString("UpdatedVersion2"));
+            // Check for updates (ignore resume)
+            if (startKind == StartKind.Launch)
+            {
+                var latestUpdateInfo = await UpdateManager.IsUpdateAvailable();
+                if (latestUpdateInfo != null)
+                {
+                    var dialog = new MessageDialog( string.Format(Utils.Resources.Translation.GetString("UpdatedVersion"), latestUpdateInfo.version, latestUpdateInfo.description));
 
-                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
-                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
-                dialog.DefaultCommandIndex = 0;
-                dialog.CancelCommandIndex = 1;
-                
-                var result = await dialog.ShowAsyncQueue();
-                if ((int) result.Id != 0) return;
-                await Launcher.LaunchUriAsync(new Uri(latestVersionUri));
+                    dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
+                    dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
+                    dialog.DefaultCommandIndex = 0;
+                    dialog.CancelCommandIndex = 1;
+
+                    var result = await dialog.ShowAsyncQueue();
+
+                    if ((int)result.Id != 0)
+                        return;
+
+                    //continue with execution because we need Busy page working (cannot work on splash screen)
+                    //result is irrelevant
+                    Task t1 = UpdateManager.InstallUpdate(latestUpdateInfo.release);
+                }
             }
             await Task.CompletedTask;
         }
