@@ -14,6 +14,7 @@ using System.IO;
 using Windows.Management.Deployment;
 using Windows.Storage.Streams;
 using System.Runtime.InteropServices;
+using Windows.UI.Popups;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -26,21 +27,25 @@ namespace PokemonGo_UWP.Utils
         /// Client to access GitHub
         /// </summary>
         private static readonly GitHubClient GitHubClient = new GitHubClient(new ProductHeaderValue("PoGo-UWP"));
+        private const string FILE_EXTENSION_APPXBUNDLE = ".appxbundle";
+        private const string FILE_EXTENSION_APPX = ".appx";
 
 
         /// <summary>
-        /// Describes
+        /// Describes update details
         /// </summary>
         public class UpdateInfo
         {
-            public UpdateInfo(string version, string url, Release release)
+            public UpdateInfo(string version, string url, string description, Release release)
             {
                 this.version = version;
                 this.url = url;
                 this.release = release;
+                this.description = description;
             }
             public string version;
             public string url;
+            public string description;
             public Release release;
         }
 
@@ -52,6 +57,9 @@ namespace PokemonGo_UWP.Utils
         {
             try
             {
+                //clean update folder on backgraound, dont bother with result - we are ready for collisions
+                Task t1 = CleanTemporaryUpdateFolderAsync();
+
                 var releases = await GitHubClient.Repository.Release.GetAll("ST-Apps", "PoGo-UWP");
                 Release latestRelease = null;
 
@@ -89,7 +97,7 @@ namespace PokemonGo_UWP.Utils
                        || (repoVersion.Major == currentVersion.Major && repoVersion.Minor == currentVersion.Minor && repoVersion.Build > currentVersion.Build)
                        )
                     {
-                        return new UpdateInfo(repoVersion.Major+"."+repoVersion.Minor+"."+repoVersion.Build, latestRelease.HtmlUrl, latestRelease);
+                        return new UpdateInfo(repoVersion.Major+"."+repoVersion.Minor+"."+repoVersion.Build, latestRelease.HtmlUrl, latestRelease.Body, latestRelease);
                     }
                 }
 
@@ -101,28 +109,31 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
-
+        /// <summary>
+        /// Try install update. If it cant be installed directly, redirect user to page with release
+        /// </summary>
+        /// <param name="release">release to which update</param>
+        /// <returns></returns>
         public static async Task InstallUpdate(Release release)
         {
             bool browserFallback = true;
 
 
-            /* This part of code is experimental and currently does not work - probably because .apps are not signed
-             
             ReleaseAsset mainAsset = null;
+            string updateError = "";
 
-            //if we have only 1 asset lets try to download and install it (we cant install frameworks)
+            //if we have some assets try to install them or fallback to browser link
             if (release.Assets.Count > 0)
             {
-                //TODO: we cant solve dependencies yet - for this we should at first download appx, extract AppxManifest, look into it and download them from somewhere
-                //List<ReleaseAsset> dependencies = new List<ReleaseAsset>();
-
                 var archAssets = FilterAssetsByArchitecture(release);
-                if (archAssets.Count == 1)
-                    mainAsset = archAssets[0];
+
+                //find bundle
+                mainAsset = archAssets.Where(asset => asset.Name.EndsWith(FILE_EXTENSION_APPXBUNDLE)).FirstOrDefault();
 
                 if (mainAsset != null)
                 {
+                    //only dependencies will stay
+                    archAssets.Remove(mainAsset);
 
                     try
                     {
@@ -130,70 +141,60 @@ namespace PokemonGo_UWP.Utils
                         Windows.Management.Deployment.PackageManager packageManager = new Windows.Management.Deployment.PackageManager();
 
                         StorageFile destinationFile = null;
+                        List<Uri> dependencies = new List<Uri>();
 
                         try
                         {
                             Uri uri = new Uri(mainAsset.BrowserDownloadUrl);
 
-                            Busy.SetBusy(true, Resources.Translation.GetString("DownloadingUpdate"));
+                            Busy.SetBusy(true, string.Format(Resources.Translation.GetString("UpdateDownloading"), release.TagName));
 
 
                             //Download dependencies
-                            List<Uri> dependencies = new List<Uri>();
-                            dependencies.Add(new Uri(@"https://github.com/ST-Apps/PoGo-UWP/blob/master/PokemonGo-UWP/AppPackages/PokemonGo-UWP_1.0.3.0_ARM_Debug_Test/Dependencies/" + Package.Current.Id.Architecture.ToString().ToLower() + @"/Microsoft.NET.CoreRuntime.1.0.appx?raw=true"));
-                            dependencies.Add(new Uri(@"https://github.com/ST-Apps/PoGo-UWP/blob/master/PokemonGo-UWP/AppPackages/PokemonGo-UWP_1.0.3.0_ARM_Debug_Test/Dependencies/" + Package.Current.Id.Architecture.ToString().ToLower() + @"/Microsoft.VCLibs." + Package.Current.Id.Architecture.ToString().ToLower() + @".Debug.14.00.appx?raw=true"));
-
-                            for (int i = 0; i < dependencies.Count; i++)
+                            foreach(var asset in archAssets)
                             {
-                                StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
-                                            i + ".appx", CreationCollisionOption.GenerateUniqueName);
-                                await DownloadFile(file, dependencies[i]);
+                                if (asset.Name.EndsWith(FILE_EXTENSION_APPX))
+                                {
+                                    StorageFile file = await GetTemporaryUpdateFileAsync(asset.Name);
+                                    await DownloadFile(file, new Uri(asset.BrowserDownloadUrl));
 
-                                dependencies[i] = new Uri(file.Path);
+                                    dependencies.Add(new Uri(file.Path));
+                                }
                             }
 
 
-                            destinationFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
-                                        mainAsset.Name, CreationCollisionOption.GenerateUniqueName);
+                            destinationFile = await GetTemporaryUpdateFileAsync(mainAsset.Name);
                             await DownloadFile(destinationFile, uri);
                             Busy.SetBusy(false);
-                            Busy.SetBusy(true, Resources.Translation.GetString("InstallingUpdate"));
+                            Busy.SetBusy(true, Resources.Translation.GetString("UpdateInstalling"));
 
-                            try
-                            {
-                                var result = await packageManager.UpdatePackageAsync(new Uri(destinationFile.Path),
-                                            dependencies,
-                                            DeploymentOptions.ForceApplicationShutdown);
-                                browserFallback = false;
-                            }
-                            catch (COMException exc)
-                            {
-                                try
-                                {
-                                    var result = await packageManager.AddPackageAsync(new Uri(destinationFile.Path),
-                                            dependencies,
-                                            DeploymentOptions.ForceApplicationShutdown);
-                                    browserFallback = false;
-                                }
-                                catch (COMException exc2)
-                                {
-                                    var result = await packageManager.RegisterPackageAsync(new Uri(destinationFile.Path),
-                                            dependencies,
-                                            DeploymentOptions.ForceApplicationShutdown);
-                                    browserFallback = false;
-                                }
-                            }
+                            var result = await packageManager.UpdatePackageAsync(new Uri(destinationFile.Path),
+                                        dependencies,
+                                        DeploymentOptions.ForceApplicationShutdown);
+
+                            //in case of error COMException is thrown so we cant get result (?????)
+                            browserFallback = false;
                         }
                         finally
                         {
+                            //clean all temorary files
                             if (destinationFile != null)
-                                await destinationFile.DeleteAsync();
-                        }
+                            {
+                                //dont wait
+                                Task t = destinationFile.DeleteAsync().AsTask();
+                            }
 
+                            foreach(Uri file in dependencies)
+                            {
+                                //dont wait
+                                var t = (await StorageFile.GetFileFromPathAsync(file.LocalPath)).DeleteAsync();
+                            }
+                        }
                         
                     }
-                    catch
+                    catch (Exception exc)
                     {
+                        updateError = exc.HResult + exc.Message;
                         //lets do fallback to browser
                     }
                     finally
@@ -201,17 +202,86 @@ namespace PokemonGo_UWP.Utils
                         Busy.SetBusy(false);
                     }
                 }
-            }*/
+            }
 
             if (browserFallback)
             {
-                //we can laso open direct link to appx with mainAsset.BrowserDownloadUrl, but Edge waits on click small unseeable "Save" button
+                //update failed, show dialog to user
+                var dialog = new MessageDialog(string.Format(Utils.Resources.Translation.GetString("UpdateFailed"), updateError));
+
+                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
+                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
+                dialog.DefaultCommandIndex = 0;
+                dialog.CancelCommandIndex = 1;
+
+                var result = await dialog.ShowAsyncQueue();
+
+                if ((int)result.Id != 0)
+                    return;
+
+                //we can laso open direct link to appx/appxbundle with mainAsset.BrowserDownloadUrl, but Edge waits on click small unseeable "Save" button before download
                 await Launcher.LaunchUriAsync(new Uri(release.HtmlUrl));
             }
-
-
         }
 
+        /// <summary>
+        /// Gets (or creates) temporary folder for updates
+        /// </summary>
+        /// <returns></returns>
+        private static async Task<StorageFolder> GetTemporaryUpdateFolderAsync()
+        {
+            StorageFolder temp = ApplicationData.Current.TemporaryFolder;
+            StorageFolder folder = null;
+            try
+            {
+                folder = await temp.GetFolderAsync("Updates");
+            }
+            catch(FileNotFoundException)
+            {
+                folder = await temp.CreateFolderAsync("Updates");
+
+            }
+
+            return folder;
+        }
+
+        /// <summary>
+        /// Get temporary update file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private static async Task<StorageFile> GetTemporaryUpdateFileAsync(string fileName)
+        {
+            return await (await GetTemporaryUpdateFolderAsync()).CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
+        }
+
+
+        /// <summary>
+        /// Deletes files in temporary update folder
+        /// </summary>
+        /// <returns></returns>
+        private static async Task CleanTemporaryUpdateFolderAsync()
+        {
+            var folder = await GetTemporaryUpdateFolderAsync();
+            foreach(var item in await folder.GetFilesAsync())
+            {
+                try
+                {
+                    await item.DeleteAsync();
+                }
+                catch(Exception)
+                {
+                    //dont bother
+                }
+            }
+        }
+
+        /// <summary>
+        /// Download file from URL
+        /// </summary>
+        /// <param name="destinationFile"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         private static async Task DownloadFile(StorageFile destinationFile, Uri uri)
         {
             using (HttpClient client = new HttpClient())
@@ -226,9 +296,19 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
+
+        /// <summary>
+        /// Filter assets only to current architecture
+        /// </summary>
+        /// <param name="release"></param>
+        /// <returns></returns>
         private static List<ReleaseAsset> FilterAssetsByArchitecture(Release release)
         {
-            return release.Assets.Where(asset => asset.Name.ToLower().Contains("_" + Package.Current.Id.Architecture.ToString().ToLower() + "_")).ToList();
+            return release.Assets.Where(asset =>
+            {
+                return asset.Name.ToLower().Contains("_" + Package.Current.Id.Architecture.ToString().ToLower() + "_")
+                || asset.Name.ToLower().Contains("." + Package.Current.Id.Architecture.ToString().ToLower() + ".");
+            }).ToList();
         }
     }
 }

@@ -95,8 +95,7 @@ namespace PokemonGo_UWP
                 var latestUpdateInfo = await UpdateManager.IsUpdateAvailable();
                 if (latestUpdateInfo != null)
                 {
-                    var dialog = new MessageDialog(Utils.Resources.Translation.GetString("UpdatedVersion1") +
-                    $"\n{latestUpdateInfo.url}\n" + Utils.Resources.Translation.GetString("UpdatedVersion2"));
+                    var dialog = new MessageDialog( string.Format(Utils.Resources.Translation.GetString("UpdatedVersion"), latestUpdateInfo.version, latestUpdateInfo.description));
 
                     dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
                     dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
