@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>Um dispositivo para capturar Pokémons selvagens. é lançad como uma bola em um pokemon selvagem, encapsulando confortavelmente o seu alvo.</value>
+    <value>Um dispositivo para capturar Pokémons selvagens. É lançado como uma bola em um Pokémon selvagem, encapsulando confortavelmente o seu alvo.</value>
   </data>
   <data name="D_ItemIncenseCool" xml:space="preserve">
     <value>Incenso com uma fragrância misteriosa que atrai Pokémons selvagens para a sua localização durante 30 minutos</value>
@@ -139,10 +139,10 @@
     <value>Um dispositivo que choca um ovo enquanto você anda.</value>
   </data>
   <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>Um dispositivo para capturar Pokémons selvagens. é lançad como uma bola em um pokemon selvagem, encapsulando confortavelmente o seu alvo.</value>
+    <value>Um dispositivo para capturar Pokémons selvagens. É lançado como uma bola em um Pokémon selvagem, encapsulando confortavelmente o seu alvo.</value>
   </data>
   <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>Um dispositivo para capturar Pokémons selvagens. é lançad como uma bola em um pokemon selvagem, encapsulando confortavelmente o seu alvo.</value>
+    <value>Um dispositivo para capturar Pokémons selvagens. É lançado como uma bola em um Pokémon selvagem, encapsulando confortavelmente o seu alvo.</value>
   </data>
   <data name="D_ItemPotion" xml:space="preserve">
     <value>Um medicamento em spay para tratar feridas. Ele recupera 20 pontos do HP de um Pokémon.</value>
@@ -151,7 +151,7 @@
     <value>Um medicamento que pode reviver Pokémons. Ele também pode restaurar metade do HP de Pokémons desmaiados.</value>
   </data>
   <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>Um dispositivo para capturar Pokémons selvagens. é lançad como uma bola em um pokemon selvagem, encapsulando confortavelmente o seu alvo.</value>
+    <value>Um dispositivo para capturar Pokémons selvagens. É lançado como uma bola em um Pokémon selvagem, encapsulando confortavelmente o seu alvo.</value>
   </data>
   <data name="ItemBlukBerry" xml:space="preserve">
     <value>Bluk Berry</value>

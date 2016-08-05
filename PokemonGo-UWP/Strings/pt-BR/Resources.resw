@@ -136,7 +136,7 @@
     <value>ENTRAR com conta PTC</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Para entrar você precisa inserir seu Usuário/Email e Senha nesse app. Se você não confia nele, por favor, feche o aplicativo. Nós não nos responsabilizamos por nada</value>
+    <value>Para entrar você precisa inserir seu Usuário/Email e Senha nesse app. Se você não confia nele, por favor, feche o aplicativo. Nós não nos responsabilizamos por nada.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
     <value>SAIR</value>
