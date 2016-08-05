@@ -346,6 +346,7 @@
     <PRIResource Include="Strings\pl-PL\Items.resw" />
     <PRIResource Include="Strings\pl-PL\Resources.resw" />
     <PRIResource Include="Strings\pl-PL\Pokemon.resw" />
+    <PRIResource Include="Strings\ja-JP\Resources.resw" />
     <PRIResource Include="Strings\es-ES\Items.resw" />
     <PRIResource Include="Strings\es-ES\Resources.resw" />
     <PRIResource Include="Strings\es-ES\Pokemon.resw" />
