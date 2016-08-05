@@ -1,6 +1,6 @@
 # Update: PoGo currently experiences API access problems. 
 
-Please don't ask why Pokestops and Pokemon aren't showing on the map. This is a known issue that a lot of third party Pokemon GO tools are experiancing, and making yet another issue about it not working won't help at all.
+Please don't ask why Pokestops and Pokemon aren't showing on the map. This is a known issue that and all the third party Pokemon Go tool are experiencing it. Please avoid opening new issues, we'll update you when things change.
 
 # PoGo for Windows 10
 
