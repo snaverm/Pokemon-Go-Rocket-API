@@ -37,7 +37,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                PokemonInventory = (ObservableCollection<PokemonData>) suspensionState[nameof(PokemonInventory)];                
+                PokemonInventory = (ObservableCollection<PokemonData>) suspensionState[nameof(PokemonInventory)];                                
                 EggsInventory = (ObservableCollection<PokemonData>)suspensionState[nameof(EggsInventory)];
                 CurrentPokemonSortingMode = (PokemonSortingModes) suspensionState[nameof(CurrentPokemonSortingMode)];
             }
