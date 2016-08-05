@@ -177,18 +177,8 @@ namespace PokemonGo_UWP.Utils
                         }
                         finally
                         {
-                            //clean all temorary files
-                            if (destinationFile != null)
-                            {
-                                //dont wait
-                                Task t = destinationFile.DeleteAsync().AsTask();
-                            }
-
-                            foreach(Uri file in dependencies)
-                            {
-                                //dont wait
-                                var t = (await StorageFile.GetFileFromPathAsync(file.LocalPath)).DeleteAsync();
-                            }
+                            //clean all temorary files and dont wait on it
+                            Task t1 = CleanTemporaryUpdateFolderAsync();
                         }
                         
                     }
