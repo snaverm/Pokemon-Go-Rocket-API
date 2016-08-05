@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,111 +118,111 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
-    <value>calma</value>
+    <value>クールダウン</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Ottenendo il segnale GPS...</value>
+    <value>GPS を取得しています...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Ottenendo i dati utente...</value>
+    <value>ユーザーのデータを取得しています...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
-    <value>GOOGLE</value>
+    <value>Google</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>inventario pieno</value>
+    <value>inventory full</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>LOGIN con account PTC</value>
+    <value>PTC アカウントでログインする</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Per eseguire il login devi inserire Username/Email e Password in questa app. Se non ti fidi, per favore, esci prima di continuare. Non assumiamo alcuna responsabilità.</value>
+    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>LOGOUT</value>
+    <value>ログアウト</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>nelle vicinanze</value>
+    <value>近く</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>troppo lontano</value>
+    <value>範囲外</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
-    <value>Password</value>
+    <value>パスワード</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Username/email</value>
+    <value>ユーザーネーム/メルアド</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
-    <value>PE</value>
+    <value>XP</value>
   </data>
   <data name="OKButton.Content" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
-    <value>Caricando l'incontro con </value>
+    <value>Loading encounter with </value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Logging in...</value>
+    <value>ログイン中...</value>
   </data>
   <data name="Fleed" xml:space="preserve">
-    <value> fuggito</value>
+    <value> fleed</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
-    <value>Google ha restituito l'errore: </value>
+    <value>Google returned error: </value>
   </data>
   <data name="GoogleNotResponding" xml:space="preserve">
-    <value>Google non risponde, prova più tardi.</value>
+    <value>Google からの反応がありません。もう一度試してください</value>
   </data>
   <data name="LoginFailed" xml:space="preserve">
-    <value>Login fallito, prova di nuovo.</value>
+    <value>ログインに失敗しました。もう一度試してください</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="NoGPSPermissions" xml:space="preserve">
-    <value>Occorrono i permessi GPS per avviare il gioco, attivalo e riprova.</value>
+    <value>ゲームをするためには GPS の使用許可が必要です。有効にしてから試してください</value>
   </data>
   <data name="PokemonRanAway" xml:space="preserve">
-    <value>Il Pokemon è scappato, ci spiace :(</value>
+    <value>ポケモンはどこかへ行ってしまいました</value>
   </data>
   <data name="PTCDown" xml:space="preserve">
-    <value>PTC login non è disponibile, riprova più tardi.</value>
+    <value>PTC のログインに問題が発生しています。後でもう一度試してください</value>
   </data>
   <data name="SomethingWentWrong" xml:space="preserve">
-    <value>Qualcosa è andato storto e l'app risulta instabile. Vuoi disconnetterti e riprovare?</value>
+    <value>何かが起きてアプリが正常起動できていません。ログアウトしてもう一度試しますか？</value>
   </data>
   <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Un aggiornamento è disponibile su</value>
+    <value>最新バージョンにアップデートできます</value>
   </data>
   <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Vuoi visitare il link?</value>
+    <value>リンクを開きますか？</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
-    <value>Username/password errati o server offline, per favore riprova.</value>
+    <value>ユーザーネーム/パスワード、もしくはサーバーがオフラインになっています。もう一度試してください</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Si</value>
+    <value>Yes</value>
   </data>
   <data name="CPText.Text" xml:space="preserve">
-    <value>PL</value>
+    <value>CP</value>
   </data>
   <data name="EggsText.Text" xml:space="preserve">
-    <value>UOVA</value>
+    <value>卵</value>
   </data>
   <data name="MusicTitleText.Text" xml:space="preserve">
-    <value>Musica</value>
+    <value>音楽</value>
   </data>
   <data name="PokemonText.Text" xml:space="preserve">
-    <value>POKÉMON</value>
+    <value>ポケモン</value>
   </data>
   <data name="SettingsHeaderText.Text" xml:space="preserve">
-    <value>IMPOSTAZIONI</value>
+    <value>設定</value>
   </data>
   <data name="SignOutButton.Content" xml:space="preserve">
-    <value>Disconnetti</value>
+    <value>サインアウト</value>
   </data>
   <data name="VibrationTitleText" xml:space="preserve">
-    <value>Vibrazione</value>
+    <value>Vibration</value>
   </data>
 </root>

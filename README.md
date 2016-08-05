@@ -1,6 +1,6 @@
 # Update: PoGo currently experiences API access problems. 
 
-Please don't ask why Pokestops and Pokemon aren't showing on the map. This is a known issue that and all the third party Pokemon Go tool are experiencing it. Please avoid opening new issues, we'll update you when things change.
+Please don't ask why Pokestops and Pokemon aren't showing on the map. This is a known issue that almost all third party Pokemon GO tools are experiencing. Please avoid opening new issues, we'll update you when things change.
 
 # PoGo for Windows 10
 
@@ -18,7 +18,7 @@ We decided to have 3 social chat groups to make sure everyone can use their favo
 
 The skype group is used for Text/Voice chat and general disscussion, as well as support.
 
-[Telegram](https://telegram.me/joinchat/B7KoEj6EIKEhFKamP44tHQ)
+[Telegram](https://telegram.me/PoGoUWP)
 
 For telegram users, there is also a Telegram superchat that is also for general disscussion, ideas and support.
 
