@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
 using POGOProtos.Data;
+using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Envelopes;
+using POGOProtos.Networking.Responses;
+using POGOProtos.Settings.Master;
 using Universal_Authenticator_v2.Views;
 using CatchPokemonResponse = POGOProtos.Networking.Responses.CatchPokemonResponse;
 using CheckAwardedBadgesResponse = POGOProtos.Networking.Responses.CheckAwardedBadgesResponse;
@@ -127,6 +131,11 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static ObservableCollection<PokemonData> EggsInventory { get; set; } = new ObservableCollection<PokemonData>();
 
+        /// <summary>
+        /// Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
+        /// </summary>
+        public static IEnumerable<PokemonSettings> PokedexExtraData { get; set; } = new List<PokemonSettings>();
+
         #endregion
 
         #region Game Logic
@@ -139,7 +148,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient(bool isPtcAccount)
         {
-            var isPtcLogin = !String.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
+            var isPtcLogin = !string.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
 
             ClientSettings = new Settings
             {
@@ -268,6 +277,7 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
             await UpdateMapObjects();
             await UpdateInventory();
+            await UpdatePokedex();
             Busy.SetBusy(false);
         }
 
@@ -364,10 +374,19 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
+        /// Gets the rewards after leveling up
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LevelUpRewardsResponse> GetLevelUpRewards(int newLevel)
+        {
+            return await Client.Player.GetLevelUpRewards(newLevel);
+        }
+
+        /// <summary>
         ///     Updates inventory data
         /// </summary>
         public static async Task UpdateInventory()
-        {
+        {            
             // Get ALL the items
             var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
             // Update items
@@ -394,12 +413,37 @@ namespace PokemonGo_UWP.Utils
                     EggsInventory.Add(pokemon);
                 else
                     PokemonsInventory.Add(pokemon);
-            }
+            }                        
         }
 
         #endregion
 
         #region Pokemon Handling
+
+        #region Pokedex
+
+        /// <summary>
+        /// Pokedex extra data doesn't change so we can just call this method once.
+        /// TODO: store it in local settings maybe?
+        /// </summary>
+        /// <returns></returns>
+        private static async Task UpdatePokedex()
+        {
+            // Update Pokedex data
+            PokedexExtraData = (await Client.Download.GetItemTemplates()).ItemTemplates.Where(item => item.PokemonSettings != null).Select(item => item.PokemonSettings);
+        }
+
+        /// <summary>
+        /// Gets extra data for the current pokemon
+        /// </summary>
+        /// <param name="pokemonId"></param>
+        /// <returns></returns>
+        public static PokemonSettings GetExtraDataForPokemon(PokemonId pokemonId)
+        {
+            return PokedexExtraData.First(pokemon => pokemon.PokemonId == pokemonId);
+        }
+
+        #endregion
 
         #region Catching
 

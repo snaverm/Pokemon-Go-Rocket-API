@@ -165,4 +165,64 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Přihlašování...</value>
   </data>
+  <data name="CPText.Text" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="EggsText.Text" xml:space="preserve">
+    <value>VEJCE</value>
+  </data>
+  <data name="Fleed" xml:space="preserve">
+    <value> utekl</value>
+  </data>
+  <data name="GoogleError" xml:space="preserve">
+    <value>Google odpověděl chybou:</value>
+  </data>
+  <data name="GoogleNotResponding" xml:space="preserve">
+    <value>Google neodpovídá, zkuste to později prosím.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Přihlášení se nepovedlo. Zkuste to později prosím.</value>
+  </data>
+  <data name="MusicTitleText.Text" xml:space="preserve">
+    <value>Hudba</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="NoGPSPermissions" xml:space="preserve">
+    <value>Pro funkčnost hry je zapotřebí GPS, prosím zapněte ji a zkuste to znovu.</value>
+  </data>
+  <data name="PokemonRanAway" xml:space="preserve">
+    <value>Bohužel, pokemon utekl :(</value>
+  </data>
+  <data name="PokemonText.Text" xml:space="preserve">
+    <value>POKÉMON</value>
+  </data>
+  <data name="PTCDown" xml:space="preserve">
+    <value>PTC je pravděpodobně offline. Zkuste to později prosím.</value>
+  </data>
+  <data name="SettingsHeaderText.Text" xml:space="preserve">
+    <value>NASTAVENÍ</value>
+  </data>
+  <data name="SignOutButton.Content" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Něco se pokazilo a applikace by mohla být nestabilní. Chcete se odhlásit a zkusit to znovu ?</value>
+  </data>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>Update je k dispozici.</value>
+  </data>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>Chcete navštívit odkaz ?</value>
+  </data>
+  <data name="VibrationTitleText" xml:space="preserve">
+    <value>Vibrace</value>
+  </data>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>Uživatelské jméno nebo Email jsou chybné, nebo je server offline. Zkuste to prosím znovu.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
+  </data>
 </root>

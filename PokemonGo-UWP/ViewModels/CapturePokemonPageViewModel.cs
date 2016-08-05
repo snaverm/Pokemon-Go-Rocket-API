@@ -219,8 +219,7 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand<bool> UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
             _useSelectedCaptureItem = new DelegateCommand<bool>(async (hitPokemon) =>
             {
-                Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
-                // TODO: we need to see what happens if the user is throwing a different kind of ball
+                Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");                
                 if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
                 {
                     // Player's using a PokeBall so we try to catch the Pokemon

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,129 +118,129 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>Девайс для ловли диких покемонов. Бросается как мяч в покемона, комфортно помещая в себя свою цель.</value>
+    <value>Dobrá a veľmi výkonná vylepšená forma Pokéballu , ktorá poskytuje väčšiu šancu na chytenie pokémona</value>
   </data>
   <data name="D_ItemIncenseCool" xml:space="preserve">
-    <value>Благовонии со странным запахом которые приманивают диких Покемонов в течении 30 минут.</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseFloral" xml:space="preserve">
-    <value>Благовонии со странным запахом которые приманивают диких Покемонов в течении 30 минут.</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseOrdinary" xml:space="preserve">
-    <value>Благовонии со странным запахом которые приманивают диких Покемонов в течении 30 минут.</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseSpicy" xml:space="preserve">
-    <value>Благовонии со странным запахом которые приманивают диких Покемонов в течении 30 минут.</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>Девайс используемый для инукбации Яиц.</value>
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
   <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Девайс используемый для инукбации Яиц.</value>
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
   <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>Девайс для ловли диких покемонов. Бросается как мяч в покемона, комфортно помещая в себя свою цель.</value>
+    <value>Najlepšie a najvýkonnejší forma Pokéballu, s ktorou možno chitit akéhokoľvek pokémona bez šance zlyhania.</value>
   </data>
   <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>Девайс для ловли диких покемонов. Бросается как мяч в покемона, комфортно помещая в себя свою цель.</value>
+    <value>Zariadenie na chytanie divokých pokémonov . Ak je po Pokémonu hodené , komfortne ho uzavrie vnútri .</value>
   </data>
   <data name="D_ItemPotion" xml:space="preserve">
-    <value>Лекарство в виде спрея используемое для лечения ран. Оно восстанавливает HP одного из покемонов на 20 очков.</value>
+    <value>Liek vo spreji, na ošetrenie rán . Obnovuje 20 HP pokémona .</value>
   </data>
   <data name="D_ItemRevive" xml:space="preserve">
-    <value>Лекарство, которое может восстановить павших покемонов. Оно также восстанавливает половину здоровья от максимального HP покемона.</value>
+    <value>Lék která dokáže probrat pokémona neschopného zápasu. Zároveň obnoví polovinu jeho HP.</value>
   </data>
   <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>Девайс для ловли диких покемонов. Бросается как мяч в покемона, комфортно помещая в себя свою цель.</value>
+    <value>Ultra výkonná vylepšená forma Pokéballu, ktorá poskytuje väčšiu šancu na chytenie pokémona , než Great Ball</value>
   </data>
   <data name="ItemBlukBerry" xml:space="preserve">
-    <value>БлукБерри</value>
+    <value>Bobule Bluk</value>
   </data>
   <data name="ItemGreatBall" xml:space="preserve">
-    <value>ГрейтБолл</value>
+    <value>Great Ball</value>
   </data>
   <data name="ItemHyperPotion" xml:space="preserve">
-    <value>Гипер-Зелье</value>
+    <value>Hyper Eliksír</value>
   </data>
   <data name="ItemIncenseCool" xml:space="preserve">
-    <value>Охлаждающие Благовонии</value>
+    <value>Chladná Esencia</value>
   </data>
   <data name="ItemIncenseFloral" xml:space="preserve">
-    <value>Цветочные Благовонии</value>
+    <value>Rastlinná Esencia</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Обычные Благовонии</value>
+    <value>Esence</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
-    <value>Жгучии Благовонии</value>
+    <value>Pikantná Esencia</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Базовый Инкубатор</value>
+    <value>Inkubátor</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Безлимитный Базовый Инкубатор</value>
+    <value>Nekonečný Inkubátor</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Улучшение хранилища предметов</value>
+    <value>Vylepšenie Úložiska Itemov</value>
   </data>
   <data name="ItemLuckyEgg" xml:space="preserve">
-    <value>Яйцо удачи</value>
+    <value>Šťastné Vejce</value>
   </data>
   <data name="ItemMasterBall" xml:space="preserve">
-    <value>МастерБолл</value>
+    <value>Master Ball</value>
   </data>
   <data name="ItemMaxPotion" xml:space="preserve">
-    <value>Сверх-Микстура</value>
+    <value>Max Lektvar</value>
   </data>
   <data name="ItemMaxRevive" xml:space="preserve">
-    <value>Сверх-Возродитель</value>
+    <value>Maximálne Oživiť</value>
   </data>
   <data name="ItemNanabBerry" xml:space="preserve">
-    <value>Нанаб</value>
+    <value>Bobule Nanab</value>
   </data>
   <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Пинапбэри</value>
+    <value>Bobule Pinap</value>
   </data>
   <data name="ItemPokeBall" xml:space="preserve">
-    <value>Покеболл</value>
+    <value>Poke Ball</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Улучшение хранилища покемонов</value>
+    <value>Vylepšenie Úložiska Pokémonov</value>
   </data>
   <data name="ItemPotion" xml:space="preserve">
-    <value>Микстура</value>
+    <value>Eliksír</value>
   </data>
   <data name="ItemRazzBerry" xml:space="preserve">
-    <value>Раззбэри</value>
+    <value>Bobule Razz</value>
   </data>
   <data name="ItemRevive" xml:space="preserve">
-    <value>Возродитель</value>
+    <value>Oživiť</value>
   </data>
   <data name="ItemSpecialCamera" xml:space="preserve">
-    <value>Камера</value>
+    <value>Špeciálna Kamera</value>
   </data>
   <data name="ItemSuperPotion" xml:space="preserve">
-    <value>Супер-Микстура</value>
+    <value>Super Eliksír</value>
   </data>
   <data name="ItemTroyDisk" xml:space="preserve">
-    <value>Диск "Трой"</value>
+    <value>Troy Disk</value>
   </data>
   <data name="ItemUltraBall" xml:space="preserve">
-    <value>УльтраБолл</value>
+    <value>Ultra Ball</value>
   </data>
   <data name="ItemUnknown" xml:space="preserve">
-    <value>Неизвестно</value>
+    <value>Neznáme</value>
   </data>
   <data name="ItemWeparBerry" xml:space="preserve">
-    <value>Ягода Вепар</value>
+    <value>Wepar bobule</value>
   </data>
   <data name="ItemXAttack" xml:space="preserve">
-    <value>X-Атака</value>
+    <value>X Útok</value>
   </data>
   <data name="ItemXDefense" xml:space="preserve">
-    <value>X-Защита</value>
+    <value>X Obrana</value>
   </data>
   <data name="ItemXMiracle" xml:space="preserve">
-    <value>X-Магия</value>
+    <value>X Zázrak</value>
   </data>
 </root>

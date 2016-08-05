@@ -15,6 +15,8 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Logging;
+using Universal_Authenticator_v2.Views;
+using Splash = PokemonGo_UWP.Views.Splash;
 
 namespace PokemonGo_UWP
 {
@@ -33,6 +35,7 @@ namespace PokemonGo_UWP
         public App()
         {
             InitializeComponent();
+            SplashFactory = e => new Splash(e);
 
 #if DEBUG
             // Init logger
