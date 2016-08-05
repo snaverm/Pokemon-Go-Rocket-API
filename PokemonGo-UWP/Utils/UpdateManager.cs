@@ -194,7 +194,7 @@ namespace PokemonGo_UWP.Utils
                     }
                     catch (Exception exc)
                     {
-                        updateError = exc.HResult + exc.Message;
+                        updateError = exc.HResult.ToString("X") + " " + exc.Message;
                         //lets do fallback to browser
                     }
                     finally
