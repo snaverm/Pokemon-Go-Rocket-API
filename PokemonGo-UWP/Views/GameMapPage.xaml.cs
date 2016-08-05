@@ -106,16 +106,25 @@ namespace PokemonGo_UWP.Views
         private void SubscribeToCaptureEvents()
         {
             GameClient.GeopositionUpdated += GeopositionUpdated;
+            ViewModel.LevelUpRewardsAwarded += ViewModelOnLevelUpRewardsAwarded;
         }        
 
         private void UnsubscribeToCaptureEvents()
         {
             GameClient.GeopositionUpdated -= GeopositionUpdated;
+            ViewModel.LevelUpRewardsAwarded -= ViewModelOnLevelUpRewardsAwarded;
         }
 
         private void GeopositionUpdated(object sender, Geoposition e)
         {
             UpdateMap(e);
+        }
+
+        private void ViewModelOnLevelUpRewardsAwarded(object sender, EventArgs eventArgs)
+        {
+            if (PokeMenuPanel.Opacity > 0)
+                HidePokeMenuStoryboard.Begin();            
+            ShowLevelUpPanelStoryboard.Begin();
         }
 
         #endregion

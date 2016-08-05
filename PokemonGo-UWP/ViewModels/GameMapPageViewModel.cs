@@ -22,6 +22,7 @@ using POGOProtos.Data;
 using POGOProtos.Data.Player;
 using POGOProtos.Inventory;
 using POGOProtos.Map.Pokemon;
+using POGOProtos.Networking.Responses;
 using Template10.Common;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
@@ -76,11 +77,19 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // No saved state, get them from the client                
                 PlayerProfile = (await GameClient.GetProfile()).PlayerData;
-                InventoryDelta = (await GameClient.GetInventory()).InventoryDelta;
+                InventoryDelta = (await GameClient.GetInventory()).InventoryDelta;                
                 var tmpStats = InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
                 if (PlayerStats != null && PlayerStats.Level != tmpStats.Level)
                 {
-                    // TODO: report level increase
+                    LevelUpResponse = await GameClient.GetLevelUpRewards(tmpStats.Level);                                        
+                    switch (LevelUpResponse.Result)
+                    {
+                        case LevelUpRewardsResponse.Types.Result.Success:
+                            LevelUpRewardsAwarded?.Invoke(this, null);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
                 PlayerStats = tmpStats;
                 RaisePropertyChanged(nameof(ExperienceValue));
@@ -149,6 +158,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private InventoryDelta _inventoryDelta;
 
+        /// <summary>
+        /// Response to the level up event
+        /// </summary>
+        private LevelUpRewardsResponse _levelUpRewards;
+
         #endregion
 
         #region Bindable Game Vars   
@@ -188,8 +202,7 @@ namespace PokemonGo_UWP.ViewModels
             set { Set(ref _playerStats, value); }
         }
 
-        public int ExperienceValue => _playerStats == null ? 0 : (int)(((double)_playerStats.Experience - _playerStats.PrevLevelXp) /
-            (_playerStats.NextLevelXp - _playerStats.PrevLevelXp) * 100);
+        public int ExperienceValue => _playerStats == null ? 0 : (int) (((double) _playerStats.Experience - _playerStats.PrevLevelXp)/(_playerStats.NextLevelXp - _playerStats.PrevLevelXp)*100);
 
         public InventoryDelta InventoryDelta
         {
@@ -216,17 +229,36 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Game Logic
 
+        #region Player
+
+        #region Level Up Events
+
+        /// <summary>
+        /// Event fired when level up rewards are awarded to user
+        /// </summary>
+        public event EventHandler LevelUpRewardsAwarded;
+
+        #endregion
+
+        /// <summary>
+        /// Response to the level up event
+        /// </summary>
+        public LevelUpRewardsResponse LevelUpResponse {
+            get { return _levelUpRewards; }
+            set{ Set(ref _levelUpRewards, value); }
+        }
+
+        #endregion
+
         #region Settings
 
         private DelegateCommand _openSettingsCommand;
 
-        public DelegateCommand SettingsCommand => _openSettingsCommand ?? (
-            _openSettingsCommand = new DelegateCommand(() =>
-            {
-                // Navigate back
-                NavigationService.Navigate(typeof(SettingsPage));
-            }, () => true)
-            );
+        public DelegateCommand SettingsCommand => _openSettingsCommand ?? (_openSettingsCommand = new DelegateCommand(() =>
+        {
+            // Navigate back
+            NavigationService.Navigate(typeof(SettingsPage));
+        }, () => true));
 
         #endregion
 
@@ -251,15 +283,10 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _gotoPokemonInventoryPage;
 
-        public DelegateCommand GotoPokemonInventoryPageCommand => _gotoPokemonInventoryPage ?? (
-            _gotoPokemonInventoryPage = new DelegateCommand(() =>
-            {
-                NavigationService.Navigate(typeof(PokemonInventoryPage), true);
-            }));
+        public DelegateCommand GotoPokemonInventoryPageCommand => _gotoPokemonInventoryPage ?? (_gotoPokemonInventoryPage = new DelegateCommand(() => { NavigationService.Navigate(typeof(PokemonInventoryPage), true); }));
 
         #endregion
 
         #endregion
-
     }
 }
