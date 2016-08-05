@@ -18,4 +18,5 @@ namespace PokemonGo_UWP.Utils
         Name,
         Combat
     }
+
 }

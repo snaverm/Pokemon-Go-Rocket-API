@@ -70,7 +70,7 @@ namespace PokemonGo_UWP.ViewModels
                 if (CurrentEncounter.Status != EncounterResponse.Types.Status.EncounterSuccess)
                 {
                     // Encounter failed, probably the Pokemon ran away
-                    await new MessageDialog("Pokemon ran away, sorry :(").ShowAsyncQueue();
+                    await new MessageDialog(Utils.Resources.Translation.GetString("PokemonRanAway")).ShowAsyncQueue();
                     ReturnToGameScreen.Execute();
                 }
             }
@@ -266,7 +266,7 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fleed");
                     CatchFlee?.Invoke(this, null);
-                    await new MessageDialog($"{CurrentPokemon.PokemonId} fleed").ShowAsyncQueue();
+                    await new MessageDialog(Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()) + Utils.Resources.Translation.GetString("Fleed")).ShowAsyncQueue();
                     await GameClient.UpdateInventory();
                     ReturnToGameScreen.Execute();
                     break;

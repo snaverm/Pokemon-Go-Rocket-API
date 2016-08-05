@@ -115,7 +115,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog("Wrong username/password or offline server, please try again.")
+                            new MessageDialog(Resources.Translation.GetString("WrongUsername"))
                                 .ShowAsyncQueue();
                     }
                     else
@@ -126,12 +126,12 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (PtcOfflineException)
                 {
-                    await new MessageDialog("PTC login is probably down, please retry later.").ShowAsyncQueue();
+                    await new MessageDialog(Resources.Translation.GetString("PTCDown")).ShowAsyncQueue();
                 }
                 catch (LoginFailedException)
                 {
                     await
-                            new MessageDialog("WLogin failed, please try again.")
+                            new MessageDialog(Resources.Translation.GetString("LoginFailed"))
                                 .ShowAsyncQueue();
                 }
                 finally
@@ -146,14 +146,14 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand DoGoogleLoginCommand => _doGoogleLoginCommand ?? (
             _doGoogleLoginCommand = new DelegateCommand(async () =>
             {
-                Busy.SetBusy(true, "Logging in...");
+                Busy.SetBusy(true, Resources.Translation.GetString("LoggingIn"));
                 try
                 {
                     if (!await GameClient.DoGoogleLogin(Username.Trim(), Password.Trim()))
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog("Wrong username/password or offline server, please try again.")
+                            new MessageDialog(Resources.Translation.GetString("WrongUsername"))
                                 .ShowAsyncQueue();
                     }
                     else
@@ -164,11 +164,11 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (GoogleOfflineException)
                 {
-                    await new MessageDialog("Google is not responding, please try again later.").ShowAsyncQueue();
+                    await new MessageDialog(Resources.Translation.GetString("GoogleNotResponding")).ShowAsyncQueue();
                 }
                 catch (GoogleException e)
                 {
-                    await new MessageDialog($"Google retuned error:{e.Message}").ShowAsyncQueue();
+                    await new MessageDialog(Resources.Translation.GetString("GoogleError") + e.Message).ShowAsyncQueue();
                 }
                 finally
                 {

@@ -90,11 +90,11 @@ namespace PokemonGo_UWP
             var latestVersionUri = await UpdateManager.IsUpdateAvailable();
             if (latestVersionUri != null)
             {                
-                var dialog = new MessageDialog(
-                $"An updated version is available on\n{latestVersionUri}\nDo you want to visit the link?");
+                var dialog = new MessageDialog(Utils.Resources.Translation.GetString("UpdatedVersion1") +
+                $"\n{latestVersionUri}\n" + Utils.Resources.Translation.GetString("UpdatedVersion2"));
 
-                dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
-                dialog.Commands.Add(new UICommand("No") { Id = 1 });
+                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
+                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
                 dialog.DefaultCommandIndex = 0;
                 dialog.CancelCommandIndex = 1;
                 
