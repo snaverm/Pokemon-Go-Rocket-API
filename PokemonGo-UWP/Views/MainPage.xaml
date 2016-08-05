@@ -45,7 +45,7 @@
                 <Button x:Name="loginButton"
                         Command="{Binding DoPtcLoginCommand}"
                         Style="{StaticResource ButtonSubmit}">
-                    <TextBlock x:Uid="loginButton" Text="LOGIN with PTC" />
+                    <TextBlock x:Uid="loginButton" Text="LOGIN with PTC Account" />
                 </Button>
                 <Button x:Name="googleButton"
                         Command="{Binding DoGoogleLoginCommand}"

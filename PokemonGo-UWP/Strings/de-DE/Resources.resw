@@ -216,10 +216,10 @@
   <data name="SettingsHeaderText.Text" xml:space="preserve">
     <value>EINSTELLUNGEN</value>
   </data>
-  <data name="SignOutButton.Content" xml:space="preserve">
+  <data name="SignOutButton.Text" xml:space="preserve">
     <value>Abmelden</value>
   </data>
-  <data name="VibrationTitleText" xml:space="preserve">
+  <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Vibration</value>
   </data>
 </root>
