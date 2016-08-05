@@ -216,7 +216,7 @@
   <data name="UpdatedVersion2" xml:space="preserve">
     <value>Chcete navštíviť odkaz ?</value>
   </data>
-  <data name="VibrationTitleText" xml:space="preserve">
+  <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Vibrácie</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">

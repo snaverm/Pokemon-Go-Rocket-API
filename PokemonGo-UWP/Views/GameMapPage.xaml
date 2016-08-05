@@ -435,7 +435,8 @@
             
             <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
                         RelativePanel.AlignVerticalCenterWithPanel="True">
-                <TextBlock Text="Level up!"
+                <TextBlock x:Uid="LevelupText"
+                           Text="Level up!"
                            FontSize="48"
                            Foreground="White"/>
                 <TextBlock Text="{Binding PlayerStats.Level}"

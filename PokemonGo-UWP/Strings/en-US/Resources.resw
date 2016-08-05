@@ -255,4 +255,7 @@
     <value>Update failed: {0}
 Open page with installation files for manual install?</value>
   </data>
+  <data name="LevelupText.Text" xml:space="preserve">
+    <value>Level up!</value>
+  </data>
 </root>
