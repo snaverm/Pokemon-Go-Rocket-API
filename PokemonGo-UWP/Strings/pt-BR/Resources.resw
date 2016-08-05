@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,111 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
-    <value>calma</value>
+    <value>Tempo de Recarga</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Ottenendo il segnale GPS...</value>
+    <value>Obtendo sinal do GPS...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Ottenendo i dati utente...</value>
+    <value>Obtendo dados do usuário...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
     <value>GOOGLE</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>inventario pieno</value>
+    <value>Inventário Cheio</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>LOGIN con account PTC</value>
+    <value>ENTRAR com conta PTC</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Per eseguire il login devi inserire Username/Email e Password in questa app. Se non ti fidi, per favore, esci prima di continuare. Non assumiamo alcuna responsabilità.</value>
+    <value>Para entrar você precisa inserir seu Usuário/Email e Senha nesse app. Se você não confia nele, por favor, feche o aplicativo. Nós não nos responsabilizamos por nada.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>LOGOUT</value>
+    <value>SAIR</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>nelle vicinanze</value>
+    <value>Próximo</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>troppo lontano</value>
+    <value>Fora de alcance</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
-    <value>Password</value>
+    <value>Senha</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Username/email</value>
+    <value>Usuário/Email</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
-    <value>PE</value>
+    <value>XP</value>
   </data>
   <data name="OKButton.Content" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
-    <value>Caricando l'incontro con </value>
+    <value>Carregando encontro com </value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Logging in...</value>
-  </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> fuggito</value>
-  </data>
-  <data name="GoogleError" xml:space="preserve">
-    <value>Google ha restituito l'errore: </value>
-  </data>
-  <data name="GoogleNotResponding" xml:space="preserve">
-    <value>Google non risponde, prova più tardi.</value>
-  </data>
-  <data name="LoginFailed" xml:space="preserve">
-    <value>Login fallito, prova di nuovo.</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="NoGPSPermissions" xml:space="preserve">
-    <value>Occorrono i permessi GPS per avviare il gioco, attivalo e riprova.</value>
-  </data>
-  <data name="PokemonRanAway" xml:space="preserve">
-    <value>Il Pokemon è scappato, ci spiace :(</value>
-  </data>
-  <data name="PTCDown" xml:space="preserve">
-    <value>PTC login non è disponibile, riprova più tardi.</value>
-  </data>
-  <data name="SomethingWentWrong" xml:space="preserve">
-    <value>Qualcosa è andato storto e l'app risulta instabile. Vuoi disconnetterti e riprovare?</value>
-  </data>
-  <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Un aggiornamento è disponibile su</value>
-  </data>
-  <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Vuoi visitare il link?</value>
-  </data>
-  <data name="WrongUsername" xml:space="preserve">
-    <value>Username/password errati o server offline, per favore riprova.</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Si</value>
-  </data>
-  <data name="CPText.Text" xml:space="preserve">
-    <value>PL</value>
-  </data>
-  <data name="EggsText.Text" xml:space="preserve">
-    <value>UOVA</value>
-  </data>
-  <data name="MusicTitleText.Text" xml:space="preserve">
-    <value>Musica</value>
-  </data>
-  <data name="PokemonText.Text" xml:space="preserve">
-    <value>POKÉMON</value>
-  </data>
-  <data name="SettingsHeaderText.Text" xml:space="preserve">
-    <value>IMPOSTAZIONI</value>
-  </data>
-  <data name="SignOutButton.Content" xml:space="preserve">
-    <value>Disconnetti</value>
-  </data>
-  <data name="VibrationTitleText" xml:space="preserve">
-    <value>Vibrazione</value>
+    <value>Entrando...</value>
   </data>
 </root>
