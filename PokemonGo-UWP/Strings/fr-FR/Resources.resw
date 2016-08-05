@@ -121,48 +121,48 @@
     <value>Veuilez patienter</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Optention du signal GPS...</value>
+    <value>Détection du signal GPS...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Chargement des données de l'utilisateur...</value>
+    <value>Récupération des données de l'utilisateur...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
     <value>GOOGLE</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>Inventaire complet</value>
+    <value>inventaire complet</value>
+  </data>
+  <data name="LoadingEncounter" xml:space="preserve">
+    <value>Chargement de la rencontre avec </value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Connexion en cours</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>Connexion avec PTC</value>
+    <value>Connexion avec un compte PTC</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>ATTENTION : pour vous connecter au serveur PTC vous aurez besoin d'entrer vos identifiant et mot de passe. Si vous n'avez pas confiance, fermez l'application. </value>
+    <value>Vous devez entrer votre nom d'utilisateur/email et votre mot de passe pour vous connecter à cette application. Veuillez quitter cette application si vous ne lui faites pas confiance. Nous ne sommes pas responsable en cas de problème.</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>DECONNEXION</value>
+    <value>Fermer la session</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>Proche</value>
+    <value>à proximité</value>
+  </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>Trop loin</value>
+    <value>hors de portée</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Identifiant</value>
+    <value>Nom d'utilisateur/Email</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
-    <value>EXP</value>
-  </data>
-  <data name="OKButton.Content" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="LoadingEncounter" xml:space="preserve">
-    <value>Veuilez patienter</value>
-  </data>
-  <data name="LoggingIn" xml:space="preserve">
-    <value>Connexion...</value>
+    <value>XP</value>
   </data>
 </root>

@@ -1,8 +1,10 @@
+# Update: PoGo currently experiences API access problems. 
+
+Please don't ask why Pokestops and Pokemon aren't showing on the map. This is a known issue that and all the third party Pokemon Go tool are experiencing it. Please avoid opening new issues, we'll update you when things change.
+
 # PoGo for Windows 10
 
 Check [Wiki](https://github.com/ST-Apps/PoGo-UWP/wiki) for information about the project, installing instructions and more.
-
-[![Code Climate](https://codeclimate.com/github/ST-Apps/PoGo-UWP/badges/gpa.svg)](https://codeclimate.com/github/ST-Apps/PoGo-UWP) [![Issue Count](https://codeclimate.com/github/ST-Apps/PoGo-UWP/badges/issue_count.svg)](https://codeclimate.com/github/ST-Apps/PoGo-UWP)
 
 # Social
 

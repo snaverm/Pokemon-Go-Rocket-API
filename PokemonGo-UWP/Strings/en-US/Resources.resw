@@ -165,4 +165,64 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Logging in...</value>
   </data>
+  <data name="Fleed" xml:space="preserve">
+    <value> fleed</value>
+  </data>
+  <data name="GoogleError" xml:space="preserve">
+    <value>Google returned error: </value>
+  </data>
+  <data name="GoogleNotResponding" xml:space="preserve">
+    <value>Google is not responding, please try again later.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Login failed, please try again.</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoGPSPermissions" xml:space="preserve">
+    <value>We need GPS permissions to run the game, please enable it and try again.</value>
+  </data>
+  <data name="PokemonRanAway" xml:space="preserve">
+    <value>Pokemon ran away, sorry :(</value>
+  </data>
+  <data name="PTCDown" xml:space="preserve">
+    <value>PTC login is probably down, please retry later.</value>
+  </data>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>Something went wrong and app may be unstable now. Do you want to logout and try again?</value>
+  </data>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>An updated version is available on</value>
+  </data>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>Do you want to visit the link?</value>
+  </data>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>Wrong username/password or offline server, please try again.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="CPText.Text" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="EggsText.Text" xml:space="preserve">
+    <value>EGGS</value>
+  </data>
+  <data name="MusicTitleText.Text" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="PokemonText.Text" xml:space="preserve">
+    <value>POKÉMON</value>
+  </data>
+  <data name="SettingsHeaderText.Text" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
+  <data name="SignOutButton.Content" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="VibrationTitleText" xml:space="preserve">
+    <value>Vibration</value>
+  </data>
 </root>

@@ -117,6 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+<data name="D_ItemGreatBall" xml:space="preserve">
+    <value>Un dispositivo para capturar Pokémon salvajes . Se ha lanzado como una pelota en un Pokémon salvaje, cómodamente encapsular su objetivo</value>
+  </data>
+  <data name="D_ItemIncenseCool" xml:space="preserve">
+    <value>Incienso con una fragancia misteriosa que atrae a Pokémon salvajes a su ubicación durante 30 minutos</value>
+  </data>
+  <data name="D_ItemIncenseFloral" xml:space="preserve">
+    <value>Incienso con una fragancia misteriosa que atrae a Pokémon salvajes a su ubicación durante 30 minutos</value>
+  </data>
+  <data name="D_ItemIncenseOrdinary" xml:space="preserve">
+    <value>Incienso con una fragancia misteriosa que atrae a Pokémon salvajes a su ubicación durante 30 minutosIncienso con una fragancia misteriosa que atrae a Pokémon salvajes a su ubicación durante 30 minutos</value>
+  </data>
+  <data name="D_ItemIncenseSpicy" xml:space="preserve">
+    <value>Incienso con una fragancia misteriosa que atrae a Pokémon salvajes a su ubicación durante 30 minutos</value>
+  </data>
+  <data name="D_ItemIncubatorBasic" xml:space="preserve">
+    <value>Un dispositivo que incuba un huevo mientras camina hasta que está listo para salir del cascarón .</value>
+  </data>
+  <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
+    <value>Un dispositivo que incuba un huevo mientras camina hasta que está listo para salir del cascarón .</value>
+  </data>
+  <data name="D_ItemMasterBall" xml:space="preserve">
+    <value>Un dispositivo para capturar Pokémon salvajes . Se ha lanzado como una pelota en un Pokémon salvaje, cómodamente encapsular su objetivo</value>
+  </data>
+  <data name="D_ItemPokeBall" xml:space="preserve">
+    <value>Un dispositivo para capturar Pokémon salvajes . Se ha lanzado como una pelota en un Pokémon salvaje, cómodamente encapsular su objetivo</value>
+  </data>
+  <data name="D_ItemPotion" xml:space="preserve">
+    <value>Un medicamento en forma de aerosol para el tratamiento de heridas . Se restaura el HP de un Pokémon en 20 puntos .</value>
+  </data>
+  <data name="D_ItemRevive" xml:space="preserve">
+    <value>Un medicamento que puede revivir desmayó Pokémon . También restaura la mitad de un máximo de HP desmayado de Pokémon</value>
+  </data>
+  <data name="D_ItemUltraBall" xml:space="preserve">
+    <value>Un dispositivo para capturar Pokémon salvajes . Se ha lanzado como una pelota en un Pokémon salvaje, cómodamente encapsular su objetivo </value>
+  </data>
   <data name="ItemBlukBerry" xml:space="preserve">
     <value>Baya Frambu</value>
   </data>
