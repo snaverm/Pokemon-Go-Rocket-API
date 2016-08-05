@@ -192,11 +192,9 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Something went wrong and app may be unstable now. Do you want to logout and try again?</value>
   </data>
-  <data name="UpdatedVersion1" xml:space="preserve">
-    <value>An updated version is available on</value>
-  </data>
-  <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Do you want to visit the link?</value>
+  <data name="UpdatedVersion" xml:space="preserve">
+    <value>An updated version {0} is available. Do you want to update?
+{1}</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
     <value>Wrong username/password or offline server, please try again.</value>
@@ -224,5 +222,15 @@
   </data>
   <data name="VibrationTitleText" xml:space="preserve">
     <value>Vibration</value>
+  </data>
+  <data name="UpdateDownloading" xml:space="preserve">
+    <value>Downloading update {0}</value>
+  </data>
+  <data name="UpdateInstalling" xml:space="preserve">
+    <value>Installing update, app is restarting...</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update failed: {0}
+Open page with installation files for manual install?</value>
   </data>
 </root>
