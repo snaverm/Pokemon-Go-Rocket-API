@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Google.Protobuf.Collections;
 using PokemonGo.RocketAPI.Extensions;
+using PokemonGo_UWP.Entities;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Inventory;
@@ -278,10 +279,14 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var cooldown = (long)value;
-            var inactve = "_inactive";
-            if (cooldown < DateTime.UtcNow.ToUnixTime()) inactve = "";
-            return new Uri($"ms-appx:///Assets/Icons/pokestop_near{inactve}.png");
+            var pokestop = (FortDataWrapper)value;
+            // TODO: download values from settings instead of manually coding them
+            var distance = GeoExtensions.GeoAssist.CalculateDistanceBetweenTwoGeoPoints(pokestop.Geoposition,
+                GameClient.Geoposition.Coordinate.Point);
+            if (distance > 70)
+                return new Uri($"ms-appx:///Assets/Icons/pokestop_far.png");
+            var mode = pokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() ? "" : "_inactive";
+            return new Uri($"ms-appx:///Assets/Icons/pokestop_near{mode}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
