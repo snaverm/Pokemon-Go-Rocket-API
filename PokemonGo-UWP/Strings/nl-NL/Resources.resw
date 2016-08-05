@@ -181,7 +181,7 @@
     <value>Nee</value>
   </data>
   <data name="NoGPSPermissions" xml:space="preserve">
-    <value>We hebben toestemming nodig om uw lokatie te bepalen, graag toestemming verlenen en opnieuw proberen.</value>
+    <value>We hebben toestemming nodig om uw locatie te bepalen, graag toestemming verlenen en opnieuw proberen.</value>
   </data>
   <data name="PokemonRanAway" xml:space="preserve">
     <value>Pokemon is weggerend, sorry :(</value>
