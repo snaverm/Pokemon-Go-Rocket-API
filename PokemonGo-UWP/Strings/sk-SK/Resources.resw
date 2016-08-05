@@ -118,40 +118,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CoolDownText.Text" xml:space="preserve">
-    <value>omezení</value>
+    <value>obmedzenia</value>
   </data>
   <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Získávání GPS signálu...</value>
+    <value>Získavanie GPS signálu ...</value>
   </data>
   <data name="GettingUserData" xml:space="preserve">
-    <value>Získávání dat uživatele...</value>
+    <value>Získavanie dát užívateľa ...</value>
   </data>
   <data name="googleButton.Text" xml:space="preserve">
     <value>GOOGLE</value>
   </data>
   <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>plný inventář</value>
+    <value>plný inventár</value>
   </data>
   <data name="loginButton.Text" xml:space="preserve">
-    <value>Přihlásit se pomocí PTC</value>
+    <value>Prihlásiť sa pomocou PTC</value>
   </data>
   <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Pro přihlášení do této aplikace potřebujete zadat Přihlašovací jméno/Email. Pokud aplikaci nevěříte, nepoužívejte ji. Neneseme za ně žádnou zodpovědnost.</value>
+    <value>Pre prihlásenie do tejto aplikácie potrebujete zadať Prihlasovacie meno / Email. Ak aplikáciu neveríte, nepoužívajte ju . Nenesieme za ne žiadnu zodpovednosť .</value>
   </data>
   <data name="logoutText.Text" xml:space="preserve">
-    <value>ODHLÁŠENÍ</value>
+    <value>ODHLÁSENIE</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
     <value>blízko</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>mimo dosah</value>
+    <value>mimo dosahu</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Heslo</value>
   </data>
   <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Přihlašovací jméno/Email</value>
+    <value>Prihlasovacie meno / Email</value>
   </data>
   <data name="XPText.Text" xml:space="preserve">
     <value>XP</value>
@@ -160,69 +160,69 @@
     <value>OK</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
-    <value>Načítání střetu s</value>
+    <value>Načítanie stretu s</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Přihlašování...</value>
+    <value>Prihlasovanie ...</value>
   </data>
   <data name="CPText.Text" xml:space="preserve">
     <value>CP</value>
   </data>
   <data name="EggsText.Text" xml:space="preserve">
-    <value>VEJCE</value>
+    <value>VAJCIA</value>
   </data>
   <data name="Fleed" xml:space="preserve">
-    <value> utekl</value>
+    <value> utiekol</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
-    <value>Google odpověděl chybou:</value>
+    <value>Google odpovedal chybou :</value>
   </data>
   <data name="GoogleNotResponding" xml:space="preserve">
-    <value>Google neodpovídá, zkuste to později prosím.</value>
+    <value>Google nezodpovedá, skúste to neskôr prosím.</value>
   </data>
   <data name="LoginFailed" xml:space="preserve">
-    <value>Přihlášení se nepovedlo. Zkuste to později prosím.</value>
+    <value>Prihlásenie sa nepodarilo. Skúste to neskôr prosím.</value>
   </data>
   <data name="MusicTitleText.Text" xml:space="preserve">
     <value>Hudba</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Ne</value>
+    <value>Nie</value>
   </data>
   <data name="NoGPSPermissions" xml:space="preserve">
-    <value>Pro funkčnost hry je zapotřebí GPS, prosím zapněte ji a zkuste to znovu.</value>
+    <value>Pre funkčnosť hry je potrebný GPS signál, prosím zapnite ju a skúste to znova .</value>
   </data>
   <data name="PokemonRanAway" xml:space="preserve">
-    <value>Bohužel, pokemon utekl :(</value>
+    <value>Bohužiaľ , pokemon utiekol :(</value>
   </data>
   <data name="PokemonText.Text" xml:space="preserve">
     <value>POKÉMON</value>
   </data>
   <data name="PTCDown" xml:space="preserve">
-    <value>PTC je pravděpodobně offline. Zkuste to později prosím.</value>
+    <value>PTC je pravdepodobne offline. Skúste to neskôr prosím.</value>
   </data>
   <data name="SettingsHeaderText.Text" xml:space="preserve">
-    <value>NASTAVENÍ</value>
+    <value>NASTAVENIE</value>
   </data>
   <data name="SignOutButton.Content" xml:space="preserve">
-    <value>Odhlásit se</value>
+    <value>Odhlásiť sa</value>
   </data>
   <data name="SomethingWentWrong" xml:space="preserve">
-    <value>Něco se pokazilo a applikace by mohla být nestabilní. Chcete se odhlásit a zkusit to znovu ?</value>
+    <value>Niečo sa pokazilo a applikace by mohla byť nestabilná. Chcete sa odhlásiť a skúsiť to znova ?</value>
   </data>
   <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Update je k dispozici.</value>
+    <value>Update je k dispozícii.</value>
   </data>
   <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Chcete navštívit odkaz ?</value>
+    <value>Chcete navštíviť odkaz ?</value>
   </data>
   <data name="VibrationTitleText" xml:space="preserve">
-    <value>Vibrace</value>
+    <value>Vibrácie</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
-    <value>Uživatelské jméno nebo Email jsou chybné, nebo je server offline. Zkuste to prosím znovu.</value>
+    <value>Užívateľské meno alebo Email sú chybné, alebo je server offline. Skúste to znova.</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Ano</value>
+    <value>Áno</value>
   </data>
 </root>

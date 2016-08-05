@@ -117,112 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoolDownText.Text" xml:space="preserve">
-    <value>omezení</value>
+  <data name="D_ItemGreatBall" xml:space="preserve">
+    <value>Dobrá a veľmi výkonná vylepšená forma Pokéballu , ktorá poskytuje väčšiu šancu na chytenie pokémona</value>
   </data>
-  <data name="GettingGPSSignal" xml:space="preserve">
-    <value>Získávání GPS signálu...</value>
+  <data name="D_ItemIncenseCool" xml:space="preserve">
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
-  <data name="GettingUserData" xml:space="preserve">
-    <value>Získávání dat uživatele...</value>
+  <data name="D_ItemIncenseFloral" xml:space="preserve">
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
-  <data name="googleButton.Text" xml:space="preserve">
-    <value>GOOGLE</value>
+  <data name="D_ItemIncenseOrdinary" xml:space="preserve">
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
-  <data name="InventoryFullText.Text" xml:space="preserve">
-    <value>plný inventář</value>
+  <data name="D_ItemIncenseSpicy" xml:space="preserve">
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
-  <data name="loginButton.Text" xml:space="preserve">
-    <value>Přihlásit se pomocí PTC</value>
+  <data name="D_ItemIncubatorBasic" xml:space="preserve">
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
-  <data name="loginInfoText.Text" xml:space="preserve">
-    <value>Pro přihlášení do této aplikace potřebujete zadat Přihlašovací jméno/Email. Pokud aplikaci nevěříte, nepoužívejte ji. Neneseme za ně žádnou zodpovědnost.</value>
+  <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
-  <data name="logoutText.Text" xml:space="preserve">
-    <value>ODHLÁŠENÍ</value>
+  <data name="D_ItemMasterBall" xml:space="preserve">
+    <value>Najlepšie a najvýkonnejší forma Pokéballu, s ktorou možno chitit akéhokoľvek pokémona bez šance zlyhania.</value>
   </data>
-  <data name="nearbyText.Text" xml:space="preserve">
-    <value>blízko</value>
+  <data name="D_ItemPokeBall" xml:space="preserve">
+    <value>Zariadenie na chytanie divokých pokémonov . Ak je po Pokémonu hodené , komfortne ho uzavrie vnútri .</value>
   </data>
-  <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>mimo dosah</value>
+  <data name="D_ItemPotion" xml:space="preserve">
+    <value>Liek vo spreji, na ošetrenie rán . Obnovuje 20 HP pokémona .</value>
   </data>
-  <data name="passwordBox.PlaceholderText" xml:space="preserve">
-    <value>Heslo</value>
+  <data name="D_ItemRevive" xml:space="preserve">
+    <value>Lék která dokáže probrat pokémona neschopného zápasu. Zároveň obnoví polovinu jeho HP.</value>
   </data>
-  <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Přihlašovací jméno/Email</value>
+  <data name="D_ItemUltraBall" xml:space="preserve">
+    <value>Ultra výkonná vylepšená forma Pokéballu, ktorá poskytuje väčšiu šancu na chytenie pokémona , než Great Ball</value>
   </data>
-  <data name="XPText.Text" xml:space="preserve">
-    <value>XP</value>
+  <data name="ItemBlukBerry" xml:space="preserve">
+    <value>Bobule Bluk</value>
   </data>
-  <data name="OKButton.Content" xml:space="preserve">
-    <value>OK</value>
+  <data name="ItemGreatBall" xml:space="preserve">
+    <value>Great Ball</value>
   </data>
-  <data name="LoadingEncounter" xml:space="preserve">
-    <value>Načítání střetu s</value>
+  <data name="ItemHyperPotion" xml:space="preserve">
+    <value>Hyper Eliksír</value>
   </data>
-  <data name="LoggingIn" xml:space="preserve">
-    <value>Přihlašování...</value>
+  <data name="ItemIncenseCool" xml:space="preserve">
+    <value>Chladná Esencia</value>
   </data>
-  <data name="CPText.Text" xml:space="preserve">
-    <value>CP</value>
+  <data name="ItemIncenseFloral" xml:space="preserve">
+    <value>Rastlinná Esencia</value>
   </data>
-  <data name="EggsText.Text" xml:space="preserve">
-    <value>VEJCE</value>
+  <data name="ItemIncenseOrdinary" xml:space="preserve">
+    <value>Esence</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> utekl</value>
+  <data name="ItemIncenseSpicy" xml:space="preserve">
+    <value>Pikantná Esencia</value>
   </data>
-  <data name="GoogleError" xml:space="preserve">
-    <value>Google odpověděl chybou:</value>
+  <data name="ItemIncubatorBasic" xml:space="preserve">
+    <value>Inkubátor</value>
   </data>
-  <data name="GoogleNotResponding" xml:space="preserve">
-    <value>Google neodpovídá, zkuste to později prosím.</value>
+  <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
+    <value>Nekonečný Inkubátor</value>
   </data>
-  <data name="LoginFailed" xml:space="preserve">
-    <value>Přihlášení se nepovedlo. Zkuste to později prosím.</value>
+  <data name="ItemItemStorageUpgrade" xml:space="preserve">
+    <value>Vylepšenie Úložiska Itemov</value>
   </data>
-  <data name="MusicTitleText.Text" xml:space="preserve">
-    <value>Hudba</value>
+  <data name="ItemLuckyEgg" xml:space="preserve">
+    <value>Šťastné Vejce</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>Ne</value>
+  <data name="ItemMasterBall" xml:space="preserve">
+    <value>Master Ball</value>
   </data>
-  <data name="NoGPSPermissions" xml:space="preserve">
-    <value>Pro funkčnost hry je zapotřebí GPS, prosím zapněte ji a zkuste to znovu.</value>
+  <data name="ItemMaxPotion" xml:space="preserve">
+    <value>Max Lektvar</value>
   </data>
-  <data name="PokemonRanAway" xml:space="preserve">
-    <value>Bohužel, pokemon utekl :(</value>
+  <data name="ItemMaxRevive" xml:space="preserve">
+    <value>Maximálne Oživiť</value>
   </data>
-  <data name="PokemonText.Text" xml:space="preserve">
-    <value>POKÉMON</value>
+  <data name="ItemNanabBerry" xml:space="preserve">
+    <value>Bobule Nanab</value>
   </data>
-  <data name="PTCDown" xml:space="preserve">
-    <value>PTC je pravděpodobně offline. Zkuste to později prosím.</value>
+  <data name="ItemPinapBerry" xml:space="preserve">
+    <value>Bobule Pinap</value>
   </data>
-  <data name="SettingsHeaderText.Text" xml:space="preserve">
-    <value>NASTAVENÍ</value>
+  <data name="ItemPokeBall" xml:space="preserve">
+    <value>Poke Ball</value>
   </data>
-  <data name="SignOutButton.Content" xml:space="preserve">
-    <value>Odhlásit se</value>
+  <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
+    <value>Vylepšenie Úložiska Pokémonov</value>
   </data>
-  <data name="SomethingWentWrong" xml:space="preserve">
-    <value>Něco se pokazilo a applikace by mohla být nestabilní. Chcete se odhlásit a zkusit to znovu ?</value>
+  <data name="ItemPotion" xml:space="preserve">
+    <value>Eliksír</value>
   </data>
-  <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Update je k dispozici.</value>
+  <data name="ItemRazzBerry" xml:space="preserve">
+    <value>Bobule Razz</value>
   </data>
-  <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Chcete navštívit odkaz ?</value>
+  <data name="ItemRevive" xml:space="preserve">
+    <value>Oživiť</value>
   </data>
-  <data name="VibrationTitleText" xml:space="preserve">
-    <value>Vibrace</value>
+  <data name="ItemSpecialCamera" xml:space="preserve">
+    <value>Špeciálna Kamera</value>
   </data>
-  <data name="WrongUsername" xml:space="preserve">
-    <value>Uživatelské jméno nebo Email jsou chybné, nebo je server offline. Zkuste to prosím znovu.</value>
+  <data name="ItemSuperPotion" xml:space="preserve">
+    <value>Super Eliksír</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Ano</value>
+  <data name="ItemTroyDisk" xml:space="preserve">
+    <value>Troy Disk</value>
+  </data>
+  <data name="ItemUltraBall" xml:space="preserve">
+    <value>Ultra Ball</value>
+  </data>
+  <data name="ItemUnknown" xml:space="preserve">
+    <value>Neznáme</value>
+  </data>
+  <data name="ItemWeparBerry" xml:space="preserve">
+    <value>Wepar bobule</value>
+  </data>
+  <data name="ItemXAttack" xml:space="preserve">
+    <value>X Útok</value>
+  </data>
+  <data name="ItemXDefense" xml:space="preserve">
+    <value>X Obrana</value>
+  </data>
+  <data name="ItemXMiracle" xml:space="preserve">
+    <value>X Zázrak</value>
   </data>
 </root>
