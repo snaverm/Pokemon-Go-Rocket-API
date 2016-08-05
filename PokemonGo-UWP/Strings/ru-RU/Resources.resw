@@ -225,4 +225,7 @@
   <data name="VibrationTitleText" xml:space="preserve">
     <value>Вибрация</value>
   </data>
+    <data name="LevelupText.Text" xml:space="preserve">
+     <value>Новый уровень!</value>
+   </data>
 </root>
