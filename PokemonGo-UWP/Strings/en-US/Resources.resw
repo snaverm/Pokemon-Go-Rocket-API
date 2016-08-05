@@ -247,4 +247,7 @@
   <data name="TotalText.Text" xml:space="preserve">
     <value>TOTAL</value>
   </data>
+  <data name="LevelupText.Text" xml:space="preserve">
+    <value>Level up!</value>
+  </data>
 </root>

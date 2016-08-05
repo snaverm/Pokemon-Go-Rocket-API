@@ -204,7 +204,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
   </data>
-    <data name="CPText.Text" xml:space="preserve">
+  <data name="CPText.Text" xml:space="preserve">
     <value>БМ</value>
   </data>
   <data name="EggsText.Text" xml:space="preserve">
@@ -222,7 +222,7 @@
   <data name="SignOutButton.Content" xml:space="preserve">
     <value>Выйти</value>
   </data>
-  <data name="VibrationTitleText" xml:space="preserve">
+  <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Вибрация</value>
   </data>
 </root>

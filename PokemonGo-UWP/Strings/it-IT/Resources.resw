@@ -222,7 +222,7 @@
   <data name="SignOutButton.Content" xml:space="preserve">
     <value>Disconnetti</value>
   </data>
-  <data name="VibrationTitleText" xml:space="preserve">
+  <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Vibrazione</value>
   </data>
 </root>
