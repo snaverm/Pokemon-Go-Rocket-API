@@ -228,4 +228,14 @@
     <data name="LevelupText.Text" xml:space="preserve">
      <value>Новый уровень!</value>
    </data>
+        <data name="UpdateDownloading" xml:space="preserve">
+    <value>скачивание обновления {0}</value>
+   </data>
+   <data name="UpdateInstalling" xml:space="preserve">
+     <value>Установка обновления, игра перезагружаеться...</value>
+   </data>
+   <data name="UpdateFailed" xml:space="preserve">
+     <value>Ошибка обновления: {0}
+ Открыть страницу для ручной установки обновления?</value>
+   </data>
 </root>
