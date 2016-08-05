@@ -18,6 +18,7 @@ using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Envelopes;
+using POGOProtos.Networking.Responses;
 using POGOProtos.Settings.Master;
 using Universal_Authenticator_v2.Views;
 using CatchPokemonResponse = POGOProtos.Networking.Responses.CatchPokemonResponse;
@@ -370,7 +371,16 @@ namespace PokemonGo_UWP.Utils
         public static async Task<GetInventoryResponse> GetInventory()
         {
             return await Client.Inventory.GetInventory();
-        }        
+        }
+
+        /// <summary>
+        /// Gets the rewards after leveling up
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LevelUpRewardsResponse> GetLevelUpRewards(int newLevel)
+        {
+            return await Client.Player.GetLevelUpRewards(newLevel);
+        }
 
         /// <summary>
         ///     Updates inventory data

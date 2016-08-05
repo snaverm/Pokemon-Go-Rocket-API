@@ -83,6 +83,68 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
+        <Storyboard x:Name="ShowLevelUpPanelStoryboard">
+
+            <DoubleAnimation
+                Storyboard.TargetName="LevelUpPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="LevelUpPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="HideLevelUpPanelStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="LevelUpPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="UIBottomPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="LevelUpPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
         <Storyboard x:Name="ShowNearbyModalStoryboard">
             <DoubleAnimation x:Name="ShowNearbyModalAnimation"
                              Storyboard.TargetName="NearbyGridTranslateTransform"
@@ -350,6 +412,101 @@
                        HorizontalAlignment="Stretch" />
             </Button>
 
+
+        </RelativePanel>
+
+        <RelativePanel x:Name="LevelUpPanel"
+                       x:DeferLoadStrategy="Lazy"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"                       
+                       Opacity="0"
+                       Canvas.ZIndex="0">
+
+            <RelativePanel.Background>
+                <LinearGradientBrush StartPoint="0,0" 
+                                     EndPoint="1,1"
+                                     Opacity="0.5">
+                    <GradientStop Color="#4ab583" Offset="0"/>
+                    <GradientStop Color="#266378" Offset="0.8"/>
+                </LinearGradientBrush>
+            </RelativePanel.Background>
+            
+            <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True">
+                <TextBlock Text="Level up!"
+                           FontSize="48"
+                           Foreground="White"/>
+                <TextBlock Text="{Binding PlayerStats.Level}"
+                           Foreground="Cyan"
+                           FontSize="60"/>
+            </StackPanel>
+            
+            <ListView ItemsSource="{Binding LevelUpResponse.ItemsAwarded}"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True"
+                      Margin="0,24,24,0">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" 
+                                Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding ItemId, Converter={StaticResource ItemToItemDescriptionConverter}}"
+                                       Grid.Column="0"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Medium"
+                                       FontFamily="../Assets/Fonts/Lato-Medium.ttf#Lato" />
+                            
+                            <Image Source="{Binding ItemId, Converter={StaticResource ItemIdToItemIconConverter}}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Grid.Column="1"
+                                   Height="36"
+                                   Width="36"
+                                   Margin="16" />
+                            
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       Foreground="Red">
+                                <Run Text="+"/>
+                                <Run Text="{Binding ItemCount}"/>
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="0,0,0,24">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=HideLevelUpPanelStoryboard}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+            </Button>
 
         </RelativePanel>
 
