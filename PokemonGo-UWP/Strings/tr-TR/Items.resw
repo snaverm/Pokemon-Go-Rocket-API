@@ -117,130 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
-  </data>
-  <data name="D_ItemIncenseCool" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
-  </data>
-  <data name="D_ItemIncenseFloral" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
-  </data>
-  <data name="D_ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
-  </data>
-  <data name="D_ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
-  </data>
-  <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
-  </data>
-  <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
-  </data>
-  <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
-  </data>
-  <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
-  </data>
-  <data name="D_ItemPotion" xml:space="preserve">
-    <value>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 20 points.</value>
-  </data>
-  <data name="D_ItemRevive" xml:space="preserve">
-    <value>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</value>
-  </data>
-  <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
-  </data>
   <data name="ItemBlukBerry" xml:space="preserve">
-    <value>Bluk Berry</value>
+    <value>Yığın Meyve</value>
   </data>
   <data name="ItemGreatBall" xml:space="preserve">
-    <value>Great Ball</value>
+    <value>Süper Top</value>
   </data>
   <data name="ItemHyperPotion" xml:space="preserve">
-    <value>Hyper Potion</value>
+    <value>Hiper İksir</value>
   </data>
   <data name="ItemIncenseCool" xml:space="preserve">
-    <value>Incense Cool</value>
+    <value>Serin Tütsü</value>
   </data>
   <data name="ItemIncenseFloral" xml:space="preserve">
-    <value>Incense Floral</value>
+    <value>Bitkisel Tütsü</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense Ordinary</value>
+    <value>Sıradan Tütsü</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense Spicy</value>
+    <value>Acılı Tütsü</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubator Basic</value>
+    <value>Kuluçka</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Incubator Basic Unlimited</value>
+    <value>Sınırsız Kuluçka</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Item Storage Upgrade</value>
+    <value>Eşya Depolama Alanını Yükseltme</value>
   </data>
   <data name="ItemLuckyEgg" xml:space="preserve">
-    <value>Lucky Egg</value>
+    <value>Şanslı Yumurta</value>
   </data>
   <data name="ItemMasterBall" xml:space="preserve">
-    <value>Master Ball</value>
+    <value>Usta Top</value>
   </data>
   <data name="ItemMaxPotion" xml:space="preserve">
-    <value>Max Potion</value>
+    <value>En İyi İksir</value>
   </data>
   <data name="ItemMaxRevive" xml:space="preserve">
-    <value>Max Revive</value>
+    <value>En İyi Canlandırma</value>
   </data>
   <data name="ItemNanabBerry" xml:space="preserve">
-    <value>Nanab Berry</value>
+    <value>Nanab Meyve</value>
   </data>
   <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Pinap Berry</value>
+    <value>Pinap Meyve</value>
   </data>
   <data name="ItemPokeBall" xml:space="preserve">
-    <value>Poke Ball</value>
+    <value>Poke Topu</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Pokemon Storage Upgrade</value>
+    <value>Pokemon Depolama Alanını Yükseltme</value>
   </data>
   <data name="ItemPotion" xml:space="preserve">
-    <value>Potion</value>
+    <value>İksir</value>
   </data>
   <data name="ItemRazzBerry" xml:space="preserve">
-    <value>Razz Berry</value>
+    <value>Alaycı Meyve</value>
   </data>
   <data name="ItemRevive" xml:space="preserve">
-    <value>Revive</value>
+    <value>Canlandırma</value>
   </data>
   <data name="ItemSpecialCamera" xml:space="preserve">
-    <value>Special Camera</value>
+    <value>Özel Kamera</value>
   </data>
   <data name="ItemSuperPotion" xml:space="preserve">
-    <value>Super Potion</value>
+    <value>Mükemmel İksir</value>
   </data>
   <data name="ItemTroyDisk" xml:space="preserve">
-    <value>Troy Disk</value>
+    <value>Hassas Plak</value>
   </data>
   <data name="ItemUltraBall" xml:space="preserve">
-    <value>Ultra Ball</value>
+    <value>Üstün Top</value>
   </data>
   <data name="ItemUnknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Bilinmeyen</value>
   </data>
   <data name="ItemWeparBerry" xml:space="preserve">
     <value>Wepar Berry</value>
   </data>
   <data name="ItemXAttack" xml:space="preserve">
-    <value>X Attack</value>
+    <value>X Saldırı</value>
   </data>
   <data name="ItemXDefense" xml:space="preserve">
-    <value>X Defense</value>
+    <value>X Savunma</value>
   </data>
   <data name="ItemXMiracle" xml:space="preserve">
-    <value>X Miracle</value>
+    <value>X Mucize</value>
   </data>
 </root>

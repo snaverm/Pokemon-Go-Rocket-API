@@ -117,130 +117,112 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+  <data name="CoolDownText.Text" xml:space="preserve">
+    <value>クールダウン</value>
   </data>
-  <data name="D_ItemIncenseCool" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+  <data name="GettingGPSSignal" xml:space="preserve">
+    <value>GPS を取得しています...</value>
   </data>
-  <data name="D_ItemIncenseFloral" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+  <data name="GettingUserData" xml:space="preserve">
+    <value>ユーザーのデータを取得しています...</value>
   </data>
-  <data name="D_ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+  <data name="googleButton.Text" xml:space="preserve">
+    <value>Google</value>
   </data>
-  <data name="D_ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+  <data name="InventoryFullText.Text" xml:space="preserve">
+    <value>inventory full</value>
   </data>
-  <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
+  <data name="loginButton.Text" xml:space="preserve">
+    <value>PTC アカウントでログインする</value>
   </data>
-  <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
+  <data name="loginInfoText.Text" xml:space="preserve">
+    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
   </data>
-  <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+  <data name="logoutText.Text" xml:space="preserve">
+    <value>ログアウト</value>
   </data>
-  <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+  <data name="nearbyText.Text" xml:space="preserve">
+    <value>近く</value>
   </data>
-  <data name="D_ItemPotion" xml:space="preserve">
-    <value>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 20 points.</value>
+  <data name="OutOfRangeText.Text" xml:space="preserve">
+    <value>範囲外</value>
   </data>
-  <data name="D_ItemRevive" xml:space="preserve">
-    <value>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</value>
+  <data name="passwordBox.PlaceholderText" xml:space="preserve">
+    <value>パスワード</value>
   </data>
-  <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+  <data name="usernameTextBox.PlaceholderText" xml:space="preserve">
+    <value>ユーザーネーム/メルアド</value>
   </data>
-  <data name="ItemBlukBerry" xml:space="preserve">
-    <value>Bluk Berry</value>
+  <data name="XPText.Text" xml:space="preserve">
+    <value>XP</value>
   </data>
-  <data name="ItemGreatBall" xml:space="preserve">
-    <value>Great Ball</value>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="ItemHyperPotion" xml:space="preserve">
-    <value>Hyper Potion</value>
+  <data name="LoadingEncounter" xml:space="preserve">
+    <value>Loading encounter with </value>
   </data>
-  <data name="ItemIncenseCool" xml:space="preserve">
-    <value>Incense Cool</value>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>ログイン中...</value>
   </data>
-  <data name="ItemIncenseFloral" xml:space="preserve">
-    <value>Incense Floral</value>
+  <data name="Fleed" xml:space="preserve">
+    <value> fleed</value>
   </data>
-  <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense Ordinary</value>
+  <data name="GoogleError" xml:space="preserve">
+    <value>Google returned error: </value>
   </data>
-  <data name="ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense Spicy</value>
+  <data name="GoogleNotResponding" xml:space="preserve">
+    <value>Google からの反応がありません。もう一度試してください</value>
   </data>
-  <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubator Basic</value>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>ログインに失敗しました。もう一度試してください</value>
   </data>
-  <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Incubator Basic Unlimited</value>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
-  <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Item Storage Upgrade</value>
+  <data name="NoGPSPermissions" xml:space="preserve">
+    <value>ゲームをするためには GPS の使用許可が必要です。有効にしてから試してください</value>
   </data>
-  <data name="ItemLuckyEgg" xml:space="preserve">
-    <value>Lucky Egg</value>
+  <data name="PokemonRanAway" xml:space="preserve">
+    <value>ポケモンはどこかへ行ってしまいました</value>
   </data>
-  <data name="ItemMasterBall" xml:space="preserve">
-    <value>Master Ball</value>
+  <data name="PTCDown" xml:space="preserve">
+    <value>PTC のログインに問題が発生しています。後でもう一度試してください</value>
   </data>
-  <data name="ItemMaxPotion" xml:space="preserve">
-    <value>Max Potion</value>
+  <data name="SomethingWentWrong" xml:space="preserve">
+    <value>何かが起きてアプリが正常起動できていません。ログアウトしてもう一度試しますか？</value>
   </data>
-  <data name="ItemMaxRevive" xml:space="preserve">
-    <value>Max Revive</value>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>最新バージョンにアップデートできます</value>
   </data>
-  <data name="ItemNanabBerry" xml:space="preserve">
-    <value>Nanab Berry</value>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>リンクを開きますか？</value>
   </data>
-  <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Pinap Berry</value>
+  <data name="WrongUsername" xml:space="preserve">
+    <value>ユーザーネーム/パスワード、もしくはサーバーがオフラインになっています。もう一度試してください</value>
   </data>
-  <data name="ItemPokeBall" xml:space="preserve">
-    <value>Poke Ball</value>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
-  <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Pokemon Storage Upgrade</value>
+  <data name="CPText.Text" xml:space="preserve">
+    <value>CP</value>
   </data>
-  <data name="ItemPotion" xml:space="preserve">
-    <value>Potion</value>
+  <data name="EggsText.Text" xml:space="preserve">
+    <value>卵</value>
   </data>
-  <data name="ItemRazzBerry" xml:space="preserve">
-    <value>Razz Berry</value>
+  <data name="MusicTitleText.Text" xml:space="preserve">
+    <value>音楽</value>
   </data>
-  <data name="ItemRevive" xml:space="preserve">
-    <value>Revive</value>
+  <data name="PokemonText.Text" xml:space="preserve">
+    <value>ポケモン</value>
   </data>
-  <data name="ItemSpecialCamera" xml:space="preserve">
-    <value>Special Camera</value>
+  <data name="SettingsHeaderText.Text" xml:space="preserve">
+    <value>設定</value>
   </data>
-  <data name="ItemSuperPotion" xml:space="preserve">
-    <value>Super Potion</value>
+  <data name="SignOutButton.Content" xml:space="preserve">
+    <value>サインアウト</value>
   </data>
-  <data name="ItemTroyDisk" xml:space="preserve">
-    <value>Troy Disk</value>
-  </data>
-  <data name="ItemUltraBall" xml:space="preserve">
-    <value>Ultra Ball</value>
-  </data>
-  <data name="ItemUnknown" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
-  <data name="ItemWeparBerry" xml:space="preserve">
-    <value>Wepar Berry</value>
-  </data>
-  <data name="ItemXAttack" xml:space="preserve">
-    <value>X Attack</value>
-  </data>
-  <data name="ItemXDefense" xml:space="preserve">
-    <value>X Defense</value>
-  </data>
-  <data name="ItemXMiracle" xml:space="preserve">
-    <value>X Miracle</value>
+  <data name="VibrationTitleText" xml:space="preserve">
+    <value>Vibration</value>
   </data>
 </root>

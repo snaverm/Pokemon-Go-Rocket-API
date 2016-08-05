@@ -118,109 +118,109 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+    <value>Dobrá a veľmi výkonná vylepšená forma Pokéballu , ktorá poskytuje väčšiu šancu na chytenie pokémona</value>
   </data>
   <data name="D_ItemIncenseCool" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseFloral" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>Esencia so zázračnú vôňou ktorá vábi divokej pokemony do vašej lokácie na 30 minút .</value>
   </data>
   <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
   <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch.</value>
+    <value>Zariadenie ktoré pomáha vajíčkam sa vykľuť zatiaľ čo chodíte .</value>
   </data>
   <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+    <value>Najlepšie a najvýkonnejší forma Pokéballu, s ktorou možno chitit akéhokoľvek pokémona bez šance zlyhania.</value>
   </data>
   <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+    <value>Zariadenie na chytanie divokých pokémonov . Ak je po Pokémonu hodené , komfortne ho uzavrie vnútri .</value>
   </data>
   <data name="D_ItemPotion" xml:space="preserve">
-    <value>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 20 points.</value>
+    <value>Liek vo spreji, na ošetrenie rán . Obnovuje 20 HP pokémona .</value>
   </data>
   <data name="D_ItemRevive" xml:space="preserve">
-    <value>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</value>
+    <value>Lék která dokáže probrat pokémona neschopného zápasu. Zároveň obnoví polovinu jeho HP.</value>
   </data>
   <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+    <value>Ultra výkonná vylepšená forma Pokéballu, ktorá poskytuje väčšiu šancu na chytenie pokémona , než Great Ball</value>
   </data>
   <data name="ItemBlukBerry" xml:space="preserve">
-    <value>Bluk Berry</value>
+    <value>Bobule Bluk</value>
   </data>
   <data name="ItemGreatBall" xml:space="preserve">
     <value>Great Ball</value>
   </data>
   <data name="ItemHyperPotion" xml:space="preserve">
-    <value>Hyper Potion</value>
+    <value>Hyper Eliksír</value>
   </data>
   <data name="ItemIncenseCool" xml:space="preserve">
-    <value>Incense Cool</value>
+    <value>Chladná Esencia</value>
   </data>
   <data name="ItemIncenseFloral" xml:space="preserve">
-    <value>Incense Floral</value>
+    <value>Rastlinná Esencia</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense Ordinary</value>
+    <value>Esence</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense Spicy</value>
+    <value>Pikantná Esencia</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubator Basic</value>
+    <value>Inkubátor</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Incubator Basic Unlimited</value>
+    <value>Nekonečný Inkubátor</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Item Storage Upgrade</value>
+    <value>Vylepšenie Úložiska Itemov</value>
   </data>
   <data name="ItemLuckyEgg" xml:space="preserve">
-    <value>Lucky Egg</value>
+    <value>Šťastné Vejce</value>
   </data>
   <data name="ItemMasterBall" xml:space="preserve">
     <value>Master Ball</value>
   </data>
   <data name="ItemMaxPotion" xml:space="preserve">
-    <value>Max Potion</value>
+    <value>Max Lektvar</value>
   </data>
   <data name="ItemMaxRevive" xml:space="preserve">
-    <value>Max Revive</value>
+    <value>Maximálne Oživiť</value>
   </data>
   <data name="ItemNanabBerry" xml:space="preserve">
-    <value>Nanab Berry</value>
+    <value>Bobule Nanab</value>
   </data>
   <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Pinap Berry</value>
+    <value>Bobule Pinap</value>
   </data>
   <data name="ItemPokeBall" xml:space="preserve">
     <value>Poke Ball</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Pokemon Storage Upgrade</value>
+    <value>Vylepšenie Úložiska Pokémonov</value>
   </data>
   <data name="ItemPotion" xml:space="preserve">
-    <value>Potion</value>
+    <value>Eliksír</value>
   </data>
   <data name="ItemRazzBerry" xml:space="preserve">
-    <value>Razz Berry</value>
+    <value>Bobule Razz</value>
   </data>
   <data name="ItemRevive" xml:space="preserve">
-    <value>Revive</value>
+    <value>Oživiť</value>
   </data>
   <data name="ItemSpecialCamera" xml:space="preserve">
-    <value>Special Camera</value>
+    <value>Špeciálna Kamera</value>
   </data>
   <data name="ItemSuperPotion" xml:space="preserve">
-    <value>Super Potion</value>
+    <value>Super Eliksír</value>
   </data>
   <data name="ItemTroyDisk" xml:space="preserve">
     <value>Troy Disk</value>
@@ -229,18 +229,18 @@
     <value>Ultra Ball</value>
   </data>
   <data name="ItemUnknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Neznáme</value>
   </data>
   <data name="ItemWeparBerry" xml:space="preserve">
-    <value>Wepar Berry</value>
+    <value>Wepar bobule</value>
   </data>
   <data name="ItemXAttack" xml:space="preserve">
-    <value>X Attack</value>
+    <value>X Útok</value>
   </data>
   <data name="ItemXDefense" xml:space="preserve">
-    <value>X Defense</value>
+    <value>X Obrana</value>
   </data>
   <data name="ItemXMiracle" xml:space="preserve">
-    <value>X Miracle</value>
+    <value>X Zázrak</value>
   </data>
 </root>

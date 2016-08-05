@@ -526,6 +526,23 @@
         <Setter Property="Margin" Value="15,15,15,5" />
     </Style>
 
+    <Style x:Key="TextMenuItemHorizontal" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="#459F87" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="Margin" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="TextMenuItemVertical" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="#459F87" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="Margin" Value="15" />
+    </Style>
+
     <!-- STYLE - END -->
 
     <!-- STYLE - BOX -->

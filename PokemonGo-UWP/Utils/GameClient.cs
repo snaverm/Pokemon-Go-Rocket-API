@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
 using POGOProtos.Data;
+using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Envelopes;
+using POGOProtos.Settings.Master;
 using Universal_Authenticator_v2.Views;
 using CatchPokemonResponse = POGOProtos.Networking.Responses.CatchPokemonResponse;
 using CheckAwardedBadgesResponse = POGOProtos.Networking.Responses.CheckAwardedBadgesResponse;
@@ -108,9 +111,14 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
-        ///     Stores items in the current inventory
+        ///     Stores Items in the current inventory
         /// </summary>
         public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+
+        /// <summary>
+        ///     Stores Incubators in the current inventory
+        /// </summary>
+        public static ObservableCollection<ItemData> IncubatorsInventory { get; set; } = new ObservableCollection<ItemData>();
 
         /// <summary>
         /// Stores Pokemons in the current inventory
@@ -121,6 +129,11 @@ namespace PokemonGo_UWP.Utils
         /// Stores Eggs in the current inventory
         /// </summary>
         public static ObservableCollection<PokemonData> EggsInventory { get; set; } = new ObservableCollection<PokemonData>();
+
+        /// <summary>
+        /// Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
+        /// </summary>
+        public static IEnumerable<PokemonSettings> PokedexExtraData { get; set; } = new List<PokemonSettings>();
 
         #endregion
 
@@ -134,7 +147,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient(bool isPtcAccount)
         {
-            var isPtcLogin = !String.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
+            var isPtcLogin = !string.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
 
             ClientSettings = new Settings
             {
@@ -221,16 +234,6 @@ namespace PokemonGo_UWP.Utils
         private static DispatcherTimer _mapUpdateTimer;
 
         /// <summary>
-        /// Mutex to secure the parallel access to the data update
-        /// </summary>
-        private static readonly Mutex UpdateDataMutex = new Mutex();
-
-        /// <summary>
-        /// If a forced refresh caused an update we should skip the next update
-        /// </summary>
-        private static bool _skipNextUpdate;
-
-        /// <summary>
         /// We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
@@ -273,6 +276,7 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
             await UpdateMapObjects();
             await UpdateInventory();
+            await UpdatePokedex();
             Busy.SetBusy(false);
         }
 
@@ -328,14 +332,6 @@ namespace PokemonGo_UWP.Utils
             Logger.Write("Finished updating map objects");
         }
 
-        public static async Task ForcedUpdateMapData()
-        {
-            if (!UpdateDataMutex.WaitOne(0)) return;
-            _skipNextUpdate = true;
-            await UpdateMapObjects();
-            UpdateDataMutex.ReleaseMutex();
-        }
-
         #endregion
 
         #region Map & Position
@@ -374,22 +370,29 @@ namespace PokemonGo_UWP.Utils
         public static async Task<GetInventoryResponse> GetInventory()
         {
             return await Client.Inventory.GetInventory();
-        }
+        }        
 
         /// <summary>
         ///     Updates inventory data
         /// </summary>
         public static async Task UpdateInventory()
-        {
+        {            
             // Get ALL the items
             var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
             // Update items
             var tmpItemsInventory = fullInventory.Where(item => item.InventoryItemData.Item != null).GroupBy(item => item.InventoryItemData.Item);
             ItemsInventory.Clear();
             foreach (var item in tmpItemsInventory)
-            {
+            {                               
                 ItemsInventory.Add(item.First().InventoryItemData.Item);
             }
+            // Update incbuators
+            //var tmpIncubatorsInventory = fullInventory.Where(item => item.InventoryItemData.EggIncubators != null).GroupBy(item => item.InventoryItemData.EggIncubators);
+            //IncubatorsInventory.Clear();
+            //foreach (var item in tmpIncubatorsInventory)
+            //{
+            //    IncubatorsInventory.Add(item.First().InventoryItemData.Item);
+            //}
             // Update Pokemons
             var tmpPokemonsInventory = fullInventory.Where(item => item.InventoryItemData.PokemonData != null).Select(itemt => itemt.InventoryItemData.PokemonData);
             PokemonsInventory.Clear();
@@ -400,12 +403,37 @@ namespace PokemonGo_UWP.Utils
                     EggsInventory.Add(pokemon);
                 else
                     PokemonsInventory.Add(pokemon);
-            }
+            }                        
         }
 
         #endregion
 
         #region Pokemon Handling
+
+        #region Pokedex
+
+        /// <summary>
+        /// Pokedex extra data doesn't change so we can just call this method once.
+        /// TODO: store it in local settings maybe?
+        /// </summary>
+        /// <returns></returns>
+        private static async Task UpdatePokedex()
+        {
+            // Update Pokedex data
+            PokedexExtraData = (await Client.Download.GetItemTemplates()).ItemTemplates.Where(item => item.PokemonSettings != null).Select(item => item.PokemonSettings);
+        }
+
+        /// <summary>
+        /// Gets extra data for the current pokemon
+        /// </summary>
+        /// <param name="pokemonId"></param>
+        /// <returns></returns>
+        public static PokemonSettings GetExtraDataForPokemon(PokemonId pokemonId)
+        {
+            return PokedexExtraData.First(pokemon => pokemon.PokemonId == pokemonId);
+        }
+
+        #endregion
 
         #region Catching
 
