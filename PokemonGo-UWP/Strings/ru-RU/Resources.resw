@@ -204,7 +204,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
   </data>
-  <data name="CPText.Text" xml:space="preserve">
+    <data name="CPText.Text" xml:space="preserve">
     <value>БМ</value>
   </data>
   <data name="EggsText.Text" xml:space="preserve">
@@ -225,4 +225,7 @@
   <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Вибрация</value>
   </data>
+    <data name="LevelupText.Text" xml:space="preserve">
+     <value>Новый уровень!</value>
+   </data>
 </root>
