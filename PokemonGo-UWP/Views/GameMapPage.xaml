@@ -278,7 +278,7 @@
                     RelativePanel.AlignVerticalCenterWithPanel="True"
                     x:Name="SettingsButton">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="SETTINGS" Style="{StaticResource TextMenuItemHorizontal}" />
+                    <TextBlock x:Uid="SettingsHeaderText" Text="SETTINGS" Style="{StaticResource TextMenuItemHorizontal}" />
                     <Image Source="../Assets/Buttons/btn_settings.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
@@ -291,7 +291,7 @@
                     x:Name="PokedexButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="POKÉDEX" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="PokedexText" Text="POKÉDEX" Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokedex.png"
                        Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                        HorizontalAlignment="Stretch" />
@@ -306,7 +306,7 @@
                     x:Name="PokemonButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="POKÉMON" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="PokemonText" Text="POKÉMON" Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokemon.png"
                        Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                        HorizontalAlignment="Stretch" />
@@ -320,7 +320,7 @@
                     x:Name="ToolsButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="ITEMS" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="ItemsText" Text="ITEMS" Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_items.png"
                        Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                        HorizontalAlignment="Stretch" />

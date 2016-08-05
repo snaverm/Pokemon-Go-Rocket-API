@@ -25,7 +25,7 @@
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock Text="SETTINGS" Style="{StaticResource TextPageTitle}" />
+            <TextBlock x:Uid="SettingsHeaderText" Text="SETTINGS" Style="{StaticResource TextPageTitle}" />
             <Border Background="#ffffff" Width="150" Height="1" />
         </StackPanel>
         <ScrollViewer Grid.Row="1">
@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                               x:Name="MusicTitle" 
+                               x:Uid="MusicTitleText" 
                                Text="Music"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                               x:Name="VibrationTitle"
+                               x:Uid="VibrationTitleText"
                                Text="Vibration"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
@@ -69,6 +69,7 @@
                         Style="{StaticResource ButtonNoStyle}">
                         <TextBlock
                                Text="Sign Out"
+                               x:Uid="SignOutButton"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
                     </Button>

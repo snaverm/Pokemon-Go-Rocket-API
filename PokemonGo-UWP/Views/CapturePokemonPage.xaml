@@ -137,7 +137,8 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="items"
+                <TextBlock x:Uid="ItemsTextLower"
+                           Text="items"
                            Grid.Row="0"
                            FontSize="25"
                            FontFamily="../Assets/Fonts/Generica.otf#Generica"
@@ -356,7 +357,8 @@
                                                                HorizontalAlignment="Right"
                                                                VerticalAlignment="Center"
                                                                Margin="0,0,6,0" />
-                                                    <TextBlock Text="XP"
+                                                    <TextBlock x:Uid="XPText"
+                                                               Text="XP"
                                                                VerticalAlignment="Center"
                                                                Foreground="Red" />
                                                 </StackPanel>
@@ -374,7 +376,8 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="TOTAL"
+                                    <TextBlock x:Uid="TotalText"
+                                               Text="TOTAL"
                                                HorizontalAlignment="Left"
                                                Grid.Column="0" />
 
@@ -387,13 +390,15 @@
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Center"
                                             Margin="0,0,6,0" />
-                                        <TextBlock Text="XP"
+                                        <TextBlock x:Uid="XPText"
+                                                   Text="XP"
                                                    VerticalAlignment="Center"
                                                    Foreground="Red" />
                                     </StackPanel>
                                 </Grid>
 
-                                <Button Content="OK"
+                                <Button x:Uid="OKButton"
+                                        Content="OK"
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding ReturnToGameScreen}"
                                         Grid.Row="3"
@@ -445,7 +450,8 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding CurrentPokemon.Name}"
                            Foreground="White" />
-                <TextBlock Text="/ CP"
+                <TextBlock x:Uid="SlashSpaceCPText"
+                           Text="/ CP"
                            Margin="6,0"
                            Foreground="White" />
                 <TextBlock Text="{Binding CurrentEncounter.WildPokemon.PokemonData.Cp}"
