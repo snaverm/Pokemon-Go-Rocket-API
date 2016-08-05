@@ -112,9 +112,13 @@
     <Content Include="Assets\Buttons\btn_close_normal_dark.png" />
     <Content Include="Assets\Buttons\btn_empty.png" />
     <Content Include="Assets\Buttons\btn_incubator.png" />
+    <Content Include="Assets\Buttons\btn_items.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
     <Content Include="Assets\Buttons\btn_ok_normal_dark.png" />
+    <Content Include="Assets\Buttons\btn_pokedex.png" />
+    <Content Include="Assets\Buttons\btn_pokemon.png" />
     <Content Include="Assets\Buttons\btn_run_away.png" />
+    <Content Include="Assets\Buttons\btn_settings.png" />
     <Content Include="Assets\Buttons\btn_swap.png" />
     <Content Include="Assets\Buttons\btn_train.png" />
     <Content Include="Assets\Icons\circle_255_filled_01.png" />
