@@ -142,7 +142,7 @@
     <value>Выйти</value>
   </data>
   <data name="nearbyText.Text" xml:space="preserve">
-    <value>Рядом</value>
+    <value>Поблизости</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
     <value>Слишком далеко</value>
