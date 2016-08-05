@@ -10,7 +10,6 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
-using PokemonGo_UWP.Utils.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,14 +29,23 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Enabled;            
 
             // Setup nearby translation
             Loaded += (s, e) =>
             {
+                var randomTileSourceIndex = new Random().Next(0, ApplicationKeys.MapBoxTokens.Length);
+                Logger.Write($"Using MapBox's keyset {randomTileSourceIndex}");
+                var mapBoxTileSource =
+                    new HttpMapTileDataSource(
+                        "https://api.mapbox.com/styles/v1/" + (RequestedTheme == ElementTheme.Light ? ApplicationKeys.MapBoxStylesLight[randomTileSourceIndex] : ApplicationKeys.MapBoxStylesDark[randomTileSourceIndex]) +
+                        "/tiles/256/{zoomlevel}/{x}/{y}?access_token=" + ApplicationKeys.MapBoxTokens[randomTileSourceIndex])
+                    {
+                        AllowCaching = true
+                    };
 
                 GameMapControl.TileSources.Clear();
-                GameMapControl.TileSources.Add(new MapTileSource(new MapBoxMapSource().TileSource) {AllowOverstretch = true, IsFadingEnabled = true});
+                GameMapControl.TileSources.Add(new MapTileSource(mapBoxTileSource) {AllowOverstretch = true, IsFadingEnabled = false});                
 
                 ShowNearbyModalAnimation.From =
                     HideNearbyModalAnimation.To = NearbyPokemonModal.ActualHeight;

@@ -129,6 +129,7 @@
     <Content Include="Assets\Icons\ic_health.png" />
     <Content Include="Assets\Icons\ic_name.png" />
     <Content Include="Assets\Icons\ic_number.png" />
+    <Content Include="Assets\Icons\pokestop_far.png" />
     <Content Include="Assets\Icons\pokestop_near.png" />
     <Content Include="Assets\Icons\pokestop_near_inactive.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
@@ -369,10 +370,6 @@
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\ExceptionHandler.cs" />
     <Compile Include="Utils\GameClient.cs" />
-    <Compile Include="Utils\Maps\BaseHttpTileSource.cs" />
-    <Compile Include="Utils\Maps\ITileSource.cs" />
-    <Compile Include="Utils\Maps\MapBoxMapSource.cs" />
-    <Compile Include="Utils\Maps\OpenStreetMapSource.cs" />
     <Compile Include="Utils\MessageDialogExtensions.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
     <Compile Include="Utils\Resources.cs" />
@@ -406,6 +403,9 @@
     </Compile>
     <Compile Include="Views\SearchPokestopPage.xaml.cs">
       <DependentUpon>SearchPokestopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +471,10 @@
     <Page Include="Views\SearchPokestopPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Splash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
