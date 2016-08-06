@@ -425,7 +425,7 @@
                                         </interactivity:Interaction.Behaviors>
 
                                         <Image
-                                            Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                            Source="{Binding Converter={StaticResource EggDataToEggIconConverter}}"
                                             Stretch="Uniform"
                                             VerticalAlignment="Center"
                                             Width="48"

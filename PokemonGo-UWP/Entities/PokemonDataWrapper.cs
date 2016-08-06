@@ -27,6 +27,8 @@ namespace PokemonGo_UWP.Entities
 
         private DelegateCommand _gotoEggDetailsCommand;
 
+        public PokemonData WrappedData => _pokemonData;
+
         /// <summary>
         ///     Navigate to detail page for the selected egg
         /// </summary>
@@ -38,6 +40,8 @@ namespace PokemonGo_UWP.Entities
             }, () => true));
 
         #region Wrapped Properties
+
+        public ulong Id => _pokemonData.Id;
 
         public PokemonId PokemonId => _pokemonData.PokemonId;
 

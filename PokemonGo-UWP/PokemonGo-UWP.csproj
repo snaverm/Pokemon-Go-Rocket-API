@@ -155,10 +155,10 @@
     <Content Include="Assets\Icons\stardust_painted.png" />
     <Content Include="Assets\Icons\stardust_vector.png" />
     <Content Include="Assets\Items\Egg.png" />
-    <Content Include="Assets\Items\EggIncubator.png" />
+    <Content Include="Assets\Items\E_Item_902.png" />
     <Content Include="Assets\Items\Item_902.png" />
     <Content Include="Assets\Items\Item_901.png" />
-    <Content Include="Assets\Items\EggIncubatorUnlimited.png" />
+    <Content Include="Assets\Items\E_Item_901.png" />
     <Content Include="Assets\Items\Item_1.png" />
     <Content Include="Assets\Items\Item_2.png" />
     <Content Include="Assets\Items\Item_3.png" />

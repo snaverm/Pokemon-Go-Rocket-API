@@ -105,7 +105,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Reference to global inventory
         /// </summary>
-        public ObservableCollection<EggIncubator> ItemsInventory => GameClient.IncubatorsInventory;
+        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.IncubatorsInventory;
 
         /// <summary>
         ///     Pokemon that we're trying to capture
@@ -145,7 +145,39 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Incubator
+
+        #region Incubator Events
+
+        /// <summary>
+        /// Event fired if using the incubator returned Success
+        /// </summary>
+        public event EventHandler IncubatorSuccess;
+
+        #endregion
+        // TODO: disable button visibility ig egg has already an incubator        
+        private DelegateCommand<EggIncubator> _useIncubatorCommand;
+
+        public DelegateCommand<EggIncubator> UseIncubatorCommand => _useIncubatorCommand ?? (
+            _useIncubatorCommand = new DelegateCommand<EggIncubator>(async incubator =>
+            {
+                var response = await GameClient.UseEggIncubator(incubator, CurrentEgg.WrappedData);
+                switch (response.Result)
+                {
+                    case UseItemEggIncubatorResponse.Types.Result.Success:
+                        IncubatorSuccess?.Invoke(this, null);
+                        await GameClient.UpdateInventory();
+                        CurrentEgg = new PokemonDataWrapper(GameClient.EggsInventory.First(item => item.Id == CurrentEgg.Id));                        
+                        break;                    
+                    default:
+                        // TODO: user can only use one unlimited incubator at the same time, so we need to hide it 
+                        Logger.Write($"Error using {incubator.Id} on {CurrentEgg.Id}");
+                        break;
+                }
+            }, incubator => true));
+
         #endregion
 
+        #endregion
     }
 }

@@ -333,6 +333,25 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class EggDataToEggIconConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return "ms-appx:///Assets/Items/Egg.png";
+            var egg = (PokemonDataWrapper)value;
+            return string.IsNullOrEmpty(egg.EggIncubatorId) ? "ms-appx:///Assets/Items/Egg.png" : $"ms-appx:///Assets/Items/E_Item_{(int)GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class EggDataToEggProgressConverter : IValueConverter
     {
         #region Implementation of IValueConverter
