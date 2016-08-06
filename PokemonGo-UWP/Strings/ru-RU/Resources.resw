@@ -181,31 +181,28 @@
     <value>Нет</value>
   </data>
   <data name="NoGPSPermissions" xml:space="preserve">
-    <value>Нет доступа к GPS, пожалуйста включите и попробуйте еще раз.</value>
+    <value>Нет доступа к GPS. Зайдите в настройки и включите его, а затем попробуйте еще раз.</value>
   </data>
   <data name="PokemonRanAway" xml:space="preserve">
-    <value>Покемон сбежал, сорри :(</value>
+    <value>Покемон сбежал.</value>
   </data>
   <data name="PTCDown" xml:space="preserve">
-    <value>проблемы в авторизации на PTC, пожалуйста попробуйте позже.</value>
+    <value>Проблемы с авторизацией через PTC, пожалуйста попробуйте позже.</value>
   </data>
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Что-то пошло не так и теперь приложение может работать нестабильно . Вы хотите, выйти и попробовать еще раз?</value>
   </data>
-  <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Обновленная версия доступна на</value>
-  </data>
-  <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Вы хотите посетить ссылку ?</value>
+  <data name="UpdatedVersion" xml:space="preserve">
+    <value>Доступна новая версия ({0}). Вы хотите обновиться?</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
-    <value>Направельный логин/пароль или сервер  недоступен, пожалуйста, попробуйте еще раз .</value>
+    <value>Направельный логин/пароль или сервер временно недоступен, пожалуйста, попробуйте еще раз.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
   </data>
     <data name="CPText.Text" xml:space="preserve">
-    <value>БМ</value>
+    <value>CP</value>
   </data>
   <data name="EggsText.Text" xml:space="preserve">
     <value>Яйца</value>
@@ -223,19 +220,19 @@
     <value>Выйти</value>
   </data>
   <data name="VibrationTitleText.Text" xml:space="preserve">
-    <value>Вибрация</value>
+    <value>Вибрации</value>
   </data>
     <data name="LevelupText.Text" xml:space="preserve">
-     <value>Новый уровень!</value>
+     <value>Уровень повышен!</value>
    </data>
         <data name="UpdateDownloading" xml:space="preserve">
-    <value>скачивание обновления {0}</value>
+    <value>Скачивание обновления {0}</value>
    </data>
    <data name="UpdateInstalling" xml:space="preserve">
-     <value>Установка обновления, игра перезагружаеться...</value>
+     <value>Установка обновления. Приложение будет перезапущено.</value>
    </data>
    <data name="UpdateFailed" xml:space="preserve">
-     <value>Ошибка обновления: {0}
- Открыть страницу для ручной установки обновления?</value>
+     <value>Обновление неудачно. Ошибка: {0}
+ Открыть страницу для ручной установки?</value>
    </data>
 </root>
