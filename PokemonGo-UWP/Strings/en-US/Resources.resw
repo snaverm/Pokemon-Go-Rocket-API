@@ -285,6 +285,9 @@ Open page with installation files for manual install?</value>
   <data name="Evolutions" xml:space="preserve">
     <value>Evolutions</value>
   </data>
+  <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
+    <value>Autorotate map</value>
+  </data>
   <data name="PokeballsThrown" xml:space="preserve">
     <value>Pokeballs thrown</value>
   </data>

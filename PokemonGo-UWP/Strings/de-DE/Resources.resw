@@ -276,4 +276,7 @@
   <data name="Walked" xml:space="preserve">
     <value>gelaufen</value>
   </data>
+  <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
+    <value>Karte automatisch rotieren</value>
+  </data>
 </root>
