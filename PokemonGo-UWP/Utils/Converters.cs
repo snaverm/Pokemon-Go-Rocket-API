@@ -113,6 +113,20 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PlayerStatsTranslationConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            return Resources.Translation.GetString((string)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class EncounterBackgroundToBackgroundImageConverter : IValueConverter
     {
         #region Implementation of IValueConverter

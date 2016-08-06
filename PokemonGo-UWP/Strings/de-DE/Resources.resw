@@ -222,4 +222,58 @@
   <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Vibration</value>
   </data>
+  <data name="LevelText.Text" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="BattleAttackTotal" xml:space="preserve">
+    <value>gesamte angegriffene Kämpfe</value>
+  </data>
+  <data name="BattleAttackWon" xml:space="preserve">
+    <value>gewonnene angegriffene Kämpfe</value>
+  </data>
+  <data name="BattleDefendedWon" xml:space="preserve">
+    <value>gewonnene verteidigende Kämpfe</value>
+  </data>
+  <data name="BattleTrainingTotal" xml:space="preserve">
+    <value>gesamte Trainingskämpfe</value>
+  </data>
+  <data name="BattleTrainingWon" xml:space="preserve">
+    <value>gewonnen Trainingskämpfe</value>
+  </data>
+  <data name="DistanceType" xml:space="preserve">
+    <value>km</value>
+  </data>
+  <data name="EggsHatched" xml:space="preserve">
+    <value>ausgeschlüpfte Eier</value>
+  </data>
+  <data name="Evolutions" xml:space="preserve">
+    <value>Entwicklungen</value>
+  </data>
+  <data name="PokeballsThrown" xml:space="preserve">
+    <value>geworfene Pokébälle</value>
+  </data>
+  <data name="PokedexEntries" xml:space="preserve">
+    <value>Pokédex-Einträge</value>
+  </data>
+  <data name="PokemonCaughtByType" xml:space="preserve">
+    <value>unterschiedliche Pokémons gefangen</value>
+  </data>
+  <data name="PokemonsCaptured" xml:space="preserve">
+    <value>Pokémons gefangen</value>
+  </data>
+  <data name="PokemonsEncountered" xml:space="preserve">
+    <value>Pokémons getroffen</value>
+  </data>
+  <data name="PokestopsVisited" xml:space="preserve">
+    <value>Pokéstops besucht</value>
+  </data>
+  <data name="prestigeDroppedTotal" xml:space="preserve">
+    <value>gesamtes gesunkenes Ansehen</value>
+  </data>
+  <data name="PrestigeRaisedTotal" xml:space="preserve">
+    <value>gesamtes erhöhtes Ansehen</value>
+  </data>
+  <data name="Walked" xml:space="preserve">
+    <value>gelaufen</value>
+  </data>
 </root>

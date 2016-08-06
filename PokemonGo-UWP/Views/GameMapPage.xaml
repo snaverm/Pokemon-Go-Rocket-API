@@ -528,26 +528,27 @@
                            Padding="10,0,0,0"
                            Grid.Column="0"
                            VerticalAlignment="Center">
-
-				<Ellipse Width="64"
+                <Button x:Name="AvatarButton" RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="true"
+                        Command="{Binding GotoPlayerProfilePageCommand}">
+                    <Ellipse Width="64"
                          Height="64"
                          Stroke="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                          StrokeThickness="2.5"
-                         RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignTopWithPanel="True"
                          x:Name="AvatarEllipse">
-					<Ellipse.Fill>
-						<ImageBrush ImageSource="../Assets/UI/avatar.png" />
-					</Ellipse.Fill>
-				</Ellipse>
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="../Assets/UI/avatar.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Button>
 
-				<ProgressBar Value="{Binding ExperienceValue}"
+                <ProgressBar Value="{Binding ExperienceValue}"
                              Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                              Height="5"
                              Margin="0,-5,0,0"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="AvatarEllipse"
+                             RelativePanel.Below="AvatarButton"
                              x:Name="ExperienceProgressBar" />
 
 				<TextBlock Text="{Binding PlayerStats.Level}"
@@ -556,7 +557,7 @@
                            Style="{ThemeResource BodyTextBlockStyle}"
                            FontWeight="SemiBold"
                            TextAlignment="Right"
-                           RelativePanel.RightOf="AvatarEllipse"
+                           RelativePanel.RightOf="AvatarButton"
                            RelativePanel.Above="ExperienceProgressBar"
                            Margin="-6,0,0,-4" />
 

@@ -258,4 +258,58 @@ Open page with installation files for manual install?</value>
   <data name="LevelupText.Text" xml:space="preserve">
     <value>Level up!</value>
   </data>
+  <data name="LevelText.Text" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="BattleAttackTotal" xml:space="preserve">
+    <value>total attacked battles</value>
+  </data>
+  <data name="BattleAttackWon" xml:space="preserve">
+    <value>won attacked battles</value>
+  </data>
+  <data name="BattleDefendedWon" xml:space="preserve">
+    <value>won defened battles</value>
+  </data>
+  <data name="BattleTrainingTotal" xml:space="preserve">
+    <value>total training battles</value>
+  </data>
+  <data name="BattleTrainingWon" xml:space="preserve">
+    <value>won training battles</value>
+  </data>
+  <data name="DistanceType" xml:space="preserve">
+    <value>km</value>
+  </data>
+  <data name="EggsHatched" xml:space="preserve">
+    <value>Eggs hatched</value>
+  </data>
+  <data name="Evolutions" xml:space="preserve">
+    <value>Evolutions</value>
+  </data>
+  <data name="PokeballsThrown" xml:space="preserve">
+    <value>Pokeballs thrown</value>
+  </data>
+  <data name="PokedexEntries" xml:space="preserve">
+    <value>Pokedex entries</value>
+  </data>
+  <data name="PokemonCaughtByType" xml:space="preserve">
+    <value>different Pokemons caught</value>
+  </data>
+  <data name="PokemonsCaptured" xml:space="preserve">
+    <value>Pokemons captured</value>
+  </data>
+  <data name="PokemonsEncountered" xml:space="preserve">
+    <value>Pokemons encountered</value>
+  </data>
+  <data name="PokestopsVisited" xml:space="preserve">
+    <value>Pokestops visited</value>
+  </data>
+  <data name="prestigeDroppedTotal" xml:space="preserve">
+    <value>total dropped prestige</value>
+  </data>
+  <data name="PrestigeRaisedTotal" xml:space="preserve">
+    <value>total raised prestige</value>
+  </data>
+  <data name="Walked" xml:space="preserve">
+    <value>walked</value>
+  </data>
 </root>
