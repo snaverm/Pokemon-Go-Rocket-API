@@ -145,7 +145,7 @@
     <value>blízko</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>mimo dosahu</value>
+    <value>Pokestop mimo dosahu</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Heslo</value>
