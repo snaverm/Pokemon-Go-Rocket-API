@@ -1,0 +1,124 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.EggDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PokemonGo_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:EggDetailPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="116*" />
+            <RowDefinition Height="67*" />
+            <RowDefinition Height="137*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="2"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform Rotation="180" />
+            </Grid.RenderTransform>
+            <Grid.Background>
+                <ImageBrush x:Name="ImageBg2"
+                            ImageSource="ms-appx:///Assets/Backgrounds/details_type_bg_normal.png"
+                            Stretch="Fill" />
+            </Grid.Background>
+        </Grid>
+
+        <Grid Grid.Row="0"
+              Grid.RowSpan="2">
+            <Grid.Background>
+                <ImageBrush x:Name="ImageBg1"
+                            ImageSource="ms-appx:///Assets/Backgrounds/details_type_bg_normal.png"
+                            Stretch="Fill" />
+            </Grid.Background>
+        </Grid>
+
+        <Grid x:Name="PokeMenuPanel"
+              Grid.Row="0"
+              Canvas.ZIndex="0"
+              Grid.RowSpan="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <Image x:Name="EggImage"
+                   Grid.Row="0"
+                   VerticalAlignment="Bottom"
+                   Height="128"
+                   Source="../Assets/Items/Egg.png"
+                   Stretch="Uniform"
+                   RelativePanel.AlignTopWithPanel="True" />
+
+            <Border CornerRadius="5"
+                    Background="#FAFAFA"
+                    BorderBrush="#FAFAFA"
+                    Margin="10,0,10,-10"
+                    BorderThickness="3"
+                    Grid.Row="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0"
+                                Padding="16">
+
+                        <ProgressBar
+                            Value="{Binding CurrentEgg, Converter={StaticResource EggDataToEggProgressConverter}}"
+                            Width="200"
+                            Margin="0,2,0,0"
+                            Foreground="#399FFF"
+                            IsIndeterminate="False"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalAlignment="Center" />
+
+                        <TextBlock
+                            TextAlignment="Center">
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedStart}" />
+                            <Run FontWeight="Bold" Text="/" />
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedTarget}" />
+                            <Run FontWeight="Light" Text=" km" />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Use an incubator to incubate the Egg." 
+                                   HorizontalAlignment="Center"/>
+
+                        <Button Style="{StaticResource ButtonSubmit}"
+                                Width="180">
+                            <TextBlock Text="START INCUBATION" />
+                        </Button>
+                    </StackPanel>
+
+                    <Button Grid.Row="2"
+                            Style="{ThemeResource ImageButtonStyle}"
+                            Height="{ThemeResource UiButtonSize}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,24"
+                            Command="{Binding ReturnToPokemonInventoryScreen}">
+                        <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
+                               Stretch="Uniform"
+                               HorizontalAlignment="Stretch" />
+                    </Button>
+
+                </Grid>
+
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

@@ -26,11 +26,16 @@ namespace PokemonGo_UWP.Views
         public PokemonInventoryPage()
         {
             this.InitializeComponent();
-
+            // TODO: fix header
+            // Setup incubators translation
             Loaded += (s, e) =>
-            {
-                // TODO: Fix header alignment
-                //PokemonsPivotHeader.Width = EggsPivotHeader.Width = this.ActualWidth/2;
+            {                
+                ShowIncubatorsModalAnimation.From =
+                    HideIncubatorsModalAnimation.To = IncubatorsModal.ActualHeight;
+                HideIncubatorsModalStoryboard.Completed += (ss, ee) =>
+                {
+                    IncubatorsModal.IsModal = false;
+                };
             };
         }
 
@@ -56,6 +61,20 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
+
+
+        private void ToggleIncubatorModel(object sender, TappedRoutedEventArgs e)
+        {
+            if (IncubatorsModal.IsModal)
+            {
+                HideIncubatorsModalStoryboard.Begin();
+            }
+            else
+            {
+                IncubatorsModal.IsModal = true;
+                ShowIncubatorsModalStoryboard.Begin();
+            }
+        }
 
     }
 
