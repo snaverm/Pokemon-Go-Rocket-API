@@ -16,39 +16,8 @@
 
     <Page.Resources>
         <Storyboard x:Name="ShowSortMenuStoryboard">
-
-            <DoubleAnimation
-                Storyboard.TargetName="SortMenuPanel"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="1"
-                Duration="0:0:0.2" />
-
             <DoubleAnimation
                 Storyboard.TargetName="MainUIPanel"
-                Storyboard.TargetProperty="Opacity"
-                From="1"
-                To="0"
-                Duration="0:0:0.2" />
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
-                                           Storyboard.TargetName="SortMenuPanel">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>10</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Name="HideSortMenuStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="SortMenuPanel"
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
@@ -60,22 +29,7 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
-                                           Storyboard.TargetName="SortMenuPanel">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>10</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
-
     </Page.Resources>
 
     <Grid HorizontalAlignment="Stretch"
@@ -85,8 +39,8 @@
                        VerticalAlignment="Stretch">
 
             <RelativePanel.Background>
-                <ImageBrush ImageSource="../Assets/UI/panelBG.png"
-                            Stretch="Uniform" />
+                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green.png"
+                            Stretch="Fill" />
             </RelativePanel.Background>
 
             <RelativePanel x:Name="UserDetailsPanel"
@@ -97,69 +51,109 @@
                            Padding="10"
                            Grid.Column="0"
                            VerticalAlignment="Stretch">
-                
-                <TextBlock Text="{Binding PlayerProfile.Username}"
-                           x:Name="UsernameTextBlock"
-                           FontSize="30"
-                           RelativePanel.AlignTopWithPanel="True"
-                           Foreground="{ThemeResource ContrastColorBrush}" />
-                <Ellipse Width="64"
-                         Height="64"
+
+                <Ellipse Width="256"
+                         Height="256"
+                         Margin="0,48,0,0"
                          Stroke="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
-                         RelativePanel.Below="UsernameTextBlock"
+                         RelativePanel.AlignTopWithPanel="True"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                          StrokeThickness="2.5"
-                         x:Name="AvatarEllipse">
+                         x:Name="AvatarEllipseNew">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="../Assets/UI/avatar.png" />
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <ProgressBar Value="{Binding ExperienceValue}"
-                             Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
-                             Height="5"
-                             Margin="0,-5,0,0"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="AvatarEllipse"
-                             x:Name="ExperienceProgressBar" />
-
-                <StackPanel RelativePanel.RightOf="AvatarEllipse"
-                            RelativePanel.Above="ExperienceProgressBar"
-                            Orientation="Horizontal">
+                <StackPanel RelativePanel.Below="AvatarEllipseNew"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            Orientation="Horizontal"
+                            x:Name="ExperiencePanel">
+                    <TextBlock Style="{ThemeResource ProfilePageMediumText}"
+                               Text="{Binding PlayerStats.Experience}"/>
+                    <TextBlock Margin="5,0,0,0" x:Uid="XPText"
+                               Style="{ThemeResource ProfilePageMediumText}" />
+                </StackPanel>
+                
+                <StackPanel RelativePanel.Below="ExperiencePanel"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            Orientation="Horizontal"
+                            x:Name="LevelPanel">
                     <TextBlock Text="Level"
-                               FontSize="38"
+                               Style="{ThemeResource ProfilePageLargeText}"
                                Foreground="{ThemeResource ContrastColorBrush}"
-                               Style="{ThemeResource BodyTextBlockStyle}"
                                x:Uid="LevelText"
                                FontWeight="SemiBold"/>
                     <TextBlock Text="{Binding PlayerStats.Level}"
                                Margin="5,0,0,0"
-                               FontSize="38"
+                               Style="{ThemeResource ProfilePageLargeText}"
                                Foreground="{ThemeResource ContrastColorBrush}"
-                               Style="{ThemeResource BodyTextBlockStyle}"
                                FontWeight="SemiBold"/>
                 </StackPanel>
 
-                <TextBlock Text="{Binding ExperienceString}"
-                           x:Name="ExperienceText"
-                           RelativePanel.Below="ExperienceProgressBar"/>
+                <ProgressBar Value="{Binding ExperienceValue}"
+                             Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
+                             Height="10"
+                             Margin="48,0"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="LevelPanel"
+                             x:Name="ExperienceProgressBar" />
 
-                <ListView RelativePanel.Below="ExperienceText"
-                          RelativePanel.AlignBottomWithPanel="True"
-                          RelativePanel.AlignLeftWithPanel="True"
-                          RelativePanel.AlignRightWithPanel="True"
-                          ItemsSource="{Binding PlayerStatsValues}"
-                          SelectionMode="None">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Value}"/>
-                                <TextBlock Text="{Binding Key, Converter={StaticResource PlayerStatsTranslationConverter}}"
-                                           Margin="5,0,0,0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <StackPanel RelativePanel.Below="ExperienceProgressBar"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            Orientation="Horizontal"
+                            x:Name="LevelExperiencePanel">
+                    <TextBlock Text="{Binding CurrentLevelXP}"
+                               Style="{ThemeResource ProfilePageMediumText}"
+                               Foreground="{ThemeResource ContrastColorBrush}"
+                               x:Uid="LevelText"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="/"
+                               Foreground="{ThemeResource ContrastColorBrush}"
+                               Style="{ThemeResource ProfilePageMediumText}"
+                               Margin="5,0"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding TotalLevelXP}"
+                               Foreground="{ThemeResource ContrastColorBrush}"
+                               Style="{ThemeResource ProfilePageMediumText}"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="XP"
+                               Margin="5,0,0,0"
+                               Foreground="{ThemeResource ContrastColorBrush}"
+                               Style="{ThemeResource ProfilePageMediumText}"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <RelativePanel RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True">
+                    <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                RelativePanel.AlignVerticalCenterWith="TeamImage">
+                        <TextBlock Style="{ThemeResource ProfilePageSmallText}" 
+                                   Foreground="{ThemeResource ContrastColorBrush}"
+                                   HorizontalAlignment="Center"
+                                   Text="START DATE"
+                                   x:Uid="StartDateText"/>
+                        <TextBlock Style="{ThemeResource ProfilePageSmallText}" 
+                                   HorizontalAlignment="Center"
+                                   Foreground="{ThemeResource ContrastColorBrush}"
+                                   Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}"/>
+                    </StackPanel>
+
+                    <Image Width="128" Margin="32,0,32,0"
+                           x:Name="TeamImage"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True"
+                           Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamImageConverter}}"/>
+                    <TextBlock x:Name="TeamText"
+                               Margin="0"
+                               Padding="0"
+                               Style="{ThemeResource ProfilePageText}"
+                               RelativePanel.AlignHorizontalCenterWith="TeamImage"
+                               RelativePanel.Below="TeamImage"
+                               Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}"/>
+                </RelativePanel>
             </RelativePanel>
             
             <Button RelativePanel.AlignBottomWithPanel="True"

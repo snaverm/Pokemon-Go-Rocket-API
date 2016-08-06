@@ -34,6 +34,9 @@
             <utils:EggDataToEggProgressConverter x:Key="EggDataToEggProgressConverter"/>
             <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter"/>
             <utils:PlayerStatsTranslationConverter x:Key="PlayerStatsTranslationConverter" />
+            <utils:MsToDateFormatConverter x:Key="MsToDateFormatConverter" />
+            <utils:PlayerTeamToTeamImageConverter x:Key="PlayerTeamToTeamImageConverter" />
+            <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
             
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>

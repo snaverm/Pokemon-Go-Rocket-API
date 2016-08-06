@@ -40,7 +40,8 @@ namespace PokemonGo_UWP.ViewModels
                 var tmpStats = InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
                 PlayerStats = tmpStats;
                 RaisePropertyChanged(nameof(ExperienceValue));
-                RaisePropertyChanged(nameof(ExperienceString));
+                RaisePropertyChanged(nameof(CurrentLevelXP));
+                RaisePropertyChanged(nameof(TotalLevelXP));
             }
             ReadPlayerStatsValues();
             await Task.CompletedTask;
@@ -121,7 +122,9 @@ namespace PokemonGo_UWP.ViewModels
 
         public int ExperienceValue => _playerStats == null ? 0 : (int)(((double)_playerStats.Experience - _playerStats.PrevLevelXp) / (_playerStats.NextLevelXp - _playerStats.PrevLevelXp) * 100);
 
-        public string ExperienceString => PlayerStats != null ? ExperienceToString(PlayerStats.Experience, PlayerStats.NextLevelXp) : "";
+        public long CurrentLevelXP => PlayerStats != null ? PlayerStats.Experience - PlayerStats.PrevLevelXp : 0;
+
+        public long TotalLevelXP => PlayerStats != null ? PlayerStats.NextLevelXp - PlayerStats.PrevLevelXp : 0;
 
         #endregion
 
@@ -135,14 +138,6 @@ namespace PokemonGo_UWP.ViewModels
         ///     Going back to map page
         /// </summary>
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (_returnToGameScreen = new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
-
-        #endregion
-
-        #region Experience to String
-
-        private static string ExperienceToString(long expirence, long nextLevel) {
-            return expirence + " / " + nextLevel;
-        }
 
         #endregion
 

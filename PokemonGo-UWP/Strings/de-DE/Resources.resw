@@ -279,5 +279,28 @@
   <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
     <value>Karte automatisch rotieren</value>
   </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>HH:mm</value>
+  </data>
+  <data name="StartDateText.Text" xml:space="preserve">
+    <value>STARTDATUM</value>
+  </data>
+  <data name="InstinctTeam" xml:space="preserve">
+    <value>Intuition</value>
+  </data>
+  <data name="MysticTeam" xml:space="preserve">
+    <value>Weisheit</value>
+  </data>
+  <data name="NoTeam" xml:space="preserve">
+    <value>Kein Team</value>
+  </data>
+  <data name="ValorTeam" xml:space="preserve">
+    <value>Wagemut</value>
+  </data>
 </root>
-

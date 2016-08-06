@@ -17,6 +17,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -107,6 +108,66 @@ namespace PokemonGo_UWP.Utils
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PlayerTeamToTeamNameConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var teamColor = (TeamColor)value;
+
+            switch(teamColor) {
+                case TeamColor.Blue:
+                    return Resources.Translation.GetString("MysticTeam");
+                case TeamColor.Red:
+                    return Resources.Translation.GetString("ValorTeam");
+                case TeamColor.Yellow:
+                    return Resources.Translation.GetString("InstinctTeam");
+                default:
+                    return Resources.Translation.GetString("NoTeam");
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PlayerTeamToTeamImageConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var teamColor = (TeamColor)value;
+            var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+            var noTeamColor = currentTime > 7 && currentTime < 19 ? Colors.Black : Colors.White;
+            var path = "ms-appx:///Assets/Teams/";
+
+            switch(teamColor) {
+                case TeamColor.Blue:
+                    path += "mystic";
+                    break;
+                case TeamColor.Red:
+                    path += "valor";
+                    break;
+                case TeamColor.Yellow:
+                    path += "instinct";
+                    break;
+                default:
+                    path += "no-team";
+                    break;
+            }
+            path += ".png";
+
+            return new BitmapImage(new Uri(path));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
             return value;
         }
 
@@ -412,6 +473,24 @@ namespace PokemonGo_UWP.Utils
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+            return value;
+        }
+
+        #endregion
+    }
+
+
+    public class MsToDateFormatConverter : IValueConverter {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            long ms = (long)value;
+            DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+            date = date.Add(TimeSpan.FromMilliseconds(ms));
+            return date.ToString(Resources.Translation.GetString("DateFormat"));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
             return value;
         }
 

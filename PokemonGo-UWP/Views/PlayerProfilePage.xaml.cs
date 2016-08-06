@@ -30,7 +30,6 @@ namespace PokemonGo_UWP.Views
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
         {
             backRequestedEventArgs.Handled = true;
-            HideSortMenuStoryboard.Begin();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

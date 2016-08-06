@@ -321,6 +321,10 @@
     <Content Include="Assets\Pokemons\98.png" />
     <Content Include="Assets\Pokemons\99.png" />
     <Content Include="Assets\Pokemons\0.png" />
+    <Content Include="Assets\Teams\instinct.png" />
+    <Content Include="Assets\Teams\mystic.png" />
+    <Content Include="Assets\Teams\no-team.png" />
+    <Content Include="Assets\Teams\valor.png" />
     <Content Include="Assets\UI\panelBG.png" />
     <Content Include="Assets\UI\candy.png" />
     <Content Include="Assets\UI\close.png" />

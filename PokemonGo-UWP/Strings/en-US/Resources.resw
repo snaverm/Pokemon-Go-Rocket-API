@@ -315,4 +315,28 @@ Open page with installation files for manual install?</value>
   <data name="Walked" xml:space="preserve">
     <value>walked</value>
   </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy hh:mm tt</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>hh:mm tt</value>
+  </data>
+  <data name="StartDateText.Text" xml:space="preserve">
+    <value>START DATE</value>
+  </data>
+  <data name="InstinctTeam" xml:space="preserve">
+    <value>Instinct</value>
+  </data>
+  <data name="MysticTeam" xml:space="preserve">
+    <value>Mystic</value>
+  </data>
+  <data name="NoTeam" xml:space="preserve">
+    <value>No Team</value>
+  </data>
+  <data name="ValorTeam" xml:space="preserve">
+    <value>Valor</value>
+  </data>
 </root>
