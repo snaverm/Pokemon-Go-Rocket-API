@@ -83,7 +83,6 @@ namespace PokemonGo_UWP.ViewModels
 
         /// <summary>
         ///     Player's inventory
-        ///     TODO: do we really need it?
         /// </summary>
         private InventoryDelta _inventoryDelta;
 
