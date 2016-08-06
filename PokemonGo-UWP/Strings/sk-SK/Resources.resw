@@ -145,7 +145,7 @@
     <value>blízko</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>mimo dosahu</value>
+    <value>Pokestop mimo dosahu</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Heslo</value>
@@ -172,7 +172,7 @@
     <value>VAJCIA</value>
   </data>
   <data name="Fleed" xml:space="preserve">
-    <value> utiekol</value>
+    <value>utiekol</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google odpovedal chybou :</value>
@@ -224,5 +224,41 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Áno</value>
+  </data>
+  <data name="ItemsText.Text" xml:space="preserve">
+    <value>PREDMET</value>
+  </data>
+  <data name="ItemsTextLower.Text" xml:space="preserve">
+    <value>predmet</value>
+  </data>
+  <data name="LevelupText.Text" xml:space="preserve">
+    <value>Level up!</value>
+  </data>
+  <data name="NumberText.Text" xml:space="preserve">
+    <value># </value>
+    <comment>Watch out: there is a space after the #</comment>
+  </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
+  <data name="SlashSpaceCPText.Text" xml:space="preserve">
+    <value>/ CP</value>
+  </data>
+  <data name="TotalText.Text" xml:space="preserve">
+    <value>CELKOM</value>
+  </data>
+  <data name="UpdateDownloading" xml:space="preserve">
+    <value>Sťahovanie updatu {0}</value>
+  </data>
+  <data name="UpdatedVersion" xml:space="preserve">
+    <value>Update { 0 } je k dispozícii. Chcete ho inštalovať ?
+{ 1 }</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update sa nepodaril: { 0 }
+Chcete otvoriť stránku so súbormi k manuálnej inštalácii ?</value>
+  </data>
+  <data name="UpdateInstalling" xml:space="preserve">
+    <value>Inštalácia updatu. Aplikácia bude reštartovaná.</value>
   </data>
 </root>
