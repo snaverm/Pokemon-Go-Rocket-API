@@ -74,18 +74,21 @@
             </Border.Background>
             <StackPanel>
                 <TextBlock x:Name="OutOfRangeTextBlock"
+                           x:Uid="OutOfRangeText"
                            Text="You are out of range"
                            Visibility="Collapsed"
                            Style="{StaticResource TextError}" 
                            Margin="15,20,15,20" />
 
                 <TextBlock x:Name="CooldownTextBlock"
+                           x:Uid="CoolDownText"
                            Text="You have to wait some time"
                            Visibility="Collapsed"
                            Style="{StaticResource TextError}" 
                            Margin="15,20,15,20" />
 
-                <TextBlock x:Name="InventoryFulleTextBlock"
+                <TextBlock x:Name="InventoryFullTextBlock"
+                           x:Uid="InventoryFullText"
                            Text="Your inventory is full!"
                            Visibility="Collapsed"
                            Style="{StaticResource TextError}" 
@@ -158,7 +161,7 @@
                 <Image Grid.Column="0" Source="../Assets/UI/gem.png" Height="50" />
                 <TextBlock Grid.Column="1" Text="{Binding CurrentSearchResponse.GemsAwarded}" Style="{StaticResource TextNormal}" FontWeight="Bold" />
                 <TextBlock Grid.Column="2" Text="{Binding CurrentSearchResponse.ExperienceAwarded}" Style="{StaticResource TextNormalSpotlight}"  />
-                <TextBlock Grid.Column="3" Text=" XP" Style="{StaticResource TextNormalSpotlight}" />
+                <TextBlock Grid.Column="3" x:Uid="SpaceXPText" Text=" XP" Style="{StaticResource TextNormalSpotlight}" />
             </Grid>
             <ListView ItemsSource="{Binding AwardedItems}"
                       SelectionMode="None"
@@ -185,7 +188,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Stretch" />
                             <TextBlock Grid.Column="1" Text="{Binding Converter={StaticResource ItemToItemNameConverter}}" Style="{StaticResource TextNormal}" />
-                            <TextBlock Grid.Column="2" Text="# " Style="{StaticResource TextNormalSpotlight}" />
+                            <TextBlock Grid.Column="2" x:Uid="NumberText" Text="# " Style="{StaticResource TextNormalSpotlight}" />
                             <TextBlock Grid.Column="3" Text="{Binding ItemCount}" Style="{StaticResource TextNormalSpotlight}" />
                         </Grid>
                     </DataTemplate>
