@@ -78,81 +78,11 @@
 
     </Page.Resources>
 
-    <Grid>
-
-        <RelativePanel x:Name="SortMenuPanel"
-                       RelativePanel.AlignTopWithPanel="True"
-                       RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignBottomWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                       Opacity="0"
-                       Canvas.ZIndex="0">
-
-            <RelativePanel.Background>
-                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_02.png"
-                            Stretch="UniformToFill" />
-            </RelativePanel.Background>
-
-            <ListView ItemsSource="{Binding Converter={StaticResource PokemonSortingModesToSortingModesListConverter}}"
-                      SelectedItem="{Binding CurrentPokemonSortingMode, Mode=TwoWay}"
-                      RelativePanel.Above="CloseSortMenuButton"
-                      RelativePanel.AlignRightWithPanel="True">
-
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Right">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding}"
-                                       Grid.Column="0"
-                                       FontSize="18"
-                                       VerticalAlignment="Center"
-                                       Foreground="#dbfee8"
-                                       FontWeight="SemiLight"
-                                       FontFamily="../Assets/Fonts/Lato-Medium.ttf#Lato" />
-                            <Image Source="{Binding Converter={StaticResource PokemonSortingModesToIconConverter}}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Grid.Column="1"
-                                   Height="36"
-                                   Width="36"
-                                   Margin="16" />
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button RelativePanel.AlignBottomWithPanel="True"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    Height="{ThemeResource UiButtonSize}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    x:Name="CloseSortMenuButton"
-                    Margin="24">
-
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Click">
-                        <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=HideSortMenuStoryboard}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-
-                <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" />
-            </Button>
-        </RelativePanel>
-
-        <RelativePanel x:Name="MainUIPanel" HorizontalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <RelativePanel x:Name="MainUIPanel"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch">
 
             <RelativePanel.Background>
                 <ImageBrush ImageSource="../Assets/UI/panelBG.png"
@@ -160,14 +90,18 @@
             </RelativePanel.Background>
 
             <RelativePanel x:Name="UserDetailsPanel"
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                   RelativePanel.AlignRightWithPanel="True"
-                                   Padding="10"
-                                   Grid.Column="0"
-                                   VerticalAlignment="Center">
+                           RelativePanel.AlignTopWithPanel="True"
+                           RelativePanel.Above="CloseButton"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           Padding="10"
+                           Grid.Column="0"
+                           VerticalAlignment="Stretch">
+                
                 <TextBlock Text="{Binding PlayerProfile.Username}"
                            x:Name="UsernameTextBlock"
                            FontSize="30"
+                           RelativePanel.AlignTopWithPanel="True"
                            Foreground="{ThemeResource ContrastColorBrush}" />
                 <Ellipse Width="64"
                          Height="64"
@@ -212,6 +146,8 @@
 
                 <ListView RelativePanel.Below="ExperienceText"
                           RelativePanel.AlignBottomWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
                           ItemsSource="{Binding PlayerStatsValues}"
                           SelectionMode="None">
                     <ListView.ItemTemplate>
@@ -233,7 +169,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,24"
-                    Command="{Binding ReturnToGameScreen}">
+                    Command="{Binding ReturnToGameScreen}"
+                    x:Name="CloseButton">
                 <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
