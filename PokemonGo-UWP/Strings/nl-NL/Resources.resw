@@ -181,7 +181,7 @@
     <value>Nee</value>
   </data>
   <data name="NoGPSPermissions" xml:space="preserve">
-    <value>We hebben toestemming nodig om uw lokatie te bepalen, graag toestemming verlenen en opnieuw proberen.</value>
+    <value>We hebben toestemming nodig om uw locatie te bepalen, graag toestemming verlenen en opnieuw proberen.</value>
   </data>
   <data name="PokemonRanAway" xml:space="preserve">
     <value>Pokemon is weggerend, sorry :(</value>
@@ -192,11 +192,12 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Er is iets misgegaan en de app is nu mogelijk instabiel. Wil je uitloggen en het opnieuw proberen?</value>
   </data>
-  <data name="UpdatedVersion1" xml:space="preserve">
-    <value>Een nieuwe versie is beschikbaar op</value>
+  <data name="UpdateDownloading" xml:space="preserve">
+    <value>Downloaden van update {0}</value>
   </data>
-  <data name="UpdatedVersion2" xml:space="preserve">
-    <value>Wil je deze link bezoeken?</value>
+  <data name="UpdatedVersion" xml:space="preserve">
+    <value>Een nieuwe versie ({0}) is beschikbaar. Wil je updaten?
+{1}</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
     <value>Ongeldige gebruikersnaam/wachtwoord of de server is offline, probeer opnieuw.</value>
@@ -230,5 +231,30 @@
   </data>
   <data name="PokedexText.Text" xml:space="preserve">
     <value>POKÉDEX</value>
+  </data>
+  <data name="ItemsTextLower.Text" xml:space="preserve">
+    <value>gereedschap</value>
+  </data>
+  <data name="LevelupText.Text" xml:space="preserve">
+    <value>Level omhoog!</value>
+  </data>
+  <data name="NumberText.Text" xml:space="preserve">
+    <value># </value>
+  </data>
+  <data name="SlashSpaceCPText.Text" xml:space="preserve">
+    <value>/ CP</value>
+  </data>
+  <data name="SpaceXPText.Text" xml:space="preserve">
+    <value> XP</value>
+  </data>
+  <data name="TotalText.Text" xml:space="preserve">
+    <value>Totaal</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update mislukt: {0}
+Open de pagina met installatie bestanden voor handmatige installatie?</value>
+  </data>
+  <data name="UpdateInstalling" xml:space="preserve">
+    <value>Installeren van de update, app zal herstarten...</value>
   </data>
 </root>
