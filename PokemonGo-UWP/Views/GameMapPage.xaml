@@ -529,6 +529,7 @@
                            Grid.Column="0"
                            VerticalAlignment="Center">
                 <Button x:Name="AvatarButton" RelativePanel.AlignLeftWithPanel="True"
+                        Style="{ThemeResource ImageButtonStyle}"
                         RelativePanel.AlignTopWithPanel="true"
                         Command="{Binding GotoPlayerProfilePageCommand}">
                     <Ellipse Width="64"

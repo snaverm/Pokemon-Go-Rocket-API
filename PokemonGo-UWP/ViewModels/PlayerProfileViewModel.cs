@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using PokemonGo_UWP.Views;
 using POGOProtos.Data;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
-using Template10.Utils;
 using POGOProtos.Data.Player;
 using POGOProtos.Inventory;
 
@@ -42,6 +40,7 @@ namespace PokemonGo_UWP.ViewModels
                 RaisePropertyChanged(nameof(ExperienceValue));
                 RaisePropertyChanged(nameof(CurrentLevelXP));
                 RaisePropertyChanged(nameof(TotalLevelXP));
+                RaisePropertyChanged(nameof(Pokecoins));
             }
             ReadPlayerStatsValues();
             await Task.CompletedTask;
@@ -125,6 +124,8 @@ namespace PokemonGo_UWP.ViewModels
         public long CurrentLevelXP => PlayerStats != null ? PlayerStats.Experience - PlayerStats.PrevLevelXp : 0;
 
         public long TotalLevelXP => PlayerStats != null ? PlayerStats.NextLevelXp - PlayerStats.PrevLevelXp : 0;
+        
+        public long Pokecoins => PlayerStats != null ? PlayerProfile.Currencies.First(item => item.Name.Equals("POKECOIN")).Amount : 0;
 
         #endregion
 

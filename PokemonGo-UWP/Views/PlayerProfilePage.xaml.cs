@@ -15,7 +15,7 @@ namespace PokemonGo_UWP.Views
 
             Loaded += (s, e) =>
             {
-                //PokemonsPivotHeader.Width = EggsPivotHeader.Width = this.ActualWidth/2;
+
             };
         }
 

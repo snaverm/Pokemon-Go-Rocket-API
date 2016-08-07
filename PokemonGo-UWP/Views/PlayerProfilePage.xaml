@@ -15,9 +15,67 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <Storyboard x:Name="ShowSortMenuStoryboard">
+        <Storyboard x:Name="ShowInventoryStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryUIPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
             <DoubleAnimation
                 Storyboard.TargetName="MainUIPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="HideInventoryButton"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="ShowInventoryButton"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="InventoryUIPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="HideInventoryButton">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="HideInventoryStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryUIPanel"
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
@@ -29,12 +87,54 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="HideInventoryButton"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="ShowInventoryButton"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="InventoryUIPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="HideInventoryButton">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
 
     <Grid HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <RelativePanel x:Name="MainUIPanel"
+        <RelativePanel x:Name="BaseUIPanel"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch">
 
@@ -43,7 +143,26 @@
                             Stretch="Fill" />
             </RelativePanel.Background>
 
-            <RelativePanel x:Name="UserDetailsPanel"
+            <RelativePanel x:Name="InventoryUIPanel"
+                           RelativePanel.AlignTopWithPanel="True"
+                           RelativePanel.Above="CloseButton"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           Padding="10"
+                           Grid.Column="0"
+                           VerticalAlignment="Stretch"
+                           Opacity="0"
+                           Canvas.ZIndex="0">
+                <GridView>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </RelativePanel>
+
+            <RelativePanel x:Name="MainUIPanel"
                            RelativePanel.AlignTopWithPanel="True"
                            RelativePanel.Above="CloseButton"
                            RelativePanel.AlignLeftWithPanel="True"
@@ -141,7 +260,7 @@
                                    Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}"/>
                     </StackPanel>
 
-                    <Image Width="128" Margin="32,0,32,0"
+                    <Image Width="96" Margin="32,0,32,0"
                            x:Name="TeamImage"
                            RelativePanel.AlignRightWithPanel="True"
                            RelativePanel.AlignTopWithPanel="True"
@@ -153,6 +272,19 @@
                                RelativePanel.AlignHorizontalCenterWith="TeamImage"
                                RelativePanel.Below="TeamImage"
                                Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}"/>
+
+                    <Image Width="96" Margin="32,0,32,0"
+                           x:Name="CoinImage"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True"
+                           Source="../Assets/Items/Item_COIN_01.png"/>
+                    <TextBlock x:Name="CoinText"
+                               Margin="0"
+                               Padding="0"
+                               Style="{ThemeResource ProfilePageText}"
+                               RelativePanel.AlignHorizontalCenterWith="CoinImage"
+                               RelativePanel.Below="TeamImage"
+                               Text="{Binding Pokecoins}"/>
                 </RelativePanel>
             </RelativePanel>
             
@@ -168,6 +300,63 @@
                 <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
+            </Button>
+
+            <Button RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,24,24"
+                    Canvas.ZIndex="10"
+                    x:Name="ShowInventoryButton">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=ShowInventoryStoryboard}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <Grid>
+                    <Image Source="../Assets/Buttons/btn_master.png"
+                           Stretch="Uniform"
+                           VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch" />
+                    <Image Source="../Assets/UI/inventory.png"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                </Grid>
+            </Button>
+
+            <Button RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,24,24"
+                    Opacity="0"
+                    Canvas.ZIndex="0"
+                    x:Name="HideInventoryButton">
+
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=HideInventoryStoryboard}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <Grid>
+                    <Image Source="../Assets/Buttons/btn_master.png"
+                           Stretch="Uniform"
+                           VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch" />
+                    <Image Source="../Assets/UI/inventory.png"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                </Grid>
             </Button>
         </RelativePanel>
 
