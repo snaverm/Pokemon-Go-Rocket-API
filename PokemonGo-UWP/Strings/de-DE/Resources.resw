@@ -225,36 +225,6 @@
   <data name="LevelText.Text" xml:space="preserve">
     <value>Level</value>
   </data>
-  <data name="BattleAttackTotal" xml:space="preserve">
-    <value>gesamte angegriffene Kämpfe</value>
-  </data>
-  <data name="BattleAttackWon" xml:space="preserve">
-    <value>gewonnene angegriffene Kämpfe</value>
-  </data>
-  <data name="BattleDefendedWon" xml:space="preserve">
-    <value>gewonnene verteidigende Kämpfe</value>
-  </data>
-  <data name="BattleTrainingTotal" xml:space="preserve">
-    <value>gesamte Trainingskämpfe</value>
-  </data>
-  <data name="BattleTrainingWon" xml:space="preserve">
-    <value>gewonnen Trainingskämpfe</value>
-  </data>
-  <data name="DistanceType" xml:space="preserve">
-    <value>km</value>
-  </data>
-  <data name="EggsHatched" xml:space="preserve">
-    <value>ausgeschlüpfte Eier</value>
-  </data>
-  <data name="Evolutions" xml:space="preserve">
-    <value>Entwicklungen</value>
-  </data>
-  <data name="PokeballsThrown" xml:space="preserve">
-    <value>geworfene Pokébälle</value>
-  </data>
-  <data name="PokedexEntries" xml:space="preserve">
-    <value>Pokédex-Einträge</value>
-  </data>
   <data name="PokemonCaughtByType" xml:space="preserve">
     <value>unterschiedliche Pokémons gefangen</value>
   </data>
@@ -266,15 +236,6 @@
   </data>
   <data name="PokestopsVisited" xml:space="preserve">
     <value>Pokéstops besucht</value>
-  </data>
-  <data name="prestigeDroppedTotal" xml:space="preserve">
-    <value>gesamtes gesunkenes Ansehen</value>
-  </data>
-  <data name="PrestigeRaisedTotal" xml:space="preserve">
-    <value>gesamtes erhöhtes Ansehen</value>
-  </data>
-  <data name="Walked" xml:space="preserve">
-    <value>gelaufen</value>
   </data>
   <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
     <value>Karte automatisch rotieren</value>
@@ -302,5 +263,89 @@
   </data>
   <data name="ValorTeam" xml:space="preserve">
     <value>Wagemut</value>
+  </data>
+  <data name="AceTrainer" xml:space="preserve">
+    <value>Ass-Trainer</value>
+  </data>
+  <data name="Backpacker" xml:space="preserve">
+    <value>Backpacker</value>
+  </data>
+  <data name="BattleGirl" xml:space="preserve">
+    <value>Kämpfer</value>
+  </data>
+  <data name="BirdKeeper" xml:space="preserve">
+    <value>Vogelfänger</value>
+  </data>
+  <data name="BlackBelt" xml:space="preserve">
+    <value>Schwarzgurt</value>
+  </data>
+  <data name="Breeder" xml:space="preserve">
+    <value>Züchter</value>
+  </data>
+  <data name="BugCatcher" xml:space="preserve">
+    <value>Käfersammler</value>
+  </data>
+  <data name="Collector" xml:space="preserve">
+    <value>Sammler</value>
+  </data>
+  <data name="DepotAgent" xml:space="preserve">
+    <value>Depot Agent</value>
+  </data>
+  <data name="DragonTamer" xml:space="preserve">
+    <value>Drachentrainer</value>
+  </data>
+  <data name="FairyTaleGirl" xml:space="preserve">
+    <value>Märchenerzählerin</value>
+  </data>
+  <data name="Fisherman" xml:space="preserve">
+    <value>Angler</value>
+  </data>
+  <data name="Gardener" xml:space="preserve">
+    <value>Gärtner</value>
+  </data>
+  <data name="HexManiac" xml:space="preserve">
+    <value>Hexe</value>
+  </data>
+  <data name="Hiker" xml:space="preserve">
+    <value>Wanderer</value>
+  </data>
+  <data name="Jogger" xml:space="preserve">
+    <value>Jogger</value>
+  </data>
+  <data name="Kanto" xml:space="preserve">
+    <value>Kanto</value>
+  </data>
+  <data name="Kindler" xml:space="preserve">
+    <value>Hitzkopf</value>
+  </data>
+  <data name="Pikachu" xml:space="preserve">
+    <value>Pikachu</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psycho</value>
+  </data>
+  <data name="PunkGirl" xml:space="preserve">
+    <value>Punker</value>
+  </data>
+  <data name="Rocker" xml:space="preserve">
+    <value>Rocker</value>
+  </data>
+  <data name="RuinManiac" xml:space="preserve">
+    <value>Ruinenmaniac</value>
+  </data>
+  <data name="SchoolKid" xml:space="preserve">
+    <value>Schulkind</value>
+  </data>
+  <data name="Scientist" xml:space="preserve">
+    <value>Forscher</value>
+  </data>
+  <data name="Skier" xml:space="preserve">
+    <value>Skifahrer</value>
+  </data>
+  <data name="Swimmer" xml:space="preserve">
+    <value>Schwimmer</value>
+  </data>
+  <data name="Youngster" xml:space="preserve">
+    <value>Teenager</value>
   </data>
 </root>

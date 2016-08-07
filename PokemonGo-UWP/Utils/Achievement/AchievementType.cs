@@ -1,0 +1,32 @@
+﻿namespace PokemonGo_UWP.Utils {
+    public enum AchievementType {
+        Jogger,
+        Kanto,
+        Collector,
+        Scientist,
+        Breeder,
+        Backpacker,
+        Fisherman,
+        BattleGirl,
+        AceTrainer,
+        SchoolKid,
+        BirdKeeper,
+        PunkGirl,
+        BugCatcher,
+        HexManiac,
+        Swimmer,
+        Gardener,
+        Rocker,
+        Psychic,
+        Skier,
+        RuinManiac,
+        Kindler,
+        FairyTaleGirl,
+        DragonTamer,
+        Youngster,
+        DepotAgent,
+        Hiker,
+        BlackBelt,
+        Pikachu
+    }
+}

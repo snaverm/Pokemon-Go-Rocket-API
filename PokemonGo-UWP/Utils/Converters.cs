@@ -139,6 +139,31 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class AchievementValueToMedalImageConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var medal = (Medal)value;
+
+            switch(medal) {
+                case Medal.Bronze:
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv1.png"));
+                case Medal.Silver:
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv2.png"));
+                case Medal.Gold:
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv3.png"));
+                default:
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+    
     public class PlayerTeamToTeamImageConverter : IValueConverter {
         #region Implementation of IValueConverter
 
@@ -161,6 +186,40 @@ namespace PokemonGo_UWP.Utils
                 default:
                     path += "no-team";
                     break;
+            }
+            path += ".png";
+
+            return new BitmapImage(new Uri(path));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PlayerTeamToTeamBackgroundImageConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var teamColor = (TeamColor)value;
+            var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+            var noTeamColor = currentTime > 7 && currentTime < 19 ? Colors.Black : Colors.White;
+            var path = "ms-appx:///Assets/Teams/";
+
+            switch(teamColor) {
+                case TeamColor.Blue:
+                    path += "mystic";
+                    break;
+                case TeamColor.Red:
+                    path += "valor";
+                    break;
+                case TeamColor.Yellow:
+                    path += "instinct";
+                    break;
+                default:
+                    return null;
             }
             path += ".png";
 

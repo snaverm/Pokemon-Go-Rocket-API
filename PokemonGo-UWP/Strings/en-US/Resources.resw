@@ -261,38 +261,8 @@ Open page with installation files for manual install?</value>
   <data name="LevelText.Text" xml:space="preserve">
     <value>Level</value>
   </data>
-  <data name="BattleAttackTotal" xml:space="preserve">
-    <value>total attacked battles</value>
-  </data>
-  <data name="BattleAttackWon" xml:space="preserve">
-    <value>won attacked battles</value>
-  </data>
-  <data name="BattleDefendedWon" xml:space="preserve">
-    <value>won defened battles</value>
-  </data>
-  <data name="BattleTrainingTotal" xml:space="preserve">
-    <value>total training battles</value>
-  </data>
-  <data name="BattleTrainingWon" xml:space="preserve">
-    <value>won training battles</value>
-  </data>
-  <data name="DistanceType" xml:space="preserve">
-    <value>km</value>
-  </data>
-  <data name="EggsHatched" xml:space="preserve">
-    <value>Eggs hatched</value>
-  </data>
-  <data name="Evolutions" xml:space="preserve">
-    <value>Evolutions</value>
-  </data>
   <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
     <value>Autorotate map</value>
-  </data>
-  <data name="PokeballsThrown" xml:space="preserve">
-    <value>Pokeballs thrown</value>
-  </data>
-  <data name="PokedexEntries" xml:space="preserve">
-    <value>Pokedex entries</value>
   </data>
   <data name="PokemonCaughtByType" xml:space="preserve">
     <value>different Pokemons caught</value>
@@ -302,18 +272,6 @@ Open page with installation files for manual install?</value>
   </data>
   <data name="PokemonsEncountered" xml:space="preserve">
     <value>Pokemons encountered</value>
-  </data>
-  <data name="PokestopsVisited" xml:space="preserve">
-    <value>Pokestops visited</value>
-  </data>
-  <data name="prestigeDroppedTotal" xml:space="preserve">
-    <value>total dropped prestige</value>
-  </data>
-  <data name="PrestigeRaisedTotal" xml:space="preserve">
-    <value>total raised prestige</value>
-  </data>
-  <data name="Walked" xml:space="preserve">
-    <value>walked</value>
   </data>
   <data name="DateFormat" xml:space="preserve">
     <value>dd.MM.yyyy</value>
@@ -338,5 +296,89 @@ Open page with installation files for manual install?</value>
   </data>
   <data name="ValorTeam" xml:space="preserve">
     <value>Valor</value>
+  </data>
+  <data name="AceTrainer" xml:space="preserve">
+    <value>Ace Trainer</value>
+  </data>
+  <data name="Backpacker" xml:space="preserve">
+    <value>Backpacker</value>
+  </data>
+  <data name="BattleGirl" xml:space="preserve">
+    <value>Battle Girl</value>
+  </data>
+  <data name="BirdKeeper" xml:space="preserve">
+    <value>Bird Keeper</value>
+  </data>
+  <data name="BlackBelt" xml:space="preserve">
+    <value>Black Belt</value>
+  </data>
+  <data name="Breeder" xml:space="preserve">
+    <value>Breeder</value>
+  </data>
+  <data name="BugCatcher" xml:space="preserve">
+    <value>Bug Catcher</value>
+  </data>
+  <data name="Collector" xml:space="preserve">
+    <value>Collector</value>
+  </data>
+  <data name="DepotAgent" xml:space="preserve">
+    <value>Depot Agent</value>
+  </data>
+  <data name="DragonTamer" xml:space="preserve">
+    <value>Dragon Tamer</value>
+  </data>
+  <data name="FairyTaleGirl" xml:space="preserve">
+    <value>Fairy Tale Girl</value>
+  </data>
+  <data name="Fisherman" xml:space="preserve">
+    <value>Fisherman</value>
+  </data>
+  <data name="Gardener" xml:space="preserve">
+    <value>Gardener</value>
+  </data>
+  <data name="HexManiac" xml:space="preserve">
+    <value>Hex Maniac</value>
+  </data>
+  <data name="Hiker" xml:space="preserve">
+    <value>Hiker</value>
+  </data>
+  <data name="Jogger" xml:space="preserve">
+    <value>Jogger</value>
+  </data>
+  <data name="Kanto" xml:space="preserve">
+    <value>Kanto</value>
+  </data>
+  <data name="Kindler" xml:space="preserve">
+    <value>Kindler</value>
+  </data>
+  <data name="Pikachu" xml:space="preserve">
+    <value>Pikachu</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psychic</value>
+  </data>
+  <data name="PunkGirl" xml:space="preserve">
+    <value>Punk Girl</value>
+  </data>
+  <data name="Rocker" xml:space="preserve">
+    <value>Rocker</value>
+  </data>
+  <data name="RuinManiac" xml:space="preserve">
+    <value>Ruin Maniac</value>
+  </data>
+  <data name="SchoolKid" xml:space="preserve">
+    <value>School Kid</value>
+  </data>
+  <data name="Scientist" xml:space="preserve">
+    <value>Scientist</value>
+  </data>
+  <data name="Skier" xml:space="preserve">
+    <value>Skier</value>
+  </data>
+  <data name="Swimmer" xml:space="preserve">
+    <value>Swimmer</value>
+  </data>
+  <data name="Youngster" xml:space="preserve">
+    <value>Youngster</value>
   </data>
 </root>

@@ -35,7 +35,13 @@
             <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter"/>
             <utils:IncubatorUsagesCountToUsagesTextConverter x:Key="IncubatorUsagesCountToUsagesTextConverter"/>
             <utils:EggDataToEggIconConverter x:Key="EggDataToEggIconConverter"/>
-
+            <utils:PlayerStatsTranslationConverter x:Key="PlayerStatsTranslationConverter" />
+            <utils:MsToDateFormatConverter x:Key="MsToDateFormatConverter" />
+            <utils:PlayerTeamToTeamImageConverter x:Key="PlayerTeamToTeamImageConverter" />
+            <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
+            <utils:AchievementValueToMedalImageConverter x:Key="AchievementValueToMedalImageConverter" />
+            <utils:PlayerTeamToTeamBackgroundImageConverter x:Key="PlayerTeamToTeamBackgroundImageConverter" />
+            
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>
                     <x:Double>0</x:Double>

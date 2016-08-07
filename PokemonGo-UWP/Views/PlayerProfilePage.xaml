@@ -153,10 +153,36 @@
                            VerticalAlignment="Stretch"
                            Opacity="0"
                            Canvas.ZIndex="0">
-                <GridView>
+                <GridView ItemsSource="{Binding PlayerStatsValues}"
+                          RelativePanel.AlignTopWithPanel="True"
+                          RelativePanel.AlignHorizontalCenterWithPanel="True">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            
+                            <RelativePanel Width="100" Height="100" Margin="5">
+                                <TextBlock x:Name="AchievementTypeText" Text="{Binding TranslatedType}"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Foreground="Green"/>
+                                <Ellipse Width="60"
+                                         Height="60"
+                                         Stroke="LightGreen"
+                                         RelativePanel.Below="AchievementTypeText"
+                                         RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                         StrokeThickness="2.5"
+                                         x:Name="AchievementImage">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding Medal, Converter={StaticResource AchievementValueToMedalImageConverter}}" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock x:Name="AchievementValueText" Text="{Binding Value}"
+                                           RelativePanel.AlignLeftWithPanel="True"
+                                           RelativePanel.Below="AchievementImage"
+                                           FontWeight="SemiBold"
+                                           Foreground="Green"/>
+                                <TextBlock x:Name="AchievementNextValueText" Text="{Binding NextValue}"
+                                           RelativePanel.AlignRightWithPanel="True"
+                                           RelativePanel.Below="AchievementImage"
+                                           Foreground="Green"/>
+                            </RelativePanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
@@ -171,10 +197,16 @@
                            Grid.Column="0"
                            VerticalAlignment="Stretch">
 
+                <Image RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       Margin="-100,-100,-100,-50"
+                       Opacity="0.25"
+                       RelativePanel.Above="ExperiencePanel"
+                       Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamBackgroundImageConverter}}"/>
+
                 <Ellipse Width="256"
                          Height="256"
                          Margin="0,48,0,0"
-                         Stroke="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignHorizontalCenterWithPanel="True"
                          StrokeThickness="2.5"
@@ -185,6 +217,7 @@
                 </Ellipse>
 
                 <StackPanel RelativePanel.Below="AvatarEllipseNew"
+                            Margin="0,50,0,0"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="ExperiencePanel">
@@ -200,18 +233,16 @@
                             x:Name="LevelPanel">
                     <TextBlock Text="Level"
                                Style="{ThemeResource ProfilePageLargeText}"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                x:Uid="LevelText"
                                FontWeight="SemiBold"/>
                     <TextBlock Text="{Binding PlayerStats.Level}"
                                Margin="5,0,0,0"
                                Style="{ThemeResource ProfilePageLargeText}"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                FontWeight="SemiBold"/>
                 </StackPanel>
 
                 <ProgressBar Value="{Binding ExperienceValue}"
-                             Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
+                             Foreground="Green"
                              Height="10"
                              Margin="48,0"
                              RelativePanel.AlignLeftWithPanel="True"
@@ -225,21 +256,17 @@
                             x:Name="LevelExperiencePanel">
                     <TextBlock Text="{Binding CurrentLevelXP}"
                                Style="{ThemeResource ProfilePageMediumText}"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                x:Uid="LevelText"
                                FontWeight="SemiBold"/>
                     <TextBlock Text="/"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                Style="{ThemeResource ProfilePageMediumText}"
                                Margin="5,0"
                                FontWeight="SemiBold"/>
                     <TextBlock Text="{Binding TotalLevelXP}"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                Style="{ThemeResource ProfilePageMediumText}"
                                FontWeight="SemiBold"/>
                     <TextBlock Text="XP"
                                Margin="5,0,0,0"
-                               Foreground="{ThemeResource ContrastColorBrush}"
                                Style="{ThemeResource ProfilePageMediumText}"
                                FontWeight="SemiBold"/>
                 </StackPanel>
@@ -250,13 +277,11 @@
                     <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
                                 RelativePanel.AlignVerticalCenterWith="TeamImage">
                         <TextBlock Style="{ThemeResource ProfilePageSmallText}" 
-                                   Foreground="{ThemeResource ContrastColorBrush}"
                                    HorizontalAlignment="Center"
                                    Text="START DATE"
                                    x:Uid="StartDateText"/>
                         <TextBlock Style="{ThemeResource ProfilePageSmallText}" 
                                    HorizontalAlignment="Center"
-                                   Foreground="{ThemeResource ContrastColorBrush}"
                                    Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}"/>
                     </StackPanel>
 
