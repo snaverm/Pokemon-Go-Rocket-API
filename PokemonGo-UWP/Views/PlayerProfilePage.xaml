@@ -217,7 +217,6 @@
                 </Ellipse>
 
                 <StackPanel RelativePanel.Below="AvatarEllipseNew"
-                            Margin="0,50,0,0"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="ExperiencePanel">
@@ -285,7 +284,7 @@
                                    Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}"/>
                     </StackPanel>
 
-                    <Image Width="96" Margin="32,0,32,0"
+                    <Image Width="96" Margin="16,0"
                            x:Name="TeamImage"
                            RelativePanel.AlignRightWithPanel="True"
                            RelativePanel.AlignTopWithPanel="True"
@@ -298,7 +297,7 @@
                                RelativePanel.Below="TeamImage"
                                Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}"/>
 
-                    <Image Width="96" Margin="32,0,32,0"
+                    <Image Width="96" Margin="16,0"
                            x:Name="CoinImage"
                            RelativePanel.AlignLeftWithPanel="True"
                            RelativePanel.AlignTopWithPanel="True"
