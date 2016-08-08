@@ -211,7 +211,7 @@
     <value>Музыка</value>
   </data>
   <data name="PokemonText.Text" xml:space="preserve">
-    <value>Покемон</value>
+    <value>Покемоны</value>
   </data>
   <data name="SettingsHeaderText.Text" xml:space="preserve">
     <value>Настройки</value>
@@ -234,5 +234,8 @@
    <data name="UpdateFailed" xml:space="preserve">
      <value>Обновление неудачно. Ошибка: {0}
  Открыть страницу для ручной установки?</value>
+   </data>
+     <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
+     <value>Авто поворот карты</value>
    </data>
 </root>
