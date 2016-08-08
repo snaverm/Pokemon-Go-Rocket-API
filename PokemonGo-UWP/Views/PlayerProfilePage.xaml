@@ -204,8 +204,8 @@
                        RelativePanel.Above="ExperiencePanel"
                        Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamBackgroundImageConverter}}"/>
 
-                <Ellipse Width="256"
-                         Height="256"
+                <Ellipse Width="200"
+                         Height="200"
                          Margin="0,48,0,0"
                          RelativePanel.AlignTopWithPanel="True"
                          RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -216,7 +216,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <StackPanel RelativePanel.Below="AvatarEllipseNew"
+                <StackPanel RelativePanel.Below="AvatarEllipseNew" Margin="0,50,0,0"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="ExperiencePanel">
