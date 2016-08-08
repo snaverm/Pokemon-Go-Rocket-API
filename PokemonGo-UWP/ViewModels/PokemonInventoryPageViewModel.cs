@@ -135,7 +135,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Reference to Incubators inventory
         /// </summary>
-        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.IncubatorsInventory;
+        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.FreeIncubatorsInventory;
 
         #endregion
 
