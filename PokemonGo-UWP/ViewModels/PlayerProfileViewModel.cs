@@ -202,6 +202,11 @@ namespace PokemonGo_UWP.ViewModels
             PlayerStatsValues.Add(Achievement.Youngster);
             PlayerStatsValues.Add(Achievement.Fisherman);
             PlayerStatsValues.Add(Achievement.AceTrainer);
+
+
+            foreach (Achievement achievement in PlayerStatsValues) {
+                RaisePropertyChanged(nameof(achievement));
+            }
         }
 
         #endregion

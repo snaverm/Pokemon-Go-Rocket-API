@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Template10.Mvvm;
 
 namespace PokemonGo_UWP.Utils {
 
@@ -10,7 +11,7 @@ namespace PokemonGo_UWP.Utils {
         Gold
     }
 
-    public class Achievement{
+    public class Achievement : BindableBase {
         public static Achievement Jogger = new Achievement(AchievementType.Jogger, 10.0f, 100.0f, 1000.0f);
         public static Achievement Kanto = new Achievement(AchievementType.Kanto, 5, 50, 100);
         public static Achievement Collector = new Achievement(AchievementType.Collector, 30, 500, 2000);
@@ -51,7 +52,20 @@ namespace PokemonGo_UWP.Utils {
         public object Bronze { get; private set; }
         public object Silver { get; private set; }
         public object Gold { get; private set; }
-        public Medal Medal { get; private set; }
+
+        private Medal _medal;
+        public Medal Medal
+        {
+            get
+            {
+                return _medal;
+            }
+            private set
+            {
+                _medal = value;
+                RaisePropertyChanged(nameof(Medal));
+            }
+        }
         public string TranslatedType
         {
             get
@@ -73,7 +87,11 @@ namespace PokemonGo_UWP.Utils {
                     return _value;
                 }
             }
-            set { _value = value; }
+            set
+            {
+                _value = value;
+                RaisePropertyChanged(nameof(Medal));
+            }
         }
 
         public object NextValue {
