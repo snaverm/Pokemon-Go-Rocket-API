@@ -145,7 +145,7 @@
     <value>cerca</value>
   </data>
   <data name="OutOfRangeText.Text" xml:space="preserve">
-    <value>Está fuera del rango</value>
+    <value>Fuera del rango</value>
   </data>
   <data name="passwordBox.PlaceholderText" xml:space="preserve">
     <value>Contraseña</value>
