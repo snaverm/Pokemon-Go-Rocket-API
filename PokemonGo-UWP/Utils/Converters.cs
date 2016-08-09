@@ -655,13 +655,13 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class VisibleWhenStringNotEmptyConverter : IValueConverter
+    public class VisibleWhenStringEmptyConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return string.IsNullOrEmpty((string) value) ? Visibility.Collapsed : Visibility.Visible;
+            return string.IsNullOrEmpty((string) value) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
