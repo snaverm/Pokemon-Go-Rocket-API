@@ -13,10 +13,8 @@ using POGOProtos.Inventory;
 using System;
 using POGOProtos.Enums;
 
-namespace PokemonGo_UWP.ViewModels
-{
-    public class PlayerProfileViewModel : ViewModelBase
-    {
+namespace PokemonGo_UWP.ViewModels {
+    public class PlayerProfileViewModel : ViewModelBase {
         #region Lifecycle Handlers
 
         /// <summary>
@@ -27,8 +25,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <param name="suspensionState"></param>
         /// <returns></returns>
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
-            IDictionary<string, object> suspensionState)
-        {
+            IDictionary<string, object> suspensionState) {
             if(suspensionState.Any()) {
                 // Recovering the state                
                 PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
@@ -54,8 +51,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <param name="suspensionState"></param>
         /// <param name="suspending"></param>
         /// <returns></returns>
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
-        {
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending) {
             if(suspending) {
                 suspensionState[nameof(PlayerProfile)] = PlayerProfile;
                 suspensionState[nameof(PlayerStats)] = PlayerStats;
@@ -63,8 +59,7 @@ namespace PokemonGo_UWP.ViewModels
             await Task.CompletedTask;
         }
 
-        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
-        {
+        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args) {
             args.Cancel = false;
             await Task.CompletedTask;
         }
@@ -116,17 +111,14 @@ namespace PokemonGo_UWP.ViewModels
             set { Set(ref _inventoryDelta, value); }
         }
 
-        /// <summary>
-        ///     Stats for the current player, including current level and experience related stuff
-        /// </summary>
-        public ObservableCollection<Achievement> PlayerStatsValues { get; } = new ObservableCollection<Achievement>();
+        public ObservableCollection<KeyValuePair<AchievementType, object>> Achievements { get; } = new ObservableCollection<KeyValuePair<AchievementType, object>>();
 
         public int ExperienceValue => _playerStats == null ? 0 : (int)(((double)_playerStats.Experience - _playerStats.PrevLevelXp) / (_playerStats.NextLevelXp - _playerStats.PrevLevelXp) * 100);
 
         public long CurrentLevelXP => PlayerStats != null ? PlayerStats.Experience - PlayerStats.PrevLevelXp : 0;
 
         public long TotalLevelXP => PlayerStats != null ? PlayerStats.NextLevelXp - PlayerStats.PrevLevelXp : 0;
-        
+
         public long Pokecoins => PlayerStats != null ? PlayerProfile.Currencies.First(item => item.Name.Equals("POKECOIN")).Amount : 0;
 
         #endregion
@@ -147,66 +139,32 @@ namespace PokemonGo_UWP.ViewModels
         #region Read Player Stats Values
 
         private void ReadPlayerStatsValues() {
-            Achievement.Jogger.Value = PlayerStats.KmWalked;
-            Achievement.Kanto.Value = PlayerStats.UniquePokedexEntries;
-            Achievement.Collector.Value = PlayerStats.PokemonsCaptured;
-            Achievement.Scientist.Value = PlayerStats.Evolutions;
-            Achievement.Breeder.Value = PlayerStats.EggsHatched;
-            Achievement.Backpacker.Value = PlayerStats.PokeStopVisits;
-            Achievement.SchoolKid.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.None];
-            Achievement.Fisherman.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Normal];
-            Achievement.BlackBelt.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Fighting];
-            Achievement.BirdKeeper.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Flying];
-            Achievement.PunkGirl.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Poison];
-            Achievement.RuinManiac.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Ground];
-            Achievement.Hiker.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Rock];
-            Achievement.BugCatcher.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Bug];
-            Achievement.HexManiac.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Ghost];
-            Achievement.DepotAgent.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Steel];
-            Achievement.Kindler.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Fire];
-            Achievement.Swimmer.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Water];
-            Achievement.Gardener.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Grass];
-            Achievement.Rocker.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Electric];
-            Achievement.Psychic.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Psychic];
-            Achievement.Skier.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Ice];
-            Achievement.DragonTamer.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Dragon];
-            Achievement.FairyTaleGirl.Value = PlayerStats.PokemonCaughtByType[(int)PokemonType.Fairy];
-            Achievement.Youngster.Value = PlayerStats.SmallRattataCaught;
-            Achievement.Fisherman.Value = PlayerStats.BigMagikarpCaught;
-            Achievement.AceTrainer.Value = PlayerStats.BattleTrainingTotal;
-
-            PlayerStatsValues.Add(Achievement.Jogger);
-            PlayerStatsValues.Add(Achievement.Kanto);
-            PlayerStatsValues.Add(Achievement.Collector);
-            PlayerStatsValues.Add(Achievement.Scientist);
-            PlayerStatsValues.Add(Achievement.Breeder);
-            PlayerStatsValues.Add(Achievement.Backpacker);
-            PlayerStatsValues.Add(Achievement.SchoolKid);
-            PlayerStatsValues.Add(Achievement.Fisherman);
-            PlayerStatsValues.Add(Achievement.BlackBelt);
-            PlayerStatsValues.Add(Achievement.BirdKeeper);
-            PlayerStatsValues.Add(Achievement.PunkGirl);
-            PlayerStatsValues.Add(Achievement.RuinManiac);
-            PlayerStatsValues.Add(Achievement.Hiker);
-            PlayerStatsValues.Add(Achievement.BugCatcher);
-            PlayerStatsValues.Add(Achievement.HexManiac);
-            PlayerStatsValues.Add(Achievement.DepotAgent);
-            PlayerStatsValues.Add(Achievement.Kindler);
-            PlayerStatsValues.Add(Achievement.Swimmer);
-            PlayerStatsValues.Add(Achievement.Gardener);
-            PlayerStatsValues.Add(Achievement.Rocker);
-            PlayerStatsValues.Add(Achievement.Psychic);
-            PlayerStatsValues.Add(Achievement.Skier);
-            PlayerStatsValues.Add(Achievement.DragonTamer);
-            PlayerStatsValues.Add(Achievement.FairyTaleGirl);
-            PlayerStatsValues.Add(Achievement.Youngster);
-            PlayerStatsValues.Add(Achievement.Fisherman);
-            PlayerStatsValues.Add(Achievement.AceTrainer);
-
-
-            foreach (Achievement achievement in PlayerStatsValues) {
-                RaisePropertyChanged(nameof(achievement));
-            }
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Jogger, PlayerStats.KmWalked));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Kanto, PlayerStats.UniquePokedexEntries));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Collector, PlayerStats.PokemonsCaptured));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Scientist, PlayerStats.Evolutions));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Breeder, PlayerStats.EggsHatched));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Backpacker, PlayerStats.PokeStopVisits));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.SchoolKid, PlayerStats.PokemonCaughtByType[(int)PokemonType.Normal]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Swimmer, PlayerStats.PokemonCaughtByType[(int)PokemonType.Water]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.BlackBelt, PlayerStats.PokemonCaughtByType[(int)PokemonType.Fighting]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.BirdKeeper, PlayerStats.PokemonCaughtByType[(int)PokemonType.Flying]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.PunkGirl, PlayerStats.PokemonCaughtByType[(int)PokemonType.Poison]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.RuinManiac, PlayerStats.PokemonCaughtByType[(int)PokemonType.Ground]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Hiker, PlayerStats.PokemonCaughtByType[(int)PokemonType.Rock]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.BugCatcher, PlayerStats.PokemonCaughtByType[(int)PokemonType.Bug]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.HexManiac, PlayerStats.PokemonCaughtByType[(int)PokemonType.Ghost]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.DepotAgent, PlayerStats.PokemonCaughtByType[(int)PokemonType.Steel]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Kindler, PlayerStats.PokemonCaughtByType[(int)PokemonType.Fire]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Gardener, PlayerStats.PokemonCaughtByType[(int)PokemonType.Grass]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Rocker, PlayerStats.PokemonCaughtByType[(int)PokemonType.Electric]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Psychic, PlayerStats.PokemonCaughtByType[(int)PokemonType.Psychic]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Skier, PlayerStats.PokemonCaughtByType[(int)PokemonType.Ice]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.DragonTamer, PlayerStats.PokemonCaughtByType[(int)PokemonType.Dragon]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.FairyTaleGirl, PlayerStats.PokemonCaughtByType[(int)PokemonType.Fairy]));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Youngster, PlayerStats.SmallRattataCaught));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Fisherman, PlayerStats.BigMagikarpCaught));
+            Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Fisherman, PlayerStats.BattleTrainingWon));
         }
 
         #endregion

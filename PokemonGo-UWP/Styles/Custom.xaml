@@ -538,7 +538,7 @@
         <Setter Property="FontSize" Value="24" />
     </Style>
     <Style x:Key="ProfilePageLargeText" TargetType="TextBlock" BasedOn="{StaticResource ProfilePageText}">
-        <Setter Property="FontSize" Value="38" />
+        <Setter Property="FontSize" Value="30" />
     </Style>
 
     <Style x:Key="TextMenuItemHorizontal" TargetType="TextBlock">

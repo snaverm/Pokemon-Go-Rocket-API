@@ -264,88 +264,88 @@
   <data name="ValorTeam" xml:space="preserve">
     <value>Wagemut</value>
   </data>
-  <data name="AceTrainer" xml:space="preserve">
+  <data name="BadgeBattleTrainingWon" xml:space="preserve">
     <value>Ass-Trainer</value>
   </data>
-  <data name="Backpacker" xml:space="preserve">
+  <data name="BadgePokestopsVisited" xml:space="preserve">
     <value>Backpacker</value>
   </data>
-  <data name="BattleGirl" xml:space="preserve">
+  <data name="BadgeBattleAttackWon" xml:space="preserve">
     <value>Kämpfer</value>
   </data>
-  <data name="BirdKeeper" xml:space="preserve">
+  <data name="Flying" xml:space="preserve">
     <value>Vogelfänger</value>
   </data>
-  <data name="BlackBelt" xml:space="preserve">
+  <data name="Fighting" xml:space="preserve">
     <value>Schwarzgurt</value>
   </data>
-  <data name="Breeder" xml:space="preserve">
+  <data name="BadgeHatchedTotal" xml:space="preserve">
     <value>Züchter</value>
   </data>
-  <data name="BugCatcher" xml:space="preserve">
+  <data name="Bug" xml:space="preserve">
     <value>Käfersammler</value>
   </data>
-  <data name="Collector" xml:space="preserve">
+  <data name="BadgeCaptureTotal" xml:space="preserve">
     <value>Sammler</value>
   </data>
-  <data name="DepotAgent" xml:space="preserve">
+  <data name="Steel" xml:space="preserve">
     <value>Depot Agent</value>
   </data>
-  <data name="DragonTamer" xml:space="preserve">
+  <data name="Dragon" xml:space="preserve">
     <value>Drachentrainer</value>
   </data>
-  <data name="FairyTaleGirl" xml:space="preserve">
+  <data name="Fairy" xml:space="preserve">
     <value>Märchenerzählerin</value>
   </data>
-  <data name="Fisherman" xml:space="preserve">
+  <data name="BadgeBigMagikarp" xml:space="preserve">
     <value>Angler</value>
   </data>
-  <data name="Gardener" xml:space="preserve">
+  <data name="Grass" xml:space="preserve">
     <value>Gärtner</value>
   </data>
-  <data name="HexManiac" xml:space="preserve">
+  <data name="Ghost" xml:space="preserve">
     <value>Hexe</value>
   </data>
-  <data name="Hiker" xml:space="preserve">
+  <data name="Rock" xml:space="preserve">
     <value>Wanderer</value>
   </data>
-  <data name="Jogger" xml:space="preserve">
+  <data name="BadgeTravelKm" xml:space="preserve">
     <value>Jogger</value>
   </data>
-  <data name="Kanto" xml:space="preserve">
+  <data name="BadgePokedexEntries" xml:space="preserve">
     <value>Kanto</value>
   </data>
-  <data name="Kindler" xml:space="preserve">
+  <data name="Fire" xml:space="preserve">
     <value>Hitzkopf</value>
   </data>
-  <data name="Pikachu" xml:space="preserve">
+  <data name="BadgePikachu" xml:space="preserve">
     <value>Pikachu</value>
   </data>
   <data name="Psychic" xml:space="preserve">
     <value>Psycho</value>
   </data>
-  <data name="PunkGirl" xml:space="preserve">
+  <data name="Poison" xml:space="preserve">
     <value>Punker</value>
   </data>
-  <data name="Rocker" xml:space="preserve">
+  <data name="Electric" xml:space="preserve">
     <value>Rocker</value>
   </data>
-  <data name="RuinManiac" xml:space="preserve">
+  <data name="Ground" xml:space="preserve">
     <value>Ruinenmaniac</value>
   </data>
-  <data name="SchoolKid" xml:space="preserve">
+  <data name="Normal" xml:space="preserve">
     <value>Schulkind</value>
   </data>
-  <data name="Scientist" xml:space="preserve">
+  <data name="BadgeEvolvedTotal" xml:space="preserve">
     <value>Forscher</value>
   </data>
-  <data name="Skier" xml:space="preserve">
+  <data name="Ice" xml:space="preserve">
     <value>Skifahrer</value>
   </data>
-  <data name="Swimmer" xml:space="preserve">
+  <data name="Water" xml:space="preserve">
     <value>Schwimmer</value>
   </data>
-  <data name="Youngster" xml:space="preserve">
+  <data name="BadgeSmallRattata" xml:space="preserve">
     <value>Teenager</value>
   </data>
 </root>

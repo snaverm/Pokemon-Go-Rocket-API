@@ -297,88 +297,88 @@ Open page with installation files for manual install?</value>
   <data name="ValorTeam" xml:space="preserve">
     <value>Valor</value>
   </data>
-  <data name="AceTrainer" xml:space="preserve">
+  <data name="BadgeBattleTrainingWon" xml:space="preserve">
     <value>Ace Trainer</value>
   </data>
-  <data name="Backpacker" xml:space="preserve">
+  <data name="BadgePokestopsVisited" xml:space="preserve">
     <value>Backpacker</value>
   </data>
-  <data name="BattleGirl" xml:space="preserve">
+  <data name="BadgeBattleAttackWon" xml:space="preserve">
     <value>Battle Girl</value>
   </data>
-  <data name="BirdKeeper" xml:space="preserve">
+  <data name="Flying" xml:space="preserve">
     <value>Bird Keeper</value>
   </data>
-  <data name="BlackBelt" xml:space="preserve">
+  <data name="Fighting" xml:space="preserve">
     <value>Black Belt</value>
   </data>
-  <data name="Breeder" xml:space="preserve">
+  <data name="BadgeHatchedTotal" xml:space="preserve">
     <value>Breeder</value>
   </data>
-  <data name="BugCatcher" xml:space="preserve">
+  <data name="Bug" xml:space="preserve">
     <value>Bug Catcher</value>
   </data>
-  <data name="Collector" xml:space="preserve">
+  <data name="BadgeCaptureTotal" xml:space="preserve">
     <value>Collector</value>
   </data>
-  <data name="DepotAgent" xml:space="preserve">
+  <data name="Steel" xml:space="preserve">
     <value>Depot Agent</value>
   </data>
-  <data name="DragonTamer" xml:space="preserve">
+  <data name="Dragon" xml:space="preserve">
     <value>Dragon Tamer</value>
   </data>
-  <data name="FairyTaleGirl" xml:space="preserve">
+  <data name="Fairy" xml:space="preserve">
     <value>Fairy Tale Girl</value>
   </data>
-  <data name="Fisherman" xml:space="preserve">
+  <data name="BadgeBigMagikarp" xml:space="preserve">
     <value>Fisherman</value>
   </data>
-  <data name="Gardener" xml:space="preserve">
+  <data name="Grass" xml:space="preserve">
     <value>Gardener</value>
   </data>
-  <data name="HexManiac" xml:space="preserve">
+  <data name="Ghost" xml:space="preserve">
     <value>Hex Maniac</value>
   </data>
-  <data name="Hiker" xml:space="preserve">
+  <data name="Rock" xml:space="preserve">
     <value>Hiker</value>
   </data>
-  <data name="Jogger" xml:space="preserve">
+  <data name="BadgeTravelKm" xml:space="preserve">
     <value>Jogger</value>
   </data>
-  <data name="Kanto" xml:space="preserve">
+  <data name="BadgePokedexEntries" xml:space="preserve">
     <value>Kanto</value>
   </data>
-  <data name="Kindler" xml:space="preserve">
+  <data name="Fire" xml:space="preserve">
     <value>Kindler</value>
   </data>
-  <data name="Pikachu" xml:space="preserve">
+  <data name="BadgePikachu" xml:space="preserve">
     <value>Pikachu</value>
   </data>
   <data name="Psychic" xml:space="preserve">
     <value>Psychic</value>
   </data>
-  <data name="PunkGirl" xml:space="preserve">
+  <data name="Poison" xml:space="preserve">
     <value>Punk Girl</value>
   </data>
-  <data name="Rocker" xml:space="preserve">
+  <data name="Electric" xml:space="preserve">
     <value>Rocker</value>
   </data>
-  <data name="RuinManiac" xml:space="preserve">
+  <data name="Ground" xml:space="preserve">
     <value>Ruin Maniac</value>
   </data>
-  <data name="SchoolKid" xml:space="preserve">
+  <data name="Normal" xml:space="preserve">
     <value>School Kid</value>
   </data>
-  <data name="Scientist" xml:space="preserve">
+  <data name="BadgeEvolvedTotal" xml:space="preserve">
     <value>Scientist</value>
   </data>
-  <data name="Skier" xml:space="preserve">
+  <data name="Ice" xml:space="preserve">
     <value>Skier</value>
   </data>
-  <data name="Swimmer" xml:space="preserve">
+  <data name="Water" xml:space="preserve">
     <value>Swimmer</value>
   </data>
-  <data name="Youngster" xml:space="preserve">
+  <data name="BadgeSmallRattata" xml:space="preserve">
     <value>Youngster</value>
   </data>
 </root>

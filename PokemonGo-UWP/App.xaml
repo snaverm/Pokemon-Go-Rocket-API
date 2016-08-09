@@ -41,6 +41,9 @@
             <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
             <utils:AchievementValueToMedalImageConverter x:Key="AchievementValueToMedalImageConverter" />
             <utils:PlayerTeamToTeamBackgroundImageConverter x:Key="PlayerTeamToTeamBackgroundImageConverter" />
+            <utils:AchievementNextValueConverter x:Key="AchievementNextValueConverter" />
+            <utils:AchievementValueConverter x:Key="AchievementValueConverter" />
+            <utils:AchievementTranslationConverter x:Key="AchievementTranslationConverter" />
             
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>

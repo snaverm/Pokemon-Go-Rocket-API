@@ -153,13 +153,22 @@
                            VerticalAlignment="Stretch"
                            Opacity="0"
                            Canvas.ZIndex="0">
-                <GridView ItemsSource="{Binding PlayerStatsValues}"
+                <GridView ItemsSource="{Binding Achievements}"
                           RelativePanel.AlignTopWithPanel="True"
-                          RelativePanel.AlignHorizontalCenterWithPanel="True">
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid MaximumRowsOrColumns="3"
+                                      Orientation="Horizontal" 
+                                      HorizontalChildrenAlignment="Center"
+                                      VerticalChildrenAlignment="Top"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <RelativePanel Width="100" Height="100" Margin="5">
-                                <TextBlock x:Name="AchievementTypeText" Text="{Binding TranslatedType}"
+                            <RelativePanel Height="100" Margin="5" Width="80">
+                                <TextBlock x:Name="AchievementTypeText" Text="{Binding Key, Converter={StaticResource AchievementTranslationConverter}}"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True"
                                            Foreground="Green"/>
                                 <Ellipse Width="60"
@@ -170,15 +179,15 @@
                                          StrokeThickness="2.5"
                                          x:Name="AchievementImage">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding Medal, Converter={StaticResource AchievementValueToMedalImageConverter}}" />
+                                        <ImageBrush ImageSource="{Binding Converter={StaticResource AchievementValueToMedalImageConverter}}" />
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <TextBlock x:Name="AchievementValueText" Text="{Binding Value}"
+                                <TextBlock x:Name="AchievementValueText" Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
                                            RelativePanel.AlignLeftWithPanel="True"
                                            RelativePanel.Below="AchievementImage"
                                            FontWeight="SemiBold"
                                            Foreground="Green"/>
-                                <TextBlock x:Name="AchievementNextValueText" Text="{Binding NextValue}"
+                                <TextBlock x:Name="AchievementNextValueText" Text="{Binding Converter={StaticResource AchievementNextValueConverter}}"
                                            RelativePanel.AlignRightWithPanel="True"
                                            RelativePanel.Below="AchievementImage"
                                            Foreground="Green"/>
@@ -198,25 +207,20 @@
                            VerticalAlignment="Stretch">
 
                 <Image RelativePanel.AlignTopWithPanel="True"
-                       RelativePanel.AlignLeftWithPanel="True"
-                       Margin="-100,-100,-100,-50"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       Margin="-100"
                        Opacity="0.25"
                        RelativePanel.Above="ExperiencePanel"
                        Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamBackgroundImageConverter}}"/>
 
-                <Ellipse Width="200"
-                         Height="200"
-                         Margin="0,48,0,0"
-                         RelativePanel.AlignTopWithPanel="True"
-                         RelativePanel.AlignHorizontalCenterWithPanel="True"
-                         StrokeThickness="2.5"
-                         x:Name="AvatarEllipseNew">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="../Assets/UI/avatar.png" />
-                    </Ellipse.Fill>
-                </Ellipse>
+                <Image Source="../Assets/UI/avatar.gif" 
+                       Stretch="Uniform"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.Above="ExperiencePanel"
+                       x:Name="AvatarImage"/>
 
-                <StackPanel RelativePanel.Below="AvatarEllipseNew" Margin="0,50,0,0"
+                <StackPanel RelativePanel.Above="LevelPanel" Margin="0,0,0,0"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="ExperiencePanel">
@@ -226,7 +230,7 @@
                                Style="{ThemeResource ProfilePageMediumText}" />
                 </StackPanel>
                 
-                <StackPanel RelativePanel.Below="ExperiencePanel"
+                <StackPanel RelativePanel.Above="ExperienceProgressBar"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="LevelPanel">
@@ -242,14 +246,13 @@
 
                 <ProgressBar Value="{Binding ExperienceValue}"
                              Foreground="Green"
-                             Height="10"
-                             Margin="48,0"
+                             Height="10" Margin="48,0"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="LevelPanel"
+                             RelativePanel.Above="LevelExperiencePanel"
                              x:Name="ExperienceProgressBar" />
 
-                <StackPanel RelativePanel.Below="ExperienceProgressBar"
+                <StackPanel RelativePanel.Above="InformationGrid"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Orientation="Horizontal"
                             x:Name="LevelExperiencePanel">
@@ -270,11 +273,28 @@
                                FontWeight="SemiBold"/>
                 </StackPanel>
 
-                <RelativePanel RelativePanel.AlignBottomWithPanel="True"
-                               RelativePanel.AlignLeftWithPanel="True"
-                               RelativePanel.AlignRightWithPanel="True">
-                    <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                RelativePanel.AlignVerticalCenterWith="TeamImage">
+                <Grid RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      x:Name="InformationGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <Image MaxWidth="64" Margin="0"
+                               HorizontalAlignment="Center"
+                               x:Name="CoinImage"
+                               Source="../Assets/Items/Item_COIN_01.png"/>
+                        <TextBlock x:Name="CoinText"
+                                   Style="{ThemeResource ProfilePageText}"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Pokecoins}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock Style="{ThemeResource ProfilePageSmallText}" 
                                    HorizontalAlignment="Center"
                                    Text="START DATE"
@@ -284,32 +304,17 @@
                                    Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}"/>
                     </StackPanel>
 
-                    <Image Width="96" Margin="16,0"
-                           x:Name="TeamImage"
-                           RelativePanel.AlignRightWithPanel="True"
-                           RelativePanel.AlignTopWithPanel="True"
-                           Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamImageConverter}}"/>
-                    <TextBlock x:Name="TeamText"
-                               Margin="0"
-                               Padding="0"
-                               Style="{ThemeResource ProfilePageText}"
-                               RelativePanel.AlignHorizontalCenterWith="TeamImage"
-                               RelativePanel.Below="TeamImage"
-                               Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}"/>
-
-                    <Image Width="96" Margin="16,0"
-                           x:Name="CoinImage"
-                           RelativePanel.AlignLeftWithPanel="True"
-                           RelativePanel.AlignTopWithPanel="True"
-                           Source="../Assets/Items/Item_COIN_01.png"/>
-                    <TextBlock x:Name="CoinText"
-                               Margin="0"
-                               Padding="0"
-                               Style="{ThemeResource ProfilePageText}"
-                               RelativePanel.AlignHorizontalCenterWith="CoinImage"
-                               RelativePanel.Below="TeamImage"
-                               Text="{Binding Pokecoins}"/>
-                </RelativePanel>
+                    <StackPanel Grid.Column="2">
+                        <Image MaxWidth="64" Margin="0"
+                               x:Name="TeamImage"
+                               HorizontalAlignment="Center"
+                               Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamImageConverter}}"/>
+                        <TextBlock x:Name="TeamText"
+                                   HorizontalAlignment="Center"
+                                   Style="{ThemeResource ProfilePageText}"
+                                   Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}"/>
+                    </StackPanel>
+                </Grid>
             </RelativePanel>
             
             <Button RelativePanel.AlignBottomWithPanel="True"
