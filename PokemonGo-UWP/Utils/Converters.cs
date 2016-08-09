@@ -279,8 +279,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var pokestop = (FortDataWrapper)value;
-            // TODO: download values from settings instead of manually coding them
+            var pokestop = (FortDataWrapper)value;            
             var distance = GeoExtensions.GeoAssist.CalculateDistanceBetweenTwoGeoPoints(pokestop.Geoposition,
                 GameClient.Geoposition.Coordinate.Point);
             if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
