@@ -105,7 +105,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Reference to global inventory
         /// </summary>
-        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.IncubatorsInventory;
+        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.FreeIncubatorsInventory;
 
         /// <summary>
         ///     Pokemon that we're trying to capture

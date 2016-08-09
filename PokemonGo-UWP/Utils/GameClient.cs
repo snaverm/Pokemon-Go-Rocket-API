@@ -124,9 +124,14 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollection<ItemData> CatchItemsInventory { get; set; } = new ObservableCollection<ItemData>();
 
         /// <summary>
-        ///     Stores Incubators in the current inventory
+        ///     Stores free Incubators in the current inventory
         /// </summary>
-        public static ObservableCollection<EggIncubator> IncubatorsInventory { get; set; } = new ObservableCollection<EggIncubator>();
+        public static ObservableCollection<EggIncubator> FreeIncubatorsInventory { get; set; } = new ObservableCollection<EggIncubator>();
+
+        /// <summary>
+        ///     Stores used Incubators in the current inventory
+        /// </summary>
+        public static ObservableCollection<EggIncubator> UsedIncubatorsInventory { get; set; } = new ObservableCollection<EggIncubator>();
 
         /// <summary>
         /// Stores Pokemons in the current inventory
@@ -436,10 +441,15 @@ namespace PokemonGo_UWP.Utils
                                                  .GroupBy(item => item.InventoryItemData.Item)
                                                  .Select(item => item.First().InventoryItemData.Item), true);
             // Update incbuators          
-            // TODO: check if unused incubators have pokemonId = 0 to separate between sable and non-usable incubators
-            IncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
+            // TODO: check if unused incubators have pokemonId = 0 to separate between sable and non-usable incubators, yes unused incubators pokemonId IS 0
+            FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                                                       .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
-                                                      .Where(item => item != null && item.PokemonId != 0 && (item.UsesRemaining > 0 || item?.ItemId == ItemId.ItemIncubatorBasicUnlimited)), true);            
+                                                      .Where(item => item != null && item.PokemonId == 0), true);
+
+            UsedIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
+                                          .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
+                                          .Where(item => item != null && item.PokemonId != 0), true);
+
             // Update Pokemons
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                                                     .Where(item => item != null && item.PokemonId > 0),true);
@@ -561,7 +571,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static EggIncubator GetIncubatorFromEgg(PokemonData egg)
         {
-            return IncubatorsInventory.First(item => item.Id.Equals(egg.EggIncubatorId));
+            return UsedIncubatorsInventory.First(item => item.Id.Equals(egg.EggIncubatorId));
         }
 
         #endregion
