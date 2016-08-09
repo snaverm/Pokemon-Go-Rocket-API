@@ -94,7 +94,7 @@ namespace PokemonGo_UWP.Utils
         public static string CurrentVersion
         {
             get
-            {
+            {                
                 var currentVersion = Package.Current.Id.Version;
                 return $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
             }
@@ -155,10 +155,17 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } = new ObservableCollection<PokedexEntry>();
 
+        #region Templates from server
         /// <summary>
         /// Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
         /// </summary>
-        public static IEnumerable<PokemonSettings> PokedexExtraData { get; set; } = new List<PokemonSettings>();
+        public static IEnumerable<PokemonSettings> PokedexExtraData { get; private set; } = new List<PokemonSettings>();
+
+        /// <summary>
+        /// Stores upgrade costs (candy, stardust) per each level
+        /// </summary>
+        public static Dictionary<int, object[]> PokemonUpgradeCosts { get; private set; } = new Dictionary<int, object[]>();
+        #endregion
 
         #endregion
 
@@ -308,10 +315,10 @@ namespace PokemonGo_UWP.Utils
             };            
             // Update before starting timer            
             Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
-            GameSetting = (await Client.Download.GetSettings()).Settings;
+            GameSetting = (await Client.Download.GetSettings()).Settings;            
             await UpdateMapObjects();
             await UpdateInventory();
-            await UpdatePokedex();
+            await UpdateItemTemplates();
             Busy.SetBusy(false);
         }
 
@@ -447,10 +454,18 @@ namespace PokemonGo_UWP.Utils
         /// TODO: store it in local settings maybe?
         /// </summary>
         /// <returns></returns>
-        private static async Task UpdatePokedex()
-        {
+        private static async Task UpdateItemTemplates()
+        {            
+            // Get all the templates
+            var itemTemplates = (await Client.Download.GetItemTemplates()).ItemTemplates;
             // Update Pokedex data
-            PokedexExtraData = (await Client.Download.GetItemTemplates()).ItemTemplates.Where(item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset).Select(item => item.PokemonSettings);
+            PokedexExtraData = itemTemplates.Where(item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset).Select(item => item.PokemonSettings);            
+            // Update Pokemon upgrade templates
+            var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
+            for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+            {
+                PokemonUpgradeCosts.Add(i, new object[] {tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i]});                
+            }
         }
 
         /// <summary>
