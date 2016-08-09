@@ -8,6 +8,7 @@
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:gif="using:XamlAnimatedGif"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -213,11 +214,11 @@
                        RelativePanel.Above="ExperiencePanel"
                        Source="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamBackgroundImageConverter}}"/>
 
-                <Image Source="../Assets/UI/avatar.gif" 
-                       Stretch="Uniform"
+                <Image Stretch="Uniform"
                        RelativePanel.AlignTopWithPanel="True"
                        RelativePanel.AlignHorizontalCenterWithPanel="True"
                        RelativePanel.Above="ExperiencePanel"
+                       gif:AnimationBehavior.SourceUri="/Assets/UI/avatar.gif"
                        x:Name="AvatarImage"/>
 
                 <StackPanel RelativePanel.Above="LevelPanel" Margin="0,0,0,0"
