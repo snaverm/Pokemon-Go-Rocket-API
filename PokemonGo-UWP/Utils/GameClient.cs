@@ -20,6 +20,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
+using POGOProtos.Settings;
 using POGOProtos.Settings.Master;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
@@ -97,6 +98,11 @@ namespace PokemonGo_UWP.Utils
                 return $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
             }
         }
+
+        /// <summary>
+        /// Settings downloaded from server
+        /// </summary>
+        public static GlobalSettings GameSetting { get; private set; }
 
         /// <summary>
         ///     Collection of Pokemon in 1 step from current position
@@ -294,6 +300,7 @@ namespace PokemonGo_UWP.Utils
             };            
             // Update before starting timer            
             Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
+            GameSetting = (await Client.Download.GetSettings()).Settings;
             await UpdateMapObjects();
             await UpdateInventory();
             await UpdatePokedex();
@@ -334,8 +341,8 @@ namespace PokemonGo_UWP.Utils
         {
             // Get all map objects from server
             var mapObjects = await GetMapObjects(Geoposition);
-            _lastUpdate = DateTime.Now;                        
-
+            _lastUpdate = DateTime.Now;                          
+            
             // update catchable pokemons
             var newCatchablePokemons = mapObjects.Item1.MapCells.SelectMany(x => x.CatchablePokemons).ToArray();
             Logger.Write($"Found {newCatchablePokemons.Length} catchable pokemons");

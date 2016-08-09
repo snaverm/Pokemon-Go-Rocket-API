@@ -283,8 +283,8 @@ namespace PokemonGo_UWP.Utils
             // TODO: download values from settings instead of manually coding them
             var distance = GeoExtensions.GeoAssist.CalculateDistanceBetweenTwoGeoPoints(pokestop.Geoposition,
                 GameClient.Geoposition.Coordinate.Point);
-            if (distance > 70)
-                return new Uri($"ms-appx:///Assets/Icons/pokestop_far.png");
+            if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
+                return new Uri("ms-appx:///Assets/Icons/pokestop_far.png");
             var mode = pokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() ? "" : "_inactive";
             return new Uri($"ms-appx:///Assets/Icons/pokestop_near{mode}.png");
         }
