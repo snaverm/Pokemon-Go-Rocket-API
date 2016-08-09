@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
+using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
@@ -169,16 +170,14 @@ namespace PokemonGo_UWP.Utils
         ///     Sets things up if we didn't come from the login page
         /// </summary>
         /// <returns></returns>
-        public static async Task InitializeClient(bool isPtcAccount)
+        public static async Task InitializeClient()
         {
-            var isPtcLogin = !string.IsNullOrWhiteSpace(SettingsService.Instance.PtcAuthToken);
-
             ClientSettings = new Settings
             {
-                AuthType = isPtcLogin ? AuthType.Ptc : AuthType.Google
+                AuthType = SettingsService.Instance.LastLoginService
             };
 
-            Client = new Client(ClientSettings, new APIFailure()) { AuthToken = SettingsService.Instance.PtcAuthToken ?? SettingsService.Instance.GoogleAuthToken };
+            Client = new Client(ClientSettings, new APIFailure()) { AuthToken = SettingsService.Instance.AuthToken};
 
             await Client.Login.DoLogin();
         }
@@ -201,10 +200,14 @@ namespace PokemonGo_UWP.Utils
             // Get PTC token
             var authToken = await Client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
-            SettingsService.Instance.PtcAuthToken = authToken;
-            SettingsService.Instance.GoogleAuthToken = null;
+            SettingsService.Instance.AuthToken = authToken;
+            // Update other data if login worked
+            if (authToken == null) return false;
+            SettingsService.Instance.LastLoginService = AuthType.Ptc;
+            SettingsService.Instance.UserCredentials =
+                new PasswordCredential(nameof(SettingsService.Instance.UserCredentials), username, password);
             // Return true if login worked, meaning that we have a token
-            return authToken != null;
+            return true;
         }
 
         /// <summary>
@@ -226,9 +229,14 @@ namespace PokemonGo_UWP.Utils
             // Get Google token
             var authToken = await Client.Login.DoLogin();
             // Update current token even if it's null
-            SettingsService.Instance.GoogleAuthToken = authToken;
+            SettingsService.Instance.AuthToken = authToken;
+            // Update other data if login worked
+            if (authToken == null) return false;
+            SettingsService.Instance.LastLoginService = AuthType.Google;
+            SettingsService.Instance.UserCredentials =
+                new PasswordCredential(nameof(SettingsService.Instance.UserCredentials), email, password);
             // Return true if login worked, meaning that we have a token
-            return authToken != null;
+            return true;
         }
 
         /// <summary>
@@ -237,8 +245,8 @@ namespace PokemonGo_UWP.Utils
         public static void DoLogout()
         {
             // Clear stored token
-            SettingsService.Instance.PtcAuthToken = null;
-            SettingsService.Instance.GoogleAuthToken = null;
+            SettingsService.Instance.AuthToken = null;
+            SettingsService.Instance.UserCredentials = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
             _geolocator = null;
