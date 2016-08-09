@@ -236,6 +236,6 @@
  Открыть страницу для ручной установки?</value>
    </data>
      <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
-     <value>Авто поворот карты</value>
+     <value>Автоповорот карты</value>
    </data>
 </root>
