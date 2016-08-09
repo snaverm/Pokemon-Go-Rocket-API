@@ -48,6 +48,18 @@
                 </converters:ValueWhenConverter.Otherwise>
             </converters:ValueWhenConverter>
 
+            <converters:ValueWhenConverter x:Key="VisibleWhenStringNotEmptyConverter">
+                <converters:ValueWhenConverter.When>
+                    <x:String></x:String>
+                </converters:ValueWhenConverter.When>
+                <converters:ValueWhenConverter.Value>
+                    <Visibility>Visible</Visibility>
+                </converters:ValueWhenConverter.Value>
+                <converters:ValueWhenConverter.Otherwise>
+                    <Visibility>Collapsed</Visibility>
+                </converters:ValueWhenConverter.Otherwise>
+            </converters:ValueWhenConverter>
+
         </ResourceDictionary>
     </Application.Resources>
 
