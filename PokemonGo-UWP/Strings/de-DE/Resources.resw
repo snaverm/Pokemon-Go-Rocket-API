@@ -192,8 +192,11 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Irgendetwas lief schief und die App ist eventuell unstabil. Wollen Sie sich abmelden und es erneut versuchen?</value>
   </data>
-  <data name="UpdatedVersion" xml:space="preserve">
-    <value>Eine neue Version {0} ist verfügbar Wollen Sie die Aktualisierung starten? {1}</value>
+  <data name="UpdatedVersion1" xml:space="preserve">
+    <value>Eine neue Version ist verfügbar:</value>
+  </data>
+  <data name="UpdatedVersion2" xml:space="preserve">
+    <value>Wollen Sie den Link öffnen?</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
     <value>Benutzername/E-Mail sind falsch oder die Server sind offline. Bitte versuchen Sie es erneut.</value>
@@ -219,36 +222,130 @@
   <data name="VibrationTitleText.Text" xml:space="preserve">
     <value>Vibration</value>
   </data>
-  <data name="ItemsText.Text" xml:space="preserve">
-    <value>ITEMS</value>
+  <data name="LevelText.Text" xml:space="preserve">
+    <value>Level</value>
   </data>
-  <data name="ItemsTextLower.Text" xml:space="preserve">
-    <value>items</value>
+  <data name="PokemonCaughtByType" xml:space="preserve">
+    <value>unterschiedliche Pokémons gefangen</value>
   </data>
-  <data name="LevelupText.Text" xml:space="preserve">
-    <value>Neues Level!</value>
+  <data name="PokemonsCaptured" xml:space="preserve">
+    <value>Pokémons gefangen</value>
   </data>
-  <data name="NumberText.Text" xml:space="preserve">
-    <value># </value>
-    <comment>Watch out: there is a space after the #</comment>
+  <data name="PokemonsEncountered" xml:space="preserve">
+    <value>Pokémons getroffen</value>
   </data>
-  <data name="PokedexText.Text" xml:space="preserve">
-    <value>POKÉDEX</value>
+  <data name="PokestopsVisited" xml:space="preserve">
+    <value>Pokéstops besucht</value>
   </data>
-  <data name="SlashSpaceCPText.Text" xml:space="preserve">
-    <value>/ CP</value>
+  <data name="MapAutoRotateTitleText.Text" xml:space="preserve">
+    <value>Karte automatisch rotieren</value>
   </data>
-  <data name="SpaceXPText.Text" xml:space="preserve">
-    <value> EP</value>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
   </data>
-  <data name="UpdateDownloading" xml:space="preserve">
-    <value>Aktualiersung herunterladen {0}</value>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
   </data>
-  <data name="UpdateFailed" xml:space="preserve">
-    <value>Aktualisierung fehlgeschlagen: {0}
-Öfnnen Sie zur manuellen Installation die Seite mit den Installationsdateien?</value>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>HH:mm</value>
   </data>
-  <data name="UpdateInstalling" xml:space="preserve">
-    <value>Aktualisierung wird installiert und die App neu gestartet...</value>
+  <data name="StartDateText.Text" xml:space="preserve">
+    <value>STARTDATUM</value>
+  </data>
+  <data name="InstinctTeam" xml:space="preserve">
+    <value>Intuition</value>
+  </data>
+  <data name="MysticTeam" xml:space="preserve">
+    <value>Weisheit</value>
+  </data>
+  <data name="NoTeam" xml:space="preserve">
+    <value>Kein Team</value>
+  </data>
+  <data name="ValorTeam" xml:space="preserve">
+    <value>Wagemut</value>
+  </data>
+  <data name="BadgeBattleTrainingWon" xml:space="preserve">
+    <value>Ass-Trainer</value>
+  </data>
+  <data name="BadgePokestopsVisited" xml:space="preserve">
+    <value>Backpacker</value>
+  </data>
+  <data name="BadgeBattleAttackWon" xml:space="preserve">
+    <value>Kämpfer</value>
+  </data>
+  <data name="Flying" xml:space="preserve">
+    <value>Vogelfänger</value>
+  </data>
+  <data name="Fighting" xml:space="preserve">
+    <value>Schwarzgurt</value>
+  </data>
+  <data name="BadgeHatchedTotal" xml:space="preserve">
+    <value>Züchter</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>Käfersammler</value>
+  </data>
+  <data name="BadgeCaptureTotal" xml:space="preserve">
+    <value>Sammler</value>
+  </data>
+  <data name="Steel" xml:space="preserve">
+    <value>Depot Agent</value>
+  </data>
+  <data name="Dragon" xml:space="preserve">
+    <value>Drachentrainer</value>
+  </data>
+  <data name="Fairy" xml:space="preserve">
+    <value>Märchenerzählerin</value>
+  </data>
+  <data name="BadgeBigMagikarp" xml:space="preserve">
+    <value>Angler</value>
+  </data>
+  <data name="Grass" xml:space="preserve">
+    <value>Gärtner</value>
+  </data>
+  <data name="Ghost" xml:space="preserve">
+    <value>Hexe</value>
+  </data>
+  <data name="Rock" xml:space="preserve">
+    <value>Wanderer</value>
+  </data>
+  <data name="BadgeTravelKm" xml:space="preserve">
+    <value>Jogger</value>
+  </data>
+  <data name="BadgePokedexEntries" xml:space="preserve">
+    <value>Kanto</value>
+  </data>
+  <data name="Fire" xml:space="preserve">
+    <value>Hitzkopf</value>
+  </data>
+  <data name="BadgePikachu" xml:space="preserve">
+    <value>Pikachu</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psycho</value>
+  </data>
+  <data name="Poison" xml:space="preserve">
+    <value>Punker</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>Rocker</value>
+  </data>
+  <data name="Ground" xml:space="preserve">
+    <value>Ruinenmaniac</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Schulkind</value>
+  </data>
+  <data name="BadgeEvolvedTotal" xml:space="preserve">
+    <value>Forscher</value>
+  </data>
+  <data name="Ice" xml:space="preserve">
+    <value>Skifahrer</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>Schwimmer</value>
+  </data>
+  <data name="BadgeSmallRattata" xml:space="preserve">
+    <value>Teenager</value>
   </data>
 </root>
