@@ -160,7 +160,7 @@
     <value>Ок</value>
   </data>
   <data name="LoadingEncounter" xml:space="preserve">
-    <value>Loading encounter with </value>
+    <value>Загружаеться сражение с </value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Авторизация...</value>
