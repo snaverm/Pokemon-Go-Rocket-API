@@ -66,6 +66,7 @@ namespace PokemonGo_UWP
         {
             e.SetObserved();
             Logger.Write(e.Exception.Message);
+            HockeyClient.Current.TrackException(e.Exception);
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
