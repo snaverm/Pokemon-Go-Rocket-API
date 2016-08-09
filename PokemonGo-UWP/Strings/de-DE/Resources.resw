@@ -193,7 +193,7 @@
     <value>Irgendetwas lief schief und die App ist eventuell unstabil. Wollen Sie sich abmelden und es erneut versuchen?</value>
   </data>
   <data name="UpdatedVersion" xml:space="preserve">
-    <value>Eine neue Version {0] ist verfügbar Wollen Sie die Aktualisierung starten? {1}</value>
+    <value>Eine neue Version {0} ist verfügbar Wollen Sie die Aktualisierung starten? {1}</value>
   </data>
   <data name="WrongUsername" xml:space="preserve">
     <value>Benutzername/E-Mail sind falsch oder die Server sind offline. Bitte versuchen Sie es erneut.</value>
