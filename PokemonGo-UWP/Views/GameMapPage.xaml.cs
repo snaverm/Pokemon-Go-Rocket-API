@@ -111,7 +111,7 @@ namespace PokemonGo_UWP.Views
 					if (lastAutoPosition == null)
 						lastAutoPosition = GameMapControl.Center;
 
-					//HACK: I'm not testing lastAutoPosition == GameMapControl.Center because MapControl is not taking exact location when setting center!!
+					//Small Trick: I'm not testing lastAutoPosition == GameMapControl.Center because MapControl is not taking exact location when setting center!!
 					string currentCoord = $"{GameMapControl.Center.Position.Latitude: 000.0000} ; {GameMapControl.Center.Position.Longitude: 000.0000}";
 					string previousCoord = $"{lastAutoPosition.Position.Latitude: 000.0000} ; {lastAutoPosition.Position.Longitude: 000.0000}";
 					if (currentCoord == previousCoord)
