@@ -287,6 +287,14 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Pokedex
+
+        private DelegateCommand _gotoPlayerProfilePage;
+
+        public DelegateCommand GotoPlayerProfilePageCommand => _gotoPlayerProfilePage ?? (_gotoPlayerProfilePage = new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
+
+        #endregion
+
         #endregion
     }
 }
