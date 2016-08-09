@@ -64,9 +64,9 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                     }
                 });
-            }
-            // Restarts map timer
-            GameClient.ToggleUpdateTimer();
+            }       
+            // Restart timer
+            GameClient.ToggleUpdateTimer();     
             if (suspensionState.Any())
             {
                 // Recovering the state                
