@@ -41,10 +41,10 @@
                     <x:Double>0</x:Double>
                 </converters:ValueWhenConverter.When>
                 <converters:ValueWhenConverter.Value>
-                    <x:Boolean>True</x:Boolean>
+                    <x:Boolean>False</x:Boolean>
                 </converters:ValueWhenConverter.Value>
                 <converters:ValueWhenConverter.Otherwise>
-                    <x:Boolean>False</x:Boolean>
+                    <x:Boolean>True</x:Boolean>
                 </converters:ValueWhenConverter.Otherwise>
             </converters:ValueWhenConverter>
 

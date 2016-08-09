@@ -286,7 +286,9 @@ namespace PokemonGo_UWP.Utils
                 Interval = TimeSpan.FromSeconds(10)
             };
             _mapUpdateTimer.Tick += async (s, e) =>
-            {
+            {                
+                // Update before starting but only if more than 10s passed since the last one
+                if ((DateTime.Now - _lastUpdate).Seconds <= 10) return;
                 Logger.Write("Updating map");
                 await UpdateMapObjects();
             };            
@@ -299,13 +301,22 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
+        /// DateTime for the last map update
+        /// </summary>
+        private static DateTime _lastUpdate;
+
+        /// <summary>
         /// Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
-        public static void ToggleUpdateTimer(bool isEnabled = true)
-        {
+        public static async void ToggleUpdateTimer(bool isEnabled = true)
+        {            
             if (isEnabled)
-            {      
+            {
+                if (_mapUpdateTimer.IsEnabled) return;
+                // Update before starting but only if more than 10s passed since the last one
+                if ((DateTime.Now - _lastUpdate).Seconds > 10)
+                    await UpdateMapObjects();
                 _mapUpdateTimer.Start();          
             }
             else
@@ -322,10 +333,11 @@ namespace PokemonGo_UWP.Utils
         private static async Task UpdateMapObjects()
         {
             // Get all map objects from server
-            var mapObjects = (await GetMapObjects(Geoposition)).Item1;
+            var mapObjects = await GetMapObjects(Geoposition);
+            _lastUpdate = DateTime.Now;                        
 
             // update catchable pokemons
-            var newCatchablePokemons = mapObjects.MapCells.SelectMany(x => x.CatchablePokemons).ToArray();
+            var newCatchablePokemons = mapObjects.Item1.MapCells.SelectMany(x => x.CatchablePokemons).ToArray();
             Logger.Write($"Found {newCatchablePokemons.Length} catchable pokemons");
             if (newCatchablePokemons.Length != CatchablePokemons.Count)
             {
@@ -334,13 +346,13 @@ namespace PokemonGo_UWP.Utils
             CatchablePokemons.UpdateWith(newCatchablePokemons, x => new MapPokemonWrapper(x), (x, y) => x.EncounterId == y.EncounterId);
 
             // update nearby pokemons
-            var newNearByPokemons = mapObjects.MapCells.SelectMany(x => x.NearbyPokemons).ToArray();
+            var newNearByPokemons = mapObjects.Item1.MapCells.SelectMany(x => x.NearbyPokemons).ToArray();
             Logger.Write($"Found {newNearByPokemons.Length} nearby pokemons");
             // for this collection the ordering is important, so we follow a slightly different update mechanism 
             NearbyPokemons.UpdateByIndexWith(newNearByPokemons, x => new NearbyPokemonWrapper(x));
 
             // update poke stops on map (gyms are ignored for now)
-            var newPokeStops = mapObjects.MapCells
+            var newPokeStops = mapObjects.Item1.MapCells
                     .SelectMany(x => x.Forts)
                     .Where(x => x.Type == FortType.Checkpoint)
                     .ToArray();
