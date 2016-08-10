@@ -94,14 +94,27 @@ namespace PokemonGo_UWP.Views
 			base.OnNavigatingFrom(e);
 			UnsubscribeToCaptureEvents();
 			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-            if (SettingsService.Instance.IsMapZoomEnabled)
+            if (SettingsService.Instance.IsRememberMapZoomEnabled)
             {
-                savezoomlevel();
+                SaveZoomLevel();
             }
 		}
 
-        private void savezoomlevel()
+        private void SaveZoomLevel()
         {
+            // Bug fix for Issue 586
+            if (SettingsService.Instance.Zoomlevel == 0 || GameMapControl.ZoomLevel == 0)
+            {
+                try
+                {
+                    GameMapControl.ZoomLevel = 20;
+                }
+                catch
+                {
+
+                }
+            }
+            // End Bug fix for Issue 586
             SettingsService.Instance.Zoomlevel = GameMapControl.ZoomLevel;
         }
 
@@ -134,7 +147,7 @@ namespace PokemonGo_UWP.Views
 						if (SettingsService.Instance.IsAutoRotateMapEnabled && position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
 						{
 							GameMapControl.Heading = position.Coordinate.Heading.Value;
-                            if (SettingsService.Instance.IsMapZoomEnabled)
+                            if (SettingsService.Instance.IsRememberMapZoomEnabled)
                             {
                                 try
                                 {
