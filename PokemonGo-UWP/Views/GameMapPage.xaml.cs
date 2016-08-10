@@ -10,6 +10,8 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -92,13 +94,36 @@ namespace PokemonGo_UWP.Views
 			base.OnNavigatingFrom(e);
 			UnsubscribeToCaptureEvents();
 			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+            savezoomlevel();
 		}
 
-		#endregion
+        private void savezoomlevel()
+        {
+            object zoom;
+            bool zoomget;
+            try
+            {
+                zoomget = CoreApplication.Properties.TryGetValue("zoom", out zoom);
+            }
+            catch
+            {
+                zoomget = false;
+            }
+            if(zoomget==false)
+            {
+                CoreApplication.Properties.Add("zoom", GameMapControl.ZoomLevel);
+            }
+            else if (zoomget == false)
+            {
+                CoreApplication.Properties["zoom"] = GameMapControl.ZoomLevel;
+            }
+        }
 
-		#region Handlers
+        #endregion
 
-		private async void UpdateMap(Geoposition position)
+        #region Handlers
+
+        private async void UpdateMap(Geoposition position)
 		{
 			await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 			{
@@ -123,7 +148,20 @@ namespace PokemonGo_UWP.Views
 						if (SettingsService.Instance.IsAutoRotateMapEnabled && position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
 						{
 							GameMapControl.Heading = position.Coordinate.Heading.Value;
-						}
+                            try
+                            {
+                                object zoom;
+                                if (CoreApplication.Properties.TryGetValue("zoom", out zoom))
+                                {
+                                    double zoomlvl = (double)zoom;
+                                    GameMapControl.ZoomLevel = zoomlvl;
+                                }
+                            }
+                            catch
+                            {
+
+                            }
+                        }
 					}
 					else
 					{
