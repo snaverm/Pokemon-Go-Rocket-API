@@ -79,7 +79,6 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -409,6 +408,7 @@
     <Compile Include="Utils\Achievement\SilverAttribute.cs" />
     <Compile Include="Utils\Achievement\GoldAttribute.cs" />
     <Compile Include="Utils\AchievementType.cs" />
+    <Compile Include="Utils\ApplicationKeys.cs" />
     <Compile Include="Utils\AsyncSynchronisationContext.cs" />
     <Compile Include="Utils\AudioUtils.cs" />
     <Compile Include="Utils\CollectionExtensions.cs" />
@@ -554,6 +554,7 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
