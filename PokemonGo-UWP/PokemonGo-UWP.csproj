@@ -424,7 +424,9 @@
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\SettingsService.cs" />
     <Compile Include="Utils\SortingModes.cs" />
+    <Compile Include="Utils\UdidGenerator.cs" />
     <Compile Include="Utils\UpdateManager.cs" />
+    <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\CapturePokemonPageViewModel.cs" />
     <Compile Include="ViewModels\EggDetailPageViewModel.cs" />
     <Compile Include="ViewModels\GameMapPageViewModel.cs" />
