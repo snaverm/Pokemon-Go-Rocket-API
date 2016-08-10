@@ -94,7 +94,10 @@ namespace PokemonGo_UWP.Views
 			base.OnNavigatingFrom(e);
 			UnsubscribeToCaptureEvents();
 			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-            savezoomlevel();
+            if (SettingsService.Instance.IsMapZoomEnabled)
+            {
+                savezoomlevel();
+            }
 		}
 
         private void savezoomlevel()
@@ -148,18 +151,21 @@ namespace PokemonGo_UWP.Views
 						if (SettingsService.Instance.IsAutoRotateMapEnabled && position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
 						{
 							GameMapControl.Heading = position.Coordinate.Heading.Value;
-                            try
+                            if (SettingsService.Instance.IsMapZoomEnabled)
                             {
-                                object zoom;
-                                if (CoreApplication.Properties.TryGetValue("zoom", out zoom))
+                                try
                                 {
-                                    double zoomlvl = (double)zoom;
-                                    GameMapControl.ZoomLevel = zoomlvl;
+                                    object zoom;
+                                    if (CoreApplication.Properties.TryGetValue("zoom", out zoom))
+                                    {
+                                        double zoomlvl = (double)zoom;
+                                        GameMapControl.ZoomLevel = zoomlvl;
+                                    }
                                 }
-                            }
-                            catch
-                            {
+                                catch
+                                {
 
+                                }
                             }
                         }
 					}

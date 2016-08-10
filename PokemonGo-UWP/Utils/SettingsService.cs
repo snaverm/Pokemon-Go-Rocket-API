@@ -95,6 +95,12 @@ namespace PokemonGo_UWP.Utils
             set { _helper.Write(nameof(IsAutoRotateMapEnabled), value); }
         }
 
+        public bool IsMapZoomEnabled
+        {
+            get { return _helper.Read(nameof(IsMapZoomEnabled), false); }
+            set { _helper.Write(nameof(IsMapZoomEnabled), value); }
+        }
+
         public PokemonSortingModes PokemonSortingMode
         {
             get { return this._helper.Read(nameof(PokemonSortingMode), PokemonSortingModes.Combat); }
