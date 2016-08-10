@@ -101,10 +101,10 @@ namespace PokemonGo_UWP.Utils
             set { _helper.Write(nameof(IsAutoRotateMapEnabled), value); }
         }
 
-        public bool IsMapZoomEnabled
+        public bool IsRememberMapZoomEnabled
         {
-            get { return _helper.Read(nameof(IsMapZoomEnabled), false); }
-            set { _helper.Write(nameof(IsMapZoomEnabled), value); }
+            get { return _helper.Read(nameof(IsRememberMapZoomEnabled), false); }
+            set { _helper.Write(nameof(IsRememberMapZoomEnabled), value); }
         }
         
         public double Zoomlevel

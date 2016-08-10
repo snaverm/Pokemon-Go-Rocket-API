@@ -419,6 +419,7 @@
     <Compile Include="Utils\MessageDialogExtensions.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
     <Compile Include="Utils\PokemonInfo.cs" />
+    <Compile Include="Utils\RandomExtensions.cs" />
     <Compile Include="Utils\Resources.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\SettingsService.cs" />
