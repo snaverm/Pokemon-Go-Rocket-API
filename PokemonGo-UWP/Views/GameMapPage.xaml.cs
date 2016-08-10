@@ -102,24 +102,7 @@ namespace PokemonGo_UWP.Views
 
         private void savezoomlevel()
         {
-            object zoom;
-            bool zoomget;
-            try
-            {
-                zoomget = CoreApplication.Properties.TryGetValue("zoom", out zoom);
-            }
-            catch
-            {
-                zoomget = false;
-            }
-            if(zoomget==false)
-            {
-                CoreApplication.Properties.Add("zoom", GameMapControl.ZoomLevel);
-            }
-            else if (zoomget == false)
-            {
-                CoreApplication.Properties["zoom"] = GameMapControl.ZoomLevel;
-            }
+            SettingsService.Instance.Zoomlevel = GameMapControl.ZoomLevel;
         }
 
         #endregion
@@ -155,12 +138,7 @@ namespace PokemonGo_UWP.Views
                             {
                                 try
                                 {
-                                    object zoom;
-                                    if (CoreApplication.Properties.TryGetValue("zoom", out zoom))
-                                    {
-                                        double zoomlvl = (double)zoom;
-                                        GameMapControl.ZoomLevel = zoomlvl;
-                                    }
+                                    GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
                                 }
                                 catch
                                 {
