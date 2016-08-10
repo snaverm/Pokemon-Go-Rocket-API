@@ -107,7 +107,7 @@ namespace PokemonGo_UWP.Views
             {
                 try
                 {
-                    GameMapControl.ZoomLevel = 20;
+                    GameMapControl.ZoomLevel = 18;
                 }
                 catch
                 {
@@ -144,21 +144,18 @@ namespace PokemonGo_UWP.Views
 						ReactivateMapAutoUpdate.Visibility = Visibility.Collapsed;
 						GameMapControl.Center = position.Coordinate.Point;
 						lastAutoPosition = GameMapControl.Center;
-						if (SettingsService.Instance.IsAutoRotateMapEnabled && position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
-						{
-							GameMapControl.Heading = position.Coordinate.Heading.Value;
-                            if (SettingsService.Instance.IsRememberMapZoomEnabled)
-                            {
-                                try
-                                {
-                                    GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
-                                }
-                                catch
-                                {
+					    if (!SettingsService.Instance.IsAutoRotateMapEnabled || position.Coordinate.Heading == null ||
+					        double.IsNaN(position.Coordinate.Heading.Value)) return;
+					    GameMapControl.Heading = position.Coordinate.Heading.Value;
+					    if (!SettingsService.Instance.IsRememberMapZoomEnabled) return;
+					    try
+					    {
+					        GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
+					    }
+					    catch
+					    {
 
-                                }
-                            }
-                        }
+					    }
 					}
 					else
 					{
