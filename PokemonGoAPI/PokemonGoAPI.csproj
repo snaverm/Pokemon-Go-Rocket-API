@@ -130,6 +130,7 @@
     <Compile Include="Helpers\RetryHandler.cs" />
     <Compile Include="Helpers\S2Helper.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\Vector.cs" />
     <Compile Include="HttpClient\PokemonClient.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Logger.cs" />

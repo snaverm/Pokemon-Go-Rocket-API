@@ -42,6 +42,10 @@ namespace PokemonGo.RocketAPI.Helpers
 
             var ticketBytes = requestEnvelope.AuthTicket.ToByteArray();
 
+            Vector normAccel = new Vector(_deviceInfo.AccelRawX, _deviceInfo.AccelRawY, _deviceInfo.AngleNormalizedX);
+            normAccel.NormalizeVector(9.81);
+            normAccel.Round(2);
+
             var sig = new Signature()
             {
                 LocationHash1 =
@@ -56,9 +60,9 @@ namespace PokemonGo.RocketAPI.Helpers
 
                 SensorInfo = new Signature.Types.SensorInfo()
                 {
-                    AccelNormalizedX = _deviceInfo.AccelNormalizedX,
-                    AccelNormalizedY = _deviceInfo.AccelNormalizedY,
-                    AccelNormalizedZ = _deviceInfo.AccelNormalizedZ,
+                    AccelNormalizedX = normAccel.X,
+                    AccelNormalizedY = normAccel.Y,
+                    AccelNormalizedZ = normAccel.Z,
                     AccelRawX = -_deviceInfo.AccelRawX,
                     AccelRawY = -_deviceInfo.AccelRawY,
                     AccelRawZ = -_deviceInfo.AccelRawZ,

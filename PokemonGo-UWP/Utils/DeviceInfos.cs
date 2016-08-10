@@ -108,15 +108,8 @@ namespace PokemonGo_UWP.Utils
         private readonly Inclinometer _inclinometer = Inclinometer.GetDefault();
 
         // TODO: if no accelerometer/compass (e.g. on desktop) what should we do?
-        //Almost all iPhones have accell && magnetometer, so if we dont have it, simulate it with some basic distrubutions
+        //Almost all iPhones have accel && magnetometer, so if we dont have it, simulate it with some basic distrubutions
 
-
-        //AccelNormalized - these values are probably computes somehow from AccelRaw - probably to gravity or what, meantime adding a little bit of random
-        public double AccelNormalizedX => AccelRawX * 10.0 + _random.NextGaussian(0.0, 0.3);
-
-        public double AccelNormalizedY => AccelRawY * 10.0 + _random.NextGaussian(0.0, 0.3);
-
-        public double AccelNormalizedZ => AccelRawZ * 10.0 + _random.NextGaussian(0.0, 0.3);
 
         public string TimestampSnapshot = ""; //(ulong)(ElapsedMilliseconds - 230L) = TimestampSinceStart - 30L
 
