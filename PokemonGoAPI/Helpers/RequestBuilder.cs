@@ -64,7 +64,15 @@ namespace PokemonGo.RocketAPI.Helpers
                     AccelRawZ = -_deviceInfo.AccelRawZ,
                     MagnetometerX = _deviceInfo.MagnetometerX,
                     MagnetometerY = _deviceInfo.MagnetometerY,
-                    MagnetometerZ = _deviceInfo.MagnetometerZ
+                    MagnetometerZ = _deviceInfo.MagnetometerZ,
+                    GyroscopeRawX = _deviceInfo.GyroscopeRawX,
+                    GyroscopeRawY = _deviceInfo.GyroscopeRawY,
+                    GyroscopeRawZ = _deviceInfo.GyroscopeRawZ,
+                    AngleNormalizedX = _deviceInfo.AngleNormalizedX,
+                    AngleNormalizedY = _deviceInfo.AngleNormalizedY,
+                    AngleNormalizedZ = _deviceInfo.AngleNormalizedZ,
+                    AccelerometerAxes = _deviceInfo.AccelerometerAxes
+                    
                 },
 
                 DeviceInfo = new Signature.Types.DeviceInfo()

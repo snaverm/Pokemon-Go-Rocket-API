@@ -105,16 +105,18 @@ namespace PokemonGo_UWP.Utils
 
         private readonly Gyrometer _gyrometer = Gyrometer.GetDefault();
 
+        private readonly Inclinometer _inclinometer = Inclinometer.GetDefault();
+
         // TODO: if no accelerometer/compass (e.g. on desktop) what should we do?
         //Almost all iPhones have accell && magnetometer, so if we dont have it, simulate it with some basic distrubutions
-        public double AccelNormalizedX => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
-                                           _accelerometer.GetCurrentReading().AccelerationX : _random.NextGaussian(0.0, 0.3);
 
-        public double AccelNormalizedY => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
-                                           _accelerometer.GetCurrentReading().AccelerationY : _random.NextGaussian(0.0, 0.3);
 
-        public double AccelNormalizedZ => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
-                                           _accelerometer.GetCurrentReading().AccelerationZ : _random.NextGaussian(0.0, 0.3);
+        //AccelNormalized - these values are probably computes somehow from AccelRaw - probably to gravity or what, meantime adding a little bit of random
+        public double AccelNormalizedX => AccelRawX * 10.0 + _random.NextGaussian(0.0, 0.3);
+
+        public double AccelNormalizedY => AccelRawY * 10.0 + _random.NextGaussian(0.0, 0.3);
+
+        public double AccelNormalizedZ => AccelRawZ * 10.0 + _random.NextGaussian(0.0, 0.3);
 
         public string TimestampSnapshot = ""; //(ulong)(ElapsedMilliseconds - 230L) = TimestampSinceStart - 30L
 
@@ -127,27 +129,33 @@ namespace PokemonGo_UWP.Utils
         public double MagnetometerZ => _magnetometer != null && _magnetometer.GetCurrentReading() != null ?
                                            _magnetometer.GetCurrentReading().MagneticFieldZ : _random.NextGaussian(0.0, 0.1);
 
-        public double AccelRawX => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+        public double GyroscopeRawX => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
                                         _gyrometer.GetCurrentReading().AngularVelocityX : _random.NextGaussian(0.0, 0.1);
 
-        public double AccelRawY => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+        public double GyroscopeRawY => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
                                         _gyrometer.GetCurrentReading().AngularVelocityY : _random.NextGaussian(0.0, 0.1);
 
-        public double AccelRawZ => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+        public double GyroscopeRawZ => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
                                         _gyrometer.GetCurrentReading().AngularVelocityZ : _random.NextGaussian(0.0, 0.1);
 
+        public double AngleNormalizedX => _inclinometer != null && _inclinometer.GetCurrentReading() != null ?
+                                        _inclinometer.GetCurrentReading().PitchDegrees : _random.NextGaussian(0.0, 5.0);
+        public double AngleNormalizedY => _inclinometer != null && _inclinometer.GetCurrentReading() != null ?
+                                        _inclinometer.GetCurrentReading().YawDegrees : _random.NextGaussian(0.0, 5.0);
+        public double AngleNormalizedZ => _inclinometer != null && _inclinometer.GetCurrentReading() != null ?
+                                        _inclinometer.GetCurrentReading().RollDegrees : _random.NextGaussian(0.0, 5.0);
+
+        public double AccelRawX => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                                  _accelerometer.GetCurrentReading().AccelerationX : _random.NextGaussian(0.0, 0.3);
+
+        public double AccelRawY => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                           _accelerometer.GetCurrentReading().AccelerationY : _random.NextGaussian(0.0, 0.3);
+
+        public double AccelRawZ => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                           _accelerometer.GetCurrentReading().AccelerationZ : _random.NextGaussian(0.0, 0.3);
 
 
-        // TODO: missing values!
-        //AngleNormalizedX = 17.950439453125,
-        //AngleNormalizedY = -23.36273193359375,
-        //AngleNormalizedZ = -48.8250732421875,
-
-        //GyroscopeRawX = 7.62939453125E-05,
-        //GyroscopeRawY = -0.00054931640625,
-        //GyroscopeRawZ = 0.0024566650390625,
-
-        public string AccelerometerAxes = "3";
+        public ulong AccelerometerAxes => 3;
 
         #endregion
 
