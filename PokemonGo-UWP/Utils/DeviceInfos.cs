@@ -1,21 +1,67 @@
-﻿using System;
+﻿using PokemonGo.RocketAPI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
+using Superbest_random;
 
 namespace PokemonGo_UWP.Utils
 {
+    public class LocationFixFused : ILocationFix
+    {
+        public static readonly LocationFixFused Instance;
+
+
+        static LocationFixFused()
+        {
+            Instance = Instance ?? new LocationFixFused();
+        }
+
+        private LocationFixFused()
+        {
+        }
+
+        public string Provider => "fused";
+        //1 = no fix, 2 = acquiring/inaccurate, 3 = fix acquired
+        public ulong ProviderStatus => 3;
+
+        public float Latitude => (float)GameClient.Geoposition.Coordinate.Point.Position.Latitude;
+
+        public float Longitude => (float)GameClient.Geoposition.Coordinate.Point.Position.Longitude;
+
+        public float Altitude => (float)GameClient.Geoposition.Coordinate.Point.Position.Altitude;
+
+        // TODO: why 3? need more infos.
+        public uint Floor => 3;
+
+        // TODO: why 1? need more infos.
+        public ulong LocationType => 1;
+
+    }
     /// <summary>
     /// Device infos used to sign requests
     /// </summary>
-    public static class DeviceInfos
+    public class DeviceInfos : IDeviceInfo
     {
+
+        public static readonly DeviceInfos Instance;
+
+
+        static DeviceInfos()
+        {
+            Instance = Instance ?? new DeviceInfos();
+        }
+
+        private DeviceInfos()
+        {
+        }
+
 
         #region Device
 
-        public static string UDID
+        public string DeviceID
         {
             get
             {
@@ -24,8 +70,8 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
-        private static readonly Random random = new Random();
-        public static string RandomString(int length)
+        private readonly Random random = new Random();
+        public string RandomString(int length)
         {
             const string chars = "ABCDEF0123456789";
             return new string(Enumerable.Repeat(chars, length)
@@ -33,61 +79,64 @@ namespace PokemonGo_UWP.Utils
         }
 
         // TODO: check for iPhone
-        public static string FirmwareBrand = "10";
+        public string FirmwareBrand => "iPhone OS";
 
         // TODO: check for iPhone
-        public static string FirmwareType = "13";
+        public string FirmwareType => "9.3.3";
 
         #endregion
 
-        #region LocationFix
+        #region LocationFixes
+        private ILocationFix[] _locationFixes = { LocationFixFused.Instance };
+        public ILocationFix[] LocationFixes => _locationFixes;
 
-        public static string Provider = "fused";
-
-        public static string Latitude = $"{GameClient.Geoposition.Coordinate.Point.Position.Latitude}";
-
-        public static string Longitude = $"{GameClient.Geoposition.Coordinate.Point.Position.Longitude}";
-
-        public static string Altitude = $"{GameClient.Geoposition.Coordinate.Point.Position.Altitude}";
-
-        // TODO: why 3? need more infos.
-        public static string Floor = "3";
-
-        // TODO: why 1? need more infos.
-        public static string LocationType = "1";
 
         #endregion
 
         #region Sensors
 
-        private static readonly Accelerometer Accelerometer = Accelerometer.GetDefault();
+        private Random _random = new Random();
 
-        private static Compass _compass = Compass.GetDefault();
+        private readonly Accelerometer _accelerometer = Accelerometer.GetDefault();
 
-        private static readonly Magnetometer Magnetometer = Magnetometer.GetDefault();
+        private Compass _compass = Compass.GetDefault();
 
-        private static readonly Gyrometer _gyrometer = Gyrometer.GetDefault();
+        private readonly Magnetometer _magnetometer = Magnetometer.GetDefault();
+
+        private readonly Gyrometer _gyrometer = Gyrometer.GetDefault();
 
         // TODO: if no accelerometer/compass (e.g. on desktop) what should we do?
-        public static string AccelNormalizedX => $"{Accelerometer.GetCurrentReading().AccelerationX}";
+        //Almost all iPhones have accell && magnetometer, so if we dont have it, simulate it with some basic distrubutions
+        public double AccelNormalizedX => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                           _accelerometer.GetCurrentReading().AccelerationX : _random.NextGaussian(0.0, 0.3);
 
-        public static string AccelNormalizedY => $"{Accelerometer.GetCurrentReading().AccelerationY}";
+        public double AccelNormalizedY => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                           _accelerometer.GetCurrentReading().AccelerationY : _random.NextGaussian(0.0, 0.3);
 
-        public static string AccelNormalizedZ => $"{Accelerometer.GetCurrentReading().AccelerationZ}";
+        public double AccelNormalizedZ => _accelerometer != null && _accelerometer.GetCurrentReading() != null ?
+                                           _accelerometer.GetCurrentReading().AccelerationZ : _random.NextGaussian(0.0, 0.3);
 
-        public static string TimestampSnapshot = ""; //(ulong)(ElapsedMilliseconds - 230L) = TimestampSinceStart - 30L
+        public string TimestampSnapshot = ""; //(ulong)(ElapsedMilliseconds - 230L) = TimestampSinceStart - 30L
 
-        public static string MagnetometerX => $"{Magnetometer.GetCurrentReading().MagneticFieldX}";
+        public double MagnetometerX => _magnetometer != null && _magnetometer.GetCurrentReading() != null ?
+                                           _magnetometer.GetCurrentReading().MagneticFieldX : _random.NextGaussian(0.0, 0.1);
 
-        public static string MagnetometerY => $"{Magnetometer.GetCurrentReading().MagneticFieldY}";
+        public double MagnetometerY => _magnetometer != null && _magnetometer.GetCurrentReading() != null ?
+                                           _magnetometer.GetCurrentReading().MagneticFieldY : _random.NextGaussian(0.0, 0.1);
 
-        public static string MagnetometerZ => $"{Magnetometer.GetCurrentReading().MagneticFieldZ}";
+        public double MagnetometerZ => _magnetometer != null && _magnetometer.GetCurrentReading() != null ?
+                                           _magnetometer.GetCurrentReading().MagneticFieldZ : _random.NextGaussian(0.0, 0.1);
 
-        public static string AccelRawX => $"{_gyrometer.GetCurrentReading().AngularVelocityX}";
+        public double AccelRawX => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+                                        _gyrometer.GetCurrentReading().AngularVelocityX : _random.NextGaussian(0.0, 0.1);
 
-        public static string AccelRawY => $"{_gyrometer.GetCurrentReading().AngularVelocityY}";
+        public double AccelRawY => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+                                        _gyrometer.GetCurrentReading().AngularVelocityY : _random.NextGaussian(0.0, 0.1);
 
-        public static string AccelRawZ => $"{_gyrometer.GetCurrentReading().AngularVelocityZ}";
+        public double AccelRawZ => _gyrometer != null && _gyrometer.GetCurrentReading() != null ?
+                                        _gyrometer.GetCurrentReading().AngularVelocityZ : _random.NextGaussian(0.0, 0.1);
+
+
 
         // TODO: missing values!
         //AngleNormalizedX = 17.950439453125,
@@ -98,7 +147,7 @@ namespace PokemonGo_UWP.Utils
         //GyroscopeRawY = -0.00054931640625,
         //GyroscopeRawZ = 0.0024566650390625,
 
-        public static string AccelerometerAxes = "3";
+        public string AccelerometerAxes = "3";
 
         #endregion
 

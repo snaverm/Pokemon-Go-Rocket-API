@@ -29,6 +29,8 @@ namespace PokemonGo.RocketAPI
         public Rpc.Encounter Encounter;
         public Rpc.Misc Misc;
 
+        public IDeviceInfo DeviceInfo;
+
         public IApiFailureStrategy ApiFailure { get; set; }
         public ISettings Settings { get; }
         public string AuthToken { get; set; }
@@ -43,7 +45,7 @@ namespace PokemonGo.RocketAPI
         internal string ApiUrl { get; set; }
         internal AuthTicket AuthTicket { get; set; }
 
-        public Client(ISettings settings, IApiFailureStrategy apiFailureStrategy)
+        public Client(ISettings settings, IApiFailureStrategy apiFailureStrategy, IDeviceInfo deviceInfo)
         {
             Settings = settings;
             ApiFailure = apiFailureStrategy;                                               
@@ -55,7 +57,8 @@ namespace PokemonGo.RocketAPI
             Map = new Rpc.Map(this);
             Fort = new Rpc.Fort(this);
             Encounter = new Rpc.Encounter(this);
-            Misc = new Rpc.Misc(this);                        
+            Misc = new Rpc.Misc(this);
+            DeviceInfo = deviceInfo;
 
             Player.SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
         }
