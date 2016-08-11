@@ -364,6 +364,24 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\fi\Resources.resw" />
+    <PRIResource Include="Strings\fi\PokemonMoves.resw" />
+    <PRIResource Include="Strings\fi\Pokemon.resw" />
+    <PRIResource Include="Strings\fi\Items.resw" />
+    <PRIResource Include="Strings\fi\CodeResources.resw" />
+    <PRIResource Include="Strings\fi\Achievements.resw" />
+    <PRIResource Include="Strings\zh-HK\Resources.resw" />
+    <PRIResource Include="Strings\zh-HK\PokemonMoves.resw" />
+    <PRIResource Include="Strings\zh-HK\Pokemon.resw" />
+    <PRIResource Include="Strings\zh-HK\Items.resw" />
+    <PRIResource Include="Strings\zh-HK\CodeResources.resw" />
+    <PRIResource Include="Strings\zh-HK\Achievements.resw" />
+    <PRIResource Include="Strings\id\Resources.resw" />
+    <PRIResource Include="Strings\id\PokemonMoves.resw" />
+    <PRIResource Include="Strings\id\Pokemon.resw" />
+    <PRIResource Include="Strings\id\Items.resw" />
+    <PRIResource Include="Strings\id\CodeResources.resw" />
+    <PRIResource Include="Strings\id\Achievements.resw" />
     <PRIResource Include="Strings\zh-TW\Resources.resw" />
     <PRIResource Include="Strings\zh-TW\PokemonMoves.resw" />
     <PRIResource Include="Strings\zh-TW\Pokemon.resw" />
@@ -477,6 +495,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\FortDataWrapper.cs" />
     <Compile Include="Entities\IUpdatable.cs" />
     <Compile Include="Entities\MapPokemonWrapper.cs" />
@@ -577,6 +598,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -643,8 +668,10 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.es.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.fi.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.fr.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.hu.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.id.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.it.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.ja.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.nl.xlf" />
@@ -655,6 +682,7 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.sk.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.tr.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-CN.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-HK.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-TW.xlf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
