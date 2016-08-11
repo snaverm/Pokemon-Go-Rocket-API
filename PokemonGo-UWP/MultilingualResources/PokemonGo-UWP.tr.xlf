@@ -1177,20 +1177,23 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Isırık</target>
         </trans-unit>
         <trans-unit id="CrossChop" translate="yes" xml:space="preserve">
-          <source>CrossChop</source>
-          <target state="translated">Çapraz Kesiş</target>
+          <source>Cross Chop</source>
+          <target state="needs-review-translation">Çapraz Kesiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DarkPulse" translate="yes" xml:space="preserve">
-          <source>DarkPulse</source>
-          <target state="translated">Karanlık Dalga</target>
+          <source>Dark Pulse</source>
+          <target state="needs-review-translation">Karanlık Dalga</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Dig" translate="yes" xml:space="preserve">
           <source>Dig</source>
           <target state="translated">Kaz</target>
         </trans-unit>
         <trans-unit id="DoubleSlap" translate="yes" xml:space="preserve">
-          <source>DoubleSlap</source>
-          <target state="translated">Çifte Dayak</target>
+          <source>Double Slap</source>
+          <target state="needs-review-translation">Çifte Dayak</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Ember" translate="yes" xml:space="preserve">
           <source>Ember</source>
@@ -1201,48 +1204,56 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Alev Makinesi</target>
         </trans-unit>
         <trans-unit id="FlameWheel" translate="yes" xml:space="preserve">
-          <source>FlameWheel</source>
-          <target state="translated">Ateş Çemberi</target>
+          <source>Flame Wheel</source>
+          <target state="needs-review-translation">Ateş Çemberi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HyperBeam" translate="yes" xml:space="preserve">
-          <source>HyperBeam</source>
-          <target state="translated">Hiper Işın</target>
+          <source>Hyper Beam</source>
+          <target state="needs-review-translation">Hiper Işın</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Lick" translate="yes" xml:space="preserve">
           <source>Lick</source>
           <target state="translated">Yala</target>
         </trans-unit>
         <trans-unit id="LowKick" translate="yes" xml:space="preserve">
-          <source>LowKick</source>
-          <target state="translated">Alttan Tekme</target>
+          <source>Low Kick</source>
+          <target state="needs-review-translation">Alttan Tekme</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Megahorn" translate="yes" xml:space="preserve">
           <source>Megahorn</source>
           <target state="translated">Mega Boynuz</target>
         </trans-unit>
         <trans-unit id="MetalClaw" translate="yes" xml:space="preserve">
-          <source>MetalClaw</source>
-          <target state="translated">Metal Pençe</target>
+          <source>Metal Claw</source>
+          <target state="needs-review-translation">Metal Pençe</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MoveUnset" translate="yes" xml:space="preserve">
-          <source>MoveUnset</source>
-          <target state="translated">Hareket Belli Değil</target>
+          <source>Move Unset</source>
+          <target state="needs-review-translation">Hareket Belli Değil</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Pound" translate="yes" xml:space="preserve">
           <source>Pound</source>
           <target state="translated">Yumruk</target>
         </trans-unit>
         <trans-unit id="PsychoCut" translate="yes" xml:space="preserve">
-          <source>PsychoCut</source>
-          <target state="translated">Psişik Kesiş</target>
+          <source>Psycho Cut</source>
+          <target state="needs-review-translation">Psişik Kesiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="QuickAttack" translate="yes" xml:space="preserve">
-          <source>QuickAttack</source>
-          <target state="translated">Hızlı Saldırı</target>
+          <source>Quick Attack</source>
+          <target state="needs-review-translation">Hızlı Saldırı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RazorLeaf" translate="yes" xml:space="preserve">
-          <source>RazorLeaf</source>
-          <target state="translated">Jilet Yaprak</target>
+          <source>Razor Leaf</source>
+          <target state="needs-review-translation">Jilet Yaprak</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Scratch" translate="yes" xml:space="preserve">
           <source>Scratch</source>
@@ -1257,36 +1268,43 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Sis</target>
         </trans-unit>
         <trans-unit id="SuckerPunch" translate="yes" xml:space="preserve">
-          <source>SuckerPunch</source>
-          <target state="translated">Bitirici Yumruk</target>
+          <source>Sucker Punch</source>
+          <target state="needs-review-translation">Bitirici Yumruk</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Tackle" translate="yes" xml:space="preserve">
           <source>Tackle</source>
           <target state="translated">Darbe</target>
         </trans-unit>
         <trans-unit id="TakeDown" translate="yes" xml:space="preserve">
-          <source>TakeDown</source>
-          <target state="translated">İndirme</target>
+          <source>Take Down</source>
+          <target state="needs-review-translation">İndirme</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ThunderShock" translate="yes" xml:space="preserve">
-          <source>ThunderShock</source>
-          <target state="translated">Şimşek Şoku</target>
+          <source>Thunder Shock</source>
+          <target state="needs-review-translation">Şimşek Şoku</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ViceGrip" translate="yes" xml:space="preserve">
-          <source>ViceGrip</source>
-          <target state="translated">Mengene Kavrama</target>
+          <source>Vice Grip</source>
+          <target state="needs-review-translation">Mengene Kavrama</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="VineWhip" translate="yes" xml:space="preserve">
-          <source>VineWhip</source>
-          <target state="translated">Kamçı Darbesi</target>
+          <source>Vine Whip</source>
+          <target state="needs-review-translation">Kamçı Darbesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WaterGun" translate="yes" xml:space="preserve">
-          <source>WaterGun</source>
-          <target state="translated">Su Tabancası</target>
+          <source>Water Gun</source>
+          <target state="needs-review-translation">Su Tabancası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WingAttack" translate="yes" xml:space="preserve">
-          <source>WingAttack</source>
-          <target state="translated">Kanat Saldırısı</target>
+          <source>Wing Attack</source>
+          <target state="needs-review-translation">Kanat Saldırısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Wrap" translate="yes" xml:space="preserve">
           <source>Wrap</source>
@@ -1301,372 +1319,455 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Asit</target>
         </trans-unit>
         <trans-unit id="AcidFast" translate="yes" xml:space="preserve">
-          <source>AcidFast</source>
-          <target state="translated">Hızlı Asit</target>
+          <source>Acid Fast</source>
+          <target state="needs-review-translation">Hızlı Asit</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AerialAce" translate="yes" xml:space="preserve">
-          <source>AerialAce</source>
-          <target state="translated">Havasal Kesiş</target>
+          <source>Aerial Ace</source>
+          <target state="needs-review-translation">Havasal Kesiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AirCutter" translate="yes" xml:space="preserve">
-          <source>AirCutter</source>
-          <target state="translated">Hava Kesici</target>
+          <source>Air Cutter</source>
+          <target state="needs-review-translation">Hava Kesici</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AirSlash" translate="yes" xml:space="preserve">
-          <source>AirSlash</source>
-          <target state="translated">Hava Kamçısı</target>
+          <source>Air Slash</source>
+          <target state="needs-review-translation">Hava Kamçısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AncientPower" translate="yes" xml:space="preserve">
-          <source>AncientPower</source>
-          <target state="translated">Antik Güç</target>
+          <source>Ancient Power</source>
+          <target state="needs-review-translation">Antik Güç</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AquaJet" translate="yes" xml:space="preserve">
-          <source>AquaJet</source>
-          <target state="translated">Su Jeti</target>
+          <source>Aqua Jet</source>
+          <target state="needs-review-translation">Su Jeti</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="AquaTail" translate="yes" xml:space="preserve">
-          <source>AquaTail</source>
-          <target state="translated">Su Kuyruğu</target>
+          <source>Aqua Tail</source>
+          <target state="needs-review-translation">Su Kuyruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BiteFast" translate="yes" xml:space="preserve">
-          <source>BiteFast</source>
-          <target state="translated">Hızlı Isırık</target>
+          <source>Bite</source>
+          <target state="needs-review-translation">Hızlı Isırık</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Blizzard" translate="yes" xml:space="preserve">
           <source>Blizzard</source>
           <target state="translated">Buz Fırtınası</target>
         </trans-unit>
         <trans-unit id="BodySlam" translate="yes" xml:space="preserve">
-          <source>BodySlam</source>
-          <target state="translated">Vücut Darbesi</target>
+          <source>Body Slam</source>
+          <target state="needs-review-translation">Vücut Darbesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BoneClub" translate="yes" xml:space="preserve">
-          <source>BoneClub</source>
-          <target state="translated">Kemik Sopa</target>
+          <source>Bone Club</source>
+          <target state="needs-review-translation">Kemik Sopa</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BrickBreak" translate="yes" xml:space="preserve">
-          <source>BrickBreak</source>
-          <target state="translated">Tuğla Kırma</target>
+          <source>Brick Break</source>
+          <target state="needs-review-translation">Tuğla Kırma</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Brine" translate="yes" xml:space="preserve">
           <source>Brine</source>
           <target state="translated">Salamura</target>
         </trans-unit>
         <trans-unit id="BubbleBeam" translate="yes" xml:space="preserve">
-          <source>BubbleBeam</source>
-          <target state="translated">Köpük Işını</target>
+          <source>Bubble Beam</source>
+          <target state="needs-review-translation">Köpük Işını</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BubbleFast" translate="yes" xml:space="preserve">
-          <source>BubbleFast</source>
-          <target state="translated">Hızlı Köpük</target>
+          <source>Bubble Fast</source>
+          <target state="needs-review-translation">Hızlı Köpük</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BugBite" translate="yes" xml:space="preserve">
-          <source>BugBite</source>
-          <target state="translated">Böcek Isırığı</target>
+          <source>Bug Bite</source>
+          <target state="needs-review-translation">Böcek Isırığı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BugBiteFast" translate="yes" xml:space="preserve">
-          <source>BugBiteFast</source>
-          <target state="translated">Hızlı Böcek Isırığı</target>
+          <source>Bug Bite</source>
+          <target state="needs-review-translation">Hızlı Böcek Isırığı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BugBuzz" translate="yes" xml:space="preserve">
-          <source>BugBuzz</source>
-          <target state="translated">Böcek Vızıldanması</target>
+          <source>Bug Buzz</source>
+          <target state="needs-review-translation">Böcek Vızıldanması</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Bulldoze" translate="yes" xml:space="preserve">
-          <source>Bulldoze</source>
-          <target state="translated">Yıkım</target>
+          <source>Bull doze</source>
+          <target state="needs-review-translation">Yıkım</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BulletPunch" translate="yes" xml:space="preserve">
-          <source>BulletPunch</source>
-          <target state="translated">Mermi Yumruğu</target>
+          <source>Bullet Punch</source>
+          <target state="needs-review-translation">Mermi Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BulletPunchFast" translate="yes" xml:space="preserve">
-          <source>BulletPunchFast</source>
-          <target state="translated">Hızlı Mermi Yumruğu</target>
+          <source>Bullet Punch</source>
+          <target state="needs-review-translation">Hızlı Mermi Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ConfusionFast" translate="yes" xml:space="preserve">
-          <source>ConfusionFast</source>
-          <target state="translated">Hızlı Şaşkınlık</target>
+          <source>Confusion</source>
+          <target state="needs-review-translation">Hızlı Şaşkınlık</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="CrossPoison" translate="yes" xml:space="preserve">
-          <source>CrossPoison</source>
-          <target state="translated">Çapraz Zehir</target>
+          <source>Cross Poison</source>
+          <target state="needs-review-translation">Çapraz Zehir</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Cut" translate="yes" xml:space="preserve">
           <source>Cut</source>
           <target state="translated">Kes</target>
         </trans-unit>
         <trans-unit id="CutFast" translate="yes" xml:space="preserve">
-          <source>CutFast</source>
-          <target state="translated">Hızlı Kes</target>
+          <source>Cut</source>
+          <target state="needs-review-translation">Hızlı Kes</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DazzlingGleam" translate="yes" xml:space="preserve">
-          <source>DazzlingGleam</source>
-          <target state="translated">Büyüleyici Parıltı</target>
+          <source>Dazzling Gleam</source>
+          <target state="needs-review-translation">Büyüleyici Parıltı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DisarmingVoice" translate="yes" xml:space="preserve">
-          <source>DisarmingVoice</source>
-          <target state="translated">Yatıştıran Ses</target>
+          <source>Disarming Voice</source>
+          <target state="needs-review-translation">Yatıştıran Ses</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Discharge" translate="yes" xml:space="preserve">
           <source>Discharge</source>
           <target state="translated">Deşarj</target>
         </trans-unit>
         <trans-unit id="DragonBreath" translate="yes" xml:space="preserve">
-          <source>DragonBreath</source>
-          <target state="translated">Ejder Nefesi</target>
+          <source>Dragon Breath</source>
+          <target state="needs-review-translation">Ejder Nefesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DragonBreathFast" translate="yes" xml:space="preserve">
-          <source>DragonBreathFast</source>
-          <target state="translated">Hızlı Ejder Nefesi</target>
+          <source>Dragon Breath</source>
+          <target state="needs-review-translation">Hızlı Ejder Nefesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DragonClaw" translate="yes" xml:space="preserve">
-          <source>DragonClaw</source>
-          <target state="translated">Ejder Pençesi</target>
+          <source>Dragon Claw</source>
+          <target state="needs-review-translation">Ejder Pençesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DragonPulse" translate="yes" xml:space="preserve">
-          <source>DragonPulse</source>
-          <target state="translated">Ejder Dalgası</target>
+          <source>Dragon Pulse</source>
+          <target state="needs-review-translation">Ejder Dalgası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DrainingKiss" translate="yes" xml:space="preserve">
-          <source>DrainingKiss</source>
-          <target state="translated">Emici Öpücük</target>
+          <source>Draining Kiss</source>
+          <target state="needs-review-translation">Emici Öpücük</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DrillPeck" translate="yes" xml:space="preserve">
-          <source>DrillPeck</source>
-          <target state="translated">Delici Gaga</target>
+          <source>Drill Peck</source>
+          <target state="needs-review-translation">Delici Gaga</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="DrillRun" translate="yes" xml:space="preserve">
-          <source>DrillRun</source>
-          <target state="translated">Delme Koşusu</target>
+          <source>Drill Run</source>
+          <target state="needs-review-translation">Delme Koşusu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Earthquake" translate="yes" xml:space="preserve">
           <source>Earthquake</source>
           <target state="translated">Deprem</target>
         </trans-unit>
         <trans-unit id="EmberFast" translate="yes" xml:space="preserve">
-          <source>EmberFast</source>
-          <target state="translated">Hızlı Ateş</target>
+          <source>Ember Fast</source>
+          <target state="needs-review-translation">Hızlı Ateş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FeintAttackFast" translate="yes" xml:space="preserve">
-          <source>FeintAttackFast</source>
-          <target state="translated">Hızlı Hafif Saldırı</target>
+          <source>Feint Attack</source>
+          <target state="needs-review-translation">Hızlı Hafif Saldırı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FireBlast" translate="yes" xml:space="preserve">
-          <source>FireBlast</source>
-          <target state="translated">Ateş Patlaması</target>
+          <source>Fire Blast</source>
+          <target state="needs-review-translation">Ateş Patlaması</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FireFangFast" translate="yes" xml:space="preserve">
-          <source>FireFangFast</source>
-          <target state="translated">Hızlı Ateşli Sivridiş</target>
+          <source>Fire Fang</source>
+          <target state="needs-review-translation">Hızlı Ateşli Sivridiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FirePunch" translate="yes" xml:space="preserve">
-          <source>FirePunch</source>
-          <target state="translated">Alev Yumruğu</target>
+          <source>Fire Punch</source>
+          <target state="needs-review-translation">Alev Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FlameBurst" translate="yes" xml:space="preserve">
-          <source>FlameBurst</source>
-          <target state="translated">Alev Patlaması</target>
+          <source>Flame Burst</source>
+          <target state="needs-review-translation">Alev Patlaması</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FlameCharge" translate="yes" xml:space="preserve">
-          <source>FlameCharge</source>
-          <target state="translated">Alev Darbesi</target>
+          <source>Flame Charge</source>
+          <target state="needs-review-translation">Alev Darbesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FlashCannon" translate="yes" xml:space="preserve">
-          <source>FlashCannon</source>
-          <target state="translated">Flaş Topu</target>
+          <source>Flash Cannon</source>
+          <target state="needs-review-translation">Flaş Topu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FrostBreath" translate="yes" xml:space="preserve">
-          <source>FrostBreath</source>
-          <target state="translated">Buz Nefesi</target>
+          <source>Frost Breath</source>
+          <target state="needs-review-translation">Buz Nefesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FrostBreathFast" translate="yes" xml:space="preserve">
-          <source>FrostBreathFast</source>
-          <target state="translated">Hızlı Buz Nefesi</target>
+          <source>Frost Breath</source>
+          <target state="needs-review-translation">Hızlı Buz Nefesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FuryCutter" translate="yes" xml:space="preserve">
-          <source>FuryCutter</source>
-          <target state="translated">Öfke Kesicisi</target>
+          <source>Fury Cutter</source>
+          <target state="needs-review-translation">Öfke Kesicisi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="FuryCutterFast" translate="yes" xml:space="preserve">
-          <source>FuryCutterFast</source>
-          <target state="translated">Hızlı Öfke Kesicisi</target>
+          <source>Fury Cutter</source>
+          <target state="needs-review-translation">Hızlı Öfke Kesicisi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="GigaDrain" translate="yes" xml:space="preserve">
-          <source>GigaDrain</source>
-          <target state="translated">Giga Emiş</target>
+          <source>Giga Drain</source>
+          <target state="needs-review-translation">Giga Emiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="GunkShot" translate="yes" xml:space="preserve">
-          <source>GunkShot</source>
-          <target state="translated">Yapışkan Vuruş</target>
+          <source>Gunk Shot</source>
+          <target state="needs-review-translation">Yapışkan Vuruş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Headbutt" translate="yes" xml:space="preserve">
           <source>Headbutt</source>
           <target state="translated">Kafa Darbesi</target>
         </trans-unit>
         <trans-unit id="HeartStamp" translate="yes" xml:space="preserve">
-          <source>HeartStamp</source>
-          <target state="translated">Kalp Damgası</target>
+          <source>Heart Stamp</source>
+          <target state="needs-review-translation">Kalp Damgası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeatWave" translate="yes" xml:space="preserve">
-          <source>HeatWave</source>
-          <target state="translated">Sıcak Dalgası</target>
+          <source>Heat Wave</source>
+          <target state="needs-review-translation">Sıcak Dalgası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HornAttack" translate="yes" xml:space="preserve">
-          <source>HornAttack</source>
-          <target state="translated">Boynuz Saldırısı</target>
+          <source>Horn Attack</source>
+          <target state="needs-review-translation">Boynuz Saldırısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Hurricane" translate="yes" xml:space="preserve">
           <source>Hurricane</source>
           <target state="translated">Fırtına</target>
         </trans-unit>
         <trans-unit id="HydroPump" translate="yes" xml:space="preserve">
-          <source>HydroPump</source>
-          <target state="translated">Su Pompası</target>
+          <source>Hydro Pump</source>
+          <target state="needs-review-translation">Su Pompası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HydroPumpBlastoise" translate="yes" xml:space="preserve">
-          <source>HydroPumpBlastoise</source>
-          <target state="translated">Blastoise Su Pompası</target>
+          <source>Hydro Pump</source>
+          <target state="needs-review-translation">Blastoise Su Pompası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HyperFang" translate="yes" xml:space="preserve">
-          <source>HyperFang</source>
-          <target state="translated">Hiper Diş</target>
+          <source>Hyper Fang</source>
+          <target state="needs-review-translation">Hiper Diş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IceBeam" translate="yes" xml:space="preserve">
-          <source>IceBeam</source>
-          <target state="translated">Buz Işını</target>
+          <source>Ice Beam</source>
+          <target state="needs-review-translation">Buz Işını</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IcePunch" translate="yes" xml:space="preserve">
-          <source>IcePunch</source>
-          <target state="translated">Buz Yumruğu</target>
+          <source>Ice Punch</source>
+          <target state="needs-review-translation">Buz Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IceShard" translate="yes" xml:space="preserve">
-          <source>IceShard</source>
-          <target state="translated">Buz Parçası</target>
+          <source>Ice Shard</source>
+          <target state="needs-review-translation">Buz Parçası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IceShardFast" translate="yes" xml:space="preserve">
-          <source>IceShardFast</source>
-          <target state="translated">Hızlı Buz Parçası</target>
+          <source>Ice Shard</source>
+          <target state="needs-review-translation">Hızlı Buz Parçası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IcyWind" translate="yes" xml:space="preserve">
-          <source>IcyWind</source>
-          <target state="translated">Buzlu Rüzgar</target>
+          <source>Icy Wind</source>
+          <target state="needs-review-translation">Buzlu Rüzgar</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="IronHead" translate="yes" xml:space="preserve">
-          <source>IronHead</source>
-          <target state="translated">Demir Kafa</target>
+          <source>Iron Head</source>
+          <target state="needs-review-translation">Demir Kafa</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="KarateChop" translate="yes" xml:space="preserve">
-          <source>KarateChop</source>
-          <target state="translated">Karate Vuruşu</target>
+          <source>Karate Chop</source>
+          <target state="needs-review-translation">Karate Vuruşu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="KarateChopFast" translate="yes" xml:space="preserve">
-          <source>KarateChopFast</source>
-          <target state="translated">Hızlı Karate Vuruşu</target>
+          <source>Karate Chop</source>
+          <target state="needs-review-translation">Hızlı Karate Vuruşu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="LeafBlade" translate="yes" xml:space="preserve">
-          <source>LeafBlade</source>
-          <target state="translated">Kılıç Yaprak</target>
+          <source>Leaf Blade</source>
+          <target state="needs-review-translation">Kılıç Yaprak</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="LickFast" translate="yes" xml:space="preserve">
-          <source>LickFast</source>
-          <target state="translated">Hızlı Yala</target>
+          <source>Lick Fast</source>
+          <target state="needs-review-translation">Hızlı Yala</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="LowKickFast" translate="yes" xml:space="preserve">
-          <source>LowKickFast</source>
-          <target state="translated">Hızlı Alttan Tekme</target>
+          <source>Low Kick</source>
+          <target state="needs-review-translation">Hızlı Alttan Tekme</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="LowSweep" translate="yes" xml:space="preserve">
-          <source>LowSweep</source>
-          <target state="translated">Alt Kesiş</target>
+          <source>Low Sweep</source>
+          <target state="needs-review-translation">Alt Kesiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MagnetBomb" translate="yes" xml:space="preserve">
-          <source>MagnetBomb</source>
-          <target state="translated">Magnet Bombası</target>
+          <source>Magnet Bomb</source>
+          <target state="needs-review-translation">Magnet Bombası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MegaDrain" translate="yes" xml:space="preserve">
-          <source>MegaDrain</source>
-          <target state="translated">Mega Emiş</target>
+          <source>Mega Drain</source>
+          <target state="needs-review-translation">Mega Emiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MetalClawFast" translate="yes" xml:space="preserve">
-          <source>MetalClawFast</source>
-          <target state="translated">Hızlı Metal Pençe</target>
+          <source>Metal Claw</source>
+          <target state="needs-review-translation">Hızlı Metal Pençe</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Moonblast" translate="yes" xml:space="preserve">
           <source>Moonblast</source>
           <target state="translated">Ay Patlaması</target>
         </trans-unit>
         <trans-unit id="MudBomb" translate="yes" xml:space="preserve">
-          <source>MudBomb</source>
-          <target state="translated">Çamur Bombası</target>
+          <source>Mud Bomb</source>
+          <target state="needs-review-translation">Çamur Bombası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MudShot" translate="yes" xml:space="preserve">
-          <source>MudShot</source>
-          <target state="translated">Çamur Vuruşu</target>
+          <source>Mud Shot</source>
+          <target state="needs-review-translation">Çamur Vuruşu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MudShotFast" translate="yes" xml:space="preserve">
-          <source>MudShotFast</source>
-          <target state="translated">Hızlı Çamur Vuruşu</target>
+          <source>Mud Shot</source>
+          <target state="needs-review-translation">Hızlı Çamur Vuruşu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MudSlapFast" translate="yes" xml:space="preserve">
-          <source>MudSlapFast</source>
-          <target state="translated">Hızlı Çamur Dayağı</target>
+          <source>Mud Slap</source>
+          <target state="needs-review-translation">Hızlı Çamur Dayağı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NightSlash" translate="yes" xml:space="preserve">
-          <source>NightSlash</source>
-          <target state="translated">Gece Kesişi</target>
+          <source>Night Slash</source>
+          <target state="needs-review-translation">Gece Kesişi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="OminousWind" translate="yes" xml:space="preserve">
-          <source>OminousWind</source>
-          <target state="translated">Uğursuz Rüzgar</target>
+          <source>Ominous Wind</source>
+          <target state="needs-review-translation">Uğursuz Rüzgar</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ParabolicCharge" translate="yes" xml:space="preserve">
-          <source>ParabolicCharge</source>
-          <target state="translated">Parabolik Şarj</target>
+          <source>Parabolic Charge</source>
+          <target state="needs-review-translation">Parabolik Şarj</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Peck" translate="yes" xml:space="preserve">
           <source>Peck</source>
           <target state="translated">Gaga</target>
         </trans-unit>
         <trans-unit id="PeckFast" translate="yes" xml:space="preserve">
-          <source>PeckFast</source>
-          <target state="translated">Hızlı Gaga</target>
+          <source>Peck</source>
+          <target state="needs-review-translation">Hızlı Gaga</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PetalBlizzard" translate="yes" xml:space="preserve">
-          <source>PetalBlizzard</source>
-          <target state="translated">Yaprak Fırtınası</target>
+          <source>Petal Blizzard</source>
+          <target state="needs-review-translation">Yaprak Fırtınası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PlayRough" translate="yes" xml:space="preserve">
-          <source>PlayRough</source>
-          <target state="translated">Sert Oyun</target>
+          <source>Play Rough</source>
+          <target state="needs-review-translation">Sert Oyun</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PoisonFang" translate="yes" xml:space="preserve">
-          <source>PoisonFang</source>
-          <target state="translated">Zehirli Diş</target>
+          <source>Poison Fang</source>
+          <target state="needs-review-translation">Zehirli Diş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PoisonJab" translate="yes" xml:space="preserve">
-          <source>PoisonJab</source>
-          <target state="translated">Zehirli Vuruş</target>
+          <source>Poison Jab</source>
+          <target state="needs-review-translation">Zehirli Vuruş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PoisonJabFast" translate="yes" xml:space="preserve">
-          <source>PoisonJabFast</source>
-          <target state="translated">Hızlı Zehirli Vuruş</target>
+          <source>Poison Jab</source>
+          <target state="needs-review-translation">Hızlı Zehirli Vuruş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PoisonStingFast" translate="yes" xml:space="preserve">
-          <source>PoisonStingFast</source>
-          <target state="translated">Hızlı Zehirli Isırık</target>
+          <source>Poison Sting</source>
+          <target state="needs-review-translation">Hızlı Zehirli Isırık</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PoundFast" translate="yes" xml:space="preserve">
-          <source>PoundFast</source>
-          <target state="translated">Hızlı Yumruk</target>
+          <source>Pound Fast</source>
+          <target state="needs-review-translation">Hızlı Yumruk</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PowerGem" translate="yes" xml:space="preserve">
-          <source>PowerGem</source>
-          <target state="translated">Güç Kristali</target>
+          <source>Power Gem</source>
+          <target state="needs-review-translation">Güç Kristali</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PowerWhip" translate="yes" xml:space="preserve">
-          <source>PowerWhip</source>
-          <target state="translated">Güç Kamçısı</target>
+          <source>Power Whip</source>
+          <target state="needs-review-translation">Güç Kamçısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Psybeam" translate="yes" xml:space="preserve">
           <source>Psybeam</source>
@@ -1677,8 +1778,9 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Psişik</target>
         </trans-unit>
         <trans-unit id="PsychoCutFast" translate="yes" xml:space="preserve">
-          <source>PsychoCutFast</source>
-          <target state="translated">Hızlı Psişik Kesiş</target>
+          <source>Psycho Cut</source>
+          <target state="needs-review-translation">Hızlı Psişik Kesiş</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Psyshock" translate="yes" xml:space="preserve">
           <source>Psyshock</source>
@@ -1689,76 +1791,92 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Psyvuruş</target>
         </trans-unit>
         <trans-unit id="QuickAttackFast" translate="yes" xml:space="preserve">
-          <source>QuickAttackFast</source>
-          <target state="translated">Çevik Hızlı Saldırı</target>
+          <source>Quick Attack</source>
+          <target state="needs-review-translation">Çevik Hızlı Saldırı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RazorLeafFast" translate="yes" xml:space="preserve">
-          <source>RazorLeafFast</source>
-          <target state="translated">Hızlı Jilet Yaprak</target>
+          <source>Razor Leaf</source>
+          <target state="needs-review-translation">Hızlı Jilet Yaprak</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Rest" translate="yes" xml:space="preserve">
           <source>Rest</source>
           <target state="translated">Dinlen</target>
         </trans-unit>
         <trans-unit id="RockSlide" translate="yes" xml:space="preserve">
-          <source>RockSlide</source>
-          <target state="translated">Kaya Kayması</target>
+          <source>Rock Slide</source>
+          <target state="needs-review-translation">Kaya Kayması</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RockSmashFast" translate="yes" xml:space="preserve">
-          <source>RockSmashFast</source>
-          <target state="translated">Hızlı Kaya Kayması</target>
+          <source>Rock Smash</source>
+          <target state="needs-review-translation">Hızlı Kaya Kayması</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RockThrow" translate="yes" xml:space="preserve">
-          <source>RockThrow</source>
-          <target state="translated">Kaya Atışı</target>
+          <source>Rock Throw</source>
+          <target state="needs-review-translation">Kaya Atışı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RockThrowFast" translate="yes" xml:space="preserve">
-          <source>RockThrowFast</source>
-          <target state="translated">Hızlı Kaya Atışı</target>
+          <source>Rock Throw</source>
+          <target state="needs-review-translation">Hızlı Kaya Atışı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RockTomb" translate="yes" xml:space="preserve">
-          <source>RockTomb</source>
-          <target state="translated">Kaya Mezarı</target>
+          <source>Rock Tomb</source>
+          <target state="needs-review-translation">Kaya Mezarı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Scald" translate="yes" xml:space="preserve">
           <source>Scald</source>
           <target state="translated">Haşlama</target>
         </trans-unit>
         <trans-unit id="ScaldBlastoise" translate="yes" xml:space="preserve">
-          <source>ScaldBlastoise</source>
-          <target state="translated">Blastoise Haşlama</target>
+          <source>Scald</source>
+          <target state="needs-review-translation">Blastoise Haşlama</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ScratchFast" translate="yes" xml:space="preserve">
-          <source>ScratchFast</source>
-          <target state="translated">Hızlı Pençe</target>
+          <source>Scratch</source>
+          <target state="needs-review-translation">Hızlı Pençe</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SeedBomb" translate="yes" xml:space="preserve">
-          <source>SeedBomb</source>
-          <target state="translated">Çekirdek Bombası</target>
+          <source>Seed Bomb</source>
+          <target state="needs-review-translation">Çekirdek Bombası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShadowBall" translate="yes" xml:space="preserve">
-          <source>ShadowBall</source>
-          <target state="translated">Gölge Topu</target>
+          <source>Shadow Ball</source>
+          <target state="needs-review-translation">Gölge Topu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShadowClaw" translate="yes" xml:space="preserve">
-          <source>ShadowClaw</source>
-          <target state="translated">Gölge Pençesi</target>
+          <source>Shadow Claw</source>
+          <target state="needs-review-translation">Gölge Pençesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShadowClawFast" translate="yes" xml:space="preserve">
-          <source>ShadowClawFast</source>
-          <target state="translated">Hızlı Gölge Pençesi</target>
+          <source>Shadow Claw</source>
+          <target state="needs-review-translation">Hızlı Gölge Pençesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShadowPunch" translate="yes" xml:space="preserve">
-          <source>ShadowPunch</source>
-          <target state="translated">Gölge Yumruğu</target>
+          <source>Shadow Punch</source>
+          <target state="needs-review-translation">Gölge Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShadowSneak" translate="yes" xml:space="preserve">
-          <source>ShadowSneak</source>
-          <target state="translated">Gölge Gizli Saldırısı</target>
+          <source>Shadow Sneak</source>
+          <target state="needs-review-translation">Gölge Gizli Saldırısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SignalBeam" translate="yes" xml:space="preserve">
-          <source>SignalBeam</source>
-          <target state="translated">Sinyal Işığı</target>
+          <source>Signal Beam</source>
+          <target state="needs-review-translation">Sinyal Işığı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Slam" translate="yes" xml:space="preserve">
           <source>Slam</source>
@@ -1769,48 +1887,56 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Pençe</target>
         </trans-unit>
         <trans-unit id="SludgeBomb" translate="yes" xml:space="preserve">
-          <source>SludgeBomb</source>
-          <target state="translated">Çamur Bombası</target>
+          <source>Sludge Bomb</source>
+          <target state="needs-review-translation">Çamur Bombası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SludgeWave" translate="yes" xml:space="preserve">
-          <source>SludgeWave</source>
-          <target state="translated">Çamur Dalgası</target>
+          <source>Sludge Wave</source>
+          <target state="needs-review-translation">Çamur Dalgası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SolarBeam" translate="yes" xml:space="preserve">
-          <source>SolarBeam</source>
-          <target state="translated">Solar Işın</target>
+          <source>Solar Beam</source>
+          <target state="needs-review-translation">Solar Işın</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Spark" translate="yes" xml:space="preserve">
           <source>Spark</source>
           <target state="translated">Kıvılcım</target>
         </trans-unit>
         <trans-unit id="SparkFast" translate="yes" xml:space="preserve">
-          <source>SparkFast</source>
-          <target state="translated">Hızlı Kıvılcım</target>
+          <source>Spark Fast</source>
+          <target state="needs-review-translation">Hızlı Kıvılcım</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Splash" translate="yes" xml:space="preserve">
           <source>Splash</source>
           <target state="translated">Su Sıçratma</target>
         </trans-unit>
         <trans-unit id="SplashFast" translate="yes" xml:space="preserve">
-          <source>SplashFast</source>
-          <target state="translated">Hızlı Su Sıçratma</target>
+          <source>Splash</source>
+          <target state="needs-review-translation">Hızlı Su Sıçratma</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SteelWing" translate="yes" xml:space="preserve">
-          <source>SteelWing</source>
-          <target state="translated">Çelik Kanat</target>
+          <source>Steel Wing</source>
+          <target state="needs-review-translation">Çelik Kanat</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="SteelWingFast" translate="yes" xml:space="preserve">
-          <source>SteelWingFast</source>
-          <target state="translated">Hızlı Çelik Kanat</target>
+          <source>Steel Wing</source>
+          <target state="needs-review-translation">Hızlı Çelik Kanat</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Stomp" translate="yes" xml:space="preserve">
           <source>Stomp</source>
           <target state="translated">Ezme</target>
         </trans-unit>
         <trans-unit id="StoneEdge" translate="yes" xml:space="preserve">
-          <source>StoneEdge</source>
-          <target state="translated">Taş Kenar</target>
+          <source>Stone Edge</source>
+          <target state="needs-review-translation">Taş Kenar</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Struggle" translate="yes" xml:space="preserve">
           <source>Struggle</source>
@@ -1821,16 +1947,18 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Bitiriş</target>
         </trans-unit>
         <trans-unit id="SuckerPunchFast" translate="yes" xml:space="preserve">
-          <source>SuckerPunchFast</source>
-          <target state="translated">Hızlı Bitirici Yumruk</target>
+          <source>Sucker Punch</source>
+          <target state="needs-review-translation">Hızlı Bitirici Yumruk</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Swift" translate="yes" xml:space="preserve">
           <source>Swift</source>
           <target state="translated">Çevik</target>
         </trans-unit>
         <trans-unit id="TackleFast" translate="yes" xml:space="preserve">
-          <source>TackleFast</source>
-          <target state="translated">Hızlı Darbe</target>
+          <source>Tackle</source>
+          <target state="needs-review-translation">Hızlı Darbe</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Thunder" translate="yes" xml:space="preserve">
           <source>Thunder</source>
@@ -1841,12 +1969,14 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Yıldırım</target>
         </trans-unit>
         <trans-unit id="ThunderPunch" translate="yes" xml:space="preserve">
-          <source>ThunderPunch</source>
-          <target state="translated">Şimşek Yumruğu</target>
+          <source>Thunder Punch</source>
+          <target state="needs-review-translation">Şimşek Yumruğu</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ThunderShockFast" translate="yes" xml:space="preserve">
-          <source>ThunderShockFast</source>
-          <target state="translated">Hızlı Şimşek Şoku</target>
+          <source>Thunder Shock</source>
+          <target state="needs-review-translation">Hızlı Şimşek Şoku</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Twineedle" translate="yes" xml:space="preserve">
           <source>Twineedle</source>
@@ -1857,40 +1987,48 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Kasırga</target>
         </trans-unit>
         <trans-unit id="VineWhipFast" translate="yes" xml:space="preserve">
-          <source>VineWhipFast</source>
-          <target state="translated">Hızlı Kamçı Darbesi</target>
+          <source>Vine Whip</source>
+          <target state="needs-review-translation">Hızlı Kamçı Darbesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WaterGunFast" translate="yes" xml:space="preserve">
-          <source>WaterGunFast</source>
-          <target state="translated">Hızlı Su Tüfeği</target>
+          <source>Water Gun</source>
+          <target state="needs-review-translation">Hızlı Su Tüfeği</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WaterGunFastBlastoise" translate="yes" xml:space="preserve">
-          <source>WaterGunFastBlastoise</source>
-          <target state="translated">Hızlı Blastoise Su Tüfeği</target>
+          <source>Water Gun</source>
+          <target state="needs-review-translation">Hızlı Blastoise Su Tüfeği</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WaterPulse" translate="yes" xml:space="preserve">
-          <source>WaterPulse</source>
-          <target state="translated">Su Dalgası</target>
+          <source>Water Pulse</source>
+          <target state="needs-review-translation">Su Dalgası</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WingAttackFast" translate="yes" xml:space="preserve">
-          <source>WingAttackFast</source>
-          <target state="translated">Hızlı Kanat Saldırısı</target>
+          <source>Wing Attack</source>
+          <target state="needs-review-translation">Hızlı Kanat Saldırısı</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WrapGreen" translate="yes" xml:space="preserve">
-          <source>WrapGreen</source>
-          <target state="translated">Yeşil Sar</target>
+          <source>Wrap Green</source>
+          <target state="needs-review-translation">Yeşil Sar</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="WrapPink" translate="yes" xml:space="preserve">
-          <source>WrapPink</source>
-          <target state="translated">Pembe Sar</target>
+          <source>Wrap Pink</source>
+          <target state="needs-review-translation">Pembe Sar</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="XScissor" translate="yes" xml:space="preserve">
           <source>XScissor</source>
           <target state="translated">XMakas</target>
         </trans-unit>
         <trans-unit id="ZenHeadbuttFast" translate="yes" xml:space="preserve">
-          <source>ZenHeadbuttFast</source>
-          <target state="translated">Hızlı Zen Kafa Darbesi</target>
+          <source>Zen Headbutt</source>
+          <target state="needs-review-translation">Hızlı Zen Kafa Darbesi</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
       </group>
     </body>
