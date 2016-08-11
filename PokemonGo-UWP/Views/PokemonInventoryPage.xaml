@@ -316,21 +316,23 @@
                     <RelativePanel>
                         <GridView
                             ItemsSource="{Binding PokemonInventory}"
-                            SelectionMode="None">
+                            SelectionMode="None"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True">
 
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapGrid Orientation="Horizontal"
                                               VerticalChildrenAlignment="Top"
-                                              HorizontalAlignment="Center"
                                               MaximumRowsOrColumns="4" />
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
 
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Margin="8,4,8,4"
-                                                Width="92">
+                                    <StackPanel Margin="8,4,8,4">
                                         <TextBlock TextAlignment="Center">
                                             <Run FontSize="12" 
                                                  x:Uid="CpTextBlock" 
@@ -411,7 +413,12 @@
                     <RelativePanel>
                         <GridView
                             ItemsSource="{Binding EggsInventory}"
-                            SelectionMode="None">
+                            SelectionMode="None"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True">
+
 
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
