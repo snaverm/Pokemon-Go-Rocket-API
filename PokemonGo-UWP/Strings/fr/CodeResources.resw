@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PokemonFledText" xml:space="preserve">
-    <value>{0} fuite</value>
+    <value>{0} s'enfuit</value>
   </data>
   <data name="GettingGpsSignalText" xml:space="preserve">
     <value>Acquisition du signal GPS...</value>
@@ -59,7 +59,7 @@
 {1}</value>
   </data>
   <data name="UpdateFailedText" xml:space="preserve">
-    <value>La mise à ujour a échouée: {0}
+    <value>La mise à jour a échouée: {0}
 Ouvrir la page avec les fichiers d'installation pour une installation manuelle?</value>
   </data>
   <data name="UpdateInstallingText" xml:space="preserve">
@@ -75,9 +75,9 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
     <value>Pas d'équipe</value>
   </data>
   <data name="ValorTeamText" xml:space="preserve">
-    <value>Valeur</value>
+    <value>Bravoure</value>
   </data>
   <data name="MysticTeamText" xml:space="preserve">
-    <value>Mystique</value>
+    <value>Sagesse</value>
   </data>
 </root>
