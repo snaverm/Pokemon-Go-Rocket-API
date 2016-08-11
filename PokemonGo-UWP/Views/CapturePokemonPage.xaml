@@ -169,8 +169,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Uid="ItemsTextLower"
-                           Text="items"
+                <TextBlock x:Uid="LowercaseItemsTextBlock"
                            Grid.Row="0"
                            FontSize="25"
                            FontFamily="../Assets/Fonts/Generica.otf#Generica"
@@ -395,8 +394,7 @@
                                                        HorizontalAlignment="Right"
                                                        VerticalAlignment="Center"
                                                        Margin="0,0,6,0" />
-                                            <TextBlock x:Uid="XPText"
-                                                       Text="XP"
+                                            <TextBlock x:Uid="ExperienceTextBlock"
                                                        VerticalAlignment="Center"
                                                        Foreground="Red" />
                                         </StackPanel>
@@ -414,8 +412,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock x:Uid="TotalText"
-                                       Text="TOTAL"
+                            <TextBlock x:Uid="TotalExperienceTextBlock"
                                        HorizontalAlignment="Left"
                                        Grid.Column="0" />
 
@@ -428,15 +425,13 @@
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Margin="0,0,6,0" />
-                                <TextBlock x:Uid="XPText"
-                                           Text="XP"
+                                <TextBlock x:Uid="ExperienceTextBlock"
                                            VerticalAlignment="Center"
                                            Foreground="Red" />
                             </StackPanel>
                         </Grid>
 
-                        <Button x:Uid="OKButton"
-                                Content="OK"
+                        <Button x:Uid="OkButton"
                                 HorizontalAlignment="Stretch"
                                 Command="{Binding ReturnToGameScreen}"
                                 Grid.Row="3"
@@ -486,8 +481,7 @@
                 <TextBlock
                     Text="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
                     Foreground="White" />
-                <TextBlock x:Uid="SlashSpaceCPText"
-                           Text="/ CP"
+                <TextBlock x:Uid="SlashSpaceCpTextBlock"
                            Margin="6,0"
                            Foreground="White" />
                 <TextBlock Text="{Binding CurrentEncounter.WildPokemon.PokemonData.Cp}"

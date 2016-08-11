@@ -79,8 +79,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="INCUBATORS"
-                                           x:Uid="incubatorsText"
+                                <TextBlock x:Uid="IncubatorsTextBlock"
                                            Grid.Row="0"
                                            FontSize="18"
                                            Foreground="Black"

@@ -115,7 +115,7 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand DoPtcLoginCommand => _doPtcLoginCommand ?? (
             _doPtcLoginCommand = new DelegateCommand(async () =>
             {
-                Busy.SetBusy(true, Resources.Translation.GetString("LoggingIn"));
+                Busy.SetBusy(true, Resources.CodeResources.GetString("LoggingInText"));
                 try
                 {
                     var loginSuccess = await GameClient.DoPtcLogin(Username, Password);
@@ -124,7 +124,7 @@ namespace PokemonGo_UWP.ViewModels
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog(Resources.Translation.GetString("WrongUsername"))
+                            new MessageDialog(Resources.CodeResources.GetString("WrongUsernameText"))
                                 .ShowAsyncQueue();
                     }
                     else
@@ -135,12 +135,12 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (PtcOfflineException)
                 {
-                    await new MessageDialog(Resources.Translation.GetString("PTCDown")).ShowAsyncQueue();
+                    await new MessageDialog(Resources.CodeResources.GetString("PtcDownText")).ShowAsyncQueue();
                 }
                 catch (LoginFailedException)
                 {
                     await
-                            new MessageDialog(Resources.Translation.GetString("LoginFailed"))
+                            new MessageDialog(Resources.CodeResources.GetString("LoginFailedText"))
                                 .ShowAsyncQueue();
                 }
                 finally
@@ -155,14 +155,14 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand DoGoogleLoginCommand => _doGoogleLoginCommand ?? (
             _doGoogleLoginCommand = new DelegateCommand(async () =>
             {
-                Busy.SetBusy(true, Resources.Translation.GetString("LoggingIn"));
+                Busy.SetBusy(true, Resources.CodeResources.GetString("LoggingInText"));
                 try
                 {
                     if (!await GameClient.DoGoogleLogin(Username.Trim(), Password.Trim()))
                     {
                         // Login failed, show a message
                         await
-                            new MessageDialog(Resources.Translation.GetString("WrongUsername"))
+                            new MessageDialog(Resources.CodeResources.GetString("WrongUsernameText"))
                                 .ShowAsyncQueue();
                     }
                     else
@@ -173,11 +173,11 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (GoogleOfflineException)
                 {
-                    await new MessageDialog(Resources.Translation.GetString("GoogleNotResponding")).ShowAsyncQueue();
+                    await new MessageDialog(Resources.CodeResources.GetString("GoogleNotRespondingText")).ShowAsyncQueue();
                 }
                 catch (GoogleException e)
                 {
-                    await new MessageDialog(Resources.Translation.GetString("GoogleError") + e.Message).ShowAsyncQueue();
+                    await new MessageDialog(Resources.CodeResources.GetString("GoogleErrorText") + e.Message).ShowAsyncQueue();
                 }
                 finally
                 {

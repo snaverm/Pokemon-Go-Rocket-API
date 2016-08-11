@@ -124,13 +124,13 @@ namespace PokemonGo_UWP.Utils
 
             switch(teamColor) {
                 case TeamColor.Blue:
-                    return Resources.Translation.GetString("MysticTeam");
+                    return Resources.CodeResources.GetString("MysticTeamText");
                 case TeamColor.Red:
-                    return Resources.Translation.GetString("ValorTeam");
+                    return Resources.CodeResources.GetString("ValorTeamText");
                 case TeamColor.Yellow:
-                    return Resources.Translation.GetString("InstinctTeam");
+                    return Resources.CodeResources.GetString("InstinctTeamText");
                 default:
-                    return Resources.Translation.GetString("NoTeam");
+                    return Resources.CodeResources.GetString("NoTeamText");
             }
         }
 
@@ -150,11 +150,7 @@ namespace PokemonGo_UWP.Utils
             var fieldInfo = type.GetField(achievementType.ToString());
             var badgeType = (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
             
-            if(badgeType == null) {
-                return "";
-            }
-            
-            return Resources.Translation.GetString(badgeType.Value.ToString());
+            return badgeType == null ? "" : Resources.Achievements.GetString(badgeType.Value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
@@ -358,7 +354,7 @@ namespace PokemonGo_UWP.Utils
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language) {
-            return Resources.Translation.GetString((string)value);
+            return Resources.CodeResources.GetString((string)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
@@ -792,7 +788,7 @@ namespace PokemonGo_UWP.Utils
             var ms = (long)value;
             var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
             date = date.Add(TimeSpan.FromMilliseconds(ms));
-            return date.ToString(Resources.Translation.GetString("DateFormat"));
+            return date.ToString(Resources.CodeResources.GetString("DateFormat"));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {

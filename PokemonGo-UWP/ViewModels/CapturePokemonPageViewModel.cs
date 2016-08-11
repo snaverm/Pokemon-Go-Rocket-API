@@ -61,7 +61,7 @@ namespace PokemonGo_UWP.ViewModels
             {                
                 // Navigating from game page, so we need to actually load the encounter                
                 CurrentPokemon = (MapPokemonWrapper) NavigationHelper.NavigationState[nameof(CurrentPokemon)];
-                Busy.SetBusy(true, Utils.Resources.Translation.GetString("LoadingEncounter") + Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()));
+                Busy.SetBusy(true, string.Format(Utils.Resources.CodeResources.GetString("LoadingEncounterText"), Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString())));
                 NavigationHelper.NavigationState.Remove(nameof(CurrentPokemon));
                 Logger.Write($"Catching {CurrentPokemon.PokemonId}");                
                 CurrentEncounter = await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
@@ -70,7 +70,7 @@ namespace PokemonGo_UWP.ViewModels
                 if (CurrentEncounter.Status != EncounterResponse.Types.Status.EncounterSuccess)
                 {
                     // Encounter failed, probably the Pokemon ran away
-                    await new MessageDialog(Utils.Resources.Translation.GetString("PokemonRanAway")).ShowAsyncQueue();
+                    await new MessageDialog(Utils.Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
                     ReturnToGameScreen.Execute();
                 }
             }
@@ -267,7 +267,7 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fleed");
                     CatchFlee?.Invoke(this, null);
-                    await new MessageDialog(Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()) + Utils.Resources.Translation.GetString("Fleed")).ShowAsyncQueue();
+                    await new MessageDialog(string.Format(Utils.Resources.CodeResources.GetString("Fleed"), Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
                     await GameClient.UpdateInventory();
                     ReturnToGameScreen.Execute();
                     break;

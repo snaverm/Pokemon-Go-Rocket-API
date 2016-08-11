@@ -218,7 +218,8 @@
                                 x:Name="ExperiencePanel">
                         <TextBlock Style="{ThemeResource ProfilePageMediumText}"
                                    Text="{Binding PlayerStats.Experience}" />
-                        <TextBlock Margin="5,0,0,0" x:Uid="XPText"
+                        <TextBlock Margin="5,0,0,0" 
+                                   x:Uid="ExperienceTextBlock"
                                    Style="{ThemeResource ProfilePageMediumText}" />
                     </StackPanel>
 
@@ -228,7 +229,7 @@
                                 x:Name="LevelPanel">
                         <TextBlock Text="Level"
                                    Style="{ThemeResource ProfilePageLargeText}"
-                                   x:Uid="LevelText"
+                                   x:Uid="LevelTextBlock"
                                    FontWeight="SemiBold" />
                         <TextBlock Text="{Binding PlayerStats.Level}"
                                    Margin="5,0,0,0"
@@ -289,9 +290,8 @@
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                             <TextBlock Style="{ThemeResource ProfilePageSmallText}"
-                                       HorizontalAlignment="Center"
-                                       Text="START DATE"
-                                       x:Uid="StartDateText" />
+                                       HorizontalAlignment="Center"                                       
+                                       x:Uid="StartDateTextBlock" />
                             <TextBlock Style="{ThemeResource ProfilePageSmallText}"
                                        HorizontalAlignment="Center"
                                        Text="{Binding PlayerProfile.CreationTimestampMs, Converter={StaticResource MsToDateFormatConverter}}" />

@@ -262,8 +262,7 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="nearby"
-                                           x:Uid="nearbyText"
+                                <TextBlock x:Uid="NearbyPokemonTextBlock"
                                            Grid.Row="0"
                                            FontSize="25"
                                            Foreground="Black"
@@ -339,10 +338,8 @@
                     RelativePanel.AlignVerticalCenterWithPanel="True"
                     x:Name="SettingsButton">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Uid="SettingsHeaderText"
-                               Text="SETTINGS"
-                               Style="{StaticResource TextMenuItemHorizontal}"
-                               VerticalAlignment="Center" />
+                    <TextBlock x:Uid="SettingsHeaderTextBlock"
+                               Style="{StaticResource TextMenuItemHorizontal}" />
                     <Image Source="../Assets/Buttons/btn_settings.png"
                            Stretch="Uniform"
                            HorizontalAlignment="Stretch" />
@@ -355,7 +352,8 @@
                     x:Name="PokedexButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="PokedexText" Text="POKÉDEX" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="PokedexTextBlock" 
+                               Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokedex.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                            HorizontalAlignment="Stretch" />
@@ -370,7 +368,8 @@
                     x:Name="PokemonButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="PokemonText" Text="POKÉMON" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="PokemonTextBlock" 
+                               Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokemon.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                            HorizontalAlignment="Stretch" />
@@ -384,7 +383,8 @@
                     x:Name="ToolsButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="ItemsText" Text="ITEMS" Style="{StaticResource TextMenuItemVertical}" />
+                    <TextBlock x:Uid="ItemsTextBlock" 
+                               Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_items.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
                            HorizontalAlignment="Stretch" />
@@ -433,8 +433,7 @@
 
             <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
                         RelativePanel.AlignVerticalCenterWithPanel="True">
-                <TextBlock x:Uid="LevelupText"
-                           Text="Level up!"
+                <TextBlock x:Uid="LevelUpTextBlock"
                            FontSize="48"
                            Foreground="White" />
                 <TextBlock Text="{Binding PlayerStats.Level}"

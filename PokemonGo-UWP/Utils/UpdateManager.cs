@@ -128,7 +128,7 @@ namespace PokemonGo_UWP.Utils
                 var archAssets = FilterAssetsByArchitecture(release);
 
                 //find bundle
-                mainAsset = archAssets.Where(asset => asset.Name.EndsWith(FILE_EXTENSION_APPXBUNDLE)).FirstOrDefault();
+                mainAsset = archAssets.FirstOrDefault(asset => asset.Name.EndsWith(FILE_EXTENSION_APPXBUNDLE));
 
                 if (mainAsset != null)
                 {
@@ -147,7 +147,7 @@ namespace PokemonGo_UWP.Utils
                         {
                             Uri uri = new Uri(mainAsset.BrowserDownloadUrl);
 
-                            Busy.SetBusy(true, string.Format(Resources.Translation.GetString("UpdateDownloading"), release.TagName));
+                            Busy.SetBusy(true, string.Format(Resources.CodeResources.GetString("UpdateDownloadingText"), release.TagName));
 
 
                             //Download dependencies
@@ -166,7 +166,7 @@ namespace PokemonGo_UWP.Utils
                             destinationFile = await GetTemporaryUpdateFileAsync(mainAsset.Name);
                             await DownloadFile(destinationFile, uri);
                             Busy.SetBusy(false);
-                            Busy.SetBusy(true, Resources.Translation.GetString("UpdateInstalling"));
+                            Busy.SetBusy(true, Resources.CodeResources.GetString("UpdateInstallingText"));
 
                             var result = await packageManager.UpdatePackageAsync(new Uri(destinationFile.Path),
                                         dependencies,
@@ -184,7 +184,7 @@ namespace PokemonGo_UWP.Utils
                     }
                     catch (Exception exc)
                     {
-                        updateError = exc.HResult.ToString("X") + " " + exc.Message;
+                        updateError = exc.HResult.ToString("0x") + " " + exc.Message;
                         //lets do fallback to browser
                     }
                     finally
@@ -197,10 +197,10 @@ namespace PokemonGo_UWP.Utils
             if (browserFallback)
             {
                 //update failed, show dialog to user
-                var dialog = new MessageDialog(string.Format(Utils.Resources.Translation.GetString("UpdateFailed"), updateError));
+                var dialog = new MessageDialog(string.Format(Utils.Resources.CodeResources.GetString("UpdateFailedText"), updateError));
 
-                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("Yes")) { Id = 0 });
-                dialog.Commands.Add(new UICommand(Utils.Resources.Translation.GetString("No")) { Id = 1 });
+                dialog.Commands.Add(new UICommand(Resources.CodeResources.GetString("YesText")) { Id = 0 });
+                dialog.Commands.Add(new UICommand(Resources.CodeResources.GetString("NoText")) { Id = 1 });
                 dialog.DefaultCommandIndex = 0;
                 dialog.CancelCommandIndex = 1;
 
@@ -285,11 +285,8 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         private static List<ReleaseAsset> FilterAssetsByArchitecture(Release release)
         {
-            return release.Assets.Where(asset =>
-            {
-                return asset.Name.ToLower().Contains("_" + Package.Current.Id.Architecture.ToString().ToLower() + "_")
-                || asset.Name.ToLower().Contains("." + Package.Current.Id.Architecture.ToString().ToLower() + ".");
-            }).ToList();
+            return release.Assets.Where(asset => asset.Name.ToLower().Contains("_" + Package.Current.Id.Architecture.ToString().ToLower() + "_")
+                                                 || asset.Name.ToLower().Contains("." + Package.Current.Id.Architecture.ToString().ToLower() + ".")).ToList();
         }
     }
 }

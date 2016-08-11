@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Bite" xml:space="preserve">
+    <value>Bite</value>
+  </data>
+  <data name="CrossChop" xml:space="preserve">
+    <value>CrossChop</value>
+  </data>
+  <data name="DarkPulse" xml:space="preserve">
+    <value>DarkPulse</value>
+  </data>
+  <data name="Dig" xml:space="preserve">
+    <value>Dig</value>
+  </data>
+  <data name="DoubleSlap" xml:space="preserve">
+    <value>DoubleSlap</value>
+  </data>
+  <data name="Ember" xml:space="preserve">
+    <value>Ember</value>
+  </data>
+  <data name="Flamethrower" xml:space="preserve">
+    <value>Flamethrower</value>
+  </data>
+  <data name="FlameWheel" xml:space="preserve">
+    <value>FlameWheel</value>
+  </data>
+  <data name="HyperBeam" xml:space="preserve">
+    <value>HyperBeam</value>
+  </data>
+  <data name="Lick" xml:space="preserve">
+    <value>Lick</value>
+  </data>
+  <data name="LowKick" xml:space="preserve">
+    <value>LowKick</value>
+  </data>
+  <data name="Megahorn" xml:space="preserve">
+    <value>Megahorn</value>
+  </data>
+  <data name="MetalClaw" xml:space="preserve">
+    <value>MetalClaw</value>
+  </data>
+  <data name="MoveUnset" xml:space="preserve">
+    <value>MoveUnset</value>
+  </data>
+  <data name="Pound" xml:space="preserve">
+    <value>Pound</value>
+  </data>
+  <data name="PsychoCut" xml:space="preserve">
+    <value>PsychoCut</value>
+  </data>
+  <data name="QuickAttack" xml:space="preserve">
+    <value>QuickAttack</value>
+  </data>
+  <data name="RazorLeaf" xml:space="preserve">
+    <value>RazorLeaf</value>
+  </data>
+  <data name="Scratch" xml:space="preserve">
+    <value>Scratch</value>
+  </data>
+  <data name="Sludge" xml:space="preserve">
+    <value>Sludge</value>
+  </data>
+  <data name="Smog" xml:space="preserve">
+    <value>Smog</value>
+  </data>
+  <data name="SuckerPunch" xml:space="preserve">
+    <value>SuckerPunch</value>
+  </data>
+  <data name="Tackle" xml:space="preserve">
+    <value>Tackle</value>
+  </data>
+  <data name="TakeDown" xml:space="preserve">
+    <value>TakeDown</value>
+  </data>
+  <data name="ThunderShock" xml:space="preserve">
+    <value>ThunderShock</value>
+  </data>
+  <data name="ViceGrip" xml:space="preserve">
+    <value>ViceGrip</value>
+  </data>
+  <data name="VineWhip" xml:space="preserve">
+    <value>VineWhip</value>
+  </data>
+  <data name="WaterGun" xml:space="preserve">
+    <value>WaterGun</value>
+  </data>
+  <data name="WingAttack" xml:space="preserve">
+    <value>WingAttack</value>
+  </data>
+  <data name="Wrap" xml:space="preserve">
+    <value>Wrap</value>
+  </data>
+  <data name="Absorb" xml:space="preserve">
+    <value>Absorb</value>
+  </data>
+  <data name="Acid" xml:space="preserve">
+    <value>Acid</value>
+  </data>
+  <data name="AcidFast" xml:space="preserve">
+    <value>AcidFast</value>
+  </data>
+  <data name="AerialAce" xml:space="preserve">
+    <value>AerialAce</value>
+  </data>
+  <data name="AirCutter" xml:space="preserve">
+    <value>AirCutter</value>
+  </data>
+  <data name="AirSlash" xml:space="preserve">
+    <value>AirSlash</value>
+  </data>
+  <data name="AncientPower" xml:space="preserve">
+    <value>AncientPower</value>
+  </data>
+  <data name="AquaJet" xml:space="preserve">
+    <value>AquaJet</value>
+  </data>
+  <data name="AquaTail" xml:space="preserve">
+    <value>AquaTail</value>
+  </data>
+  <data name="BiteFast" xml:space="preserve">
+    <value>BiteFast</value>
+  </data>
+  <data name="Blizzard" xml:space="preserve">
+    <value>Blizzard</value>
+  </data>
+  <data name="BodySlam" xml:space="preserve">
+    <value>BodySlam</value>
+  </data>
+  <data name="BoneClub" xml:space="preserve">
+    <value>BoneClub</value>
+  </data>
+  <data name="BrickBreak" xml:space="preserve">
+    <value>BrickBreak</value>
+  </data>
+  <data name="Brine" xml:space="preserve">
+    <value>Brine</value>
+  </data>
+  <data name="BubbleBeam" xml:space="preserve">
+    <value>BubbleBeam</value>
+  </data>
+  <data name="BubbleFast" xml:space="preserve">
+    <value>BubbleFast</value>
+  </data>
+  <data name="BugBite" xml:space="preserve">
+    <value>BugBite</value>
+  </data>
+  <data name="BugBiteFast" xml:space="preserve">
+    <value>BugBiteFast</value>
+  </data>
+  <data name="BugBuzz" xml:space="preserve">
+    <value>BugBuzz</value>
+  </data>
+  <data name="Bulldoze" xml:space="preserve">
+    <value>Bulldoze</value>
+  </data>
+  <data name="BulletPunch" xml:space="preserve">
+    <value>BulletPunch</value>
+  </data>
+  <data name="BulletPunchFast" xml:space="preserve">
+    <value>BulletPunchFast</value>
+  </data>
+  <data name="ConfusionFast" xml:space="preserve">
+    <value>ConfusionFast</value>
+  </data>
+  <data name="CrossPoison" xml:space="preserve">
+    <value>CrossPoison</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="CutFast" xml:space="preserve">
+    <value>CutFast</value>
+  </data>
+  <data name="DazzlingGleam" xml:space="preserve">
+    <value>DazzlingGleam</value>
+  </data>
+  <data name="DisarmingVoice" xml:space="preserve">
+    <value>DisarmingVoice</value>
+  </data>
+  <data name="Discharge" xml:space="preserve">
+    <value>Discharge</value>
+  </data>
+  <data name="DragonBreath" xml:space="preserve">
+    <value>DragonBreath</value>
+  </data>
+  <data name="DragonBreathFast" xml:space="preserve">
+    <value>DragonBreathFast</value>
+  </data>
+  <data name="DragonClaw" xml:space="preserve">
+    <value>DragonClaw</value>
+  </data>
+  <data name="DragonPulse" xml:space="preserve">
+    <value>DragonPulse</value>
+  </data>
+  <data name="DrainingKiss" xml:space="preserve">
+    <value>DrainingKiss</value>
+  </data>
+  <data name="DrillPeck" xml:space="preserve">
+    <value>DrillPeck</value>
+  </data>
+  <data name="DrillRun" xml:space="preserve">
+    <value>DrillRun</value>
+  </data>
+  <data name="Earthquake" xml:space="preserve">
+    <value>Earthquake</value>
+  </data>
+  <data name="EmberFast" xml:space="preserve">
+    <value>EmberFast</value>
+  </data>
+  <data name="FeintAttackFast" xml:space="preserve">
+    <value>FeintAttackFast</value>
+  </data>
+  <data name="FireBlast" xml:space="preserve">
+    <value>FireBlast</value>
+  </data>
+  <data name="FireFangFast" xml:space="preserve">
+    <value>FireFangFast</value>
+  </data>
+  <data name="FirePunch" xml:space="preserve">
+    <value>FirePunch</value>
+  </data>
+  <data name="FlameBurst" xml:space="preserve">
+    <value>FlameBurst</value>
+  </data>
+  <data name="FlameCharge" xml:space="preserve">
+    <value>FlameCharge</value>
+  </data>
+  <data name="FlashCannon" xml:space="preserve">
+    <value>FlashCannon</value>
+  </data>
+  <data name="FrostBreath" xml:space="preserve">
+    <value>FrostBreath</value>
+  </data>
+  <data name="FrostBreathFast" xml:space="preserve">
+    <value>FrostBreathFast</value>
+  </data>
+  <data name="FuryCutter" xml:space="preserve">
+    <value>FuryCutter</value>
+  </data>
+  <data name="FuryCutterFast" xml:space="preserve">
+    <value>FuryCutterFast</value>
+  </data>
+  <data name="GigaDrain" xml:space="preserve">
+    <value>GigaDrain</value>
+  </data>
+  <data name="GunkShot" xml:space="preserve">
+    <value>GunkShot</value>
+  </data>
+  <data name="Headbutt" xml:space="preserve">
+    <value>Headbutt</value>
+  </data>
+  <data name="HeartStamp" xml:space="preserve">
+    <value>HeartStamp</value>
+  </data>
+  <data name="HeatWave" xml:space="preserve">
+    <value>HeatWave</value>
+  </data>
+  <data name="HornAttack" xml:space="preserve">
+    <value>HornAttack</value>
+  </data>
+  <data name="Hurricane" xml:space="preserve">
+    <value>Hurricane</value>
+  </data>
+  <data name="HydroPump" xml:space="preserve">
+    <value>HydroPump</value>
+  </data>
+  <data name="HydroPumpBlastoise" xml:space="preserve">
+    <value>HydroPumpBlastoise</value>
+  </data>
+  <data name="HyperFang" xml:space="preserve">
+    <value>HyperFang</value>
+  </data>
+  <data name="IceBeam" xml:space="preserve">
+    <value>IceBeam</value>
+  </data>
+  <data name="IcePunch" xml:space="preserve">
+    <value>IcePunch</value>
+  </data>
+  <data name="IceShard" xml:space="preserve">
+    <value>IceShard</value>
+  </data>
+  <data name="IceShardFast" xml:space="preserve">
+    <value>IceShardFast</value>
+  </data>
+  <data name="IcyWind" xml:space="preserve">
+    <value>IcyWind</value>
+  </data>
+  <data name="IronHead" xml:space="preserve">
+    <value>IronHead</value>
+  </data>
+  <data name="KarateChop" xml:space="preserve">
+    <value>KarateChop</value>
+  </data>
+  <data name="KarateChopFast" xml:space="preserve">
+    <value>KarateChopFast</value>
+  </data>
+  <data name="LeafBlade" xml:space="preserve">
+    <value>LeafBlade</value>
+  </data>
+  <data name="LickFast" xml:space="preserve">
+    <value>LickFast</value>
+  </data>
+  <data name="LowKickFast" xml:space="preserve">
+    <value>LowKickFast</value>
+  </data>
+  <data name="LowSweep" xml:space="preserve">
+    <value>LowSweep</value>
+  </data>
+  <data name="MagnetBomb" xml:space="preserve">
+    <value>MagnetBomb</value>
+  </data>
+  <data name="MegaDrain" xml:space="preserve">
+    <value>MegaDrain</value>
+  </data>
+  <data name="MetalClawFast" xml:space="preserve">
+    <value>MetalClawFast</value>
+  </data>
+  <data name="Moonblast" xml:space="preserve">
+    <value>Moonblast</value>
+  </data>
+  <data name="MudBomb" xml:space="preserve">
+    <value>MudBomb</value>
+  </data>
+  <data name="MudShot" xml:space="preserve">
+    <value>MudShot</value>
+  </data>
+  <data name="MudShotFast" xml:space="preserve">
+    <value>MudShotFast</value>
+  </data>
+  <data name="MudSlapFast" xml:space="preserve">
+    <value>MudSlapFast</value>
+  </data>
+  <data name="NightSlash" xml:space="preserve">
+    <value>NightSlash</value>
+  </data>
+  <data name="OminousWind" xml:space="preserve">
+    <value>OminousWind</value>
+  </data>
+  <data name="ParabolicCharge" xml:space="preserve">
+    <value>ParabolicCharge</value>
+  </data>
+  <data name="Peck" xml:space="preserve">
+    <value>Peck</value>
+  </data>
+  <data name="PeckFast" xml:space="preserve">
+    <value>PeckFast</value>
+  </data>
+  <data name="PetalBlizzard" xml:space="preserve">
+    <value>PetalBlizzard</value>
+  </data>
+  <data name="PlayRough" xml:space="preserve">
+    <value>PlayRough</value>
+  </data>
+  <data name="PoisonFang" xml:space="preserve">
+    <value>PoisonFang</value>
+  </data>
+  <data name="PoisonJab" xml:space="preserve">
+    <value>PoisonJab</value>
+  </data>
+  <data name="PoisonJabFast" xml:space="preserve">
+    <value>PoisonJabFast</value>
+  </data>
+  <data name="PoisonStingFast" xml:space="preserve">
+    <value>PoisonStingFast</value>
+  </data>
+  <data name="PoundFast" xml:space="preserve">
+    <value>PoundFast</value>
+  </data>
+  <data name="PowerGem" xml:space="preserve">
+    <value>PowerGem</value>
+  </data>
+  <data name="PowerWhip" xml:space="preserve">
+    <value>PowerWhip</value>
+  </data>
+  <data name="Psybeam" xml:space="preserve">
+    <value>Psybeam</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psychic</value>
+  </data>
+  <data name="PsychoCutFast" xml:space="preserve">
+    <value>PsychoCutFast</value>
+  </data>
+  <data name="Psyshock" xml:space="preserve">
+    <value>Psyshock</value>
+  </data>
+  <data name="Psystrike" xml:space="preserve">
+    <value>Psystrike</value>
+  </data>
+  <data name="QuickAttackFast" xml:space="preserve">
+    <value>QuickAttackFast</value>
+  </data>
+  <data name="RazorLeafFast" xml:space="preserve">
+    <value>RazorLeafFast</value>
+  </data>
+  <data name="Rest" xml:space="preserve">
+    <value>Rest</value>
+  </data>
+  <data name="RockSlide" xml:space="preserve">
+    <value>RockSlide</value>
+  </data>
+  <data name="RockSmashFast" xml:space="preserve">
+    <value>RockSmashFast</value>
+  </data>
+  <data name="RockThrow" xml:space="preserve">
+    <value>RockThrow</value>
+  </data>
+  <data name="RockThrowFast" xml:space="preserve">
+    <value>RockThrowFast</value>
+  </data>
+  <data name="RockTomb" xml:space="preserve">
+    <value>RockTomb</value>
+  </data>
+  <data name="Scald" xml:space="preserve">
+    <value>Scald</value>
+  </data>
+  <data name="ScaldBlastoise" xml:space="preserve">
+    <value>ScaldBlastoise</value>
+  </data>
+  <data name="ScratchFast" xml:space="preserve">
+    <value>ScratchFast</value>
+  </data>
+  <data name="SeedBomb" xml:space="preserve">
+    <value>SeedBomb</value>
+  </data>
+  <data name="ShadowBall" xml:space="preserve">
+    <value>ShadowBall</value>
+  </data>
+  <data name="ShadowClaw" xml:space="preserve">
+    <value>ShadowClaw</value>
+  </data>
+  <data name="ShadowClawFast" xml:space="preserve">
+    <value>ShadowClawFast</value>
+  </data>
+  <data name="ShadowPunch" xml:space="preserve">
+    <value>ShadowPunch</value>
+  </data>
+  <data name="ShadowSneak" xml:space="preserve">
+    <value>ShadowSneak</value>
+  </data>
+  <data name="SignalBeam" xml:space="preserve">
+    <value>SignalBeam</value>
+  </data>
+  <data name="Slam" xml:space="preserve">
+    <value>Slam</value>
+  </data>
+  <data name="Slash" xml:space="preserve">
+    <value>Slash</value>
+  </data>
+  <data name="SludgeBomb" xml:space="preserve">
+    <value>SludgeBomb</value>
+  </data>
+  <data name="SludgeWave" xml:space="preserve">
+    <value>SludgeWave</value>
+  </data>
+  <data name="SolarBeam" xml:space="preserve">
+    <value>SolarBeam</value>
+  </data>
+  <data name="Spark" xml:space="preserve">
+    <value>Spark</value>
+  </data>
+  <data name="SparkFast" xml:space="preserve">
+    <value>SparkFast</value>
+  </data>
+  <data name="Splash" xml:space="preserve">
+    <value>Splash</value>
+  </data>
+  <data name="SplashFast" xml:space="preserve">
+    <value>SplashFast</value>
+  </data>
+  <data name="SteelWing" xml:space="preserve">
+    <value>SteelWing</value>
+  </data>
+  <data name="SteelWingFast" xml:space="preserve">
+    <value>SteelWingFast</value>
+  </data>
+  <data name="Stomp" xml:space="preserve">
+    <value>Stomp</value>
+  </data>
+  <data name="StoneEdge" xml:space="preserve">
+    <value>StoneEdge</value>
+  </data>
+  <data name="Struggle" xml:space="preserve">
+    <value>Struggle</value>
+  </data>
+  <data name="Submission" xml:space="preserve">
+    <value>Submission</value>
+  </data>
+  <data name="SuckerPunchFast" xml:space="preserve">
+    <value>SuckerPunchFast</value>
+  </data>
+  <data name="Swift" xml:space="preserve">
+    <value>Swift</value>
+  </data>
+  <data name="TackleFast" xml:space="preserve">
+    <value>TackleFast</value>
+  </data>
+  <data name="Thunder" xml:space="preserve">
+    <value>Thunder</value>
+  </data>
+  <data name="Thunderbolt" xml:space="preserve">
+    <value>Thunderbolt</value>
+  </data>
+  <data name="ThunderPunch" xml:space="preserve">
+    <value>ThunderPunch</value>
+  </data>
+  <data name="ThunderShockFast" xml:space="preserve">
+    <value>ThunderShockFast</value>
+  </data>
+  <data name="Twineedle" xml:space="preserve">
+    <value>Twineedle</value>
+  </data>
+  <data name="Twister" xml:space="preserve">
+    <value>Twister</value>
+  </data>
+  <data name="VineWhipFast" xml:space="preserve">
+    <value>VineWhipFast</value>
+  </data>
+  <data name="WaterGunFast" xml:space="preserve">
+    <value>WaterGunFast</value>
+  </data>
+  <data name="WaterGunFastBlastoise" xml:space="preserve">
+    <value>WaterGunFastBlastoise</value>
+  </data>
+  <data name="WaterPulse" xml:space="preserve">
+    <value>WaterPulse</value>
+  </data>
+  <data name="WingAttackFast" xml:space="preserve">
+    <value>WingAttackFast</value>
+  </data>
+  <data name="WrapGreen" xml:space="preserve">
+    <value>WrapGreen</value>
+  </data>
+  <data name="WrapPink" xml:space="preserve">
+    <value>WrapPink</value>
+  </data>
+  <data name="XScissor" xml:space="preserve">
+    <value>XScissor</value>
+  </data>
+  <data name="ZenHeadbuttFast" xml:space="preserve">
+    <value>ZenHeadbuttFast</value>
+  </data>
+</root>

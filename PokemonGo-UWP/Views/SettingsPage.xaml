@@ -43,8 +43,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               x:Uid="MusicTitleText"
-                               Text="Music"
+                               x:Uid="MusicTextBlock"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
 
@@ -60,8 +59,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               x:Uid="VibrationTitleText"
-                               Text="Vibration"
+                               x:Uid="VibrationTextBlock"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
 
@@ -77,8 +75,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               x:Uid="MapAutoRotateTitleText"
-                               Text="Auto-Rotate Map"
+                               x:Uid="MapAutoRotateTextBlock"
                                Style="{StaticResource TextSettingsTitle}"
                                VerticalAlignment="Center" />
 
@@ -112,9 +109,7 @@
                 <Grid Margin="15,0,15,10">
                     <Button Command="{Binding DoPtcLogoutCommand}"
                             Style="{StaticResource ButtonNoStyle}">
-                        <TextBlock
-                            Text="Sign Out"
-                            x:Uid="SignOutButton"
+                        <TextBlock x:Uid="SignOutTextBlock"
                             Style="{StaticResource TextSettingsTitle}"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"/>
