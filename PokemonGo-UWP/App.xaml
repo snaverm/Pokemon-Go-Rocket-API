@@ -45,7 +45,6 @@
             <utils:AchievementNextValueConverter x:Key="AchievementNextValueConverter" />
             <utils:AchievementValueConverter x:Key="AchievementValueConverter" />
             <utils:AchievementTranslationConverter x:Key="AchievementTranslationConverter" />
-            <utils:PlayerDataToExperienceConverter x:Key="PlayerDataToExperienceConverter"/>
             <utils:PlayerDataToCurrentExperienceConverter x:Key="PlayerDataToCurrentExperienceConverter"/>
             <utils:PlayerDataToTotalLevelExperienceConverter x:Key="PlayerDataToTotalLevelExperienceConverter"/>
             <utils:PlayerDataToPokeCoinsConverter x:Key="PlayerDataToPokeCoinsConverter"/>

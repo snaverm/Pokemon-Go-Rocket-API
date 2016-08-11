@@ -238,7 +238,8 @@
                     </StackPanel>
 
                     <ProgressBar
-                        Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToExperienceConverter}}"
+                        Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}}"
+                             Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
                         Foreground="Yellow"
                         HorizontalAlignment="Stretch"
                         Height="10"

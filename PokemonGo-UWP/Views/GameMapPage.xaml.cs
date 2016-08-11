@@ -33,7 +33,6 @@ namespace PokemonGo_UWP.Views
 			// Setup nearby translation + map
 			Loaded += (s, e) =>
 			{
-			    SetupMap();
                 ShowNearbyModalAnimation.From =
 									HideNearbyModalAnimation.To = NearbyPokemonModal.ActualHeight;
 				HideNearbyModalAnimation.Completed += (ss, ee) =>
@@ -90,6 +89,7 @@ namespace PokemonGo_UWP.Views
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
+            SetupMap();
             // Set first position if we shomehow missed it
             if (GameClient.Geoposition != null)
 				UpdateMap(GameClient.Geoposition);
