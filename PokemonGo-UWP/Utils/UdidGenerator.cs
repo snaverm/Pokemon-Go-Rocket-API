@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
-using Windows.Networking.Connectivity;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -220,14 +219,16 @@ namespace PokemonGo_UWP.Utils
         {
             var adapters = AdaptersHelper.GetAdapters();
 
-            var btMacTmp = adapters.FirstOrDefault(a => a.Name.Contains("Bluetooth"));
-            var profile = NetworkInformation.GetInternetConnectionProfile();
+            //TODO: Bluetooth MAC is not available if BlueTooth is disabled.
+            //TODO: Here must be prompt to enable BlueTooth for a second to get the MAC
+
+            var btMacTmp = adapters.FirstOrDefault(a => a.Description.Contains("Bluetooth"));
+            var wfMacTmp = adapters.FirstOrDefault(a => a.Description.Contains("Wireless"));
 
             var serial = SerialGenerator();
             var ecid = EcidGenerator();
             var bluetoothMac = btMacTmp != null ? btMacTmp.Mac.ToLower() : RandomMac().ToLower();
-            // var wifiMac = wfMacTmp != null ? wfMacTmp.MAC.ToLower() : RandomMac().ToLower();
-            var wifiMac = profile?.NetworkAdapter.NetworkAdapterId.ToString() ?? RandomMac().ToLower();
+            var wifiMac = wfMacTmp != null ? wfMacTmp.Mac.ToLower() : RandomMac().ToLower();
 
             var toSha1 = $"{serial}{ecid}{bluetoothMac}{wifiMac}";
             using (var sha1 = SHA1.Create())

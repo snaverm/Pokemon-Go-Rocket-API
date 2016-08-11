@@ -70,8 +70,17 @@ namespace PokemonGo_UWP.Utils
             get
             {
                 if (string.IsNullOrEmpty(SettingsService.Instance.UDID))
-                    //SettingsService.Instance.UDID = Utilities.RandomHex(40);
-                    SettingsService.Instance.UDID = UdidGenerator.GenerateUdid();
+                {
+                    try
+                    {
+                        SettingsService.Instance.UDID = UdidGenerator.GenerateUdid();
+                    }
+                    catch (Exception)
+                    {
+                        //Fallback solution with random hex
+                        SettingsService.Instance.UDID = Utilities.RandomHex(40);
+                    }
+                }
                 return SettingsService.Instance.UDID;
             }
         }
