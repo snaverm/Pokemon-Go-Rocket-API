@@ -21,6 +21,7 @@ namespace PokemonGo.RocketAPI.Helpers
         private readonly AuthTicket _authTicket;
         private readonly IDeviceInfo _deviceInfo;
         private readonly DateTime _startTime = DateTime.UtcNow;
+        private readonly Random _random = new Random();
 
         public RequestBuilder(string authToken, AuthType authType, double latitude, double longitude, double altitude, IDeviceInfo deviceInfo,
         AuthTicket authTicket = null)
@@ -42,9 +43,11 @@ namespace PokemonGo.RocketAPI.Helpers
 
             var ticketBytes = requestEnvelope.AuthTicket.ToByteArray();
 
-            Vector normAccel = new Vector(_deviceInfo.AccelRawX, _deviceInfo.AccelRawY, _deviceInfo.AngleNormalizedX);
+            Vector normAccel = new Vector(_deviceInfo.AccelRawX, _deviceInfo.AccelRawY, _deviceInfo.AccelRawZ);
             normAccel.NormalizeVector(9.81);
             normAccel.Round(2);
+
+            ulong timeFromStart = (ulong)(DateTime.UtcNow.ToUnixTime() - _startTime.ToUnixTime());
 
             var sig = new Signature()
             {
@@ -56,7 +59,7 @@ namespace PokemonGo.RocketAPI.Helpers
                         requestEnvelope.Altitude),
                 Unk22 = ByteString.CopyFrom(rnd32),
                 Timestamp = (ulong)DateTime.UtcNow.ToUnixTime(),
-                TimestampSinceStart = (ulong)(DateTime.UtcNow.ToUnixTime() - _startTime.ToUnixTime()),
+                TimestampSinceStart = timeFromStart,
 
                 SensorInfo = new Signature.Types.SensorInfo()
                 {
@@ -75,8 +78,9 @@ namespace PokemonGo.RocketAPI.Helpers
                     AngleNormalizedX = _deviceInfo.AngleNormalizedX,
                     AngleNormalizedY = _deviceInfo.AngleNormalizedY,
                     AngleNormalizedZ = _deviceInfo.AngleNormalizedZ,
-                    AccelerometerAxes = _deviceInfo.AccelerometerAxes
-                    
+                    AccelerometerAxes = _deviceInfo.AccelerometerAxes,
+                    TimestampSnapshot = timeFromStart - (ulong)_random.Next(150, 260)
+
                 },
 
                 DeviceInfo = new Signature.Types.DeviceInfo()
@@ -84,11 +88,17 @@ namespace PokemonGo.RocketAPI.Helpers
                     DeviceId = _deviceInfo.DeviceID,
                     FirmwareBrand = _deviceInfo.FirmwareBrand,
                     FirmwareType = _deviceInfo.FirmwareType
+                },
+
+                ActivityStatus = new Signature.Types.ActivityStatus()
+                {
+                    StartTimeMs = timeFromStart - (ulong)_random.Next(150, 350),
+                    UnknownStatus = true
                 }
 
             };
 
-            _deviceInfo.LocationFixes.ToList().ForEach( loc => sig.LocationFix.Add(new Signature.Types.LocationFix()
+            _deviceInfo.LocationFixes.ToList().ForEach(loc => sig.LocationFix.Add(new Signature.Types.LocationFix()
             {
                 Floor = loc.Floor,
                 Longitude = loc.Longitude,
@@ -96,8 +106,9 @@ namespace PokemonGo.RocketAPI.Helpers
                 Altitude = loc.Altitude,
                 LocationType = loc.LocationType,
                 Provider = loc.Provider,
-                ProviderStatus = loc.ProviderStatus
-                
+                ProviderStatus = loc.ProviderStatus,
+                TimestampSinceStart = timeFromStart - (ulong)_random.Next(160, 240)
+
             }));
 
             foreach (var request in requestEnvelope.Requests)
