@@ -137,11 +137,12 @@
             </Border>
         </Grid>
         
-        <Grid Grid.Row="1" 
+        <Grid Grid.Row="0" 
+              Grid.RowSpan="3"
               x:Name="GatheredItemsBorder"
               Style="{StaticResource GridContainer}"
               Visibility="Collapsed"
-              VerticalAlignment="Top">
+              VerticalAlignment="Center">
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="GatheredItemsTranslateTransform"
                                     Y="800" />
@@ -217,7 +218,7 @@
             </Button>
         </Grid>
         <Button Grid.Row="2" 
-                Command="{Binding ReturnToGameScreen}"
+                Command="{Binding AbandonPokestop}"
                 Style="{StaticResource ButtonCircle}"
                 Margin="0">
             <TextBlock Text="" FontFamily="SEGOE MDL2 Assets" />

@@ -130,7 +130,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                     {
                         // Goto game page
-                        await NavigationService.NavigateAsync(typeof(GameMapPage), true);
+                        await NavigationService.NavigateAsync(typeof(GameMapPage), GameMapNavigationModes.AppStart);
                     }
                 }
                 catch (PtcOfflineException)
@@ -168,7 +168,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                     {
                         // Goto game page
-                        await NavigationService.NavigateAsync(typeof(GameMapPage), true);
+                        await NavigationService.NavigateAsync(typeof(GameMapPage), GameMapNavigationModes.AppStart);
                     }
                 }
                 catch (GoogleOfflineException)

@@ -60,7 +60,9 @@ namespace PokemonGo_UWP.Entities
             _trySearchPokestop = new DelegateCommand(() =>
             {
                 NavigationHelper.NavigationState["CurrentPokestop"] = this;
-                BootStrapper.Current.NavigationService.Navigate(typeof(SearchPokestopPage), true);
+                // Disable map update
+                GameClient.ToggleUpdateTimer(false);
+                BootStrapper.Current.NavigationService.Navigate(typeof(SearchPokestopPage));
             }, () => true)
             );
 
