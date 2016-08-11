@@ -41,7 +41,7 @@ namespace PokemonGo_UWP.ViewModels
                 CurrentPokestopInfo = (FortDetailsResponse) suspensionState[nameof(CurrentPokestopInfo)];
                 CurrentSearchResponse = (FortSearchResponse) suspensionState[nameof(CurrentSearchResponse)];
             }
-            else if (parameter is bool)
+            else
             {
                 // Navigating from game page, so we need to actually load the Pokestop                  
                 Busy.SetBusy(true, "Loading Pokestop");
@@ -57,7 +57,6 @@ namespace PokemonGo_UWP.ViewModels
                     SearchInCooldown?.Invoke(null, null);
                 }
             }
-            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -152,7 +151,19 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
             _returnToGameScreen = new DelegateCommand(() =>
             {
-                NavigationService.Navigate(typeof(GameMapPage));
+                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokestopUpdate);
+            }, () => true)
+            );
+
+        private DelegateCommand _abandonPokestop;
+
+        /// <summary>
+        ///     Going back to map page
+        /// </summary>
+        public DelegateCommand AbandonPokestop => _abandonPokestop ?? (
+            _abandonPokestop = new DelegateCommand(() =>
+            {
+                NavigationService.GoBack();
             }, () => true)
             );
 
@@ -203,17 +214,16 @@ namespace PokemonGo_UWP.ViewModels
                         break;
                     case FortSearchResponse.Types.Result.Success:
                         // Success, we play the animation and update inventory
+                        Logger.Write("Searching Pokestop success");
                         AwardedItems.Clear();
+                        // TODO: can this be improved?
                         var tmpAwardedItems = CurrentSearchResponse.ItemsAwarded.GroupBy(item => item.ItemId);
                         foreach (var tmpAwardedItem in tmpAwardedItems)
                         {
-                            var tmpItem = tmpAwardedItem.GroupBy(item => item.ItemId);                            
+                            var tmpItem = tmpAwardedItem.GroupBy(item => item.ItemId);
                             AwardedItems.Add(new ItemAward() { ItemId = tmpItem.First().First().ItemId, ItemCount = tmpItem.First().Count() });
-                        }
-                        Logger.Write("Searching Pokestop success");
+                        }                        
                         SearchSuccess?.Invoke(this, null);
-                        // Restarts map timer
-                        GameClient.ToggleUpdateTimer();
                         await GameClient.UpdateInventory();
                         break;
                     case FortSearchResponse.Types.Result.OutOfRange:

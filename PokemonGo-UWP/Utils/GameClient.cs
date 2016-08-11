@@ -15,6 +15,7 @@ using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
 using POGOProtos.Data;
+using POGOProtos.Data.Player;
 using POGOProtos.Enums;
 using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
@@ -48,13 +49,13 @@ namespace PokemonGo_UWP.Utils
     {
         #region Client Vars
 
-        private static ISettings ClientSettings;
-        private static Client Client;
+        private static ISettings _clientSettings;
+        private static Client _client;
 
         /// <summary>
         /// Handles failures by having a fixed number of retries
         /// </summary>
-        internal class APIFailure : IApiFailureStrategy
+        internal class ApiFailure : IApiFailureStrategy
         {
 
             private int _retryCount;
@@ -72,7 +73,7 @@ namespace PokemonGo_UWP.Utils
                 if (_retryCount % 5 == 0)
                 {
                     // Let's try to refresh the session by getting a new token
-                    await (ClientSettings.AuthType == AuthType.Google ? DoGoogleLogin(ClientSettings.GoogleUsername, ClientSettings.GooglePassword) : DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword));
+                    await (_clientSettings.AuthType == AuthType.Google ? DoGoogleLogin(_clientSettings.GoogleUsername, _clientSettings.GooglePassword) : DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword));
                 }
 
                 return ApiOperation.Retry;
@@ -104,6 +105,23 @@ namespace PokemonGo_UWP.Utils
         /// Settings downloaded from server
         /// </summary>
         public static GlobalSettings GameSetting { get; private set; }
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        public static PlayerData PlayerProfile { get; private set; }
+
+        /// <summary>
+        ///     Stats for the current player, including current level and experience related stuff
+        /// </summary>
+        public static PlayerStats PlayerStats { get; private set; }
+
+        /// <summary>
+        /// Contains infos about level up rewards
+        /// </summary>
+        public static InventoryDelta InventoryDelta { get; private set; }
+
+        #region Collections
 
         /// <summary>
         ///     Collection of Pokemon in 1 step from current position
@@ -155,6 +173,8 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } = new ObservableCollection<PokedexEntry>();
 
+        #endregion
+
         #region Templates from server
         /// <summary>
         /// Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
@@ -179,14 +199,14 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient()
         {
-            ClientSettings = new Settings
+            _clientSettings = new Settings
             {
                 AuthType = SettingsService.Instance.LastLoginService
             };
 
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance) { AuthToken = SettingsService.Instance.AuthToken};
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance) { AuthToken = SettingsService.Instance.AuthToken};
 
-            await Client.Login.DoLogin();
+            await _client.Login.DoLogin();
         }
 
         /// <summary>
@@ -197,15 +217,15 @@ namespace PokemonGo_UWP.Utils
         /// <returns>true if login worked</returns>
         public static async Task<bool> DoPtcLogin(string username, string password)
         {
-            ClientSettings = new Settings
+            _clientSettings = new Settings
             {
                 PtcUsername = username,
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);
             // Get PTC token
-            var authToken = await Client.Login.DoLogin();
+            var authToken = await _client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
             SettingsService.Instance.AuthToken = authToken;
             // Update other data if login worked
@@ -225,16 +245,16 @@ namespace PokemonGo_UWP.Utils
         /// <returns>true if login worked</returns>
         public static async Task<bool> DoGoogleLogin(string email, string password)
         {
-            ClientSettings = new Settings
+            _clientSettings = new Settings
             {
                 GoogleUsername = email,
                 GooglePassword = password,
                 AuthType = AuthType.Google,
             };
 
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);
             // Get Google token
-            var authToken = await Client.Login.DoLogin();
+            var authToken = await _client.Login.DoLogin();
             // Update current token even if it's null
             SettingsService.Instance.AuthToken = authToken;
             // Update other data if login worked
@@ -310,7 +330,7 @@ namespace PokemonGo_UWP.Utils
             };            
             // Update before starting timer            
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
-            GameSetting = (await Client.Download.GetSettings()).Settings;            
+            GameSetting = (await _client.Download.GetSettings()).Settings;            
             await UpdateMapObjects();
             await UpdateInventory();
             await UpdateItemTemplates();
@@ -388,9 +408,9 @@ namespace PokemonGo_UWP.Utils
         {
             // Sends the updated position to the client
             await
-                Client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
+                _client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
                     geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);
-            return await Client.Map.GetMapObjects();
+            return await _client.Map.GetMapObjects();
         }
 
         #endregion
@@ -400,7 +420,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         /// List of items that can be used when trying to catch a Pokemon
         /// </summary>
-        private static readonly List<ItemId> _catchItemIds = new List<ItemId>()
+        private static readonly List<ItemId> CatchItemIds = new List<ItemId>
         {
             ItemId.ItemPokeBall,
             ItemId.ItemGreatBall,
@@ -417,9 +437,27 @@ namespace PokemonGo_UWP.Utils
         ///     Gets user's profile
         /// </summary>
         /// <returns></returns>
-        public static async Task<GetPlayerResponse> GetProfile()
+        public static async Task UpdateProfile()
         {
-            return await Client.Player.GetPlayer();
+            PlayerProfile = (await _client.Player.GetPlayer()).PlayerData;
+        }
+
+        /// <summary>
+        ///     Gets player's inventoryDelta
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LevelUpRewardsResponse> UpdatePlayerStats(bool checkForLevelUp = false)
+        {
+            InventoryDelta = (await _client.Inventory.GetInventory()).InventoryDelta;
+            var tmpStats = InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+            if (checkForLevelUp && PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            {
+                PlayerStats = tmpStats;
+                var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);                
+                return levelUpResponse;
+            }
+            PlayerStats = tmpStats;
+            return null;
         }
 
         /// <summary>
@@ -428,7 +466,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<GetInventoryResponse> GetInventory()
         {
-            return await Client.Inventory.GetInventory();
+            return await _client.Inventory.GetInventory();
         }
 
         /// <summary>
@@ -437,7 +475,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<LevelUpRewardsResponse> GetLevelUpRewards(int newLevel)
         {
-            return await Client.Player.GetLevelUpRewards(newLevel);
+            return await _client.Player.GetLevelUpRewards(newLevel);
         }
 
         /// <summary>
@@ -448,7 +486,7 @@ namespace PokemonGo_UWP.Utils
         private static async Task UpdateItemTemplates()
         {            
             // Get all the templates
-            var itemTemplates = (await Client.Download.GetItemTemplates()).ItemTemplates;
+            var itemTemplates = (await _client.Download.GetItemTemplates()).ItemTemplates;
             // Update Pokedex data
             PokedexExtraData = itemTemplates.Where(item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset).Select(item => item.PokemonSettings);            
             // Update Pokemon upgrade templates
@@ -470,7 +508,7 @@ namespace PokemonGo_UWP.Utils
             ItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null)
                                                  .GroupBy(item => item.InventoryItemData.Item)
                                                  .Select(item => item.First().InventoryItemData.Item), true);
-            CatchItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null && _catchItemIds.Contains(item.InventoryItemData.Item.ItemId))
+            CatchItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null && CatchItemIds.Contains(item.InventoryItemData.Item.ItemId))
                                                  .GroupBy(item => item.InventoryItemData.Item)
                                                  .Select(item => item.First().InventoryItemData.Item), true);
             // Update incbuators          
@@ -521,7 +559,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnpointId)
         {
-            return await Client.Encounter.EncounterPokemon(encounterId, spawnpointId);
+            return await _client.Encounter.EncounterPokemon(encounterId, spawnpointId);
         }
 
         /// <summary>
@@ -537,7 +575,7 @@ namespace PokemonGo_UWP.Utils
         public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId, ItemId captureItem, bool hitPokemon = true)
         {
             var random = new Random();
-            return await Client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble() * 1.95D, random.NextDouble(), 1, hitPokemon);
+            return await _client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble() * 1.95D, random.NextDouble(), 1, hitPokemon);
         }
 
         /// <summary>
@@ -549,7 +587,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, string spawnpointId, ItemId captureItem)
         {
-            return await Client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
+            return await _client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
         }
 
         #endregion
@@ -567,7 +605,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<FortDetailsResponse> GetFort(string pokestopId, double latitude, double longitude)
         {
-            return await Client.Fort.GetFort(pokestopId, latitude, longitude);
+            return await _client.Fort.GetFort(pokestopId, latitude, longitude);
         }
 
         /// <summary>
@@ -579,7 +617,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<FortSearchResponse> SearchFort(string pokestopId, double latitude, double longitude)
         {
-            return await Client.Fort.SearchFort(pokestopId, latitude, longitude);
+            return await _client.Fort.SearchFort(pokestopId, latitude, longitude);
         }
 
         #endregion
@@ -594,7 +632,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<UseItemEggIncubatorResponse> UseEggIncubator(EggIncubator incubator, PokemonData egg)
         {
-            return await Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
+            return await _client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
         }
 
         /// <summary>

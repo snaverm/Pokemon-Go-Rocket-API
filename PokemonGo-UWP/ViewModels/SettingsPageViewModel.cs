@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml.Media.Animation;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
+using Template10.Common;
 using Template10.Mvvm;
 
 namespace PokemonGo_UWP.ViewModels
@@ -47,7 +48,11 @@ namespace PokemonGo_UWP.ViewModels
         public bool IsNianticMapEnabled
         {
             get { return SettingsService.Instance.IsNianticMapEnabled; }
-            set { SettingsService.Instance.IsNianticMapEnabled = value; }
+            set
+            {
+                SettingsService.Instance.IsNianticMapEnabled = value;
+                _mapSettingsChangedCounter++;
+            }
         }
 
         #endregion
@@ -75,15 +80,23 @@ namespace PokemonGo_UWP.ViewModels
 
 		#region Close
 
+        private int _mapSettingsChangedCounter;
+
 		private DelegateCommand _closeCommand;
 
 		public DelegateCommand CloseCommand => _closeCommand ?? (
 			_closeCommand = new DelegateCommand(() =>
 			{
-				// Navigate back
-				NavigationService.GoBack();
-			}, () => true)
-			);
+				// Navigate back if we didn't change map settings
+			    if (_mapSettingsChangedCounter%2 == 0)
+			    {
+			        NavigationService.GoBack();
+			    }
+			    else
+			    {                  
+			        NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.SettingsUpdate);
+			    }
+			}));
 
 
 		#endregion

@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +26,7 @@ namespace PokemonGo_UWP.Views
 	{
 		private readonly object lockObject = new object();
 		private Geopoint lastAutoPosition = null;
+	    private int _mapBoxIndex = -1;
 
 		public GameMapPage()
 		{
@@ -49,16 +52,17 @@ namespace PokemonGo_UWP.Views
 	    {
 	        if (ApplicationKeys.MapBoxTokens.Length > 0 && SettingsService.Instance.IsNianticMapEnabled)
 	        {
-	            var randomTileSourceIndex = new Random().Next(0, ApplicationKeys.MapBoxTokens.Length);
-	            Logger.Write($"Using MapBox's keyset {randomTileSourceIndex}");
+                if (_mapBoxIndex == -1)
+                    _mapBoxIndex = new Random().Next(0, ApplicationKeys.MapBoxTokens.Length);
+	            Logger.Write($"Using MapBox's keyset {_mapBoxIndex}");
 	            var mapBoxTileSource =
 	                new HttpMapTileDataSource(
 	                    "https://api.mapbox.com/styles/v1/" +
 	                    (RequestedTheme == ElementTheme.Light
-	                        ? ApplicationKeys.MapBoxStylesLight[randomTileSourceIndex]
-	                        : ApplicationKeys.MapBoxStylesDark[randomTileSourceIndex]) +
+	                        ? ApplicationKeys.MapBoxStylesLight[_mapBoxIndex]
+	                        : ApplicationKeys.MapBoxStylesDark[_mapBoxIndex]) +
 	                    "/tiles/256/{zoomlevel}/{x}/{y}?access_token=" +
-	                    ApplicationKeys.MapBoxTokens[randomTileSourceIndex])
+	                    ApplicationKeys.MapBoxTokens[_mapBoxIndex])
 	                {
 	                    AllowCaching = true
 	                };
@@ -89,12 +93,20 @@ namespace PokemonGo_UWP.Views
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
-            SetupMap();
+            // Hide PokeMenu panel just in case
+            HidePokeMenuStoryboard.Begin();
+            // See if we need to update the map
+            if (e.Parameter != null && e.NavigationMode != NavigationMode.Back)
+		    {
+		        var mode = ((JObject) JsonConvert.DeserializeObject((string) e.Parameter)).Last.ToObject<GameMapNavigationModes>();
+                if (mode == GameMapNavigationModes.AppStart || mode == GameMapNavigationModes.SettingsUpdate)
+                    SetupMap();
+            }            
             // Set first position if we shomehow missed it
             if (GameClient.Geoposition != null)
 				UpdateMap(GameClient.Geoposition);
 			SubscribeToCaptureEvents();
-			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;            
 		}
 
 		private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)

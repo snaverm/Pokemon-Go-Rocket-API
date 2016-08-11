@@ -48,7 +48,9 @@ namespace PokemonGo_UWP.Entities
             _tryCatchPokemon = new DelegateCommand(() =>
             {
                 NavigationHelper.NavigationState["CurrentPokemon"] = this;
-                BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage), true);
+                // Disable map update
+                GameClient.ToggleUpdateTimer(false);
+                BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage));
             }, () => true)
             );
 

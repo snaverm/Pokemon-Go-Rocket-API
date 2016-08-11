@@ -495,7 +495,7 @@
                 Margin="8"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
-                Command="{Binding ReturnToGameScreen}"
+                Command="{Binding EscapeEncounterCommand}"
                 x:Name="EscapeEncounterButton">
             <Image Source="../Assets/Buttons/btn_run_away.png"
                    Stretch="Uniform"
