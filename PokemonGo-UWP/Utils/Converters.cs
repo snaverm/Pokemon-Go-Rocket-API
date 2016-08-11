@@ -124,13 +124,13 @@ namespace PokemonGo_UWP.Utils
 
             switch(teamColor) {
                 case TeamColor.Blue:
-                    return Resources.Translation.GetString("MysticTeam");
+                    return Resources.CodeResources.GetString("MysticTeamText");
                 case TeamColor.Red:
-                    return Resources.Translation.GetString("ValorTeam");
+                    return Resources.CodeResources.GetString("ValorTeamText");
                 case TeamColor.Yellow:
-                    return Resources.Translation.GetString("InstinctTeam");
+                    return Resources.CodeResources.GetString("InstinctTeamText");
                 default:
-                    return Resources.Translation.GetString("NoTeam");
+                    return Resources.CodeResources.GetString("NoTeamText");
             }
         }
 
@@ -150,11 +150,7 @@ namespace PokemonGo_UWP.Utils
             var fieldInfo = type.GetField(achievementType.ToString());
             var badgeType = (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
             
-            if(badgeType == null) {
-                return "";
-            }
-            
-            return Resources.Translation.GetString(badgeType.Value.ToString());
+            return badgeType == null ? "" : Resources.Achievements.GetString(badgeType.Value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
@@ -358,7 +354,7 @@ namespace PokemonGo_UWP.Utils
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language) {
-            return Resources.Translation.GetString((string)value);
+            return Resources.CodeResources.GetString((string)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
@@ -713,32 +709,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PlayerDataToExperienceConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            var playerStats = (PlayerStats) value;
-            return playerStats == null ? 0 : (int)(((double)playerStats.Experience - playerStats.PrevLevelXp) / (playerStats.NextLevelXp - playerStats.PrevLevelXp) * 100);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     public class PlayerDataToCurrentExperienceConverter : IValueConverter
     {
+
+        // TODO: find a better place for this
+        private readonly int[] _xpTable =
+        {
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+        };
+
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats)value;
-            return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;
+            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
+            return (playerStats == null) ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -751,12 +739,21 @@ namespace PokemonGo_UWP.Utils
 
     public class PlayerDataToTotalLevelExperienceConverter : IValueConverter
     {
+        // TODO: find a better place for this
+        private readonly int[] _xpTable =
+        {
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+        };
+
+
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats)value;
-            return playerStats?.NextLevelXp - playerStats?.PrevLevelXp ?? 0;
+            return playerStats == null ? 0 : _xpTable[playerStats.Level];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -792,7 +789,7 @@ namespace PokemonGo_UWP.Utils
             var ms = (long)value;
             var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
             date = date.Add(TimeSpan.FromMilliseconds(ms));
-            return date.ToString(Resources.Translation.GetString("DateFormat"));
+            return date.ToString(Resources.CodeResources.GetString("DateFormat"));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {

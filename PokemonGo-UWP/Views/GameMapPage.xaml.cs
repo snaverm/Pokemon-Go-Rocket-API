@@ -33,32 +33,7 @@ namespace PokemonGo_UWP.Views
 			// Setup nearby translation + map
 			Loaded += (s, e) =>
 			{
-				if (ApplicationKeys.MapBoxTokens.Length > 0)
-				{
-					var randomTileSourceIndex = new Random().Next(0, ApplicationKeys.MapBoxTokens.Length);
-					Logger.Write($"Using MapBox's keyset {randomTileSourceIndex}");
-					var mapBoxTileSource =
-										new HttpMapTileDataSource(
-												"https://api.mapbox.com/styles/v1/" +
-												(RequestedTheme == ElementTheme.Light
-														? ApplicationKeys.MapBoxStylesLight[randomTileSourceIndex]
-														: ApplicationKeys.MapBoxStylesDark[randomTileSourceIndex]) +
-												"/tiles/256/{zoomlevel}/{x}/{y}?access_token=" +
-												ApplicationKeys.MapBoxTokens[randomTileSourceIndex])
-										{
-											AllowCaching = true
-										};
-
-					GameMapControl.Style = MapStyle.None;
-					GameMapControl.TileSources.Clear();
-					GameMapControl.TileSources.Add(new MapTileSource(mapBoxTileSource)
-					{
-						AllowOverstretch = true,
-						IsFadingEnabled = false,
-						Layer = MapTileLayer.BackgroundReplacement
-					});
-				}
-				ShowNearbyModalAnimation.From =
+                ShowNearbyModalAnimation.From =
 									HideNearbyModalAnimation.To = NearbyPokemonModal.ActualHeight;
 				HideNearbyModalAnimation.Completed += (ss, ee) =>
 							{
@@ -70,13 +45,53 @@ namespace PokemonGo_UWP.Views
 			};
 		}
 
+	    private void SetupMap()
+	    {
+	        if (ApplicationKeys.MapBoxTokens.Length > 0 && SettingsService.Instance.IsNianticMapEnabled)
+	        {
+	            var randomTileSourceIndex = new Random().Next(0, ApplicationKeys.MapBoxTokens.Length);
+	            Logger.Write($"Using MapBox's keyset {randomTileSourceIndex}");
+	            var mapBoxTileSource =
+	                new HttpMapTileDataSource(
+	                    "https://api.mapbox.com/styles/v1/" +
+	                    (RequestedTheme == ElementTheme.Light
+	                        ? ApplicationKeys.MapBoxStylesLight[randomTileSourceIndex]
+	                        : ApplicationKeys.MapBoxStylesDark[randomTileSourceIndex]) +
+	                    "/tiles/256/{zoomlevel}/{x}/{y}?access_token=" +
+	                    ApplicationKeys.MapBoxTokens[randomTileSourceIndex])
+	                {
+	                    AllowCaching = true
+	                };
+
+	            GameMapControl.Style = MapStyle.None;
+	            GameMapControl.TileSources.Clear();
+	            GameMapControl.TileSources.Add(new MapTileSource(mapBoxTileSource)
+	            {
+	                AllowOverstretch = true,
+	                IsFadingEnabled = false,
+	                Layer = MapTileLayer.BackgroundReplacement
+	            });
+	        }
+	        else
+	        {
+                // Fallback to Bing Maps   
+                // TODO: map color scheme is set but the visual style doesn't update!             
+	            GameMapControl.ColorScheme = ViewModel.CurrentTheme == ElementTheme.Dark
+	                ? MapColorScheme.Dark
+	                : MapColorScheme.Light;
+                GameMapControl.TileSources.Clear();
+                GameMapControl.Style = MapStyle.Terrain;
+	        }
+        }
+
 		#region Overrides of Page
 
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
-			// Set first position if we shomehow missed it
-			if (GameClient.Geoposition != null)
+            SetupMap();
+            // Set first position if we shomehow missed it
+            if (GameClient.Geoposition != null)
 				UpdateMap(GameClient.Geoposition);
 			SubscribeToCaptureEvents();
 			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;

@@ -14,15 +14,12 @@ namespace PokemonGo_UWP.Views
 
         private void passwordBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                // TODO: find a better way to do this
-                // If username contains @ we login with google
-                if (usernameTextBox.Text.Contains("@"))
-				    googleButton.Focus(Windows.UI.Xaml.FocusState.Programmatic);
-                else
-                    loginButton.Focus(Windows.UI.Xaml.FocusState.Programmatic);
-            }
+            if (e.Key != Windows.System.VirtualKey.Enter) return;            
+            // If username contains @ we login with google
+            if (LoginUsernameTextBox.Text.Contains("@"))
+                GoogleLoginButton.Focus(Windows.UI.Xaml.FocusState.Programmatic);
+            else
+                PtcLoginButton.Focus(Windows.UI.Xaml.FocusState.Programmatic);
         }
     }
 }

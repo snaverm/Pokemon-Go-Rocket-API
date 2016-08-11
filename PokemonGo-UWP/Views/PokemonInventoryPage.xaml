@@ -334,7 +334,9 @@
                                 <DataTemplate>
                                     <StackPanel Margin="8,4,8,4">
                                         <TextBlock TextAlignment="Center">
-                                            <Run FontSize="12" x:Uid="CPText" Text="CP" />
+                                            <Run FontSize="12" 
+                                                 x:Uid="CpTextBlock" 
+                                                 Text="CP" />
                                             <Run FontSize="16" Text="{Binding Cp}" />
                                         </TextBlock>
                                         <Image
@@ -404,8 +406,7 @@
                                    Foreground="#5a7878"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Name="EggsPivotHeader"
-                                   x:Uid="EggsText"
-                                   Text="EGGS" />
+                                   x:Uid="EggsTextBlock"/>
                     </PivotItem.Header>
 
 

@@ -184,7 +184,7 @@ namespace PokemonGo_UWP.Utils
                 AuthType = SettingsService.Instance.LastLoginService
             };
 
-            Client = new Client(ClientSettings, new APIFailure()) { AuthToken = SettingsService.Instance.AuthToken};
+            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance) { AuthToken = SettingsService.Instance.AuthToken};
 
             await Client.Login.DoLogin();
         }
@@ -203,7 +203,7 @@ namespace PokemonGo_UWP.Utils
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            Client = new Client(ClientSettings, new APIFailure());
+            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
             // Get PTC token
             var authToken = await Client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
@@ -232,7 +232,7 @@ namespace PokemonGo_UWP.Utils
                 AuthType = AuthType.Google,
             };
 
-            Client = new Client(ClientSettings, new APIFailure());
+            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
             // Get Google token
             var authToken = await Client.Login.DoLogin();
             // Update current token even if it's null
@@ -289,7 +289,7 @@ namespace PokemonGo_UWP.Utils
                 ReportInterval = 5000,
                 MovementThreshold = 5
             };
-            Busy.SetBusy(true, Resources.Translation.GetString("GettingGPSSignal"));
+            Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
             _geolocator.PositionChanged += (s, e) =>
@@ -309,7 +309,7 @@ namespace PokemonGo_UWP.Utils
                 await UpdateMapObjects();
             };            
             // Update before starting timer            
-            Busy.SetBusy(true, Resources.Translation.GetString("GettingUserData"));
+            Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
             GameSetting = (await Client.Download.GetSettings()).Settings;            
             await UpdateMapObjects();
             await UpdateInventory();

@@ -101,7 +101,7 @@ namespace PokemonGo_UWP.Views
         private void SubscribeToCaptureEvents()
         {
             ViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
-            ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;            
             // Add also handlers to enable the button once the animation is done                                    
             CatchEscape.Completed += (s, e) =>
             {

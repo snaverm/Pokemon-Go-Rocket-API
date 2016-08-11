@@ -92,6 +92,10 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\Achievements\badge_lv0.png" />
@@ -360,38 +364,114 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
-    <PRIResource Include="Strings\sk-SK\Resources.resw" />
-    <PRIResource Include="Strings\sk-SK\Pokemon.resw" />
-    <PRIResource Include="Strings\sk-SK\Items.resw" />
-    <PRIResource Include="Strings\nl-NL\Resources.resw" />
-    <PRIResource Include="Strings\tr-TR\Resources.resw" />
-    <PRIResource Include="Strings\tr-TR\Pokemon.resw" />
-    <PRIResource Include="Strings\tr-TR\Items.resw" />
-    <PRIResource Include="Strings\it-IT\Items.resw" />
-    <PRIResource Include="Strings\it-IT\Resources.resw" />
-    <PRIResource Include="Strings\it-IT\Pokemon.resw" />
-    <PRIResource Include="Strings\pl-PL\Items.resw" />
-    <PRIResource Include="Strings\pl-PL\Resources.resw" />
-    <PRIResource Include="Strings\pl-PL\Pokemon.resw" />
-    <PRIResource Include="Strings\ja-JP\Resources.resw" />
-    <PRIResource Include="Strings\es-ES\Items.resw" />
-    <PRIResource Include="Strings\es-ES\Resources.resw" />
-    <PRIResource Include="Strings\es-ES\Pokemon.resw" />
-    <PRIResource Include="Strings\cs-CZ\Items.resw" />
-    <PRIResource Include="Strings\cs-CZ\Resources.resw" />
-    <PRIResource Include="Strings\cs-CZ\Pokemon.resw" />
-    <PRIResource Include="Strings\ru-RU\Resources.resw" />
-    <PRIResource Include="Strings\ru-RU\Pokemon.resw" />
-    <PRIResource Include="Strings\ru-RU\Items.resw" />
-    <PRIResource Include="Strings\fr-FR\Resources.resw" />
-    <PRIResource Include="Strings\fr-FR\Pokemon.resw" />
-    <PRIResource Include="Strings\fr-FR\Items.resw" />
-    <PRIResource Include="Strings\de-DE\Items.resw" />
+    <PRIResource Include="Strings\zh-TW\Resources.resw" />
+    <PRIResource Include="Strings\zh-TW\PokemonMoves.resw" />
+    <PRIResource Include="Strings\zh-TW\Pokemon.resw" />
+    <PRIResource Include="Strings\zh-TW\Items.resw" />
+    <PRIResource Include="Strings\zh-TW\CodeResources.resw" />
+    <PRIResource Include="Strings\zh-TW\Achievements.resw" />
+    <PRIResource Include="Strings\cs\Achievements.resw" />
+    <PRIResource Include="Strings\cs\CodeResources.resw" />
+    <PRIResource Include="Strings\cs\Items.resw" />
+    <PRIResource Include="Strings\cs\Pokemon.resw" />
+    <PRIResource Include="Strings\cs\PokemonMoves.resw" />
+    <PRIResource Include="Strings\cs\Resources.resw" />
+    <PRIResource Include="Strings\de\Achievements.resw" />
+    <PRIResource Include="Strings\de\CodeResources.resw" />
+    <PRIResource Include="Strings\de\Items.resw" />
+    <PRIResource Include="Strings\de\Pokemon.resw" />
+    <PRIResource Include="Strings\de\PokemonMoves.resw" />
+    <PRIResource Include="Strings\de\Resources.resw" />
+    <PRIResource Include="Strings\el\Achievements.resw" />
+    <PRIResource Include="Strings\el\CodeResources.resw" />
+    <PRIResource Include="Strings\el\Items.resw" />
+    <PRIResource Include="Strings\el\Pokemon.resw" />
+    <PRIResource Include="Strings\el\PokemonMoves.resw" />
+    <PRIResource Include="Strings\el\Resources.resw" />
+    <PRIResource Include="Strings\en-US\CodeResources.resw" />
+    <PRIResource Include="Strings\en-US\Achievements.resw" />
+    <PRIResource Include="Strings\en-US\PokemonMoves.resw" />
     <PRIResource Include="Strings\en-US\Items.resw" />
-    <PRIResource Include="Strings\de-DE\Resources.resw" />
-    <PRIResource Include="Strings\de-DE\Pokemon.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\en-US\Pokemon.resw" />
+    <PRIResource Include="Strings\es\Achievements.resw" />
+    <PRIResource Include="Strings\es\CodeResources.resw" />
+    <PRIResource Include="Strings\es\Items.resw" />
+    <PRIResource Include="Strings\es\Pokemon.resw" />
+    <PRIResource Include="Strings\es\PokemonMoves.resw" />
+    <PRIResource Include="Strings\es\Resources.resw" />
+    <PRIResource Include="Strings\fr\Achievements.resw" />
+    <PRIResource Include="Strings\fr\CodeResources.resw" />
+    <PRIResource Include="Strings\fr\Items.resw" />
+    <PRIResource Include="Strings\fr\Pokemon.resw" />
+    <PRIResource Include="Strings\fr\PokemonMoves.resw" />
+    <PRIResource Include="Strings\fr\Resources.resw" />
+    <PRIResource Include="Strings\hu\Achievements.resw" />
+    <PRIResource Include="Strings\hu\CodeResources.resw" />
+    <PRIResource Include="Strings\hu\Items.resw" />
+    <PRIResource Include="Strings\hu\Pokemon.resw" />
+    <PRIResource Include="Strings\hu\PokemonMoves.resw" />
+    <PRIResource Include="Strings\hu\Resources.resw" />
+    <PRIResource Include="Strings\it\Achievements.resw" />
+    <PRIResource Include="Strings\it\CodeResources.resw" />
+    <PRIResource Include="Strings\it\Items.resw" />
+    <PRIResource Include="Strings\it\Pokemon.resw" />
+    <PRIResource Include="Strings\it\PokemonMoves.resw" />
+    <PRIResource Include="Strings\it\Resources.resw" />
+    <PRIResource Include="Strings\ja\Achievements.resw" />
+    <PRIResource Include="Strings\ja\CodeResources.resw" />
+    <PRIResource Include="Strings\ja\Items.resw" />
+    <PRIResource Include="Strings\ja\Pokemon.resw" />
+    <PRIResource Include="Strings\ja\PokemonMoves.resw" />
+    <PRIResource Include="Strings\ja\Resources.resw" />
+    <PRIResource Include="Strings\nl\Achievements.resw" />
+    <PRIResource Include="Strings\nl\CodeResources.resw" />
+    <PRIResource Include="Strings\nl\Items.resw" />
+    <PRIResource Include="Strings\nl\Pokemon.resw" />
+    <PRIResource Include="Strings\nl\PokemonMoves.resw" />
+    <PRIResource Include="Strings\nl\Resources.resw" />
+    <PRIResource Include="Strings\pl\Achievements.resw" />
+    <PRIResource Include="Strings\pl\CodeResources.resw" />
+    <PRIResource Include="Strings\pl\Items.resw" />
+    <PRIResource Include="Strings\pl\Pokemon.resw" />
+    <PRIResource Include="Strings\pl\PokemonMoves.resw" />
+    <PRIResource Include="Strings\pl\Resources.resw" />
+    <PRIResource Include="Strings\pt-BR\Achievements.resw" />
+    <PRIResource Include="Strings\pt-BR\CodeResources.resw" />
+    <PRIResource Include="Strings\pt-BR\Items.resw" />
+    <PRIResource Include="Strings\pt-BR\Pokemon.resw" />
+    <PRIResource Include="Strings\pt-BR\PokemonMoves.resw" />
+    <PRIResource Include="Strings\pt-BR\Resources.resw" />
+    <PRIResource Include="Strings\pt-PT\Achievements.resw" />
+    <PRIResource Include="Strings\pt-PT\CodeResources.resw" />
+    <PRIResource Include="Strings\pt-PT\Items.resw" />
+    <PRIResource Include="Strings\pt-PT\Pokemon.resw" />
+    <PRIResource Include="Strings\pt-PT\PokemonMoves.resw" />
+    <PRIResource Include="Strings\pt-PT\Resources.resw" />
+    <PRIResource Include="Strings\ru\Achievements.resw" />
+    <PRIResource Include="Strings\ru\CodeResources.resw" />
+    <PRIResource Include="Strings\ru\Items.resw" />
+    <PRIResource Include="Strings\ru\Pokemon.resw" />
+    <PRIResource Include="Strings\ru\PokemonMoves.resw" />
+    <PRIResource Include="Strings\ru\Resources.resw" />
+    <PRIResource Include="Strings\sk\Achievements.resw" />
+    <PRIResource Include="Strings\sk\CodeResources.resw" />
+    <PRIResource Include="Strings\sk\Items.resw" />
+    <PRIResource Include="Strings\sk\Pokemon.resw" />
+    <PRIResource Include="Strings\sk\PokemonMoves.resw" />
+    <PRIResource Include="Strings\sk\Resources.resw" />
+    <PRIResource Include="Strings\tr\Achievements.resw" />
+    <PRIResource Include="Strings\tr\CodeResources.resw" />
+    <PRIResource Include="Strings\tr\Items.resw" />
+    <PRIResource Include="Strings\tr\Pokemon.resw" />
+    <PRIResource Include="Strings\tr\PokemonMoves.resw" />
+    <PRIResource Include="Strings\tr\Resources.resw" />
+    <PRIResource Include="Strings\zh-CN\Achievements.resw" />
+    <PRIResource Include="Strings\zh-CN\CodeResources.resw" />
+    <PRIResource Include="Strings\zh-CN\Items.resw" />
+    <PRIResource Include="Strings\zh-CN\Pokemon.resw" />
+    <PRIResource Include="Strings\zh-CN\PokemonMoves.resw" />
+    <PRIResource Include="Strings\zh-CN\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -419,11 +499,14 @@
     <Compile Include="Utils\MessageDialogExtensions.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
     <Compile Include="Utils\PokemonInfo.cs" />
+    <Compile Include="Utils\RandomExtensions.cs" />
     <Compile Include="Utils\Resources.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\SettingsService.cs" />
     <Compile Include="Utils\SortingModes.cs" />
+    <Compile Include="Utils\UdidGenerator.cs" />
     <Compile Include="Utils\UpdateManager.cs" />
+    <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\CapturePokemonPageViewModel.cs" />
     <Compile Include="ViewModels\EggDetailPageViewModel.cs" />
     <Compile Include="ViewModels\GameMapPageViewModel.cs" />
@@ -555,11 +638,33 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.cs.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.es.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.fr.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.hu.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.it.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.ja.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.nl.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.pl.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.pt-BR.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.pt-PT.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.ru.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.sk.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.tr.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-CN.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-TW.xlf" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

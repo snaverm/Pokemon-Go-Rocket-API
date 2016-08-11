@@ -53,7 +53,7 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                         default:
                             Logger.Write("Error during GPS activation");
-                            await new MessageDialog(Utils.Resources.Translation.GetString("NoGPSPermissions")).ShowAsyncQueue();
+                            await new MessageDialog(Utils.Resources.CodeResources.GetString("NoGpsPermissionsText")).ShowAsyncQueue();
                             BootStrapper.Current.Exit();
                             break;
                     }
@@ -67,7 +67,7 @@ namespace PokemonGo_UWP.ViewModels
                 PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
                 PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
             }
-            else
+            else if (mode != NavigationMode.Back)
             {
                 // No saved state, get them from the client                
                 PlayerProfile = (await GameClient.GetProfile()).PlayerData;
