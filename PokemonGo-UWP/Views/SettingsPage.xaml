@@ -26,11 +26,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <TextBlock x:Uid="SettingsHeaderText" 
+            <TextBlock x:Uid="SettingsHeaderText"
                        Text="SETTINGS"
                        Style="{StaticResource TextPageTitle}" />
-            <Border Background="#ffffff" 
-                    Width="150" 
+            <Border Background="#ffffff"
+                    Width="150"
                     Height="1" />
         </StackPanel>
 
@@ -118,17 +118,17 @@
                               Style="{StaticResource SettingsCheckbox}" />
                 </Grid>
 
-                <Border Background="#33ffffff" 
-                        Height="0.3" 
+                <Border Background="#33ffffff"
+                        Height="0.3"
                         Margin="15,15,15,0" />
 
                 <Grid Margin="15,0,15,10">
                     <Button Command="{Binding DoPtcLogoutCommand}"
                             Style="{StaticResource ButtonNoStyle}">
                         <TextBlock x:Uid="SignOutTextBlock"
-                            Style="{StaticResource TextSettingsTitle}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right"/>
+                                   Style="{StaticResource TextSettingsTitle}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right" />
                     </Button>
                 </Grid>
 

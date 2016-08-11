@@ -1,16 +1,15 @@
-﻿using POGOProtos.Enums;
-using System;
+﻿using System;
+using POGOProtos.Enums;
 
-namespace PokemonGo_UWP.Utils {
-    public class BadgeTypeAttribute : Attribute {
-        public BadgeTypeAttribute(BadgeType value) {
-            this.value = value;
-        }
-        private BadgeType value;
-        public BadgeType Value
+namespace PokemonGo_UWP.Utils
+{
+    public class BadgeTypeAttribute : Attribute
+    {
+        public BadgeTypeAttribute(BadgeType value)
         {
-            get { return value; }
-            set { this.value = value; }
+            Value = value;
         }
+
+        public BadgeType Value { get; set; }
     }
 }

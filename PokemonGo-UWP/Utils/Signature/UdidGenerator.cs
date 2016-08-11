@@ -9,164 +9,11 @@ namespace PokemonGo_UWP.Utils
 {
     public static class UdidGenerator
     {
-        private class AdapterInfo
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string Type { get; set; }
-            public string Mac { get; set; }
-        }
-
-        private static class AdaptersHelper
-        {
-            private const int MAX_ADAPTER_DESCRIPTION_LENGTH = 128;
-            private const int ERROR_BUFFER_OVERFLOW = 111;
-            private const int MAX_ADAPTER_NAME_LENGTH = 256;
-            private const int MAX_ADAPTER_ADDRESS_LENGTH = 8;
-            private const int MIB_IF_TYPE_OTHER = 1;
-            private const int MIB_IF_TYPE_ETHERNET = 6;
-            private const int MIB_IF_TYPE_TOKENRING = 9;
-            private const int MIB_IF_TYPE_FDDI = 15;
-            private const int MIB_IF_TYPE_PPP = 23;
-            private const int MIB_IF_TYPE_LOOPBACK = 24;
-            private const int MIB_IF_TYPE_SLIP = 28;
-
-            [DllImport("iphlpapi.dll", CharSet = CharSet.Ansi, ExactSpelling = true)]
-            private static extern int GetAdaptersInfo(IntPtr pAdapterInfo, ref Int64 pBufOutLen);
-
-            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-            private struct IpAdapterInfo
-            {
-                public IntPtr Next;
-                public Int32 ComboIndex;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_ADAPTER_NAME_LENGTH + 4)]
-                public string AdapterName;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_ADAPTER_DESCRIPTION_LENGTH + 4)]
-                public string AdapterDescription;
-                public UInt32 AddressLength;
-                [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ADAPTER_ADDRESS_LENGTH)]
-                public byte[] Address;
-                public Int32 Index;
-                public UInt32 Type;
-                public UInt32 DhcpEnabled;
-                public IntPtr CurrentIpAddress;
-                public IpAddrString IpAddressList;
-                public IpAddrString GatewayList;
-                public IpAddrString DhcpServer;
-                public bool HaveWins;
-                public IpAddrString PrimaryWinsServer;
-                public IpAddrString SecondaryWinsServer;
-                public Int32 LeaseObtained;
-                public Int32 LeaseExpires;
-            }
-
-            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-            private struct IpAddrString
-            {
-                public IntPtr Next;
-                public IpAddressString IpAddress;
-                public IpAddressString IpMask;
-                public Int32 Context;
-            }
-
-            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-            private struct IpAddressString
-            {
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
-                public string Address;
-            }
-
-
-            /// <summary>Gets the network adapters</summary>
-            /// <returns>List of network adapters</returns>
-            /// <exception cref="System.InvalidOperationException">GetAdaptersInfo failed:  + ret</exception>
-            public static List<AdapterInfo> GetAdapters()
-            {
-                var adapters = new List<AdapterInfo>();
-
-                long structSize = Marshal.SizeOf(typeof(IpAdapterInfo));
-                var pArray = Marshal.AllocHGlobal(new IntPtr(structSize));
-
-                var ret = GetAdaptersInfo(pArray, ref structSize);
-
-                if (ret == ERROR_BUFFER_OVERFLOW) // ERROR_BUFFER_OVERFLOW == 111
-                {
-                    // Buffer was too small, reallocate the correct size for the buffer.
-                    pArray = Marshal.ReAllocHGlobal(pArray, new IntPtr(structSize));
-
-                    ret = GetAdaptersInfo(pArray, ref structSize);
-                }
-
-                if (ret == 0)
-                {
-                    // Call Succeeded
-                    var pEntry = pArray;
-
-                    do
-                    {
-                        var adapter = new AdapterInfo();
-
-                        // Retrieve the adapter info from the memory address
-                        var entry = (IpAdapterInfo)Marshal.PtrToStructure(pEntry, typeof(IpAdapterInfo));
-
-                        // Adapter Type
-                        switch (entry.Type)
-                        {
-                            case MIB_IF_TYPE_ETHERNET:
-                                adapter.Type = "Ethernet";
-                                break;
-                            case MIB_IF_TYPE_TOKENRING:
-                                adapter.Type = "Token Ring";
-                                break;
-                            case MIB_IF_TYPE_FDDI:
-                                adapter.Type = "FDDI";
-                                break;
-                            case MIB_IF_TYPE_PPP:
-                                adapter.Type = "PPP";
-                                break;
-                            case MIB_IF_TYPE_LOOPBACK:
-                                adapter.Type = "Loopback";
-                                break;
-                            case MIB_IF_TYPE_SLIP:
-                                adapter.Type = "Slip";
-                                break;
-                            default:
-                                adapter.Type = "Other/Unknown";
-                                break;
-                        } // switch
-
-                        adapter.Name = entry.AdapterName;
-                        adapter.Description = entry.AdapterDescription;
-
-                        // MAC Address (data is in a byte[])
-                        adapter.Mac = string.Join(":", Enumerable.Range(0, (int)entry.AddressLength).Select(s => string.Format("{0:X2}", entry.Address[s])));
-
-                        // Get next adapter (if any)
-
-                        adapters.Add(adapter);
-
-                        pEntry = entry.Next;
-                    }
-                    while (pEntry != IntPtr.Zero);
-
-                    Marshal.FreeHGlobal(pArray);
-                }
-                else
-                {
-                    Marshal.FreeHGlobal(pArray);
-                    throw new InvalidOperationException("GetAdaptersInfo failed: " + ret);
-                }
-
-                return adapters;
-            }
-
-        }
-
-
         // Suffixes for IPhones from:
         // https://pikeralpha.wordpress.com/2013/10/10/apple-serial-numbers-ending-with-f000-fzzz/
         // https://pikeralpha.wordpress.com/2014/06/11/apple-serial-numbers-ending-with-g000-gzzz/
-        private static readonly string[] IphoneSerialSuffixes = {
+        private static readonly string[] IphoneSerialSuffixes =
+        {
             "07P", "07Q", "07R", "07T", "07V", "38W", "38Y", "39C", "39D", "5MC", "5MD", "5MF", "5MG", "5MH", "5MJ",
             "5MK", "5ML", "5MM", "5MN", "5MP", "5MQ", "5MR", "5MT", "5MV", "5MW", "5MY", "5N0", "5QF", "5QG", "5QH",
             "5QJ", "5QK", "5QL", "5QM", "5QN", "5QP", "5QQ", "5QR", "5QT", "5QV", "5QW", "5QY", "5R0", "5R1", "5R2",
@@ -191,8 +38,6 @@ namespace PokemonGo_UWP.Utils
         // Serial Generation: http://osxdaily.com/2012/01/26/reading-iphone-serial-number/
         private static string SerialGenerator()
         {
-
-
             var factoryAndMachineId = Utilities.RandomNum(2);
             var maxYear = DateTime.Now.Year;
             var yearManufactured = Utilities.Rand.NextInclusive(5, Utilities.EnsureRange(maxYear - 2010, 6, 9));
@@ -234,13 +79,170 @@ namespace PokemonGo_UWP.Utils
             using (var sha1 = SHA1.Create())
             {
                 var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(toSha1));
-                var sb = new StringBuilder(hash.Length * 2);
+                var sb = new StringBuilder(hash.Length*2);
 
                 // can be "x2" if you want lowercase
                 foreach (var b in hash)
                     sb.Append(b.ToString("X2"));
 
                 return sb.ToString();
+            }
+        }
+
+        private class AdapterInfo
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string Type { get; set; }
+            public string Mac { get; set; }
+        }
+
+        private static class AdaptersHelper
+        {
+            private const int MAX_ADAPTER_DESCRIPTION_LENGTH = 128;
+            private const int ERROR_BUFFER_OVERFLOW = 111;
+            private const int MAX_ADAPTER_NAME_LENGTH = 256;
+            private const int MAX_ADAPTER_ADDRESS_LENGTH = 8;
+            private const int MIB_IF_TYPE_OTHER = 1;
+            private const int MIB_IF_TYPE_ETHERNET = 6;
+            private const int MIB_IF_TYPE_TOKENRING = 9;
+            private const int MIB_IF_TYPE_FDDI = 15;
+            private const int MIB_IF_TYPE_PPP = 23;
+            private const int MIB_IF_TYPE_LOOPBACK = 24;
+            private const int MIB_IF_TYPE_SLIP = 28;
+
+            [DllImport("iphlpapi.dll", CharSet = CharSet.Ansi, ExactSpelling = true)]
+            private static extern int GetAdaptersInfo(IntPtr pAdapterInfo, ref long pBufOutLen);
+
+
+            /// <summary>Gets the network adapters</summary>
+            /// <returns>List of network adapters</returns>
+            /// <exception cref="System.InvalidOperationException">GetAdaptersInfo failed:  + ret</exception>
+            public static List<AdapterInfo> GetAdapters()
+            {
+                var adapters = new List<AdapterInfo>();
+
+                long structSize = Marshal.SizeOf<IpAdapterInfo>();
+                var pArray = Marshal.AllocHGlobal(new IntPtr(structSize));
+
+                var ret = GetAdaptersInfo(pArray, ref structSize);
+
+                if (ret == ERROR_BUFFER_OVERFLOW) // ERROR_BUFFER_OVERFLOW == 111
+                {
+                    // Buffer was too small, reallocate the correct size for the buffer.
+                    pArray = Marshal.ReAllocHGlobal(pArray, new IntPtr(structSize));
+
+                    ret = GetAdaptersInfo(pArray, ref structSize);
+                }
+
+                if (ret == 0)
+                {
+                    // Call Succeeded
+                    var pEntry = pArray;
+
+                    do
+                    {
+                        var adapter = new AdapterInfo();
+
+                        // Retrieve the adapter info from the memory address
+                        var entry = Marshal.PtrToStructure<IpAdapterInfo>(pEntry);
+
+                        // Adapter Type
+                        switch (entry.Type)
+                        {
+                            case MIB_IF_TYPE_ETHERNET:
+                                adapter.Type = "Ethernet";
+                                break;
+                            case MIB_IF_TYPE_TOKENRING:
+                                adapter.Type = "Token Ring";
+                                break;
+                            case MIB_IF_TYPE_FDDI:
+                                adapter.Type = "FDDI";
+                                break;
+                            case MIB_IF_TYPE_PPP:
+                                adapter.Type = "PPP";
+                                break;
+                            case MIB_IF_TYPE_LOOPBACK:
+                                adapter.Type = "Loopback";
+                                break;
+                            case MIB_IF_TYPE_SLIP:
+                                adapter.Type = "Slip";
+                                break;
+                            default:
+                                adapter.Type = "Other/Unknown";
+                                break;
+                        } // switch
+
+                        adapter.Name = entry.AdapterName;
+                        adapter.Description = entry.AdapterDescription;
+
+                        // MAC Address (data is in a byte[])
+                        adapter.Mac = string.Join(":",
+                            Enumerable.Range(0, (int) entry.AddressLength)
+                                .Select(s => string.Format("{0:X2}", entry.Address[s])));
+
+                        // Get next adapter (if any)
+
+                        adapters.Add(adapter);
+
+                        pEntry = entry.Next;
+                    } while (pEntry != IntPtr.Zero);
+
+                    Marshal.FreeHGlobal(pArray);
+                }
+                else
+                {
+                    Marshal.FreeHGlobal(pArray);
+                    throw new InvalidOperationException("GetAdaptersInfo failed: " + ret);
+                }
+
+                return adapters;
+            }
+
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+            private struct IpAdapterInfo
+            {
+                public readonly IntPtr Next;
+                public readonly int ComboIndex;
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_ADAPTER_NAME_LENGTH + 4)] public readonly string
+                    AdapterName;
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_ADAPTER_DESCRIPTION_LENGTH + 4)] public readonly
+                    string AdapterDescription;
+
+                public readonly uint AddressLength;
+
+                [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ADAPTER_ADDRESS_LENGTH)] public readonly byte[]
+                    Address;
+
+                public readonly int Index;
+                public readonly uint Type;
+                public readonly uint DhcpEnabled;
+                public readonly IntPtr CurrentIpAddress;
+                public readonly IpAddrString IpAddressList;
+                public readonly IpAddrString GatewayList;
+                public readonly IpAddrString DhcpServer;
+                public readonly bool HaveWins;
+                public readonly IpAddrString PrimaryWinsServer;
+                public readonly IpAddrString SecondaryWinsServer;
+                public readonly int LeaseObtained;
+                public readonly int LeaseExpires;
+            }
+
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+            private struct IpAddrString
+            {
+                public readonly IntPtr Next;
+                public readonly IpAddressString IpAddress;
+                public readonly IpAddressString IpMask;
+                public readonly int Context;
+            }
+
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+            private struct IpAddressString
+            {
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)] public readonly string Address;
             }
         }
     }

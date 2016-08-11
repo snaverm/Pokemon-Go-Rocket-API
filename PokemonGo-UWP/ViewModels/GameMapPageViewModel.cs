@@ -1,46 +1,40 @@
-﻿using POGOProtos.Data;
-using POGOProtos.Data.Player;
-using POGOProtos.Inventory;
-using POGOProtos.Networking.Responses;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Threading.Tasks;
+using POGOProtos.Data;
+using POGOProtos.Data.Player;
+using POGOProtos.Networking.Responses;
 using Template10.Common;
 using Template10.Mvvm;
-using Template10.Services.NavigationService;
-using Windows.Devices.Geolocation;
-using Windows.Foundation.Metadata;
-using Windows.Phone.Devices.Notification;
-using Windows.UI.Popups;
-using Windows.UI.WebUI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Navigation;
+using Resources = PokemonGo_UWP.Utils.Resources;
 
 namespace PokemonGo_UWP.ViewModels
 {
     public class GameMapPageViewModel : ViewModelBase
     {
-
         #region Lifecycle Handlers        
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="mode"></param>
         /// <param name="suspensionState"></param>
         /// <returns></returns>
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
+            IDictionary<string, object> suspensionState)
         {
             // Prevent from going back to other pages
-            NavigationService.ClearHistory();            
+            NavigationService.ClearHistory();
             if (parameter == null || mode == NavigationMode.Back) return;
             var gameMapNavigationMode = (GameMapNavigationModes) parameter;
 
@@ -48,8 +42,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state                
-                PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
-                PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
+                PlayerProfile = (PlayerData) suspensionState[nameof(PlayerProfile)];
+                PlayerStats = (PlayerStats) suspensionState[nameof(PlayerStats)];
                 // Restarting update service
                 await StartGpsDataService();
                 return;
@@ -70,7 +64,7 @@ namespace PokemonGo_UWP.ViewModels
                     // We came here after the catching page so we need to restart map update timer and update player data. We also check for level up.                   
                     GameClient.ToggleUpdateTimer();
                     await UpdatePlayerData();
-                    break;               
+                    break;
                 case GameMapNavigationModes.PokemonUpdate:
                     // As above + check for level up         
                     await UpdatePlayerData(true);
@@ -81,7 +75,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Save state before navigating
+        ///     Save state before navigating
         /// </summary>
         /// <param name="suspensionState"></param>
         /// <param name="suspending"></param>
@@ -111,7 +105,7 @@ namespace PokemonGo_UWP.ViewModels
         private PlayerStats _playerStats;
 
         /// <summary>
-        /// Response to the level up event
+        ///     Response to the level up event
         /// </summary>
         private LevelUpRewardsResponse _levelUpRewards;
 
@@ -155,7 +149,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Response to the level up event
+        ///     Response to the level up event
         /// </summary>
         public LevelUpRewardsResponse LevelUpResponse
         {
@@ -187,14 +181,14 @@ namespace PokemonGo_UWP.ViewModels
         #region Level Up Events
 
         /// <summary>
-        /// Event fired when level up rewards are awarded to user
+        ///     Event fired when level up rewards are awarded to user
         /// </summary>
         public event EventHandler LevelUpRewardsAwarded;
 
-        #endregion        
+        #endregion
 
         /// <summary>
-        /// Waits for GPS auth and, if auth is given, starts updating data
+        ///     Waits for GPS auth and, if auth is given, starts updating data
         /// </summary>
         /// <returns></returns>
         private async Task StartGpsDataService()
@@ -209,7 +203,8 @@ namespace PokemonGo_UWP.ViewModels
                         break;
                     default:
                         Logger.Write("Error during GPS activation");
-                        await new MessageDialog(Utils.Resources.CodeResources.GetString("NoGpsPermissionsText")).ShowAsyncQueue();
+                        await
+                            new MessageDialog(Resources.CodeResources.GetString("NoGpsPermissionsText")).ShowAsyncQueue();
                         BootStrapper.Current.Exit();
                         break;
                 }
@@ -217,7 +212,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Updates player profile & stats
+        ///     Updates player profile & stats
         /// </summary>
         /// <param name="checkForLevelUp"></param>
         /// <returns></returns>
@@ -226,9 +221,9 @@ namespace PokemonGo_UWP.ViewModels
             await GameClient.UpdateProfile();
             LevelUpResponse = await GameClient.UpdatePlayerStats(checkForLevelUp);
             PlayerProfile = GameClient.PlayerProfile;
-            PlayerStats = GameClient.PlayerStats;                   
+            PlayerStats = GameClient.PlayerStats;
             if (checkForLevelUp && LevelUpResponse != null)
-            {                
+            {
                 switch (LevelUpResponse.Result)
                 {
                     case LevelUpRewardsResponse.Types.Result.Success:
@@ -246,10 +241,11 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _openSettingsCommand;
 
-        public DelegateCommand SettingsCommand => _openSettingsCommand ?? (_openSettingsCommand = new DelegateCommand(() =>
-        {            
-            NavigationService.Navigate(typeof(SettingsPage));
-        }));
+        public DelegateCommand SettingsCommand
+            =>
+                _openSettingsCommand ??
+                (_openSettingsCommand = new DelegateCommand(() => { NavigationService.Navigate(typeof(SettingsPage)); }))
+            ;
 
         #endregion
 
@@ -257,7 +253,11 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _gotoPokemonInventoryPage;
 
-        public DelegateCommand GotoPokemonInventoryPageCommand => _gotoPokemonInventoryPage ?? (_gotoPokemonInventoryPage = new DelegateCommand(() => { NavigationService.Navigate(typeof(PokemonInventoryPage), true); }));
+        public DelegateCommand GotoPokemonInventoryPageCommand
+            =>
+                _gotoPokemonInventoryPage ??
+                (_gotoPokemonInventoryPage =
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PokemonInventoryPage), true); }));
 
         #endregion
 
@@ -265,7 +265,11 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _gotoPlayerProfilePage;
 
-        public DelegateCommand GotoPlayerProfilePageCommand => _gotoPlayerProfilePage ?? (_gotoPlayerProfilePage = new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
+        public DelegateCommand GotoPlayerProfilePageCommand
+            =>
+                _gotoPlayerProfilePage ??
+                (_gotoPlayerProfilePage =
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
 
         #endregion
 

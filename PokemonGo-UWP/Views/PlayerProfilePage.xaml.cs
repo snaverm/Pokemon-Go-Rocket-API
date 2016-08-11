@@ -6,8 +6,7 @@ namespace PokemonGo_UWP.Views
     {
         public PlayerProfilePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
-
 }

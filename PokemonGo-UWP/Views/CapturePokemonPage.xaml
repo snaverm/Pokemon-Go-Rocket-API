@@ -7,7 +7,6 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
-    xmlns:controls="using:Template10.Controls"
     x:Name="Page"
     mc:Ignorable="d">
 

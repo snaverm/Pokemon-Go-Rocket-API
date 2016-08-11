@@ -6,11 +6,19 @@ namespace PokemonGo_UWP.Utils
 {
     public class AsyncSynchronizationContext : SynchronizationContext
     {
+        private readonly SynchronizationContext _syncContext;
+
+        public AsyncSynchronizationContext(SynchronizationContext syncContext)
+        {
+            _syncContext = syncContext;
+        }
+
         public static AsyncSynchronizationContext Register()
         {
             var syncContext = Current;
             if (syncContext == null)
-                throw new InvalidOperationException("Ensure a synchronization context exists before calling this method.");
+                throw new InvalidOperationException(
+                    "Ensure a synchronization context exists before calling this method.");
 
             var customSynchronizationContext = syncContext as AsyncSynchronizationContext;
 
@@ -21,13 +29,6 @@ namespace PokemonGo_UWP.Utils
             }
 
             return customSynchronizationContext;
-        }
-
-        private readonly SynchronizationContext _syncContext;
-
-        public AsyncSynchronizationContext(SynchronizationContext syncContext)
-        {
-            _syncContext = syncContext;
         }
 
         public override SynchronizationContext CreateCopy()

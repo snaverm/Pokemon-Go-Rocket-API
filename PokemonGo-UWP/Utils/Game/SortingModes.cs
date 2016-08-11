@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokemonGo_UWP.Utils
+﻿namespace PokemonGo_UWP.Utils
 {
     /// <summary>
-    /// Sorting modes for Pokemon inventory
+    ///     Sorting modes for Pokemon inventory
     /// </summary>
     public enum PokemonSortingModes
     {
@@ -18,5 +12,4 @@ namespace PokemonGo_UWP.Utils
         Name,
         Combat
     }
-
 }
