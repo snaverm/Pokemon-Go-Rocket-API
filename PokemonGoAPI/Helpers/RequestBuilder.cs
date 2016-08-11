@@ -98,7 +98,7 @@ namespace PokemonGo.RocketAPI.Helpers
 
             };
 
-            _deviceInfo.LocationFixes.ToList().ForEach( loc => sig.LocationFix.Add(new Signature.Types.LocationFix()
+            _deviceInfo.LocationFixes.ToList().ForEach(loc => sig.LocationFix.Add(new Signature.Types.LocationFix()
             {
                 Floor = loc.Floor,
                 Longitude = loc.Longitude,

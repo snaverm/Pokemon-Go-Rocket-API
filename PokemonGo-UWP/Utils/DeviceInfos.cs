@@ -1,9 +1,13 @@
-﻿using PokemonGo.RocketAPI.Helpers;
+﻿using System.Diagnostics;
+using System.Net.NetworkInformation;
+using PokemonGo.RocketAPI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Bluetooth;
+using Windows.Devices.Enumeration;
 using Windows.Devices.Sensors;
 using Superbest_random;
 
@@ -65,17 +69,20 @@ namespace PokemonGo_UWP.Utils
         {
             get
             {
-                if (string.IsNullOrEmpty(SettingsService.Instance.UDID)) SettingsService.Instance.UDID = RandomString(40);
+                if (string.IsNullOrEmpty(SettingsService.Instance.UDID))
+                {
+                    try
+                    {
+                        SettingsService.Instance.UDID = UdidGenerator.GenerateUdid();
+                    }
+                    catch (Exception)
+                    {
+                        //Fallback solution with random hex
+                        SettingsService.Instance.UDID = Utilities.RandomHex(40);
+                    }
+                }
                 return SettingsService.Instance.UDID;
             }
-        }
-
-        private readonly Random random = new Random();
-        public string RandomString(int length)
-        {
-            const string chars = "ABCDEF0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         // TODO: check for iPhone
