@@ -165,8 +165,8 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Logowanie...</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value>uciekł</value>
+  <data name="Fled" xml:space="preserve">
+    <value>{0} uciekł!</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Błąd zwrócony przez Google: </value>

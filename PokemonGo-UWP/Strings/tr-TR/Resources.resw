@@ -165,8 +165,8 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Giriş Yapılıyor...</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> Kaçtı</value>
+  <data name="Fled" xml:space="preserve">
+    <value>{0} Kaçtı!</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google hata verdi :(</value>

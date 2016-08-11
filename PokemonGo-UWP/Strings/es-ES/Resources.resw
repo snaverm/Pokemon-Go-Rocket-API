@@ -165,8 +165,8 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Iniciando sesion...</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> ha escapado</value>
+  <data name="Fled" xml:space="preserve">
+    <value>{0} ha escapado!</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google retornó el error: </value>

@@ -165,8 +165,8 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Авторизация...</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> fleed</value>
+  <data name="Fled" xml:space="preserve">
+    <value>{0} fled!</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google вернул ошибку: </value>

@@ -165,8 +165,8 @@
   <data name="LoggingIn" xml:space="preserve">
     <value>Logging in...</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value> fleed</value>
+  <data name="Fled" xml:space="preserve">
+    <value> fled.</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google returned error: </value>

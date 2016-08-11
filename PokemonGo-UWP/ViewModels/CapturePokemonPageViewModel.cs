@@ -255,6 +255,7 @@ namespace PokemonGo_UWP.ViewModels
                     CurrentCaptureAward = caughtPokemonResponse.CaptureAward;
                     Logger.Write($"We caught {CurrentPokemon.PokemonId}");
                     CatchSuccess?.Invoke(this, null);
+                    GameClient.CatchablePokemons.Remove(CurrentPokemon);
                     // Restarts map timer
                     GameClient.ToggleUpdateTimer();
                     await GameClient.UpdateInventory();
@@ -265,9 +266,10 @@ namespace PokemonGo_UWP.ViewModels
                     await GameClient.UpdateInventory();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
-                    Logger.Write($"{CurrentPokemon.PokemonId} fleed");
+                    Logger.Write($"{CurrentPokemon.PokemonId} fled");
                     CatchFlee?.Invoke(this, null);
-                    await new MessageDialog(Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()) + Utils.Resources.Translation.GetString("Fleed")).ShowAsyncQueue();
+                    await new MessageDialog(string.Format(Utils.Resources.Translation.GetString("Fled"), Utils.Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
+                    GameClient.CatchablePokemons.Remove(CurrentPokemon);
                     await GameClient.UpdateInventory();
                     ReturnToGameScreen.Execute();
                     break;

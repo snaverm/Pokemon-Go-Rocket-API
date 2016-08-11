@@ -171,8 +171,8 @@
   <data name="EggsText.Text" xml:space="preserve">
     <value>VAJCIA</value>
   </data>
-  <data name="Fleed" xml:space="preserve">
-    <value>utiekol</value>
+  <data name="Fled" xml:space="preserve">
+    <value>{0} utiekol!</value>
   </data>
   <data name="GoogleError" xml:space="preserve">
     <value>Google odpovedal chybou :</value>
