@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Helpers
 {
     public class Vector
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
-
         public Vector(double x, double y, double z)
         {
             X = x;
@@ -19,12 +11,16 @@ namespace PokemonGo.RocketAPI.Helpers
             Z = z;
         }
 
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+
         public void NormalizeVector(double normalValue)
         {
-            double length = Math.Sqrt((X * X) + (Y * Y) + (Z * Z)) / normalValue;
-            X = Math.Abs(X / length);
-            Y = Math.Abs(Y / length);
-            Z = Math.Abs(Z / length);
+            var length = Math.Sqrt(X*X + Y*Y + Z*Z)/normalValue;
+            X = Math.Abs(X/length);
+            Y = Math.Abs(Y/length);
+            Z = Math.Abs(Z/length);
         }
 
         public void Round(int places)

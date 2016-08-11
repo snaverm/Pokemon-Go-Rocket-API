@@ -325,14 +325,16 @@
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapGrid Orientation="Horizontal"
+                                              HorizontalAlignment="Center"
                                               VerticalChildrenAlignment="Top"
-                                              MaximumRowsOrColumns="4" />
+                                              MaximumRowsOrColumns="3" />
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
 
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Margin="8,4,8,4">
+                                    <StackPanel Margin="8,4,8,4"
+                                                Width="92">
                                         <TextBlock TextAlignment="Center">
                                             <Run FontSize="12" 
                                                  x:Uid="CpTextBlock" 
