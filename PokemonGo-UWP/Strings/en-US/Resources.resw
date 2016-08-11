@@ -208,4 +208,7 @@
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>INCUBATORS</value>
   </data>
+  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
+    <value>Niantic map</value>
+  </data>
 </root>

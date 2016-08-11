@@ -709,32 +709,24 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PlayerDataToExperienceConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            var playerStats = (PlayerStats) value;
-            return playerStats == null ? 0 : (int)(((double)playerStats.Experience - playerStats.PrevLevelXp) / (playerStats.NextLevelXp - playerStats.PrevLevelXp) * 100);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     public class PlayerDataToCurrentExperienceConverter : IValueConverter
     {
+
+        // TODO: find a better place for this
+        private readonly int[] _xpTable =
+        {
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+        };
+
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats)value;
-            return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;
+            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
+            return (playerStats == null) ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -747,12 +739,21 @@ namespace PokemonGo_UWP.Utils
 
     public class PlayerDataToTotalLevelExperienceConverter : IValueConverter
     {
+        // TODO: find a better place for this
+        private readonly int[] _xpTable =
+        {
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+        };
+
+
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats)value;
-            return playerStats?.NextLevelXp - playerStats?.PrevLevelXp ?? 0;
+            return playerStats == null ? 0 : _xpTable[playerStats.Level];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -1,4 +1,5 @@
-﻿using PokemonGo_UWP.Utils;
+﻿using Windows.UI.Xaml.Media.Animation;
+using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 
@@ -43,6 +44,12 @@ namespace PokemonGo_UWP.ViewModels
             set { SettingsService.Instance.IsRememberMapZoomEnabled = value; }
         }
 
+        public bool IsNianticMapEnabled
+        {
+            get { return SettingsService.Instance.IsNianticMapEnabled; }
+            set { SettingsService.Instance.IsNianticMapEnabled = value; }
+        }
+
         #endregion
 
         #region Game Logic
@@ -74,7 +81,7 @@ namespace PokemonGo_UWP.ViewModels
 			_closeCommand = new DelegateCommand(() =>
 			{
 				// Navigate back
-				NavigationService.Navigate(typeof(GameMapPage));
+				NavigationService.GoBack();
 			}, () => true)
 			);
 

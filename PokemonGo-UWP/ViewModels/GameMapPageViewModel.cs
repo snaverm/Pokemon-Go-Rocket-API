@@ -73,7 +73,7 @@ namespace PokemonGo_UWP.ViewModels
                 PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
                 PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
             }
-            else
+            else if (mode != NavigationMode.Back)
             {
                 // No saved state, get them from the client                
                 PlayerProfile = (await GameClient.GetProfile()).PlayerData;

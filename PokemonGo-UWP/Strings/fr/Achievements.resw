@@ -12,4 +12,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BadgeBigMagikarp" xml:space="preserve">
+    <value>Pêcheur</value>
+  </data>
+  <data name="BadgeCaptureTotal" xml:space="preserve">
+    <value>Collectionneur</value>
+  </data>
+  <data name="BadgeEvolvedTotal" xml:space="preserve">
+    <value>Scientifique</value>
+  </data>
+  <data name="BadgeHatchedTotal" xml:space="preserve">
+    <value>Éleveur</value>
+  </data>
+  <data name="BadgePokestopsVisited" xml:space="preserve">
+    <value>Randonneur</value>
+  </data>
+  <data name="BadgeTravelKm" xml:space="preserve">
+    <value>Joggeur</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>Attrapeur d'insect</value>
+  </data>
+  <data name="Dragon" xml:space="preserve">
+    <value>Dompteur de Dragon</value>
+  </data>
+  <data name="Fighting" xml:space="preserve">
+    <value>Ceinture noire</value>
+  </data>
+  <data name="Flying" xml:space="preserve">
+    <value>Gardien des oiseaux</value>
+  </data>
+  <data name="Grass" xml:space="preserve">
+    <value>Jardinier</value>
+  </data>
+  <data name="Ground" xml:space="preserve">
+    <value>Mania des ruines</value>
+  </data>
+  <data name="Ice" xml:space="preserve">
+    <value>Skieur</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psychique</value>
+  </data>
+  <data name="Rock" xml:space="preserve">
+    <value>Randonneur</value>
+  </data>
+  <data name="Steel" xml:space="preserve">
+    <value>Depot Agent</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>Nageur</value>
+  </data>
 </root>
