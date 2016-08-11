@@ -460,9 +460,9 @@
 
                                         <TextBlock
                                             TextAlignment="Center">
-                                            <Run FontWeight="Bold" Text="{Binding EggKmWalkedStart}" />
+                                            <Run FontWeight="Bold" Text="{Binding EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.#\}}" />
                                             <Run FontWeight="Bold" Text="/" />
-                                            <Run FontWeight="Bold" Text="{Binding EggKmWalkedTarget}" />
+                                            <Run FontWeight="Bold" Text="{Binding EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
                                             <Run FontWeight="Light" Text=" km" />
                                         </TextBlock>
                                     </StackPanel>

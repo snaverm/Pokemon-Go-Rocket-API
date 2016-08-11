@@ -637,9 +637,10 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null) return 0;
-            var pokemon = (PokemonDataWrapper) value;
-            return (int) (pokemon.EggKmWalkedStart/pokemon.EggKmWalkedTarget)*100;
+
+            if (value == null || !(value is IncubatedEggDataWrapper)) return 0;
+            var pokemon = (IncubatedEggDataWrapper)value;
+            return (int)((pokemon.EggKmWalkedStart / pokemon.EggKmWalkedTarget) * 100);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -736,6 +737,19 @@ namespace PokemonGo_UWP.Utils
         }
 
         #endregion
+    }
+
+    public class StringFormatConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return string.Format(parameter as string, value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
     }
 
     public class PlayerDataToCurrentExperienceConverter : IValueConverter

@@ -49,6 +49,7 @@
             <utils:PlayerDataToTotalLevelExperienceConverter x:Key="PlayerDataToTotalLevelExperienceConverter" />
             <utils:PlayerDataToPokeCoinsConverter x:Key="PlayerDataToPokeCoinsConverter" />
             <utils:AchievementToCompletedPercentageConverter x:Key="AchievementToCompletedPercentageConverter" />
+            <utils:StringFormatConverter x:Key="StringFormatConverter" />
 
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>

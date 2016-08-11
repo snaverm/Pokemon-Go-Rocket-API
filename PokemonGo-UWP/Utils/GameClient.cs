@@ -173,6 +173,8 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
 
+        public static PlayerStats PlayerStats { get; set; }
+
         #region Templates from server
 
         /// <summary>
@@ -547,6 +549,9 @@ namespace PokemonGo_UWP.Utils
             // Update Pokedex            
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
+
+            PlayerStats =
+                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
         }
 
         #endregion
