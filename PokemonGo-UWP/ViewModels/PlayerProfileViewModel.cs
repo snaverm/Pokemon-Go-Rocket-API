@@ -28,15 +28,13 @@ namespace PokemonGo_UWP.ViewModels {
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState) {
             if(suspensionState.Any()) {
-                // Recovering the state                
+                // Recovering the state                                
                 PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
                 PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
             } else {
-                // No saved state, get them from the client                
-                PlayerProfile = (await GameClient.GetProfile()).PlayerData;
-                InventoryDelta = (await GameClient.GetInventory()).InventoryDelta;
-                var tmpStats = InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
-                PlayerStats = tmpStats;
+                // No saved state, get them from the client                                
+                PlayerProfile = GameClient.PlayerProfile;                
+                PlayerStats = GameClient.PlayerStats;
             }
             ReadPlayerStatsValues();            
             await Task.CompletedTask;
@@ -75,11 +73,6 @@ namespace PokemonGo_UWP.ViewModels {
         /// </summary>
         private PlayerStats _playerStats;
 
-        /// <summary>
-        ///     Player's inventory
-        /// </summary>
-        private InventoryDelta _inventoryDelta;
-
         #endregion
 
         #region Bindable Game Vars
@@ -100,12 +93,6 @@ namespace PokemonGo_UWP.ViewModels {
         {
             get { return _playerStats; }
             set { Set(ref _playerStats, value); }
-        }
-
-        public InventoryDelta InventoryDelta
-        {
-            get { return _inventoryDelta; }
-            set { Set(ref _inventoryDelta, value); }
         }
 
         public ObservableCollection<KeyValuePair<AchievementType, object>> Achievements { get; } = new ObservableCollection<KeyValuePair<AchievementType, object>>();                

@@ -111,11 +111,6 @@ namespace PokemonGo_UWP.ViewModels
         private PlayerStats _playerStats;
 
         /// <summary>
-        ///     Player's inventory
-        /// </summary>
-        private InventoryDelta _inventoryDelta;
-
-        /// <summary>
         /// Response to the level up event
         /// </summary>
         private LevelUpRewardsResponse _levelUpRewards;
@@ -157,12 +152,6 @@ namespace PokemonGo_UWP.ViewModels
         {
             get { return _playerStats; }
             private set { Set(ref _playerStats, value); }
-        }
-
-        public InventoryDelta InventoryDelta
-        {
-            get { return _inventoryDelta; }
-            private set { Set(ref _inventoryDelta, value); }
         }
 
         /// <summary>
@@ -234,12 +223,12 @@ namespace PokemonGo_UWP.ViewModels
         /// <returns></returns>
         private async Task UpdatePlayerData(bool checkForLevelUp = false)
         {
-            PlayerProfile = (await GameClient.GetProfile()).PlayerData;
-            InventoryDelta = (await GameClient.GetInventory()).InventoryDelta;
-            var tmpStats = InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
-            if (checkForLevelUp && PlayerStats != null && PlayerStats.Level != tmpStats.Level)
-            {
-                LevelUpResponse = await GameClient.GetLevelUpRewards(tmpStats.Level);
+            await GameClient.UpdateProfile();
+            LevelUpResponse = await GameClient.UpdatePlayerStats(checkForLevelUp);
+            PlayerProfile = GameClient.PlayerProfile;
+            PlayerStats = GameClient.PlayerStats;                   
+            if (checkForLevelUp && LevelUpResponse != null)
+            {                
                 switch (LevelUpResponse.Result)
                 {
                     case LevelUpRewardsResponse.Types.Result.Success:
@@ -249,7 +238,6 @@ namespace PokemonGo_UWP.ViewModels
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            PlayerStats = tmpStats;
         }
 
         #endregion
