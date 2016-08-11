@@ -173,8 +173,6 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
 
-        public static PlayerStats PlayerStats { get; set; }
-
         #region Templates from server
 
         /// <summary>
