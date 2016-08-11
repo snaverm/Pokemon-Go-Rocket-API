@@ -12,6 +12,7 @@ using POGOProtos.Data.Player;
 using POGOProtos.Inventory;
 using System;
 using POGOProtos.Enums;
+using Windows.UI.Xaml.Controls;
 
 namespace PokemonGo_UWP.ViewModels {
     public class PlayerProfileViewModel : ViewModelBase {
@@ -154,6 +155,14 @@ namespace PokemonGo_UWP.ViewModels {
             Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Youngster, PlayerStats.SmallRattataCaught));
             Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.Fisherman, PlayerStats.BigMagikarpCaught));
             Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.AceTrainer, PlayerStats.BattleTrainingWon));
+        }
+
+        #endregion
+
+        #region Navigate to detail page
+
+        public void NavigateToDetailPage(object sender, ItemClickEventArgs e) {
+            NavigationService.Navigate(typeof(AchievementDetailPage), e.ClickedItem);
         }
 
         #endregion

@@ -107,6 +107,8 @@
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignBottomWithPanel="True"
                       ItemsSource="{Binding Achievements}"
+                      ItemClick="GridView_ItemClick"
+                      IsItemClickEnabled="True"
                       SelectionMode="None">
 
                 <GridView.ItemsPanel>
