@@ -477,6 +477,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\FortDataWrapper.cs" />
     <Compile Include="Entities\IUpdatable.cs" />
     <Compile Include="Entities\MapPokemonWrapper.cs" />
@@ -577,6 +580,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

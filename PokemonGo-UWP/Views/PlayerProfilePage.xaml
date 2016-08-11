@@ -9,6 +9,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:gif="using:XamlAnimatedGif"
+    xmlns:controls="using:PokemonGo_UWP.Controls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -129,7 +130,7 @@
                                        Foreground="Green" />
                             <Ellipse Width="60"
                                      Height="60"
-                                     Stroke="LightGreen"
+                                     Stroke="LightGray"
                                      RelativePanel.Below="AchievementTypeText"
                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
                                      StrokeThickness="2.5"
@@ -139,17 +140,18 @@
                                         ImageSource="{Binding Converter={StaticResource AchievementValueToMedalImageConverter}}" />
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <TextBlock x:Name="AchievementValueText"
-                                       Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
-                                       RelativePanel.AlignLeftWithPanel="True"
-                                       RelativePanel.Below="AchievementImage"
-                                       FontWeight="SemiBold"
-                                       Foreground="Green" />
-                            <TextBlock x:Name="AchievementNextValueText"
-                                       Text="{Binding Converter={StaticResource AchievementNextValueConverter}}"
-                                       RelativePanel.AlignRightWithPanel="True"
-                                       RelativePanel.Below="AchievementImage"
-                                       Foreground="Green" />
+                            <controls:CircularProgressBar Height="60" Width="60" SegmentColor="DeepSkyBlue"
+                                                          Radius="118" StrokeThickness="2"
+                                                          RelativePanel.Below="AchievementTypeText"
+                                                          RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                          Maximum="{Binding Converter={StaticResource AchievementNextValueConverter}}"
+                                                          Value="{Binding Value, Converter={StaticResource AchievementValueConverter}}"/>
+                            <StackPanel Orientation="Horizontal" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="AchievementImage" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
+                                           FontWeight="SemiBold" Foreground="Gray" />
+                                <TextBlock Text=" / " Foreground="LightGray"/>
+                                <TextBlock Text="{Binding Converter={StaticResource AchievementNextValueConverter}}" Foreground="LightGray" />
+                            </StackPanel>
                         </RelativePanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
