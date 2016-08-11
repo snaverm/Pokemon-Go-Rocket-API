@@ -244,6 +244,10 @@ Open page with installation files for manual install?</target>
           <source>INCUBATORS</source>
           <target state="new">INCUBATORS</target>
         </trans-unit>
+        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Niantic map</source>
+          <target state="new">Niantic map</target>
+        </trans-unit>
       </group>
     </body>
   </file>

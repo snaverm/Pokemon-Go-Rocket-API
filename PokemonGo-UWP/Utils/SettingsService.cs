@@ -118,7 +118,13 @@ namespace PokemonGo_UWP.Utils
             get { return this._helper.Read(nameof(PokemonSortingMode), PokemonSortingModes.Combat); }
             set { this._helper.Write(nameof(PokemonSortingMode), value); }
         }
-        
+
+        public bool IsNianticMapEnabled
+        {
+            get { return _helper.Read(nameof(IsNianticMapEnabled), false); }
+            set { _helper.Write(nameof(IsNianticMapEnabled), value); }
+        }
+
 
         #endregion
     }

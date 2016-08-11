@@ -102,6 +102,22 @@
                               Style="{StaticResource SettingsCheckbox}" />
                 </Grid>
 
+                <Grid Margin="15,0,30,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="UseNianticMapTextBlock"
+                               Style="{StaticResource TextSettingsTitle}"
+                               VerticalAlignment="Center" />
+
+                    <CheckBox Grid.Column="1"
+                              x:Name="UseNianticMapCheckbox"
+                              IsChecked="{Binding IsNianticMapEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}" />
+                </Grid>
+
                 <Border Background="#33ffffff" 
                         Height="0.3" 
                         Margin="15,15,15,0" />
