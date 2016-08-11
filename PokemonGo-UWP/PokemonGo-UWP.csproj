@@ -364,6 +364,12 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\fi\Resources.resw" />
+    <PRIResource Include="Strings\fi\PokemonMoves.resw" />
+    <PRIResource Include="Strings\fi\Pokemon.resw" />
+    <PRIResource Include="Strings\fi\Items.resw" />
+    <PRIResource Include="Strings\fi\CodeResources.resw" />
+    <PRIResource Include="Strings\fi\Achievements.resw" />
     <PRIResource Include="Strings\zh-HK\Resources.resw" />
     <PRIResource Include="Strings\zh-HK\PokemonMoves.resw" />
     <PRIResource Include="Strings\zh-HK\Pokemon.resw" />
@@ -662,6 +668,7 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.es.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.fi.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.fr.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.hu.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.id.xlf" />
