@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Linq;
 using Google.Protobuf;
 using POGOProtos.Networking.Signature;
 using PokemonGo.RocketAPI.Enums;
@@ -18,10 +19,12 @@ namespace PokemonGo.RocketAPI.Helpers
         private readonly double _longitude;
         private readonly double _altitude;
         private readonly AuthTicket _authTicket;
+        private readonly IDeviceInfo _deviceInfo;
         private readonly DateTime _startTime = DateTime.UtcNow;
+        private readonly Random _random = new Random();
 
-        public RequestBuilder(string authToken, AuthType authType, double latitude, double longitude, double altitude,
-            AuthTicket authTicket = null)
+        public RequestBuilder(string authToken, AuthType authType, double latitude, double longitude, double altitude, IDeviceInfo deviceInfo,
+        AuthTicket authTicket = null)
         {
             _authToken = authToken;
             _authType = authType;
@@ -29,6 +32,7 @@ namespace PokemonGo.RocketAPI.Helpers
             _longitude = longitude;
             _altitude = altitude;
             _authTicket = authTicket;
+            _deviceInfo = deviceInfo;
         }
 
         public RequestEnvelope SetRequestEnvelopeUnknown6(RequestEnvelope requestEnvelope)
@@ -39,6 +43,12 @@ namespace PokemonGo.RocketAPI.Helpers
 
             var ticketBytes = requestEnvelope.AuthTicket.ToByteArray();
 
+            Vector normAccel = new Vector(_deviceInfo.AccelRawX, _deviceInfo.AccelRawY, _deviceInfo.AccelRawZ);
+            normAccel.NormalizeVector(9.81);
+            normAccel.Round(2);
+
+            ulong timeFromStart = (ulong)(DateTime.UtcNow.ToUnixTime() - _startTime.ToUnixTime());
+
             var sig = new Signature()
             {
                 LocationHash1 =
@@ -48,9 +58,58 @@ namespace PokemonGo.RocketAPI.Helpers
                     Utils.GenerateLocation2(requestEnvelope.Latitude, requestEnvelope.Longitude,
                         requestEnvelope.Altitude),
                 Unk22 = ByteString.CopyFrom(rnd32),
-                Timestamp = (ulong) DateTime.UtcNow.ToUnixTime(),
-                TimestampSinceStart = (ulong)(DateTime.UtcNow.ToUnixTime() - _startTime.ToUnixTime())
+                Timestamp = (ulong)DateTime.UtcNow.ToUnixTime(),
+                TimestampSinceStart = timeFromStart,
+
+                SensorInfo = new Signature.Types.SensorInfo()
+                {
+                    AccelNormalizedX = normAccel.X,
+                    AccelNormalizedY = normAccel.Y,
+                    AccelNormalizedZ = normAccel.Z,
+                    AccelRawX = -_deviceInfo.AccelRawX,
+                    AccelRawY = -_deviceInfo.AccelRawY,
+                    AccelRawZ = -_deviceInfo.AccelRawZ,
+                    MagnetometerX = _deviceInfo.MagnetometerX,
+                    MagnetometerY = _deviceInfo.MagnetometerY,
+                    MagnetometerZ = _deviceInfo.MagnetometerZ,
+                    GyroscopeRawX = _deviceInfo.GyroscopeRawX,
+                    GyroscopeRawY = _deviceInfo.GyroscopeRawY,
+                    GyroscopeRawZ = _deviceInfo.GyroscopeRawZ,
+                    AngleNormalizedX = _deviceInfo.AngleNormalizedX,
+                    AngleNormalizedY = _deviceInfo.AngleNormalizedY,
+                    AngleNormalizedZ = _deviceInfo.AngleNormalizedZ,
+                    AccelerometerAxes = _deviceInfo.AccelerometerAxes,
+                    TimestampSnapshot = timeFromStart - (ulong)_random.Next(150, 260)
+
+                },
+
+                DeviceInfo = new Signature.Types.DeviceInfo()
+                {
+                    DeviceId = _deviceInfo.DeviceID,
+                    FirmwareBrand = _deviceInfo.FirmwareBrand,
+                    FirmwareType = _deviceInfo.FirmwareType
+                },
+
+                ActivityStatus = new Signature.Types.ActivityStatus()
+                {
+                    StartTimeMs = timeFromStart - (ulong)_random.Next(150, 350),
+                    UnknownStatus = true
+                }
+
             };
+
+            _deviceInfo.LocationFixes.ToList().ForEach( loc => sig.LocationFix.Add(new Signature.Types.LocationFix()
+            {
+                Floor = loc.Floor,
+                Longitude = loc.Longitude,
+                Latitude = loc.Latitude,
+                Altitude = loc.Altitude,
+                LocationType = loc.LocationType,
+                Provider = loc.Provider,
+                ProviderStatus = loc.ProviderStatus,
+                TimestampSinceStart = timeFromStart - (ulong)_random.Next(160, 240)
+
+            }));
 
             foreach (var request in requestEnvelope.Requests)
             {

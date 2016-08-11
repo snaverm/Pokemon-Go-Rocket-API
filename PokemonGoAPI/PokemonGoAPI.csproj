@@ -123,12 +123,14 @@
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Helpers\Crypt.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
+    <Compile Include="Helpers\IDeviceInfos.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\RequestBuilder.cs" />
     <Compile Include="Helpers\RetryHandler.cs" />
     <Compile Include="Helpers\S2Helper.cs" />
     <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\Vector.cs" />
     <Compile Include="HttpClient\PokemonClient.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Logger.cs" />
