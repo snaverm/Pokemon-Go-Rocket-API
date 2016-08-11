@@ -364,6 +364,12 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-TW\Resources.resw" />
+    <PRIResource Include="Strings\zh-TW\PokemonMoves.resw" />
+    <PRIResource Include="Strings\zh-TW\Pokemon.resw" />
+    <PRIResource Include="Strings\zh-TW\Items.resw" />
+    <PRIResource Include="Strings\zh-TW\CodeResources.resw" />
+    <PRIResource Include="Strings\zh-TW\Achievements.resw" />
     <PRIResource Include="Strings\cs\Achievements.resw" />
     <PRIResource Include="Strings\cs\CodeResources.resw" />
     <PRIResource Include="Strings\cs\Items.resw" />
@@ -646,6 +652,7 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.sk.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.tr.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-CN.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-TW.xlf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
