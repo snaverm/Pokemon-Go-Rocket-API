@@ -90,11 +90,18 @@ namespace PokemonGo.RocketAPI.Helpers
                     FirmwareType = _deviceInfo.FirmwareType
                 },
 
-                ActivityStatus = new Signature.Types.ActivityStatus()
+                /*ActivityStatus = new Signature.Types.ActivityStatus()
                 {
                     StartTimeMs = timeFromStart - (ulong)_random.Next(150, 350),
-                    UnknownStatus = true
-                }
+                    Walking = false,
+                    Automotive = false,
+                    Cycling = false,
+                    Running = false,
+                    Stationary = true,
+                    Tilting = false,
+                    UnknownStatus = false,
+                    Status = ByteString.Empty //Have no idea what is there
+                }*/
 
             };
 
