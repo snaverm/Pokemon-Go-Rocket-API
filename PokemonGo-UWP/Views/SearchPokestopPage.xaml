@@ -224,7 +224,7 @@
                 Command="{Binding AbandonPokestop}"
                 Style="{StaticResource ButtonCircle}"
                 Margin="0">
-            <TextBlock Text="" FontFamily="SEGOE MDL2 Assets" />
+            <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
     </Grid>
 
