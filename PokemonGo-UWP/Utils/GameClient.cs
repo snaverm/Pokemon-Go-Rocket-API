@@ -547,6 +547,9 @@ namespace PokemonGo_UWP.Utils
             // Update Pokedex            
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
+
+            PlayerStats =
+                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
         }
 
         #endregion

@@ -52,10 +52,20 @@ namespace PokemonGo_UWP.ViewModels
 
                 RaisePropertyChanged(() => PokemonInventory);
 
-                foreach (var pokemonData in GameClient.EggsInventory.OrderBy(c => c.EggKmWalkedTarget))
+                var unincubatedEggs = GameClient.EggsInventory.Where(o => string.IsNullOrEmpty(o.EggIncubatorId));
+                var incubatedEggs = GameClient.EggsInventory.Where(o => !string.IsNullOrEmpty(o.EggIncubatorId));
+
+                foreach (var pokemonData in unincubatedEggs)
                 {
                     EggsInventory.Add(new PokemonDataWrapper(pokemonData));
                 }
+                foreach (var incubatorData in GameClient.UsedIncubatorsInventory)
+                {
+                    var pokemonData = incubatedEggs.FirstOrDefault(o => o.EggIncubatorId == incubatorData.Id);
+                    EggsInventory.Add(new IncubatedEggDataWrapper(incubatorData,GameClient.PlayerStats.KmWalked, pokemonData));
+                }
+
+                EggsInventory.OrderBy(c => c.EggKmWalkedTarget);
             }
 
             await Task.CompletedTask;
