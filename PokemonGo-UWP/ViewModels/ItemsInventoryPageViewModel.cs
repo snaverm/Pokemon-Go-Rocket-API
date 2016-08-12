@@ -39,6 +39,8 @@ namespace PokemonGo_UWP.ViewModels
                 RaisePropertyChanged(() => ItemsInventory);
             }
 
+            ItemsTotalCount = ItemsInventory.Sum(i => i.WrappedData.Count);
+
             await Task.CompletedTask;
         }
 
@@ -68,10 +70,21 @@ namespace PokemonGo_UWP.ViewModels
         #region Bindable Game Vars
 
         /// <summary>
-        ///     Reference to Pokemon inventory
+        ///     Reference to Items inventory
         /// </summary>
         public ObservableCollection<ItemDataWrapper> ItemsInventory { get; private set; } =
             new ObservableCollection<ItemDataWrapper>();
+
+        private int _itemsTotalCount;
+        public int ItemsTotalCount
+        {
+            get { return _itemsTotalCount; }
+            private set
+            {
+                _itemsTotalCount = value;
+                RaisePropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -89,6 +102,8 @@ namespace PokemonGo_UWP.ViewModels
                 _returnToGameScreen ??
                 (_returnToGameScreen =
                     new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
+
+        public int MaxItemStorageFieldNumber => GameClient.PlayerProfile.MaxItemStorage;
 
         #endregion
 
