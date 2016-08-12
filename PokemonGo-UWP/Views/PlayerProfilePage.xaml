@@ -151,11 +151,16 @@
                                 <RowDefinition Height="4*" />
                             </Grid.RowDefinitions>
 
-                            <Image Stretch="Uniform"
-                                   Grid.Row="0"
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Style="{ThemeResource ProfilePageLargeText}" 
+                                           Text="{Binding PlayerProfile.Username}"
+                                           HorizontalAlignment="Center"/>
+                                <Image Stretch="Uniform"
                                    Height="480"
                                    gif:AnimationBehavior.SourceUri="/Assets/UI/avatar.gif"
                                    x:Name="AvatarImage" />
+                            </StackPanel>
+                            
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Stretch"
