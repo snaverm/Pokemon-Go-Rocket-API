@@ -9,8 +9,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace PokemonGo_UWP.Views
 {
     /// <summary>
@@ -215,6 +213,8 @@ namespace PokemonGo_UWP.Views
         private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
         {
             CatchEscape.Begin();
+            //TODO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation
+            //                         so the user can try again.
         }
 
         private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)

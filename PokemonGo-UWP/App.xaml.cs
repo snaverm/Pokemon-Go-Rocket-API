@@ -59,7 +59,7 @@ namespace PokemonGo_UWP
             HockeyClient.Current.TrackException(e.Exception);
         }
 
-        #region Notify
+        #region Toast & Notifications
 
         /// <summary>
         ///     Vibrates and/or plays a sound when new pokemons are in the area
