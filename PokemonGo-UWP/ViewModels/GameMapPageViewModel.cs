@@ -56,6 +56,7 @@ namespace PokemonGo_UWP.ViewModels
                     // App just started, so we get GPS access and eventually initialize the client
                     await StartGpsDataService();
                     await UpdatePlayerData(true);
+                    GameClient.ToggleUpdateTimer();
                     break;
                 case GameMapNavigationModes.SettingsUpdate:
                     // We navigated back from Settings page after changing the Map provider, but this is managed in the page itself                                        
