@@ -28,8 +28,7 @@ namespace PokemonGo_UWP.ViewModels
 
         public CapturePokemonPageViewModel()
         {
-            // Set default item
-            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+            SelectStartingBall();
         }
 
         #endregion
@@ -64,7 +63,7 @@ namespace PokemonGo_UWP.ViewModels
                 Logger.Write($"Catching {CurrentPokemon.PokemonId}");
                 CurrentEncounter =
                     await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
-                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+                SelectStartingBall();
                 Busy.SetBusy(false);
                 if (CurrentEncounter.Status != EncounterResponse.Types.Status.EncounterSuccess)
                 {
@@ -191,7 +190,12 @@ namespace PokemonGo_UWP.ViewModels
         ///     Going back to map page
         /// </summary>
         public DelegateCommand EscapeEncounterCommand => _escapeEncounterCommand ?? (
-            _escapeEncounterCommand = new DelegateCommand(() => { NavigationService.GoBack(); }, () => true));
+            _escapeEncounterCommand = new DelegateCommand(() =>
+            {
+                // Re-enable update timer
+                GameClient.ToggleUpdateTimer();
+                NavigationService.GoBack();
+            }, () => true));
 
         #endregion
 
@@ -215,6 +219,37 @@ namespace PokemonGo_UWP.ViewModels
         public event EventHandler CatchEscape;
 
         #endregion
+
+        /// <summary>
+        /// Selects the first ball based on available items
+        /// </summary>
+        private void SelectStartingBall()
+        {
+            // Set default item (switch to other balls if user has none)            
+            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+            while (SelectedCaptureItem.Count == 0)
+            {
+                switch (SelectedCaptureItem.ItemId)
+                {
+                    case ItemId.ItemPokeBall:
+                        // Try with Greatball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemGreatBall);
+                        break;
+                    case ItemId.ItemGreatBall:
+                        // Try with Ultraball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemUltraBall);
+                        break;
+                    case ItemId.ItemUltraBall:
+                        // Try with Masterball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemMasterBall);
+                        break;
+                    case ItemId.ItemMasterBall:
+                        // User has no left balls, choose Pokeball to stop him from trying to capture
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+                        return;
+                }
+            }
+        }
 
         private DelegateCommand<bool> _useSelectedCaptureItem;
 
@@ -252,9 +287,10 @@ namespace PokemonGo_UWP.ViewModels
         private async Task ThrowPokeball(bool hitPokemon)
         {
             var caughtPokemonResponse =
-                await
-                    GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
+                await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
                         SelectedCaptureItem.ItemId, hitPokemon);
+            var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
+
             switch (caughtPokemonResponse.Status)
             {
                 case CatchPokemonResponse.Types.CatchStatus.CatchError:
@@ -266,21 +302,19 @@ namespace PokemonGo_UWP.ViewModels
                     CurrentCaptureAward = caughtPokemonResponse.CaptureAward;
                     CatchSuccess?.Invoke(this, null);
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
+                    GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
-                    CatchEscape?.Invoke(this, null);
+                    CatchEscape?.Invoke(this, null);                    
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fled");
                     CatchFlee?.Invoke(this, null);
-                    // TODO: animation and navigate back to map page to remove this ugly message
-                    await
-                        new MessageDialog(string.Format(Resources.CodeResources.GetString("Fled"),
-                            Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
+                    GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     // We just go back because there's nothing else to do
-                    NavigationService.GoBack();
+                    GameClient.ToggleUpdateTimer();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
                     Logger.Write($"We missed {CurrentPokemon.PokemonId}");

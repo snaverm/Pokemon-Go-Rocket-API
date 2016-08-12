@@ -45,42 +45,5 @@ namespace PokemonGo_UWP.Views
             HideIncubatorsModalStoryboard.Begin();
         }
 
-        #region Overrides of Page
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            SubscribeToCaptureEvents();
-        }
-
-
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            base.OnNavigatingFrom(e);
-            UnsubscribeToCaptureEvents();
-        }
-
-        #endregion
-
-        #region Handlers
-
-        private void SubscribeToCaptureEvents()
-        {
-            ViewModel.IncubatorSuccess += ViewModelOnIncubatorSuccess;
-        }
-
-        private void UnsubscribeToCaptureEvents()
-        {
-            ViewModel.IncubatorSuccess -= ViewModelOnIncubatorSuccess;
-        }
-
-        private void ViewModelOnIncubatorSuccess(object sender, EventArgs eventArgs)
-        {
-            // Replace image
-            // TODO: doing this with code-behind maybe?
-            //EggImage.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Items/{(int) ViewModel.SelectedEggIncubator.ItemId}"));            
-        }
-
-        #endregion
     }
 }

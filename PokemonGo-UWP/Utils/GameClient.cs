@@ -22,6 +22,7 @@ using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings;
 using POGOProtos.Settings.Master;
+using Q42.WinRT.Data;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
 
@@ -183,7 +184,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Stores upgrade costs (candy, stardust) per each level
         /// </summary>
-        public static Dictionary<int, object[]> PokemonUpgradeCosts { get; } = new Dictionary<int, object[]>();
+        public static Dictionary<int, object[]> PokemonUpgradeCosts { get; private set; } = new Dictionary<int, object[]>();
 
         #endregion
 
@@ -199,6 +200,9 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient()
         {
+
+            await DataCache.Init();
+
             _clientSettings = new Settings
             {
                 AuthType = SettingsService.Instance.LastLoginService
@@ -315,25 +319,35 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += (s, e) =>
+            _geolocator.PositionChanged += async (s, e) =>
             {
                 Geoposition = e.Position;
+                // Updating player's position
+                var position = Geoposition.Coordinate.Point.Position;
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
                 GeopositionUpdated?.Invoke(null, Geoposition);
             };
+            // Before starting we need game settings
+            GameSetting =
+                await
+                    DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings,
+                        DateTime.Now.AddMonths(1));      
+            // Update geolocator settings based on server
+            _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(10)
+                Interval = TimeSpan.FromSeconds(GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
             };
             _mapUpdateTimer.Tick += async (s, e) =>
             {
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds <= 10) return;
+                if ((DateTime.Now - _lastUpdate).Seconds <= GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
+                    return;
                 Logger.Write("Updating map");
                 await UpdateMapObjects();
             };
             // Update before starting timer            
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
-            GameSetting = (await _client.Download.GetSettings()).Settings;
             await UpdateMapObjects();
             await UpdateInventory();
             await UpdateItemTemplates();
@@ -355,7 +369,7 @@ namespace PokemonGo_UWP.Utils
             {
                 if (_mapUpdateTimer.IsEnabled) return;
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds > 10)
+                if ((DateTime.Now - _lastUpdate).Seconds > GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
                     await UpdateMapObjects();
                 _mapUpdateTimer.Start();
             }
@@ -415,10 +429,6 @@ namespace PokemonGo_UWP.Utils
                         <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            // Sends the updated position to the client
-            await
-                _client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
-                    geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);
             return await _client.Map.GetMapObjects();
         }
 
@@ -497,19 +507,31 @@ namespace PokemonGo_UWP.Utils
         private static async Task UpdateItemTemplates()
         {
             // Get all the templates
-            var itemTemplates = (await _client.Download.GetItemTemplates()).ItemTemplates;
+            var itemTemplates = await DataCache.GetAsync("itemTemplates", async () => (await _client.Download.GetItemTemplates()).ItemTemplates, DateTime.Now.AddMonths(1));
+
             // Update Pokedex data
-            PokedexExtraData =
-                itemTemplates.Where(
+            PokedexExtraData = await DataCache.GetAsync(nameof(PokedexExtraData), async () =>
+            {
+                await Task.CompletedTask;
+                return itemTemplates.Where(
                     item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset)
                     .Select(item => item.PokemonSettings);
-            // Update Pokemon upgrade templates
-            var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
-            for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+            }, DateTime.Now.AddMonths(1));
+
+            PokemonUpgradeCosts = await DataCache.GetAsync(nameof(PokemonUpgradeCosts), async () =>
             {
-                PokemonUpgradeCosts.Add(i,
-                    new object[] {tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i]});
-            }
+                await Task.CompletedTask;
+                // Update Pokemon upgrade templates
+                var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
+                var tmpResult = new Dictionary<int, object[]>();
+                for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+                {
+                    tmpResult.Add(i,
+                        new object[] { tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i] });
+                }
+                return tmpResult;
+            }, DateTime.Now.AddMonths(1));
+            
         }
 
         /// <summary>
@@ -529,8 +551,7 @@ namespace PokemonGo_UWP.Utils
                         item.InventoryItemData.Item != null && CatchItemIds.Contains(item.InventoryItemData.Item.ItemId))
                     .GroupBy(item => item.InventoryItemData.Item)
                     .Select(item => item.First().InventoryItemData.Item), true);
-            // Update incbuators          
-            // TODO: check if unused incubators have pokemonId = 0 to separate between sable and non-usable incubators, yes unused incubators pokemonId IS 0
+            // Update incbuators                      
             FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId == 0), true);
@@ -547,6 +568,9 @@ namespace PokemonGo_UWP.Utils
             // Update Pokedex            
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
+
+            PlayerStats =
+                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
         }
 
         #endregion

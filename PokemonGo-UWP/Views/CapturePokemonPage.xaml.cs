@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.System.Threading;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using Template10.Common;
 
 namespace PokemonGo_UWP.Views
 {
@@ -27,7 +27,7 @@ namespace PokemonGo_UWP.Views
                 ShowCatchStatsModalAnimation.From = CatchStatsTranslateTransform.Y = ActualHeight;
                 // HACK - somehow binding doesn't work as expected so we manually disable the item if count is 0
                 LaunchPokeballButton.IsEnabled =
-                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectedCaptureItem.Count > 0;
+                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectedCaptureItem.Count > 0;                
             };
         }
 
@@ -79,8 +79,7 @@ namespace PokemonGo_UWP.Views
                     timer.Cancel();
                     pokeballStopped = true;
                     Logger.Write("Missed Pokemon! " + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " +
-                                 ThrowItemPosition.Z);
-                    // TODO: We need to use up a pokeball on the missed throw
+                                 ThrowItemPosition.Z);                    
                 }
 
                 UpdateLoopMutex.ReleaseMutex();
@@ -194,6 +193,7 @@ namespace PokemonGo_UWP.Views
         {
             ViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
             ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchFlee += GameManagerViewModelOnCatchFlee;
             // Add also handlers to enable the button once the animation is done                                    
             CatchEscape.Completed += (s, e) =>
             {
@@ -204,23 +204,35 @@ namespace PokemonGo_UWP.Views
                 PokeballTransform.ScaleY = 1;
                 LaunchPokeballButton.IsEnabled = true;
             };
-        }
+            CatchFlee.Completed += (s, e) =>
+            {
+                // Go back once the animation finishes
+                BootStrapper.Current.NavigationService.GoBack();
+            };
+        }        
 
         private void UnsubscribeToCaptureEvents()
         {
             ViewModel.CatchSuccess -= GameManagerViewModelOnCatchSuccess;
             ViewModel.CatchEscape -= GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchFlee -= GameManagerViewModelOnCatchFlee;
         }
 
-        private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
+        private async void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
         {
-            CatchEscape.Begin();
+            CatchEscape.Begin();                        
+            //TODO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation so the user can try again.
         }
 
         private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
         {
             LaunchPokeballButton.IsEnabled = false;
             ShowCatchStatsModalStoryboard.Begin();
+        }
+
+        private void GameManagerViewModelOnCatchFlee(object sender, EventArgs eventArgs)
+        {
+            CatchFlee.Begin();
         }
 
 

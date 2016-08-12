@@ -1,7 +1,9 @@
 ﻿using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using POGOProtos.Data;
+using POGOProtos.Data.Player;
 using POGOProtos.Enums;
+using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using Template10.Common;
 using Template10.Mvvm;
@@ -92,5 +94,20 @@ namespace PokemonGo_UWP.Entities
         public int FromFort => WrappedData.FromFort;
 
         #endregion
+    }
+
+    public class IncubatedEggDataWrapper : PokemonDataWrapper
+    {
+        private readonly EggIncubator _incubatorData;
+        private readonly double playerWalkedKm;
+        public IncubatedEggDataWrapper(EggIncubator incubatorData, double playerWalkedKm, PokemonData pokemonData) : base(pokemonData)
+        {
+            _incubatorData = incubatorData;
+            this.playerWalkedKm = playerWalkedKm;
+        }
+
+        public new double EggKmWalkedStart => playerWalkedKm - _incubatorData.StartKmWalked;
+
+        //public new double EggKmWalkedTarget => _incubatorData.TargetKmWalked;
     }
 }

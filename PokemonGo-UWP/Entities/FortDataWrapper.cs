@@ -1,8 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using GeoExtensions;
 using Google.Protobuf;
+using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Utils;
+using PokemonGo_UWP.Utils.Game;
 using PokemonGo_UWP.Views;
 using POGOProtos.Enums;
 using POGOProtos.Map.Fort;
@@ -16,6 +20,22 @@ namespace PokemonGo_UWP.Entities
         private FortData _fortData;
 
         private DelegateCommand _trySearchPokestop;
+
+        /// <summary>
+        /// HACK - this should help updating pokestop icon on the map by binding to this
+        /// </summary>
+        public FortDataStatus FortDataStatus {
+            get
+            {
+                var distance = GeoAssist.CalculateDistanceBetweenTwoGeoPoints(Geoposition,
+                GameClient.Geoposition.Coordinate.Point);
+                if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
+                    return FortDataStatus.Closed;
+                return CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime()
+                    ? FortDataStatus.Opened
+                    : FortDataStatus.Cooldown;
+            }
+        }
 
         public FortDataWrapper(FortData fortData)
         {
@@ -48,6 +68,7 @@ namespace PokemonGo_UWP.Entities
         {
             _fortData = update;
 
+            OnPropertyChanged(nameof(FortDataStatus));
             OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Type));
             OnPropertyChanged(nameof(ActiveFortModifier));

@@ -214,9 +214,9 @@
 
                         <TextBlock
                             TextAlignment="Center">
-                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedStart}" />
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.##\}}" />
                             <Run FontWeight="Bold" Text="/" />
-                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedTarget}" />
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
                             <Run FontWeight="Light" Text=" km" />
                         </TextBlock>
                     </StackPanel>
