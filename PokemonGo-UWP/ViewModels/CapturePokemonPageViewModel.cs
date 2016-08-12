@@ -315,7 +315,6 @@ namespace PokemonGo_UWP.ViewModels
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     // We just go back because there's nothing else to do
                     GameClient.ToggleUpdateTimer();
-                    NavigationService.GoBack();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
                     Logger.Write($"We missed {CurrentPokemon.PokemonId}");
