@@ -25,7 +25,7 @@ namespace PokemonGo_UWP.Views
                 ShowCatchStatsModalAnimation.From = CatchStatsTranslateTransform.Y = ActualHeight;
                 // HACK - somehow binding doesn't work as expected so we manually disable the item if count is 0
                 LaunchPokeballButton.IsEnabled =
-                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectedCaptureItem.Count > 0;
+                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectedCaptureItem.Count > 0;                
             };
         }
 
@@ -192,6 +192,7 @@ namespace PokemonGo_UWP.Views
         {
             ViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
             ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchFlee += GameManagerViewModelOnCatchFlee;
             // Add also handlers to enable the button once the animation is done                                    
             CatchEscape.Completed += (s, e) =>
             {
@@ -202,12 +203,13 @@ namespace PokemonGo_UWP.Views
                 PokeballTransform.ScaleY = 1;
                 LaunchPokeballButton.IsEnabled = true;
             };
-        }
+        }        
 
         private void UnsubscribeToCaptureEvents()
         {
             ViewModel.CatchSuccess -= GameManagerViewModelOnCatchSuccess;
             ViewModel.CatchEscape -= GameManagerViewModelOnCatchEscape;
+            ViewModel.CatchFlee -= GameManagerViewModelOnCatchFlee;
         }
 
         private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
@@ -220,6 +222,11 @@ namespace PokemonGo_UWP.Views
         {
             LaunchPokeballButton.IsEnabled = false;
             ShowCatchStatsModalStoryboard.Begin();
+        }
+
+        private void GameManagerViewModelOnCatchFlee(object sender, EventArgs eventArgs)
+        {
+            CatchFlee.Begin();
         }
 
 

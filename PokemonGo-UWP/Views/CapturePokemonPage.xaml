@@ -124,6 +124,17 @@
 
         </Storyboard>
 
+        <Storyboard x:Name="CatchFlee">
+
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="-1000" />
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+
         <Storyboard x:Name="ShowCatchStatsModalStoryboard">
             <DoubleAnimation x:Name="ShowCatchStatsModalAnimation"
                              Storyboard.TargetName="CatchStatsTranslateTransform"

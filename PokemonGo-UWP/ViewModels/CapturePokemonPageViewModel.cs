@@ -311,9 +311,6 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fled");
                     CatchFlee?.Invoke(this, null);
-                    // TODO: animation and navigate back to map page to remove this ugly message
-                    await new MessageDialog(string.Format(Resources.CodeResources.GetString("Fled"),
-                            Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     // We just go back because there's nothing else to do
