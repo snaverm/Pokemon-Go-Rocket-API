@@ -159,6 +159,7 @@
     <Content Include="Assets\Icons\ic_name.png" />
     <Content Include="Assets\Icons\ic_number.png" />
     <Content Include="Assets\Icons\pokestop_far.png" />
+    <Content Include="Assets\Icons\pokestop_far_inactive.png" />
     <Content Include="Assets\Icons\pokestop_near.png" />
     <Content Include="Assets\Icons\pokestop_near_inactive.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
