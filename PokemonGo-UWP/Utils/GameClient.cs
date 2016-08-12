@@ -36,6 +36,7 @@ namespace PokemonGo_UWP.Utils
 
         private static ISettings _clientSettings;
         private static Client _client;
+        private static readonly int _mapUpdateInterval = 10;
 
         /// <summary>
         ///     Handles failures by having a fixed number of retries
@@ -322,12 +323,12 @@ namespace PokemonGo_UWP.Utils
             };
             _mapUpdateTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(10)
+                Interval = TimeSpan.FromSeconds(_mapUpdateInterval)
             };
             _mapUpdateTimer.Tick += async (s, e) =>
             {
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds <= 10) return;
+                if ((DateTime.Now - _lastUpdate).Seconds <= _mapUpdateInterval) return;
                 Logger.Write("Updating map");
                 await UpdateMapObjects();
             };
@@ -355,7 +356,7 @@ namespace PokemonGo_UWP.Utils
             {
                 if (_mapUpdateTimer.IsEnabled) return;
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds > 10)
+                if ((DateTime.Now - _lastUpdate).Seconds > _mapUpdateInterval)
                     await UpdateMapObjects();
                 _mapUpdateTimer.Start();
             }

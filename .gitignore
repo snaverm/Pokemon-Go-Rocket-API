@@ -14,6 +14,7 @@ obj/
 /.vs/config/applicationhost.config
 /PokemonGo-UWP/Utils/ApplicationKeys.cs
 /PokemonGo-UWP/AppPackages/
+/PokemonGo-UWP/BundleArtifacts/
 *.suo
 *.user
 *.tss

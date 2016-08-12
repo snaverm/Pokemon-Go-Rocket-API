@@ -252,9 +252,10 @@ namespace PokemonGo_UWP.ViewModels
         private async Task ThrowPokeball(bool hitPokemon)
         {
             var caughtPokemonResponse =
-                await
-                    GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
+                await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
                         SelectedCaptureItem.ItemId, hitPokemon);
+            var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
+
             switch (caughtPokemonResponse.Status)
             {
                 case CatchPokemonResponse.Types.CatchStatus.CatchError:
@@ -266,19 +267,22 @@ namespace PokemonGo_UWP.ViewModels
                     CurrentCaptureAward = caughtPokemonResponse.CaptureAward;
                     CatchSuccess?.Invoke(this, null);
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
+                    GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
+                    //TO DO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation
+                    //                         so the user can try again.
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fled");
                     CatchFlee?.Invoke(this, null);
                     // TODO: animation and navigate back to map page to remove this ugly message
-                    await
-                        new MessageDialog(string.Format(Resources.CodeResources.GetString("Fled"),
+                    await new MessageDialog(string.Format(Resources.CodeResources.GetString("Fled"),
                             Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
+                    GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     // We just go back because there's nothing else to do
                     NavigationService.GoBack();
                     break;
