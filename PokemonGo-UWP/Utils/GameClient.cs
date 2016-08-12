@@ -22,6 +22,7 @@ using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings;
 using POGOProtos.Settings.Master;
+using Q42.WinRT.Data;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
 
@@ -183,7 +184,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Stores upgrade costs (candy, stardust) per each level
         /// </summary>
-        public static Dictionary<int, object[]> PokemonUpgradeCosts { get; } = new Dictionary<int, object[]>();
+        public static Dictionary<int, object[]> PokemonUpgradeCosts { get; private set; } = new Dictionary<int, object[]>();
 
         #endregion
 
@@ -199,6 +200,9 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient()
         {
+
+            await DataCache.Init();
+
             _clientSettings = new Settings
             {
                 AuthType = SettingsService.Instance.LastLoginService
@@ -324,8 +328,10 @@ namespace PokemonGo_UWP.Utils
                 GeopositionUpdated?.Invoke(null, Geoposition);
             };
             // Before starting we need game settings
-            // TODO: store settings in localsettings and update them only once a month?
-            GameSetting = (await _client.Download.GetSettings()).Settings;
+            GameSetting =
+                await
+                    DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings,
+                        DateTime.Now.AddMonths(1));      
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
@@ -501,19 +507,31 @@ namespace PokemonGo_UWP.Utils
         private static async Task UpdateItemTemplates()
         {
             // Get all the templates
-            var itemTemplates = (await _client.Download.GetItemTemplates()).ItemTemplates;
+            var itemTemplates = await DataCache.GetAsync("itemTemplates", async () => (await _client.Download.GetItemTemplates()).ItemTemplates, DateTime.Now.AddMonths(1));
+
             // Update Pokedex data
-            PokedexExtraData =
-                itemTemplates.Where(
+            PokedexExtraData = await DataCache.GetAsync(nameof(PokedexExtraData), async () =>
+            {
+                await Task.CompletedTask;
+                return itemTemplates.Where(
                     item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset)
                     .Select(item => item.PokemonSettings);
-            // Update Pokemon upgrade templates
-            var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
-            for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+            }, DateTime.Now.AddMonths(1));
+
+            PokemonUpgradeCosts = await DataCache.GetAsync(nameof(PokemonUpgradeCosts), async () =>
             {
-                PokemonUpgradeCosts.Add(i,
-                    new object[] {tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i]});
-            }
+                await Task.CompletedTask;
+                // Update Pokemon upgrade templates
+                var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
+                var tmpResult = new Dictionary<int, object[]>();
+                for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+                {
+                    tmpResult.Add(i,
+                        new object[] { tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i] });
+                }
+                return tmpResult;
+            }, DateTime.Now.AddMonths(1));
+            
         }
 
         /// <summary>

@@ -515,6 +515,9 @@
     <Compile Include="Utils\Helpers\AudioUtils.cs" />
     <Compile Include="Utils\Helpers\CollectionExtensions.cs" />
     <Compile Include="Utils\Game\Converters.cs" />
+    <Compile Include="Utils\Helpers\IStorageHelper.cs" />
+    <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
+    <Compile Include="Utils\Helpers\StorageHelper.cs" />
     <Compile Include="Utils\Signature\DeviceInfos.cs" />
     <Compile Include="Utils\Helpers\ExceptionHandler.cs" />
     <Compile Include="Utils\GameClient.cs" />
