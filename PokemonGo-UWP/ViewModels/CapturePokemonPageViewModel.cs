@@ -28,8 +28,7 @@ namespace PokemonGo_UWP.ViewModels
 
         public CapturePokemonPageViewModel()
         {
-            // Set default item
-            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+            SelectStartingBall();
         }
 
         #endregion
@@ -64,7 +63,7 @@ namespace PokemonGo_UWP.ViewModels
                 Logger.Write($"Catching {CurrentPokemon.PokemonId}");
                 CurrentEncounter =
                     await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
-                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+                SelectStartingBall();
                 Busy.SetBusy(false);
                 if (CurrentEncounter.Status != EncounterResponse.Types.Status.EncounterSuccess)
                 {
@@ -221,6 +220,37 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Selects the first ball based on available items
+        /// </summary>
+        private void SelectStartingBall()
+        {
+            // Set default item (switch to other balls if user has none)            
+            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+            while (SelectedCaptureItem.Count == 0)
+            {
+                switch (SelectedCaptureItem.ItemId)
+                {
+                    case ItemId.ItemPokeBall:
+                        // Try with Greatball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemGreatBall);
+                        break;
+                    case ItemId.ItemGreatBall:
+                        // Try with Ultraball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemUltraBall);
+                        break;
+                    case ItemId.ItemUltraBall:
+                        // Try with Masterball
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemMasterBall);
+                        break;
+                    case ItemId.ItemMasterBall:
+                        // User has no left balls, choose Pokeball to stop him from trying to capture
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
+                        return;
+                }
+            }
+        }
+
         private DelegateCommand<bool> _useSelectedCaptureItem;
 
         /// <summary>
@@ -276,7 +306,7 @@ namespace PokemonGo_UWP.ViewModels
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
-                    CatchEscape?.Invoke(this, null);
+                    CatchEscape?.Invoke(this, null);                    
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
                     Logger.Write($"{CurrentPokemon.PokemonId} fled");
