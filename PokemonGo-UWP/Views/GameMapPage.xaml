@@ -215,7 +215,7 @@
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 Command="{x:Bind TrySearchPokestop}">
                             <Image
-                                Source="{Binding Converter={StaticResource PokestopToIconConverter}}"
+                                Source="{Binding FortDataStatus, Converter={StaticResource PokestopToIconConverter}}"
                                 maps:MapControl.Location="{Binding Geoposition}"
                                 maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                 Stretch="Uniform"

@@ -13,6 +13,7 @@ using GeoExtensions;
 using Google.Protobuf.Collections;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
+using PokemonGo_UWP.Utils.Game;
 using POGOProtos.Data;
 using POGOProtos.Data.Player;
 using POGOProtos.Enums;
@@ -557,13 +558,18 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var pokestop = (FortDataWrapper) value;
-            var distance = GeoAssist.CalculateDistanceBetweenTwoGeoPoints(pokestop.Geoposition,
-                GameClient.Geoposition.Coordinate.Point);
-            if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
-                return new Uri("ms-appx:///Assets/Icons/pokestop_far.png");
-            var mode = pokestop.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() ? "" : "_inactive";
-            return new Uri($"ms-appx:///Assets/Icons/pokestop_near{mode}.png");
+            var fortDataStatus = (FortDataStatus) value;
+            switch (fortDataStatus)
+            {
+                case FortDataStatus.Opened:
+                    return new Uri($"ms-appx:///Assets/Icons/pokestop_near.png");
+                case FortDataStatus.Closed:
+                    return new Uri("ms-appx:///Assets/Icons/pokestop_far.png");
+                case FortDataStatus.Cooldown:
+                    return new Uri($"ms-appx:///Assets/Icons/pokestop_near_inactive.png");                             
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -618,9 +624,7 @@ namespace PokemonGo_UWP.Utils
         {
             if (value == null) return "ms-appx:///Assets/Items/Egg.png";
             var egg = (PokemonDataWrapper) value;
-            return string.IsNullOrEmpty(egg.EggIncubatorId)
-                ? "ms-appx:///Assets/Items/Egg.png"
-                : $"ms-appx:///Assets/Items/E_Item_{(int) GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
+            return string.IsNullOrEmpty(egg.EggIncubatorId) ? "ms-appx:///Assets/Items/Egg.png" : $"ms-appx:///Assets/Items/E_Item_{(int) GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -637,10 +641,9 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-
             if (value == null || !(value is IncubatedEggDataWrapper)) return 0;
-            var pokemon = (IncubatedEggDataWrapper)value;
-            return (int)((pokemon.EggKmWalkedStart / pokemon.EggKmWalkedTarget) * 100);
+            var pokemon = (IncubatedEggDataWrapper) value;
+            return (int) ((pokemon.EggKmWalkedStart/pokemon.EggKmWalkedTarget)*100);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -757,9 +760,7 @@ namespace PokemonGo_UWP.Utils
         // TODO: find a better place for this
         private readonly int[] _xpTable =
         {
-            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
-            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
-            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000, 50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
         };
 
         #region Implementation of IValueConverter
@@ -768,7 +769,7 @@ namespace PokemonGo_UWP.Utils
         {
             var playerStats = (PlayerStats) value;
             //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
-            return playerStats == null ? 0 :_xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
+            return playerStats == null ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -784,9 +785,7 @@ namespace PokemonGo_UWP.Utils
         // TODO: find a better place for this
         private readonly int[] _xpTable =
         {
-            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
-            10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
-            50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
+            0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000, 50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000
         };
 
         #region Implementation of IValueConverter
