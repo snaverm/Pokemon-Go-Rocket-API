@@ -127,24 +127,14 @@
                                        Text="{Binding Key, Converter={StaticResource AchievementTranslationConverter}}"
                                        RelativePanel.AlignHorizontalCenterWithPanel="True"
                                        Foreground="Green" />
-                            <Ellipse Width="60"
-                                     Height="60"
-                                     Stroke="LightGray"
-                                     RelativePanel.Below="AchievementTypeText"
-                                     RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                     StrokeThickness="2.5"
-                                     x:Name="AchievementImage">
-                                <Ellipse.Fill>
-                                    <ImageBrush
-                                        ImageSource="{Binding Converter={StaticResource AchievementValueToMedalImageConverter}}" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <controls:CircularProgressBar Height="60" Width="60" SegmentColor="DeepSkyBlue"
-                                                          Radius="118" StrokeThickness="2"
+                            <controls:CircularProgressBar x:Name="AchievementImage" Height="60" Width="60" SegmentColor="DeepSkyBlue"
+                                                          Diameter="{Binding ActualHeight, ElementName=AchievementImage, Mode=OneWay}" StrokeThickness="2"
                                                           RelativePanel.Below="AchievementTypeText"
                                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
                                                           Maximum="{Binding Converter={StaticResource AchievementNextValueConverter}}"
-                                                          Value="{Binding Value, Converter={StaticResource AchievementValueConverter}}" />
+                                                          Value="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
+                                                          InnerSegmentColor="LightGray"
+                                                          ImageSourcePath="{Binding Converter={StaticResource AchievementValueToMedalImageConverter}}" />
                             <StackPanel Orientation="Horizontal" RelativePanel.AlignHorizontalCenterWithPanel="True"
                                         RelativePanel.Below="AchievementImage" HorizontalAlignment="Center">
                                 <TextBlock Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
