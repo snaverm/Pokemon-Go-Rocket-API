@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -9,22 +6,21 @@ using Windows.UI.Xaml;
 namespace PokemonGo_UWP.Utils
 {
     /// <summary>
-    /// MessageDialog extension methods
+    ///     MessageDialog extension methods
     /// </summary>
     public static class MessageDialogExtensions
     {
-
         private static TaskCompletionSource<MessageDialog> _currentDialogShowRequest;
 
         /// <summary>
-        /// Begins an asynchronous operation showing a dialog.
-        /// If another dialog is already shown using
-        /// ShowAsyncQueueQueue or ShowAsyncQueueIfPossible method - it will wait
-        /// for that previous dialog to be dismissed before showing the new one.
+        ///     Begins an asynchronous operation showing a dialog.
+        ///     If another dialog is already shown using
+        ///     ShowAsyncQueueQueue or ShowAsyncQueueIfPossible method - it will wait
+        ///     for that previous dialog to be dismissed before showing the new one.
         /// </summary>
         /// <param name="dialog">The dialog.</param>
         /// <returns></returns>
-        /// <seealso cref="WinRTXamlToolkit.Controls.Extensions"/>
+        /// <seealso cref="WinRTXamlToolkit.Controls.Extensions" />
         /// <exception cref="System.InvalidOperationException">This method can only be invoked from UI thread.</exception>
         public static async Task<IUICommand> ShowAsyncQueue(this MessageDialog dialog)
         {

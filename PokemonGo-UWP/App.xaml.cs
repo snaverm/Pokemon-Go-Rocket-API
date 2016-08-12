@@ -1,25 +1,21 @@
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation.Metadata;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml.Data;
-using Microsoft.HockeyApp;
-using PokemonGo_UWP.Utils;
-using PokemonGo_UWP.ViewModels;
-using PokemonGo_UWP.Views;
-using Template10.Common;
 using System;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
 using Windows.Phone.Devices.Notification;
-using Windows.System;
 using Windows.System.Display;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Microsoft.HockeyApp;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Logging;
-using Universal_Authenticator_v2.Views;
-using Splash = PokemonGo_UWP.Views.Splash;
+using PokemonGo_UWP.Utils;
+using PokemonGo_UWP.Views;
+using Template10.Common;
 
 namespace PokemonGo_UWP
 {
@@ -28,7 +24,6 @@ namespace PokemonGo_UWP
     [Bindable]
     sealed partial class App : BootStrapper
     {
-
         /// <summary>
         ///     We use it to notify that we found at least one catchable Pokemon in our area
         /// </summary>
@@ -44,11 +39,11 @@ namespace PokemonGo_UWP
 
             // ensure general app exceptions are handled
             Application.Current.UnhandledException += App_UnhandledException;
-  
-            
+
+
             // Init HockeySDK
             if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
-                HockeyClient.Current.Configure(ApplicationKeys.HockeyAppToken);            
+                HockeyClient.Current.Configure(ApplicationKeys.HockeyAppToken);
         }
 
         private static async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -64,15 +59,15 @@ namespace PokemonGo_UWP
             HockeyClient.Current.TrackException(e.Exception);
         }
 
-        #region Notify
+        #region Toast & Notifications
 
         /// <summary>
-        /// Vibrates and/or plays a sound when new pokemons are in the area
+        ///     Vibrates and/or plays a sound when new pokemons are in the area
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
+        /// <param name="e"></param>
         private async void CatchablePokemons_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {            
+        {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             if (SettingsService.Instance.IsVibrationEnabled)
                 _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
@@ -85,7 +80,7 @@ namespace PokemonGo_UWP
         #region Overrides of BootStrapper
 
         /// <summary>
-        /// Disable vibration on suspending
+        ///     Disable vibration on suspending
         /// </summary>
         /// <param name="s"></param>
         /// <param name="e"></param>
@@ -100,17 +95,16 @@ namespace PokemonGo_UWP
         #endregion
 
         /// <summary>
-        /// This runs everytime the app is launched, even after suspension, so we use this to initialize stuff
+        ///     This runs everytime the app is launched, even after suspension, so we use this to initialize stuff
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
-
 #if DEBUG
             // Init logger
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
-#endif          
+#endif
 
             // If we have a phone contract, hide the status bar
             if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
@@ -165,21 +159,23 @@ namespace PokemonGo_UWP
                 var latestUpdateInfo = await UpdateManager.IsUpdateAvailable();
                 if (latestUpdateInfo != null)
                 {
-                    var dialog = new MessageDialog( string.Format(Utils.Resources.CodeResources.GetString("UpdatedVersion"), latestUpdateInfo.version, latestUpdateInfo.description));
+                    var dialog =
+                        new MessageDialog(string.Format(Utils.Resources.CodeResources.GetString("UpdatedVersion"),
+                            latestUpdateInfo.Version, latestUpdateInfo.Description));
 
-                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("YesText")) { Id = 0 });
-                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("NoText")) { Id = 1 });
+                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("YesText")) {Id = 0});
+                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("NoText")) {Id = 1});
                     dialog.DefaultCommandIndex = 0;
                     dialog.CancelCommandIndex = 1;
 
                     var result = await dialog.ShowAsyncQueue();
 
-                    if ((int)result.Id != 0)
+                    if ((int) result.Id != 0)
                         return;
 
                     //continue with execution because we need Busy page working (cannot work on splash screen)
                     //result is irrelevant
-                    Task t1 = UpdateManager.InstallUpdate(latestUpdateInfo.release);
+                    var t1 = UpdateManager.InstallUpdate(latestUpdateInfo.Release);
                 }
             }
             await Task.CompletedTask;

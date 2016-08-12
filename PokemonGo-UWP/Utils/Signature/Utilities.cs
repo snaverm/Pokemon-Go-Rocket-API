@@ -7,25 +7,6 @@ namespace PokemonGo_UWP.Utils
         /// <summary>Provides Random instance</summary>
         public static readonly Random Rand = new Random();
 
-        #region Random Extension methods
-
-        /// <summary>Calculates random value in [0;max], it includes maximum as well</summary>
-        /// <param name="rnd">Random instance</param>
-        /// <param name="max">Maximum, that is also included</param>
-        /// <returns>Returns random value in [0;max]</returns>
-        public static int NextInclusive(this Random rnd, int max) =>
-            rnd.Next(max + 1);
-
-        /// <summary>Calculates random value in [min;max], it includes maximum as well</summary>
-        /// <param name="rnd">Random instance</param>
-        /// <param name="min">Minimum</param>
-        /// <param name="max">Maximum, that is also included</param>
-        /// <returns>Returns random value in [min;max]</returns>
-        public static int NextInclusive(this Random rnd, int min, int max) =>
-            rnd.Next(min, max + 1);
-
-        #endregion Extension methods
-
         /// <summary>Generates random HEX number as string with defined length</summary>
         /// <param name="length">Length of wanted HEX</param>
         /// <returns>Hex number as string</returns>
@@ -62,8 +43,8 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        /// Generic function that clips any IComparable value with min and max.
-        /// Also if min is less than max, it corrects for that automatically
+        ///     Generic function that clips any IComparable value with min and max.
+        ///     Also if min is less than max, it corrects for that automatically
         /// </summary>
         /// <typeparam name="T">Any IComparable type</typeparam>
         /// <param name="value">Input value, that will be clipped</param>
@@ -85,5 +66,24 @@ namespace PokemonGo_UWP.Utils
 
             return value.CompareTo(min) < 0 ? min : (value.CompareTo(max) > 0 ? max : value);
         }
+
+        #region Random Extension methods
+
+        /// <summary>Calculates random value in [0;max], it includes maximum as well</summary>
+        /// <param name="rnd">Random instance</param>
+        /// <param name="max">Maximum, that is also included</param>
+        /// <returns>Returns random value in [0;max]</returns>
+        public static int NextInclusive(this Random rnd, int max) =>
+            rnd.Next(max + 1);
+
+        /// <summary>Calculates random value in [min;max], it includes maximum as well</summary>
+        /// <param name="rnd">Random instance</param>
+        /// <param name="min">Minimum</param>
+        /// <param name="max">Maximum, that is also included</param>
+        /// <returns>Returns random value in [min;max]</returns>
+        public static int NextInclusive(this Random rnd, int min, int max) =>
+            rnd.Next(min, max + 1);
+
+        #endregion Extension methods
     }
 }

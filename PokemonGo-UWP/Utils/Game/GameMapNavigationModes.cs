@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PokemonGo_UWP.ViewModels;
+﻿using PokemonGo_UWP.ViewModels;
 
 namespace PokemonGo_UWP.Utils
 {
     /// <summary>
-    /// We use this enum to tell to <see cref="GameMapPageViewModel"/> what's the action that generated the navigation, so that we can handle it without needing ugly workarounds.
+    ///     We use this enum to tell to <see cref="GameMapPageViewModel" /> what's the action that generated the navigation, so
+    ///     that we can handle it without needing ugly workarounds.
     /// </summary>
     public enum GameMapNavigationModes
     {

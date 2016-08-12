@@ -2,13 +2,10 @@
     x:Class="PokemonGo_UWP.Views.EggDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:PokemonGo_UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -91,7 +88,7 @@
                                           IsItemClickEnabled="True"
                                           HorizontalAlignment="Stretch"
                                           HorizontalContentAlignment="Stretch"
-                                          SelectionMode="None"        
+                                          SelectionMode="None"
                                           ItemClick="ListViewBase_OnItemClick"
                                           Grid.Row="1">
 
@@ -217,9 +214,9 @@
 
                         <TextBlock
                             TextAlignment="Center">
-                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedStart}" />
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.##\}}" />
                             <Run FontWeight="Bold" Text="/" />
-                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedTarget}" />
+                            <Run FontWeight="Bold" Text="{Binding CurrentEgg.EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
                             <Run FontWeight="Light" Text=" km" />
                         </TextBlock>
                     </StackPanel>

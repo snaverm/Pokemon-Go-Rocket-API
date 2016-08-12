@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Extensions;
@@ -21,11 +19,9 @@ namespace PokemonGo_UWP.ViewModels
 {
     public class SearchPokeStopPageViewModel : ViewModelBase
     {
-
         #region Lifecycle Handlers
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="parameter">FortData containing the Pokestop that we're visiting</param>
         /// <param name="mode"></param>
@@ -45,10 +41,11 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Navigating from game page, so we need to actually load the Pokestop                  
                 Busy.SetBusy(true, "Loading Pokestop");
-                CurrentPokestop = (FortDataWrapper)NavigationHelper.NavigationState[nameof(CurrentPokestop)];                
+                CurrentPokestop = (FortDataWrapper) NavigationHelper.NavigationState[nameof(CurrentPokestop)];
                 NavigationHelper.NavigationState.Remove(nameof(CurrentPokestop));
-                Logger.Write($"Searching {CurrentPokestop.Id}");                
-                CurrentPokestopInfo = await GameClient.GetFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
+                Logger.Write($"Searching {CurrentPokestop.Id}");
+                CurrentPokestopInfo =
+                    await GameClient.GetFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
                 Busy.SetBusy(false);
                 // If timeout is expired we can go to to pokestop page          
                 if (CurrentPokestop.CooldownCompleteTimestampMs >= DateTime.UtcNow.ToUnixTime())
@@ -60,7 +57,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Save state before navigating
+        ///     Save state before navigating
         /// </summary>
         /// <param name="suspensionState"></param>
         /// <param name="suspending"></param>
@@ -133,9 +130,9 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Items awarded by Pokestop searching
+        ///     Items awarded by Pokestop searching
         /// </summary>
-        public ObservableCollection<ItemAward> AwardedItems { get; private set; } = new ObservableCollection<ItemAward>();
+        public ObservableCollection<ItemAward> AwardedItems { get; } = new ObservableCollection<ItemAward>();
 
         #endregion
 
@@ -149,10 +146,10 @@ namespace PokemonGo_UWP.ViewModels
         ///     Going back to map page
         /// </summary>
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
-            _returnToGameScreen = new DelegateCommand(() =>
-            {
-                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokestopUpdate);
-            }, () => true)
+            _returnToGameScreen =
+                new DelegateCommand(
+                    () => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokestopUpdate); },
+                    () => true)
             );
 
         private DelegateCommand _abandonPokestop;
@@ -163,6 +160,8 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand AbandonPokestop => _abandonPokestop ?? (
             _abandonPokestop = new DelegateCommand(() =>
             {
+                // Re-enable update timer
+                GameClient.ToggleUpdateTimer();
                 NavigationService.GoBack();
             }, () => true)
             );
@@ -193,7 +192,7 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public event EventHandler SearchInventoryFull;
 
-        #endregion        
+        #endregion
 
         private DelegateCommand _searchCurrentPokestop;
 
@@ -206,8 +205,8 @@ namespace PokemonGo_UWP.ViewModels
                 Busy.SetBusy(true, "Searching PokeStop");
                 Logger.Write($"Searching {CurrentPokestopInfo.Name} [ID = {CurrentPokestop.Id}]");
                 CurrentSearchResponse =
-                    await GameClient.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);                
-                Busy.SetBusy(false);                                
+                    await GameClient.SearchFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
+                Busy.SetBusy(false);
                 switch (CurrentSearchResponse.Result)
                 {
                     case FortSearchResponse.Types.Result.NoResultSet:
@@ -221,8 +220,12 @@ namespace PokemonGo_UWP.ViewModels
                         foreach (var tmpAwardedItem in tmpAwardedItems)
                         {
                             var tmpItem = tmpAwardedItem.GroupBy(item => item.ItemId);
-                            AwardedItems.Add(new ItemAward() { ItemId = tmpItem.First().First().ItemId, ItemCount = tmpItem.First().Count() });
-                        }                        
+                            AwardedItems.Add(new ItemAward
+                            {
+                                ItemId = tmpItem.First().First().ItemId,
+                                ItemCount = tmpItem.First().Count()
+                            });
+                        }
                         SearchSuccess?.Invoke(this, null);
                         await GameClient.UpdateInventory();
                         break;
@@ -249,6 +252,5 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #endregion
-
     }
 }

@@ -8,7 +8,8 @@ namespace PokemonGo_UWP.Utils
 {
     public static class CollectionExtensions
     {
-        public static void UpdateWith<T, T1>(this ICollection<T> destination, IReadOnlyCollection<T1> updates, Func<T1, T> createFunc, Func<T, T1, bool> compareFunc)
+        public static void UpdateWith<T, T1>(this ICollection<T> destination, IReadOnlyCollection<T1> updates,
+            Func<T1, T> createFunc, Func<T, T1, bool> compareFunc)
             where T : IUpdatable<T1>
         {
             // delete items that no longer exist in the destination collection
@@ -33,7 +34,8 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
-        public static void UpdateByIndexWith<T, T1>(this IList<T> destination, IReadOnlyList<T1> updates, Func<T1, T> createFunc)
+        public static void UpdateByIndexWith<T, T1>(this IList<T> destination, IReadOnlyList<T1> updates,
+            Func<T1, T> createFunc)
             where T : IUpdatable<T1>
         {
             // we update the existing collection by index
