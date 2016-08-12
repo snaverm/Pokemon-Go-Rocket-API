@@ -315,11 +315,19 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += (s, e) =>
+            _geolocator.PositionChanged += async (s, e) =>
             {
                 Geoposition = e.Position;
+                // Updating player's position
+                var position = Geoposition.Coordinate.Point.Position;
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
                 GeopositionUpdated?.Invoke(null, Geoposition);
             };
+            // Before starting we need game settings
+            // TODO: store settings in localsettings and update them only once a month?
+            GameSetting = (await _client.Download.GetSettings()).Settings;
+            // Update geolocator settings based on server
+            _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
@@ -327,13 +335,13 @@ namespace PokemonGo_UWP.Utils
             _mapUpdateTimer.Tick += async (s, e) =>
             {
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds <= GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds) return;
+                if ((DateTime.Now - _lastUpdate).Seconds <= GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
+                    return;
                 Logger.Write("Updating map");
                 await UpdateMapObjects();
             };
             // Update before starting timer            
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
-            GameSetting = (await _client.Download.GetSettings()).Settings;
             await UpdateMapObjects();
             await UpdateInventory();
             await UpdateItemTemplates();
@@ -415,10 +423,6 @@ namespace PokemonGo_UWP.Utils
                         <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            // Sends the updated position to the client
-            await
-                _client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
-                    geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);
             return await _client.Map.GetMapObjects();
         }
 
