@@ -79,11 +79,7 @@ namespace PokemonGo_UWP.ViewModels
         public int ItemsTotalCount
         {
             get { return _itemsTotalCount; }
-            private set
-            {
-                _itemsTotalCount = value;
-                RaisePropertyChanged();
-            }
+            private set { Set(ref _itemsTotalCount, value); }
         }
 
         #endregion
