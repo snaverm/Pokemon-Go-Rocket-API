@@ -213,8 +213,7 @@ namespace PokemonGo_UWP.Views
         private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
         {
             CatchEscape.Begin();
-            //TO DO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation
-            //                         so the user can try again.
+            //TODO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation so the user can try again.
         }
 
         private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)

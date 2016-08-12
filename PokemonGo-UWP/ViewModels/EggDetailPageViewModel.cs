@@ -134,8 +134,7 @@ namespace PokemonGo_UWP.ViewModels
         public event EventHandler IncubatorSuccess;
 
         #endregion
-
-        // TODO: disable button visibility ig egg has already an incubator        
+        
         private DelegateCommand<EggIncubator> _useIncubatorCommand;
 
         public DelegateCommand<EggIncubator> UseIncubatorCommand => _useIncubatorCommand ?? (
@@ -150,8 +149,7 @@ namespace PokemonGo_UWP.ViewModels
                         CurrentEgg =
                             new PokemonDataWrapper(GameClient.EggsInventory.First(item => item.Id == CurrentEgg.Id));
                         break;
-                    default:
-                        // TODO: user can only use one unlimited incubator at the same time, so we need to hide it 
+                    default:                        
                         Logger.Write($"Error using {incubator.Id} on {CurrentEgg.Id}");
                         break;
                 }
