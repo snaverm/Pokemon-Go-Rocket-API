@@ -191,7 +191,12 @@ namespace PokemonGo_UWP.ViewModels
         ///     Going back to map page
         /// </summary>
         public DelegateCommand EscapeEncounterCommand => _escapeEncounterCommand ?? (
-            _escapeEncounterCommand = new DelegateCommand(() => { NavigationService.GoBack(); }, () => true));
+            _escapeEncounterCommand = new DelegateCommand(() =>
+            {
+                // Re-enable update timer
+                GameClient.ToggleUpdateTimer();
+                NavigationService.GoBack();
+            }, () => true));
 
         #endregion
 
@@ -282,6 +287,7 @@ namespace PokemonGo_UWP.ViewModels
                     GameClient.CatchablePokemons.Remove(CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
                     // We just go back because there's nothing else to do
+                    GameClient.ToggleUpdateTimer();
                     NavigationService.GoBack();
                     break;
                 case CatchPokemonResponse.Types.CatchStatus.CatchMissed:

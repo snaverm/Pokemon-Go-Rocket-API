@@ -67,7 +67,8 @@ namespace PokemonGo_UWP.ViewModels
                     await UpdatePlayerData();
                     break;
                 case GameMapNavigationModes.PokemonUpdate:
-                    // As above + check for level up         
+                    // As above + check for level up   
+                    GameClient.ToggleUpdateTimer();
                     await UpdatePlayerData(true);
                     break;
                 default:
