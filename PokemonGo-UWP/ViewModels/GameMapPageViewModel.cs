@@ -263,6 +263,18 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Items
+
+        private DelegateCommand _gotoItemsInventoryPage;
+
+        public DelegateCommand GotoItemsInventoryPageCommand
+            =>
+                _gotoItemsInventoryPage ??
+                (_gotoItemsInventoryPage =
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(ItemsInventoryPage), true); }));
+
+        #endregion
+
         #region Pokedex
 
         private DelegateCommand _gotoPlayerProfilePage;
