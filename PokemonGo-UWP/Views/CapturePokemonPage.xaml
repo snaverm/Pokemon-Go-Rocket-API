@@ -7,7 +7,6 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
-    xmlns:controls="using:Template10.Controls"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -495,7 +494,7 @@
                 Margin="8"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
-                Command="{Binding ReturnToGameScreen}"
+                Command="{Binding EscapeEncounterCommand}"
                 x:Name="EscapeEncounterButton">
             <Image Source="../Assets/Buttons/btn_run_away.png"
                    Stretch="Uniform"

@@ -9,11 +9,11 @@
         uint Floor { get; }
         ulong LocationType { get; }
         ulong ProviderStatus { get; }
-
     }
+
     public interface IDeviceInfo
     {
-        ulong AccelerometerAxes { get;}
+        ulong AccelerometerAxes { get; }
         double AccelRawX { get; }
         double AccelRawY { get; }
         double AccelRawZ { get; }

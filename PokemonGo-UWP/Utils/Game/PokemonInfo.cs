@@ -9,7 +9,7 @@ using POGOProtos.Settings.Master;
 namespace PokemonGo_UWP.Utils
 {
     /// <summary>
-    ///     <see cref="https://github.com/NECROBOTIO/NecroBot/blob/master/PoGo.NecroBot.Logic/PoGoUtils/PokemonInfo.cs" />
+    ///     <seealso cref="https://github.com/NECROBOTIO/NecroBot/blob/master/PoGo.NecroBot.Logic/PoGoUtils/PokemonInfo.cs" />
     /// </summary>
     public struct BaseStats
     {
@@ -582,11 +582,11 @@ namespace PokemonGo_UWP.Utils
             return move2;
         }
 
-        public static int GetCandy(PokemonData pokemon, List<Candy> PokemonFamilies,
-            IEnumerable<PokemonSettings> PokemonSettings)
+        public static int GetCandy(PokemonData pokemon, List<Candy> pokemonFamilies,
+            IEnumerable<PokemonSettings> pokemonSettings)
         {
-            var setting = PokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
-            var family = PokemonFamilies.FirstOrDefault(q => setting != null && q.FamilyId.Equals(setting.FamilyId));
+            var setting = pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
+            var family = pokemonFamilies.FirstOrDefault(q => setting != null && q.FamilyId.Equals(setting.FamilyId));
 
             return family.Candy_;
         }
