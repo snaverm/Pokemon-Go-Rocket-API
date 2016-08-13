@@ -20,16 +20,17 @@ namespace PokemonGo_UWP.Utils
         ///     A <see cref="List{string}"/> containing the URLs to use for the tile images. May be app-relative or internet URLs.
         /// </param>
         /// <returns>A populated <see cref="TileContent"/> object suitable for submitting to a TileUpdateManager.</returns>
+        /// <remarks>https://msdn.microsoft.com/windows/uwp/controls-and-patterns/tiles-and-notifications-special-tile-templates-catalog</remarks>
         public static TileContent GetPeopleTile(List<string> urls)
         {
             var tile = GetTile();
 
             // Recommended to use 9 photos on Medium
-            tile.Visual.TileMedium = GetPeopleBinding(urls, 9);
+            tile.Visual.TileMedium = GetPeopleBinding(urls, 12);
             // Recommended to use 15 photos on Wide
-            tile.Visual.TileWide = GetPeopleBinding(urls, 15);
+            tile.Visual.TileWide = GetPeopleBinding(urls, 18);
             // Recommended to use 20 photos on Large
-            tile.Visual.TileLarge = GetPeopleBinding(urls, 20);
+            tile.Visual.TileLarge = GetPeopleBinding(urls, 28);
 
             return tile;
         }
@@ -41,6 +42,7 @@ namespace PokemonGo_UWP.Utils
         ///     A <see cref="List{string}"/> containing the URLs to use for the tile images. May be app-relative or internet URLs.
         /// </param>
         /// <returns>A populated <see cref="TileContent"/> object suitable for submitting to a TileUpdateManager.</returns>
+        /// <remarks>https://msdn.microsoft.com/windows/uwp/controls-and-patterns/tiles-and-notifications-special-tile-templates-catalog</remarks>
         public static TileContent GetPhotosTile(List<string> urls)
         {
             var tile = GetTile();
@@ -81,12 +83,12 @@ namespace PokemonGo_UWP.Utils
         /// </param>
         /// <param name="maxCount">The maximum number of images to use for this particular binding size.</param>
         /// <returns></returns>
-        private static TileBinding GetPeopleBinding(List<string> urls, int maxCount = 0)
+        private static TileBinding GetPeopleBinding(List<string> urls, int maxCount = 25)
         {
 
             var content = new TileBindingContentPeople();
 
-            foreach (var url in urls)
+            foreach (var url in urls.Take(maxCount))
             {
                 content.Images.Add(new TileImageSource(url));
             }
