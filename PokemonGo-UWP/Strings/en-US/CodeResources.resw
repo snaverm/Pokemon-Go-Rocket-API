@@ -210,13 +210,13 @@ Open page with installation files for manual install?</value>
     <value>Unknown</value>
   </data>
   <data name="ActivityCatchPokemon" xml:space="preserve">
-    <value>Catch Pokémon</value>
+    <value>Pokémon Caught!</value>
   </data>
   <data name="ActivityCatchLegendPokemon" xml:space="preserve">
     <value>Catch Legend Pokémon</value>
   </data>
   <data name="ActivityFleePokemon" xml:space="preserve">
-    <value>Flee Pokémon</value>
+    <value>Pokémon Fled</value>
   </data>
   <data name="ActivityDefeatFort" xml:space="preserve">
     <value>Defeat Fort</value>
@@ -225,31 +225,31 @@ Open page with installation files for manual install?</value>
     <value>Evolve Pokémon</value>
   </data>
   <data name="ActivityHatchEgg" xml:space="preserve">
-    <value>Hatch Egg</value>
+    <value>Egg Hatched!</value>
   </data>
   <data name="WalkKm" xml:space="preserve">
     <value>Walk Km</value>
   </data>
   <data name="PokedexEntryNew" xml:space="preserve">
-    <value>Pokedex Entry New</value>
+    <value>New Pokémon Found!</value>
   </data>
   <data name="ActivityCatchFirstThrow" xml:space="preserve">
     <value>Catch First Throw</value>
   </data>
   <data name="ActivityCatchNiceThrow" xml:space="preserve">
-    <value>Catch Nice Throw</value>
+    <value>Nice Throw!</value>
   </data>
   <data name="ActivityCatchGreatThrow" xml:space="preserve">
-    <value>Catch Great Throw</value>
+    <value>Great Throw!</value>
   </data>
   <data name="ActivityCatchExcellentThrow" xml:space="preserve">
-    <value>Catch Excellent Throw</value>
+    <value>Excellent Throw</value>
   </data>
   <data name="ActivityCatchCurveball" xml:space="preserve">
-    <value>Catch Curveball</value>
+    <value>Curveball</value>
   </data>
   <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
-    <value>First Catch of day</value>
+    <value>First Catch of Day!</value>
   </data>
   <data name="ActivityCatchMilestone" xml:space="preserve">
     <value>Catch Milestone</value>
