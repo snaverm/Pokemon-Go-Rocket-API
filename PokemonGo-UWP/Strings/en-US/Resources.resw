@@ -130,7 +130,7 @@
     <value>LOGIN with PTC Account</value>
   </data>
   <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
-    <value>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</value>
+    <value>To login, enter your Username/Email and Password above. If you don't trust this app, please close it now. Niantic may ban you for using this app. Use at your own risk.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
     <value>nearby</value>
@@ -142,7 +142,7 @@
     <value>Password</value>
   </data>
   <data name="LoginUsernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Username/email</value>
+    <value>Username / Email</value>
   </data>
   <data name="ExperienceTextBlock.Text" xml:space="preserve">
     <value>XP</value>
