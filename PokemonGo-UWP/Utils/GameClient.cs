@@ -229,11 +229,11 @@ namespace PokemonGo_UWP.Utils
             }
             catch (Exception e)
             {
-                if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
-                {
-                    await GameClient.Relogin();
-                }
-                else throw;
+                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
+                 {
+                     await Relogin();
+                 }
+                 else throw;
             }
         }
     public static async Task<bool> Relogin()

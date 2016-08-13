@@ -138,6 +138,9 @@
   <data name="GoogleNotRespondingText" xml:space="preserve">
     <value>Google is not responding, please try again later.</value>
   </data>
+  <data name="LoginExpired" xml:space="preserve">
+    <value>Previous login expired.</value>
+  </data>
   <data name="LoadingEncounterText" xml:space="preserve">
     <value>Loading encounter with {0}</value>
   </data>
