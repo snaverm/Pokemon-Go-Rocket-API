@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Google.Common.Geometry;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using POGOProtos.Data;
@@ -44,7 +45,7 @@ namespace PokemonGo_UWP.ViewModels
             else
             {
                 // Navigating from inventory page so we need to load the pokemon               
-                CurrentPokemon = (PokemonDataWrapper) NavigationHelper.NavigationState[nameof(CurrentPokemon)];
+                CurrentPokemon = (PokemonDataWrapper) NavigationHelper.NavigationState[nameof(CurrentPokemon)];                
                 UpdateCurrentData();
             }
             await Task.CompletedTask;
@@ -119,6 +120,21 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Bindable Game Vars
+
+        /// <summary>
+        ///     Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
+        /// </summary>
+        public string MapServiceToken => ApplicationKeys.MapServiceToken;
+
+        public ElementTheme CurrentTheme
+        {
+            get
+            {
+                // Set theme
+                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+                return currentTime > 7 && currentTime < 19 ? ElementTheme.Light : ElementTheme.Dark;
+            }
+        }
 
         /// <summary>
         ///     Pokemon that we're trying to capture
@@ -237,7 +253,7 @@ namespace PokemonGo_UWP.ViewModels
                     Convert.ToInt32(Math.Round(PokemonInfo.GetLevel(CurrentPokemon.WrappedData)) - 1)];
             CandiesToPowerUp = Convert.ToInt32(upgradeCosts[0]);
             StardustToPowerUp = Convert.ToInt32(upgradeCosts[1]);
-            PokemonExtraData = GameClient.PokedexExtraData.FirstOrDefault(item => item.PokemonId == CurrentPokemon.PokemonId);            
+            PokemonExtraData = GameClient.GetExtraDataForPokemon(CurrentPokemon.PokemonId);            
             CurrentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == PokemonExtraData.FamilyId);
             RaisePropertyChanged(() => PokemonExtraData);
         }
@@ -261,15 +277,27 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _transferPokemonCommand;
 
         public DelegateCommand TransferPokemonCommand => _transferPokemonCommand ?? (
-          _transferPokemonCommand = new DelegateCommand(() =>
+          _transferPokemonCommand = new DelegateCommand(async () =>
           {
-              //var pk = CurrentPokemon;
-              //var mes = await GameClient.TransferPokemon(pk.Id);
-              //MessageDialog mes1 = new MessageDialog(mes.Result.ToString());
-              //await mes1.ShowAsync();
-              //await GameClient.UpdateInventory();
-              //NavigationHelper.NavigationState["CurrentPokemon"] = CurrentPokemon;
-              //BootStrapper.Current.NavigationService.Navigate(typeof(PokemonView), true);
+              var mes = await GameClient.TransferPokemon(CurrentPokemon.Id);
+              switch (mes.Result)
+              {
+                  case ReleasePokemonResponse.Types.Result.Unset:
+                      break;
+                  case ReleasePokemonResponse.Types.Result.Success:
+                      // TODO: candy awarded message
+                      // TODO: leave page and update inventory on OK   
+                      break;
+                  // TODO: what to do on error?
+                  case ReleasePokemonResponse.Types.Result.PokemonDeployed:
+                      break;
+                  case ReleasePokemonResponse.Types.Result.Failed:
+                      break;
+                  case ReleasePokemonResponse.Types.Result.ErrorPokemonIsEgg:
+                      break;
+                  default:
+                      throw new ArgumentOutOfRangeException();
+              }                  
           }, () => true));
 
         #endregion
@@ -278,35 +306,34 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _powerUpPokemonCommand;
 
-        public DelegateCommand PowerUpPokemonCommand => _powerUpPokemonCommand ?? (
-          _powerUpPokemonCommand = new DelegateCommand(async () =>
-          {
-              // Send power up request
-              var res = await GameClient.PowerUpPokemon(CurrentPokemon.WrappedData);              
-              switch (res.Result)
-              {
-                  case UpgradePokemonResponse.Types.Result.Unset:
-                      break;
-                  case UpgradePokemonResponse.Types.Result.Success:
-                      // Reload updated data
-                      CurrentPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
-                      await GameClient.UpdateInventory();
-                      await GameClient.UpdateProfile();
-                      UpdateCurrentData();
-                      break;
-                  // TODO: do something if we have an error!
-                  case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
-                      break;
-                  case UpgradePokemonResponse.Types.Result.ErrorInsufficientResources:
-                      break;
-                  case UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable:
-                      break;
-                  case UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed:
-                      break;
-                  default:
-                      throw new ArgumentOutOfRangeException();
-              }
-          }, () => StardustAmount >= StardustToPowerUp));
+        public DelegateCommand PowerUpPokemonCommand => _powerUpPokemonCommand ?? (_powerUpPokemonCommand = new DelegateCommand(async () =>
+        {
+            // Send power up request
+            var res = await GameClient.PowerUpPokemon(CurrentPokemon.WrappedData);
+            switch (res.Result)
+            {
+                case UpgradePokemonResponse.Types.Result.Unset:
+                    break;
+                case UpgradePokemonResponse.Types.Result.Success:
+                    // Reload updated data
+                    CurrentPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
+                    await GameClient.UpdateInventory();
+                    await GameClient.UpdateProfile();
+                    UpdateCurrentData();
+                    break;
+                // TODO: do something if we have an error!
+                case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
+                    break;
+                case UpgradePokemonResponse.Types.Result.ErrorInsufficientResources:
+                    break;
+                case UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable:
+                    break;
+                case UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }, () => StardustAmount >= StardustToPowerUp));
 
         #endregion
 
@@ -321,16 +348,16 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _evolvePokemonCommand;
 
         public DelegateCommand EvolvePokemonCommand => _evolvePokemonCommand ?? (_evolvePokemonCommand = new DelegateCommand(async () =>
-        {                                 
-            EvolvePokemonResponse = await GameClient.EvolvePokemon(CurrentPokemon.WrappedData);            
+        {
+            EvolvePokemonResponse = await GameClient.EvolvePokemon(CurrentPokemon.WrappedData);
             switch (EvolvePokemonResponse.Result)
             {
                 case EvolvePokemonResponse.Types.Result.Unset:
                     break;
                 case EvolvePokemonResponse.Types.Result.Success:
-                    PokemonEvolved?.Invoke(this, null);                    
+                    PokemonEvolved?.Invoke(this, null);
                     await GameClient.UpdateInventory();
-                    await GameClient.UpdateProfile();                 
+                    await GameClient.UpdateProfile();
                     break;
                 // TODO: do something if we have an error!
                 case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
@@ -348,8 +375,7 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _replaceEvolvedPokemonCommand;
 
-        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (_replaceEvolvedPokemonCommand = new DelegateCommand(
-            () =>
+        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (_replaceEvolvedPokemonCommand = new DelegateCommand(() =>
         {
             CurrentPokemon = new PokemonDataWrapper(EvolvePokemonResponse.EvolvedPokemonData);
             UpdateCurrentData();
