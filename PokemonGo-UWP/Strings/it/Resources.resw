@@ -159,6 +159,9 @@
   <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Musica</value>
   </data>
+  <data name="PokemonTextBlock.Text" xml:space="preserve">
+    <value>POKÉMON</value>
+  </data>
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>IMPOSTAZIONI</value>
   </data>
