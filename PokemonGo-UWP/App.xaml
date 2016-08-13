@@ -55,6 +55,8 @@
             <utils:PokemonDataToLevelBarConverter x:Key="PokemonDataToLevelBarConverter"/>
             <utils:PokemonFamilyToCandyImageConverter x:Key="PokemonFamilyToCandyImageConverter"/>
             <utils:PokemonFamilyNameToStringConverter x:Key="PokemonFamilyNameToStringConverter"/>
+            <utils:PokemonDataStardustPowerUpCostConverter x:Key="PokemonDataStardustPowerUpCostConverter"/>
+            <utils:PokemonDataCandyPowerUpCostConverter x:Key="PokemonDataCandyPowerUpCostConverter"/>
 
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>
