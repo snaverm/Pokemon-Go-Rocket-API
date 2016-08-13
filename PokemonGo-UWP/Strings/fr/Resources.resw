@@ -22,7 +22,7 @@
     <value>Connexion avec un compte PTC</value>
   </data>
   <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
-    <value>Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faite pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</value>
+    <value>Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faites pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
     <value>proche</value>

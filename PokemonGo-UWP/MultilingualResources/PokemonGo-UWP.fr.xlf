@@ -64,7 +64,7 @@
         </trans-unit>
         <trans-unit id="Fairy" translate="yes" xml:space="preserve">
           <source>Fairy Tale Girl</source>
-          <target state="translated">Fillette de comte</target>
+          <target state="translated">Fillette de conte</target>
         </trans-unit>
         <trans-unit id="Fighting" translate="yes" xml:space="preserve">
           <source>Black Belt</source>
@@ -173,7 +173,7 @@
         </trans-unit>
         <trans-unit id="NoGpsPermissionsText" translate="yes" xml:space="preserve">
           <source>We need GPS permissions to run the game, please enable it and try again.</source>
-          <target state="translated">Nous avons besoin de l'autorisation d'accés au GPS pour faire fonctionner le jeu, activez le et réessayer.</target>
+          <target state="translated">Nous avons besoin de l'autorisation d'accès au GPS pour faire fonctionner le jeu, activez le et réessayer.</target>
         </trans-unit>
         <trans-unit id="PokemonRanAwayText" translate="yes" xml:space="preserve">
           <source>Pokemon ran away, sorry :(</source>
@@ -185,7 +185,7 @@
         </trans-unit>
         <trans-unit id="SomethingWentWrongText" translate="yes" xml:space="preserve">
           <source>Something went wrong and app may be unstable now. Do you want to logout and try again?</source>
-          <target state="translated">Quelque chose s'est mal passé et l'application peut être instable. Voule-vous vous déconnecter et recommencer?</target>
+          <target state="translated">Quelque chose s'est mal passé et l'application peut être instable. Voulez-vous vous déconnecter et recommencer?</target>
         </trans-unit>
         <trans-unit id="TimeFormat" translate="yes" xml:space="preserve">
           <source>hh:mm tt</source>
@@ -270,7 +270,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
         </trans-unit>
         <trans-unit id="LoginDisclaimerTextBox.Text" translate="yes" xml:space="preserve">
           <source>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</source>
-          <target state="translated">Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faite pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</target>
+          <target state="translated">Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faites pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</target>
         </trans-unit>
         <trans-unit id="NearbyPokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>nearby</source>
@@ -473,7 +473,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
         </trans-unit>
         <trans-unit id="D_ItemRevive" translate="yes" xml:space="preserve">
           <source>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</source>
-          <target state="translated">Un médicament qui peut réanimer un Pokémon évanoui . Il restaure également la moitié des HP maximum du Pokémon évanoui.</target>
+          <target state="translated">Un médicament qui peut réanimer un Pokémon évanoui. Il restaure également la moitié des PV maximum du Pokémon évanoui.</target>
         </trans-unit>
         <trans-unit id="D_ItemUltraBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
@@ -493,7 +493,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
           <source>Incense Cool</source>
-          <target state="translated">Encens raffraichissant</target>
+          <target state="translated">Encens rafraichissant</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
           <source>Incense Floral</source>
@@ -509,11 +509,11 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>Incubator Basic</source>
-          <target state="translated">Incubateur Basic</target>
+          <target state="translated">Incubateur Basique</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
           <source>Incubator Basic Unlimited</source>
-          <target state="translated">Incubateur Basic Illimité</target>
+          <target state="translated">Incubateur Basique Illimité</target>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
@@ -593,7 +593,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
         </trans-unit>
         <trans-unit id="ItemXDefense" translate="yes" xml:space="preserve">
           <source>X Defense</source>
-          <target state="translated">X Defense</target>
+          <target state="translated">X Défense</target>
         </trans-unit>
         <trans-unit id="ItemXMiracle" translate="yes" xml:space="preserve">
           <source>X Miracle</source>

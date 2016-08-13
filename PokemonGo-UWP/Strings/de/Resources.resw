@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CooldownTextBlock.Text" xml:space="preserve">
-    <value>Sie müssen leider etwas Warten</value>
+    <value>Du musst leider etwas warten.</value>
   </data>
   <data name="GoogleLoginTextBlock.Text" xml:space="preserve">
     <value>GOOGLE</value>
@@ -25,19 +25,19 @@
     <value>LOGIN mit PTC Account</value>
   </data>
   <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
-    <value>Um dich einzuloggen musst du deinen Benutzername/eMail und Passwort eingeben. Wenn du der App nicht vertraust solltest du sie jetzt schließen. Wir sind nicht für alles verantwortlich.</value>
+    <value>Um dich einzuloggen, musst du deinen Benutzername/eMail und Passwort eingeben. Wenn du der App nicht vertraust, solltest du sie jetzt schließen. Wir sind nicht für alles verantwortlich.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
     <value>in der Nähe</value>
   </data>
   <data name="OutOfRangeTextBlock.Text" xml:space="preserve">
-    <value>Du bist zu weit entfernt</value>
+    <value>Du bist zu weit entfernt.</value>
   </data>
   <data name="LoginPasswordPasswordBox.PlaceholderText" xml:space="preserve">
     <value>Passwort</value>
   </data>
   <data name="LoginUsernameTextBox.PlaceholderText" xml:space="preserve">
-    <value>Benutzername/eMail</value>
+    <value>Benutzername/Email</value>
   </data>
   <data name="ExperienceTextBlock.Text" xml:space="preserve">
     <value>EP</value>
@@ -101,6 +101,6 @@
     <value>BEGINN</value>
   </data>
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
-    <value>INCUBATOREN</value>
+    <value>Brutmaschine</value>
   </data>
 </root>
