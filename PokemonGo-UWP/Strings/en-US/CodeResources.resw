@@ -197,4 +197,10 @@ Open page with installation files for manual install?</value>
   <data name="MysticTeamText" xml:space="preserve">
     <value>Mystic</value>
   </data>
+  <data name="TransferPokemonSuccessText" xml:space="preserve">
+    <value>Transfer succeeded! Got a {0} Candy from the Professor.</value>
+  </data>
+  <data name="TransferPokemonWarningText" xml:space="preserve">
+    <value>You can't take it back after it's transferred to the Professor. Do you really want to transfer {0} to the Professor?</value>
+  </data>
 </root>

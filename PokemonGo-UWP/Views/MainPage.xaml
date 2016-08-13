@@ -41,9 +41,9 @@
                              Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox x:Name="RememberMeCheckBox"
                           x:Uid="RememberMeCheckBox"
+                          IsChecked="{Binding RememberLoginData}"
                           Margin="15,20,15,0">
-                    <TextBlock x:Uid="RememberMeTextBlock"
-                               Text="REMEMBER ME" />
+                    <TextBlock x:Uid="RememberMeTextBlock" />
                 </CheckBox>
                 <Button x:Name="PtcLoginButton"
                         Style="{StaticResource ButtonSubmit}"

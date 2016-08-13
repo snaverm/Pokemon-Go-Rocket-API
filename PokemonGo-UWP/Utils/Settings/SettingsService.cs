@@ -25,6 +25,12 @@ namespace PokemonGo_UWP.Utils
 
         #region Login & Authentication
 
+        public bool RememberLoginData
+        {
+            get { return _helper.Read(nameof(RememberLoginData), false); }
+            set { _helper.Write(nameof(RememberLoginData), value); }
+        }
+
         public string Udid
         {
             get { return _helper.Read(nameof(Udid), string.Empty); }
