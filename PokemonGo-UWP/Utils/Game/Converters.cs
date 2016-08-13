@@ -114,44 +114,6 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PokemonDataStardustPowerUpCostConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value == null) return 0;
-            var pokemonData = (PokemonDataWrapper)value;            
-            return GameClient.PokemonUpgradeCosts[System.Convert.ToInt32(Math.Round(PokemonInfo.GetLevel(pokemonData.WrappedData)) - 1)][1];
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
-    public class PokemonDataCandyPowerUpCostConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value == null) return 0;
-            var pokemonData = (PokemonDataWrapper)value;
-            return GameClient.PokemonUpgradeCosts[System.Convert.ToInt32(Math.Round(PokemonInfo.GetLevel(pokemonData.WrappedData)) - 1)][0];
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     public class PokemonDataToLevelBarConverter : IValueConverter
     {
         #region Implementation of IValueConverter

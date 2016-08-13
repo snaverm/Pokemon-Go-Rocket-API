@@ -665,6 +665,30 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
 
+        #region Power Up & Evolving
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pokemon"></param>
+        /// <returns></returns>
+        public static async Task<UpgradePokemonResponse> PowerUpPokemon(PokemonData pokemon)
+        {
+            return await _client.Inventory.UpgradePokemon(pokemon.Id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pokemon"></param>
+        /// <returns></returns>
+        public static async Task<EvolvePokemonResponse> EvolvePokemon(PokemonData pokemon)
+        {
+            return await _client.Inventory.EvolvePokemon(pokemon.Id);
+        }
+
+        #endregion
+
         #endregion
 
         #region Pokestop Handling

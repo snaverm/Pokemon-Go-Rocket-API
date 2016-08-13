@@ -55,8 +55,6 @@
             <utils:PokemonDataToLevelBarConverter x:Key="PokemonDataToLevelBarConverter"/>
             <utils:PokemonFamilyToCandyImageConverter x:Key="PokemonFamilyToCandyImageConverter"/>
             <utils:PokemonFamilyNameToStringConverter x:Key="PokemonFamilyNameToStringConverter"/>
-            <utils:PokemonDataStardustPowerUpCostConverter x:Key="PokemonDataStardustPowerUpCostConverter"/>
-            <utils:PokemonDataCandyPowerUpCostConverter x:Key="PokemonDataCandyPowerUpCostConverter"/>
 
             <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
                 <converters:ValueWhenConverter.When>
@@ -67,6 +65,18 @@
                 </converters:ValueWhenConverter.Value>
                 <converters:ValueWhenConverter.Otherwise>
                     <x:Boolean>True</x:Boolean>
+                </converters:ValueWhenConverter.Otherwise>
+            </converters:ValueWhenConverter>
+
+            <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
+                <converters:ValueWhenConverter.When>
+                    <x:Int32>0</x:Int32>
+                </converters:ValueWhenConverter.When>
+                <converters:ValueWhenConverter.Value>
+                    <Visibility>Collapsed</Visibility>
+                </converters:ValueWhenConverter.Value>
+                <converters:ValueWhenConverter.Otherwise>
+                    <Visibility>Visible</Visibility>
                 </converters:ValueWhenConverter.Otherwise>
             </converters:ValueWhenConverter>
 
