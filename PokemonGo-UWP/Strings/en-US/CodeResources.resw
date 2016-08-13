@@ -216,7 +216,7 @@ Open page with installation files for manual install?</value>
     <value>Catch Legend Pokémon</value>
   </data>
   <data name="ActivityFleePokemon" xml:space="preserve">
-    <value>Flee Pokémon</value>
+    <value>Pokémon Fled</value>
   </data>
   <data name="ActivityDefeatFort" xml:space="preserve">
     <value>Defeat Fort</value>
@@ -225,7 +225,7 @@ Open page with installation files for manual install?</value>
     <value>Evolve a Pokémon</value>
   </data>
   <data name="ActivityHatchEgg" xml:space="preserve">
-    <value>Hatch Egg</value>
+    <value>Egg Hatched!</value>
   </data>
   <data name="ActivityWalkKm" xml:space="preserve">
     <value>Walk Km</value>
@@ -249,7 +249,7 @@ Open page with installation files for manual install?</value>
     <value>Curveball</value>
   </data>
   <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
-    <value>First Catch of day</value>
+    <value>First Catch of Day!</value>
   </data>
   <data name="ActivityCatchMilestone" xml:space="preserve">
     <value>Catch Milestone</value>
