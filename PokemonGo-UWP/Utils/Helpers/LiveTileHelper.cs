@@ -67,6 +67,9 @@ namespace PokemonGo_UWP.Utils
             return new TileContent()
             {
                 Visual = new TileVisual()
+                {
+                    Branding = TileBranding.NameAndLogo
+                }
             };
         }
 
