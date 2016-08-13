@@ -192,8 +192,6 @@
     <Content Include="Assets\Items\Item_COIN_HEAP_01.png" />
     <Content Include="Assets\Items\Item_COIN_POUCH_01.png" />
     <Content Include="Assets\Items\Item_COIN_STACK_01.png" />
-    <Content Include="Assets\Logos\google.png" />
-    <Content Include="Assets\Logos\logo_transparent.png" />
     <Content Include="Assets\Pokemons\1.png" />
     <Content Include="Assets\Pokemons\10.png" />
     <Content Include="Assets\Pokemons\100.png" />
@@ -356,6 +354,8 @@
     <Content Include="Assets\UI\close.png" />
     <Content Include="Assets\UI\egg.png" />
     <Content Include="Assets\UI\escape.png" />
+    <Content Include="Assets\UI\logoDark.png" />
+    <Content Include="Assets\UI\logoLight.png" />
     <Content Include="Assets\Fonts\Generica Bold.otf" />
     <Content Include="Assets\Fonts\Generica.otf" />
     <Content Include="Assets\Fonts\Lato-Italic.ttf" />
