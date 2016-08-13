@@ -42,7 +42,7 @@ namespace PokemonGo_UWP.ViewModels
                 PokemonInventory = (ObservableCollection<PokemonDataWrapper>) suspensionState[nameof(PokemonInventory)];
                 EggsInventory = (ObservableCollection<PokemonDataWrapper>) suspensionState[nameof(EggsInventory)];
             }
-            else if (parameter is bool)
+            else
             {
                 // Navigating from game page, so we need to actually load the inventory
                 // The sorting mode is directly bound to the settings
