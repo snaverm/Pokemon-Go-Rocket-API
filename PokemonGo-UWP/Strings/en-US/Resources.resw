@@ -156,7 +156,7 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>EGGS</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Music</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -168,7 +168,7 @@
   <data name="SignOutTextBlock.Text" xml:space="preserve">
     <value>Sign Out</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Vibration</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -199,7 +199,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Level</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Auto-Rotate Map</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
@@ -208,8 +208,8 @@
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>INCUBATORS</value>
   </data>
-  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
-    <value>Niantic map</value>
+  <data name="SettingsUseNianticMapTextBlock.Text" xml:space="preserve">
+    <value>Use Niantic Map</value>
   </data>
   <data name="CandyTextBlock.Text" xml:space="preserve">
     <value> CANDY</value>
@@ -241,5 +241,8 @@
   </data>
   <data name="PowerUpButton.Content" xml:space="preserve">
     <value>POWER UP</value>
+  </data>
+  <data name="SettingsRememberMapZoomTextBlock" xml:space="preserve">
+    <value>Remember Map Zoom</value>
   </data>
 </root>

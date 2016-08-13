@@ -296,7 +296,7 @@ Open page with installation files for manual install?</target>
           <source>EGGS</source>
           <target state="new">EGGS</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="new">Music</target>
         </trans-unit>
@@ -366,8 +366,8 @@ Open page with installation files for manual install?</target>
           <target state="new">INCUBATORS</target>
         </trans-unit>
         <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="new">Niantic map</target>
+          <source>Use Niantic Map</source>
+          <target state="new">Use Niantic Map</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
           <source>HP </source>
