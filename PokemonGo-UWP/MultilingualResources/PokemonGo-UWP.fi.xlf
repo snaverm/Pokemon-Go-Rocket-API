@@ -481,7 +481,7 @@ Open page with installation files for manual install?</target>
           <source>EGGS</source>
           <target state="new">EGGS</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="new">Music</target>
         </trans-unit>
@@ -493,11 +493,11 @@ Open page with installation files for manual install?</target>
           <source>SETTINGS</source>
           <target state="new">SETTINGS</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="new">Sign Out</target>
         </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
           <target state="new">Vibration</target>
         </trans-unit>
@@ -538,7 +538,7 @@ Open page with installation files for manual install?</target>
           <source>Level</source>
           <target state="new">Level</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Auto-Rotate Map</source>
           <target state="new">Auto-Rotate Map</target>
         </trans-unit>
@@ -550,9 +550,9 @@ Open page with installation files for manual install?</target>
           <source>INCUBATORS</source>
           <target state="new">INCUBATORS</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="new">Niantic map</target>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
+          <target state="new">Use Niantic Map</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
           <source>HP </source>

@@ -304,7 +304,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
           <source>EGGS</source>
           <target state="translated">OEUFS</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="translated">Musique</target>
         </trans-unit>
@@ -316,11 +316,11 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
           <source>SETTINGS</source>
           <target state="translated">PARAMETRES</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Déconnexion</target>
         </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
           <target state="new">Vibration</target>
         </trans-unit>
@@ -361,7 +361,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
           <source>Level</source>
           <target state="translated">Niveau</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Auto-Rotate Map</source>
           <target state="translated">Rotation automatique de la carte</target>
         </trans-unit>
@@ -373,9 +373,9 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
           <source>INCUBATORS</source>
           <target state="translated">INCUBATEURS</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="new">Niantic map</target>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
+          <target state="new">Use Niantic Map</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
           <source>HP </source>

@@ -304,7 +304,7 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <source>EGGS</source>
           <target state="translated">JAJKA</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="translated">Muzyka</target>
         </trans-unit>
@@ -316,11 +316,11 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <source>SETTINGS</source>
           <target state="translated">USTAWIENIA</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Wyloguj</target>
         </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
           <target state="translated">Wibracje</target>
         </trans-unit>
@@ -361,7 +361,7 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <source>Level</source>
           <target state="translated">Poziom</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Auto-Rotate Map</source>
           <target state="translated">Autorotacja Mapy</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Czasownik czy rzeczownik?</note>
@@ -375,8 +375,8 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <source>INCUBATORS</source>
           <target state="translated">INKUBATORY</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
           <target state="translated">Mapa Niantic</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">

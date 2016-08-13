@@ -183,7 +183,7 @@ Open page with installation files for manual install?</source>
           <source>EGGS</source>
           <target state="translated">寶可夢蛋</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="translated">開啟音樂</target>
         </trans-unit>
@@ -195,12 +195,11 @@ Open page with installation files for manual install?</source>
           <source>SETTINGS</source>
           <target state="translated">設定</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
-          <target state="translated">登出
-</target>
+          <target state="translated">登出</target>
         </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
           <target state="translated">開啟震動</target>
         </trans-unit>
@@ -241,7 +240,7 @@ Open page with installation files for manual install?</source>
           <source>Level</source>
           <target state="translated">等級</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Auto-Rotate Map</source>
           <target state="translated">地圖自動轉向</target>
         </trans-unit>
@@ -253,9 +252,9 @@ Open page with installation files for manual install?</source>
           <source>INCUBATORS</source>
           <target state="translated">孵蛋器</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="translated">Niantic 地圖</target>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
+          <target state="new">Niantic 地圖</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
           <source>HP </source>
