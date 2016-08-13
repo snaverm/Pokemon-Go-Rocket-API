@@ -305,7 +305,7 @@ Open page with installation files for manual install?</target>
           <source>EGGS</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">EIEREN</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Muziek</target>
         </trans-unit>
@@ -317,11 +317,11 @@ Open page with installation files for manual install?</target>
           <source>SETTINGS</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">INSTELLINGEN</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Afmelden</target>
         </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Vibratie</target>
         </trans-unit>
@@ -362,7 +362,7 @@ Open page with installation files for manual install?</target>
           <source>Level</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Niveau</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Auto-Rotate Map</source>
           <target state="translated">Kaart automatisch draaien</target>
         </trans-unit>
@@ -374,9 +374,9 @@ Open page with installation files for manual install?</target>
           <source>INCUBATORS</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">INCUBATORS</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Niantic kaart</target>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
+          <target state="new" state-qualifier="mt-suggestion">Niantic kaart</target>
         </trans-unit>
         <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
           <source>HP </source>

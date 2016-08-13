@@ -156,7 +156,7 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>USTAWIENIA</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
   <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">

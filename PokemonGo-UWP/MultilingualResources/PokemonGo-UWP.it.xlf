@@ -316,7 +316,7 @@ Apri pagina con il file di installazione per l'installazione manuale?</target>
           <source>SETTINGS</source>
           <target state="final" state-qualifier="tm-suggestion">IMPOSTAZIONI</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="final" state-qualifier="tm-suggestion">Disconnetti</target>
         </trans-unit>

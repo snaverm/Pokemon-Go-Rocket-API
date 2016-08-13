@@ -316,7 +316,7 @@ Open page with installation files for manual install?</source>
           <source>SETTINGS</source>
           <target state="final">ΡΥΘΜΙΣΕΙΣ</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="final">Αποσύνδεση</target>
         </trans-unit>

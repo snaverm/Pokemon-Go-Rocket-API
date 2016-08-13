@@ -316,7 +316,7 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
           <source>SETTINGS</source>
           <target state="translated">CONFIGURAÇÕES</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Desconectar</target>
         </trans-unit>

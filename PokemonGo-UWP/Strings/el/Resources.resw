@@ -60,7 +60,7 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>ΡΥΘΜΙΣΕΙΣ</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Αποσύνδεση</value>
   </data>
   <data name="VibrationTextBlock.Text" xml:space="preserve">

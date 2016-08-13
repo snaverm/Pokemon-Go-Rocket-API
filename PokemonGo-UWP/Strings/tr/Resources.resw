@@ -153,7 +153,7 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>AYARLAR</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Çıkış Yap</value>
   </data>
   <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">

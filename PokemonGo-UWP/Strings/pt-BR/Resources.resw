@@ -150,7 +150,7 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>CONFIGURAÇÕES</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">

@@ -316,7 +316,7 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <source>SETTINGS</source>
           <target state="translated">AYARLAR</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Çıkış Yap</target>
         </trans-unit>

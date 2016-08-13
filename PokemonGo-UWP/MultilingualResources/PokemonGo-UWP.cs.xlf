@@ -317,7 +317,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
           <source>SETTINGS</source>
           <target state="translated">NASTAVENÍ</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Odhlásit se</target>
         </trans-unit>

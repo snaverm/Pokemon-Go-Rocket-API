@@ -51,7 +51,7 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>CONFIGURACIÓN</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Cerrar sesión</value>
   </data>
   <data name="VibrationTextBlock.Text" xml:space="preserve">

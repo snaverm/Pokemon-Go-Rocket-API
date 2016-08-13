@@ -316,7 +316,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle?<
           <source>SETTINGS</source>
           <target state="translated">PARAMETRES</target>
         </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
           <target state="translated">Déconnexion</target>
         </trans-unit>
