@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.Security.Credentials;
 using Windows.UI.Xaml;
-using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Console;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
 using POGOProtos.Data;
+using POGOProtos.Data.Player;
 using POGOProtos.Enums;
 using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
@@ -23,21 +22,9 @@ using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings;
 using POGOProtos.Settings.Master;
+using Q42.WinRT.Data;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
-using CatchPokemonResponse = POGOProtos.Networking.Responses.CatchPokemonResponse;
-using CheckAwardedBadgesResponse = POGOProtos.Networking.Responses.CheckAwardedBadgesResponse;
-using DownloadSettingsResponse = POGOProtos.Networking.Responses.DownloadSettingsResponse;
-using EncounterResponse = POGOProtos.Networking.Responses.EncounterResponse;
-using FortDetailsResponse = POGOProtos.Networking.Responses.FortDetailsResponse;
-using FortSearchResponse = POGOProtos.Networking.Responses.FortSearchResponse;
-using GetHatchedEggsResponse = POGOProtos.Networking.Responses.GetHatchedEggsResponse;
-using GetInventoryResponse = POGOProtos.Networking.Responses.GetInventoryResponse;
-using GetMapObjectsResponse = POGOProtos.Networking.Responses.GetMapObjectsResponse;
-using GetPlayerResponse = POGOProtos.Networking.Responses.GetPlayerResponse;
-using MapPokemon = POGOProtos.Map.Pokemon.MapPokemon;
-using NearbyPokemon = POGOProtos.Map.Pokemon.NearbyPokemon;
-using UseItemCaptureResponse = POGOProtos.Networking.Responses.UseItemCaptureResponse;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -48,17 +35,17 @@ namespace PokemonGo_UWP.Utils
     {
         #region Client Vars
 
-        private static ISettings ClientSettings;
-        private static Client Client;
+        private static ISettings _clientSettings;
+        private static Client _client;
 
         /// <summary>
-        /// Handles failures by having a fixed number of retries
+        ///     Handles failures by having a fixed number of retries
         /// </summary>
-        internal class APIFailure : IApiFailureStrategy
+        internal class ApiFailure : IApiFailureStrategy
         {
+            private const int MaxRetries = 50;
 
             private int _retryCount;
-            private const int MaxRetries = 50;
 
 
             public async Task<ApiOperation> HandleApiFailure(RequestEnvelope request, ResponseEnvelope response)
@@ -69,10 +56,13 @@ namespace PokemonGo_UWP.Utils
                 await Task.Delay(500);
                 _retryCount++;
 
-                if (_retryCount % 5 == 0)
-                {
+                if (_retryCount%5 == 0)
+                {                    
                     // Let's try to refresh the session by getting a new token
-                    await (ClientSettings.AuthType == AuthType.Google ? DoGoogleLogin(ClientSettings.GoogleUsername, ClientSettings.GooglePassword) : DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword));
+                    await
+                        (_clientSettings.AuthType == AuthType.Google
+                            ? DoGoogleLogin(_clientSettings.GoogleUsername, _clientSettings.GooglePassword)
+                            : DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword));
                 }
 
                 return ApiOperation.Retry;
@@ -94,77 +84,113 @@ namespace PokemonGo_UWP.Utils
         public static string CurrentVersion
         {
             get
-            {                
+            {
                 var currentVersion = Package.Current.Id.Version;
                 return $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
             }
         }
 
         /// <summary>
-        /// Settings downloaded from server
+        ///     Settings downloaded from server
         /// </summary>
         public static GlobalSettings GameSetting { get; private set; }
 
         /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        public static PlayerData PlayerProfile { get; private set; }
+
+        /// <summary>
+        ///     Stats for the current player, including current level and experience related stuff
+        /// </summary>
+        public static PlayerStats PlayerStats { get; private set; }
+
+        /// <summary>
+        ///     Contains infos about level up rewards
+        /// </summary>
+        public static InventoryDelta InventoryDelta { get; private set; }
+
+        #region Collections
+
+        /// <summary>
         ///     Collection of Pokemon in 1 step from current position
         /// </summary>
-        public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } = new ObservableCollection<MapPokemonWrapper>();
+        public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } =
+            new ObservableCollection<MapPokemonWrapper>();
 
         /// <summary>
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
-        public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } = new ObservableCollection<NearbyPokemonWrapper>();
+        public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } =
+            new ObservableCollection<NearbyPokemonWrapper>();
 
         /// <summary>
         ///     Collection of Pokestops in the current area
         /// </summary>
-        public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
+        public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } =
+            new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
         ///     Stores Items in the current inventory
         /// </summary>
-        public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+        public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>()
+            ;
 
         /// <summary>
         ///     Stores Items that can be used to catch a Pokemon
         /// </summary>
-        public static ObservableCollection<ItemData> CatchItemsInventory { get; set; } = new ObservableCollection<ItemData>();
+        public static ObservableCollection<ItemData> CatchItemsInventory { get; set; } =
+            new ObservableCollection<ItemData>();
 
         /// <summary>
         ///     Stores free Incubators in the current inventory
         /// </summary>
-        public static ObservableCollection<EggIncubator> FreeIncubatorsInventory { get; set; } = new ObservableCollection<EggIncubator>();
+        public static ObservableCollection<EggIncubator> FreeIncubatorsInventory { get; set; } =
+            new ObservableCollection<EggIncubator>();
 
         /// <summary>
         ///     Stores used Incubators in the current inventory
         /// </summary>
-        public static ObservableCollection<EggIncubator> UsedIncubatorsInventory { get; set; } = new ObservableCollection<EggIncubator>();
+        public static ObservableCollection<EggIncubator> UsedIncubatorsInventory { get; set; } =
+            new ObservableCollection<EggIncubator>();
 
         /// <summary>
-        /// Stores Pokemons in the current inventory
+        ///     Stores Pokemons in the current inventory
         /// </summary>
-        public static ObservableCollection<PokemonData> PokemonsInventory { get; set; } = new ObservableCollection<PokemonData>();
+        public static ObservableCollection<PokemonData> PokemonsInventory { get; set; } =
+            new ObservableCollection<PokemonData>();
 
         /// <summary>
-        /// Stores Eggs in the current inventory
+        ///     Stores Eggs in the current inventory
         /// </summary>
-        public static ObservableCollection<PokemonData> EggsInventory { get; set; } = new ObservableCollection<PokemonData>();
+        public static ObservableCollection<PokemonData> EggsInventory { get; set; } =
+            new ObservableCollection<PokemonData>();
 
         /// <summary>
-        /// Stores player's current Pokedex
+        ///     Stores player's current Pokedex
         /// </summary>
-        public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } = new ObservableCollection<PokedexEntry>();
+        public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } =
+            new ObservableCollection<PokedexEntry>();
+
+        /// <summary>
+        ///     Stores player's current candies
+        /// </summary>
+        public static ObservableCollection<Candy> CandyInventory { get; set; } = new ObservableCollection<Candy>();
+
+        #endregion
 
         #region Templates from server
+
         /// <summary>
-        /// Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
+        ///     Stores extra useful data for the Pokedex, like Pokemon type and other stuff that is missing from PokemonData
         /// </summary>
         public static IEnumerable<PokemonSettings> PokedexExtraData { get; private set; } = new List<PokemonSettings>();
 
         /// <summary>
-        /// Stores upgrade costs (candy, stardust) per each level
+        ///     Stores upgrade costs (candy, stardust) per each level
         /// </summary>
         public static Dictionary<int, object[]> PokemonUpgradeCosts { get; private set; } = new Dictionary<int, object[]>();
+
         #endregion
 
         #endregion
@@ -179,14 +205,26 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task InitializeClient()
         {
-            ClientSettings = new Settings
+
+            await DataCache.Init();
+
+            var credentials = SettingsService.Instance.UserCredentials;
+            credentials.RetrievePassword();
+            _clientSettings = new Settings
             {
-                AuthType = SettingsService.Instance.LastLoginService
+                AuthType = SettingsService.Instance.LastLoginService,
+                PtcUsername = SettingsService.Instance.LastLoginService == AuthType.Ptc ? credentials.UserName : null,
+                PtcPassword = SettingsService.Instance.LastLoginService == AuthType.Ptc ? credentials.Password : null,
+                GoogleUsername = SettingsService.Instance.LastLoginService == AuthType.Google ? credentials.UserName : null,
+                GooglePassword = SettingsService.Instance.LastLoginService == AuthType.Google ? credentials.Password : null,
             };
 
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance) { AuthToken = SettingsService.Instance.AuthToken};
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance)
+            {
+                AuthToken = SettingsService.Instance.AuthToken
+            };
 
-            await Client.Login.DoLogin();
+            await _client.Login.DoLogin();
         }
 
         /// <summary>
@@ -197,15 +235,15 @@ namespace PokemonGo_UWP.Utils
         /// <returns>true if login worked</returns>
         public static async Task<bool> DoPtcLogin(string username, string password)
         {
-            ClientSettings = new Settings
+            _clientSettings = new Settings
             {
                 PtcUsername = username,
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);
             // Get PTC token
-            var authToken = await Client.Login.DoLogin();
+            var authToken = await _client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
             SettingsService.Instance.AuthToken = authToken;
             // Update other data if login worked
@@ -225,16 +263,16 @@ namespace PokemonGo_UWP.Utils
         /// <returns>true if login worked</returns>
         public static async Task<bool> DoGoogleLogin(string email, string password)
         {
-            ClientSettings = new Settings
+            _clientSettings = new Settings
             {
                 GoogleUsername = email,
                 GooglePassword = password,
-                AuthType = AuthType.Google,
+                AuthType = AuthType.Google
             };
 
-            Client = new Client(ClientSettings, new APIFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);            
             // Get Google token
-            var authToken = await Client.Login.DoLogin();
+            var authToken = await _client.Login.DoLogin();
             // Update current token even if it's null
             SettingsService.Instance.AuthToken = authToken;
             // Update other data if login worked
@@ -247,7 +285,7 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        /// Logs the user out by clearing data and timers
+        ///     Logs the user out by clearing data and timers
         /// </summary>
         public static void DoLogout()
         {
@@ -273,12 +311,12 @@ namespace PokemonGo_UWP.Utils
         private static DispatcherTimer _mapUpdateTimer;
 
         /// <summary>
-        /// We fire this event when the current position changes
+        ///     We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
 
         /// <summary>
-        /// Starts the timer to update map objects and the handler to update position
+        ///     Starts the timer to update map objects and the handler to update position
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
@@ -292,25 +330,35 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += (s, e) =>
+            _geolocator.PositionChanged += async (s, e) =>
             {
                 Geoposition = e.Position;
+                // Updating player's position
+                var position = Geoposition.Coordinate.Point.Position;
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
                 GeopositionUpdated?.Invoke(null, Geoposition);
             };
+            // Before starting we need game settings
+            GameSetting =
+                await
+                    DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings,
+                        DateTime.Now.AddMonths(1));      
+            // Update geolocator settings based on server
+            _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(10)
+                Interval = TimeSpan.FromSeconds(GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
             };
             _mapUpdateTimer.Tick += async (s, e) =>
-            {                
+            {
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds <= 10) return;
+                if ((DateTime.Now - _lastUpdate).Seconds <= GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
+                    return;
                 Logger.Write("Updating map");
                 await UpdateMapObjects();
-            };            
+            };
             // Update before starting timer            
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
-            GameSetting = (await Client.Download.GetSettings()).Settings;            
             await UpdateMapObjects();
             await UpdateInventory();
             await UpdateItemTemplates();
@@ -318,23 +366,23 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        /// DateTime for the last map update
+        ///     DateTime for the last map update
         /// </summary>
         private static DateTime _lastUpdate;
 
         /// <summary>
-        /// Toggles the update timer based on the isEnabled value
+        ///     Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
         public static async void ToggleUpdateTimer(bool isEnabled = true)
-        {            
+        {
             if (isEnabled)
             {
                 if (_mapUpdateTimer.IsEnabled) return;
                 // Update before starting but only if more than 10s passed since the last one
-                if ((DateTime.Now - _lastUpdate).Seconds > 10)
+                if ((DateTime.Now - _lastUpdate).Seconds > GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
                     await UpdateMapObjects();
-                _mapUpdateTimer.Start();          
+                _mapUpdateTimer.Start();
             }
             else
             {
@@ -343,20 +391,21 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        /// Updates catcheable and nearby Pokemons + Pokestops.
-        /// We're using a single method so that we don't need two separate calls to the server, making things faster.
+        ///     Updates catcheable and nearby Pokemons + Pokestops.
+        ///     We're using a single method so that we don't need two separate calls to the server, making things faster.
         /// </summary>
         /// <returns></returns>
         private static async Task UpdateMapObjects()
-        {
+        {            
             // Get all map objects from server
             var mapObjects = await GetMapObjects(Geoposition);
-            _lastUpdate = DateTime.Now;                          
-            
+            _lastUpdate = DateTime.Now;
+
             // update catchable pokemons
             var newCatchablePokemons = mapObjects.Item1.MapCells.SelectMany(x => x.CatchablePokemons).ToArray();
             Logger.Write($"Found {newCatchablePokemons.Length} catchable pokemons");
-            CatchablePokemons.UpdateWith(newCatchablePokemons, x => new MapPokemonWrapper(x), (x, y) => x.EncounterId == y.EncounterId);
+            CatchablePokemons.UpdateWith(newCatchablePokemons, x => new MapPokemonWrapper(x),
+                (x, y) => x.EncounterId == y.EncounterId);
 
             // update nearby pokemons
             var newNearByPokemons = mapObjects.Item1.MapCells.SelectMany(x => x.NearbyPokemons).ToArray();
@@ -366,9 +415,9 @@ namespace PokemonGo_UWP.Utils
 
             // update poke stops on map (gyms are ignored for now)
             var newPokeStops = mapObjects.Item1.MapCells
-                    .SelectMany(x => x.Forts)
-                    .Where(x => x.Type == FortType.Checkpoint)
-                    .ToArray();
+                .SelectMany(x => x.Forts)
+                .Where(x => x.Type == FortType.Checkpoint)
+                .ToArray();
             Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
             NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
@@ -384,13 +433,14 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         /// <param name="geoposition"></param>
         /// <returns></returns>
-        public static async Task<Tuple<GetMapObjectsResponse, GetHatchedEggsResponse, POGOProtos.Networking.Responses.GetInventoryResponse, CheckAwardedBadgesResponse, DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
+        public static async
+            Task
+                <
+                    Tuple
+                        <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
+                            DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            // Sends the updated position to the client
-            await
-                Client.Player.UpdatePlayerLocation(geoposition.Coordinate.Point.Position.Latitude,
-                    geoposition.Coordinate.Point.Position.Longitude, geoposition.Coordinate.Point.Position.Altitude);
-            return await Client.Map.GetMapObjects();
+            return await _client.Map.GetMapObjects();
         }
 
         #endregion
@@ -398,9 +448,9 @@ namespace PokemonGo_UWP.Utils
         #region Player Data & Inventory
 
         /// <summary>
-        /// List of items that can be used when trying to catch a Pokemon
+        ///     List of items that can be used when trying to catch a Pokemon
         /// </summary>
-        private static readonly List<ItemId> _catchItemIds = new List<ItemId>()
+        private static readonly List<ItemId> CatchItemIds = new List<ItemId>
         {
             ItemId.ItemPokeBall,
             ItemId.ItemGreatBall,
@@ -410,16 +460,50 @@ namespace PokemonGo_UWP.Utils
             ItemId.ItemPinapBerry,
             ItemId.ItemRazzBerry,
             ItemId.ItemUltraBall,
-            ItemId.ItemWeparBerry            
+            ItemId.ItemWeparBerry
         };
 
         /// <summary>
         ///     Gets user's profile
         /// </summary>
         /// <returns></returns>
-        public static async Task<GetPlayerResponse> GetProfile()
+        public static async Task UpdateProfile()
         {
-            return await Client.Player.GetPlayer();
+            PlayerProfile = (await _client.Player.GetPlayer()).PlayerData;
+        }
+
+        /// <summary>
+        ///     Gets player's inventoryDelta
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LevelUpRewardsResponse> UpdatePlayerStats(bool checkForLevelUp = false)
+        {
+            InventoryDelta = (await _client.Inventory.GetInventory()).InventoryDelta;
+
+            var tmpStats =
+                InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null)
+                    .InventoryItemData.PlayerStats;
+
+            if (checkForLevelUp && PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            {
+                PlayerStats = tmpStats;
+                var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
+                return levelUpResponse;
+            }
+            PlayerStats = tmpStats;
+
+            // Update candies
+            CandyInventory.AddRange(from item in InventoryDelta.InventoryItems
+                      where item.InventoryItemData?.Candy != null
+                      where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                      group item by item.InventoryItemData?.Candy.FamilyId into family
+                      select new Candy
+                      {
+                          FamilyId = family.FirstOrDefault().InventoryItemData.Candy.FamilyId,
+                          Candy_ = family.FirstOrDefault().InventoryItemData.Candy.Candy_
+                      },true);
+
+            return null;
         }
 
         /// <summary>
@@ -428,69 +512,93 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<GetInventoryResponse> GetInventory()
         {
-            return await Client.Inventory.GetInventory();
+            return await _client.Inventory.GetInventory();
         }
 
         /// <summary>
-        /// Gets the rewards after leveling up
+        ///     Gets the rewards after leveling up
         /// </summary>
         /// <returns></returns>
         public static async Task<LevelUpRewardsResponse> GetLevelUpRewards(int newLevel)
         {
-            return await Client.Player.GetLevelUpRewards(newLevel);
+            return await _client.Player.GetLevelUpRewards(newLevel);
         }
 
         /// <summary>
-        /// Pokedex extra data doesn't change so we can just call this method once.
-        /// TODO: store it in local settings maybe?
+        ///     Pokedex extra data doesn't change so we can just call this method once.
+        ///     TODO: store it in local settings maybe?
         /// </summary>
         /// <returns></returns>
         private static async Task UpdateItemTemplates()
-        {            
+        {
             // Get all the templates
-            var itemTemplates = (await Client.Download.GetItemTemplates()).ItemTemplates;
+            var itemTemplates = await DataCache.GetAsync("itemTemplates", async () => (await _client.Download.GetItemTemplates()).ItemTemplates, DateTime.Now.AddMonths(1));
+
             // Update Pokedex data
-            PokedexExtraData = itemTemplates.Where(item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset).Select(item => item.PokemonSettings);            
-            // Update Pokemon upgrade templates
-            var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
-            for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+            PokedexExtraData = await DataCache.GetAsync(nameof(PokedexExtraData), async () =>
             {
-                PokemonUpgradeCosts.Add(i, new object[] {tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i]});                
-            }
+                await Task.CompletedTask;
+                return itemTemplates.Where(
+                    item => item.PokemonSettings != null && item.PokemonSettings.FamilyId != PokemonFamilyId.FamilyUnset)
+                    .Select(item => item.PokemonSettings);
+            }, DateTime.Now.AddMonths(1));
+
+            PokemonUpgradeCosts = await DataCache.GetAsync(nameof(PokemonUpgradeCosts), async () =>
+            {
+                await Task.CompletedTask;
+                // Update Pokemon upgrade templates
+                var tmpPokemonUpgradeCosts = itemTemplates.First(item => item.PokemonUpgrades != null).PokemonUpgrades;
+                var tmpResult = new Dictionary<int, object[]>();
+                for (var i = 0; i < tmpPokemonUpgradeCosts.CandyCost.Count; i++)
+                {
+                    tmpResult.Add(i,
+                        new object[] { tmpPokemonUpgradeCosts.CandyCost[i], tmpPokemonUpgradeCosts.StardustCost[i] });
+                }
+                return tmpResult;
+            }, DateTime.Now.AddMonths(1));
+            
         }
 
         /// <summary>
         ///     Updates inventory data
         /// </summary>
         public static async Task UpdateInventory()
-        {            
+        {
             // Get ALL the items
-            var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;            
+            var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
             // Update items
             ItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null)
-                                                 .GroupBy(item => item.InventoryItemData.Item)
-                                                 .Select(item => item.First().InventoryItemData.Item), true);
-            CatchItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null && _catchItemIds.Contains(item.InventoryItemData.Item.ItemId))
-                                                 .GroupBy(item => item.InventoryItemData.Item)
-                                                 .Select(item => item.First().InventoryItemData.Item), true);
-            // Update incbuators          
-            // TODO: check if unused incubators have pokemonId = 0 to separate between sable and non-usable incubators, yes unused incubators pokemonId IS 0
-            FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
-                                                      .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
-                                                      .Where(item => item != null && item.PokemonId == 0), true);
+                .GroupBy(item => item.InventoryItemData.Item)
+                .Select(item => item.First().InventoryItemData.Item), true);
+            CatchItemsInventory.AddRange(
+                fullInventory.Where(
+                    item =>
+                        item.InventoryItemData.Item != null && CatchItemIds.Contains(item.InventoryItemData.Item.ItemId))
+                    .GroupBy(item => item.InventoryItemData.Item)
+                    .Select(item => item.First().InventoryItemData.Item), true);
 
+            // Update incbuators                      
+            FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
+                .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
+                .Where(item => item != null && item.PokemonId == 0), true);
             UsedIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
-                                          .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
-                                          .Where(item => item != null && item.PokemonId != 0), true);
+                .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
+                .Where(item => item != null && item.PokemonId != 0), true);
 
             // Update Pokemons
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
-                                                    .Where(item => item != null && item.PokemonId > 0),true);
+                .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
-                                                .Where(item => item != null && item.IsEgg), true); 
+                .Where(item => item != null && item.IsEgg), true);
+
             // Update Pokedex            
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
-                                                   .Select(item => item.InventoryItemData.PokedexEntry), true);
+                .Select(item => item.InventoryItemData.PokedexEntry), true);
+
+            // Update Player stats
+            PlayerStats =
+                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;            
+
         }
 
         #endregion
@@ -500,7 +608,7 @@ namespace PokemonGo_UWP.Utils
         #region Pokedex        
 
         /// <summary>
-        /// Gets extra data for the current pokemon
+        ///     Gets extra data for the current pokemon
         /// </summary>
         /// <param name="pokemonId"></param>
         /// <returns></returns>
@@ -514,42 +622,45 @@ namespace PokemonGo_UWP.Utils
         #region Catching
 
         /// <summary>
-        /// Encounters the selected Pokemon
+        ///     Encounters the selected Pokemon
         /// </summary>
         /// <param name="encounterId"></param>
         /// <param name="spawnpointId"></param>
         /// <returns></returns>
         public static async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnpointId)
         {
-            return await Client.Encounter.EncounterPokemon(encounterId, spawnpointId);
+            return await _client.Encounter.EncounterPokemon(encounterId, spawnpointId);
         }
 
         /// <summary>
-        /// Executes Pokemon catching
+        ///     Executes Pokemon catching
         /// </summary>
         /// <param name="encounterId"></param>
         /// <param name="spawnpointId"></param>
-        /// <param name="longitude"></param>
         /// <param name="captureItem"></param>
-        /// <param name="latitude"></param>
-        /// <param name="shotMissed"></param>
+        /// <param name="hitPokemon"></param>
         /// <returns></returns>
-        public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId, ItemId captureItem, bool hitPokemon = true)
+        public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId,
+            ItemId captureItem, bool hitPokemon = true)
         {
             var random = new Random();
-            return await Client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble() * 1.95D, random.NextDouble(), 1, hitPokemon);
+            return
+                await
+                    _client.Encounter.CatchPokemon(encounterId, spawnpointId, captureItem, random.NextDouble()*1.95D,
+                        random.NextDouble(), 1, hitPokemon);
         }
 
         /// <summary>
-        /// Throws a capture item to the Pokemon
+        ///     Throws a capture item to the Pokemon
         /// </summary>
         /// <param name="encounterId"></param>
         /// <param name="spawnpointId"></param>
         /// <param name="captureItem"></param>
         /// <returns></returns>
-        public static async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, string spawnpointId, ItemId captureItem)
+        public static async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, string spawnpointId,
+            ItemId captureItem)
         {
-            return await Client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
+            return await _client.Encounter.UseCaptureItem(encounterId, captureItem, spawnpointId);
         }
 
         #endregion
@@ -559,7 +670,7 @@ namespace PokemonGo_UWP.Utils
         #region Pokestop Handling
 
         /// <summary>
-        /// Gets fort data for the given Id
+        ///     Gets fort data for the given Id
         /// </summary>
         /// <param name="pokestopId"></param>
         /// <param name="latitude"></param>
@@ -567,11 +678,11 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<FortDetailsResponse> GetFort(string pokestopId, double latitude, double longitude)
         {
-            return await Client.Fort.GetFort(pokestopId, latitude, longitude);
+            return await _client.Fort.GetFort(pokestopId, latitude, longitude);
         }
 
         /// <summary>
-        /// Searches the given fort
+        ///     Searches the given fort
         /// </summary>
         /// <param name="pokestopId"></param>
         /// <param name="latitude"></param>
@@ -579,7 +690,7 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static async Task<FortSearchResponse> SearchFort(string pokestopId, double latitude, double longitude)
         {
-            return await Client.Fort.SearchFort(pokestopId, latitude, longitude);
+            return await _client.Fort.SearchFort(pokestopId, latitude, longitude);
         }
 
         #endregion
@@ -587,18 +698,18 @@ namespace PokemonGo_UWP.Utils
         #region Eggs Handling
 
         /// <summary>
-        /// Uses the selected incubator on the given egg
+        ///     Uses the selected incubator on the given egg
         /// </summary>
         /// <param name="incubator"></param>
         /// <param name="egg"></param>
         /// <returns></returns>
         public static async Task<UseItemEggIncubatorResponse> UseEggIncubator(EggIncubator incubator, PokemonData egg)
         {
-            return await Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
+            return await _client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
         }
 
         /// <summary>
-        /// Gets the incubator used by the given egg
+        ///     Gets the incubator used by the given egg
         /// </summary>
         /// <param name="egg"></param>
         /// <returns></returns>

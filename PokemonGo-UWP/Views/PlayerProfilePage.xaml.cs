@@ -6,12 +6,11 @@ namespace PokemonGo_UWP.Views
     {
         public PlayerProfilePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e) {
             ViewModel.NavigateToDetailPage(sender, e);
         }
     }
-
 }

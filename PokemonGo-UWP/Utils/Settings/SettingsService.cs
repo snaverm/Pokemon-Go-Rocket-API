@@ -25,18 +25,18 @@ namespace PokemonGo_UWP.Utils
 
         #region Login & Authentication
 
-        public string UDID
+        public string Udid
         {
-            get { return _helper.Read(nameof(UDID), string.Empty); }
-            set { _helper.Write(nameof(UDID), value); }
+            get { return _helper.Read(nameof(Udid), string.Empty); }
+            set { _helper.Write(nameof(Udid), value); }
         }
 
         public AuthType LastLoginService
         {
             get { return _helper.Read(nameof(LastLoginService), AuthType.Ptc); }
-            set { _helper.Write(nameof(LastLoginService), value);}
-        }        
-        
+            set { _helper.Write(nameof(LastLoginService), value); }
+        }
+
         public string AuthToken
         {
             get
@@ -50,7 +50,8 @@ namespace PokemonGo_UWP.Utils
             set
             {
                 var credentials = _passwordVault.RetrieveAll();
-                var currentToken = credentials.FirstOrDefault(credential => credential.Resource.Equals(nameof(AuthToken)));
+                var currentToken =
+                    credentials.FirstOrDefault(credential => credential.Resource.Equals(nameof(AuthToken)));
                 if (currentToken != null) _passwordVault.Remove(currentToken);
                 if (value == null) return;
                 _passwordVault.Add(new PasswordCredential
@@ -72,28 +73,29 @@ namespace PokemonGo_UWP.Utils
             set
             {
                 var credentials = _passwordVault.RetrieveAll();
-                var currentCredential = credentials.FirstOrDefault(credential => credential.Resource.Equals(nameof(UserCredentials)));
+                var currentCredential =
+                    credentials.FirstOrDefault(credential => credential.Resource.Equals(nameof(UserCredentials)));
                 if (currentCredential != null) _passwordVault.Remove(currentCredential);
                 if (value == null) return;
                 _passwordVault.Add(value);
             }
-		}        
+        }
 
         #endregion
 
         #region Game
 
         public bool IsMusicEnabled
-		{
-			get { return _helper.Read(nameof(IsMusicEnabled), false); }
-			set { _helper.Write(nameof(IsMusicEnabled), value); }
-		}
+        {
+            get { return _helper.Read(nameof(IsMusicEnabled), false); }
+            set { _helper.Write(nameof(IsMusicEnabled), value); }
+        }
 
-		public bool IsVibrationEnabled
-		{
-			get { return _helper.Read(nameof(IsVibrationEnabled), false); }
-			set { _helper.Write(nameof(IsVibrationEnabled), value); }
-		}
+        public bool IsVibrationEnabled
+        {
+            get { return _helper.Read(nameof(IsVibrationEnabled), false); }
+            set { _helper.Write(nameof(IsVibrationEnabled), value); }
+        }
 
         public bool IsAutoRotateMapEnabled
         {
@@ -106,17 +108,17 @@ namespace PokemonGo_UWP.Utils
             get { return _helper.Read(nameof(IsRememberMapZoomEnabled), false); }
             set { _helper.Write(nameof(IsRememberMapZoomEnabled), value); }
         }
-        
+
         public double Zoomlevel
         {
-            get { return _helper.Read(nameof(Zoomlevel), (double)12); }
+            get { return _helper.Read(nameof(Zoomlevel), (double) 12); }
             set { _helper.Write(nameof(Zoomlevel), value); }
         }
 
         public PokemonSortingModes PokemonSortingMode
         {
-            get { return this._helper.Read(nameof(PokemonSortingMode), PokemonSortingModes.Combat); }
-            set { this._helper.Write(nameof(PokemonSortingMode), value); }
+            get { return _helper.Read(nameof(PokemonSortingMode), PokemonSortingModes.Combat); }
+            set { _helper.Write(nameof(PokemonSortingMode), value); }
         }
 
         public bool IsNianticMapEnabled
@@ -124,7 +126,6 @@ namespace PokemonGo_UWP.Utils
             get { return _helper.Read(nameof(IsNianticMapEnabled), false); }
             set { _helper.Write(nameof(IsNianticMapEnabled), value); }
         }
-
 
         #endregion
     }
