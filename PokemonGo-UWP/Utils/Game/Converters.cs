@@ -623,7 +623,8 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var activityType = (ActivityType) value;
-            return activityType.ToString().Replace("Activity", "");
+            var resActivityType = Resources.CodeResources.GetString(activityType.ToString()); ;
+            return string.IsNullOrEmpty(resActivityType)?activityType.ToString().Replace("Activity", ""):resActivityType;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
