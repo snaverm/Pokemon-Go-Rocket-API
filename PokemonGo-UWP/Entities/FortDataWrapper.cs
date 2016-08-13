@@ -92,6 +92,13 @@ namespace PokemonGo_UWP.Entities
             OnPropertyChanged(nameof(Longitude));
         }
 
+        public void UpdateCooldown(long newCooldownTimestampMs)
+        {
+            this._fortData.CooldownCompleteTimestampMs = newCooldownTimestampMs;
+            OnPropertyChanged(nameof(FortDataStatus));
+            OnPropertyChanged(nameof(CooldownCompleteTimestampMs));
+        }
+
         #region Wrapped Properties
 
         public FortType Type => _fortData.Type;
