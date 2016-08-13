@@ -126,7 +126,6 @@ namespace System.Collections.ObjectModel
 
             if (clearFirst) Items.Clear();
 
-            var originalIndex = Items.Count;
             var newIndex = Items.Count;
             foreach (var item in collection)
             {
