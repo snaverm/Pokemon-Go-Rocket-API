@@ -61,7 +61,7 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <controls:CircularProgressBar Height="180" Width="180" SegmentColor="DeepSkyBlue"
-                                                      Radius="353" StrokeThickness="2"
+                                                      Diameter="353" StrokeThickness="2"
                                                       RelativePanel.AlignHorizontalCenterWithPanel="True"
                                                       RelativePanel.AlignVerticalCenterWithPanel="true"
                                                       Maximum="{Binding Achievement, Converter={StaticResource AchievementNextValueConverter}}"

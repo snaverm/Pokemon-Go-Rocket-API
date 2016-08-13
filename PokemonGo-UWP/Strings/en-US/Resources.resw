@@ -136,7 +136,7 @@
     <value>nearby</value>
   </data>
   <data name="OutOfRangeTextBlock.Text" xml:space="preserve">
-    <value>You are out of range</value>
+    <value>THIS POKÉSTOP IS TOO FAR AWAY</value>
   </data>
   <data name="LoginPasswordPasswordBox.PlaceholderText" xml:space="preserve">
     <value>Password</value>
