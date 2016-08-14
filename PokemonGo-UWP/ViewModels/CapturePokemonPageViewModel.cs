@@ -286,10 +286,6 @@ namespace PokemonGo_UWP.ViewModels
         /// <returns></returns>
         private async Task ThrowPokeball(bool hitPokemon)
         {
-
-            CatchEscape?.Invoke(this, null);
-            return;
-
             var caughtPokemonResponse =
                 await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
                         SelectedCaptureItem.ItemId, hitPokemon);
