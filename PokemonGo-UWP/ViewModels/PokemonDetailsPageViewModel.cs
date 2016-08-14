@@ -301,7 +301,7 @@ namespace PokemonGo_UWP.ViewModels
                       await
                           new MessageDialog(
                               string.Format(Resources.CodeResources.GetString("TransferPokemonSuccessText"),
-                                  Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
+                                  Resources.Pokemon.GetString(CurrentCandy.FamilyId.ToString().Replace("Family", "")))).ShowAsyncQueue();
                       await GameClient.UpdateInventory();
                       await GameClient.UpdatePlayerStats();
                       NavigationService.Navigate(typeof(PokemonInventoryPage));
