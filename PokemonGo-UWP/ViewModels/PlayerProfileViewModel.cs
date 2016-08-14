@@ -9,6 +9,8 @@ using POGOProtos.Data.Player;
 using POGOProtos.Enums;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using Windows.UI.Xaml.Controls;
+using PokemonGo_UWP.Views;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -176,6 +178,14 @@ namespace PokemonGo_UWP.ViewModels
                 PlayerStats.BigMagikarpCaught));
             Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.AceTrainer,
                 PlayerStats.BattleTrainingWon));
+        }
+
+        #endregion
+
+        #region Navigate to detail page
+
+        public void NavigateToDetailPage(object sender, ItemClickEventArgs e) {
+            NavigationService.Navigate(typeof(AchievementDetailPage), e.ClickedItem);
         }
 
         #endregion
