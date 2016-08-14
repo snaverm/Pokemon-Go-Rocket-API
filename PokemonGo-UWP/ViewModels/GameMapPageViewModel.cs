@@ -57,7 +57,6 @@ namespace PokemonGo_UWP.ViewModels
                     await StartGpsDataService();
                     await UpdatePlayerData(true);
                     await GameClient.ToggleUpdateTimer();
-                    GameClient.GameView = this;
                     break;
                 case GameMapNavigationModes.SettingsUpdate:
                     // We navigated back from Settings page after changing the Map provider, but this is managed in the page itself

@@ -350,8 +350,9 @@ namespace PokemonGo_UWP.Utils
                 Debug.WriteLine("[Relogin] Token successfuly changed.");
 
             Debug.WriteLine("[Relogin] Reloading gps and playerdata.");
-            await GameView.StartGpsDataService();
-            await GameView.UpdatePlayerData(true);
+            await InitializeDataUpdate();
+            await UpdateProfile();
+            await UpdatePlayerStats();
             Debug.WriteLine("[Relogin] Restarting MapUpdate timer.");
             _lastUpdate = DateTime.Now;
             await ToggleUpdateTimer();
@@ -364,7 +365,6 @@ namespace PokemonGo_UWP.Utils
         private static Geolocator _geolocator;
 
         public static Geoposition Geoposition { get; private set; }
-        public static GameMapPageViewModel GameView { get; set; }
 
         private static DispatcherTimer _mapUpdateTimer;
 
