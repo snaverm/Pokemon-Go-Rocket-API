@@ -9,6 +9,7 @@ using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
+using Newtonsoft.Json.Linq;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -140,11 +141,20 @@ namespace PokemonGo_UWP.ViewModels
                 {
                     await new MessageDialog(Resources.CodeResources.GetString("PtcDownText")).ShowAsyncQueue();
                 }
-                catch (LoginFailedException)
+                catch (LoginFailedException e)
                 {
-                    await
-                        new MessageDialog(Resources.CodeResources.GetString("LoginFailedText"))
-                            .ShowAsyncQueue();
+                    string errorMessage = Resources.CodeResources.GetString("LoginFailedText");
+
+                    try
+                    {
+                        Task<string> result = e.GetLoginResponseContentAsString();
+                        JObject json = JObject.Parse(result.Result);
+                        JToken token = json.SelectToken("$.errors[0]");
+                        if (token != null)
+                            errorMessage = token.ToString();
+                    } catch { }
+
+                    await new MessageDialog(errorMessage).ShowAsyncQueue();
                 }
                 finally
                 {
