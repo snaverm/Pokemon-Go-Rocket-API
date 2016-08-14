@@ -1,4 +1,5 @@
 using Microsoft.HockeyApp;
+using NotificationsExtensions.Tiles;
 using POGOProtos.Data;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Logging;
@@ -8,6 +9,7 @@ using PokemonGo_UWP.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Threading.Tasks;
 using Template10.Common;
 using Windows.ApplicationModel;
@@ -102,24 +104,16 @@ namespace PokemonGo_UWP
         /// <param name="e"></param>
         private void PokemonsInventory_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (!SettingsService.Instance.IsLiveTileEnabled) return;
+            if (SettingsService.Instance.LiveTileMode == LiveTileModes.Off) return;
             // Using a Switch here because we might handle other changed events in other ways.
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    var images = new List<string>();
-
-                    foreach (PokemonData pokemonData in e.NewItems)
-                    {
-                        var pokemon = new PokemonDataWrapper(pokemonData);
-                        images.Add($"Assets/Pokemons/{(int)pokemon.PokemonId}.png");
-                    }
-
-                    var tile = LiveTileHelper.GetPeopleTile(images);
-                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                    UpdateLiveTile(new List<PokemonData>(e.NewItems.Cast<PokemonData>()));
                     break;
+
             }
         }
 
@@ -153,6 +147,10 @@ namespace PokemonGo_UWP
             GameClient.PokemonsInventory.CollectionChanged -= PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged -= CatchablePokemons_CollectionChanged;
             _displayRequest.RequestRelease();
+            if (SettingsService.Instance.LiveTileMode == LiveTileModes.Peek)
+            {
+                LiveTileUpdater.EnableNotificationQueue(false);
+            }
             return base.OnSuspendingAsync(s, e, prelaunchActivated);
         }
 
@@ -187,8 +185,13 @@ namespace PokemonGo_UWP
                 _vibrationDevice = VibrationDevice.GetDefault();
             }
 
+            if (SettingsService.Instance.LiveTileMode == LiveTileModes.Peek)
+            {
+                LiveTileUpdater.EnableNotificationQueue(true);
+            }
+
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
-            GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
+                GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
 
             await Task.CompletedTask;
@@ -248,6 +251,57 @@ namespace PokemonGo_UWP
                 }
             }
             await Task.CompletedTask;
+        }
+
+        #endregion
+
+        #region Helpers
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pokemonList"></param>
+        /// <remarks>
+        /// advancedrei: The LiveTileUpdater is on teh App class, so this has to stay here for now. Might refactor later.
+        /// </remarks>
+        internal static void UpdateLiveTile(IList<PokemonData> pokemonList)
+        {
+            TileContent tile = null;
+            var images = new List<string>();
+
+            // For peeking, we pass the Pokemon straight to the helper.
+            if (SettingsService.Instance.LiveTileMode != LiveTileModes.Peek)
+            {
+                foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
+                {
+                    var pokemon = new PokemonDataWrapper(pokemonData);
+                    images.Add($"{(int)pokemon.PokemonId}.png");
+                }
+            }
+
+            switch (SettingsService.Instance.LiveTileMode)
+            {
+                case LiveTileModes.Peek:
+                    foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
+                    {
+                        if (LiveTileUpdater.GetScheduledTileNotifications().Count >= 4095) return;
+                        var peekTile = LiveTileHelper.GetPeekTile(new PokemonDataWrapper(pokemonData));
+                        //Logger.Write(peekTile.GetXml().GetXml());
+                        var scheduled = new ScheduledTileNotification(peekTile.GetXml(),
+                            DateTimeOffset.Now.AddSeconds((pokemonList.IndexOf(pokemonData) + 1) * 30));
+                        LiveTileUpdater.AddToSchedule(scheduled);
+                    }
+                    break;
+                case LiveTileModes.People:
+                    tile = LiveTileHelper.GetPeopleTile(images);
+                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                    break;
+                case LiveTileModes.Photo:
+                    tile = LiveTileHelper.GetPhotosTile(images);
+                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                    break;
+            }
+
         }
 
         #endregion

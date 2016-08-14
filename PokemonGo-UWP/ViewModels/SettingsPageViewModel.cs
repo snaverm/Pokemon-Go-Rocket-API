@@ -1,5 +1,7 @@
-﻿using PokemonGo_UWP.Utils;
+﻿using POGOProtos.Data;
+using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
+using System.Collections.Generic;
 using Template10.Mvvm;
 
 namespace PokemonGo_UWP.ViewModels
@@ -17,15 +19,6 @@ namespace PokemonGo_UWP.ViewModels
         {
             get { return SettingsService.Instance.IsAutoRotateMapEnabled; }
             set { SettingsService.Instance.IsAutoRotateMapEnabled = value; }
-        }
-
-        /// <summary>
-        ///     Whether the player wants the Live Tile turned on.
-        /// </summary>
-        public bool IsLiveTileEnabled
-        {
-            get { return SettingsService.Instance.IsLiveTileEnabled; }
-            set { SettingsService.Instance.IsLiveTileEnabled = value; }
         }
 
         /// <summary>
@@ -68,9 +61,51 @@ namespace PokemonGo_UWP.ViewModels
             set { SettingsService.Instance.IsVibrationEnabled = value; }
         }
 
+        /// <summary>
+        ///     Whether the player wants a Live Tile or a regular one.
+        /// </summary>
+        public LiveTileModes LiveTileMode
+        {
+            get { return SettingsService.Instance.LiveTileMode; }
+            set
+            {
+                SettingsService.Instance.LiveTileMode = value;
+                App.LiveTileUpdater.Clear();
+                switch (value)
+                {
+                    case LiveTileModes.Off:
+                        App.LiveTileUpdater.EnableNotificationQueue(false);
+                        break;
+                    case LiveTileModes.Peek:
+                        App.LiveTileUpdater.EnableNotificationQueue(true);
+                        break;
+                }
+                App.UpdateLiveTile(GameClient.PokemonsInventory);
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public SettingsPageViewModel()
+        {
+            LiveTileSelectionCommand = new DelegateCommand<string>(param =>
+            {
+                var mode = (LiveTileModes)int.Parse(param);
+                LiveTileMode = mode;
+            });
+        }
+
         #endregion
 
         #region Game Logic
+
+        #region LiveTileSelection
+
+        public DelegateCommand<string> LiveTileSelectionCommand { get; set; }
+
+        #endregion
 
         #region Logout
 
