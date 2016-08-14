@@ -642,19 +642,23 @@
         <Grid RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True"
               Canvas.ZIndex="1"
               Background="Transparent"
-              Height="200">
-            <Button
-                Style="{ThemeResource ButtonNoStyle}"
+              Height="224">
+			<Button
+                Style="{ThemeResource ImageButtonStyle}"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Top"
+                VerticalAlignment="Bottom"
                 x:Name="ReactivateMapAutoUpdate" Tapped="ReactivateMapAutoUpdate_Tapped"
-                FontSize="36" Margin="0,0,20,0">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE81D;" Width="42" Height="36" FontSize="24"
-                          Foreground="#FF00FF2E" />
-            </Button>
+                FontSize="36" Margin="0,0,32,0">
+				<Image Source="../Assets/Icons/RecenterMapIcon.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" 
+							 Height="32"/>
+
+			</Button>
         </Grid>
     </RelativePanel>
 </Page>
