@@ -130,7 +130,7 @@
                           RelativePanel.AlignLeftWithPanel="True"
                           RelativePanel.AlignRightWithPanel="True"
                           RelativePanel.AlignHorizontalCenterWithPanel="True">
-                <StackPanel>
+                <StackPanel Margin="0,0,0,50">
                     <RelativePanel>
                         <Image RelativePanel.AlignTopWithPanel="True"
                                RelativePanel.AlignLeftWithPanel="True"
