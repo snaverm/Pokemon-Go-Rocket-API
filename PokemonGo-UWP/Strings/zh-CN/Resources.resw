@@ -51,7 +51,7 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>鸡蛋</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>音乐</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -63,7 +63,7 @@
   <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>注销</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>振动</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -94,7 +94,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>级</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>地图自动旋转</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
@@ -102,8 +102,5 @@
   </data>
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>孵蛋器</value>
-  </data>
-  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
-    <value>Niantic 地图</value>
   </data>
 </root>

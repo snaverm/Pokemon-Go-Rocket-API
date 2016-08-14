@@ -15,6 +15,9 @@
   <data name="CooldownTextBlock.Text" xml:space="preserve">
     <value>Вы должны немного подождать</value>
   </data>
+  <data name="GoogleLoginTextBlock.Text" xml:space="preserve">
+    <value>GOOGLE</value>
+  </data>
   <data name="InventoryFullTextBlock.Text" xml:space="preserve">
     <value>Ваш инвентарь полон!</value>
   </data>
@@ -42,10 +45,13 @@
   <data name="OkButton.Content" xml:space="preserve">
     <value>ОК</value>
   </data>
+  <data name="CpTextBlock.Text" xml:space="preserve">
+    <value>CP</value>
+  </data>
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>ЯЙЦА</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Музыка</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -57,7 +63,7 @@
   <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Выйти</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Вибрация</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -69,8 +75,18 @@
   <data name="LowercaseItemsTextBlock.Text" xml:space="preserve">
     <value>предметы</value>
   </data>
+  <data name="NumberTextBlock.Text" xml:space="preserve">
+    <value># </value>
+    <comment>Watch out: there is a space after the #</comment>
+  </data>
+  <data name="SlashSpaceCpTextBlock.Text" xml:space="preserve">
+    <value>/ Мощь</value>
+  </data>
+  <data name="SpaceXpTextBlock.Text" xml:space="preserve">
+    <value> ХП</value>
+  </data>
   <data name="TotalExperienceTextBlock.Text" xml:space="preserve">
-    <value>TOTAL</value>
+    <value>ВСЕГО</value>
   </data>
   <data name="LevelUpTextBlock.Text" xml:space="preserve">
     <value>Уровень повышен!</value>
@@ -78,7 +94,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Уровень</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Автоповорот карты</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
@@ -87,7 +103,38 @@
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>ИНКУБАТОРЫ</value>
   </data>
-  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
-    <value>Карта Niantic Inc.</value>
+  <data name="CandyTextBlock.Text" xml:space="preserve">
+    <value>Конфета</value>
+    <comment>Watch out: space before the word!</comment>
+  </data>
+  <data name="HeightTextBlock.Text" xml:space="preserve">
+    <value>Высота</value>
+  </data>
+  <data name="HpTextBlock.Text" xml:space="preserve">
+    <value>ХП</value>
+  </data>
+  <data name="KgTextBlock.Text" xml:space="preserve">
+    <value>кг</value>
+  </data>
+  <data name="MTextBlock.Text" xml:space="preserve">
+    <value>м</value>
+  </data>
+  <data name="StardustTextBlock.Text" xml:space="preserve">
+    <value>STARDUST</value>
+  </data>
+  <data name="TypeTextBlock.Text" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="WeightTextBlock.Text" xml:space="preserve">
+    <value>Вес</value>
+  </data>
+  <data name="EvolveButton.Content" xml:space="preserve">
+    <value>Развить</value>
+  </data>
+  <data name="PowerUpButton.Content" xml:space="preserve">
+    <value>Улучшить</value>
+  </data>
+  <data name="TransferButton.Content" xml:space="preserve">
+    <value>Передать</value>
   </data>
 </root>

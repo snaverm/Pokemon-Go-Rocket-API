@@ -303,6 +303,7 @@ namespace PokemonGo_UWP.ViewModels
                               string.Format(Resources.CodeResources.GetString("TransferPokemonSuccessText"),
                                   Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString()))).ShowAsyncQueue();
                       await GameClient.UpdateInventory();
+                      await GameClient.UpdatePlayerStats();
                       NavigationService.Navigate(typeof(PokemonInventoryPage));
                       break;
                   // TODO: what to do on error?
