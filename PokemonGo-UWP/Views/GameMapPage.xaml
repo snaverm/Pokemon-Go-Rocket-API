@@ -639,26 +639,22 @@
 
         </Grid>
 
-        <Grid RelativePanel.AlignBottomWithPanel="True"
-              RelativePanel.AlignLeftWithPanel="True"
-              RelativePanel.AlignRightWithPanel="True"
-              RelativePanel.AlignTopWithPanel="True"
-              Canvas.ZIndex="1"
-              Background="Transparent"
-              Height="224">
 			<Button
-                Style="{ThemeResource ImageButtonStyle}"
-                Height="{ThemeResource UiButtonSize}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                x:Name="ReactivateMapAutoUpdate" Tapped="ReactivateMapAutoUpdate_Tapped"
-                FontSize="36" Margin="0,0,32,0">
+				x:Name="ReactivateMapAutoUpdate" 
+				Canvas.ZIndex="1"
+				Style="{ThemeResource ImageButtonStyle}"
+				Height="{ThemeResource UiButtonSize}"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Bottom"
+				Tapped="ReactivateMapAutoUpdate_Tapped"
+				FontSize="36" Margin="0,144,32,0" 
+				RelativePanel.AlignVerticalCenterWithPanel="True" 
+				RelativePanel.AlignRightWithPanel="True">
 				<Image Source="../Assets/Icons/RecenterMapIcon.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" 
 							 Height="32"/>
 
 			</Button>
-        </Grid>
     </RelativePanel>
 </Page>
