@@ -294,10 +294,12 @@ namespace PokemonGo_UWP
                     break;
                 case LiveTileModes.People:
                     tile = LiveTileHelper.GetPeopleTile(images);
+                    //Logger.Write(tile.GetXml().GetXml());
                     LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
                     break;
                 case LiveTileModes.Photo:
                     tile = LiveTileHelper.GetPhotosTile(images);
+                    //Logger.Write(tile.GetXml().GetXml());
                     LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
                     break;
             }
