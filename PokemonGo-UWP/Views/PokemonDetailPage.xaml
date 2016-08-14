@@ -569,6 +569,7 @@
                                                    Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                             <TextBlock Foreground="#626264"
                                                        FontSize="19"
+                                                       TextWrapping="WrapWholeWords"
                                                        Text="{Binding CurrentCandy.Candy_}"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center" />
