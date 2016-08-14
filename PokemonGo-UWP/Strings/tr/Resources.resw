@@ -42,16 +42,16 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>YUMURTALAR</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Müzik</value>
   </data>
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>AYARLAR</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Çıkış Yap</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Titreşim</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -69,7 +69,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Seviye</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Haritayı otomatik döndür</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">

@@ -42,7 +42,7 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>JAJKA</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Muzyka</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -51,10 +51,10 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>USTAWIENIA</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Wibracje</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -76,7 +76,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Poziom</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Autorotacja Mapy</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
@@ -85,7 +85,7 @@
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>INKUBATORY</value>
   </data>
-  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
+  <data name="SettingsUseNianticMapTextBlock.Text" xml:space="preserve">
     <value>Mapa Niantic</value>
   </data>
 </root>

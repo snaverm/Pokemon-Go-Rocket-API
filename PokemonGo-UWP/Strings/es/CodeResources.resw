@@ -12,4 +12,84 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy hh:mm tt</value>
+  </data>
+  <data name="PokemonFledText" xml:space="preserve">
+    <value>{0} huyó</value>
+  </data>
+  <data name="GettingGpsSignalText" xml:space="preserve">
+    <value>Obteniendo señal de GPS...</value>
+  </data>
+  <data name="GettingUserDataText" xml:space="preserve">
+    <value>Obteniendo los datos del usuario...</value>
+  </data>
+  <data name="GoogleErrorText" xml:space="preserve">
+    <value>Google devolvió el error: </value>
+  </data>
+  <data name="GoogleNotRespondingText" xml:space="preserve">
+    <value>Google no está respondiendo, por favor intente más tarde.</value>
+  </data>
+  <data name="LoadingEncounterText" xml:space="preserve">
+    <value>Cargando encuentro con {0}</value>
+  </data>
+  <data name="LoggingInText" xml:space="preserve">
+    <value>Iniciando sesión...</value>
+  </data>
+  <data name="LoginFailedText" xml:space="preserve">
+    <value>Inicio de sesión fallido, por favor intente de nuevo.</value>
+  </data>
+  <data name="NoText" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoGpsPermissionsText" xml:space="preserve">
+    <value>Necesitamos permiso sobre tu ubicación para ejecutar el juego, por favor habilítalo e inténtelo de nuevo.</value>
+  </data>
+  <data name="PokemonRanAwayText" xml:space="preserve">
+    <value>El Pokemon se escapó, lo sentimos :(</value>
+  </data>
+  <data name="PtcDownText" xml:space="preserve">
+    <value>El inicio de sesión de PTC probablemente este caído, por favor intente más tarde.</value>
+  </data>
+  <data name="SomethingWentWrongText" xml:space="preserve">
+    <value>Algo fué mal y la aplicación puede ser inestable. ¿Desea desconectarse e intentarlo de nuevo?</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>hh:mm tt</value>
+  </data>
+  <data name="UpdateDownloadingText" xml:space="preserve">
+    <value>Descargando la actualización {0}</value>
+  </data>
+  <data name="UpdatedVersionText" xml:space="preserve">
+    <value>Una versión actualizada esta disponble {0}. ¿Desea actualizar?
+{1}</value>
+  </data>
+  <data name="UpdateFailedText" xml:space="preserve">
+    <value>Actualización fallida: {0}
+¿Desea abrir la página con los archivos de instalación para instalarla manualmente?</value>
+  </data>
+  <data name="UpdateInstallingText" xml:space="preserve">
+    <value>Instalando la actualización, reiniciando la aplicación...</value>
+  </data>
+  <data name="WrongUsernameText" xml:space="preserve">
+    <value>El usuario o contraseña son incorrectos o el servidor esta desconectado. Por favor intente nuevamente.</value>
+  </data>
+  <data name="YesText" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="InstinctTeamText" xml:space="preserve">
+    <value>Instinto</value>
+  </data>
+  <data name="NoTeamText" xml:space="preserve">
+    <value>Sin equipo</value>
+  </data>
+  <data name="ValorTeamText" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="MysticTeamText" xml:space="preserve">
+    <value>Sabiduría</value>
+  </data>
 </root>

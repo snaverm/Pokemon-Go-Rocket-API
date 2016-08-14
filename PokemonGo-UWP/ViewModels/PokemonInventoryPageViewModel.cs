@@ -42,7 +42,7 @@ namespace PokemonGo_UWP.ViewModels
                 PokemonInventory = (ObservableCollection<PokemonDataWrapper>) suspensionState[nameof(PokemonInventory)];
                 EggsInventory = (ObservableCollection<PokemonDataWrapper>) suspensionState[nameof(EggsInventory)];
             }
-            else if (parameter is bool)
+            else
             {
                 // Navigating from game page, so we need to actually load the inventory
                 // The sorting mode is directly bound to the settings
@@ -52,20 +52,22 @@ namespace PokemonGo_UWP.ViewModels
 
                 RaisePropertyChanged(() => PokemonInventory);
 
-                var unincubatedEggs = GameClient.EggsInventory.Where(o => string.IsNullOrEmpty(o.EggIncubatorId));
-                var incubatedEggs = GameClient.EggsInventory.Where(o => !string.IsNullOrEmpty(o.EggIncubatorId));
+                var unincubatedEggs = GameClient.EggsInventory.Where(o => string.IsNullOrEmpty(o.EggIncubatorId))
+                                                              .OrderBy(c => c.EggKmWalkedTarget);
+                var incubatedEggs = GameClient.EggsInventory.Where(o => !string.IsNullOrEmpty(o.EggIncubatorId))
+                                                              .OrderBy(c => c.EggKmWalkedTarget);
+
+                // advancedrei: I have verified this is the sort order in the game.
+                foreach (var incubatedEgg in incubatedEggs)
+                {
+                    var incubatorData = GameClient.UsedIncubatorsInventory.FirstOrDefault(incubator => incubator.Id == incubatedEgg.EggIncubatorId);
+                    EggsInventory.Add(new IncubatedEggDataWrapper(incubatorData, GameClient.PlayerStats.KmWalked, incubatedEgg));
+                }
 
                 foreach (var pokemonData in unincubatedEggs)
                 {
                     EggsInventory.Add(new PokemonDataWrapper(pokemonData));
                 }
-                foreach (var incubatorData in GameClient.UsedIncubatorsInventory)
-                {
-                    var pokemonData = incubatedEggs.FirstOrDefault(o => o.EggIncubatorId == incubatorData.Id);
-                    EggsInventory.Add(new IncubatedEggDataWrapper(incubatorData,GameClient.PlayerStats.KmWalked, pokemonData));
-                }
-
-                EggsInventory.OrderBy(c => c.EggKmWalkedTarget);
             }
 
             await Task.CompletedTask;

@@ -22,7 +22,7 @@
     <value>Connexion avec un compte PTC</value>
   </data>
   <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
-    <value>Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faite pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</value>
+    <value>Pour vous connecter vous devez insérer votre Nom d'ulitisaeur/Email et votre mot de passe dans cette application. Si vous ne lui faites pas confiance, fermez la avant de continuer. Nous ne sommes pas responsable de quoi que ce soit.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
     <value>proche</value>
@@ -39,13 +39,13 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>OEUFS</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Musique</value>
   </data>
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>PARAMETRES</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -60,7 +60,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Niveau</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Rotation automatique de la carte</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">

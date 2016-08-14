@@ -39,7 +39,7 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>VEJCE</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Hudba</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -48,10 +48,10 @@
   <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
     <value>NASTAVENÍ</value>
   </data>
-  <data name="SignOutTextBlock.Text" xml:space="preserve">
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Odhlásit se</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Vibrace</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -66,7 +66,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Úroveň</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Auto-rotovat Mapu</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
