@@ -215,7 +215,7 @@
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 Command="{x:Bind TrySearchPokestop}">
                             <Image
-                                Source="{Binding Converter={StaticResource PokestopToIconConverter}}"
+                                Source="{Binding FortDataStatus, Converter={StaticResource PokestopToIconConverter}}"
                                 maps:MapControl.Location="{Binding Geoposition}"
                                 maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                 Stretch="Uniform"
@@ -352,7 +352,7 @@
                     x:Name="PokedexButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="PokedexTextBlock" 
+                    <TextBlock x:Uid="PokedexTextBlock"
                                Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokedex.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
@@ -368,7 +368,7 @@
                     x:Name="PokemonButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="PokemonTextBlock" 
+                    <TextBlock x:Uid="PokemonTextBlock"
                                Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_pokemon.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
@@ -383,7 +383,7 @@
                     x:Name="ToolsButton">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock x:Uid="ItemsTextBlock" 
+                    <TextBlock x:Uid="ItemsTextBlock"
                                Style="{StaticResource TextMenuItemVertical}" />
                     <Image Source="../Assets/Buttons/btn_items.png"
                            Stretch="Uniform" Height="{ThemeResource UiButtonSize}"
@@ -541,15 +541,16 @@
                     </Ellipse>
                 </Button>
 
-                <ProgressBar Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}}"
-                             Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
-                             Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
-                             Height="5"
-                             Margin="0,-5,0,0"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="AvatarButton"
-                             x:Name="ExperienceProgressBar" />
+                <ProgressBar
+                    Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}}"
+                    Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
+                    Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
+                    Height="5"
+                    Margin="0,-5,0,0"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.Below="AvatarButton"
+                    x:Name="ExperienceProgressBar" />
 
                 <TextBlock Text="{Binding PlayerStats.Level}"
                            FontSize="38"

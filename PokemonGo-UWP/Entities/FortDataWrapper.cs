@@ -1,8 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using GeoExtensions;
 using Google.Protobuf;
+using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Utils;
+using PokemonGo_UWP.Utils.Game;
 using PokemonGo_UWP.Views;
 using POGOProtos.Enums;
 using POGOProtos.Map.Fort;
@@ -15,16 +19,60 @@ namespace PokemonGo_UWP.Entities
     {
         private FortData _fortData;
 
+        private DelegateCommand _trySearchPokestop;
+
+        /// <summary>
+        /// HACK - this should help updating pokestop icon on the map by binding to this
+        /// </summary>
+        public FortDataStatus FortDataStatus {
+            get
+            {
+                var distance = GeoAssist.CalculateDistanceBetweenTwoGeoPoints(Geoposition,
+                GameClient.Geoposition.Coordinate.Point);
+                FortDataStatus retVal = FortDataStatus.Opened;
+
+                if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
+                    retVal =  FortDataStatus.Closed;
+
+                if(CooldownCompleteTimestampMs > DateTime.UtcNow.ToUnixTime())
+                    retVal |= FortDataStatus.Cooldown;
+
+                return retVal;
+            }
+        }
+
         public FortDataWrapper(FortData fortData)
         {
             _fortData = fortData;
-            Geoposition = new Geopoint(new BasicGeoposition { Latitude = _fortData.Latitude, Longitude = _fortData.Longitude });
+            Geoposition =
+                new Geopoint(new BasicGeoposition {Latitude = _fortData.Latitude, Longitude = _fortData.Longitude});
         }
+
+        /// <summary>
+        ///     HACK - this should fix Pokestop floating on map
+        /// </summary>
+        public Point Anchor => new Point(0.5, 1);
+
+        /// <summary>
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        ///     The only logic here is to check if the encounter was successful before navigating, everything else is handled by
+        ///     the actual capture method.
+        /// </summary>
+        public DelegateCommand TrySearchPokestop => _trySearchPokestop ?? (
+            _trySearchPokestop = new DelegateCommand(() =>
+            {
+                NavigationHelper.NavigationState["CurrentPokestop"] = this;
+                // Disable map update
+                GameClient.ToggleUpdateTimer(false);
+                BootStrapper.Current.NavigationService.Navigate(typeof(SearchPokestopPage));
+            }, () => true)
+            );
 
         public void Update(FortData update)
         {
             _fortData = update;
 
+            OnPropertyChanged(nameof(FortDataStatus));
             OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Type));
             OnPropertyChanged(nameof(ActiveFortModifier));
@@ -44,25 +92,12 @@ namespace PokemonGo_UWP.Entities
             OnPropertyChanged(nameof(Longitude));
         }
 
-        /// <summary>
-        /// HACK - this should fix Pokestop floating on map
-        /// </summary>
-        public Point Anchor => new Point(0.5, 1);
-
-        private DelegateCommand _trySearchPokestop;
-
-        /// <summary>
-        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-        ///     The only logic here is to check if the encounter was successful before navigating, everything else is handled by
-        ///     the actual capture method.
-        /// </summary>
-        public DelegateCommand TrySearchPokestop => _trySearchPokestop ?? (
-            _trySearchPokestop = new DelegateCommand(() =>
-            {
-                NavigationHelper.NavigationState["CurrentPokestop"] = this;
-                BootStrapper.Current.NavigationService.Navigate(typeof(SearchPokestopPage), true);
-            }, () => true)
-            );
+        public void UpdateCooldown(long newCooldownTimestampMs)
+        {
+            this._fortData.CooldownCompleteTimestampMs = newCooldownTimestampMs;
+            OnPropertyChanged(nameof(FortDataStatus));
+            OnPropertyChanged(nameof(CooldownCompleteTimestampMs));
+        }
 
         #region Wrapped Properties
 

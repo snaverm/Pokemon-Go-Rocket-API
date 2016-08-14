@@ -1,4 +1,6 @@
-﻿namespace PokemonGo.RocketAPI.Helpers
+﻿using System;
+
+namespace PokemonGo.RocketAPI.Helpers
 {
     public interface ILocationFix
     {
@@ -9,10 +11,15 @@
         uint Floor { get; }
         ulong LocationType { get; }
         ulong ProviderStatus { get; }
+        ulong Timestamp { get; }
+        float HorizontalAccuracy { get; }
+        float VerticalAccuracy { get; }
 
     }
+
     public interface IDeviceInfo
     {
+        TimeSpan TimeSnapshot { get; }
         ulong AccelerometerAxes { get;}
         double AccelRawX { get; }
         double AccelRawY { get; }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
@@ -11,7 +9,6 @@ using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
-using System.Collections.ObjectModel;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -20,13 +17,13 @@ namespace PokemonGo_UWP.ViewModels
         #region Lifecycle Handlers
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="mode"></param>
         /// <param name="suspensionState"></param>
         /// <returns></returns>
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
+            IDictionary<string, object> suspensionState)
         {
             // Prevent from going back to other pages
             NavigationService.ClearHistory();
@@ -38,7 +35,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             else
             {
-                // TODO: load only if user enabled this with the missing checkbox
+                if (!RememberLoginData) return;
                 var currentCredentials = SettingsService.Instance.UserCredentials;
                 if (currentCredentials == null) return;
                 currentCredentials.RetrievePassword();
@@ -49,7 +46,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Save state before navigating
+        ///     Save state before navigating
         /// </summary>
         /// <param name="suspensionState"></param>
         /// <param name="suspending"></param>
@@ -106,6 +103,12 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
+        public bool RememberLoginData
+        {
+            get { return SettingsService.Instance.RememberLoginData; }
+            set { SettingsService.Instance.RememberLoginData = value; }
+        }
+
         #endregion
 
         #region Game Logic        
@@ -130,7 +133,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                     {
                         // Goto game page
-                        await NavigationService.NavigateAsync(typeof(GameMapPage), true);
+                        await NavigationService.NavigateAsync(typeof(GameMapPage), GameMapNavigationModes.AppStart);
                     }
                 }
                 catch (PtcOfflineException)
@@ -140,8 +143,8 @@ namespace PokemonGo_UWP.ViewModels
                 catch (LoginFailedException)
                 {
                     await
-                            new MessageDialog(Resources.CodeResources.GetString("LoginFailedText"))
-                                .ShowAsyncQueue();
+                        new MessageDialog(Resources.CodeResources.GetString("LoginFailedText"))
+                            .ShowAsyncQueue();
                 }
                 finally
                 {
@@ -168,16 +171,19 @@ namespace PokemonGo_UWP.ViewModels
                     else
                     {
                         // Goto game page
-                        await NavigationService.NavigateAsync(typeof(GameMapPage), true);
+                        await NavigationService.NavigateAsync(typeof(GameMapPage), GameMapNavigationModes.AppStart);
                     }
                 }
                 catch (GoogleOfflineException)
                 {
-                    await new MessageDialog(Resources.CodeResources.GetString("GoogleNotRespondingText")).ShowAsyncQueue();
+                    await
+                        new MessageDialog(Resources.CodeResources.GetString("GoogleNotRespondingText")).ShowAsyncQueue();
                 }
                 catch (GoogleException e)
                 {
-                    await new MessageDialog(Resources.CodeResources.GetString("GoogleErrorText") + e.Message).ShowAsyncQueue();
+                    await
+                        new MessageDialog(Resources.CodeResources.GetString("GoogleErrorText") + e.Message)
+                            .ShowAsyncQueue();
                 }
                 finally
                 {
@@ -187,6 +193,5 @@ namespace PokemonGo_UWP.ViewModels
             );
 
         #endregion
-
     }
 }

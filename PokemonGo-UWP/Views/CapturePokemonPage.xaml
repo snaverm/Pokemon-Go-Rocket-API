@@ -7,7 +7,6 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
-    xmlns:controls="using:Template10.Controls"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -121,6 +120,17 @@
                 Storyboard.TargetName="CurrentPokemonIcon">
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1" />
                 <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+        <Storyboard x:Name="CatchFlee">
+
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="CurrentPokemonIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="-1000" />
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
@@ -495,7 +505,7 @@
                 Margin="8"
                 Height="{ThemeResource UiButtonSize}"
                 HorizontalAlignment="Center"
-                Command="{Binding ReturnToGameScreen}"
+                Command="{Binding EscapeEncounterCommand}"
                 x:Name="EscapeEncounterButton">
             <Image Source="../Assets/Buttons/btn_run_away.png"
                    Stretch="Uniform"
