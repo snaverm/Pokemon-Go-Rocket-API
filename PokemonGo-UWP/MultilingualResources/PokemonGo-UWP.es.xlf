@@ -289,8 +289,9 @@
           <target state="translated">Necesitamos permiso sobre tu ubicación para ejecutar el juego, por favor habilítalo e inténtelo de nuevo.</target>
         </trans-unit>
         <trans-unit id="PokemonRanAwayText" translate="yes" xml:space="preserve">
-          <source>Pokemon ran away, sorry :(</source>
-          <target state="translated">El Pokemon se escapó, lo sentimos :(</target>
+          <source>Pokémon ran away, sorry :(</source>
+          <target state="needs-review-translation">El Pokemon se escapó, lo sentimos :(</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="PtcDownText" translate="yes" xml:space="preserve">
           <source>PTC login is probably down, please retry later.</source>
@@ -348,6 +349,114 @@ Open page with installation files for manual install?</source>
           <source>Mystic</source>
           <target state="translated">Sabiduría</target>
         </trans-unit>
+        <trans-unit id="LoginExpired" translate="yes" xml:space="preserve">
+          <source>Previous login expired.</source>
+          <target state="new">Previous login expired.</target>
+        </trans-unit>
+        <trans-unit id="TransferPokemonSuccessText" translate="yes" xml:space="preserve">
+          <source>Transfer succeeded! Got a {0} Candy from the Professor.</source>
+          <target state="new">Transfer succeeded! Got a {0} Candy from the Professor.</target>
+        </trans-unit>
+        <trans-unit id="TransferPokemonWarningText" translate="yes" xml:space="preserve">
+          <source>You can't take it back after it's transferred to the Professor. Do you really want to transfer {0} to the Professor?</source>
+          <target state="new">You can't take it back after it's transferred to the Professor. Do you really want to transfer {0} to the Professor?</target>
+        </trans-unit>
+        <trans-unit id="ActivityUnknown" translate="yes" xml:space="preserve">
+          <source>Unknown</source>
+          <target state="new">Unknown</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchPokemon" translate="yes" xml:space="preserve">
+          <source>Pokémon Caught</source>
+          <target state="new">Pokémon Caught</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchLegendPokemon" translate="yes" xml:space="preserve">
+          <source>Catch Legend Pokémon</source>
+          <target state="new">Catch Legend Pokémon</target>
+        </trans-unit>
+        <trans-unit id="ActivityFleePokemon" translate="yes" xml:space="preserve">
+          <source>Pokémon Fled</source>
+          <target state="new">Pokémon Fled</target>
+        </trans-unit>
+        <trans-unit id="ActivityDefeatFort" translate="yes" xml:space="preserve">
+          <source>Defeat Fort</source>
+          <target state="new">Defeat Fort</target>
+        </trans-unit>
+        <trans-unit id="ActivityEvolvePokemon" translate="yes" xml:space="preserve">
+          <source>Evolve a Pokémon</source>
+          <target state="new">Evolve a Pokémon</target>
+        </trans-unit>
+        <trans-unit id="ActivityHatchEgg" translate="yes" xml:space="preserve">
+          <source>Egg Hatched!</source>
+          <target state="new">Egg Hatched!</target>
+        </trans-unit>
+        <trans-unit id="ActivityWalkKm" translate="yes" xml:space="preserve">
+          <source>Walk Km</source>
+          <target state="new">Walk Km</target>
+        </trans-unit>
+        <trans-unit id="ActivityPokedexEntryNew" translate="yes" xml:space="preserve">
+          <source>New Pokémon</source>
+          <target state="new">New Pokémon</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchFirstThrow" translate="yes" xml:space="preserve">
+          <source>First Throw</source>
+          <target state="new">First Throw</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchNiceThrow" translate="yes" xml:space="preserve">
+          <source>Nice Throw</source>
+          <target state="new">Nice Throw</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchGreatThrow" translate="yes" xml:space="preserve">
+          <source>Great Throw</source>
+          <target state="new">Great Throw</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchExcellentThrow" translate="yes" xml:space="preserve">
+          <source>Excellent Throw</source>
+          <target state="new">Excellent Throw</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchCurveball" translate="yes" xml:space="preserve">
+          <source>Curveball</source>
+          <target state="new">Curveball</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchFirstCatchOfDay" translate="yes" xml:space="preserve">
+          <source>First Catch of Day!</source>
+          <target state="new">First Catch of Day!</target>
+        </trans-unit>
+        <trans-unit id="ActivityCatchMilestone" translate="yes" xml:space="preserve">
+          <source>Catch Milestone</source>
+          <target state="new">Catch Milestone</target>
+        </trans-unit>
+        <trans-unit id="ActivityTrainPokemon" translate="yes" xml:space="preserve">
+          <source>Train Pokémon</source>
+          <target state="new">Train Pokémon</target>
+        </trans-unit>
+        <trans-unit id="ActivitySearchFort" translate="yes" xml:space="preserve">
+          <source>Search Fort</source>
+          <target state="new">Search Fort</target>
+        </trans-unit>
+        <trans-unit id="ActivityReleasePokemon" translate="yes" xml:space="preserve">
+          <source>Release Pokémon</source>
+          <target state="new">Release Pokémon</target>
+        </trans-unit>
+        <trans-unit id="ActivityHatchEggSmallBonus" translate="yes" xml:space="preserve">
+          <source>Hatch Egg Small Bonus</source>
+          <target state="new">Hatch Egg Small Bonus</target>
+        </trans-unit>
+        <trans-unit id="ActivityHatchEggMediumBonus" translate="yes" xml:space="preserve">
+          <source>Hatch Egg Medium Bonus</source>
+          <target state="new">Hatch Egg Medium Bonus</target>
+        </trans-unit>
+        <trans-unit id="ActivityHatchEggLargeBonus" translate="yes" xml:space="preserve">
+          <source>Hatch Egg Large Bonus</source>
+          <target state="new">Hatch Egg Large Bonus</target>
+        </trans-unit>
+        <trans-unit id="ActivityDefeatGymDefender" translate="yes" xml:space="preserve">
+          <source>Defeat Gym Defender</source>
+          <target state="new">Defeat Gym Defender</target>
+        </trans-unit>
+        <trans-unit id="ActivityDefeatGymLeader" translate="yes" xml:space="preserve">
+          <source>Defeat Gym Leader</source>
+          <target state="new">Defeat Gym Leader</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -374,24 +483,27 @@ Open page with installation files for manual install?</source>
           <target state="translated">Iniciar Sesión con una cuenta PTC</target>
         </trans-unit>
         <trans-unit id="LoginDisclaimerTextBox.Text" translate="yes" xml:space="preserve">
-          <source>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</source>
-          <target state="translated">Para conectarte tienes que poner tu nombre de usuario/correo electrónico en esta. Si no confías en la misma, por favor, ciérrala antes de continuar. No nos hacemos responsables por nada.</target>
+          <source>To login, enter your Username/Email and Password above. If you don't trust this app, please close it now. Niantic may ban you for using this app. Use at your own risk.</source>
+          <target state="needs-review-translation">Para conectarte tienes que poner tu nombre de usuario/correo electrónico en esta. Si no confías en la misma, por favor, ciérrala antes de continuar. No nos hacemos responsables por nada.</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NearbyPokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>nearby</source>
           <target state="translated">cerca</target>
         </trans-unit>
         <trans-unit id="OutOfRangeTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>You are out of range</source>
-          <target state="translated">Estás fuera del alcance</target>
+          <source>THIS POKÉSTOP IS TOO FAR AWAY</source>
+          <target state="needs-review-translation">Estás fuera del alcance</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="LoginPasswordPasswordBox.PlaceholderText" translate="yes" xml:space="preserve">
           <source>Password</source>
           <target state="translated">Contraseña</target>
         </trans-unit>
         <trans-unit id="LoginUsernameTextBox.PlaceholderText" translate="yes" xml:space="preserve">
-          <source>Username/email</source>
-          <target state="translated">Nombre de usuario/correo electrónico</target>
+          <source>Username / Email</source>
+          <target state="needs-review-translation">Nombre de usuario/correo electrónico</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ExperienceTextBlock.Text" translate="yes" xml:space="preserve">
           <source>XP</source>
@@ -409,10 +521,6 @@ Open page with installation files for manual install?</source>
           <source>EGGS</source>
           <target state="translated" state-qualifier="mt-suggestion">HUEVOS</target>
         </trans-unit>
-        <trans-unit id="MusicTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Music</source>
-          <target state="translated" state-qualifier="tm-suggestion">Música</target>
-        </trans-unit>
         <trans-unit id="PokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>POKÉMON</source>
           <target state="translated">POKÉMON</target>
@@ -420,14 +528,6 @@ Open page with installation files for manual install?</source>
         <trans-unit id="SettingsHeaderTextBlock.Text" translate="yes" xml:space="preserve">
           <source>SETTINGS</source>
           <target state="translated">OPCIONES</target>
-        </trans-unit>
-        <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Sign Out</source>
-          <target state="translated">Salir</target>
-        </trans-unit>
-        <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Vibration</source>
-          <target state="translated" state-qualifier="tm-suggestion">Vibración</target>
         </trans-unit>
         <trans-unit id="ItemsTextBlock.Text" translate="yes" xml:space="preserve">
           <source>ITEMS</source>
@@ -466,10 +566,6 @@ Open page with installation files for manual install?</source>
           <source>Level</source>
           <target state="translated">Nivel</target>
         </trans-unit>
-        <trans-unit id="MapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Auto-Rotate Map</source>
-          <target state="translated">Auto-rotación del Mapa</target>
-        </trans-unit>
         <trans-unit id="StartDateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START DATE</source>
           <target state="translated">FECHA DE INICIO</target>
@@ -478,9 +574,74 @@ Open page with installation files for manual install?</source>
           <source>INCUBATORS</source>
           <target state="translated">INCUBADORAS</target>
         </trans-unit>
-        <trans-unit id="UseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Niantic map</source>
-          <target state="translated">Mapa de Niantic</target>
+        <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Music</source>
+          <target state="new">Music</target>
+        </trans-unit>
+        <trans-unit id="SettingsSignOutTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Sign Out</source>
+          <target state="new">Sign Out</target>
+        </trans-unit>
+        <trans-unit id="SettingsVibrationTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Vibration</source>
+          <target state="new">Vibration</target>
+        </trans-unit>
+        <trans-unit id="SettingsMapAutoRotateTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Auto-Rotate Map</source>
+          <target state="new">Auto-Rotate Map</target>
+        </trans-unit>
+        <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use Niantic Map</source>
+          <target state="new">Use Niantic Map</target>
+        </trans-unit>
+        <trans-unit id="CandyTextBlock.Text" translate="yes" xml:space="preserve">
+          <source> CANDY</source>
+          <target state="new"> CANDY</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Watch out: space before the word!</note>
+        </trans-unit>
+        <trans-unit id="HeightTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Height</source>
+          <target state="new">Height</target>
+        </trans-unit>
+        <trans-unit id="HpTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>HP </source>
+          <target state="new">HP </target>
+        </trans-unit>
+        <trans-unit id="KgTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>kg</source>
+          <target state="new">kg</target>
+        </trans-unit>
+        <trans-unit id="MTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>m</source>
+          <target state="new">m</target>
+        </trans-unit>
+        <trans-unit id="StardustTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>STARDUST</source>
+          <target state="new">STARDUST</target>
+        </trans-unit>
+        <trans-unit id="TypeTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target state="new">Type</target>
+        </trans-unit>
+        <trans-unit id="WeightTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Weight</source>
+          <target state="new">Weight</target>
+        </trans-unit>
+        <trans-unit id="EvolveButton.Content" translate="yes" xml:space="preserve">
+          <source>EVOLVE</source>
+          <target state="new">EVOLVE</target>
+        </trans-unit>
+        <trans-unit id="PowerUpButton.Content" translate="yes" xml:space="preserve">
+          <source>POWER UP</source>
+          <target state="new">POWER UP</target>
+        </trans-unit>
+        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
+          <source>Remember Map Zoom</source>
+          <target state="new">Remember Map Zoom</target>
+        </trans-unit>
+        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
+          <source>TRANSFER</source>
+          <target state="new">TRANSFER</target>
         </trans-unit>
       </group>
     </body>

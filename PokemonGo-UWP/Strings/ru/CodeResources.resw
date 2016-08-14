@@ -12,6 +12,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy hh:mm tt</value>
+  </data>
+  <data name="PokemonFledText" xml:space="preserve">
+    <value>{0} сбежал</value>
+  </data>
+  <data name="GettingGpsSignalText" xml:space="preserve">
+    <value>Получение GPS сигнала...</value>
+  </data>
+  <data name="GettingUserDataText" xml:space="preserve">
+    <value>Получение пользовательских данных...</value>
+  </data>
+  <data name="GoogleErrorText" xml:space="preserve">
+    <value>Google вернул ошибку: </value>
+  </data>
+  <data name="GoogleNotRespondingText" xml:space="preserve">
+    <value>Google не отвечает, подождите немного и попробуйте ешё раз.</value>
+  </data>
+  <data name="LoadingEncounterText" xml:space="preserve">
+    <value>Загрузка битвы с {0}</value>
+  </data>
+  <data name="LoggingInText" xml:space="preserve">
+    <value>Вход...</value>
+  </data>
   <data name="LoginFailedText" xml:space="preserve">
     <value>Вход не удался, попробуйте ещё раз.</value>
   </data>
@@ -30,6 +57,9 @@
   </data>
   <data name="SomethingWentWrongText" xml:space="preserve">
     <value>Что-то пошло не так и приложение может работать не стабильно. Вы хотите выйти и попробовать ещё раз?</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>hh:mm tt</value>
   </data>
   <data name="UpdateDownloadingText" xml:space="preserve">
     <value>Скачивается обновление {0}</value>
@@ -62,5 +92,11 @@
   </data>
   <data name="MysticTeamText" xml:space="preserve">
     <value>Команда "Мистика"</value>
+  </data>
+  <data name="TransferPokemonSuccessText" xml:space="preserve">
+    <value>Успешно переданно! Полученна {0} Конфета(ы) от профессора.</value>
+  </data>
+  <data name="TransferPokemonWarningText" xml:space="preserve">
+    <value>Вы не можете вернуть это после отправки Профессору. Вы правда хотите отправить {0} Профессору?</value>
   </data>
 </root>

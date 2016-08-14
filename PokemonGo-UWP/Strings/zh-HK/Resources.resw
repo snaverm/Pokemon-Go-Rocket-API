@@ -27,7 +27,7 @@
   <data name="CpTextBlock.Text" xml:space="preserve">
     <value>數值</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>音樂</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -59,8 +59,5 @@
   </data>
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>孵蛋器</value>
-  </data>
-  <data name="UseNianticMapTextBlock.Text" xml:space="preserve">
-    <value>任天堂地圖</value>
   </data>
 </root>

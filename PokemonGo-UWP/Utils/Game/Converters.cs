@@ -322,6 +322,26 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class AchievementDescriptionTranslationConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var achievementType = (KeyValuePair<AchievementType, object>)value;
+            var type = achievementType.Key.GetType();
+            var fieldInfo = type.GetField(achievementType.Key.ToString());
+            var badgeType =
+                (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
+
+            return badgeType == null ? "" : string.Format(Resources.Achievements.GetString(badgeType.Value.ToString() + "Description"),achievementType.Value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class AchievementValueToMedalImageConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -334,7 +354,9 @@ namespace PokemonGo_UWP.Utils
             var bronze = (BronzeAttribute) fieldInfo.GetCustomAttributes(typeof(BronzeAttribute), false).First();
             var silver = (SilverAttribute) fieldInfo.GetCustomAttributes(typeof(SilverAttribute), false).First();
             var gold = (GoldAttribute) fieldInfo.GetCustomAttributes(typeof(GoldAttribute), false).First();
-
+            if (achievement.Value == null) {
+                return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
+            }
             if (float.Parse(achievement.Value.ToString()) < float.Parse(bronze.Value.ToString()))
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
@@ -370,7 +392,9 @@ namespace PokemonGo_UWP.Utils
             var bronze = (BronzeAttribute) fieldInfo.GetCustomAttributes(typeof(BronzeAttribute), false).First();
             var silver = (SilverAttribute) fieldInfo.GetCustomAttributes(typeof(SilverAttribute), false).First();
             var gold = (GoldAttribute) fieldInfo.GetCustomAttributes(typeof(GoldAttribute), false).First();
-
+            if(achievement.Value == null) {
+                return 0;
+            }
             if (achievement.Value is float)
             {
                 if (float.Parse(achievement.Value.ToString()) < float.Parse(bronze.Value.ToString()))
@@ -382,6 +406,18 @@ namespace PokemonGo_UWP.Utils
                     return float.Parse(silver.Value.ToString()).ToString("N1");
                 }
                 return float.Parse(gold.Value.ToString()).ToString("N1");
+            }
+            if (achievement.Value is double)
+            {
+                if (double.Parse(achievement.Value.ToString()) < double.Parse(bronze.Value.ToString()))
+                {
+                    return float.Parse(bronze.Value.ToString()).ToString("N1");
+                }
+                if (double.Parse(achievement.Value.ToString()) < double.Parse(silver.Value.ToString()))
+                {
+                    return float.Parse(silver.Value.ToString()).ToString("N1");
+                }
+                return double.Parse(gold.Value.ToString()).ToString("N1");
             }
             if (int.Parse(achievement.Value.ToString()) < int.Parse(bronze.Value.ToString()))
             {

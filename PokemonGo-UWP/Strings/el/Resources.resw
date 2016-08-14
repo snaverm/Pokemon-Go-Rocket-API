@@ -51,7 +51,7 @@
   <data name="EggsTextBlock.Text" xml:space="preserve">
     <value>ΑΥΓΑ</value>
   </data>
-  <data name="MusicTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
     <value>Μουσική</value>
   </data>
   <data name="PokemonTextBlock.Text" xml:space="preserve">
@@ -63,7 +63,7 @@
   <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
     <value>Αποσύνδεση</value>
   </data>
-  <data name="VibrationTextBlock.Text" xml:space="preserve">
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
     <value>Δόνηση</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
@@ -94,7 +94,7 @@
   <data name="LevelTextBlock.Text" xml:space="preserve">
     <value>Επίπεδο</value>
   </data>
-  <data name="MapAutoRotateTextBlock.Text" xml:space="preserve">
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Αυτόματη-Περιστροφή Χάρτη</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">

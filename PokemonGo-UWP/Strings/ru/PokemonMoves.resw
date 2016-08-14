@@ -51,6 +51,9 @@
   <data name="MetalClaw" xml:space="preserve">
     <value>Металлическая клешня</value>
   </data>
+  <data name="MoveUnset" xml:space="preserve">
+    <value>Перемещение отключено</value>
+  </data>
   <data name="Pound" xml:space="preserve">
     <value>Колотушка</value>
   </data>
@@ -507,6 +510,12 @@
   <data name="Thunder" xml:space="preserve">
     <value>Шторм</value>
   </data>
+  <data name="Thunderbolt" xml:space="preserve">
+    <value>Удар молнии</value>
+  </data>
+  <data name="ThunderPunch" xml:space="preserve">
+    <value>Громовой удар</value>
+  </data>
   <data name="ThunderShockFast" xml:space="preserve">
     <value>Электрошок</value>
   </data>
@@ -520,10 +529,10 @@
     <value>Удар плетью</value>
   </data>
   <data name="WaterGunFast" xml:space="preserve">
-    <value>Водяное ружьё</value>
+    <value>Водяной пистолет</value>
   </data>
   <data name="WaterGunFastBlastoise" xml:space="preserve">
-    <value>Водяное ружьё</value>
+    <value>Водяной пистолет</value>
   </data>
   <data name="WaterPulse" xml:space="preserve">
     <value>Водный пульс</value>

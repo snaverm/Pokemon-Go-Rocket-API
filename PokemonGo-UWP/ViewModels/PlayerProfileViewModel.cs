@@ -9,6 +9,9 @@ using POGOProtos.Data.Player;
 using POGOProtos.Enums;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using Windows.UI.Xaml.Controls;
+using PokemonGo_UWP.Views;
+using Template10.Common;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -177,6 +180,17 @@ namespace PokemonGo_UWP.ViewModels
             Achievements.Add(new KeyValuePair<AchievementType, object>(AchievementType.AceTrainer,
                 PlayerStats.BattleTrainingWon));
         }
+
+        #endregion
+
+        #region Navigate to detail page
+
+        private DelegateCommand<object> m_GoToAchievementDetailPage;
+
+        public DelegateCommand<object> GoToAchievementDetailPage => m_GoToAchievementDetailPage ?? (m_GoToAchievementDetailPage = new DelegateCommand<object>(x =>
+        {
+            BootStrapper.Current.NavigationService.Navigate(typeof(AchievementDetailPage), x);
+        }));
 
         #endregion
 

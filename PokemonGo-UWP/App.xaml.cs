@@ -42,7 +42,7 @@ namespace PokemonGo_UWP
         ///     Stores the current <see cref="DisplayRequest"/> instance for the app.
         /// </summary>
         private readonly DisplayRequest _displayRequest;
-		
+
         #endregion
 
         #region Properties
@@ -85,7 +85,7 @@ namespace PokemonGo_UWP
         private static async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            await ExceptionHandler.HandleException();
+            await ExceptionHandler.HandleException(new Exception(e.Message));
             // We should be logging these exceptions too so they can be tracked down.
             HockeyClient.Current.TrackException(e.Exception);
         }
@@ -98,7 +98,7 @@ namespace PokemonGo_UWP
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -198,7 +198,7 @@ namespace PokemonGo_UWP
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="startKind"></param>
         /// <param name="args"></param>
