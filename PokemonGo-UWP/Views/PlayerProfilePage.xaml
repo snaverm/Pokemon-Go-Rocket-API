@@ -257,7 +257,7 @@
                                         <TextBlock x:Name="TeamText"
                                                    HorizontalAlignment="Center"
                                                    Style="{ThemeResource ProfilePageText}"
-                                                   TextWrapping="Wrap"
+                                                   TextWrapping="WrapWholeWords"
                                                    Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}" />
                                     </StackPanel>
                                 </Grid>
