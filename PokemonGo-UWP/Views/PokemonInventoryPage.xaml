@@ -282,15 +282,23 @@
 
                 <PivotItem Margin="0"
                            x:Name="PokemonsPivot">
-                    <PivotItem.Header>
-                        <TextBlock VerticalAlignment="Center"
+                         <PivotItem.Header>
+                          <StackPanel Orientation="Vertical">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"
                                    Foreground="#5a7878"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Name="PokemonsPivotHeader"
                                    x:Uid="PokemonText"
-                                   Text="POKÉMON" />
+                                   Text="POKEMON"
+                                   />
+                            <TextBlock Foreground="#5a7878" FontSize="15" HorizontalAlignment="Center">
+                                <Run Text="{Binding PokemonInventory.Count}"/>
+                                <Run Text=" / "/>
+                                <Run Text="250"/>
+                            </TextBlock>
+                        </StackPanel>
                     </PivotItem.Header>
                     <RelativePanel>
                         <GridView
@@ -387,14 +395,21 @@
                 <PivotItem Margin="0"
                            x:Name="EggsPivot">
 
-                    <PivotItem.Header>
-                        <TextBlock VerticalAlignment="Center"
+                        <PivotItem.Header>
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"
                                    Foreground="#5a7878"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Name="EggsPivotHeader"
                                    x:Uid="EggsTextBlock" />
+                            <TextBlock Foreground="#5a7878" FontSize="15" HorizontalAlignment="Center">
+                                <Run Text="{Binding EggsInventory.Count}"/>
+                                <Run Text=" / "/>
+                                <Run Text="9"/>
+                            </TextBlock>
+                        </StackPanel>
                     </PivotItem.Header>
 
 
