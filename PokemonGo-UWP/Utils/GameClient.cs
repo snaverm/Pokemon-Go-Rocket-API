@@ -363,8 +363,11 @@ namespace PokemonGo_UWP.Utils
         #region Data Updating
 
         private static Geolocator _geolocator;
+        private static Compass _compass;
 
         public static Geoposition Geoposition { get; private set; }
+
+        public static double Heading { get; private set; }
 
         private static DispatcherTimer _mapUpdateTimer;
 
@@ -378,6 +381,7 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
+            _compass = Compass.GetDefault();
             _geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
@@ -396,11 +400,9 @@ namespace PokemonGo_UWP.Utils
                 await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
                 GeopositionUpdated?.Invoke(null, Geoposition);
             };
+            Heading = (double)(_compass != null ? _compass.GetCurrentReading().HeadingTrueNorth : 0);
             // Before starting we need game settings
-            GameSetting =
-                await
-                    DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings,
-                        DateTime.Now.AddMonths(1));
+            GameSetting = await DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings, DateTime.Now.AddMonths(1));
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
