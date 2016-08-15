@@ -325,13 +325,15 @@ namespace PokemonGo_UWP.Utils
         {
             // Clear stored token
             SettingsService.Instance.AuthToken = null;
-            SettingsService.Instance.UserCredentials = null;
+            if (!SettingsService.Instance.RememberLoginData)
+                SettingsService.Instance.UserCredentials = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
+            _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
-            NearbyPokestops.Clear();
+            NearbyPokestops.Clear();            
         }
 
         public static async Task DoRelogin()
@@ -388,14 +390,7 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += async (s, e) =>
-            {
-                Geoposition = e.Position;
-                // Updating player's position
-                var position = Geoposition.Coordinate.Point.Position;
-                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
-                GeopositionUpdated?.Invoke(null, Geoposition);
-            };
+            _geolocator.PositionChanged += GeolocatorOnPositionChanged;
             // Before starting we need game settings
             GameSetting =
                 await
@@ -429,6 +424,15 @@ namespace PokemonGo_UWP.Utils
             await UpdateInventory();
             await UpdateItemTemplates();
             Busy.SetBusy(false);
+        }
+
+        private static async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Geoposition = args.Position;
+            // Updating player's position
+            var position = Geoposition.Coordinate.Point.Position;
+            await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
+            GeopositionUpdated?.Invoke(null, Geoposition);
         }
 
         /// <summary>
