@@ -39,28 +39,33 @@
             <DoubleAnimation
                 Storyboard.TargetName="PokedexButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
+                From="0"
                 To="-180"
                 Duration="0:0:0.2"/>
 
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
+                From="0"
                 To="-70"
                 Duration="0:0:0.2"/>
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
+                From="0"
                 To="-100"
                 Duration="0:0:0.2"/>
 
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
+                From="0"
                 To="-70"
                 Duration="0:0:0.2"/>
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
+                From="0"
                 To="100"
                 Duration="0:0:0.2"/>
 
@@ -409,7 +414,7 @@
                     RelativePanel.AlignHorizontalCenterWithPanel="True" 
                     RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-180" x:Name="PokedexButtonTrans"/>
+                    <CompositeTransform x:Name="PokedexButtonTrans"/>
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
@@ -429,7 +434,7 @@
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="PokemonButton">
                 <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-70" TranslateX="-100" x:Name="PokemonButtonTrans"/>
+                    <CompositeTransform x:Name="PokemonButtonTrans"/>
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
@@ -442,14 +447,14 @@
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
+                    RelativePanel.AlignBottomWithPanel="True"
                     Margin="0,0,0,24" 
                     RelativePanel.AlignHorizontalCenterWithPanel="True" 
-                    Margin="0,0,24,128"
                     Command="{Binding GotoItemsInventoryPageCommand}"
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="ToolsButton">
                 <Button.RenderTransform>
-                    <CompositeTransform TranslateY="-70" TranslateX="100" x:Name="ToolsButtonTrans"/>
+                    <CompositeTransform x:Name="ToolsButtonTrans"/>
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
