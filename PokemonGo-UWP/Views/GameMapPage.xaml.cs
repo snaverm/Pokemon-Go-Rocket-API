@@ -203,10 +203,6 @@ namespace PokemonGo_UWP.Views
                         //Position was changed by user, activate button to go back to automatic mode
                         ReactivateMapAutoUpdate.Visibility = Visibility.Visible;
                     }
-                    if (SettingsService.Instance.IsAutoRotateMapEnabled == true)
-                    {
-                        GameMapControl.Heading = GameClient.Heading;
-                    }
                 }
             });
         }
@@ -214,11 +210,18 @@ namespace PokemonGo_UWP.Views
         private void SubscribeToCaptureEvents()
         {
             GameClient.GeopositionUpdated += GeopositionUpdated;
+            GameClient.HeadingUpdated += HeadingUpdated;
             ViewModel.LevelUpRewardsAwarded += ViewModelOnLevelUpRewardsAwarded;
+        }
+
+        private void HeadingUpdated(object sender, Windows.Devices.Sensors.CompassReading e)
+        {
+            GameMapControl.Heading = e.HeadingTrueNorth ?? e.HeadingMagneticNorth;
         }
 
         private void UnsubscribeToCaptureEvents()
         {
+            GameClient.GeopositionUpdated -= GeopositionUpdated;
             GameClient.GeopositionUpdated -= GeopositionUpdated;
             ViewModel.LevelUpRewardsAwarded -= ViewModelOnLevelUpRewardsAwarded;
         }

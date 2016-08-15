@@ -28,6 +28,7 @@ using Q42.WinRT.Data;
 using Template10.Common;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
+using Windows.Devices.Sensors;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -370,11 +371,14 @@ namespace PokemonGo_UWP.Utils
         public static double Heading { get; private set; }
 
         private static DispatcherTimer _mapUpdateTimer;
+        private static DispatcherTimer _compassTimer;
 
         /// <summary>
         ///     We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
+
+        public static event EventHandler<CompassReading> HeadingUpdated;
 
         /// <summary>
         ///     Starts the timer to update map objects and the handler to update position
@@ -382,6 +386,21 @@ namespace PokemonGo_UWP.Utils
         public static async Task InitializeDataUpdate()
         {
             _compass = Compass.GetDefault();
+            _compassTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+            };
+            _compassTimer.Tick += (s, e) =>
+            {
+                if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                {
+                    HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                }
+            };
+            if (_compass != null)
+            {
+                _compassTimer.Start();
+            }
             _geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
