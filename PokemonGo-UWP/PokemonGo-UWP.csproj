@@ -413,7 +413,7 @@
     <Content Include="Assets\Pokemons\97.png" />
     <Content Include="Assets\Pokemons\98.png" />
     <Content Include="Assets\Pokemons\99.png" />
-    <Content Include="Assets\Pokemons\0.png" />
+    <Content Include="Assets\Pokemons\Egg.png" />
     <Content Include="Assets\Teams\instinct.png" />
     <Content Include="Assets\Teams\mystic.png" />
     <Content Include="Assets\Teams\no-team.png" />
