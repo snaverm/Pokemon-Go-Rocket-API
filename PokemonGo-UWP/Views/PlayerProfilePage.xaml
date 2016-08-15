@@ -308,9 +308,10 @@
                                         </interactivity:Interaction.Behaviors>
 
                                         <TextBlock x:Name="AchievementTypeText"
-                                       Text="{Binding Key, Converter={StaticResource AchievementTranslationConverter}}"
-                                       RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                       Foreground="Green" />
+                                                   Text="{Binding Key, Converter={StaticResource AchievementTranslationConverter}}"
+                                                   TextWrapping="WrapWholeWords"
+                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                   Foreground="Green" />
                                         <controls:CircularProgressBar x:Name="AchievementImage" Height="60" Width="60" SegmentColor="DeepSkyBlue"
                                                           Diameter="{Binding ActualHeight, ElementName=AchievementImage, Mode=OneWay}" StrokeThickness="2"
                                                           RelativePanel.Below="AchievementTypeText"
