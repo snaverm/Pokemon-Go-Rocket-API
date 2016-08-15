@@ -288,7 +288,7 @@
           <target state="final">Abilitare l'utilizzo del GPS per eseguire il gioco, si prega di attivarlo e riprovare.</target>
         </trans-unit>
         <trans-unit id="PokemonRanAwayText" translate="yes" xml:space="preserve">
-          <source>Pokemon ran away, sorry :(</source>
+          <source>Pokémon ran away, sorry :(</source>
           <target state="final">Il Pokémon è scappato, ci spiace :(</target>
         </trans-unit>
         <trans-unit id="PtcDownText" translate="yes" xml:space="preserve">
@@ -481,24 +481,24 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
           <target state="final">LOGIN con Account PTC</target>
         </trans-unit>
         <trans-unit id="LoginDisclaimerTextBox.Text" translate="yes" xml:space="preserve">
-          <source>To login you need to insert your Username/Email and Password in this app. If you don't trust it, please, close it before going on. We are not responsible for anything.</source>
-          <target state="final">Per effettuare il login è necessario inserire il tuo Username/Email e Password. Se non ti fidi, per favore, chiudi prima di procedere. Non ci riteniamo responsabili di nulla.</target>
+          <source>To login, enter your Username/Email and Password above. If you don't trust this app, please close it now. Niantic may ban you for using this app. Use at your own risk.</source>
+          <target state="final">Per effettuare il login, inserisci Username/Email e Password. Se non ti fidi, per favore chiudila ora. Niantic potrebbe bannarti nell'utilizzo di quest'app. Usa a tuo rischio e pericolo.</target>
         </trans-unit>
         <trans-unit id="NearbyPokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>nearby</source>
           <target state="final" state-qualifier="mt-suggestion">nelle vicinanze</target>
         </trans-unit>
         <trans-unit id="OutOfRangeTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>You are out of range</source>
-          <target state="final">Sei troppo lontano</target>
+          <source>THIS POKÉSTOP IS TOO FAR AWAY</source>
+          <target state="final">QUESTO POKÉSTOP È TROPPO LONTANO</target>
         </trans-unit>
         <trans-unit id="LoginPasswordPasswordBox.PlaceholderText" translate="yes" xml:space="preserve">
           <source>Password</source>
           <target state="final" state-qualifier="tm-suggestion">Password</target>
         </trans-unit>
         <trans-unit id="LoginUsernameTextBox.PlaceholderText" translate="yes" xml:space="preserve">
-          <source>Username/email</source>
-          <target state="final" state-qualifier="mt-suggestion">Nome utente/e-mail</target>
+          <source>Username / email</source>
+          <target state="final" state-qualifier="mt-suggestion">Nome utente / e-mail</target>
         </trans-unit>
         <trans-unit id="ExperienceTextBlock.Text" translate="yes" xml:space="preserve">
           <source>XP</source>
@@ -649,23 +649,23 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
       <group id="POKEMONGO-UWP/STRINGS/EN-US/ITEMS.RESW" datatype="resx">
         <trans-unit id="D_ItemGreatBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
-          <target state="new">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
+          <target state="translated">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
         </trans-unit>
         <trans-unit id="D_ItemIncenseCool" translate="yes" xml:space="preserve">
           <source>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</source>
-          <target state="new">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
+          <target state="final">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
         </trans-unit>
         <trans-unit id="D_ItemIncenseFloral" translate="yes" xml:space="preserve">
           <source>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</source>
-          <target state="new">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
+          <target state="final">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
         </trans-unit>
         <trans-unit id="D_ItemIncenseOrdinary" translate="yes" xml:space="preserve">
           <source>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</source>
-          <target state="new">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
+          <target state="final">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
         </trans-unit>
         <trans-unit id="D_ItemIncenseSpicy" translate="yes" xml:space="preserve">
           <source>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</source>
-          <target state="new">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
+          <target state="final">Un intenso profumo che attrae i Pokémon selvatici per 30 minuti</target>
         </trans-unit>
         <trans-unit id="D_ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>A device that incubates an Egg as you walk until it is ready to hatch.</source>
@@ -681,19 +681,19 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="D_ItemPokeBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
-          <target state="new">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
+          <target state="final">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
         </trans-unit>
         <trans-unit id="D_ItemPotion" translate="yes" xml:space="preserve">
           <source>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 20 points.</source>
-          <target state="new">Medicina spray per il trattamento delle ferite. Restituisce 20 PS a un Pokémon.</target>
+          <target state="translated">Medicina spray per il trattamento delle ferite. Restituisce 20 PS a un Pokémon.</target>
         </trans-unit>
         <trans-unit id="D_ItemRevive" translate="yes" xml:space="preserve">
           <source>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</source>
-          <target state="new">Medicina che può revitalizzare un Pokémon esausto. Restituisce anche metà dei PS massimi di un Pokémon esausto.</target>
+          <target state="final">Medicina che può revitalizzare un Pokémon esausto. Restituisce anche metà dei PS massimi di un Pokémon esausto.</target>
         </trans-unit>
         <trans-unit id="D_ItemUltraBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
-          <target state="new">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
+          <target state="translated">Strumento dotato di capsula usato per catturare Pokémon selvatici. Si lancia contro il bersaglio come una palla.</target>
         </trans-unit>
         <trans-unit id="ItemBlukBerry" translate="yes" xml:space="preserve">
           <source>Bluk Berry</source>
