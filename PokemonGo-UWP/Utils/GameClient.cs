@@ -326,13 +326,15 @@ namespace PokemonGo_UWP.Utils
         {
             // Clear stored token
             SettingsService.Instance.AuthToken = null;
-            SettingsService.Instance.UserCredentials = null;
+            if (!SettingsService.Instance.RememberLoginData)
+                SettingsService.Instance.UserCredentials = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
+            _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
-            NearbyPokestops.Clear();
+            NearbyPokestops.Clear();            
         }
 
         public static async Task DoRelogin()
@@ -412,17 +414,12 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += async (s, e) =>
-            {
-                Geoposition = e.Position;
-                // Updating player's position
-                var position = Geoposition.Coordinate.Point.Position;
-                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
-                GeopositionUpdated?.Invoke(null, Geoposition);
-            };
-            Heading = (double)(_compass != null ? _compass.GetCurrentReading().HeadingTrueNorth : 0);
+            _geolocator.PositionChanged += GeolocatorOnPositionChanged;
             // Before starting we need game settings
-            GameSetting = await DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings, DateTime.Now.AddMonths(1));
+            GameSetting =
+                await
+                    DataCache.GetAsync(nameof(GameSetting), async () => (await _client.Download.GetSettings()).Settings,
+                        DateTime.Now.AddMonths(1));
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             _mapUpdateTimer = new DispatcherTimer
@@ -451,6 +448,15 @@ namespace PokemonGo_UWP.Utils
             await UpdateInventory();
             await UpdateItemTemplates();
             Busy.SetBusy(false);
+        }
+
+        private static async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Geoposition = args.Position;
+            // Updating player's position
+            var position = Geoposition.Coordinate.Point.Position;
+            await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
+            GeopositionUpdated?.Invoke(null, Geoposition);
         }
 
         /// <summary>

@@ -93,7 +93,6 @@
                              To="350"
                              Duration="0:0:0.2" />
         </Storyboard>
-
     </Page.Resources>
 
     <Grid>
@@ -282,15 +281,23 @@
 
                 <PivotItem Margin="0"
                            x:Name="PokemonsPivot">
-                    <PivotItem.Header>
-                        <TextBlock VerticalAlignment="Center"
+                         <PivotItem.Header>
+                          <StackPanel Orientation="Vertical">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"
                                    Foreground="#5a7878"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Name="PokemonsPivotHeader"
                                    x:Uid="PokemonText"
-                                   Text="POKÉMON" />
+                                   Text="POKEMON"
+                                   />
+                            <TextBlock Foreground="#5a7878" FontSize="15" HorizontalAlignment="Center">
+                                <Run Text="{Binding PokemonInventory.Count}"/>
+                                <Run Text=" / "/>
+                                <Run Text="250"/>
+                            </TextBlock>
+                        </StackPanel>
                     </PivotItem.Header>
                     <RelativePanel>
                         <GridView
@@ -301,11 +308,17 @@
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.AlignBottomWithPanel="True">
 
+                            <!-- hack some spacer to the end of the list -->
+                            <GridView.FooterTemplate>
+                                <DataTemplate>
+                                    <Grid Height="80"/>
+                                </DataTemplate>
+                            </GridView.FooterTemplate>
+                            
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal"
+                                    <ItemsWrapGrid Orientation="Horizontal"
                                               HorizontalAlignment="Center"
-                                              VerticalChildrenAlignment="Top"
                                               MaximumRowsOrColumns="3" />
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
@@ -387,14 +400,21 @@
                 <PivotItem Margin="0"
                            x:Name="EggsPivot">
 
-                    <PivotItem.Header>
-                        <TextBlock VerticalAlignment="Center"
+                        <PivotItem.Header>
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"
                                    Foreground="#5a7878"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    x:Name="EggsPivotHeader"
                                    x:Uid="EggsTextBlock" />
+                            <TextBlock Foreground="#5a7878" FontSize="15" HorizontalAlignment="Center">
+                                <Run Text="{Binding EggsInventory.Count}"/>
+                                <Run Text=" / "/>
+                                <Run Text="9"/>
+                            </TextBlock>
+                        </StackPanel>
                     </PivotItem.Header>
 
 
@@ -407,11 +427,15 @@
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.AlignBottomWithPanel="True">
 
+                            <GridView.FooterTemplate>
+                                <DataTemplate>
+                                    <Grid Height="80"></Grid>
+                                </DataTemplate>
+                            </GridView.FooterTemplate>
 
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal"
-                                              VerticalChildrenAlignment="Top"
+                                    <ItemsWrapGrid Orientation="Horizontal"
                                               HorizontalAlignment="Center"
                                               MaximumRowsOrColumns="4" />
                                 </ItemsPanelTemplate>

@@ -324,6 +324,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             // We always need to update the inventory
             await GameClient.UpdateInventory();
+            SelectStartingBall();
         }
 
         /// <summary>

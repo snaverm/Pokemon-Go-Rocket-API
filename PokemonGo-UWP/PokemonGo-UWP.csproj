@@ -141,7 +141,9 @@
     <Content Include="Assets\Buttons\btn_empty.png" />
     <Content Include="Assets\Buttons\btn_incubator.png" />
     <Content Include="Assets\Buttons\btn_items.png" />
+    <Content Include="Assets\Buttons\btn_items_catch.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
+    <Content Include="Assets\Buttons\btn_menu.png" />
     <Content Include="Assets\Buttons\btn_ok.png" />
     <Content Include="Assets\Buttons\btn_ok_dark.png" />
     <Content Include="Assets\Buttons\btn_ok_normal_dark.png" />
@@ -217,6 +219,48 @@
     <Content Include="Assets\Items\Item_COIN_HEAP_01.png" />
     <Content Include="Assets\Items\Item_COIN_POUCH_01.png" />
     <Content Include="Assets\Items\Item_COIN_STACK_01.png" />
+    <Content Include="Assets\LiveTiles\Normal\640x640.png" />
+    <Content Include="Assets\LiveTiles\Normal\NewStoreLogo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\NewStoreLogo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\NewStoreLogo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\NewStoreLogo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\NewStoreLogo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square310x310Logo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square310x310Logo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square71x71Logo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square71x71Logo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Peek.gif" />
+    <Content Include="Assets\LiveTiles\People.gif" />
+    <Content Include="Assets\LiveTiles\People.png" />
+    <Content Include="Assets\LiveTiles\Transparent\LineLogo.svg" />
+    <Content Include="Assets\LiveTiles\Transparent\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\UI\night_sky_texture_by_amdillon.jpg" />
     <Content Include="Assets\Pokemons\1.png" />
     <Content Include="Assets\Pokemons\10.png" />
@@ -544,6 +588,7 @@
     <Compile Include="Utils\Game\Converters.cs" />
     <Compile Include="Utils\Helpers\IStorageHelper.cs" />
     <Compile Include="Utils\Helpers\LiveTileHelper.cs" />
+    <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />
     <Compile Include="Utils\Signature\DeviceInfos.cs" />
@@ -628,11 +673,11 @@
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -734,6 +779,7 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-HK.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-TW.xlf" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
