@@ -192,6 +192,11 @@ namespace PokemonGo_UWP.Views
                         GameMapControl.Center = position.Coordinate.Point;
                         lastAutoPosition = GameMapControl.Center;
 
+                        if (SettingsService.Instance.IsAutoRotateMapEnabled == true && position.Coordinate.Heading != null)
+                        {
+                            GameMapControl.Heading = position.Coordinate.Heading.Value;
+                        }
+
                         if (SettingsService.Instance.IsRememberMapZoomEnabled == true)
                         {
                             GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
