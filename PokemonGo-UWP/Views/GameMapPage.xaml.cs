@@ -116,7 +116,7 @@ namespace PokemonGo_UWP.Views
             if (e.Parameter != null && e.NavigationMode != NavigationMode.Back)
             {
                 var mode =
-                    ((JObject) JsonConvert.DeserializeObject((string) e.Parameter)).Last
+                    ((JObject)JsonConvert.DeserializeObject((string)e.Parameter)).Last
                         .ToObject<GameMapNavigationModes>();
                 if (mode == GameMapNavigationModes.AppStart || mode == GameMapNavigationModes.SettingsUpdate)
                     SetupMap();
@@ -191,22 +191,21 @@ namespace PokemonGo_UWP.Views
                         ReactivateMapAutoUpdate.Visibility = Visibility.Collapsed;
                         GameMapControl.Center = position.Coordinate.Point;
                         lastAutoPosition = GameMapControl.Center;
-                        if (!SettingsService.Instance.IsAutoRotateMapEnabled || position.Coordinate.Heading == null ||
-                            double.IsNaN(position.Coordinate.Heading.Value)) return;
-                        GameMapControl.Heading = position.Coordinate.Heading.Value;
-                        if (!SettingsService.Instance.IsRememberMapZoomEnabled) return;
-                        try
+
+                        if (SettingsService.Instance.IsRememberMapZoomEnabled == true)
                         {
                             GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
                         }
-                        catch
-                        {
-                        }
+
                     }
                     else
                     {
                         //Position was changed by user, activate button to go back to automatic mode
                         ReactivateMapAutoUpdate.Visibility = Visibility.Visible;
+                    }
+                    if (SettingsService.Instance.IsAutoRotateMapEnabled == true)
+                    {
+                        GameMapControl.Heading = GameClient.Heading;
                     }
                 }
             });
