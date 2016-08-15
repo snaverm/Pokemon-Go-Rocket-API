@@ -258,8 +258,8 @@ namespace PokemonGo_UWP.Utils
             var currentTime = int.Parse(DateTime.Now.ToString("HH"));
             var noTeamColor = currentTime > 7 && currentTime < 19 ? Colors.Black : Colors.White;
             return new SolidColorBrush(teamColor == TeamColor.Neutral
-                ? noTeamColor
-                : teamColor == TeamColor.Blue ? Color.FromArgb(0xFF, 0x00, 0xB1, 0xFF) : teamColor == TeamColor.Red ? Color.FromArgb(0xFF, 0xFE, 0x5A, 0x59) : Color.FromArgb(0xFF, 0xFF, 0xE2, 0x22));
+                ? Color.FromArgb(255, 26, 237, 213)
+                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 36, 176, 253) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 225, 63));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
