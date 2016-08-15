@@ -227,7 +227,7 @@ namespace PokemonGo_UWP.Views
         private void UnsubscribeToCaptureEvents()
         {
             GameClient.GeopositionUpdated -= GeopositionUpdated;
-            GameClient.GeopositionUpdated -= GeopositionUpdated;
+            GameClient.HeadingUpdated -= HeadingUpdated;
             ViewModel.LevelUpRewardsAwarded -= ViewModelOnLevelUpRewardsAwarded;
         }
 
