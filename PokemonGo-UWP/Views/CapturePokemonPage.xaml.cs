@@ -195,15 +195,22 @@ namespace PokemonGo_UWP.Views
             ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
             ViewModel.CatchFlee += GameManagerViewModelOnCatchFlee;
             // Add also handlers to enable the button once the animation is done                                    
-            CatchEscape.Completed += (s, e) =>
-            {
-                // Get ready for a new shot
-                PokeballTransform.TranslateX = InitItemX;
-                PokeballTransform.TranslateY = InitItemY;
-                PokeballTransform.ScaleX = 1;
-                PokeballTransform.ScaleY = 1;
-                LaunchPokeballButton.IsEnabled = true;
-            };
+            //CatchEscape.Completed += async (s, e) =>
+            //{                
+            //    //PokeballCatchAnimationStartingTranslateX.Value = PokeballTransform.TranslateX;
+            //    //PokeballCatchAnimationStartingTranslateY.Value = PokeballTransform.TranslateY;
+            //    //PokeballCatchAnimationStartingScaleX.Value = PokeballTransform.ScaleX;
+            //    //PokeballCatchAnimationStartingScaleY.Value = PokeballTransform.ScaleY;
+            //    await Task.Delay(TimeSpan.FromSeconds(new Random().Next(1, 5)));
+            //    CatchSuccess.AutoReverse = true;
+            //    CatchSuccess.Begin();
+            //    // Get ready for a new shot
+            //    PokeballTransform.TranslateX = 0;
+            //    PokeballTransform.TranslateY = 0;
+            //    PokeballTransform.ScaleX = 1;
+            //    PokeballTransform.ScaleY = 1;
+            //    LaunchPokeballButton.IsEnabled = true;
+            //};
             CatchFlee.Completed += (s, e) =>
             {
                 // Go back once the animation finishes
@@ -220,28 +227,41 @@ namespace PokemonGo_UWP.Views
 
         private async void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
         {
-            //CatchEscape.Begin();            
-            //CatchSuccess.SkipToFill();                                       
-            CatchSuccess.AutoReverse = true;            
-            PokeballCatchAnimationStartingTranslateX.Value = PokeballTransform.TranslateX;
-            PokeballCatchAnimationStartingTranslateY.Value = PokeballTransform.TranslateY;
-            PokeballCatchAnimationStartingScaleX.Value = PokeballTransform.ScaleX;
-            PokeballCatchAnimationStartingScaleY.Value = PokeballTransform.ScaleY;
-            await Task.Delay(TimeSpan.FromSeconds(new Random().Next(1, 5)));
-            CatchSuccess.Begin();
-            CatchEscape.Begin();
-            //TODO (from advancedrei): This storyboard needs to delay 3 seconds, then reverse the animation so the user can try again.
+            CatchSuccess.Completed += (s, e) =>
+            {
+                PokeballMovingStoryboard.Begin();
+            };
+            await Task.Delay(TimeSpan.FromSeconds(new Random().Next(3, 5)));
+            PokeballMovingStoryboard.Stop();
+            CatchEscape.Begin();            
         }
 
-        private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
+        private async void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
         {
             LaunchPokeballButton.IsEnabled = false;
+            CatchSuccess.Completed += (s, e) =>
+            {
+                PokeballMovingStoryboard.Begin();
+            };
+            await Task.Delay(TimeSpan.FromSeconds(new Random().Next(3, 5)));
+            PokeballMovingStoryboard.Stop();
             ShowCatchStatsModalStoryboard.Begin();
         }
 
-        private void GameManagerViewModelOnCatchFlee(object sender, EventArgs eventArgs)
+        private async void GameManagerViewModelOnCatchFlee(object sender, EventArgs eventArgs)
         {
-            CatchFlee.Begin();
+            CatchEscape.Completed += (s, e) =>
+            {
+                CatchFlee.Begin();
+            };
+            CatchSuccess.Completed += (s, e) =>
+            {
+                PokeballMovingStoryboard.Begin();
+            };
+            await Task.Delay(TimeSpan.FromSeconds(new Random().Next(3, 5)));
+            PokeballMovingStoryboard.Stop();
+            await Task.Delay(TimeSpan.FromSeconds(new Random().Next(1, 5)));
+            CatchEscape.Begin();
         }
 
 
