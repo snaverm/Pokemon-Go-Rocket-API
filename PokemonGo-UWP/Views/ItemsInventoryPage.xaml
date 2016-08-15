@@ -151,55 +151,86 @@
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="8,4,8,4"
-                                    Height="92">
+                        <Grid Margin="0,8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Image
-                                Source="{Binding Converter={StaticResource ItemToItemIconConverter}}"
-                                Stretch="Uniform"
-                                VerticalAlignment="Center"
-                                Width="84"
-                                Height="84"
-                                Margin="3,0"
-                                Grid.RowSpan="2"/>
-                            <Border Grid.Row="1" Grid.Column="0" 
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Bottom"
-                                    Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
-                                    Background="LightGray" CornerRadius="8" Padding="3,1">
+
+                            <Grid Grid.Column="0"
+                                      Margin="0,0,8,0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Image
+                                        Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"
+                                        Stretch="Uniform"
+                                        VerticalAlignment="Center"
+                                        Width="84"
+                                        Height="84"
+                                        Margin="3,0"
+                                        Grid.RowSpan="2" />
+                                <Border Grid.Row="1" 
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Bottom"
+                                            Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
+                                            Background="LightGray" 
+                                            CornerRadius="8" 
+                                            Padding="3,1">
+                                    <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                                   TextAlignment="Center">
+                                            <Run Text="x" />
+                                            <Run FontWeight="Bold" 
+                                                 Text="{Binding Count}" />
+                                    </TextBlock>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
                                 <TextBlock
-                                    Style="{StaticResource BodyTextBlockStyle}"
-                                    TextAlignment="Center">
-                                    <Run Text="x"/><Run FontWeight="Bold" Text="{Binding Count}"/>
-                                </TextBlock>
-                            </Border>
-                            <TextBlock
-                                Grid.Row="0" Grid.Column="1"
-                                Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                                Style="{StaticResource TitleTextBlockStyle}"
-                                TextAlignment="Left" />
-                            <TextBlock
-                                Grid.Row="1" Grid.Column="1"
-                                Text="{Binding Converter={StaticResource ItemToItemDescriptionConverter}}"
-                                Style="{StaticResource BodyTextBlockStyle}"
-                                TextAlignment="Left" />
-                            <Border Grid.Row="0" Grid.Column="1"
-                                    HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30">
-                                <TextBlock Text="&#x1F5D1;"/>
+                                        Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                        FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                        Foreground="#FF45686A"
+                                        Grid.Row="0"
+                                        FontSize="22"
+                                        FontWeight="SemiBold" />
+
+                                <!--<Button IsEnabled="False"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
                                         <core:CallMethodAction MethodName="Begin"
                                                    TargetObject="{Binding ElementName=ShowDiscardStoryboard}" />
                                     </core:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
-                            </Border>
+                                
+                                        <SymbolIcon Symbol="Delete" />
+                                    </Button>-->
+
+                                <TextBlock
+                                        Text="{Binding Converter={StaticResource ItemToItemDescriptionConverter}}"
+                                        TextWrapping="WrapWholeWords"
+                                        FontFamily="../Assets/Fonts/Lato-Light.ttf#Lato"
+                                        Foreground="#FF45686A"
+                                        Grid.Row="1"
+                                        FontSize="14"
+                                        FontWeight="SemiLight" />
+                            </Grid>
+
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
