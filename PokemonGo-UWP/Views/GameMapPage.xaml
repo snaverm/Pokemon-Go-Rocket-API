@@ -444,7 +444,8 @@
             <Button Style="{ThemeResource ImageButtonStyle}"
                     Margin="0,0,0,24" 
                     RelativePanel.AlignHorizontalCenterWithPanel="True" 
-                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,24,128"
+                    Command="{Binding GotoItemsInventoryPageCommand}"
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="ToolsButton">
                 <Button.RenderTransform>

@@ -69,18 +69,7 @@ namespace PokemonGo_UWP.ViewModels
             set
             {
                 SettingsService.Instance.LiveTileMode = value;
-                switch (value)
-                {
-                    case LiveTileModes.Off:
-                    case LiveTileModes.Transparent:
-                        App.LiveTileUpdater.EnableNotificationQueue(false);
-                        break;
-                    case LiveTileModes.Peek:
-                        App.LiveTileUpdater.EnableNotificationQueue(true);
-                        break;
-                }
-                App.LiveTileUpdater.Clear();
-                App.UpdateLiveTile(GameClient.PokemonsInventory.OrderBy(c => c.Cp).ToList());
+                App.UpdateLiveTile(GameClient.PokemonsInventory.OrderByDescending(c => c.Cp).ToList());
             }
         }
 
