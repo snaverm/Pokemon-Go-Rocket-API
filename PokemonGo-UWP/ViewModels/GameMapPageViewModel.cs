@@ -231,8 +231,6 @@ namespace PokemonGo_UWP.ViewModels
                     case LevelUpRewardsResponse.Types.Result.Success:
                         LevelUpRewardsAwarded?.Invoke(this, null);
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
