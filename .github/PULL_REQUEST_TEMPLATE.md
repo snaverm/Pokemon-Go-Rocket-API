@@ -1,7 +1,13 @@
-Fixes #
+#Fixes:
 
-Changes made(in short):
+- Fix 1
+- Fix 2
 
-Detailed Change:
+#Changes:
 
-Other information:
+- Change 1
+- Change 2
+
+#Change details:
+
+#Other informations:
