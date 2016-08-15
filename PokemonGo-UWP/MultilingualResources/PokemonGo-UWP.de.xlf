@@ -641,6 +641,14 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
           <source>Remember Map Zoom</source>
           <target state="translated">Speichere Karten Zoom</target>
         </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="translated">AUSBRÜTEN BEGINNEN</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="translated">Benutze eine Brutmaschine, um dieses Ei auszubrüten.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

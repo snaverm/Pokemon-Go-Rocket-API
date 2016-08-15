@@ -642,6 +642,14 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
           <source>TRANSFER</source>
           <target state="new">TRANSFER</target>
         </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="new">START INCUBATION</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="new">Use an incubator to incubate the Egg.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
