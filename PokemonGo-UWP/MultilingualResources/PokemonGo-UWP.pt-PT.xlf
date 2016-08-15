@@ -270,7 +270,7 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
         </trans-unit>
         <trans-unit id="OutOfRangeTextBlock.Text" translate="yes" xml:space="preserve">
           <source>You are out of range</source>
-          <target state="translated">Você está fora do alcance</target>
+          <target state="translated">Você está fora do raio de alcance</target>
         </trans-unit>
         <trans-unit id="LoginPasswordPasswordBox.PlaceholderText" translate="yes" xml:space="preserve">
           <source>Password</source>
@@ -310,7 +310,7 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
         </trans-unit>
         <trans-unit id="SignOutTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Sign Out</source>
-          <target state="translated">Sair</target>
+          <target state="translated">Terminar Sessão</target>
         </trans-unit>
         <trans-unit id="VibrationTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Vibration</source>
