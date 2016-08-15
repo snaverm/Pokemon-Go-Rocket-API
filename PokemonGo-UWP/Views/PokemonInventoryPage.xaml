@@ -93,7 +93,6 @@
                              To="350"
                              Duration="0:0:0.2" />
         </Storyboard>
-
     </Page.Resources>
 
     <Grid>
@@ -309,11 +308,17 @@
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.AlignBottomWithPanel="True">
 
+                            <!-- hack some spacer to the end of the list -->
+                            <GridView.FooterTemplate>
+                                <DataTemplate>
+                                    <Grid Height="80"></Grid>
+                                </DataTemplate>
+                            </GridView.FooterTemplate>
+                            
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal"
+                                    <ItemsWrapGrid Orientation="Horizontal"
                                               HorizontalAlignment="Center"
-                                              VerticalChildrenAlignment="Top"
                                               MaximumRowsOrColumns="3" />
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
@@ -422,11 +427,15 @@
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.AlignBottomWithPanel="True">
 
+                            <GridView.FooterTemplate>
+                                <DataTemplate>
+                                    <Grid Height="80"></Grid>
+                                </DataTemplate>
+                            </GridView.FooterTemplate>
 
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal"
-                                              VerticalChildrenAlignment="Top"
+                                    <ItemsWrapGrid Orientation="Horizontal"
                                               HorizontalAlignment="Center"
                                               MaximumRowsOrColumns="4" />
                                 </ItemsPanelTemplate>
