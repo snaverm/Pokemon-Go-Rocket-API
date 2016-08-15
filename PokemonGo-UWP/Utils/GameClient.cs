@@ -20,6 +20,7 @@ using POGOProtos.Enums;
 using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
+using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings;
@@ -123,7 +124,13 @@ namespace PokemonGo_UWP.Utils
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } =
-            new ObservableCollection<NearbyPokemonWrapper>();
+            new ObservableCollection<NearbyPokemonWrapper>
+            {
+                //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
+            };
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -237,6 +244,8 @@ namespace PokemonGo_UWP.Utils
             {
                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
                 {
+                    Debug.WriteLine("AccessTokenExpired Exception caught");
+                    Debug.WriteLine("Loging in now");
                     await Relogin();
                 }
                 else throw;
@@ -325,9 +334,11 @@ namespace PokemonGo_UWP.Utils
         {
             // Clear stored token
             SettingsService.Instance.AuthToken = null;
-            SettingsService.Instance.UserCredentials = null;
+            if (!SettingsService.Instance.RememberLoginData)
+                SettingsService.Instance.UserCredentials = null;
             _mapUpdateTimer?.Stop();
             _mapUpdateTimer = null;
+            _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
@@ -388,14 +399,7 @@ namespace PokemonGo_UWP.Utils
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
-            _geolocator.PositionChanged += async (s, e) =>
-            {
-                Geoposition = e.Position;
-                // Updating player's position
-                var position = Geoposition.Coordinate.Point.Position;
-                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
-                GeopositionUpdated?.Invoke(null, Geoposition);
-            };
+            _geolocator.PositionChanged += GeolocatorOnPositionChanged;
             // Before starting we need game settings
             GameSetting =
                 await
@@ -429,6 +433,16 @@ namespace PokemonGo_UWP.Utils
             await UpdateInventory();
             await UpdateItemTemplates();
             Busy.SetBusy(false);
+        }
+
+        private static async void GeolocatorOnPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Geoposition = args.Position;
+            // Updating player's position
+            var position = Geoposition.Coordinate.Point.Position;
+            if (_client != null)
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
+            GeopositionUpdated?.Invoke(null, Geoposition);
         }
 
         /// <summary>

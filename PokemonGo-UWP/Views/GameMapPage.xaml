@@ -253,7 +253,7 @@
                     <Border CornerRadius="8,8,0,0"
                             Margin="16,0"
                             Background="White"
-                            x:Name="NarbyPokemonGrid">
+                            x:Name="NearbyPokemonGrid">
                         <Border Padding="8">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -380,6 +380,7 @@
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
                     Margin="0,0,24,128"
+                    Command="{Binding GotoItemsInventoryPageCommand}"
                     x:Name="ToolsButton">
 
                 <StackPanel Orientation="Vertical">
@@ -639,22 +640,22 @@
 
         </Grid>
 
-        <Grid RelativePanel.AlignBottomWithPanel="True"
-              RelativePanel.AlignLeftWithPanel="True"
-              RelativePanel.AlignRightWithPanel="True"
-              Canvas.ZIndex="1"
-              Background="Transparent"
-              Height="200">
-            <Button
-                Style="{ThemeResource ButtonNoStyle}"
-                Height="{ThemeResource UiButtonSize}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                x:Name="ReactivateMapAutoUpdate" Tapped="ReactivateMapAutoUpdate_Tapped"
-                FontSize="36" Margin="0,0,20,0">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE81D;" Width="42" Height="36" FontSize="24"
-                          Foreground="#FF00FF2E" />
-            </Button>
-        </Grid>
+			<Button
+				x:Name="ReactivateMapAutoUpdate" 
+				Canvas.ZIndex="1"
+				Style="{ThemeResource ImageButtonStyle}"
+				Height="{ThemeResource UiButtonSize}"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Bottom"
+				Tapped="ReactivateMapAutoUpdate_Tapped"
+				FontSize="36" Margin="0,144,32,0" 
+				RelativePanel.AlignVerticalCenterWithPanel="True" 
+				RelativePanel.AlignRightWithPanel="True">
+				<Image Source="../Assets/Icons/RecenterMapIcon.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" 
+							 Height="32"/>
+
+			</Button>
     </RelativePanel>
 </Page>
