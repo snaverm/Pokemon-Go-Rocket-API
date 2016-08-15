@@ -140,6 +140,7 @@
     <Content Include="Assets\Buttons\btn_close_normal_dark.png" />
     <Content Include="Assets\Buttons\btn_empty.png" />
     <Content Include="Assets\Buttons\btn_incubator.png" />
+    <Content Include="Assets\Buttons\btn_incubator_dark.png" />
     <Content Include="Assets\Buttons\btn_items.png" />
     <Content Include="Assets\Buttons\btn_items_catch.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
