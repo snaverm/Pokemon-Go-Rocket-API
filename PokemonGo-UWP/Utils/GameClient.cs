@@ -29,6 +29,7 @@ using Q42.WinRT.Data;
 using Template10.Common;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
+using Windows.Devices.Sensors;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -374,21 +375,43 @@ namespace PokemonGo_UWP.Utils
         #region Data Updating
 
         private static Geolocator _geolocator;
+        private static Compass _compass;
 
         public static Geoposition Geoposition { get; private set; }
 
+        public static double Heading { get; private set; }
+
         private static DispatcherTimer _mapUpdateTimer;
+        private static DispatcherTimer _compassTimer;
 
         /// <summary>
         ///     We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
 
+        public static event EventHandler<CompassReading> HeadingUpdated;
+
         /// <summary>
         ///     Starts the timer to update map objects and the handler to update position
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
+            _compass = Compass.GetDefault();
+            _compassTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+            };
+            _compassTimer.Tick += (s, e) =>
+            {
+                if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                {
+                    HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                }
+            };
+            if (_compass != null)
+            {
+                _compassTimer.Start();
+            }
             _geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
@@ -396,6 +419,7 @@ namespace PokemonGo_UWP.Utils
                 ReportInterval = 5000,
                 MovementThreshold = 5
             };
+
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
