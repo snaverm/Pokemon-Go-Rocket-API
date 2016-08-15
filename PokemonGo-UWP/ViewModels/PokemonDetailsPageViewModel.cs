@@ -8,6 +8,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Google.Common.Geometry;
+using Newtonsoft.Json;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
@@ -28,7 +29,7 @@ namespace PokemonGo_UWP.ViewModels
         #region Lifecycle Handlers
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameter">MapPokemonWrapper containing the Pokemon that we're trying to capture</param>
         /// <param name="mode"></param>
@@ -40,13 +41,13 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                CurrentPokemon = (PokemonDataWrapper) suspensionState[nameof(CurrentPokemon)];
-                PlayerProfile = (PlayerData) suspensionState[nameof(PlayerProfile)];
+                CurrentPokemon = JsonConvert.DeserializeObject<PokemonDataWrapper>((string)suspensionState[nameof(CurrentPokemon)]);
+                PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
             }
             else
             {
-                // Navigating from inventory page so we need to load the pokemon               
-                CurrentPokemon = (PokemonDataWrapper) NavigationHelper.NavigationState[nameof(CurrentPokemon)];                
+                // Navigating from inventory page so we need to load the pokemon
+                CurrentPokemon = (PokemonDataWrapper)NavigationHelper.NavigationState[nameof(CurrentPokemon)];
                 UpdateCurrentData();
             }
             await Task.CompletedTask;
@@ -62,8 +63,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(CurrentPokemon)] = CurrentPokemon;
-                suspensionState[nameof(PlayerProfile)] = PlayerProfile;
+                suspensionState[nameof(CurrentPokemon)] = JsonConvert.SerializeObject(CurrentPokemon);
+                suspensionState[nameof(PlayerProfile)] = JsonConvert.SerializeObject(PlayerProfile);
             }
             await Task.CompletedTask;
         }
@@ -216,7 +217,7 @@ namespace PokemonGo_UWP.ViewModels
             get { return _currentCandy; }
             set
             {
-                Set(ref _currentCandy, value); 
+                Set(ref _currentCandy, value);
                 EvolvePokemonCommand.RaiseCanExecuteChanged();
             }
         }
@@ -284,7 +285,7 @@ namespace PokemonGo_UWP.ViewModels
           {
               // Ask for confirmation before moving the Pokemon
               // TODO: better style maybe?
-              var dialog = 
+              var dialog =
                   new MessageDialog(string.Format(Resources.CodeResources.GetString("TransferPokemonWarningText"),
                       Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString())));
               dialog.Commands.Add(new UICommand(Resources.CodeResources.GetString("YesText")) { Id = 0 });
@@ -317,7 +318,7 @@ namespace PokemonGo_UWP.ViewModels
                       break;
                   default:
                       throw new ArgumentOutOfRangeException();
-              }                  
+              }
           }, () => true));
 
         #endregion

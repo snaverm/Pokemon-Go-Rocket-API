@@ -43,8 +43,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                PlayerProfile = (PlayerData)JsonConvert.DeserializeObject((string)suspensionState[nameof(PlayerProfile)]);
-                PlayerStats = (PlayerStats)JsonConvert.DeserializeObject((string)suspensionState[nameof(PlayerStats)]);
+                PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
+                PlayerStats = JsonConvert.DeserializeObject<PlayerStats>((string)suspensionState[nameof(PlayerStats)]);
                 // Restarting update service
                 await StartGpsDataService();
                 return;

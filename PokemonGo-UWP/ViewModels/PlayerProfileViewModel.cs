@@ -10,6 +10,7 @@ using POGOProtos.Enums;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Controls;
+using Newtonsoft.Json;
 using PokemonGo_UWP.Views;
 using Template10.Common;
 
@@ -30,13 +31,13 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspensionState.Any())
             {
-                // Recovering the state                                
-                PlayerProfile = (PlayerData) suspensionState[nameof(PlayerProfile)];
-                PlayerStats = (PlayerStats) suspensionState[nameof(PlayerStats)];
+                // Recovering the state
+                PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
+                PlayerStats = JsonConvert.DeserializeObject<PlayerStats>((string)suspensionState[nameof(PlayerStats)]);
             }
             else
             {
-                // No saved state, get them from the client                                
+                // No saved state, get them from the client
                 PlayerProfile = GameClient.PlayerProfile;
                 PlayerStats = GameClient.PlayerStats;
             }
@@ -54,8 +55,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(PlayerProfile)] = PlayerProfile;
-                suspensionState[nameof(PlayerStats)] = PlayerStats;
+                suspensionState[nameof(PlayerProfile)] = JsonConvert.SerializeObject(PlayerProfile);
+                suspensionState[nameof(PlayerStats)] = JsonConvert.SerializeObject(PlayerStats);
             }
             await Task.CompletedTask;
         }
