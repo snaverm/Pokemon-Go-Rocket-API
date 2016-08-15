@@ -304,7 +304,7 @@ namespace PokemonGo_UWP.ViewModels
                                   Resources.Pokemon.GetString(CurrentCandy.FamilyId.ToString().Replace("Family", "")))).ShowAsyncQueue();
                       await GameClient.UpdateInventory();
                       await GameClient.UpdatePlayerStats();
-                      NavigationService.Navigate(typeof(PokemonInventoryPage));
+                      NavigationService.GoBack();
                       break;
                   // TODO: what to do on error?
                   case ReleasePokemonResponse.Types.Result.PokemonDeployed:
