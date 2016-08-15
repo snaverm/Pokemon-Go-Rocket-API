@@ -293,7 +293,7 @@ namespace PokemonGo_UWP.ViewModels
                 await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
                         SelectedCaptureItem.ItemId, hitPokemon);
             var responseDelay = DateTime.Now - requestTime;
-            if (responseDelay.TotalSeconds < 5) await Task.Delay(5 - (int)responseDelay.TotalSeconds);
+            if (responseDelay.TotalSeconds < 5) await Task.Delay(TimeSpan.FromSeconds(5 - (int)responseDelay.TotalSeconds));
             var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
 
             switch (caughtPokemonResponse.Status)

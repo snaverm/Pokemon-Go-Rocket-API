@@ -564,7 +564,7 @@ namespace PokemonGo_UWP.Utils
                 InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null)
                     .InventoryItemData.PlayerStats;
 
-            if (checkForLevelUp && PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            if (checkForLevelUp && ((PlayerStats == null) || (PlayerStats != null && PlayerStats.Level != tmpStats.Level)))
             {
                 PlayerStats = tmpStats;
                 var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
@@ -684,8 +684,8 @@ namespace PokemonGo_UWP.Utils
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
 
             // Update Player stats
-            PlayerStats =
-                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+            //PlayerStats =
+            //    fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
 
         }
 
