@@ -141,7 +141,9 @@
     <Content Include="Assets\Buttons\btn_empty.png" />
     <Content Include="Assets\Buttons\btn_incubator.png" />
     <Content Include="Assets\Buttons\btn_items.png" />
+    <Content Include="Assets\Buttons\btn_items_catch.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
+    <Content Include="Assets\Buttons\btn_menu.png" />
     <Content Include="Assets\Buttons\btn_ok.png" />
     <Content Include="Assets\Buttons\btn_ok_dark.png" />
     <Content Include="Assets\Buttons\btn_ok_normal_dark.png" />
@@ -778,9 +780,7 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.zh-TW.xlf" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Assets\LiveTiles\Transparent\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

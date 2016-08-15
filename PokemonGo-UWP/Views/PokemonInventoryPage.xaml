@@ -311,7 +311,7 @@
                             <!-- hack some spacer to the end of the list -->
                             <GridView.FooterTemplate>
                                 <DataTemplate>
-                                    <Grid Height="80"></Grid>
+                                    <Grid Height="80"/>
                                 </DataTemplate>
                             </GridView.FooterTemplate>
                             
