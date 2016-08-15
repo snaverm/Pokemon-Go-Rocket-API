@@ -270,7 +270,7 @@ namespace PokemonGo_UWP
             var images = new List<string>();
 
             // For peeking, we pass the Pokemon straight to the helper.
-            if (SettingsService.Instance.LiveTileMode != LiveTileModes.Peek)
+            if (SettingsService.Instance.LiveTileMode != LiveTileModes.Peek && SettingsService.Instance.LiveTileMode != LiveTileModes.Transparent)
             {
                 foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
                 {
@@ -281,6 +281,10 @@ namespace PokemonGo_UWP
 
             switch (SettingsService.Instance.LiveTileMode)
             {
+                case LiveTileModes.Transparent:
+                    tile = LiveTileHelper.GetImageTile("LiveTiles/Transparent/Square44x44Logo.scale-400.png");
+                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                    break;
                 case LiveTileModes.Peek:
                     foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
                     {

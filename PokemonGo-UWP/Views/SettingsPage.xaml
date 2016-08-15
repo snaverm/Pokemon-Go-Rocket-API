@@ -141,7 +141,7 @@
                 <VariableSizedWrapGrid Grid.Row="7"
                                        Grid.ColumnSpan="2"
                                        Orientation="Horizontal"
-                                       MaximumRowsOrColumns="4"
+                                       MaximumRowsOrColumns="5"
                                        ItemHeight="140"
                                        ItemWidth="160"
                                        VerticalAlignment="Top"
@@ -151,7 +151,7 @@
                             HorizontalAlignment="Center"
                             Margin="10,0"
                             Command="{Binding LiveTileSelectionCommand}" CommandParameter="0">
-                        <Image Source="../Assets/Square150x150Logo.scale-200.png" 
+                        <Image Source="/Assets/LiveTiles/Normal/Square150x150Logo.scale-200.png" 
                                Width="120" 
                                Height="120" />
                     </Button>
@@ -160,6 +160,15 @@
                             HorizontalAlignment="Center"
                             Margin="10,0"
                             Command="{Binding LiveTileSelectionCommand}" CommandParameter="1">
+                        <Image Source="/Assets/LiveTiles/Transparent/Square150x150Logo.scale-200.png" 
+                               Width="120" 
+                               Height="120" />
+                    </Button>
+                    <Button Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            Margin="10,0"
+                            Command="{Binding LiveTileSelectionCommand}" CommandParameter="2">
                         <Image Source="../Assets/LiveTiles/Peek.gif" 
                                Width="120" 
                                Height="120" />
@@ -168,8 +177,8 @@
                             Grid.Column="0"
                             HorizontalAlignment="Center"
                             Margin="10,0"
-                            Command="{Binding LiveTileSelectionCommand}" CommandParameter="2">
-                        <Image Source="../Assets/LiveTiles/People.png" 
+                            Command="{Binding LiveTileSelectionCommand}" CommandParameter="3">
+                        <Image Source="../Assets/LiveTiles/People.gif" 
                                Width="140" 
                                Height="140"
                                HorizontalAlignment="Center" 
@@ -179,7 +188,7 @@
                             Grid.Column="1"
                             HorizontalAlignment="Center"
                             Margin="10,0"
-                            Command="{Binding LiveTileSelectionCommand}" CommandParameter="3">
+                            Command="{Binding LiveTileSelectionCommand}" CommandParameter="4">
                         <Image Source="../Assets/Square150x150Logo.scale-200.png" 
                                Width="140"
                                Height="140" />
@@ -190,7 +199,7 @@
                         Grid.ColumnSpan="2"
                         Background="#33ffffff"
                         Height="1"
-                        Margin="0,8,0,15" />
+                        Margin="0,24,0,15" />
 
                 <Button Grid.Row="9"
                         Grid.ColumnSpan="2"

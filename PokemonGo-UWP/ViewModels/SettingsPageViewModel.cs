@@ -1,7 +1,6 @@
-﻿using POGOProtos.Data;
-using PokemonGo_UWP.Utils;
+﻿using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
-using System.Collections.Generic;
+using System.Linq;
 using Template10.Mvvm;
 
 namespace PokemonGo_UWP.ViewModels
@@ -70,17 +69,18 @@ namespace PokemonGo_UWP.ViewModels
             set
             {
                 SettingsService.Instance.LiveTileMode = value;
-                App.LiveTileUpdater.Clear();
                 switch (value)
                 {
                     case LiveTileModes.Off:
+                    case LiveTileModes.Transparent:
                         App.LiveTileUpdater.EnableNotificationQueue(false);
                         break;
                     case LiveTileModes.Peek:
                         App.LiveTileUpdater.EnableNotificationQueue(true);
                         break;
                 }
-                App.UpdateLiveTile(GameClient.PokemonsInventory);
+                App.LiveTileUpdater.Clear();
+                App.UpdateLiveTile(GameClient.PokemonsInventory.OrderBy(c => c.Cp).ToList());
             }
         }
 

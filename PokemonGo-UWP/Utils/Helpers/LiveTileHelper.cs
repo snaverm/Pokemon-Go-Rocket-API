@@ -17,6 +17,23 @@ namespace PokemonGo_UWP.Utils
         #region Public Methods
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public static TileContent GetImageTile(string image)
+        {
+            var tile = GetTile();
+
+            tile.Visual.TileSmall = GetImageBinding(image);
+            tile.Visual.TileMedium = GetImageBinding(image);
+            tile.Visual.TileWide = GetImageBinding(image);
+            tile.Visual.TileLarge = GetImageBinding(image);
+
+            return tile;
+        }
+
+        /// <summary>
         /// Gets a Live Tile containing a "peek" template that renders like the Me tile.
         /// </summary>
         /// <param name="urls">
@@ -102,6 +119,37 @@ namespace PokemonGo_UWP.Utils
         }
 
         #endregion
+
+        /// <summary>
+        /// Generates a <see cref="TileBindingContentAdaptive"/> for a given list of image URLs. 
+        /// </summary>
+        /// <param name="pokemon">
+        ///     A <see cref="PokemonDataWrapper"/> containing the Pokemon to generate a tile for.
+        /// </param>
+        /// <returns></returns>
+        /// <remarks>Original contribution from sam9116 (https://github.com/ST-Apps/PoGo-UWP/pull/626/files)</remarks>
+        private static TileBinding GetImageBinding(string imageSource)
+        {
+            var content = new TileBindingContentAdaptive()
+            {
+                Children =
+                {
+                    new AdaptiveImage
+                    {
+                        Source = imageSource,
+                        HintRemoveMargin = true,
+                        HintAlign = AdaptiveImageAlign.Center
+                    }
+                }
+
+            };
+
+            return new TileBinding()
+            {
+                Content = content
+            };
+
+        }
 
         #region PeekTile Helpers
 

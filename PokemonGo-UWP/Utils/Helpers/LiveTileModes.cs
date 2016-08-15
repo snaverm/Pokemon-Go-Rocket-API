@@ -15,11 +15,13 @@ namespace PokemonGo_UWP.Utils
 
         Off = 0,
 
-        Peek = 1,
+        Transparent = 1,
 
-        People = 2,
+        Peek = 2,
 
-        Photo = 3
+        People = 3,
+
+        Photo = 4
 
     }
 
