@@ -570,19 +570,7 @@ namespace PokemonGo_UWP.Utils
                 var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
                 return levelUpResponse;
             }
-            PlayerStats = tmpStats;
-
-            // Update candies
-            CandyInventory.AddRange(from item in InventoryDelta.InventoryItems
-                                    where item.InventoryItemData?.Candy != null
-                                    where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
-                                    group item by item.InventoryItemData?.Candy.FamilyId into family
-                                    select new Candy
-                                    {
-                                        FamilyId = family.FirstOrDefault().InventoryItemData.Candy.FamilyId,
-                                        Candy_ = family.FirstOrDefault().InventoryItemData.Candy.Candy_
-                                    }, true);
-
+            PlayerStats = tmpStats;            
             return null;
         }
 
@@ -683,9 +671,16 @@ namespace PokemonGo_UWP.Utils
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
 
-            // Update Player stats
-            //PlayerStats =
-            //    fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+            // Update candies
+            CandyInventory.AddRange(from item in fullInventory
+                                    where item.InventoryItemData?.Candy != null
+                                    where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                                    group item by item.InventoryItemData?.Candy.FamilyId into family
+                                    select new Candy
+                                    {
+                                        FamilyId = family.FirstOrDefault().InventoryItemData.Candy.FamilyId,
+                                        Candy_ = family.FirstOrDefault().InventoryItemData.Candy.Candy_
+                                    }, true);
 
         }
 
