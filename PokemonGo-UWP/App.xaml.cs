@@ -111,7 +111,7 @@ namespace PokemonGo_UWP
                 case NotifyCollectionChangedAction.Add:
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    UpdateLiveTile(new List<PokemonData>(e.NewItems.Cast<PokemonData>()));
+                    UpdateLiveTile(e.NewItems.Cast<PokemonData>().OrderByDescending(c => c.Cp).ToList());
                     break;
 
             }
@@ -266,48 +266,69 @@ namespace PokemonGo_UWP
         /// </remarks>
         internal static void UpdateLiveTile(IList<PokemonData> pokemonList)
         {
-            TileContent tile = null;
-            var images = new List<string>();
-
-            // For peeking, we pass the Pokemon straight to the helper.
-            if (SettingsService.Instance.LiveTileMode != LiveTileModes.Peek && SettingsService.Instance.LiveTileMode != LiveTileModes.Transparent)
-            {
-                foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
+            // Let's run this on a separate thread.
+            Task.Run(() => {
+                try
                 {
-                    var pokemon = new PokemonDataWrapper(pokemonData);
-                    images.Add($"{(int)pokemon.PokemonId}.png");
-                }
-            }
+                    TileContent tile = null;
+                    var images = new List<string>();
+                    var mode = SettingsService.Instance.LiveTileMode;
 
-            switch (SettingsService.Instance.LiveTileMode)
-            {
-                case LiveTileModes.Transparent:
-                    tile = LiveTileHelper.GetImageTile("LiveTiles/Transparent/Square44x44Logo.scale-400.png");
-                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
-                    break;
-                case LiveTileModes.Peek:
-                    foreach (PokemonData pokemonData in pokemonList.OrderBy(c => c.Cp))
+                    // Generate the images list for multi-image modes.
+                    if (mode == LiveTileModes.People && mode == LiveTileModes.Photo)
                     {
-                        if (LiveTileUpdater.GetScheduledTileNotifications().Count >= 4095) return;
-                        var peekTile = LiveTileHelper.GetPeekTile(new PokemonDataWrapper(pokemonData));
-                        //Logger.Write(peekTile.GetXml().GetXml());
-                        var scheduled = new ScheduledTileNotification(peekTile.GetXml(),
-                            DateTimeOffset.Now.AddSeconds((pokemonList.IndexOf(pokemonData) + 1) * 30));
-                        LiveTileUpdater.AddToSchedule(scheduled);
+                        images.AddRange(pokemonList.Select(c => new PokemonDataWrapper(c).ImageFileName));
                     }
-                    break;
-                case LiveTileModes.People:
-                    tile = LiveTileHelper.GetPeopleTile(images);
-                    //Logger.Write(tile.GetXml().GetXml());
-                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
-                    break;
-                case LiveTileModes.Photo:
-                    tile = LiveTileHelper.GetPhotosTile(images);
-                    //Logger.Write(tile.GetXml().GetXml());
-                    LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
-                    break;
-            }
 
+                    if (mode != LiveTileModes.Peek)
+                    {
+                        App.LiveTileUpdater.EnableNotificationQueue(true);
+                    }
+                    else
+                    {
+                        App.LiveTileUpdater.EnableNotificationQueue(false);
+                        LiveTileUpdater.Clear();
+                    }
+
+                    switch (mode)
+                    {
+                        case LiveTileModes.Off:
+                            break;
+                        case LiveTileModes.Peek:
+                            foreach (PokemonData pokemonData in pokemonList)
+                            {
+                                if (LiveTileUpdater.GetScheduledTileNotifications().Count >= 300) return;
+                                var peekTile = LiveTileHelper.GetPeekTile(new PokemonDataWrapper(pokemonData));
+                                var scheduled = new ScheduledTileNotification(peekTile.GetXml(),
+                                    DateTimeOffset.Now.AddSeconds((pokemonList.IndexOf(pokemonData) * 30) + 1));
+                                LiveTileUpdater.AddToSchedule(scheduled);
+                            }
+                            break;
+                        case LiveTileModes.People:
+                            tile = LiveTileHelper.GetPeopleTile(images);
+                            LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                            break;
+                        case LiveTileModes.Photo:
+                            tile = LiveTileHelper.GetPhotosTile(images);
+                            LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                            break;
+                        case LiveTileModes.Transparent:
+                            tile = LiveTileHelper.GetImageTile("LiveTiles/Transparent/Square44x44Logo.scale-400.png");
+                            LiveTileUpdater.Update(new TileNotification(tile.GetXml()));
+                            break;
+                    }
+                    if (tile != null)
+                    {
+                        //Logger.Write(tile.GetXml().GetXml());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.Write(ex.Message);
+                    HockeyClient.Current.TrackException(ex);
+                }
+            });
         }
 
         #endregion
