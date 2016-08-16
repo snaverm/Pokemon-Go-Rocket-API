@@ -56,7 +56,7 @@ namespace PokemonGo_UWP.ViewModels
                                                               .OrderBy(c => c.EggKmWalkedTarget);
                 var incubatedEggs = GameClient.EggsInventory.Where(o => !string.IsNullOrEmpty(o.EggIncubatorId))
                                                               .OrderBy(c => c.EggKmWalkedTarget);
-
+                EggsInventory.Clear();                
                 // advancedrei: I have verified this is the sort order in the game.
                 foreach (var incubatedEgg in incubatedEggs)
                 {
