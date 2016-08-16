@@ -87,14 +87,16 @@ namespace PokemonGo_UWP
             e.Handled = true;
             await ExceptionHandler.HandleException(new Exception(e.Message));
             // We should be logging these exceptions too so they can be tracked down.
-            HockeyClient.Current.TrackException(e.Exception);
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.TrackException(e.Exception);
         }
 
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
             Logger.Write(e.Exception.Message);
-            HockeyClient.Current.TrackException(e.Exception);
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.TrackException(e.Exception);
         }
 
         /// <summary>
@@ -207,22 +209,33 @@ namespace PokemonGo_UWP
         {
             AsyncSynchronizationContext.Register();
             // TODO: this is really ugly!
-            if (!string.IsNullOrEmpty(SettingsService.Instance.AuthToken))
+            //if (!string.IsNullOrEmpty(SettingsService.Instance.AuthToken))
+            //{
+            //    try
+            //    {
+            //        await GameClient.InitializeClient();
+            //        // We have a stored token, let's go to game page
+            //        NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        await ExceptionHandler.HandleException(e);
+            //    }
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync(typeof(MainPage));
+            //}
+
+            var currentAccessToken = GameClient.LoadAccessToken();
+            if (currentAccessToken == null)
             {
-                try
-                {
-                    await GameClient.InitializeClient();
-                    // We have a stored token, let's go to game page
-                    NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
-                }
-                catch (Exception e)
-                {
-                    await ExceptionHandler.HandleException(e);
-                }
+                await NavigationService.NavigateAsync(typeof(MainPage));
             }
             else
             {
-                await NavigationService.NavigateAsync(typeof(MainPage));
+                await GameClient.InitializeClient();
+                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
             }
 
             // Check for updates (ignore resume)
@@ -326,7 +339,8 @@ namespace PokemonGo_UWP
                 catch (Exception ex)
                 {
                     Logger.Write(ex.Message);
-                    HockeyClient.Current.TrackException(ex);
+                    if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                        HockeyClient.Current.TrackException(ex);
                 }
             });
         }
