@@ -858,13 +858,21 @@ namespace PokemonGo_UWP.Utils
             switch (fortDataStatus)
             {
                 case FortDataStatus.Opened:
-                    return new Uri($"ms-appx:///Assets/Icons/pokestop_near.png");
+                    return new Uri(resourceUriString + "near.png");
                 case FortDataStatus.Closed:
-                    return new Uri("ms-appx:///Assets/Icons/pokestop_far.png");
+                    return new Uri(resourceUriString + "far.png");
                 case FortDataStatus.Opened | FortDataStatus.Cooldown:
-                    return new Uri($"ms-appx:///Assets/Icons/pokestop_near_inactive.png");
+                    return new Uri(resourceUriString + "near_inactive.png");
                 case FortDataStatus.Closed | FortDataStatus.Cooldown:
-                    return new Uri($"ms-appx:///Assets/Icons/pokestop_far_inactive.png");
+                    return new Uri(resourceUriString + "far_inactive.png");
+                case FortDataStatus.Opened | FortDataStatus.Lure:
+                    return new Uri(resourceUriString + "near_lured.png");
+                case FortDataStatus.Closed | FortDataStatus.Lure:
+                    return new Uri(resourceUriString + "far_lured.png");
+                case FortDataStatus.Opened | FortDataStatus.Cooldown | FortDataStatus.Lure:
+                    return new Uri(resourceUriString + "near_inactive_lured.png");
+                case FortDataStatus.Closed | FortDataStatus.Cooldown | FortDataStatus.Lure: 
+                    return new Uri(resourceUriString + "far_inactive_lured.png");
                 default:
                     throw new ArgumentOutOfRangeException();
             }
