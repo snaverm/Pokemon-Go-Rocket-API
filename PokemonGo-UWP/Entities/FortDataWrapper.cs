@@ -36,9 +36,6 @@ namespace PokemonGo_UWP.Entities
                 if(CooldownCompleteTimestampMs > DateTime.UtcNow.ToUnixTime())
                     retVal |= FortDataStatus.Cooldown;
 
-                if(_fortData.LureInfo != null && _fortData.LureInfo.LureExpiresTimestampMs > DateTime.UtcNow.ToUnixTime())
-                    retVal |= FortDataStatus.Lure;
-
                 return retVal;
             }
         }

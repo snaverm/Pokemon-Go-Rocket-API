@@ -12,9 +12,8 @@ namespace PokemonGo_UWP.Utils.Game
     [Flags]
     public enum FortDataStatus
     {
-        Closed = 0,
-        Opened = 1,
-        Cooldown = 2,
-        Lure = 4
+        Opened,
+        Closed,
+        Cooldown
     }
 }
