@@ -135,8 +135,9 @@ Open page with installation files for manual install?</source>
           <target state="translated">抓到精靈寶可夢</target>
         </trans-unit>
         <trans-unit id="ActivityCatchLegendPokemon" translate="yes" xml:space="preserve">
-          <source>Catch Legend Pokémon</source>
-          <target state="translated">捕捉傳說中的精靈寶可夢</target>
+          <source>Catch Legendary Pokémon</source>
+          <target state="needs-review-translation">捕捉傳說中的精靈寶可夢</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ActivityFleePokemon" translate="yes" xml:space="preserve">
           <source>Pokémon Fled</source>

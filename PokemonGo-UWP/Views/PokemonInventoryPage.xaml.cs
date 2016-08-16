@@ -16,6 +16,9 @@ namespace PokemonGo_UWP.Views
         public PokemonInventoryPage()
         {
             InitializeComponent();
+
+            NavigationCacheMode = NavigationCacheMode.Enabled;
+
             // TODO: fix header
             // Setup incubators translation
             Loaded += (s, e) =>
