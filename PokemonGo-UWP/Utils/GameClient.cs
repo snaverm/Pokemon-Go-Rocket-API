@@ -397,19 +397,19 @@ namespace PokemonGo_UWP.Utils
         public static async Task InitializeDataUpdate()
         {
             _compass = Compass.GetDefault();
-            _compassTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
-            };
-            _compassTimer.Tick += (s, e) =>
-            {
-                if (SettingsService.Instance.IsAutoRotateMapEnabled)
-                {
-                    HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
-                }
-            };
             if (_compass != null)
             {
+                _compassTimer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+                };
+                _compassTimer.Tick += (s, e) =>
+                {
+                    if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                    {
+                        HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                    }
+                };
                 _compassTimer.Start();
             }
             _geolocator = new Geolocator
