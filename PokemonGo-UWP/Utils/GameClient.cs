@@ -93,7 +93,7 @@ namespace PokemonGo_UWP.Utils
                     var minSeconds = GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds;
                     var maxSeconds = GameSetting.MapSettings.GetMapObjectsMaxRefreshSeconds;
                     var minDistance = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
-                    var lastGeoCoordinate = LastGeopositionMapObjectsRequest;
+                    var lastGeoCoordinate = _lastGeopositionMapObjectsRequest;
                     var secondsSinceLast = DateTime.UtcNow.Subtract(BaseRpc.LastRpcRequest).Seconds;
                     if (lastGeoCoordinate == null)
                     {
@@ -426,7 +426,7 @@ namespace PokemonGo_UWP.Utils
             _heartbeat?.StopDispatcher();
             _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
-            LastGeopositionMapObjectsRequest = null;
+            _lastGeopositionMapObjectsRequest = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
             NearbyPokestops.Clear();
@@ -568,7 +568,7 @@ namespace PokemonGo_UWP.Utils
 
         #region Map & Position
 
-        private static Geoposition LastGeopositionMapObjectsRequest;
+        private static Geoposition _lastGeopositionMapObjectsRequest;
 
         /// <summary>
         ///     Gets updated map data based on provided position
@@ -582,7 +582,7 @@ namespace PokemonGo_UWP.Utils
                         <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            LastGeopositionMapObjectsRequest = geoposition;      
+            _lastGeopositionMapObjectsRequest = geoposition;      
             return await _client.Map.GetMapObjects();
         }
 
