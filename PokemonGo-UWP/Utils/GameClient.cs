@@ -20,6 +20,7 @@ using POGOProtos.Enums;
 using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
+using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings;
@@ -28,6 +29,7 @@ using Q42.WinRT.Data;
 using Template10.Common;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
+using Windows.Devices.Sensors;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -123,7 +125,13 @@ namespace PokemonGo_UWP.Utils
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } =
-            new ObservableCollection<NearbyPokemonWrapper>();
+            new ObservableCollection<NearbyPokemonWrapper>
+            {
+                //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
+            };
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -237,6 +245,8 @@ namespace PokemonGo_UWP.Utils
             {
                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
                 {
+                    Debug.WriteLine("AccessTokenExpired Exception caught");
+                    Debug.WriteLine("Loging in now");
                     await Relogin();
                 }
                 else throw;
@@ -333,7 +343,7 @@ namespace PokemonGo_UWP.Utils
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
-            NearbyPokestops.Clear();            
+            NearbyPokestops.Clear();
         }
 
         public static async Task DoRelogin()
@@ -365,21 +375,43 @@ namespace PokemonGo_UWP.Utils
         #region Data Updating
 
         private static Geolocator _geolocator;
+        private static Compass _compass;
 
         public static Geoposition Geoposition { get; private set; }
 
+        public static double Heading { get; private set; }
+
         private static DispatcherTimer _mapUpdateTimer;
+        private static DispatcherTimer _compassTimer;
 
         /// <summary>
         ///     We fire this event when the current position changes
         /// </summary>
         public static event EventHandler<Geoposition> GeopositionUpdated;
 
+        public static event EventHandler<CompassReading> HeadingUpdated;
+
         /// <summary>
         ///     Starts the timer to update map objects and the handler to update position
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
+            _compass = Compass.GetDefault();
+            _compassTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+            };
+            _compassTimer.Tick += (s, e) =>
+            {
+                if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                {
+                    HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                }
+            };
+            if (_compass != null)
+            {
+                _compassTimer.Start();
+            }
             _geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
@@ -387,6 +419,7 @@ namespace PokemonGo_UWP.Utils
                 ReportInterval = 5000,
                 MovementThreshold = 5
             };
+
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
             Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
             GeopositionUpdated?.Invoke(null, Geoposition);
@@ -431,7 +464,8 @@ namespace PokemonGo_UWP.Utils
             Geoposition = args.Position;
             // Updating player's position
             var position = Geoposition.Coordinate.Point.Position;
-            await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
+            if (_client != null)
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
             GeopositionUpdated?.Invoke(null, Geoposition);
         }
 
@@ -554,25 +588,13 @@ namespace PokemonGo_UWP.Utils
                 InventoryDelta.InventoryItems.First(item => item.InventoryItemData.PlayerStats != null)
                     .InventoryItemData.PlayerStats;
 
-            if (checkForLevelUp && PlayerStats != null && PlayerStats.Level != tmpStats.Level)
+            if (checkForLevelUp && ((PlayerStats == null) || (PlayerStats != null && PlayerStats.Level != tmpStats.Level)))
             {
                 PlayerStats = tmpStats;
                 var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
                 return levelUpResponse;
             }
-            PlayerStats = tmpStats;
-
-            // Update candies
-            CandyInventory.AddRange(from item in InventoryDelta.InventoryItems
-                                    where item.InventoryItemData?.Candy != null
-                                    where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
-                                    group item by item.InventoryItemData?.Candy.FamilyId into family
-                                    select new Candy
-                                    {
-                                        FamilyId = family.FirstOrDefault().InventoryItemData.Candy.FamilyId,
-                                        Candy_ = family.FirstOrDefault().InventoryItemData.Candy.Candy_
-                                    }, true);
-
+            PlayerStats = tmpStats;            
             return null;
         }
 
@@ -673,9 +695,16 @@ namespace PokemonGo_UWP.Utils
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
                 .Select(item => item.InventoryItemData.PokedexEntry), true);
 
-            // Update Player stats
-            PlayerStats =
-                fullInventory.First(item => item.InventoryItemData.PlayerStats != null).InventoryItemData.PlayerStats;
+            // Update candies
+            CandyInventory.AddRange(from item in fullInventory
+                                    where item.InventoryItemData?.Candy != null
+                                    where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                                    group item by item.InventoryItemData?.Candy.FamilyId into family
+                                    select new Candy
+                                    {
+                                        FamilyId = family.FirstOrDefault().InventoryItemData.Candy.FamilyId,
+                                        Candy_ = family.FirstOrDefault().InventoryItemData.Candy.Candy_
+                                    }, true);
 
         }
 
