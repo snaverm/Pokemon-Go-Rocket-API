@@ -7,6 +7,7 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
@@ -42,8 +43,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                PlayerProfile = (PlayerData)suspensionState[nameof(PlayerProfile)];
-                PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
+                PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
+                PlayerStats = JsonConvert.DeserializeObject<PlayerStats>((string)suspensionState[nameof(PlayerStats)]);
                 // Restarting update service
                 await StartGpsDataService();
                 return;
@@ -86,8 +87,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(PlayerProfile)] = PlayerProfile;
-                suspensionState[nameof(PlayerStats)] = PlayerStats;
+                suspensionState[nameof(PlayerProfile)] = JsonConvert.SerializeObject(PlayerProfile);
+                suspensionState[nameof(PlayerStats)] = JsonConvert.SerializeObject(PlayerStats);
             }
             await Task.CompletedTask;
         }

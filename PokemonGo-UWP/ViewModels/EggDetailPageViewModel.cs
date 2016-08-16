@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
@@ -31,13 +32,13 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                CurrentEgg = (PokemonDataWrapper) suspensionState[nameof(CurrentEgg)];
-                SelectedEggIncubator = (EggIncubator) suspensionState[nameof(SelectedEggIncubator)];
+                CurrentEgg = JsonConvert.DeserializeObject<PokemonDataWrapper>((string)suspensionState[nameof(CurrentEgg)]);
+                SelectedEggIncubator = JsonConvert.DeserializeObject<EggIncubator>((string)suspensionState[nameof(SelectedEggIncubator)]);
             }
             else
             {
-                // Navigating from game page, so we need to actually load the encounter                
-                CurrentEgg = (PokemonDataWrapper) NavigationHelper.NavigationState[nameof(CurrentEgg)];
+                // Navigating from game page, so we need to actually load the encounter
+                CurrentEgg = (PokemonDataWrapper)NavigationHelper.NavigationState[nameof(CurrentEgg)];
             }
             await Task.CompletedTask;
         }
@@ -52,8 +53,8 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(CurrentEgg)] = CurrentEgg;
-                suspensionState[nameof(SelectedEggIncubator)] = SelectedEggIncubator;
+                suspensionState[nameof(CurrentEgg)] = JsonConvert.SerializeObject(CurrentEgg);
+                suspensionState[nameof(SelectedEggIncubator)] = JsonConvert.SerializeObject(SelectedEggIncubator);
             }
             await Task.CompletedTask;
         }
@@ -134,7 +135,7 @@ namespace PokemonGo_UWP.ViewModels
         public event EventHandler IncubatorSuccess;
 
         #endregion
-        
+
         private DelegateCommand<EggIncubator> _useIncubatorCommand;
 
         public DelegateCommand<EggIncubator> UseIncubatorCommand => _useIncubatorCommand ?? (
@@ -149,7 +150,7 @@ namespace PokemonGo_UWP.ViewModels
                         CurrentEgg =
                             new PokemonDataWrapper(GameClient.EggsInventory.First(item => item.Id == CurrentEgg.Id));
                         break;
-                    default:                        
+                    default:
                         Logger.Write($"Error using {incubator.Id} on {CurrentEgg.Id}");
                         break;
                 }

@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using GeoExtensions;
 using Google.Common.Geometry;
 using Google.Protobuf.Collections;
 using PokemonGo.RocketAPI.Extensions;
@@ -68,8 +67,9 @@ namespace PokemonGo_UWP.Utils
         {
             if (value == null) return new BasicGeoposition();
             var pokemonData = (PokemonData) value;
-            var cellId = new S2CellId(pokemonData.CapturedCellId).ToLatLng();            
-            return new Geopoint(new BasicGeoposition() {Latitude = cellId.LatDegrees, Longitude = cellId.LngDegrees});
+            // TODO: still give wrong position!
+            var cellCenter = new S2CellId(pokemonData.CapturedCellId).ChildEndForLevel(30).ToLatLng();// new S2LatLng(new S2Cell(new S2CellId(pokemonData.CapturedCellId).RangeMax).Center);
+            return new Geopoint(new BasicGeoposition() {Latitude = cellCenter.LatDegrees, Longitude = cellCenter.LngDegrees});
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
