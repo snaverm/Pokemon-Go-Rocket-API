@@ -163,9 +163,9 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Re-enable update timer
                 GameClient.ToggleUpdateTimer();
-                NavigationService.GoBack();
+                Dispatcher.Dispatch(() => NavigationService.GoBack());
             }, () => true)
-            );
+        );
 
         #endregion
 
