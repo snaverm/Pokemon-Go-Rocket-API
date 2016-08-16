@@ -94,7 +94,7 @@ namespace PokemonGo_UWP.Utils
                     var maxSeconds = GameSetting.MapSettings.GetMapObjectsMaxRefreshSeconds;
                     var minDistance = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
                     var lastGeoCoordinate = _lastGeopositionMapObjectsRequest;
-                    var secondsSinceLast = DateTime.UtcNow.Subtract(BaseRpc.LastRpcRequest).Seconds;
+                    var secondsSinceLast = DateTime.Now.Subtract(BaseRpc.LastRpcRequest).Seconds;
                     if (lastGeoCoordinate == null)
                     {
                         Logger.Write("Refreshing MapObjects, reason: 'lastGeoCoordinate == null'.");
@@ -491,7 +491,8 @@ namespace PokemonGo_UWP.Utils
                         DateTime.Now.AddMonths(1));
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
-            _heartbeat = new Heartbeat();
+            if (_heartbeat == null)
+                _heartbeat = new Heartbeat();
             _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
@@ -575,7 +576,7 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         /// <param name="geoposition"></param>
         /// <returns></returns>
-        public static async
+        private static async
             Task
                 <
                     Tuple
@@ -728,7 +729,7 @@ namespace PokemonGo_UWP.Utils
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
-                .Where(item => item != null && item.IsEgg), true);
+                .Where(item => item != null && item.IsEgg), true);            
 
             // Update Pokedex
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
