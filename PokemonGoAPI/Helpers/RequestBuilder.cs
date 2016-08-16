@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Helpers
                     Utils.GenerateLocation2(requestEnvelope.Latitude, requestEnvelope.Longitude,
                         requestEnvelope.Altitude),
                 SessionHash = ByteString.CopyFrom(rnd32),
-                Unknown25 = 0x898654dd2753a481UL,
+                Unknown25 = -8537042734809897855L,
                 Timestamp = (ulong) DateTime.UtcNow.ToUnixTime(),
                 TimestampSinceStart = timeFromStart,
                 SensorInfo = new Signature.Types.SensorInfo

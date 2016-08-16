@@ -337,6 +337,7 @@
     <Compile Include="Proto\Settings\DownloadSettingsAction.cs" />
     <Compile Include="Proto\Settings\FortSettings.cs" />
     <Compile Include="Proto\Settings\GlobalSettings.cs" />
+    <Compile Include="Proto\Settings\GpsSettings.cs" />
     <Compile Include="Proto\Settings\InventorySettings.cs" />
     <Compile Include="Proto\Settings\LevelSettings.cs" />
     <Compile Include="Proto\Settings\MapSettings.cs" />
