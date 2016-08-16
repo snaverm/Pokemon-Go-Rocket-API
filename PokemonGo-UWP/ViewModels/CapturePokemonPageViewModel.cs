@@ -226,46 +226,34 @@ namespace PokemonGo_UWP.ViewModels
         private void SelectStartingBall()
         {
             // Set default item (switch to other balls if user has none)            
-            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall);
-            while (SelectedCaptureItem.Count == 0)
+            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+            {
+                Count = 0,
+                ItemId = ItemId.ItemPokeBall
+            };
+            while (SelectedCaptureItem != null && SelectedCaptureItem.Count == 0)
             {
                 switch (SelectedCaptureItem.ItemId)
                 {
                     case ItemId.ItemPokeBall:
                         // Try with Greatball
-                        SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == ItemId.ItemGreatBall);
-                        if (SelectedCaptureItem == null) {
-                            SelectedCaptureItem = new ItemData() {
-                                ItemId = ItemId.ItemGreatBall
-                            };
-                        }
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemGreatBall);
                         break;
                     case ItemId.ItemGreatBall:
                         // Try with Ultraball
-                        SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == ItemId.ItemUltraBall);
-                        if(SelectedCaptureItem == null) {
-                            SelectedCaptureItem = new ItemData() {
-                                ItemId = ItemId.ItemUltraBall
-                            };
-                        }
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemUltraBall);
                         break;
                     case ItemId.ItemUltraBall:
                         // Try with Masterball
-                        SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == ItemId.ItemMasterBall);
-                        if(SelectedCaptureItem == null) {
-                            SelectedCaptureItem = new ItemData() {
-                                ItemId = ItemId.ItemMasterBall
-                            };
-                        }
+                        SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemMasterBall);
                         break;
                     case ItemId.ItemMasterBall:
-                        // User has no left balls, choose Pokeball to stop him from trying to capture
-                        SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == ItemId.ItemPokeBall);
-                        if(SelectedCaptureItem == null) {
-                            SelectedCaptureItem = new ItemData() {
-                                ItemId = ItemId.ItemPokeBall
-                            };
-                        }
+                        // User has no left balls, choose a non-existing Pokeball to stop him from trying to capture
+                        SelectedCaptureItem = new ItemData
+                        {
+                            Count = 0,
+                            ItemId = ItemId.ItemPokeBall
+                        };
                         return;
                 }
             }
@@ -313,7 +301,7 @@ namespace PokemonGo_UWP.ViewModels
                 await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
                         SelectedCaptureItem.ItemId, hitPokemon);
             var responseDelay = DateTime.Now - requestTime;
-            if (responseDelay.TotalSeconds < 5) await Task.Delay(5 - (int)responseDelay.TotalSeconds);
+            if (responseDelay.TotalSeconds < 5) await Task.Delay(TimeSpan.FromSeconds(5 - (int)responseDelay.TotalSeconds));
             var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
 
             switch (caughtPokemonResponse.Status)

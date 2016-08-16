@@ -255,11 +255,9 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var teamColor = (TeamColor) value;
-            var currentTime = int.Parse(DateTime.Now.ToString("HH"));
-            var noTeamColor = currentTime > 7 && currentTime < 19 ? Colors.Black : Colors.White;
             return new SolidColorBrush(teamColor == TeamColor.Neutral
-                ? noTeamColor
-                : teamColor == TeamColor.Blue ? Colors.Blue : teamColor == TeamColor.Red ? Colors.Red : Colors.Yellow);
+                ? Color.FromArgb(255, 26, 237, 213)
+                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 36, 176, 253) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 225, 63));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
