@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Entities;
@@ -33,21 +34,21 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                CurrentPokestop = (FortDataWrapper) suspensionState[nameof(CurrentPokestop)];
-                CurrentPokestopInfo = (FortDetailsResponse) suspensionState[nameof(CurrentPokestopInfo)];
-                CurrentSearchResponse = (FortSearchResponse) suspensionState[nameof(CurrentSearchResponse)];
+                CurrentPokestop = JsonConvert.DeserializeObject<FortDataWrapper>((string)suspensionState[nameof(CurrentPokestop)]);
+                CurrentPokestopInfo = JsonConvert.DeserializeObject<FortDetailsResponse>((string)suspensionState[nameof(CurrentPokestopInfo)]);
+                CurrentSearchResponse = JsonConvert.DeserializeObject<FortSearchResponse>((string)suspensionState[nameof(CurrentSearchResponse)]);
             }
             else
             {
-                // Navigating from game page, so we need to actually load the Pokestop                  
+                // Navigating from game page, so we need to actually load the Pokestop
                 Busy.SetBusy(true, "Loading Pokestop");
-                CurrentPokestop = (FortDataWrapper) NavigationHelper.NavigationState[nameof(CurrentPokestop)];
+                CurrentPokestop = (FortDataWrapper)NavigationHelper.NavigationState[nameof(CurrentPokestop)];
                 NavigationHelper.NavigationState.Remove(nameof(CurrentPokestop));
                 Logger.Write($"Searching {CurrentPokestop.Id}");
                 CurrentPokestopInfo =
                     await GameClient.GetFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
                 Busy.SetBusy(false);
-                // If timeout is expired we can go to to pokestop page          
+                // If timeout is expired we can go to to pokestop page
                 if (CurrentPokestop.CooldownCompleteTimestampMs >= DateTime.UtcNow.ToUnixTime())
                 {
                     // Timeout is not expired yet, player can't get items from the fort
@@ -66,9 +67,9 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(CurrentPokestop)] = CurrentPokestop;
-                suspensionState[nameof(CurrentPokestopInfo)] = CurrentPokestopInfo;
-                suspensionState[nameof(CurrentSearchResponse)] = CurrentSearchResponse;
+                suspensionState[nameof(CurrentPokestop)] = JsonConvert.SerializeObject(CurrentPokestop);
+                suspensionState[nameof(CurrentPokestopInfo)] = JsonConvert.SerializeObject(CurrentPokestopInfo);
+                suspensionState[nameof(CurrentSearchResponse)] = JsonConvert.SerializeObject(CurrentSearchResponse);
             }
             await Task.CompletedTask;
         }
