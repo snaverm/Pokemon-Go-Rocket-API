@@ -93,8 +93,8 @@ namespace PokemonGo_UWP.Utils
                     var minSeconds = GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds;
                     var maxSeconds = GameSetting.MapSettings.GetMapObjectsMaxRefreshSeconds;
                     var minDistance = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
-                    var lastGeoCoordinate = LastGeopositionMapObjectsRequest;
-                    var secondsSinceLast = DateTime.UtcNow.Subtract(BaseRpc.LastRpcRequest).Seconds;
+                    var lastGeoCoordinate = _lastGeopositionMapObjectsRequest;
+                    var secondsSinceLast = DateTime.Now.Subtract(BaseRpc.LastRpcRequest).Seconds;
                     if (lastGeoCoordinate == null)
                     {
                         Logger.Write("Refreshing MapObjects, reason: 'lastGeoCoordinate == null'.");
@@ -426,7 +426,7 @@ namespace PokemonGo_UWP.Utils
             _heartbeat?.StopDispatcher();
             _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
-            LastGeopositionMapObjectsRequest = null;
+            _lastGeopositionMapObjectsRequest = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
             NearbyPokestops.Clear();
@@ -491,7 +491,8 @@ namespace PokemonGo_UWP.Utils
                         DateTime.Now.AddMonths(1));
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
-            _heartbeat = new Heartbeat();
+            if (_heartbeat == null)
+                _heartbeat = new Heartbeat();
             _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
@@ -568,21 +569,21 @@ namespace PokemonGo_UWP.Utils
 
         #region Map & Position
 
-        private static Geoposition LastGeopositionMapObjectsRequest;
+        private static Geoposition _lastGeopositionMapObjectsRequest;
 
         /// <summary>
         ///     Gets updated map data based on provided position
         /// </summary>
         /// <param name="geoposition"></param>
         /// <returns></returns>
-        public static async
+        private static async
             Task
                 <
                     Tuple
                         <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            LastGeopositionMapObjectsRequest = geoposition;      
+            _lastGeopositionMapObjectsRequest = geoposition;      
             return await _client.Map.GetMapObjects();
         }
 
@@ -728,7 +729,7 @@ namespace PokemonGo_UWP.Utils
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
-                .Where(item => item != null && item.IsEgg), true);
+                .Where(item => item != null && item.IsEgg), true);            
 
             // Update Pokedex
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
