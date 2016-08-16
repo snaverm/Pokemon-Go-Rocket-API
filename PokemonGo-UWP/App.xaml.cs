@@ -87,14 +87,16 @@ namespace PokemonGo_UWP
             e.Handled = true;
             await ExceptionHandler.HandleException(new Exception(e.Message));
             // We should be logging these exceptions too so they can be tracked down.
-            HockeyClient.Current.TrackException(e.Exception);
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.TrackException(e.Exception);
         }
 
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
             Logger.Write(e.Exception.Message);
-            HockeyClient.Current.TrackException(e.Exception);
+            if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                HockeyClient.Current.TrackException(e.Exception);
         }
 
         /// <summary>
@@ -326,7 +328,8 @@ namespace PokemonGo_UWP
                 catch (Exception ex)
                 {
                     Logger.Write(ex.Message);
-                    HockeyClient.Current.TrackException(ex);
+                    if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
+                        HockeyClient.Current.TrackException(ex);
                 }
             });
         }
