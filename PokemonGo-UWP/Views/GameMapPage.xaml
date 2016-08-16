@@ -549,7 +549,6 @@
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
               Canvas.ZIndex="2"
-              Background="Transparent"
               Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -649,24 +648,15 @@
 
                         <Image Grid.Column="0"
                                Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Stretch="Uniform"
-                               VerticalAlignment="Center"
-                               Width="36"
-                               Height="36" />
+                               Style="{ThemeResource NearbyPokemonImageStyle}" />/>
 
                         <Image Grid.Column="1"
                                Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Stretch="Uniform"
-                               VerticalAlignment="Center"
-                               Width="36"
-                               Height="36" />
+                               Style="{ThemeResource NearbyPokemonImageStyle}" /> />
 
                         <Image Grid.Column="2"
                                Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Stretch="Uniform"
-                               VerticalAlignment="Center"
-                               Width="36"
-                               Height="36" />
+                               Style="{ThemeResource NearbyPokemonImageStyle}" /> />
                     </Grid>
                 </Border>
 
