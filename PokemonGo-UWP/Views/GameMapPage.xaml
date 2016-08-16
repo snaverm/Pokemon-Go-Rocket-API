@@ -589,7 +589,6 @@
             </Button>
 
             <Border CornerRadius="8,0,0,8"
-                    x:Name="NearbyPokemonGridBorder"
                     BorderThickness="2,2,0,2"
                     BorderBrush="#abefca"
                     VerticalAlignment="Center"
