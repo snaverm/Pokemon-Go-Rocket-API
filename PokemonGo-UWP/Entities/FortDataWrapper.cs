@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
-using GeoExtensions;
 using Google.Protobuf;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Utils.Game;
+using PokemonGo_UWP.Utils.Helpers;
 using PokemonGo_UWP.Views;
 using POGOProtos.Enums;
 using POGOProtos.Map.Fort;
@@ -27,8 +27,7 @@ namespace PokemonGo_UWP.Entities
         public FortDataStatus FortDataStatus {
             get
             {
-                var distance = GeoAssist.CalculateDistanceBetweenTwoGeoPoints(Geoposition,
-                GameClient.Geoposition.Coordinate.Point);
+                var distance = GeoHelper.Distance(Geoposition, GameClient.Geoposition.Coordinate.Point);
                 FortDataStatus retVal = FortDataStatus.Opened;
 
                 if (distance > GameClient.GameSetting.FortSettings.InteractionRangeMeters)
