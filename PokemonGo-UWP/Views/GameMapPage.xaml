@@ -73,11 +73,6 @@
                                            Storyboard.TargetName="PokeMenuPanel">
                 <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
                         <x:Int32>10</x:Int32>
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
