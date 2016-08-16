@@ -209,22 +209,33 @@ namespace PokemonGo_UWP
         {
             AsyncSynchronizationContext.Register();
             // TODO: this is really ugly!
-            if (!string.IsNullOrEmpty(SettingsService.Instance.AuthToken))
+            //if (!string.IsNullOrEmpty(SettingsService.Instance.AuthToken))
+            //{
+            //    try
+            //    {
+            //        await GameClient.InitializeClient();
+            //        // We have a stored token, let's go to game page
+            //        NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        await ExceptionHandler.HandleException(e);
+            //    }
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync(typeof(MainPage));
+            //}
+
+            var currentAccessToken = GameClient.LoadAccessToken();
+            if (currentAccessToken == null)
             {
-                try
-                {
-                    await GameClient.InitializeClient();
-                    // We have a stored token, let's go to game page
-                    NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
-                }
-                catch (Exception e)
-                {
-                    await ExceptionHandler.HandleException(e);
-                }
+                await NavigationService.NavigateAsync(typeof(MainPage));
             }
             else
             {
-                await NavigationService.NavigateAsync(typeof(MainPage));
+                await GameClient.InitializeClient();
+                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
             }
 
             // Check for updates (ignore resume)
