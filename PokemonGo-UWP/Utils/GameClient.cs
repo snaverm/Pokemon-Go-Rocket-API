@@ -459,7 +459,7 @@ namespace PokemonGo_UWP.Utils
             await UpdatePlayerStats();
             Debug.WriteLine("[Relogin] Restarting MapUpdate timer.");
             _lastUpdate = DateTime.Now;
-            await ToggleUpdateTimer();
+            ToggleUpdateTimer();
         }
 
         #endregion
@@ -552,7 +552,7 @@ namespace PokemonGo_UWP.Utils
         ///     Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
-        public static async Task ToggleUpdateTimer(bool isEnabled = true)
+        public static void ToggleUpdateTimer(bool isEnabled = true)
         {
             if (isEnabled)
                 _heartbeat.StartDispatcher();
@@ -560,18 +560,6 @@ namespace PokemonGo_UWP.Utils
             {
                 _heartbeat.StopDispatcher();
             }
-            //if (isEnabled)
-            //{
-            //    if (_mapUpdateTimer.IsEnabled) return;
-            //    // Update before starting but only if more than 10s passed since the last one
-            //    if ((DateTime.Now - _lastUpdate).Seconds > GameSetting.MapSettings.GetMapObjectsMinRefreshSeconds)
-            //        await UpdateMapObjects();
-            //    _mapUpdateTimer.Start();
-            //}
-            //else
-            //{
-            //    _mapUpdateTimer.Stop();
-            //}
         }
 
         /// <summary>
