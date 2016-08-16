@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
@@ -27,7 +28,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                ItemsInventory = (ObservableCollection<ItemDataWrapper>) suspensionState[nameof(ItemsInventory)];
+                ItemsInventory = JsonConvert.DeserializeObject<ObservableCollection<ItemDataWrapper>>((string)suspensionState[nameof(ItemsInventory)]);
             }
             else if (parameter is bool)
             {
@@ -54,7 +55,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
-                suspensionState[nameof(ItemsInventory)] = ItemsInventory;
+                suspensionState[nameof(ItemsInventory)] = JsonConvert.SerializeObject(ItemsInventory);
             }
             await Task.CompletedTask;
         }
