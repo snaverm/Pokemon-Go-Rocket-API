@@ -783,7 +783,7 @@
                                                  TrafficFlowVisible="False"
                                                  TransitFeaturesVisible="False"
                                                  MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"
-                                                 ZoomLevel="17"
+                                                 ZoomLevel="10"
                                                  x:Name="DetailMapControl">
 
                                     <Rectangle Height="200"
