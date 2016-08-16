@@ -426,6 +426,7 @@ namespace PokemonGo_UWP.Utils
             _heartbeat?.StopDispatcher();
             _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
+            LastGeopositionMapObjectsRequest = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
             NearbyPokestops.Clear();
@@ -567,8 +568,7 @@ namespace PokemonGo_UWP.Utils
 
         #region Map & Position
 
-        internal static Geoposition LastGeopositionMapObjectsRequest;
-        internal static DateTime LastRpcMapObjectsRequest;
+        private static Geoposition LastGeopositionMapObjectsRequest;
 
         /// <summary>
         ///     Gets updated map data based on provided position
@@ -582,8 +582,7 @@ namespace PokemonGo_UWP.Utils
                         <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
-            LastGeopositionMapObjectsRequest = geoposition;            
-            LastRpcMapObjectsRequest = DateTime.Now;
+            LastGeopositionMapObjectsRequest = geoposition;      
             return await _client.Map.GetMapObjects();
         }
 
