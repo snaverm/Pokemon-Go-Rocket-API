@@ -491,7 +491,8 @@ namespace PokemonGo_UWP.Utils
                         DateTime.Now.AddMonths(1));
             // Update geolocator settings based on server
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
-            _heartbeat = new Heartbeat();
+            if (_heartbeat == null)
+                _heartbeat = new Heartbeat();
             _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
