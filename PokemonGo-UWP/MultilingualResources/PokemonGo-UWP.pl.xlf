@@ -368,7 +368,7 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <target state="translated">Złapano Pokémona</target>
         </trans-unit>
         <trans-unit id="ActivityCatchLegendPokemon" translate="yes" xml:space="preserve">
-          <source>Catch Legend Pokémon</source>
+          <source>Catch Legendary Pokémon</source>
           <target state="translated">Złapano legendarnego Pokémona</target>
         </trans-unit>
         <trans-unit id="ActivityFleePokemon" translate="yes" xml:space="preserve">
