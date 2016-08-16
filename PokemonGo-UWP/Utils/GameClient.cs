@@ -440,8 +440,6 @@ namespace PokemonGo_UWP.Utils
 
         public static Geoposition Geoposition { get; private set; }
 
-        public static double Heading { get; private set; }
-
         private static Heartbeat _heartbeat;
         private static DispatcherTimer _compassTimer;
 

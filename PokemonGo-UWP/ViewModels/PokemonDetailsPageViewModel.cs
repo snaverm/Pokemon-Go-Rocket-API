@@ -14,6 +14,7 @@ using Template10.Services.NavigationService;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 
 namespace PokemonGo_UWP.ViewModels
 {
