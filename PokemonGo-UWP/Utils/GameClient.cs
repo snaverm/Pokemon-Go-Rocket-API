@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
@@ -30,7 +32,9 @@ using Template10.Common;
 using Template10.Utils;
 using Universal_Authenticator_v2.Views;
 using Windows.Devices.Sensors;
+using Newtonsoft.Json;
 using PokemonGo.RocketAPI.Rpc;
+using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
 
 namespace PokemonGo_UWP.Utils
@@ -46,43 +50,10 @@ namespace PokemonGo_UWP.Utils
         private static Client _client;
 
         /// <summary>
-        ///     Handles failures by having a fixed number of retries
-        /// </summary>
-        internal class ApiFailure : IApiFailureStrategy
-        {
-            private const int MaxRetries = 50;
-
-            private int _retryCount;
-
-            public async Task<ApiOperation> HandleApiFailure(RequestEnvelope request, ResponseEnvelope response)
-            {
-                if (_retryCount == MaxRetries)
-                    return ApiOperation.Abort;
-
-                await Task.Delay(500);
-                _retryCount++;
-
-                if (_retryCount % 5 == 0)
-                {
-                    await DoRelogin();
-                    Debug.WriteLine("[Relogin] Stopping API via ApiHandledException.");
-                    throw new ApiHandledException("Relogin completed.");
-                }
-
-                return ApiOperation.Retry;
-            }
-
-            public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
-            {
-                _retryCount = 0;
-            }
-        }
-
-        /// <summary>
         /// Handles map updates using Niantic's logic.
         /// Ported from <seealso cref="https://github.com/AeonLucid/POGOLib"/>
         /// </summary>
-        internal class Heartbeat
+        private class Heartbeat
         {
             /// <summary>
             ///     Determines whether we can keep heartbeating.
@@ -95,6 +66,11 @@ namespace PokemonGo_UWP.Utils
             private DispatcherTimer _mapUpdateTimer;
 
             /// <summary>
+            /// True if another update operation is in progress.
+            /// </summary>
+            private bool _isHeartbeating;
+
+            /// <summary>
             /// Checks if we need to update data
             /// </summary>
             /// <param name="sender"></param>
@@ -102,7 +78,8 @@ namespace PokemonGo_UWP.Utils
             private async void HeartbeatTick(object sender, object o)
             {
                 // We need to skip this iteration
-                if (!_keepHeartbeating) return;
+                if (!_keepHeartbeating || _isHeartbeating) return;
+                _isHeartbeating = true;
                 // Heartbeat is alive so we check if we need to update data, based on GameSettings
                 var canRefresh = false;
                 // We have no settings yet so we just update without further checks
@@ -139,7 +116,11 @@ namespace PokemonGo_UWP.Utils
                     }
                 } 
                 // Update!
-                if (!canRefresh) return;
+                if (!canRefresh)
+                {
+                    _isHeartbeating = false;
+                    return;
+                }
                 try
                 {
                     await UpdateMapObjects();
@@ -147,6 +128,10 @@ namespace PokemonGo_UWP.Utils
                 catch (Exception ex)
                 {
                     await ExceptionHandler.HandleException(ex);
+                }
+                finally
+                {
+                    _isHeartbeating = false;
                 }
             }
 
@@ -307,6 +292,24 @@ namespace PokemonGo_UWP.Utils
         #region Login/Logout
 
         /// <summary>
+        /// Saves the new AccessToken to settings.        
+        /// </summary>
+        private static void SaveAccessToken()
+        {
+            SettingsService.Instance.AccessTokenString = JsonConvert.SerializeObject(_client.AccessToken);
+        }
+
+        /// <summary>
+        /// Loads current AccessToken
+        /// </summary>
+        /// <returns></returns>
+        public static AccessToken LoadAccessToken()
+        {
+            var tokenString = SettingsService.Instance.AccessTokenString;
+            return tokenString == null ? null : JsonConvert.DeserializeObject<AccessToken>(SettingsService.Instance.AccessTokenString);
+        }
+
+        /// <summary>
         ///     Sets things up if we didn't come from the login page
         /// </summary>
         /// <returns></returns>
@@ -326,10 +329,11 @@ namespace PokemonGo_UWP.Utils
                 GooglePassword = SettingsService.Instance.LastLoginService == AuthType.Google ? credentials.Password : null,
             };
 
-            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance)
-            {
-                AuthToken = SettingsService.Instance.AuthToken
-            };
+            _client = new Client(_clientSettings, null, DeviceInfos.Instance) {AccessToken = LoadAccessToken()};
+            var apiFailureStrategy = new ApiFailureStrategy(_client);
+            _client.ApiFailure = apiFailureStrategy;
+            // Register to AccessTokenChanged       
+            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
             try
             {
                 await _client.Login.DoLogin();
@@ -339,28 +343,9 @@ namespace PokemonGo_UWP.Utils
                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
                 {
                     Debug.WriteLine("AccessTokenExpired Exception caught");
-                    Debug.WriteLine("Loging in now");
-                    await Relogin();
+                    await _client.Login.DoLogin();
                 }
                 else throw;
-            }
-        }
-        public static async Task<bool> Relogin()
-        {
-            switch (_clientSettings.AuthType)
-            {
-                case AuthType.Ptc:
-                    {
-                        return await DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
-                    }
-                case AuthType.Google:
-                    {
-                        return await DoGoogleLogin(_clientSettings.GoogleUsername, _clientSettings.GooglePassword);
-                    }
-                default:
-                    {
-                        throw new InvalidOperationException();
-                    }
             }
         }
 
@@ -378,13 +363,17 @@ namespace PokemonGo_UWP.Utils
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, null, DeviceInfos.Instance);
+            var apiFailureStrategy = new ApiFailureStrategy(_client);
+            _client.ApiFailure = apiFailureStrategy;
+            // Register to AccessTokenChanged       
+            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
             // Get PTC token
-            var authToken = await _client.Login.DoLogin();
+            await _client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
-            SettingsService.Instance.AuthToken = authToken;
+            SaveAccessToken();
             // Update other data if login worked
-            if (authToken == null) return false;
+            if (_client.AccessToken == null) return false;
             SettingsService.Instance.LastLoginService = AuthType.Ptc;
             SettingsService.Instance.UserCredentials =
                 new PasswordCredential(nameof(SettingsService.Instance.UserCredentials), username, password);
@@ -407,13 +396,17 @@ namespace PokemonGo_UWP.Utils
                 AuthType = AuthType.Google
             };
 
-            _client = new Client(_clientSettings, new ApiFailure(), DeviceInfos.Instance);
+            _client = new Client(_clientSettings, null, DeviceInfos.Instance);
+            var apiFailureStrategy = new ApiFailureStrategy(_client);
+            _client.ApiFailure = apiFailureStrategy;
+            // Register to AccessTokenChanged       
+            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
             // Get Google token
-            var authToken = await _client.Login.DoLogin();
-            // Update current token even if it's null
-            SettingsService.Instance.AuthToken = authToken;
+            await _client.Login.DoLogin();
+            // Update current token even if it's null and clear the token for the other identity provide
+            SaveAccessToken();
             // Update other data if login worked
-            if (authToken == null) return false;
+            if (_client.AccessToken == null) return false;
             SettingsService.Instance.LastLoginService = AuthType.Google;
             SettingsService.Instance.UserCredentials =
                 new PasswordCredential(nameof(SettingsService.Instance.UserCredentials), email, password);
@@ -427,39 +420,15 @@ namespace PokemonGo_UWP.Utils
         public static void DoLogout()
         {
             // Clear stored token
-            SettingsService.Instance.AuthToken = null;
+            SettingsService.Instance.AccessTokenString = null;
             if (!SettingsService.Instance.RememberLoginData)
                 SettingsService.Instance.UserCredentials = null;
-            _heartbeat.StopDispatcher();
+            _heartbeat?.StopDispatcher();
             _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
             NearbyPokestops.Clear();
-        }
-
-        public static async Task DoRelogin()
-        {
-            Debug.WriteLine("[Relogin] Started.");
-            DoLogout();
-
-            var token = _client.AuthToken;
-
-            await
-                (_clientSettings.AuthType == AuthType.Google
-                    ? DoGoogleLogin(_clientSettings.GoogleUsername, _clientSettings.GooglePassword)
-                    : DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword));
-
-            if (token != _client.AuthToken)
-                Debug.WriteLine("[Relogin] Token successfuly changed.");
-
-            Debug.WriteLine("[Relogin] Reloading gps and playerdata.");
-            await InitializeDataUpdate();
-            await UpdateProfile();
-            await UpdatePlayerStats();
-            Debug.WriteLine("[Relogin] Restarting MapUpdate timer.");
-            _lastUpdate = DateTime.Now;
-            ToggleUpdateTimer();
         }
 
         #endregion
