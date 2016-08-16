@@ -32,6 +32,7 @@
             <utils:PokemonSortingModesToSortingModesListConverter
                 x:Key="PokemonSortingModesToSortingModesListConverter" />
             <utils:PokemonSortingModesToIconConverter x:Key="PokemonSortingModesToIconConverter" />
+            <utils:PokemonSortingModesTranslationConverter x:Key="PokemonSortingModesTranslationConverter" />
             <utils:EggDataToEggProgressConverter x:Key="EggDataToEggProgressConverter" />
             <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter" />
             <utils:IncubatorUsagesCountToUsagesTextConverter x:Key="IncubatorUsagesCountToUsagesTextConverter" />

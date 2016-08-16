@@ -135,7 +135,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"
-                                       Text="{Binding}"
+                                       Text="{Binding Converter={StaticResource PokemonSortingModesTranslationConverter}}"
                                        Style="{StaticResource TextSortTitle}" />
                             <Button Grid.Column="1"
                                     IsHitTestVisible="False"
