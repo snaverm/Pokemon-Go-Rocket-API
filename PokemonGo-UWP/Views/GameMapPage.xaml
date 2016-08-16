@@ -648,15 +648,15 @@
 
                         <Image Grid.Column="0"
                                Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" />/>
+                               Style="{ThemeResource NearbyPokemonImageStyle}" />
 
                         <Image Grid.Column="1"
                                Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" /> />
+                               Style="{ThemeResource NearbyPokemonImageStyle}" />
 
                         <Image Grid.Column="2"
                                Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" /> />
+                               Style="{ThemeResource NearbyPokemonImageStyle}" />
                     </Grid>
                 </Border>
 
