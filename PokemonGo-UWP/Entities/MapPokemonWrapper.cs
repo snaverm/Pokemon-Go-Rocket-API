@@ -32,14 +32,14 @@ namespace PokemonGo_UWP.Entities
         ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
         /// </summary>
         public DelegateCommand TryCatchPokemon => _tryCatchPokemon ?? (
-            _tryCatchPokemon = new DelegateCommand(async () =>
+            _tryCatchPokemon = new DelegateCommand(() =>
             {
                 NavigationHelper.NavigationState["CurrentPokemon"] = this;
                 // Disable map update
-                await GameClient.ToggleUpdateTimer(false);
+                GameClient.ToggleUpdateTimer(false);
                 BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage));
             }, () => true)
-            );
+        );
 
         public void Update(MapPokemon update)
         {

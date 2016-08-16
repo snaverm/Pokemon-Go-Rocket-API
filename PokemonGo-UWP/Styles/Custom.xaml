@@ -1258,6 +1258,16 @@
         <Setter Property="Height" Value="36"/>
     </Style>
     
+    <Style TargetType="BitmapIcon" x:Key="NearbyPokemonBitmapIconStyle">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+    </Style>
+
+    <Style TargetType="BitmapIcon" x:Key="NearbyPokemonNotInPokedexBitmapIconStyle" BasedOn="{StaticResource NearbyPokemonBitmapIconStyle}">
+        <Setter Property="Foreground" Value="#FF888F93" />
+    </Style>
+
     <Style TargetType="Pivot">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>

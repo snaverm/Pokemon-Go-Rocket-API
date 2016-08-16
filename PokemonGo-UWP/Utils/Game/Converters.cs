@@ -22,6 +22,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using Template10.Common;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -806,6 +807,26 @@ namespace PokemonGo_UWP.Utils
             var distance = (int) (float) value;
             var distanceString = distance < 125 ? (distance < 70 ? "Near" : "Mid") : "Far";
             return new Uri($"ms-appx:///Assets/Icons/Footprint_{distanceString}.png");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class NearbyPokemonInPokedexToStyleConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            //Parameter passed in needs to be the Pokedex for this to work.
+            var isInPokedex = true; // TO DO - Change this logic.
+            return isInPokedex ? (Style)App.Current.Resources["NearbyPokemonBitmapIconStyle"] : (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

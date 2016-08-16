@@ -11,6 +11,7 @@
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:entities="using:PokemonGo_UWP.Entities"
     xmlns:controls="using:Template10.Controls"
+    xmlns:utils="using:PokemonGo_UWP.Utils"
     x:Name="GamePage"
     RequestedTheme="{Binding CurrentTheme, Mode=OneWay}"
     mc:Ignorable="d">
@@ -162,6 +163,8 @@
                              To="350"
                              Duration="0:0:0.2" />
         </Storyboard>
+
+        <utils:NearbyPokemonInPokedexToStyleConverter x:Key="NearbyPokemonInPokedexToStyleConverter" />
 
     </Page.Resources>
 
@@ -646,17 +649,18 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0"
-                               Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" />
+                        <BitmapIcon Grid.Column="0"
+                               UriSource="{Binding NearbyPokemons[0].ImageFilePath}"
+                               Style="{Binding Path=NearbyPokemons[0], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}}" />
+                        <!--Style="{Binding Path=NearbyPokemons[0], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}, Parameter=GameClient.PokedexInventory}" />-->
 
-                        <Image Grid.Column="1"
-                               Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" />
+                        <BitmapIcon Grid.Column="1"
+                               UriSource="{Binding NearbyPokemons[1].ImageFilePath}"
+                               Style="{Binding Path=NearbyPokemons[1], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}}" />
 
-                        <Image Grid.Column="2"
-                               Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonImageStyle}" />
+                        <BitmapIcon Grid.Column="2"
+                               UriSource="{Binding NearbyPokemons[2].ImageFilePath}"
+                               Style="{Binding Path=NearbyPokemons[2], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}}" />
                     </Grid>
                 </Border>
 
