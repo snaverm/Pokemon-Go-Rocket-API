@@ -426,6 +426,7 @@ namespace PokemonGo_UWP.Utils
             _heartbeat?.StopDispatcher();
             _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
+            Geoposition = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
             NearbyPokestops.Clear();
