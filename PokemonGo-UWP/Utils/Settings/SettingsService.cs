@@ -97,6 +97,12 @@ namespace PokemonGo_UWP.Utils
             set { _helper.Write(nameof(IsAutoRotateMapEnabled), value); }
         }
 
+        public bool IsCompassEnabled
+        {
+            get { return _helper.Read(nameof(IsCompassEnabled), false); }
+            set { _helper.Write(nameof(IsCompassEnabled), value); }
+        }
+
         public bool IsMusicEnabled
         {
             get { return _helper.Read(nameof(IsMusicEnabled), false); }

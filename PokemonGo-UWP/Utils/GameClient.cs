@@ -456,21 +456,24 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
-            _compass = Compass.GetDefault();
-            if (_compass != null)
+            if (SettingsService.Instance.IsCompassEnabled)
             {
-                _compassTimer = new DispatcherTimer
+                _compass = Compass.GetDefault();
+                if (_compass != null)
                 {
-                    Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
-                };
-                _compassTimer.Tick += (s, e) =>
-                {
-                    if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                    _compassTimer = new DispatcherTimer
                     {
-                        HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
-                    }
-                };
-                _compassTimer.Start();
+                        Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+                    };
+                    _compassTimer.Tick += (s, e) =>
+                    {
+                        if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                        {
+                            HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                        }
+                    };
+                    _compassTimer.Start();
+                }
             }
             _geolocator = new Geolocator
             {
@@ -705,7 +708,8 @@ namespace PokemonGo_UWP.Utils
         public static async Task UpdateInventory()
         {
             // Get ALL the items
-            var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
+            var response = await GetInventory();
+            var fullInventory = response.InventoryDelta?.InventoryItems;
             // Update items
             ItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null)
                 .GroupBy(item => item.InventoryItemData.Item)
@@ -725,15 +729,15 @@ namespace PokemonGo_UWP.Utils
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId != 0), true);
 
+            // Update Pokedex
+            PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
+                .Select(item => item.InventoryItemData.PokedexEntry), true);
+
             // Update Pokemons
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.IsEgg), true);            
-
-            // Update Pokedex
-            PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
-                .Select(item => item.InventoryItemData.PokedexEntry), true);
 
             // Update candies
             CandyInventory.AddRange(from item in fullInventory

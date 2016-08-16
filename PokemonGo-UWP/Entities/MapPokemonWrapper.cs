@@ -39,7 +39,7 @@ namespace PokemonGo_UWP.Entities
                 GameClient.ToggleUpdateTimer(false);
                 BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage));
             }, () => true)
-            );
+        );
 
         public void Update(MapPokemon update)
         {

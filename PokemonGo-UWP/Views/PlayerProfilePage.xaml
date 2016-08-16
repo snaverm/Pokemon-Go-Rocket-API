@@ -310,7 +310,7 @@
                                         <Viewbox Stretch="Uniform" 
                                                  x:Name="AchievementTypeText" 
                                                  MaxWidth="80"
-                                                 MaxHeight="20"
+                                                 Height="20"
                                                 Margin="0,5"
                                                  RelativePanel.AlignHorizontalCenterWithPanel="True">
                                             <TextBlock Text="{Binding Key, Converter={StaticResource AchievementTranslationConverter}}"
