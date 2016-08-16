@@ -652,7 +652,6 @@
                         <BitmapIcon Grid.Column="0"
                                UriSource="{Binding NearbyPokemons[0].ImageFilePath}"
                                Style="{Binding Path=NearbyPokemons[0], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}}" />
-                        <!--Style="{Binding Path=NearbyPokemons[0], Converter={StaticResource NearbyPokemonInPokedexToStyleConverter}, Parameter=GameClient.PokedexInventory}" />-->
 
                         <BitmapIcon Grid.Column="1"
                                UriSource="{Binding NearbyPokemons[1].ImageFilePath}"

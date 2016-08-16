@@ -823,10 +823,19 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            //Parameter passed in needs to be the Pokedex for this to work.
-            var isInPokedex = true; // TO DO - Change this logic.
-            return isInPokedex ? (Style)App.Current.Resources["NearbyPokemonBitmapIconStyle"] : (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+            // Get the Pokemon passed in. If it's null, you can't see the real deal.
+            NearbyPokemonWrapper pokemon = value as NearbyPokemonWrapper;
+            if (pokemon == null) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
 
+            // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
+            var entry = GameClient.PokedexInventory.FirstOrDefault(c => c.PokemonId == pokemon.PokemonId);
+            if (entry == null) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+
+            // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
+            if (entry.TimesCaptured == 0) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+
+            // You've cleared all the reasons NOT to show it. So show it.
+            return (Style)App.Current.Resources["NearbyPokemonBitmapIconStyle"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
