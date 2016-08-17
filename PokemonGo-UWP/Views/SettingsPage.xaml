@@ -79,7 +79,7 @@
 
                 <CheckBox Grid.Row="1"
                           Grid.Column="1"
-                          IsChecked="{Binding IsCompassEnabledEnabled, Mode=TwoWay}"
+                          IsChecked="{Binding IsCompassEnabled, Mode=TwoWay}"
                           Style="{StaticResource SettingsCheckbox}"
                           Margin="0,0,15,10" />
 
