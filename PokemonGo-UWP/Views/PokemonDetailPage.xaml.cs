@@ -34,9 +34,6 @@ namespace PokemonGo_UWP.Views
             Loaded += (s, e) =>
             {
                 ShowEvolveStatsModalAnimation.From = EvolveStatsTranslateTransform.Y = ActualHeight;
-
-                PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
-                PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
             };
         }
 
