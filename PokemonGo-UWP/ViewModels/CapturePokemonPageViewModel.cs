@@ -219,6 +219,11 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public event EventHandler CatchEscape;
 
+        /// <summary>
+        /// Event fired if berry worked
+        /// </summary>
+        public event EventHandler BerrySuccess;
+
         #endregion
 
         /// <summary>
@@ -278,8 +283,7 @@ namespace PokemonGo_UWP.ViewModels
                     await ThrowPokeball(hitPokemon);
                 }
                 else
-                {
-                    // TODO: check if player can only use a ball or a berry during an encounter, and maybe avoid displaying useless items in encounter's inventory
+                {                    
                     // He's using a berry
                     await ThrowBerry();
                 }
@@ -342,18 +346,22 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        ///     Uses the selected berry for the current encounter
-        ///     TODO: what happens when the berry is used? Do we need some kind of animation or visual feedback?
+        ///     Uses the selected berry for the current encounter        
         /// </summary>
         /// <returns></returns>
         public async Task ThrowBerry()
         {
-            //if (SelectedCaptureItem == null)
-            //    return;
-            //var berryResult =
-            //    await
-            //        GameClient.UseCaptureItem(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, (ItemId)SelectedCaptureItem.Item_);
-            //Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");
+            Logger.Write($"Used {SelectedCaptureItem}. Remaining: {SelectedCaptureItem.Count}");
+            var berryResult = await GameClient.UseCaptureItem(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, SelectedCaptureItem.ItemId);
+            if (berryResult.Success)
+            {
+                // TODO: visual feedback
+                // TODO: do we need to handle the returned values or are they needed just to animate the 3d model?
+                Logger.Write($"Success when using {SelectedCaptureItem}.");
+                BerrySuccess?.Invoke(this, null);
+                await new MessageDialog($"Used {SelectedCaptureItem.ItemId}", "").ShowAsyncQueue();
+                SelectStartingBall();
+            }
         }
 
         #endregion
