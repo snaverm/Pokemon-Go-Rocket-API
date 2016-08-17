@@ -270,7 +270,7 @@
                             </TextBlock>
                         </StackPanel>
                         <GridView x:Name="PokemonInventoryGridView"
-                                      ItemsSource="{x:Bind ViewModel.PokemonInventory}"
+                                      ItemsSource="{x:Bind ViewModel.PokemonInventory, Mode=OneWay}"
                                       Grid.Row="1"
                                       SelectionMode="None"
                                       Padding="0,0,0,57.5"
