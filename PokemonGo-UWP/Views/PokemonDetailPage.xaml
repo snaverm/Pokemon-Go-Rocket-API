@@ -357,10 +357,9 @@
 
                 <Border CornerRadius="5"
                         Background="#FAFAFA"
-                        BorderBrush="#FAFAFA"
                         Margin="10,0,10,-10"
                         Padding="0,32,0,0"
-                        BorderThickness="3"
+                        BorderThickness="0"
                         Grid.RowSpan="4"
                         Grid.Row="2">
 
