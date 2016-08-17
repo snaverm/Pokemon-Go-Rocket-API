@@ -310,7 +310,7 @@ namespace PokemonGo_UWP.Utils
             var badgeType =
                 (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
 
-            return badgeType == null ? "" : Resources.Achievements.GetString(badgeType.Value.ToString());
+            return badgeType == null ? "" : Resources.Achievements.GetString(badgeType.Value.ToString()).ToUpper();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -356,6 +356,7 @@ namespace PokemonGo_UWP.Utils
             var bronze = (BronzeAttribute)fieldInfo.GetCustomAttributes(typeof(BronzeAttribute), false).First();
             var silver = (SilverAttribute)fieldInfo.GetCustomAttributes(typeof(SilverAttribute), false).First();
             var gold = (GoldAttribute)fieldInfo.GetCustomAttributes(typeof(GoldAttribute), false).First();
+            int level = 3;
             if (achievement.Value == null)
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
@@ -366,13 +367,31 @@ namespace PokemonGo_UWP.Utils
             }
             if (float.Parse(achievement.Value.ToString()) < float.Parse(silver.Value.ToString()))
             {
-                return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv1.png"));
+                level = 1;
             }
             if (float.Parse(achievement.Value.ToString()) < float.Parse(gold.Value.ToString()))
             {
-                return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv2.png"));
+                level = 2;
             }
-            return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv3.png"));
+            
+            switch (achievement.Key.ToString().ToLower().Replace(" ","")) {
+                case "acetrainer":
+                case "backpacker":
+                case "battlegirl":
+                case "breeder":
+                case "collector":
+                case "fisherman":
+                case "jogger":
+                case "kanto":
+                case "pikachufan":
+                case "scientist":
+                case "youngster":
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/" + achievement.Key.ToString().ToLower().Replace(" ", "") + "_lv" + level.ToString() + ".png"));
+                    break;
+                default:
+                    return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv" + level.ToString() + ".png"));
+                    break;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
