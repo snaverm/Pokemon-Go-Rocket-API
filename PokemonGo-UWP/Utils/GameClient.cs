@@ -36,6 +36,7 @@ using Newtonsoft.Json;
 using PokemonGo.RocketAPI.Rpc;
 using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
+using System.Collections.Specialized;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -138,14 +139,18 @@ namespace PokemonGo_UWP.Utils
             /// <summary>
             /// Inits heartbeat
             /// </summary>
-            internal void StartDispatcher()
+            internal async Task StartDispatcher()
             {
                 _keepHeartbeating = true;
                 if (_mapUpdateTimer != null) return;
-                _mapUpdateTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
-                _mapUpdateTimer.Tick += HeartbeatTick;
-                _mapUpdateTimer.Start();
-            }            
+
+                await DispatcherHelper.RunInDispatcherAndAwait(() =>
+                {
+                    _mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                    _mapUpdateTimer.Tick += HeartbeatTick;
+                    _mapUpdateTimer.Start();
+                });
+            }
 
             /// <summary>
             /// Stops heartbeat
@@ -203,13 +208,13 @@ namespace PokemonGo_UWP.Utils
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } =
-            new ObservableCollection<NearbyPokemonWrapper>
-            {
-                //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
-            };
+            new ObservableCollection<NearbyPokemonWrapper>();
+            //{
+            //    //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
+            //};
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -256,8 +261,8 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Stores player's current Pokedex
         /// </summary>
-        public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } =
-            new ObservableCollection<PokedexEntry>();
+        public static ObservableCollectionPlus<PokedexEntry> PokedexInventory { get; set; } =
+            new ObservableCollectionPlus<PokedexEntry>();
 
         /// <summary>
         ///     Stores player's current candies
@@ -284,6 +289,35 @@ namespace PokemonGo_UWP.Utils
         public static IEnumerable<MoveSettings> MoveSettings { get; private set; } = new List<MoveSettings>();
 
         #endregion
+
+        #endregion
+
+        #region Constructor
+
+        static GameClient()
+        {
+            PokedexInventory.CollectionChanged += PokedexInventory_CollectionChanged;
+            // TO DO: Investigate whether or not this needs to be unsubscribed when the app closes.
+        }
+
+        /// <summary>
+        /// When new items are added to the Pokedex, reset the Nearby Pokemon so their state can be re-run.
+        /// </summary>
+        /// <remarks>
+        /// This exists because the Nearby Pokemon are Map objects, and are loaded before Inventory. If you don't do this,
+        /// the first Nearby items are always shown as "new to the Pokedex" until they disappear, regardless of if they are
+        /// ACTUALLY new.
+        /// </remarks>
+        private static void PokedexInventory_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                // advancedrei: This is a total order-of-operations hack.
+                var nearby = NearbyPokemons.ToList();
+                NearbyPokemons.Clear();
+                NearbyPokemons.AddRange(nearby);
+            }
+        }
 
         #endregion
 
@@ -417,7 +451,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Logs the user out by clearing data and timers
         /// </summary>
-        public static void DoLogout()
+        public static async void DoLogout()
         {
             // Clear stored token
             SettingsService.Instance.AccessTokenString = null;
@@ -496,7 +530,7 @@ namespace PokemonGo_UWP.Utils
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             if (_heartbeat == null)
                 _heartbeat = new Heartbeat();
-            _heartbeat.StartDispatcher();
+            await _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
             //await UpdateMapObjects();
@@ -524,10 +558,10 @@ namespace PokemonGo_UWP.Utils
         ///     Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
-        public static void ToggleUpdateTimer(bool isEnabled = true)
+        public static async void ToggleUpdateTimer(bool isEnabled = true)
         {
             if (isEnabled)
-                _heartbeat.StartDispatcher();
+                await _heartbeat.StartDispatcher();
             else
             {
                 _heartbeat.StopDispatcher();
@@ -660,8 +694,7 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        ///     Pokedex extra data doesn't change so we can just call this method once.
-        ///     TODO: store it in local settings maybe?
+        ///     Pokedex extra data doesn't change so we can just call this method once.        
         /// </summary>
         /// <returns></returns>
         private static async Task UpdateItemTemplates()
