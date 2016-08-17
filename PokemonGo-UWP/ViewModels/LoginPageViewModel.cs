@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
@@ -30,7 +31,7 @@ namespace PokemonGo_UWP.ViewModels
             NavigationService.ClearHistory();
             if (suspensionState.Any())
             {
-                // Recovering the state                
+                // Recovering the state
                 Username = (string) suspensionState[nameof(Username)];
                 Password = (string) suspensionState[nameof(Password)];
             }
@@ -112,7 +113,7 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
-        #region Game Logic        
+        #region Game Logic
 
         private DelegateCommand _doPtcLoginCommand;
 
@@ -152,9 +153,19 @@ namespace PokemonGo_UWP.ViewModels
                         JToken token = json.SelectToken("$.errors[0]");
                         if (token != null)
                             errorMessage = token.ToString();
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
 
                     await new MessageDialog(errorMessage).ShowAsyncQueue();
+                }
+                catch (Exception e)
+                {
+                    if (e.Message.Contains("Your username or password is incorrect."))
+                    {
+                        await new MessageDialog(e.Message).ShowAsyncQueue();
+                    }
                 }
                 finally
                 {
