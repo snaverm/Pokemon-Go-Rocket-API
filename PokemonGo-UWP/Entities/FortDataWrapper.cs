@@ -12,6 +12,7 @@ using POGOProtos.Enums;
 using POGOProtos.Map.Fort;
 using Template10.Common;
 using Template10.Mvvm;
+using Google.Protobuf.Collections;
 
 namespace PokemonGo_UWP.Entities
 {
@@ -102,7 +103,7 @@ namespace PokemonGo_UWP.Entities
 
         public FortType Type => _fortData.Type;
 
-        public ByteString ActiveFortModifier => _fortData.ActiveFortModifier;
+        public RepeatedField<POGOProtos.Inventory.Item.ItemId> ActiveFortModifier => _fortData.ActiveFortModifier;
 
         public long CooldownCompleteTimestampMs => _fortData.CooldownCompleteTimestampMs;
 
