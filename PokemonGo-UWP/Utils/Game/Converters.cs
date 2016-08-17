@@ -23,6 +23,7 @@ using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Template10.Common;
+using System.Collections.ObjectModel;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -817,7 +818,7 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class NearbyPokemonInPokedexToStyleConverter : IValueConverter
+    public class NearbyPokemonInPokedexToVisibilityConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 
@@ -825,17 +826,17 @@ namespace PokemonGo_UWP.Utils
         {
             // Get the Pokemon passed in. If it's null, you can't see the real deal.
             NearbyPokemonWrapper pokemon = value as NearbyPokemonWrapper;
-            if (pokemon == null) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+            if (pokemon == null) return Visibility.Collapsed;
 
             // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
             var entry = GameClient.PokedexInventory.FirstOrDefault(c => c.PokemonId == pokemon.PokemonId);
-            if (entry == null) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+            if (entry == null) return Visibility.Collapsed;
 
             // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
-            if (entry.TimesCaptured == 0) return (Style)App.Current.Resources["NearbyPokemonNotInPokedexBitmapIconStyle"];
+            if (entry.TimesCaptured == 0) return Visibility.Collapsed;
 
             // You've cleared all the reasons NOT to show it. So show it.
-            return (Style)App.Current.Resources["NearbyPokemonBitmapIconStyle"];
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -951,7 +952,6 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
-
 
     public class PokemonSortingModesToSortingModesListConverter : IValueConverter
     {
