@@ -221,6 +221,7 @@
         </Storyboard>
 
         <utils:NearbyPokemonInPokedexToVisibilityConverter x:Key="NearbyPokemonInPokedexToVisibilityConverter" />
+        <utils:InverseNearbyPokemonInPokedexToVisibilityConverter x:Key="InverseNearbyPokemonInPokedexToVisibilityConverter"/>
 
     </Page.Resources>
 
@@ -709,112 +710,58 @@
                     BorderBrush="#abefca"
                     VerticalAlignment="Center"
                     Grid.Column="2"
-                    Padding="8,8,0,8"
-                    Height="60">
+                    Tapped="ToggleNearbyPokemonModal"
+                    Padding="4"
+                    Height="55">
 
-                <Border CornerRadius="8,0,0,8"
-                        Tapped="ToggleNearbyPokemonModal">
+                <Border.Background>
+                    <SolidColorBrush Color="White"
+                                     Opacity="0.7"/>
+                </Border.Background>
 
-                    <Border.Background>
-                        <SolidColorBrush Color="White"
-                                         Opacity="0.7" />
-                    </Border.Background>
-
-                    <GridView ItemsSource="{Binding NearbyPokemons}"
+                <GridView ItemsSource="{Binding NearbyPokemons}"
                               HorizontalAlignment="Stretch"
                               HorizontalContentAlignment="Stretch"
                               SelectionMode="None" 
+                          ScrollViewer.VerticalScrollMode="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                               ShowsScrollingPlaceholders="False" 
                               IsMultiSelectCheckBoxEnabled="False" >
 
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapGrid Orientation="Horizontal"
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Horizontal"
                                           VerticalChildrenAlignment="Top"
                                           MaximumRowsOrColumns="10" 
-                                          ItemHeight="40" 
-                                          ItemWidth="52"
+                                          ItemHeight="52" 
+                                          ItemWidth="40"
+                                      ScrollViewer.VerticalScrollMode="Disabled"
                                           ScrollViewer.VerticalScrollBarVisibility="Disabled" />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
 
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,-4,0,0" Padding="6,0">
-                                    <Image Canvas.ZIndex="100"
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Canvas.ZIndex="100"
                                            Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                            Visibility="{Binding Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            Stretch="Uniform"
-                                           Height="40"
-                                           Width="40"
-                                           Margin="0"/>
+                                           Height="36"
+                                           Width="36"/>
 
-                                    <BitmapIcon UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                                Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}"
-                                                VerticalAlignment="Center"
+                                <BitmapIcon UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                                Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}" 
+                                            Visibility="{Binding Converter={StaticResource InverseNearbyPokemonInPokedexToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Center"
                                                 Height="36"
-                                                Width="36"
-                                                Margin="6,0" />
-                                </Grid>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-
-                    <!--<Grid HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0"
-                               Canvas.ZIndex="100"
-                                Source="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                Visibility="{Binding NearbyPokemons[0], Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Height="36"
-                                Width="36"
-                                Stretch="Uniform"/>
-
-                        <BitmapIcon Grid.Column="0"
-                                    Canvas.ZIndex="0"
-                               UriSource="{Binding NearbyPokemons[0].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}" />
-
-                        <Image Grid.Column="1"
-                               Canvas.ZIndex="100"
-                                Source="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                Visibility="{Binding NearbyPokemons?[1], Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Height="36"
-                                Width="36"
-                                Stretch="Uniform"/>
-
-                        <BitmapIcon Grid.Column="1"
-                               UriSource="{Binding NearbyPokemons[1].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}" />
-
-                        <Image Grid.Column="2"
-                               Canvas.ZIndex="100"
-                                Source="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                Visibility="{Binding NearbyPokemons[2], Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Height="36"
-                                Width="36"
-                                Stretch="Uniform"/>
-
-                        <BitmapIcon Grid.Column="2"
-                               UriSource="{Binding NearbyPokemons[2].PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}" />
-                    </Grid>-->
-
-                </Border>
+                                                Width="36" />
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
 
             </Border>
 

@@ -811,6 +811,35 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class InverseNearbyPokemonInPokedexToVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            // Get the Pokemon passed in. If it's null, you can't see the real deal.
+            NearbyPokemonWrapper pokemon = value as NearbyPokemonWrapper;
+            if (pokemon == null) return Visibility.Visible;
+
+            // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
+            var entry = GameClient.PokedexInventory.FirstOrDefault(c => c.PokemonId == pokemon.PokemonId);
+            if (entry == null) return Visibility.Visible;
+
+            // Get the Pokedex entry for this Pokemon. If it's null, you can't see the real deal.
+            if (entry.TimesCaptured == 0) return Visibility.Visible;
+
+            // You've cleared all the reasons NOT to show it. So show it.
+            return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class NearbyPokemonInPokedexToVisibilityConverter : IValueConverter
     {
         #region Implementation of IValueConverter
