@@ -631,7 +631,13 @@
                                                            Text="{Binding StardustToPowerUp}"
                                                            HorizontalAlignment="Left"
                                                            Margin="-6"
-                                                           VerticalAlignment="Center" />
+                                                           VerticalAlignment="Center" >
+                                                    <interactivity:Interaction.Behaviors>
+                                                        <core:DataTriggerBehavior Binding="{Binding StardustAmount}" ComparisonCondition="LessThan" Value="{Binding StardustToPowerUp}">
+                                                            <core:ChangePropertyAction PropertyName="Foreground" Value="Red"/>
+                                                        </core:DataTriggerBehavior>
+                                                    </interactivity:Interaction.Behaviors>
+                                                </TextBlock>
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="1"
@@ -644,7 +650,13 @@
                                                            FontSize="14"
                                                            Text="{Binding CandiesToPowerUp}"
                                                            HorizontalAlignment="Left"
-                                                           VerticalAlignment="Center" />
+                                                           VerticalAlignment="Center" >
+                                                    <interactivity:Interaction.Behaviors>
+                                                        <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}" ComparisonCondition="LessThan" Value="{Binding CandiesToPowerUp}">
+                                                            <core:ChangePropertyAction PropertyName="Foreground" Value="Red" />
+                                                        </core:DataTriggerBehavior>
+                                                    </interactivity:Interaction.Behaviors>
+                                                </TextBlock>
                                             </StackPanel>
 
                                         </Grid>
@@ -692,7 +704,13 @@
                                                        FontSize="14"
                                                        Text="{Binding PokemonExtraData.CandyToEvolve}"
                                                        HorizontalAlignment="Left"
-                                                       VerticalAlignment="Center" />
+                                                       VerticalAlignment="Center" >
+                                                <interactivity:Interaction.Behaviors>
+                                                    <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}" ComparisonCondition="LessThan" Value="{Binding PokemonExtraData.CandyToEvolve}">
+                                                        <core:ChangePropertyAction PropertyName="Foreground" Value="Red"/>
+                                                    </core:DataTriggerBehavior>
+                                                </interactivity:Interaction.Behaviors>
+                                            </TextBlock>
                                         </StackPanel>
                                     </Border>
 
