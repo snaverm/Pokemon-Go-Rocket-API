@@ -17,6 +17,7 @@ using PokemonGo_UWP.Utils.Game;
 using Windows.Devices.Geolocation;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
@@ -47,7 +48,8 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new Uri($"ms-appx:///Assets/Pokemons/{(int)value}.png");
+            return new BitmapImage(new Uri($"ms-appx:///Assets/Pokemons/{(int)value}.png"));
+            //return new Uri($"ms-appx:///Assets/Pokemons/{(int)value}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -925,8 +927,9 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var pokemon = (PokemonDataWrapper)value;
-            return (int)(pokemon.Stamina / (double)pokemon.StaminaMax) * 100;
+            if (value == null) return 0;
+            var pokemon = (PokemonDataWrapper)value;            
+            return System.Convert.ToDouble(pokemon.Stamina / pokemon.StaminaMax * 100);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -943,9 +946,16 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null) return "ms-appx:///Assets/Items/Egg.png";
-            var egg = (PokemonDataWrapper)value;
-            return string.IsNullOrEmpty(egg.EggIncubatorId) ? "ms-appx:///Assets/Items/Egg.png" : $"ms-appx:///Assets/Items/E_Item_{(int)GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
+            string uri;
+            if (value == null) uri = "ms-appx:///Assets/Items/Egg.png";
+            else
+            {
+                var egg = (PokemonDataWrapper) value;
+                uri = string.IsNullOrEmpty(egg.EggIncubatorId)
+                    ? "ms-appx:///Assets/Items/Egg.png"
+                    : $"ms-appx:///Assets/Items/E_Item_{(int) GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
+            }
+            return new BitmapImage(new Uri(uri));            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
