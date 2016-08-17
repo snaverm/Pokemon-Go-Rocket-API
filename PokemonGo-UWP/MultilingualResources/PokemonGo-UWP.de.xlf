@@ -489,7 +489,7 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="NearbyPokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>nearby</source>
-          <target state="translated">gesichtete Pokémon</target>
+          <target state="translated">GESICHTETE POKÉMON</target>
         </trans-unit>
         <trans-unit id="OutOfRangeTextBlock.Text" translate="yes" xml:space="preserve">
           <source>THIS POKÉSTOP IS TOO FAR AWAY</source>
