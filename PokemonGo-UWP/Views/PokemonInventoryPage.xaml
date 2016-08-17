@@ -321,7 +321,7 @@
                         <Button x:Name="SortingButton"
                                 Grid.Row="1"
                                 Style="{StaticResource ButtonCircleBigInverse}"
-                                Margin="0,0,25,12.5">
+                                Margin="16">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Click">
                                     <core:CallMethodAction MethodName="Begin"
@@ -409,7 +409,7 @@
                         <Button x:Name="IncubatorButton" Grid.Row="1"
                                 Style="{StaticResource ButtonCircleBigInverse}"
                                 Tapped="ToggleIncubatorModel"
-                                Margin="0,0,25,12.5">
+                                Margin="16">
                             <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
                         </Button>
                         
