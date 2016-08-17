@@ -694,8 +694,7 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        ///     Pokedex extra data doesn't change so we can just call this method once.
-        ///     TODO: store it in local settings maybe?
+        ///     Pokedex extra data doesn't change so we can just call this method once.        
         /// </summary>
         /// <returns></returns>
         private static async Task UpdateItemTemplates()
