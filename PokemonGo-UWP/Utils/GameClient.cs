@@ -36,6 +36,7 @@ using Newtonsoft.Json;
 using PokemonGo.RocketAPI.Rpc;
 using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
+using System.Collections.Specialized;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -203,13 +204,13 @@ namespace PokemonGo_UWP.Utils
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons { get; set; } =
-            new ObservableCollection<NearbyPokemonWrapper>
-            {
-                //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
-                new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
-            };
+            new ObservableCollection<NearbyPokemonWrapper>();
+            //{
+            //    //To prevent errors from NearbyPokemons[0-2].PokemonId in GameMapPage.xaml
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0}),
+            //    new NearbyPokemonWrapper(new NearbyPokemon {PokemonId = 0})
+            //};
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -256,8 +257,8 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Stores player's current Pokedex
         /// </summary>
-        public static ObservableCollection<PokedexEntry> PokedexInventory { get; set; } =
-            new ObservableCollection<PokedexEntry>();
+        public static ObservableCollectionPlus<PokedexEntry> PokedexInventory { get; set; } =
+            new ObservableCollectionPlus<PokedexEntry>();
 
         /// <summary>
         ///     Stores player's current candies
@@ -284,6 +285,35 @@ namespace PokemonGo_UWP.Utils
         public static IEnumerable<MoveSettings> MoveSettings { get; private set; } = new List<MoveSettings>();
 
         #endregion
+
+        #endregion
+
+        #region Constructor
+
+        static GameClient()
+        {
+            PokedexInventory.CollectionChanged += PokedexInventory_CollectionChanged;
+            // TO DO: Investigate whether or not this needs to be unsubscribed when the app closes.
+        }
+
+        /// <summary>
+        /// When new items are added to the Pokedex, reset the Nearby Pokemon so their state can be re-run.
+        /// </summary>
+        /// <remarks>
+        /// This exists because the Nearby Pokemon are Map objects, and are loaded before Inventory. If you don't do this,
+        /// the first Nearby items are always shown as "new to the Pokedex" until they disappear, regardless of if they are
+        /// ACTUALLY new.
+        /// </remarks>
+        private static void PokedexInventory_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                // advancedrei: This is a total order-of-operations hack.
+                var nearby = NearbyPokemons.ToList();
+                NearbyPokemons.Clear();
+                NearbyPokemons.AddRange(nearby);
+            }
+        }
 
         #endregion
 
