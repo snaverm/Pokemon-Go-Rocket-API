@@ -324,14 +324,20 @@
                                                           Value="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
                                                           InnerSegmentColor="LightGray"
                                                           ImageSourcePath="{Binding Converter={StaticResource AchievementValueToMedalImageConverter}}" />
-                                        <StackPanel Orientation="Horizontal" RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        <Viewbox Stretch="Uniform" 
+                                                 MaxWidth="80"
+                                                 Height="20"
+                                                Margin="0,15,0,0"
+                                                 RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                                            <StackPanel Orientation="Horizontal" RelativePanel.AlignHorizontalCenterWithPanel="True"
                                         RelativePanel.Below="AchievementImage" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
+                                                <TextBlock Text="{Binding Value, Converter={StaticResource AchievementValueConverter}}"
                                            FontWeight="SemiBold" Foreground="Gray" />
-                                            <TextBlock Text=" / " Foreground="LightGray" />
-                                            <TextBlock Text="{Binding Converter={StaticResource AchievementNextValueConverter}}"
+                                                <TextBlock Text=" / " Foreground="LightGray" />
+                                                <TextBlock Text="{Binding Converter={StaticResource AchievementNextValueConverter}}"
                                            Foreground="LightGray" />
-                                        </StackPanel>
+                                            </StackPanel>
+                                        </Viewbox>
                                     </RelativePanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

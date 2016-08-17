@@ -38,16 +38,18 @@ namespace PokemonGo_UWP.ViewModels
                 var poke2 = new NearbyPokemon()
                 {
                     PokemonId = PokemonId.Arbok,
-                    DistanceInMeters = 10,
+                    DistanceInMeters = 11,
                 };
                 var poke3 = new NearbyPokemon()
                 {
                     PokemonId = PokemonId.Blastoise,
-                    DistanceInMeters = 10,
+                    DistanceInMeters = 12,
                 };
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke1));
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke2));
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke3));
+                GameClient.PokedexInventory.Add(new PokedexEntry { PokemonId = poke1.PokemonId, TimesCaptured = 1 });
+                GameClient.PokedexInventory.Add(new PokedexEntry { PokemonId = poke2.PokemonId, TimesCaptured = 1 });
             }
         }
 
