@@ -23,7 +23,6 @@
     <Page.Resources>
 
         <Storyboard x:Name="ShowPokeMenuStoryboard">
-
             <DoubleAnimation
                 Storyboard.TargetName="PokeMenuPanel"
                 Storyboard.TargetProperty="Opacity"
@@ -38,14 +37,42 @@
                 To="0"
                 Duration="0:0:0.2" />
 
+            <DoubleAnimation
+                Storyboard.TargetName="PokedexButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                From="0"
+                To="-180"
+                Duration="0:0:0.2"/>
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokemonButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                From="0"
+                To="-70"
+                Duration="0:0:0.2"/>
+            <DoubleAnimation
+                Storyboard.TargetName="PokemonButtonTrans"
+                Storyboard.TargetProperty="TranslateX"
+                From="0"
+                To="-100"
+                Duration="0:0:0.2"/>
+
+            <DoubleAnimation
+                Storyboard.TargetName="ToolsButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                From="0"
+                To="-70"
+                Duration="0:0:0.2"/>
+            <DoubleAnimation
+                Storyboard.TargetName="ToolsButtonTrans"
+                Storyboard.TargetProperty="TranslateX"
+                From="0"
+                To="100"
+                Duration="0:0:0.2"/>
+
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
                                            Storyboard.TargetName="PokeMenuPanel">
                 <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
                     <DiscreteObjectKeyFrame.Value>
                         <x:Int32>10</x:Int32>
                     </DiscreteObjectKeyFrame.Value>
@@ -54,6 +81,7 @@
         </Storyboard>
 
         <Storyboard x:Name="HidePokeMenuStoryboard">
+
             <DoubleAnimation
                 Storyboard.TargetName="PokeMenuPanel"
                 Storyboard.TargetProperty="Opacity"
@@ -67,6 +95,34 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokedexButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                To="0"
+                Duration="0:0:0.2"/>
+
+            <DoubleAnimation
+                Storyboard.TargetName="PokemonButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                To="0"
+                Duration="0:0:0.2"/>
+            <DoubleAnimation
+                Storyboard.TargetName="PokemonButtonTrans"
+                Storyboard.TargetProperty="TranslateX"
+                To="0"
+                Duration="0:0:0.2"/>
+
+            <DoubleAnimation
+                Storyboard.TargetName="ToolsButtonTrans"
+                Storyboard.TargetProperty="TranslateY"
+                To="0"
+                Duration="0:0:0.2"/>
+            <DoubleAnimation
+                Storyboard.TargetName="ToolsButtonTrans"
+                Storyboard.TargetProperty="TranslateX"
+                To="0"
+                Duration="0:0:0.2"/>
 
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
@@ -359,10 +415,15 @@
                 </StackPanel>
             </Button>
 
-            <Button Style="{ThemeResource ImageButtonStyle}"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    RelativePanel.AlignVerticalCenterWithPanel="True"
-                    x:Name="PokedexButton">
+            <Button Style="{ThemeResource ImageButtonStyle}"       
+                    x:Name="PokedexButton" 
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,0,24" 
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <CompositeTransform x:Name="PokedexButtonTrans"/>
+                </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
                     <TextBlock x:Uid="PokedexTextBlock"
@@ -374,11 +435,15 @@
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    RelativePanel.AlignBottomWithPanel="True"
-                    Margin="24,0,0,128"
                     Command="{Binding GotoPokemonInventoryPageCommand}"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,0,24" 
+                    RenderTransformOrigin="0.5,0.5"
                     x:Name="PokemonButton">
+                <Button.RenderTransform>
+                    <CompositeTransform x:Name="PokemonButtonTrans"/>
+                </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
                     <TextBlock x:Uid="PokemonTextBlock"
@@ -390,11 +455,15 @@
             </Button>
 
             <Button Style="{ThemeResource ImageButtonStyle}"
-                    RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
-                    Margin="0,0,24,128"
+                    Margin="0,0,0,24" 
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
                     Command="{Binding GotoItemsInventoryPageCommand}"
+                    RenderTransformOrigin="0.5,0.5"
                     x:Name="ToolsButton">
+                <Button.RenderTransform>
+                    <CompositeTransform x:Name="ToolsButtonTrans"/>
+                </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
                     <TextBlock x:Uid="ItemsTextBlock"
@@ -404,7 +473,6 @@
                            HorizontalAlignment="Stretch" />
                 </StackPanel>
             </Button>
-
 
             <Button Style="{ThemeResource ImageButtonStyle}"
                     Height="{ThemeResource UiButtonSize}"
@@ -423,7 +491,6 @@
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" />
             </Button>
-
 
         </RelativePanel>
 
@@ -753,7 +820,7 @@
 
         </Grid>
 
-			<Button
+        <Button
 				x:Name="ReactivateMapAutoUpdate" 
 				Canvas.ZIndex="1"
 				Style="{ThemeResource ImageButtonStyle}"
@@ -763,11 +830,11 @@
 				FontSize="36" Margin="0,150,34,0" 
 				RelativePanel.AlignVerticalCenterWithPanel="True" 
 				RelativePanel.AlignRightWithPanel="True">
-				<Image Source="../Assets/Icons/RecenterMapIcon.png"
+            <Image Source="../Assets/Icons/RecenterMapIcon.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Stretch" 
 							 Height="32"/>
 
-			</Button>
+        </Button>
     </RelativePanel>
 </Page>

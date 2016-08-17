@@ -139,14 +139,18 @@ namespace PokemonGo_UWP.Utils
             /// <summary>
             /// Inits heartbeat
             /// </summary>
-            internal void StartDispatcher()
+            internal async Task StartDispatcher()
             {
                 _keepHeartbeating = true;
                 if (_mapUpdateTimer != null) return;
-                _mapUpdateTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
-                _mapUpdateTimer.Tick += HeartbeatTick;
-                _mapUpdateTimer.Start();
-            }            
+
+                await DispatcherHelper.RunInDispatcherAndAwait(() =>
+                {
+                    _mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                    _mapUpdateTimer.Tick += HeartbeatTick;
+                    _mapUpdateTimer.Start();
+                });
+            }
 
             /// <summary>
             /// Stops heartbeat
@@ -447,7 +451,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Logs the user out by clearing data and timers
         /// </summary>
-        public static void DoLogout()
+        public static async void DoLogout()
         {
             // Clear stored token
             SettingsService.Instance.AccessTokenString = null;
@@ -526,7 +530,7 @@ namespace PokemonGo_UWP.Utils
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             if (_heartbeat == null)
                 _heartbeat = new Heartbeat();
-            _heartbeat.StartDispatcher();
+            await _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
             //await UpdateMapObjects();
@@ -554,10 +558,10 @@ namespace PokemonGo_UWP.Utils
         ///     Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
-        public static void ToggleUpdateTimer(bool isEnabled = true)
+        public static async void ToggleUpdateTimer(bool isEnabled = true)
         {
             if (isEnabled)
-                _heartbeat.StartDispatcher();
+                await _heartbeat.StartDispatcher();
             else
             {
                 _heartbeat.StopDispatcher();
