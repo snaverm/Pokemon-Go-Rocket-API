@@ -1258,7 +1258,7 @@
                     <Grid Height="{TemplateBinding Height}"
                               Width="{TemplateBinding Width}"
                               MinWidth="50" >
-                        <Border x:Name="PART_Track" 
+                        <Border x:Name="ProgressBarTrack" 
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="2" >
                             <Border.Background>
@@ -1273,8 +1273,7 @@
                             <Border Background="{TemplateBinding Foreground}"
                                     CornerRadius="2"
                                     HorizontalAlignment="Left"
-                                    Width="{TemplateBinding Value}" 
-                                    x:Name="PART_Indicator"/>
+                                    x:Name="ProgressBarIndicator"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>
