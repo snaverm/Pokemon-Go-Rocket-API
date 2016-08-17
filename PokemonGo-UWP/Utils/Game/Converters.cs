@@ -413,10 +413,8 @@ namespace PokemonGo_UWP.Utils
                 case "scientist":
                 case "youngster":
                     return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/" + achievement.Key.ToString().ToLower().Replace(" ", "") + "_lv" + level.ToString() + ".png"));
-                    break;
                 default:
                     return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv" + level.ToString() + ".png"));
-                    break;
             }
         }
 
@@ -923,7 +921,6 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var fortDataStatus = (FortDataStatus)value;
-            var resourceUriString = "ms-appx:///Assets/Icons/pokestop_";
 
             switch (fortDataStatus)
             {
@@ -981,7 +978,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null) return 0;
-            var pokemon = (PokemonDataWrapper)value;            
+            var pokemon = (PokemonDataWrapper)value;
             return System.Convert.ToDouble(pokemon.Stamina / pokemon.StaminaMax * 100);
         }
 
@@ -1008,7 +1005,7 @@ namespace PokemonGo_UWP.Utils
                     ? "ms-appx:///Assets/Items/Egg.png"
                     : $"ms-appx:///Assets/Items/E_Item_{(int) GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
             }
-            return new BitmapImage(new Uri(uri));            
+            return new BitmapImage(new Uri(uri));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

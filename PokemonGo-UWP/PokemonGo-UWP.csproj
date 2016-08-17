@@ -303,6 +303,7 @@
     <Content Include="Assets\LiveTiles\Transparent\Square71x71Logo.scale-400.png" />
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.png" />
     <Content Include="Assets\UI\night_sky_texture_by_amdillon.jpg" />
     <Content Include="Assets\Pokemons\1.png" />
     <Content Include="Assets\Pokemons\10.png" />
@@ -786,7 +787,6 @@
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
