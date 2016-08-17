@@ -228,6 +228,7 @@
     <RelativePanel>
 
         <maps:MapControl BusinessLandmarksVisible="False"
+                         TargetCameraChanged="GameMapControl_TargetCameraChanged"
                          LandmarksVisible="False"
                          ColorScheme="{ThemeResource MapColorScheme}"
                          DesiredPitch="50"
