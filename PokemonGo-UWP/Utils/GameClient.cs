@@ -138,14 +138,18 @@ namespace PokemonGo_UWP.Utils
             /// <summary>
             /// Inits heartbeat
             /// </summary>
-            internal void StartDispatcher()
+            internal async Task StartDispatcher()
             {
                 _keepHeartbeating = true;
                 if (_mapUpdateTimer != null) return;
-                _mapUpdateTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
-                _mapUpdateTimer.Tick += HeartbeatTick;
-                _mapUpdateTimer.Start();
-            }            
+
+                await DispatcherHelper.RunInDispatcherAndAwait(() =>
+                {
+                    _mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                    _mapUpdateTimer.Tick += HeartbeatTick;
+                    _mapUpdateTimer.Start();
+                });
+            }
 
             /// <summary>
             /// Stops heartbeat
@@ -417,7 +421,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Logs the user out by clearing data and timers
         /// </summary>
-        public static void DoLogout()
+        public static async void DoLogout()
         {
             // Clear stored token
             SettingsService.Instance.AccessTokenString = null;
@@ -456,21 +460,24 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
-            _compass = Compass.GetDefault();
-            if (_compass != null)
+            if (SettingsService.Instance.IsCompassEnabled)
             {
-                _compassTimer = new DispatcherTimer
+                _compass = Compass.GetDefault();
+                if (_compass != null)
                 {
-                    Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
-                };
-                _compassTimer.Tick += (s, e) =>
-                {
-                    if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                    _compassTimer = new DispatcherTimer
                     {
-                        HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
-                    }
-                };
-                _compassTimer.Start();
+                        Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
+                    };
+                    _compassTimer.Tick += (s, e) =>
+                    {
+                        if (SettingsService.Instance.IsAutoRotateMapEnabled)
+                        {
+                            HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                        }
+                    };
+                    _compassTimer.Start();
+                }
             }
             _geolocator = new Geolocator
             {
@@ -493,7 +500,7 @@ namespace PokemonGo_UWP.Utils
             _geolocator.MovementThreshold = GameSetting.MapSettings.GetMapObjectsMinDistanceMeters;
             if (_heartbeat == null)
                 _heartbeat = new Heartbeat();
-            _heartbeat.StartDispatcher();
+            await _heartbeat.StartDispatcher();
             // Update before starting timer
             Busy.SetBusy(true, Resources.CodeResources.GetString("GettingUserDataText"));
             //await UpdateMapObjects();
@@ -521,10 +528,10 @@ namespace PokemonGo_UWP.Utils
         ///     Toggles the update timer based on the isEnabled value
         /// </summary>
         /// <param name="isEnabled"></param>
-        public static void ToggleUpdateTimer(bool isEnabled = true)
+        public static async void ToggleUpdateTimer(bool isEnabled = true)
         {
             if (isEnabled)
-                _heartbeat.StartDispatcher();
+                await _heartbeat.StartDispatcher();
             else
             {
                 _heartbeat.StopDispatcher();
@@ -705,7 +712,8 @@ namespace PokemonGo_UWP.Utils
         public static async Task UpdateInventory()
         {
             // Get ALL the items
-            var fullInventory = (await GetInventory()).InventoryDelta.InventoryItems;
+            var response = await GetInventory();
+            var fullInventory = response.InventoryDelta?.InventoryItems;
             // Update items
             ItemsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.Item != null)
                 .GroupBy(item => item.InventoryItemData.Item)
@@ -725,15 +733,15 @@ namespace PokemonGo_UWP.Utils
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId != 0), true);
 
+            // Update Pokedex
+            PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
+                .Select(item => item.InventoryItemData.PokedexEntry), true);
+
             // Update Pokemons
             PokemonsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.IsEgg), true);            
-
-            // Update Pokedex
-            PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
-                .Select(item => item.InventoryItemData.PokedexEntry), true);
 
             // Update candies
             CandyInventory.AddRange(from item in fullInventory
