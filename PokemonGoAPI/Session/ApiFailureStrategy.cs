@@ -85,7 +85,7 @@ namespace PokemonGoAPI.Session
                 case 52:
                     // Slow servers?
                     Logger.Write("Server may be slow, let's wait a little bit");
-                    await Task.Delay(500);
+                    await Task.Delay(2000);
                     break;
                 case 53:
                     // New RPC url
