@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.HockeyApp;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
@@ -165,6 +166,12 @@ namespace PokemonGo_UWP.ViewModels
                     if (e.Message.Contains("Your username or password is incorrect."))
                     {
                         await new MessageDialog(e.Message).ShowAsyncQueue();
+                    }
+                    else
+                    {
+                        //TODO: Message that contains, that Developers working on fix (it means that server is probably down) - can't reproduce
+
+                        HockeyClient.Current.TrackException(e);
                     }
                 }
                 finally
