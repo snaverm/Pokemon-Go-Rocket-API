@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -490,6 +491,7 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static async Task InitializeDataUpdate()
         {
+            #region Compass management
             _compass = Compass.GetDefault();
             if (_compass != null)
             {
@@ -499,10 +501,24 @@ namespace PokemonGo_UWP.Utils
                 };
                 _compassTimer.Tick += (s, e) =>
                 {
-                    HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
+                    if (SettingsService.Instance.IsCompassEnabled) //avoid reading compass value if compass is off, should'nt be needed as we stop the compass tick on prop change but who knows!
+                        HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
                 };
-                _compassTimer.Start();
+                if (SettingsService.Instance.IsCompassEnabled)
+                    _compassTimer.Start();
+
+                SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) => 
+                {
+                  if (e.PropertyName == nameof(SettingsService.Instance.IsCompassEnabled))
+                    {
+                        if (SettingsService.Instance.IsCompassEnabled && !_compassTimer.IsEnabled)
+                            _compassTimer.Start();
+                        if (!SettingsService.Instance.IsCompassEnabled && _compassTimer.IsEnabled)
+                            _compassTimer.Stop();
+                    }
+                };
             }
+            #endregion
 
             _geolocator = new Geolocator
             {
