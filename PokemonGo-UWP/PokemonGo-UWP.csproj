@@ -194,6 +194,9 @@
     <Content Include="Assets\Icons\stardust_vector.png" />
     <Content Include="Assets\Items\Egg.png" />
     <Content Include="Assets\Items\E_Item_902.png" />
+    <Content Include="Assets\Items\Item_301.png" />
+    <Content Include="Assets\Items\Item_402.png" />
+    <Content Include="Assets\Items\Item_501.png" />
     <Content Include="Assets\Items\Item_902.png" />
     <Content Include="Assets\Items\Item_901.png" />
     <Content Include="Assets\Items\E_Item_901.png" />
