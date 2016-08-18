@@ -63,6 +63,29 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PokemonTypeTranslationConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if(value == null || !(value is Enum))
+            {
+                return string.Empty;
+            }
+
+            var type = (PokemonType)value;
+            return Resources.PokemonTypes.GetString(type.ToString());
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonDataToCapturedGepositionConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -149,7 +172,7 @@ namespace PokemonGo_UWP.Utils
         {
             if (value == null) return string.Empty;
             var move = (PokemonMove)value;
-            return GameClient.MoveSettings.First(item => item.MovementId == move).PokemonType;
+            return new PokemonTypeTranslationConverter().Convert(GameClient.MoveSettings.First(item => item.MovementId == move).PokemonType, targetType, parameter, language);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
