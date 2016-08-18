@@ -37,6 +37,7 @@ using PokemonGo.RocketAPI.Rpc;
 using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
 using System.Collections.Specialized;
+using Windows.UI.Popups;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -83,6 +84,11 @@ namespace PokemonGo_UWP.Utils
                 _isHeartbeating = true;
                 // Heartbeat is alive so we check if we need to update data, based on GameSettings
                 var canRefresh = false;
+
+
+                //Collect location data for signature
+                DeviceInfos.Instance.CollectLocationData();
+
                 // We have no settings yet so we just update without further checks
                 if (GameSetting == null)
                 {
@@ -379,7 +385,10 @@ namespace PokemonGo_UWP.Utils
                     Debug.WriteLine("AccessTokenExpired Exception caught");
                     await _client.Login.DoLogin();
                 }
-                else throw;
+                else
+                {
+                    await new MessageDialog(e.Message).ShowAsyncQueue();
+                }
             }
         }
 
@@ -513,7 +522,7 @@ namespace PokemonGo_UWP.Utils
             {
                 DesiredAccuracy = PositionAccuracy.High,
                 DesiredAccuracyInMeters = 5,
-                ReportInterval = 5000,
+                ReportInterval = 1000,
                 MovementThreshold = 5
             };
 
