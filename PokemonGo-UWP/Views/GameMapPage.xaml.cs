@@ -192,7 +192,7 @@ namespace PokemonGo_UWP.Views
 						GameMapControl.Center = position.Coordinate.Point;
 						lastAutoPosition = GameMapControl.Center;
 
-						if (SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPSRotation && position.Coordinate.Heading != null)
+						if (SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPS && position.Coordinate.Heading != null)
 						{
 							GameMapControl.Heading = position.Coordinate.Heading.Value;
 						}

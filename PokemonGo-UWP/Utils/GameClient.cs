@@ -509,7 +509,7 @@ namespace PokemonGo_UWP.Utils
 							_compass.ReadingChanged += compass_ReadingChanged;
 							break;
 						case MapAutomaticOrientationModes.None:
-						case MapAutomaticOrientationModes.GPSRotation:
+						case MapAutomaticOrientationModes.GPS:
 						default:
 							if (_compass != null)
 							{

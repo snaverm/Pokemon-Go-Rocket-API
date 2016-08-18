@@ -18,7 +18,7 @@ namespace PokemonGo_UWP.Utils
 		/// <summary>
 		/// Rotation based on GPS movement
 		/// </summary>
-		GPSRotation = 1,
+		GPS = 1,
 		/// <summary>
 		/// Rotation based on Compass
 		/// </summary>

@@ -80,7 +80,7 @@
 									HorizontalAlignment="Right" VerticalAlignment="Center" 
 									Width="120" 
 									Margin="0,0,15,10"
-									SelectedIndex="{Binding MapOrientationMode_Index, Mode=TwoWay}" >
+									SelectedIndex="{Binding MapAutomaticOrientationMode_Index, Mode=TwoWay}" >
 					<ComboBoxItem Content="None"/>
 					<ComboBoxItem Content="GPS"/>
 					<ComboBoxItem Content="Compass"/>
