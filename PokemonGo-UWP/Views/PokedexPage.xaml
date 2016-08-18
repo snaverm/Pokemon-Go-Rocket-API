@@ -190,8 +190,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <TextBlock x:Name="PokemonsPivotHeader"
-                               x:Uid="PokemonText"
+                    <TextBlock x:Uid="PokedexText"
                                Text="POKEDEX"
                                Style="{StaticResource TextPageTitleDark}" />
                     <Border Background="#000" Width="150" Height="1" />
@@ -432,10 +431,12 @@
 
                                         <TextBlock HorizontalAlignment="Center" Foreground="#577074">
                                             <Run Text="{Binding SelectedPokedexEntry.Value.TimesEncountered}" FontSize="19" />
+                                            <Run x:Uid="TimesTextBlock" Text="times" FontSize="15"/>
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Grid.Row="1"
+                                                   x:Uid="PokedexViewSeen"
                                                    Text="Seen"
                                                    FontSize="12"
                                                    Margin="0,3"
@@ -454,18 +455,18 @@
 
                                         <TextBlock HorizontalAlignment="Center" Foreground="#577074">
                                             <Run Text="{Binding SelectedPokedexEntry.Value.TimesCaptured}" FontSize="19" />
+                                            <Run x:Uid="TimesTextBlock" Text="times" FontSize="15"/>
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Grid.Row="1"
-                                                   Text="Captured"
+                                                   x:Uid="PokedexViewCaught"
+                                                   Text="Caught"
                                                    FontSize="12"
                                                    Margin="0,3"
                                                    Foreground="#FF5D686A" />
                                     </Grid>
                                 </Grid>
-
-                                <!-- SEEN AND CAPTURED HERE -->
 
                                 <TextBlock Margin="16,8" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#577074">
                                     <Run Text="{Binding SelectedPokedexEntry.Key, Converter={StaticResource PokemonIdToPokedexDescription}}"/>

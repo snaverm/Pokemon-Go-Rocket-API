@@ -667,6 +667,22 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
           <source>Seen:</source>
           <target state="new">Seen:</target>
         </trans-unit>
+        <trans-unit id="PokedexText.Text" translate="yes" xml:space="preserve">
+          <source>POKÉDEX</source>
+          <target state="new">POKÉDEX</target>
+        </trans-unit>
+        <trans-unit id="PokedexViewCaught.Text" translate="yes" xml:space="preserve">
+          <source>Caught</source>
+          <target state="new">Caught</target>
+        </trans-unit>
+        <trans-unit id="PokedexViewSeen.Text" translate="yes" xml:space="preserve">
+          <source>Seen</source>
+          <target state="new">Seen</target>
+        </trans-unit>
+        <trans-unit id="TimesTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>times</source>
+          <target state="new">times</target>
+        </trans-unit>
       </group>
     </body>
   </file>
