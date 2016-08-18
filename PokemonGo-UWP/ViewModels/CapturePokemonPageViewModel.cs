@@ -238,13 +238,22 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Selects the first ball based on available items
         /// </summary>
-        private void SelectStartingBall()
+        private void SelectStartingBall(bool keepPreviousSelection = false)
         {
             // Set default item (switch to other balls if user has none)
-            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+            if (!keepPreviousSelection)
             {
-                Count = 0, ItemId = ItemId.ItemPokeBall
-            };
+                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+                {
+                    Count = 0,
+                    ItemId = ItemId.ItemPokeBall
+                };
+            }
+            else
+            {
+                // Start with a ball of the same type as the one that's currently used
+                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == SelectedCaptureItem.ItemId);
+            }
             while (SelectedCaptureItem != null && SelectedCaptureItem.Count == 0)
             {
                 switch (SelectedCaptureItem.ItemId)
@@ -343,7 +352,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             // We always need to update the inventory
             await GameClient.UpdateInventory();
-            SelectStartingBall();
+            SelectStartingBall(true);
         }
 
         /// <summary>
