@@ -355,7 +355,7 @@ namespace PokemonGo_UWP.Utils
         public static async Task InitializeClient()
         {
 
-            await DataCache.Init();
+            DataCache.Init();
 
             var credentials = SettingsService.Instance.UserCredentials;
             credentials.RetrievePassword();
