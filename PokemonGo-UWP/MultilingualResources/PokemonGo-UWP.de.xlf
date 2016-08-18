@@ -666,10 +666,6 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
           <source>TRANSFER</source>
           <target state="translated">VERSCHICKEN</target>
         </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="translated">Speichere Karten Zoom</target>
-        </trans-unit>
         <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START INCUBATION</source>
           <target state="translated">AUSBRÜTEN BEGINNEN</target>
@@ -677,6 +673,18 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="translated">Benutze eine Brutmaschine, um dieses Ei auszubrüten.</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>You must restart the App to take effect.</source>
+          <target state="translated">Die App muss neu gestartet werden.</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="translated">Sprache</target>
+        </trans-unit>
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Remember Map Zoom</source>
+          <target state="translated">Karten Zoom speichern</target>
         </trans-unit>
       </group>
     </body>

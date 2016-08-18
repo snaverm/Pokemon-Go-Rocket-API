@@ -117,7 +117,6 @@ namespace PokemonGo_UWP.ViewModels
 
                 return list;
             }
-            set { }
         }
 
         #endregion
