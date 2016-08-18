@@ -130,13 +130,7 @@ namespace PokemonGo_UWP
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             if (SettingsService.Instance.IsVibrationEnabled)
                 _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
-            if (SettingsService.Instance.IsMusicEnabled)
-            {
-                if (AudioUtils.IsPlaying == false)
-                {
-                    await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
-                }
-            }
+            await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
         }
 
         #endregion

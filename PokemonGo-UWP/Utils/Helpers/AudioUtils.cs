@@ -1,33 +1,33 @@
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
-using System;
 
 namespace PokemonGo_UWP.Utils
 {
     public static class AudioUtils
-    { 
-        public static bool IsPlaying { get; set; }
-        public static MediaElement NormalSounds = new MediaElement();
-        public static MediaElement CaptureSound = new MediaElement();
+    {
+        private static readonly MediaElement NormalSounds = new MediaElement();
+        private static readonly MediaElement CaptureSound = new MediaElement();
+        private static bool _isPlaying;
+
         public static async Task PlaySound(string asset)
         {
-            if (SettingsService.Instance.IsMusicEnabled)
+            if (SettingsService.Instance.IsMusicEnabled && !_isPlaying)
             {
-                if((string)asset == "Gameplay.mp3")
+                if (asset == "Gameplay.mp3")
                 {
                     NormalSounds.IsLooping = true;
                 }
                 var folder =
-                       await (await Package.Current.InstalledLocation.GetFolderAsync("Assets")).GetFolderAsync("Audio");
+                    await (await Package.Current.InstalledLocation.GetFolderAsync("Assets")).GetFolderAsync("Audio");
                 var file = await folder.GetFileAsync(asset);
                 var stream = await file.OpenAsync(FileAccessMode.Read);
                 NormalSounds.Volume = 1;
                 NormalSounds.SetSource(stream, file.ContentType);
-                IsPlaying = true;
+                _isPlaying = true;
                 NormalSounds.Play();
-                            
             }
         }
 
