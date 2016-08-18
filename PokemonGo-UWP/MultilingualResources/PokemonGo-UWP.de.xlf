@@ -485,7 +485,7 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="PokemonInventoryFullText" translate="yes" xml:space="preserve">
           <source>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</source>
-          <target state="new">Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</target>
+          <target state="translated">Das Pokémon Inventar ist voll, verschicken Sie zunächst einige Pokémon, bevore Sie versuchen, {0} zu fangen.</target>
         </trans-unit>
       </group>
     </body>
