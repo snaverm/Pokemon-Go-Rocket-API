@@ -42,33 +42,33 @@
                 Storyboard.TargetProperty="TranslateY"
                 From="0"
                 To="-180"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
                 From="0"
                 To="-70"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
                 From="0"
                 To="-100"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
                 From="0"
                 To="-70"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
                 From="0"
                 To="100"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
                                            Storyboard.TargetName="PokeMenuPanel">
@@ -100,29 +100,29 @@
                 Storyboard.TargetName="PokedexButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
                 To="0"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
                 To="0"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
             <DoubleAnimation
                 Storyboard.TargetName="PokemonButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
                 To="0"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateY"
                 To="0"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
             <DoubleAnimation
                 Storyboard.TargetName="ToolsButtonTrans"
                 Storyboard.TargetProperty="TranslateX"
                 To="0"
-                Duration="0:0:0.2"/>
+                Duration="0:0:0.2" />
 
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
@@ -221,7 +221,8 @@
         </Storyboard>
 
         <utils:NearbyPokemonInPokedexToVisibilityConverter x:Key="NearbyPokemonInPokedexToVisibilityConverter" />
-        <utils:InverseNearbyPokemonInPokedexToVisibilityConverter x:Key="InverseNearbyPokemonInPokedexToVisibilityConverter"/>
+        <utils:InverseNearbyPokemonInPokedexToVisibilityConverter
+            x:Key="InverseNearbyPokemonInPokedexToVisibilityConverter" />
 
     </Page.Resources>
 
@@ -357,15 +358,16 @@
                                                        HorizontalAlignment="Center"
                                                        Stretch="Uniform"
                                                        Margin="6,0" />
-                                                
-                                                <BitmapIcon UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"                                                            
-                                                            Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}"
-                                                            Visibility="{Binding PokemonId, Converter={StaticResource InverseNearbyPokemonInPokedexToVisibilityConverter}}"
-                                                            Height="60"
-                                                            Width="60"
-                                                            VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center"
-                                                            Margin="6,0" />
+
+                                                <BitmapIcon
+                                                    UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
+                                                    Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}"
+                                                    Visibility="{Binding PokemonId, Converter={StaticResource InverseNearbyPokemonInPokedexToVisibilityConverter}}"
+                                                    Height="60"
+                                                    Width="60"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="6,0" />
                                             </Grid>
                                         </DataTemplate>
                                     </GridView.ItemTemplate>
@@ -418,14 +420,14 @@
                 </StackPanel>
             </Button>
 
-            <Button Style="{ThemeResource ImageButtonStyle}"       
-                    x:Name="PokedexButton" 
+            <Button Style="{ThemeResource ImageButtonStyle}"
+                    x:Name="PokedexButton"
                     RelativePanel.AlignBottomWithPanel="True"
-                    Margin="0,0,0,24" 
-                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Margin="0,0,0,24"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                     RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
-                    <CompositeTransform x:Name="PokedexButtonTrans"/>
+                    <CompositeTransform x:Name="PokedexButtonTrans" />
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
@@ -439,13 +441,13 @@
 
             <Button Style="{ThemeResource ImageButtonStyle}"
                     Command="{Binding GotoPokemonInventoryPageCommand}"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
-                    Margin="0,0,0,24" 
+                    Margin="0,0,0,24"
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="PokemonButton">
                 <Button.RenderTransform>
-                    <CompositeTransform x:Name="PokemonButtonTrans"/>
+                    <CompositeTransform x:Name="PokemonButtonTrans" />
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
@@ -459,13 +461,13 @@
 
             <Button Style="{ThemeResource ImageButtonStyle}"
                     RelativePanel.AlignBottomWithPanel="True"
-                    Margin="0,0,0,24" 
-                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                    Margin="0,0,0,24"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                     Command="{Binding GotoItemsInventoryPageCommand}"
                     RenderTransformOrigin="0.5,0.5"
                     x:Name="ToolsButton">
                 <Button.RenderTransform>
-                    <CompositeTransform x:Name="ToolsButtonTrans"/>
+                    <CompositeTransform x:Name="ToolsButtonTrans" />
                 </Button.RenderTransform>
 
                 <StackPanel Orientation="Vertical">
@@ -542,64 +544,64 @@
                     <DataTemplate>
                         <Grid Margin="8"
                               Height="64">
-                            
+
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
-                                        Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                                        FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
-                                        Foreground="White"
-                                        Grid.Column="0"
-                                       Grid.Row="0"
-                                     Grid.RowSpan="2"
+                                Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
+                                Foreground="White"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
                                 HorizontalAlignment="Right"
-                                       VerticalAlignment="Center"
+                                VerticalAlignment="Center"
                                 Margin="8"
-                                        FontSize="18"
-                                        FontWeight="SemiBold" />
+                                FontSize="18"
+                                FontWeight="SemiBold" />
 
                             <Ellipse Grid.Row="0"
                                      Grid.RowSpan="2"
                                      Grid.Column="1"
                                      Height="64"
-                              Width="64"
+                                     Width="64"
                                      Stroke="White"
                                      StrokeThickness="3">
                                 <Ellipse.Fill>
-                                    <SolidColorBrush Color="White" 
-                                                     Opacity="0.5"/>
+                                    <SolidColorBrush Color="White"
+                                                     Opacity="0.5" />
                                 </Ellipse.Fill>
                             </Ellipse>
 
                             <Image Grid.Row="0"
                                    Grid.Column="1"
-                                        Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"
-                                        Stretch="Uniform"
-                                        VerticalAlignment="Center"
-                                        Width="48"
-                                        Height="48"
-                                        Margin="3,0"
-                                        Grid.RowSpan="2" />
-                            <Border Grid.Row="1" 
+                                   Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"
+                                   Stretch="Uniform"
+                                   VerticalAlignment="Center"
+                                   Width="48"
+                                   Height="48"
+                                   Margin="3,0"
+                                   Grid.RowSpan="2" />
+                            <Border Grid.Row="1"
                                     Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Bottom"                                            
-                                            Background="#CCD3D3D3" 
-                                            CornerRadius="8" 
-                                            Padding="3,1">
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Background="#CCD3D3D3"
+                                    CornerRadius="8"
+                                    Padding="3,1">
                                 <TextBlock Style="{StaticResource BodyTextBlockStyle}"
-                                                   TextAlignment="Center"
+                                           TextAlignment="Center"
                                            Foreground="Red">
-                                <Run Text="+" />
-                                <Run Text="{Binding ItemCount}" />
+                                    <Run Text="+" />
+                                    <Run Text="{Binding ItemCount}" />
                                 </TextBlock>
                             </Border>
                         </Grid>
@@ -718,27 +720,27 @@
 
                 <Border.Background>
                     <SolidColorBrush Color="White"
-                                     Opacity="0.7"/>
+                                     Opacity="0.7" />
                 </Border.Background>
 
                 <GridView ItemsSource="{Binding NearbyPokemons}"
-                              HorizontalAlignment="Stretch"
-                              HorizontalContentAlignment="Stretch"
-                              SelectionMode="None" 
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch"
+                          SelectionMode="None"
                           ScrollViewer.VerticalScrollMode="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                              ShowsScrollingPlaceholders="False" 
-                              IsMultiSelectCheckBoxEnabled="False" >
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ShowsScrollingPlaceholders="False"
+                          IsMultiSelectCheckBoxEnabled="False">
 
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapGrid Orientation="Horizontal"
-                                          VerticalChildrenAlignment="Top"
-                                          MaximumRowsOrColumns="10" 
-                                          ItemHeight="52" 
-                                          ItemWidth="40"
+                                      VerticalChildrenAlignment="Top"
+                                      MaximumRowsOrColumns="10"
+                                      ItemHeight="52"
+                                      ItemWidth="40"
                                       ScrollViewer.VerticalScrollMode="Disabled"
-                                          ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
 
@@ -746,20 +748,21 @@
                         <DataTemplate>
                             <Grid>
                                 <Image Canvas.ZIndex="100"
-                                           Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                           Visibility="{Binding PokemonId, Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"
-                                           Stretch="Uniform"
-                                           Height="36"
-                                           Width="36"/>
+                                       Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                       Visibility="{Binding PokemonId, Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Stretch="Uniform"                                        
+                                       Height="36"
+                                       Width="36" />
 
-                                <BitmapIcon UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
-                                                Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}" 
-                                            Visibility="{Binding PokemonId, Converter={StaticResource InverseNearbyPokemonInPokedexToVisibilityConverter}}"
-                                                HorizontalAlignment="Center"
-                                                Height="36"
-                                                Width="36" />
+                                <BitmapIcon
+                                    UriSource="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
+                                    Style="{ThemeResource NearbyPokemonNotInPokedexBitmapIconStyle}"
+                                    Visibility="{Binding PokemonId, Converter={StaticResource InverseNearbyPokemonInPokedexToVisibilityConverter}}"
+                                    HorizontalAlignment="Center"                                    
+                                    Height="36"
+                                    Width="36" />
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -770,19 +773,19 @@
         </Grid>
 
         <Button
-				x:Name="ReactivateMapAutoUpdate" 
-				Canvas.ZIndex="1"
-				Style="{ThemeResource ImageButtonStyle}"
-				Height="{ThemeResource UiButtonSize}"
-				HorizontalAlignment="Right"
-				Tapped="ReactivateMapAutoUpdate_Tapped"
-				FontSize="36" Margin="0,150,34,0" 
-				RelativePanel.AlignVerticalCenterWithPanel="True" 
-				RelativePanel.AlignRightWithPanel="True">
+            x:Name="ReactivateMapAutoUpdate"
+            Canvas.ZIndex="1"
+            Style="{ThemeResource ImageButtonStyle}"
+            Height="{ThemeResource UiButtonSize}"
+            HorizontalAlignment="Right"
+            Tapped="ReactivateMapAutoUpdate_Tapped"
+            FontSize="36" Margin="0,150,34,0"
+            RelativePanel.AlignVerticalCenterWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True">
             <Image Source="../Assets/Icons/RecenterMapIcon.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" 
-							 Height="32"/>
+                   Stretch="Uniform"
+                   HorizontalAlignment="Stretch"
+                   Height="32" />
 
         </Button>
     </RelativePanel>

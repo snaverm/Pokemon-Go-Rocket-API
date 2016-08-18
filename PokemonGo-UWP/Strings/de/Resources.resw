@@ -125,10 +125,10 @@
     <value>m</value>
   </data>
   <data name="StardustTextBlock.Text" xml:space="preserve">
-    <value>STERNSTAUB</value>
+    <value>STERNENSTAUB</value>
   </data>
   <data name="CandyTextBlock.Text" xml:space="preserve">
-    <value>BONBON</value>
+    <value>-BONBON</value>
     <comment>Watch out: space before the word!</comment>
   </data>
   <data name="EvolveButton.Content" xml:space="preserve">
