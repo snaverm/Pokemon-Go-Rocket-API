@@ -175,7 +175,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Id for current pokemon's evolution
         /// </summary>
-        public PokemonId EvolvedPokemonId => CurrentPokemon?.PokemonId + 1 ?? 0;
+        public PokemonId EvolvedPokemonId => EvolvePokemonResponse?.EvolvedPokemonData.PokemonId ?? PokemonId.Missingno;
 
         /// <summary>
         /// Data for the current user
@@ -391,7 +391,8 @@ namespace PokemonGo_UWP.ViewModels
 
         public DelegateCommand EvolvePokemonCommand => _evolvePokemonCommand ?? (_evolvePokemonCommand = new DelegateCommand(async () =>
         {
-            EvolvePokemonResponse = await GameClient.EvolvePokemon(CurrentPokemon.WrappedData);
+            EvolvePokemonResponse = await GameClient.EvolvePokemon(CurrentPokemon.WrappedData);   
+            RaisePropertyChanged(() => EvolvedPokemonId);         
             switch (EvolvePokemonResponse.Result)
             {
                 case EvolvePokemonResponse.Types.Result.Unset:
@@ -417,7 +418,8 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _replaceEvolvedPokemonCommand;
 
-        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (_replaceEvolvedPokemonCommand = new DelegateCommand(() =>
+        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (
+            _replaceEvolvedPokemonCommand = new DelegateCommand(() =>
         {
             CurrentPokemon = new PokemonDataWrapper(EvolvePokemonResponse.EvolvedPokemonData);
             UpdateCurrentData();

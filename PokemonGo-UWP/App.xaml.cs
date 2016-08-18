@@ -146,11 +146,9 @@ namespace PokemonGo_UWP
         /// <param name="prelaunchActivated"></param>
         /// <returns></returns>
         public override Task OnSuspendingAsync(object s, SuspendingEventArgs e, bool prelaunchActivated)
-        {
+        {            
             GameClient.PokemonsInventory.CollectionChanged -= PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged -= CatchablePokemons_CollectionChanged;
-            // TODO: Probably not needed as stated here: https://blogs.windows.com/buildingapps/2016/05/24/how-to-prevent-screen-locks-in-your-uwp-apps/
-            _displayRequest.RequestRelease();
             if (SettingsService.Instance.LiveTileMode == LiveTileModes.Peek)
             {
                 LiveTileUpdater.EnableNotificationQueue(false);
@@ -168,8 +166,7 @@ namespace PokemonGo_UWP
 #if DEBUG
             // Init logger
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
-#endif
-
+#endif            
             // If we have a phone contract, hide the status bar
             if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
             {
@@ -179,6 +176,7 @@ namespace PokemonGo_UWP
 
             // Enter into full screen mode
             ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Standard;            
 
             // Forces the display to stay on while we play
             //_displayRequest.RequestActive();
