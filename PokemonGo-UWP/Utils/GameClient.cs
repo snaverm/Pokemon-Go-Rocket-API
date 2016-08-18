@@ -37,6 +37,7 @@ using PokemonGo.RocketAPI.Rpc;
 using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
 using System.Collections.Specialized;
+using Windows.UI.Popups;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -384,7 +385,10 @@ namespace PokemonGo_UWP.Utils
                     Debug.WriteLine("AccessTokenExpired Exception caught");
                     await _client.Login.DoLogin();
                 }
-                else throw;
+                else
+                {
+                    await new MessageDialog(e.Message).ShowAsyncQueue();
+                }
             }
         }
 

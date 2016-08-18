@@ -74,4 +74,7 @@ Abrir a página com os arquivos de instalação para instalação manual?</value
   <data name="NoTeamText" xml:space="preserve">
     <value>Sem equipe</value>
   </data>
+  <data name="ActivityUnknown" xml:space="preserve">
+    <value>Desconhecido</value>
+  </data>
 </root>
