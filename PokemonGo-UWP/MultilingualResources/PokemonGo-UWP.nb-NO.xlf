@@ -37,7 +37,7 @@
         </trans-unit>
         <trans-unit id="LoadingEncounterText" translate="yes" xml:space="preserve">
           <source>Loading encounter with {0}</source>
-          <target state="translated">Overføring fullført! Du fikk en {0} candy fra Professoren.</target>
+          <target state="translated">Laster møte med {0}</target>
         </trans-unit>
         <trans-unit id="LoggingInText" translate="yes" xml:space="preserve">
           <source>Logging in...</source>
@@ -45,7 +45,7 @@
         </trans-unit>
         <trans-unit id="LoginFailedText" translate="yes" xml:space="preserve">
           <source>Login failed, please try again.</source>
-          <target state="final">Pålogging mislyktes, vennligst prøv på nytt.</target>
+          <target state="final">Pålogging mislykkes, vennligst prøv på nytt.</target>
         </trans-unit>
         <trans-unit id="NoText" translate="yes" xml:space="preserve">
           <source>No</source>
@@ -121,7 +121,7 @@ Vil du åpne installasjonsfilene for manuell installasjon?</target>
         </trans-unit>
         <trans-unit id="TransferPokemonWarningText" translate="yes" xml:space="preserve">
           <source>You can't take it back after it's transferred to the Professor. Do you really want to transfer {0} to the Professor?</source>
-          <target state="translated">Du kan ikke få den tilbake etter den er overført til Professoren. Vil du virkelig å overføre {0} til professoren?</target>
+          <target state="translated">Du kan ikke få den tilbake etter den er overført til Professoren. Vil du virkelig å overføre {0} til Professoren?</target>
         </trans-unit>
       </group>
     </body>
@@ -154,11 +154,11 @@ Vil du åpne installasjonsfilene for manuell installasjon?</target>
         </trans-unit>
         <trans-unit id="D_ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>A device that incubates an Egg as you walk until it is ready to hatch.</source>
-          <target state="translated">En enhet som ruger egg mens du går til det er klart for å klekkes.</target>
+          <target state="translated">En enhet som ruger egg imens du går til det er klart for å klekkes.</target>
         </trans-unit>
         <trans-unit id="D_ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
           <source>A device that incubates an Egg as you walk until it is ready to hatch.</source>
-          <target state="translated">En enhet som ruger egg mens du går til det er klart for å klekkes.</target>
+          <target state="translated">En enhet som ruger egg imens du går til det er klart for å klekkes.</target>
         </trans-unit>
         <trans-unit id="D_ItemMasterBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
@@ -202,7 +202,7 @@ Vil du åpne installasjonsfilene for manuell installasjon?</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
           <source>Incense Ordinary</source>
-          <target state="translated">Røkelse</target>
+          <target state="translated">Incense Ordinary</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
           <source>Incense Spicy</source>
@@ -210,11 +210,11 @@ Vil du åpne installasjonsfilene for manuell installasjon?</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>Incubator Basic</source>
-          <target state="translated">Vanlig inkubator</target>
+          <target state="translated">Inkubator</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
           <source>Incubator Basic Unlimited</source>
-          <target state="translated">Evig inkubator</target>
+          <target state="translated">∞ Inkubator</target>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
@@ -375,7 +375,7 @@ Vil du åpne installasjonsfilene for manuell installasjon?</target>
         </trans-unit>
         <trans-unit id="Fire" translate="yes" xml:space="preserve">
           <source>Kindler</source>
-          <target state="translated">Pyro</target>
+          <target state="translated">Pyroman</target>
         </trans-unit>
         <trans-unit id="Flying" translate="yes" xml:space="preserve">
           <source>Bird Keeper</source>
