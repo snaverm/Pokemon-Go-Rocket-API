@@ -365,7 +365,7 @@
                             Style="{ThemeResource ImageButtonStyle}"
                             Height="{ThemeResource UiButtonSize}"
                             Margin="16"
-                            Canvas.ZIndex="10"
+                            Canvas.ZIndex="9"
                             x:Name="ShowInventoryButton">
 
                     <interactivity:Interaction.Behaviors>

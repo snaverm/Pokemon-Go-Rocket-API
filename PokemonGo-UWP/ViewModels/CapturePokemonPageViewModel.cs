@@ -66,11 +66,25 @@ namespace PokemonGo_UWP.ViewModels
                     await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
                 SelectStartingBall();
                 Busy.SetBusy(false);
-                if (CurrentEncounter.Status != EncounterResponse.Types.Status.EncounterSuccess)
+                switch (CurrentEncounter.Status)
                 {
-                    // Encounter failed, probably the Pokemon ran away
-                    await new MessageDialog(Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
-                    ReturnToGameScreen.Execute();
+                    case EncounterResponse.Types.Status.PokemonInventoryFull:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonInventoryFullText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
+                    case EncounterResponse.Types.Status.EncounterSuccess:
+                        break;                    
+                    case EncounterResponse.Types.Status.EncounterPokemonFled:                                                                        
+                    case EncounterResponse.Types.Status.EncounterError:                        
+                    case EncounterResponse.Types.Status.EncounterNotFound:                        
+                    case EncounterResponse.Types.Status.EncounterClosed:                        
+                    case EncounterResponse.Types.Status.EncounterNotInRange:                        
+                    case EncounterResponse.Types.Status.EncounterAlreadyHappened:
+                        await new MessageDialog(Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;                    
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
@@ -179,24 +193,19 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Going back to map page
         /// </summary>
-        public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (
-            _returnToGameScreen =
-                new DelegateCommand(
-                    () => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate); },
-                    () => true));
+        public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (_returnToGameScreen = new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate); }, () => true));
 
         private DelegateCommand _escapeEncounterCommand;
 
         /// <summary>
         ///     Going back to map page
         /// </summary>
-        public DelegateCommand EscapeEncounterCommand => _escapeEncounterCommand ?? (
-            _escapeEncounterCommand = new DelegateCommand(() =>
-            {
-                // Re-enable update timer
-                GameClient.ToggleUpdateTimer();
-                Dispatcher.Dispatch(() => NavigationService.GoBack());
-            }, () => true));
+        public DelegateCommand EscapeEncounterCommand => _escapeEncounterCommand ?? (_escapeEncounterCommand = new DelegateCommand(() =>
+        {
+            // Re-enable update timer
+            GameClient.ToggleUpdateTimer();
+            Dispatcher.Dispatch(() => NavigationService.GoBack());
+        }, () => true));
 
         #endregion
 
@@ -229,14 +238,22 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Selects the first ball based on available items
         /// </summary>
-        private void SelectStartingBall()
+        private void SelectStartingBall(bool keepPreviousSelection = false)
         {
             // Set default item (switch to other balls if user has none)
-            SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+            if (!keepPreviousSelection)
             {
-                Count = 0,
-                ItemId = ItemId.ItemPokeBall
-            };
+                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+                {
+                    Count = 0,
+                    ItemId = ItemId.ItemPokeBall
+                };
+            }
+            else
+            {
+                // Start with a ball of the same type as the one that's currently used
+                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == SelectedCaptureItem.ItemId);
+            }
             while (SelectedCaptureItem != null && SelectedCaptureItem.Count == 0)
             {
                 switch (SelectedCaptureItem.ItemId)
@@ -257,8 +274,7 @@ namespace PokemonGo_UWP.ViewModels
                         // User has no left balls, choose a non-existing Pokeball to stop him from trying to capture
                         SelectedCaptureItem = new ItemData
                         {
-                            Count = 0,
-                            ItemId = ItemId.ItemPokeBall
+                            Count = 0, ItemId = ItemId.ItemPokeBall
                         };
                         return;
                 }
@@ -270,28 +286,24 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     We throw the selected item to the Pokemon and see what happens
         /// </summary>
-        public DelegateCommand<bool> UseSelectedCaptureItem => _useSelectedCaptureItem ?? (
-            _useSelectedCaptureItem = new DelegateCommand<bool>(async hitPokemon =>
+        public DelegateCommand<bool> UseSelectedCaptureItem => _useSelectedCaptureItem ?? (_useSelectedCaptureItem = new DelegateCommand<bool>(async hitPokemon =>
+        {
+            Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
+            if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
             {
-                Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
-                if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall ||
-                    SelectedCaptureItem.ItemId == ItemId.ItemGreatBall ||
-                    SelectedCaptureItem.ItemId == ItemId.ItemMasterBall ||
-                    SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
-                {
-                    // Player's using a PokeBall so we try to catch the Pokemon
-                    await ThrowPokeball(hitPokemon);
-                }
-                else
-                {                    
-                    // He's using a berry
-                    await ThrowBerry();
-                }
-                // Update selected item to get the new item count
-                if (SelectedCaptureItem != null)
-                    SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == SelectedCaptureItem.ItemId);
-                Busy.SetBusy(false);
-            }, hitPokemon => true));
+                // Player's using a PokeBall so we try to catch the Pokemon
+                await ThrowPokeball(hitPokemon);
+            }
+            else
+            {
+                // He's using a berry
+                await ThrowBerry();
+            }
+            // Update selected item to get the new item count
+            if (SelectedCaptureItem != null)
+                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == SelectedCaptureItem.ItemId);
+            Busy.SetBusy(false);
+        }, hitPokemon => true));
 
         /// <summary>
         ///     Launches the PokeBall for the current encounter, handling the different catch responses
@@ -302,11 +314,9 @@ namespace PokemonGo_UWP.ViewModels
             // We use to simulate a 5 second wait to get animation going
             // If server takes too much to reply then we don't use the delay
             var requestTime = DateTime.Now;
-            var caughtPokemonResponse =
-                await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId,
-                        SelectedCaptureItem.ItemId, hitPokemon);
+            var caughtPokemonResponse = await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, SelectedCaptureItem.ItemId, hitPokemon);
             var responseDelay = DateTime.Now - requestTime;
-            if (responseDelay.TotalSeconds < 5) await Task.Delay(TimeSpan.FromSeconds(5 - (int)responseDelay.TotalSeconds));
+            if (responseDelay.TotalSeconds < 5) await Task.Delay(TimeSpan.FromSeconds(5 - (int) responseDelay.TotalSeconds));
             var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
 
             switch (caughtPokemonResponse.Status)
@@ -342,7 +352,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             // We always need to update the inventory
             await GameClient.UpdateInventory();
-            SelectStartingBall();
+            SelectStartingBall(true);
         }
 
         /// <summary>
