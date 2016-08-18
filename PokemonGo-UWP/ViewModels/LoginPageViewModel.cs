@@ -122,6 +122,10 @@ namespace PokemonGo_UWP.ViewModels
             _doPtcLoginCommand = new DelegateCommand(async () =>
             {
                 Busy.SetBusy(true, Resources.CodeResources.GetString("LoggingInText"));
+
+                //Let's hack the shit out of SetBusy, it didn't want to populate itself, so we will HELP IT!
+                await Task.Delay(50);
+
                 try
                 {
                     var loginSuccess = await GameClient.DoPtcLogin(Username, Password);
@@ -178,6 +182,10 @@ namespace PokemonGo_UWP.ViewModels
             _doGoogleLoginCommand = new DelegateCommand(async () =>
             {
                 Busy.SetBusy(true, Resources.CodeResources.GetString("LoggingInText"));
+
+                //Let's hack the shit out of SetBusy, it didn't want to populate itself, so we will HELP IT!
+                await Task.Delay(50);
+
                 try
                 {
                     if (!await GameClient.DoGoogleLogin(Username.Trim(), Password.Trim()))
