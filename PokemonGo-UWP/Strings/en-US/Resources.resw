@@ -260,4 +260,10 @@
   <data name="SettingsLanguageTextBlock.Text" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="SettingsCompassEnabledTextBlock.Text" xml:space="preserve">
+    <value>Use compass</value>
+  </data>
+  <data name="SettingsLiveTileTextBlock.Text" xml:space="preserve">
+    <value>Live Tile Mode</value>
+  </data>
 </root>
