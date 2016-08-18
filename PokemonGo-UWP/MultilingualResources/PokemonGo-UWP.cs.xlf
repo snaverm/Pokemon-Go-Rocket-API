@@ -463,23 +463,23 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="Date" translate="yes" xml:space="preserve">
           <source>Date</source>
-          <target state="new">Date</target>
+          <target state="new">Datum</target>
         </trans-unit>
         <trans-unit id="Fav" translate="yes" xml:space="preserve">
           <source>Favorite</source>
-          <target state="new">Favorite</target>
+          <target state="new">oblíbený</target>
         </trans-unit>
         <trans-unit id="Health" translate="yes" xml:space="preserve">
           <source>Health</source>
-          <target state="new">Health</target>
+          <target state="new">Život</target>
         </trans-unit>
         <trans-unit id="Name" translate="yes" xml:space="preserve">
           <source>Name</source>
-          <target state="new">Name</target>
+          <target state="new">Jméno</target>
         </trans-unit>
         <trans-unit id="Number" translate="yes" xml:space="preserve">
           <source>Number</source>
-          <target state="new">Number</target>
+          <target state="new">Číslo</target>
         </trans-unit>
         <trans-unit id="PokemonInventoryFullText" translate="yes" xml:space="preserve">
           <source>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</source>
@@ -628,7 +628,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="TypeTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Type</source>
-          <target state="new">Type</target>
+          <target state="new">Typ</target>
         </trans-unit>
         <trans-unit id="KgTextBlock.Text" translate="yes" xml:space="preserve">
           <source>kg</source>
@@ -636,11 +636,11 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="WeightTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Weight</source>
-          <target state="new">Weight</target>
+          <target state="new">Váha</target>
         </trans-unit>
         <trans-unit id="HeightTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Height</source>
-          <target state="new">Height</target>
+          <target state="new">Výška</target>
         </trans-unit>
         <trans-unit id="MTextBlock.Text" translate="yes" xml:space="preserve">
           <source>m</source>
@@ -648,24 +648,24 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="StardustTextBlock.Text" translate="yes" xml:space="preserve">
           <source>STARDUST</source>
-          <target state="new">STARDUST</target>
+          <target state="new">HVĚZDNÝ PRACH</target>
         </trans-unit>
         <trans-unit id="CandyTextBlock.Text" translate="yes" xml:space="preserve">
           <source> CANDY</source>
-          <target state="new"> CANDY</target>
+          <target state="new"> BOMBÓNY</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Watch out: space before the word!</note>
         </trans-unit>
         <trans-unit id="EvolveButton.Content" translate="yes" xml:space="preserve">
           <source>EVOLVE</source>
-          <target state="new">EVOLVE</target>
+          <target state="new">EVOLUCE</target>
         </trans-unit>
         <trans-unit id="PowerUpButton.Content" translate="yes" xml:space="preserve">
           <source>POWER UP</source>
-          <target state="new">POWER UP</target>
+          <target state="new">SÍLA UP</target>
         </trans-unit>
         <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>
-          <target state="new">TRANSFER</target>
+          <target state="new">PRODAT</target>
         </trans-unit>
         <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
@@ -673,7 +673,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START INCUBATION</source>
-          <target state="new">START INCUBATION</target>
+          <target state="new">ZAČÍT INCUBOVAT</target>
         </trans-unit>
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
