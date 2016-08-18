@@ -1,7 +1,12 @@
-﻿using PokemonGo_UWP.Utils;
+﻿using PokemonGo_UWP.Entities;
+using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Template10.Mvvm;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Storage;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -76,47 +81,43 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         ///     Windows handles the PrimaryLanguageOverride, so we don't need to save the value by ourself.
         /// </summary>
-        public string UserLanguage
+        public Language UserLanguage
         {
             get {
-                    if (Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride == "")
-                    {
-                         return "System";
+                if (Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride == "")
+                {
+                    return new Language() {
+                        Code = "System"
+                    };
                 } else {
-                        return Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride;
-                    }
+                    return new Language() {
+                        Code = Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride
+                    };
                 }
-            set { Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = value.Replace("System", ""); }
+            }
+            set {
+                Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = value.Code.Replace("System", "");
+            }
         }
 
-        public System.Collections.Generic.List<string> languageList
+        public List<Language> languageList
         {
             get {
-                System.Collections.Generic.List<string> tmp = new System.Collections.Generic.List<string>();
-                tmp.Clear();
-                tmp.Add("System");
-                tmp.Add("cs");
-                tmp.Add("de");
-                tmp.Add("el");
-                tmp.Add("en-US");
-                tmp.Add("es");
-                tmp.Add("fi");
-                tmp.Add("fr");
-                tmp.Add("hu");
-                tmp.Add("id");
-                tmp.Add("it");
-                tmp.Add("ja");
-                tmp.Add("nl");
-                tmp.Add("pl");
-                tmp.Add("pt-BR");
-                tmp.Add("pt-PT");
-                tmp.Add("ru");
-                tmp.Add("sk");
-                tmp.Add("tr");
-                tmp.Add("zh-CN");
-                tmp.Add("zh-HK");
-                tmp.Add("zh-TW");
-                return tmp;
+                List<Language> list = new List<Language>();
+                list.Add(new Language() {
+                    Code = "System"
+                });
+
+                IReadOnlyList<string> languages = Windows.Globalization.ApplicationLanguages.ManifestLanguages;
+                
+
+                foreach(string language in languages) {
+                    list.Add(new Language() {
+                        Code = language
+                    });
+                }
+
+                return list;
             }
             set { }
         }
