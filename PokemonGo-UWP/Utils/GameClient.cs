@@ -474,50 +474,63 @@ namespace PokemonGo_UWP.Utils
             NearbyPokestops.Clear();
         }
 
-        #endregion
+		#endregion
 
-        #region Data Updating
+		#region Data Updating
+		private static Geolocator _geolocator;
+		private static Compass _compass;
 
-        private static Geolocator _geolocator;
-        private static Compass _compass;
+		public static Geoposition Geoposition { get; private set; }
 
-        public static Geoposition Geoposition { get; private set; }
+		private static Heartbeat _heartbeat;
 
-        private static Heartbeat _heartbeat;
-        private static DispatcherTimer _compassTimer;
-
-        /// <summary>
-        ///     We fire this event when the current position changes
-        /// </summary>
-        public static event EventHandler<Geoposition> GeopositionUpdated;
-
-        public static event EventHandler<CompassReading> HeadingUpdated;
-
-        /// <summary>
-        ///     Starts the timer to update map objects and the handler to update position
-        /// </summary>
-        public static async Task InitializeDataUpdate()
-        {
-            if (SettingsService.Instance.IsCompassEnabled)
-            {
-                _compass = Compass.GetDefault();
-                if (_compass != null)
-                {
-                    _compassTimer = new DispatcherTimer
-                    {
-                        Interval = TimeSpan.FromMilliseconds(Math.Max(_compass.MinimumReportInterval, 50))
-                    };
-                    _compassTimer.Tick += (s, e) =>
-                    {
-                        if (SettingsService.Instance.IsAutoRotateMapEnabled)
-                        {
-                            HeadingUpdated?.Invoke(null, _compass.GetCurrentReading());
-                        }
-                    };
-                    _compassTimer.Start();
-                }
-            }
-            _geolocator = new Geolocator
+		/// <summary>
+		///     We fire this event when the current position changes
+		/// </summary>
+		public static event EventHandler<Geoposition> GeopositionUpdated;
+		#region Compass Stuff
+		/// <summary>
+		/// We fire this event when the current compass position changes
+		/// </summary>
+		public static event EventHandler<CompassReading> HeadingUpdated;
+		private static void compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
+		{
+			HeadingUpdated?.Invoke(sender, args.Reading);
+		}
+		#endregion
+		/// <summary>
+		///     Starts the timer to update map objects and the handler to update position
+		/// </summary>
+		public static async Task InitializeDataUpdate()
+		{
+			#region Compass management
+			SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
+			{
+				if (e.PropertyName == nameof(SettingsService.Instance.MapAutomaticOrientationMode))
+				{
+					switch (SettingsService.Instance.MapAutomaticOrientationMode)
+					{
+						case MapAutomaticOrientationModes.Compass:
+							_compass = Compass.GetDefault();
+							_compass.ReportInterval = Math.Max(_compass.MinimumReportInterval, 50);
+							_compass.ReadingChanged += compass_ReadingChanged;
+							break;
+						case MapAutomaticOrientationModes.None:
+						case MapAutomaticOrientationModes.GPS:
+						default:
+							if (_compass != null)
+							{
+								_compass.ReadingChanged -= compass_ReadingChanged;
+								_compass = null;
+							}
+							break;
+					}
+				}
+			};
+			//Trick to trigger the PropertyChanged for MapAutomaticOrientationMode ;)
+			SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
+			#endregion
+			_geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
                 DesiredAccuracyInMeters = 5,
