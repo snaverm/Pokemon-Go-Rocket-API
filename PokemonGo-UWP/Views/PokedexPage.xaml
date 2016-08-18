@@ -158,7 +158,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <BitmapIcon UriSource="{Binding Key, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                <BitmapIcon UriSource="{Binding Key, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
                             Grid.Row="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
