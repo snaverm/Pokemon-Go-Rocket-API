@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/ACHIEVEMENTS.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/ACHIEVEMENTS.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -234,7 +234,7 @@
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/CODERESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/CODERESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -487,7 +487,7 @@ Open page with installation files for manual install?</source>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -667,14 +667,6 @@ Open page with installation files for manual install?</source>
           <source>TRANSFER</source>
           <target state="translated">TRANSFERIR</target>
         </trans-unit>
-        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>START INCUBATION</source>
-          <target state="translated">EMPEZAR INCUBACIÓN</target>
-        </trans-unit>
-        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Use an incubator to incubate the Egg.</source>
-          <target state="translated">Usa una incubadora para incubar este Huevo.</target>
-        </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
           <target state="new">Caught:</target>
@@ -715,10 +707,18 @@ Open page with installation files for manual install?</source>
           <source>times</source>
           <target state="new">times</target>
         </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="new">START INCUBATION</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="new">Use an incubator to incubate the Egg.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/ITEMS.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/ITEMS.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -897,7 +897,7 @@ Open page with installation files for manual install?</source>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMON.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMON.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -1514,7 +1514,7 @@ Open page with installation files for manual install?</source>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMONMOVES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMONMOVES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -2245,88 +2245,7 @@ Open page with installation files for manual install?</source>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMONTYPES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="POKEMONGO-UWP/STRINGS/EN-US/POKEMONTYPES.RESW" datatype="resx">
-        <trans-unit id="Bug" translate="yes" xml:space="preserve">
-          <source>Bug</source>
-          <target state="translated">Bicho</target>
-        </trans-unit>
-        <trans-unit id="Dark" translate="yes" xml:space="preserve">
-          <source>Dark</source>
-          <target state="translated">Siniestro</target>
-        </trans-unit>
-        <trans-unit id="Dragon" translate="yes" xml:space="preserve">
-          <source>Dragon</source>
-          <target state="translated">Dragón</target>
-        </trans-unit>
-        <trans-unit id="Electric" translate="yes" xml:space="preserve">
-          <source>Electric</source>
-          <target state="translated">Eléctrico</target>
-        </trans-unit>
-        <trans-unit id="Fairy" translate="yes" xml:space="preserve">
-          <source>Fairy</source>
-          <target state="translated">Hada</target>
-        </trans-unit>
-        <trans-unit id="Fighting" translate="yes" xml:space="preserve">
-          <source>Fighting</source>
-          <target state="translated">Lucha</target>
-        </trans-unit>
-        <trans-unit id="Fire" translate="yes" xml:space="preserve">
-          <source>Fire</source>
-          <target state="translated">Fuego</target>
-        </trans-unit>
-        <trans-unit id="Flying" translate="yes" xml:space="preserve">
-          <source>Flying</source>
-          <target state="translated">Volador</target>
-        </trans-unit>
-        <trans-unit id="Ghost" translate="yes" xml:space="preserve">
-          <source>Ghost</source>
-          <target state="translated">Fantasma</target>
-        </trans-unit>
-        <trans-unit id="Grass" translate="yes" xml:space="preserve">
-          <source>Grass</source>
-          <target state="translated">Planta</target>
-        </trans-unit>
-        <trans-unit id="Ground" translate="yes" xml:space="preserve">
-          <source>Ground</source>
-          <target state="translated">Tierra</target>
-        </trans-unit>
-        <trans-unit id="Ice" translate="yes" xml:space="preserve">
-          <source>Ice</source>
-          <target state="translated">Hielo</target>
-        </trans-unit>
-        <trans-unit id="Normal" translate="yes" xml:space="preserve">
-          <source>Normal</source>
-          <target state="translated">Normal</target>
-        </trans-unit>
-        <trans-unit id="Poison" translate="yes" xml:space="preserve">
-          <source>Poison</source>
-          <target state="translated">Veneno</target>
-        </trans-unit>
-        <trans-unit id="Psychic" translate="yes" xml:space="preserve">
-          <source>Psychic</source>
-          <target state="translated">Psíquico</target>
-        </trans-unit>
-        <trans-unit id="Rock" translate="yes" xml:space="preserve">
-          <source>Rock</source>
-          <target state="translated">Roca</target>
-        </trans-unit>
-        <trans-unit id="Steel" translate="yes" xml:space="preserve">
-          <source>Steel</source>
-          <target state="translated">Acero</target>
-        </trans-unit>
-        <trans-unit id="Water" translate="yes" xml:space="preserve">
-          <source>Water</source>
-          <target state="translated">Agua</target>
-        </trans-unit>
-      </group>
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEDEX.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEDEX.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
@@ -2935,6 +2854,87 @@ Open page with installation files for manual install?</source>
         <trans-unit id="Mew.Description" translate="yes" xml:space="preserve">
           <source>Mew is said to possess the genetic composition of all Pokémon. It is capable of making itself invisible at will, so it entirely avoids notice even if it approaches people.</source>
           <target state="final">Dicen que Mew posee el mapa genético de todos los Pokémon. Puede hacerse invisible cuando quiere, así que pasa desapercibido cada vez que se le acerca alguien.</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="el" target-language="es" original="POKEMONGO-UWP/STRINGS/EN-US/POKEMONTYPES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="POKEMONGO-UWP/STRINGS/EN-US/POKEMONTYPES.RESW" datatype="resx">
+        <trans-unit id="Bug" translate="yes" xml:space="preserve">
+          <source>Bug</source>
+          <target state="new">Bug</target>
+        </trans-unit>
+        <trans-unit id="Dark" translate="yes" xml:space="preserve">
+          <source>Dark</source>
+          <target state="new">Dark</target>
+        </trans-unit>
+        <trans-unit id="Dragon" translate="yes" xml:space="preserve">
+          <source>Dragon</source>
+          <target state="new">Dragon</target>
+        </trans-unit>
+        <trans-unit id="Electric" translate="yes" xml:space="preserve">
+          <source>Electric</source>
+          <target state="new">Electric</target>
+        </trans-unit>
+        <trans-unit id="Fairy" translate="yes" xml:space="preserve">
+          <source>Fairy</source>
+          <target state="new">Fairy</target>
+        </trans-unit>
+        <trans-unit id="Fighting" translate="yes" xml:space="preserve">
+          <source>Fighting</source>
+          <target state="new">Fighting</target>
+        </trans-unit>
+        <trans-unit id="Fire" translate="yes" xml:space="preserve">
+          <source>Fire</source>
+          <target state="new">Fire</target>
+        </trans-unit>
+        <trans-unit id="Flying" translate="yes" xml:space="preserve">
+          <source>Flying</source>
+          <target state="new">Flying</target>
+        </trans-unit>
+        <trans-unit id="Ghost" translate="yes" xml:space="preserve">
+          <source>Ghost</source>
+          <target state="new">Ghost</target>
+        </trans-unit>
+        <trans-unit id="Grass" translate="yes" xml:space="preserve">
+          <source>Grass</source>
+          <target state="new">Grass</target>
+        </trans-unit>
+        <trans-unit id="Ground" translate="yes" xml:space="preserve">
+          <source>Ground</source>
+          <target state="new">Ground</target>
+        </trans-unit>
+        <trans-unit id="Ice" translate="yes" xml:space="preserve">
+          <source>Ice</source>
+          <target state="new">Ice</target>
+        </trans-unit>
+        <trans-unit id="Normal" translate="yes" xml:space="preserve">
+          <source>Normal</source>
+          <target state="new">Normal</target>
+        </trans-unit>
+        <trans-unit id="Poison" translate="yes" xml:space="preserve">
+          <source>Poison</source>
+          <target state="new">Poison</target>
+        </trans-unit>
+        <trans-unit id="Psychic" translate="yes" xml:space="preserve">
+          <source>Psychic</source>
+          <target state="new">Psychic</target>
+        </trans-unit>
+        <trans-unit id="Rock" translate="yes" xml:space="preserve">
+          <source>Rock</source>
+          <target state="new">Rock</target>
+        </trans-unit>
+        <trans-unit id="Steel" translate="yes" xml:space="preserve">
+          <source>Steel</source>
+          <target state="new">Steel</target>
+        </trans-unit>
+        <trans-unit id="Water" translate="yes" xml:space="preserve">
+          <source>Water</source>
+          <target state="new">Water</target>
         </trans-unit>
       </group>
     </body>
