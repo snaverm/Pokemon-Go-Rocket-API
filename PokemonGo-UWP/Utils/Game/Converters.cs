@@ -1042,6 +1042,21 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PokemonSortingModesTranslationConverter : IValueConverter {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var sortingMode = (PokemonSortingModes)value;
+            return Resources.CodeResources.GetString(sortingMode.ToString());
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class IncubatorUsagesCountToUsagesTextConverter : IValueConverter
     {
         #region Implementation of IValueConverter
