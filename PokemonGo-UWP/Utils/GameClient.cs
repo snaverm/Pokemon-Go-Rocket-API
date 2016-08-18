@@ -38,6 +38,7 @@ using PokemonGoAPI.Session;
 using PokemonGo_UWP.Utils.Helpers;
 using System.Collections.Specialized;
 using Windows.UI.Popups;
+using System.ComponentModel;
 
 namespace PokemonGo_UWP.Utils
 {
