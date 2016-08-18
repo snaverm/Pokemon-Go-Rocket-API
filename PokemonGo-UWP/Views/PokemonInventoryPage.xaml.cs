@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
+using Template10.Services.NavigationService;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -66,14 +67,19 @@ namespace PokemonGo_UWP.Views
 			base.OnNavigatingFrom(e);
 			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
 
-            var lastSelectedId = (ulong)NavigationHelper.NavigationState["LastSelectedID"];
+		    if (NavigationHelper.NavigationState.ContainsKey("LastSelectedID"))
+		    {
+		        var lastSelectedId = (ulong) NavigationHelper.NavigationState["LastSelectedID"];
 
-		    var pokemonList = ViewModel.PokemonInventory;
-            var pokemon = pokemonList
-                .FirstOrDefault(i => i.Id == lastSelectedId);
-            var index = pokemonList
-                .IndexOf(pokemon);
-		    ViewModel.LastVisibleIndex = index;
+		        var pokemonList = ViewModel.PokemonInventory;
+		        var pokemon = pokemonList
+		            .FirstOrDefault(i => i.Id == lastSelectedId);
+		        var index = pokemonList
+		            .IndexOf(pokemon);
+		        ViewModel.LastVisibleIndex = index;
+		    }
+		    else
+                ViewModel.LastVisibleIndex = 0;
 		}
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
