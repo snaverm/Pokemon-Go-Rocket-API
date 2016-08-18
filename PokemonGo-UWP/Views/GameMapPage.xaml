@@ -271,6 +271,23 @@
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
 
+            <maps:MapItemsControl ItemsSource="{Binding LuredPokemon}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="entities:LuredPokemon">
+                        <Button Style="{ThemeResource ImageButtonStyle}"
+                                Command="{x:Bind TryCatchPokemon}">
+                            <Image
+                                Source="{Binding LureInfo.ActivePokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                maps:MapControl.Location="{Binding Geoposition}"
+                                maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
+                                Stretch="Uniform"
+                                Height="48"
+                                Width="48" />
+                        </Button>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+
             <maps:MapItemsControl ItemsSource="{Binding NearbyPokestops}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="entities:FortDataWrapper">
