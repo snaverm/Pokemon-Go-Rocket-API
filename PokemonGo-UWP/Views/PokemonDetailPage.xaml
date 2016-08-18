@@ -374,6 +374,7 @@
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:CallMethodAction MethodName="Begin"
                                                TargetObject="{Binding ElementName=HideContextMenuStoryboard}" />
+                            <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                     <TextBlock Grid.Column="0"
@@ -400,8 +401,6 @@
                     </Grid.RenderTransform>
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
-                            <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=HideContextMenuStoryboard}" />
                             <core:InvokeCommandAction Command="{Binding TransferPokemonCommand}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
@@ -493,6 +492,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
+                    <CheckBox MinWidth="30" Style="{StaticResource CheckStar}" Margin="0" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="4" Command="{Binding FavoritePokemonCommand}" IsChecked="{Binding IsFavorite, Mode=OneWay}"/>
+                    
                     <TextBlock Grid.Row="0"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
@@ -784,6 +785,7 @@
                                         <Grid HorizontalAlignment="Right"
                                               VerticalAlignment="Center"
                                               Margin="0,0,10,0">
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="50" />
@@ -1018,7 +1020,8 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,17.5"
-                Command="{Binding ReturnToPokemonInventoryScreen}">
+                Command="{Binding ReturnToPokemonInventoryScreen}"
+                >
             <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
 

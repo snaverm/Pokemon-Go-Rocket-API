@@ -62,6 +62,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
+                // TODO: ulong needed
                 CurrentPokemon = JsonConvert.DeserializeObject<PokemonDataWrapper>((string)suspensionState[nameof(CurrentPokemon)]);
                 PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
             }
@@ -114,6 +115,11 @@ namespace PokemonGo_UWP.ViewModels
         /// Pokedex data for the current Pokemon
         /// </summary>
         private PokemonSettings _pokemonExtraData;
+
+        /// <summary>
+        /// Current Pokemons favorite status
+        /// </summary>
+        private bool _isFavorite;
 
         /// <summary>
         /// Amount of Stardust owned by the player
@@ -196,6 +202,15 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
+        /// Current Pokemons favorite status
+        /// </summary>
+        public bool IsFavorite
+        {
+            get { return _isFavorite; }
+            set { Set(ref _isFavorite, value); }
+        }
+
+        /// <summary>
         /// Amount of Stardust owned by the player
         /// </summary>
         public int StardustAmount
@@ -270,6 +285,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             // Retrieve data
             PlayerProfile = GameClient.PlayerProfile;
+            IsFavorite = Convert.ToBoolean(CurrentPokemon.Favorite);
             StardustAmount = PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount;
             var upgradeCosts =
                 GameClient.PokemonUpgradeCosts[
@@ -358,14 +374,10 @@ namespace PokemonGo_UWP.ViewModels
                   case SetFavoritePokemonResponse.Types.Result.Unset:
                       break;
                   case SetFavoritePokemonResponse.Types.Result.Success:
-                      // Since no new Pokemon data is passed, we need to reconstruct it local
-                      PokemonData newPokemonData = CurrentPokemon.WrappedData;
                       // Inverse favorite state
-                      newPokemonData.Favorite = Convert.ToInt32(!isFavorite);
-                      CurrentPokemon = new PokemonDataWrapper(newPokemonData);
-                      await GameClient.UpdateInventory();
-                      await GameClient.UpdatePlayerStats();
-                      NavigationService.GoBack();
+                      CurrentPokemon.WrappedData.Favorite = Convert.ToInt32(!isFavorite);
+
+                      IsFavorite = !isFavorite;
                       break;
                   // TODO: what to do on error?
                   case SetFavoritePokemonResponse.Types.Result.ErrorPokemonNotFound:
