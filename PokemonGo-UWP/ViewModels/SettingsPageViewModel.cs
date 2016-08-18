@@ -109,8 +109,6 @@ namespace PokemonGo_UWP.ViewModels
                 });
 
                 IReadOnlyList<string> languages = Windows.Globalization.ApplicationLanguages.ManifestLanguages;
-                
-
                 foreach(string language in languages) {
                     list.Add(new Language() {
                         Code = language
