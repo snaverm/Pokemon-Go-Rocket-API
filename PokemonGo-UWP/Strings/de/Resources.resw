@@ -28,7 +28,7 @@
     <value>Um dich einzuloggen, musst du deinen Benutzernamen/E-Mail und Passwort eingeben. Wenn du der App nicht vertraust, solltest du sie jetzt schließen. Niantic kann dich für die Verwendung dieser App sperren. Verwendung auf eigene Gefahr.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
-    <value>in der Nähe</value>
+    <value>GESICHTETE POKÉMON</value>
   </data>
   <data name="OutOfRangeTextBlock.Text" xml:space="preserve">
     <value>Dieser Pokéstop ist zu weit entfernt.</value>
@@ -98,10 +98,10 @@
     <value>Karte automatisch drehen</value>
   </data>
   <data name="StartDateTextBlock.Text" xml:space="preserve">
-    <value>BEGINN</value>
+    <value>STARTDATUM</value>
   </data>
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
-    <value>Brutmaschine</value>
+    <value>BRUTMASCHINEN</value>
   </data>
   <data name="SettingsUseNianticMapTextBlock.Text" xml:space="preserve">
     <value>Verwende Niantic Karte</value>
@@ -135,10 +135,10 @@
     <value>ENTWICKELN</value>
   </data>
   <data name="PowerUpButton.Content" xml:space="preserve">
-    <value>POWER UP</value>
+    <value>POWER-UP</value>
   </data>
   <data name="TransferButton.Content" xml:space="preserve">
-    <value>TRANSFER</value>
+    <value>VERSCHICKEN</value>
   </data>
   <data name="SettingsRememberMapZoomTextBlock" xml:space="preserve">
     <value>Speichere Karten Zoom</value>
