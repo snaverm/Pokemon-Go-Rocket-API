@@ -1,13 +1,11 @@
 ﻿using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Settings.Master;
-using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,16 +17,6 @@ namespace PokemonGo_UWP.ViewModels
 {
     public class PokedexPageViewModel : ViewModelBase
     {
-        public PokedexPageViewModel()
-        {
-            if (DesignMode.DesignModeEnabled)
-            {
-                PokedexEntry entry = new PokedexEntry() { PokemonId = PokemonId.Missingno, TimesCaptured = 0, TimesEncountered = 10 };
-                PokemonFoundAndSeen.Add(new KeyValuePair<PokemonId, PokedexEntry>(PokemonId.Missingno, entry));
-                CapturedPokemons = 10;
-                SeenPokemons = 15;
-            }
-        }
         #region Lifecycle Handlers
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -37,6 +25,12 @@ namespace PokemonGo_UWP.ViewModels
                 PokemonFoundAndSeen = (ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>)state[nameof(PokemonFoundAndSeen)];
                 SeenPokemons = (int)state[nameof(SeenPokemons)];
                 CapturedPokemons = (int)state[nameof(CapturedPokemons)];
+                if (state.ContainsKey(nameof(IsPokemonDetailsOpen)))
+                {
+                    SelectedPokedexEntry = (KeyValuePair<PokemonId, PokedexEntry>)state[nameof(SelectedPokedexEntry)];
+                    IsEevee = (bool)state[nameof(IsEevee)];
+                    IsPokemonDetailsOpen = (bool)state[nameof(IsPokemonDetailsOpen)];
+                }
             }
             else
             {
@@ -60,6 +54,11 @@ namespace PokemonGo_UWP.ViewModels
                 CapturedPokemons = pokedexItems.Where(x => x.TimesCaptured > 0).Count();
                 SeenPokemons = pokedexItems.Count;
             }
+            if(parameter!=null && parameter is PokemonId)
+            {
+                SelectedPokedexEntry = new KeyValuePair<PokemonId, PokedexEntry>((PokemonId)parameter, GetPokedexEntry((PokemonId)parameter));
+                IsPokemonDetailsOpen = true;
+            }
             return Task.CompletedTask;
         }
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -69,11 +68,19 @@ namespace PokemonGo_UWP.ViewModels
                 pageState[nameof(PokemonFoundAndSeen)] = PokemonFoundAndSeen;
                 pageState[nameof(SeenPokemons)] = SeenPokemons;
                 pageState[nameof(CapturedPokemons)] = CapturedPokemons;
+                if (IsPokemonDetailsOpen)
+                {
+                    pageState[nameof(IsPokemonDetailsOpen)] = IsPokemonDetailsOpen;
+                    pageState[nameof(SelectedPokedexEntry)] = SelectedPokedexEntry;
+                    pageState[nameof(IsEevee)] = IsEevee;
+                }
             }
             else
             {
                 pageState?.Clear();
                 PokemonFoundAndSeen?.Clear();
+                EeveeEvolutions?.Clear();
+                PokemonEvolutions?.Clear();
             }
             return Task.CompletedTask;
         }
@@ -85,21 +92,9 @@ namespace PokemonGo_UWP.ViewModels
         private int _captured, _seen;
         public int CapturedPokemons { get { return _captured; } set { Set(ref _captured, value); } }
         public int SeenPokemons { get { return _seen; } set { Set(ref _seen, value); } }
-        private DelegateCommand _closeCommand;
-        public DelegateCommand CloseCommand
-            =>
-            _closeCommand ??
-            (_closeCommand = new DelegateCommand(() =>
-                {
-                    if (IsPokemonDetailsOpen)
-                        IsPokemonDetailsOpen = false;
-                    else
-                        NavigationService.Navigate(typeof(GameMapPage));
-                }, () => true)
-            );
+        
         private bool _pokemonDetailsOpen;
         public bool IsPokemonDetailsOpen { get { return _pokemonDetailsOpen; } set { Set(ref _pokemonDetailsOpen, value); } }
-        #endregion
         private KeyValuePair<PokemonId, PokedexEntry> _selectedPokedex;
         public KeyValuePair<PokemonId, PokedexEntry> SelectedPokedexEntry
         {
@@ -115,6 +110,14 @@ namespace PokemonGo_UWP.ViewModels
         }
         private PokemonSettings _pokemonDetails;
         public PokemonSettings PokemonDetails { get { return _pokemonDetails; } set { Set(ref _pokemonDetails, value); } }
+        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> PokemonEvolutions { get; } =
+            new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> EeveeEvolutions { get; } =
+            new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        private bool _isEevee;
+        public bool IsEevee { get { return _isEevee; } set { Set(ref _isEevee, value); } }
+        #endregion
+
         private DelegateCommand<KeyValuePair<PokemonId, PokedexEntry>> _openPokedexEntry;
         public DelegateCommand<KeyValuePair<PokemonId, PokedexEntry>> OpenPokedexEntry =>
             _openPokedexEntry ??
@@ -128,12 +131,18 @@ namespace PokemonGo_UWP.ViewModels
                     (x) => { return true; }
                 )
             );
-        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> PokemonEvolutions { get; } =
-            new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
-        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> EeveeEvolutions { get; } = 
-            new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
-        private bool _isEevee;
-        public bool IsEevee { get { return _isEevee; } set { Set(ref _isEevee, value); } }
+        private DelegateCommand _closeCommand;
+        public DelegateCommand CloseCommand
+            =>
+            _closeCommand ??
+            (_closeCommand = new DelegateCommand(() =>
+            {
+                if (IsPokemonDetailsOpen)
+                    IsPokemonDetailsOpen = false;
+                else
+                    NavigationService.Navigate(typeof(GameMapPage));
+            }, () => true)
+            );
         private void PopulateEvolutions()
         {
             PokemonEvolutions.Clear();

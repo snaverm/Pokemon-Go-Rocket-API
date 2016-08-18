@@ -318,7 +318,7 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _gotoPokedexPage ??
                 (_gotoPokedexPage =
-                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PokedexPage), true); }));
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PokedexPage)); }));
 
         #endregion
 
