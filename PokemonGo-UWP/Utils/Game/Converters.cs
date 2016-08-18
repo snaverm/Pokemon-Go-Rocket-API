@@ -391,13 +391,13 @@ namespace PokemonGo_UWP.Utils
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
             }
-            if (float.Parse(achievement.Value.ToString()) < float.Parse(silver.Value.ToString()))
-            {
-                level = 1;
-            }
             if (float.Parse(achievement.Value.ToString()) < float.Parse(gold.Value.ToString()))
             {
                 level = 2;
+            }
+            if (float.Parse(achievement.Value.ToString()) < float.Parse(silver.Value.ToString()))
+            {
+                level = 1;
             }
             
             switch (achievement.Key.ToString().ToLower().Replace(" ","")) {
