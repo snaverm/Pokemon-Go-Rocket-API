@@ -344,6 +344,41 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Favorite
+
+        private DelegateCommand _favoritePokemonCommand;
+
+        public DelegateCommand FavoritePokemonCommand => _favoritePokemonCommand ?? (
+          _favoritePokemonCommand = new DelegateCommand(async () =>
+          {
+              bool isFavorite = Convert.ToBoolean(CurrentPokemon.Favorite);
+              var pokemonFavoriteResponse = await GameClient.SetFavoritePokemon(CurrentPokemon.Id, !isFavorite);
+              switch (pokemonFavoriteResponse.Result)
+              {
+                  case SetFavoritePokemonResponse.Types.Result.Unset:
+                      break;
+                  case SetFavoritePokemonResponse.Types.Result.Success:
+                      // Since no new Pokemon data is passed, we need to reconstruct it local
+                      PokemonData newPokemonData = CurrentPokemon.WrappedData;
+                      // Inverse favorite state
+                      newPokemonData.Favorite = Convert.ToInt32(!isFavorite);
+                      CurrentPokemon = new PokemonDataWrapper(newPokemonData);
+                      await GameClient.UpdateInventory();
+                      await GameClient.UpdatePlayerStats();
+                      NavigationService.GoBack();
+                      break;
+                  // TODO: what to do on error?
+                  case SetFavoritePokemonResponse.Types.Result.ErrorPokemonNotFound:
+                      break;
+                  case SetFavoritePokemonResponse.Types.Result.ErrorPokemonIsEgg:
+                      break;
+                  default:
+                      throw new ArgumentOutOfRangeException();
+              }
+          }, () => true));
+
+        #endregion
+
         #region Power Up
 
         private DelegateCommand _powerUpPokemonCommand;
