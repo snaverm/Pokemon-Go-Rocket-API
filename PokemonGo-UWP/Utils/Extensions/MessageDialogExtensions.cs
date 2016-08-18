@@ -27,7 +27,9 @@ namespace PokemonGo_UWP.Utils
         {
             if (!WindowWrapper.Current().Dispatcher.HasThreadAccess())
             {
-                throw new InvalidOperationException("This method can only be invoked from UI thread.");
+                return await
+                    WindowWrapper.Current()
+                        .Dispatcher.DispatchAsync(async () => await ShowAsyncQueue(dialog)).Result;                
             }
 
             while (_currentDialogShowRequest != null)
