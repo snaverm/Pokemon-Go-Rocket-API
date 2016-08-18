@@ -618,7 +618,7 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="StardustTextBlock.Text" translate="yes" xml:space="preserve">
           <source>STARDUST</source>
-          <target state="translated">STERNSTAUB</target>
+          <target state="translated">STERNENSTAUB</target>
         </trans-unit>
         <trans-unit id="CandyTextBlock.Text" translate="yes" xml:space="preserve">
           <source> CANDY</source>
