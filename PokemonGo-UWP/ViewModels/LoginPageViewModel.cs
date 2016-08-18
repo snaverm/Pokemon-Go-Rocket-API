@@ -145,13 +145,13 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (LoginFailedException e)
                 {
-                    string errorMessage = Resources.CodeResources.GetString("LoginFailedText");
+                    var errorMessage = Resources.CodeResources.GetString("LoginFailedText");
 
                     try
                     {
-                        Task<string> result = e.GetLoginResponseContentAsString();
-                        JObject json = JObject.Parse(result.Result);
-                        JToken token = json.SelectToken("$.errors[0]");
+                        var result = e.GetLoginResponseContentAsString();
+                        var json = JObject.Parse(result.Result);
+                        var token = json.SelectToken("$.errors[0]");
                         if (token != null)
                             errorMessage = token.ToString();
                     }
@@ -163,16 +163,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
                 catch (Exception e)
                 {
-                    if (e.Message.Contains("Your username or password is incorrect."))
-                    {
-                        await new MessageDialog(e.Message).ShowAsyncQueue();
-                    }
-                    else
-                    {
-                        //TODO: Message that contains, that Developers working on fix (it means that server is probably down) - can't reproduce
-
-                        HockeyClient.Current.TrackException(e);
-                    }
+                    HockeyClient.Current.TrackEvent(e.Message);
                 }
                 finally
                 {
