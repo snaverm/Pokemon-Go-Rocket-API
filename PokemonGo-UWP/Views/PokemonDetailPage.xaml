@@ -604,7 +604,7 @@
                                         </interactivity:Interaction.Behaviors>
                                         <Grid HorizontalAlignment="Right"
                                               VerticalAlignment="Center"
-                                              Margin="0,0,20,0">
+                                              Margin="0,0,10,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="50" />
@@ -697,10 +697,9 @@
                                         </interactivity:Interaction.Behaviors>
 
                                         <Grid HorizontalAlignment="Right"
-                                              VerticalAlignment="Center"
-                                              Margin="0,0,20,0">
+                                              VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="60" />
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel Grid.Column="0"
@@ -718,8 +717,11 @@
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center" >
                                                 <interactivity:Interaction.Behaviors>
-                                                    <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}" ComparisonCondition="LessThan" Value="{Binding PokemonExtraData.CandyToEvolve}">
-                                                        <core:ChangePropertyAction PropertyName="Foreground" Value="Red"/>
+                                                    <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}" 
+                                                                              ComparisonCondition="LessThan" 
+                                                                              Value="{Binding PokemonExtraData.CandyToEvolve}">
+                                                        <core:ChangePropertyAction PropertyName="Foreground" 
+                                                                                   Value="Red"/>
                                                     </core:DataTriggerBehavior>
                                                 </interactivity:Interaction.Behaviors>
                                                 </TextBlock>
@@ -751,7 +753,6 @@
                                     </Button>
 
                                 </Grid>
-
 
                                 <!-- Moves -->
                                 <Grid Padding="8"
@@ -807,44 +808,7 @@
                                                Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMovePowerConverter}}" />
 
                                 </Grid>
-
-                                <maps:MapControl BusinessLandmarksVisible="False"
-                                                 Height="200"
-                                                 Margin="24"
-                                                 Center="{Binding CurrentPokemon.WrappedData, Converter={StaticResource PokemonDataToCapturedGepositionConverter}}"
-                                                 LandmarksVisible="False"
-                                                 ColorScheme="{ThemeResource MapColorScheme}"
-                                                 IsHitTestVisible="False"
-                                                 IsEnabled="False"
-                                                 PanInteractionMode="Disabled"
-                                                 ZoomInteractionMode="Disabled"
-                                                 RotateInteractionMode="Disabled"
-                                                 TiltInteractionMode="Disabled"
-                                                 PedestrianFeaturesVisible="False"
-                                                 TrafficFlowVisible="False"
-                                                 TransitFeaturesVisible="False"
-                                                 MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"
-                                                 ZoomLevel="10"
-                                                 x:Name="DetailMapControl">
-
-                                    <Rectangle Height="200"
-                                               maps:MapControl.Location="{Binding CurrentPokemon.WrappedData, Converter={StaticResource PokemonDataToCapturedGepositionConverter}}"
-                                               maps:MapControl.NormalizedAnchorPoint="0.5,0.5"
-                                               Width="{x:Bind DetailMapControl.ActualWidth}"
-                                               Fill="Transparent" />
-
-                                    <Ellipse
-                                        maps:MapControl.Location="{Binding CurrentPokemon.WrappedData, Converter={StaticResource PokemonDataToCapturedGepositionConverter}}"
-                                        maps:MapControl.NormalizedAnchorPoint="0.5,0.5"
-                                        Stroke="White"
-                                        StrokeThickness="2"
-                                        Width="80"
-                                        Height="80" />
-
-                                </maps:MapControl>
-
-                                <MenuFlyoutSeparator />
-
+                                
                                 <!-- Transfer -->
                                 <Button Style="{StaticResource ButtonSubmit}"
                                         CharacterSpacing="40"

@@ -417,7 +417,8 @@ namespace PokemonGo_UWP.ViewModels
 
         private DelegateCommand _replaceEvolvedPokemonCommand;
 
-        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (_replaceEvolvedPokemonCommand = new DelegateCommand(() =>
+        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (
+            _replaceEvolvedPokemonCommand = new DelegateCommand(() =>
         {
             CurrentPokemon = new PokemonDataWrapper(EvolvePokemonResponse.EvolvedPokemonData);
             UpdateCurrentData();
