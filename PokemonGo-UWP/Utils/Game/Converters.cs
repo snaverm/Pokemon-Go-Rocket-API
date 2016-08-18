@@ -1187,20 +1187,50 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+    //parameter is optional
+    //Use parameter to pass margin between items and page margin
+    //format: itemsMargin,pageMargins
+    //first is margin between items, the second is page margins
+    //ex: items margin = 8,4,8,8 | page margins = 12,0,12,0 | parameter will be 16,24
     public class WidthConverter : IValueConverter
     {
+        private static readonly char[] splitValue = { ',' };
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            int maxColumns = (int)value;
-            Thickness margins = parameter != null ? new Thickness(Int32.Parse(parameter.ToString())) : new Thickness(0);//(Thickness)parameter;
+            int minColumns = (int)value;
+            double externalMargin = 0;
+            double internalMargin = 0;
+            if(!string.IsNullOrEmpty(parameter as string))
+            {
+                string[] margins = parameter.ToString().Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
+                if (margins.Length > 0)
+                    internalMargin = Double.Parse(margins[0]);
+                if (margins.Length > 1)
+                    externalMargin = Double.Parse(margins[1]);
+            }
+            
             var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             var scaleFactor = 1;//DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             var size = new Size(bounds.Width * scaleFactor, bounds.Height * scaleFactor);
-            var res = (size.Width / maxColumns) - margins.Left - margins.Right;
+            var res = ((size.Width - externalMargin) / minColumns) - internalMargin;
             
             //https://msdn.microsoft.com/en-us/windows/uwp/layout/design-and-ui-intro#effective-pixels-and-scaling
             var width = ((int)res / 4) * 4; //round to 4 - win 10 optimized 
             return width;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PokemonTypeToBackgroundImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null || !(value is PokemonType)) return new Uri("ms-appx:///Assets/Backgrounds/details_type_bg_normal.png");
+            var type = (PokemonType)value;
+            return new Uri($"ms-appx:///Assets/Backgrounds/details_type_bg_{type}.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
