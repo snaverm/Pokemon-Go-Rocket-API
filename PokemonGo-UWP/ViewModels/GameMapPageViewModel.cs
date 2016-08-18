@@ -38,16 +38,18 @@ namespace PokemonGo_UWP.ViewModels
                 var poke2 = new NearbyPokemon()
                 {
                     PokemonId = PokemonId.Arbok,
-                    DistanceInMeters = 10,
+                    DistanceInMeters = 11,
                 };
                 var poke3 = new NearbyPokemon()
                 {
                     PokemonId = PokemonId.Blastoise,
-                    DistanceInMeters = 10,
+                    DistanceInMeters = 12,
                 };
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke1));
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke2));
                 GameClient.NearbyPokemons.Add(new NearbyPokemonWrapper(poke3));
+                GameClient.PokedexInventory.Add(new PokedexEntry { PokemonId = poke1.PokemonId, TimesCaptured = 1 });
+                GameClient.PokedexInventory.Add(new PokedexEntry { PokemonId = poke2.PokemonId, TimesCaptured = 1 });
             }
         }
 
@@ -195,6 +197,11 @@ namespace PokemonGo_UWP.ViewModels
         public static ObservableCollection<MapPokemonWrapper> CatchablePokemons => GameClient.CatchablePokemons;
 
         /// <summary>
+        ///     Collection of lured Pokemon
+        /// </summary>
+        public static ObservableCollection<LuredPokemon> LuredPokemon => GameClient.LuredPokemons;
+
+        /// <summary>
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons => GameClient.NearbyPokemons;
@@ -242,6 +249,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
             });
         }
+
 
         /// <summary>
         ///     Updates player profile & stats

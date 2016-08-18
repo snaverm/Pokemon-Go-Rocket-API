@@ -81,6 +81,7 @@ namespace PokemonGo.RocketAPI.Extensions
                 response = await PostProto<TRequest>(client, urlArray[0], requestEnvelope);
             }
 
+            // TODO: statuscode = 3 probably means ban!
             if (response.Returns.Count == 0)
                 throw new InvalidResponseException();
 

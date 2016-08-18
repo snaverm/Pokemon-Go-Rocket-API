@@ -126,6 +126,7 @@ namespace PokemonGo_UWP.Views
                 UpdateMap(GameClient.Geoposition);
             SubscribeToCaptureEvents();
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            AudioUtils.StopSounds();
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -203,11 +204,6 @@ namespace PokemonGo_UWP.Views
                         }
 
                     }
-                    else
-                    {
-                        //Position was changed by user, activate button to go back to automatic mode
-                        ReactivateMapAutoUpdate.Visibility = Visibility.Visible;
-                    }
                 }
             });
         }
@@ -244,5 +240,13 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
+
+        private void GameMapControl_TargetCameraChanged(MapControl sender, MapTargetCameraChangedEventArgs args)
+        {
+            if (args.ChangeReason == MapCameraChangeReason.UserInteraction && lastAutoPosition != null)
+            {
+                ReactivateMapAutoUpdate.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
