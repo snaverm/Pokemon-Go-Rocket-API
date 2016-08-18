@@ -46,5 +46,11 @@ namespace PokemonGo_UWP.Utils
                 CaptureSound.Play();
             }
         }
+
+        public static void StopSounds()
+        {
+            CaptureSound.Stop();
+            NormalSounds.Stop();            
+        }
     }
 }
