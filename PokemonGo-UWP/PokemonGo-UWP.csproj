@@ -291,7 +291,6 @@
     <Content Include="Assets\LiveTiles\Peek.gif" />
     <Content Include="Assets\LiveTiles\People.gif" />
     <Content Include="Assets\LiveTiles\People.png" />
-    <Content Include="Assets\LiveTiles\Transparent\LineLogo.svg" />
     <Content Include="Assets\LiveTiles\Transparent\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Transparent\Square150x150Logo.scale-400.png" />
     <Content Include="Assets\LiveTiles\Transparent\Square310x310Logo.scale-200.png" />
