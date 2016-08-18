@@ -178,7 +178,10 @@ namespace PokemonGo_UWP.Views
 
 					// Update angle and center only if map is not being manipulated 
 					if (lastAutoPosition == null)
+					{
 						lastAutoPosition = GameMapControl.Center;
+						GameMapControl.Heading = 0;
+					}
 
 					//Small Trick: I'm not testing lastAutoPosition == GameMapControl.Center because MapControl is not taking exact location when setting center!!
 					string currentCoord =
@@ -219,9 +222,19 @@ namespace PokemonGo_UWP.Views
 			ViewModel.LevelUpRewardsAwarded += ViewModelOnLevelUpRewardsAwarded;
 		}
 
-		private void HeadingUpdated(object sender, Windows.Devices.Sensors.CompassReading e)
+
+		private TimeSpan tick = new TimeSpan(DateTime.Now.Ticks);
+		private async void HeadingUpdated(object sender, Windows.Devices.Sensors.CompassReading e)
 		{
-			GameMapControl.Heading = e.HeadingTrueNorth ?? e.HeadingMagneticNorth;
+			TimeSpan newTick = new TimeSpan(DateTime.Now.Ticks);
+			if (newTick.Subtract(tick).TotalMilliseconds > 10)
+			{
+				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+				{
+					GameMapControl.Heading = e.HeadingTrueNorth ?? e.HeadingMagneticNorth;
+				});
+				tick = newTick;
+			}
 		}
 
 		private void UnsubscribeToCaptureEvents()
