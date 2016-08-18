@@ -355,7 +355,7 @@ namespace PokemonGo_UWP.Utils
         public static async Task InitializeClient()
         {
 
-            await DataCache.Init();
+            DataCache.Init();
 
             var credentials = SettingsService.Instance.UserCredentials;
             credentials.RetrievePassword();
@@ -459,7 +459,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     Logs the user out by clearing data and timers
         /// </summary>
-        public static async void DoLogout()
+        public static void DoLogout()
         {
             // Clear stored token
             SettingsService.Instance.AccessTokenString = null;
@@ -707,7 +707,7 @@ namespace PokemonGo_UWP.Utils
         }
 
         /// <summary>
-        ///     Pokedex extra data doesn't change so we can just call this method once.        
+        ///     Pokedex extra data doesn't change so we can just call this method once.
         /// </summary>
         /// <returns></returns>
         private static async Task UpdateItemTemplates()
