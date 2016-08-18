@@ -123,11 +123,59 @@
                              Duration="0:0:0.2" />
         </Storyboard>
 
+        <Storyboard x:Name="ShowContextMenuStoryboard">
+
+            <DoubleAnimation
+                Storyboard.TargetName="ContextMenuPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="EvolvePokemonPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="HideContextMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="ContextMenuPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="EvolvePokemonPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
 
     </Page.Resources>
 
     <RelativePanel>
 
+        <!--Evolve-->
         <RelativePanel x:Name="EvolvePokemonPanel"
                        RelativePanel.AlignTopWithPanel="True"
                        RelativePanel.AlignLeftWithPanel="True"
@@ -253,6 +301,75 @@
             </Grid>
 
         </RelativePanel>
+
+        
+        <!--Contextmenu-->
+        <Grid x:Name="ContextMenuPanel"
+              RelativePanel.AlignTopWithPanel="True"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True" 
+              Opacity="0" 
+              Canvas.ZIndex="0"
+              >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#00b3ee9a" Offset="0.1" />
+                    <GradientStop Color="#EE43bab6" Offset="0.8" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <ListView ItemsSource="{Binding Converter={StaticResource PokemonSortingModesToSortingModesListConverter}}"
+                      SelectedItem="{Binding CurrentPokemonSortingMode, Mode=TwoWay}"
+                      IsItemClickEnabled="True"
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,0,77.5">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="ItemClick">
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=HideContextMenuStoryboard}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Right" Margin="15,5,15,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding Converter={StaticResource PokemonSortingModesTranslationConverter}}"
+                                       Style="{StaticResource TextSortTitle}" />
+                            <Button Grid.Column="1"
+                                    IsHitTestVisible="False"
+                                    Style="{StaticResource ButtonCircleInverse}" Margin="10,0,0,0">
+                                <Image Source="{Binding Converter={StaticResource PokemonSortingModesToIconConverter}}" />
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Style="{StaticResource ButtonCircle}"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="17.5"
+                Command="{Binding ReturnToPokemonInventoryScreen}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=HideSortMenuStoryboard}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <Image Source="../Assets/Buttons/btn_close.png" />
+            </Button>
+        </Grid>
 
         <Grid x:Name="MainUi"
               RelativePanel.AlignTopWithPanel="True"
@@ -869,16 +986,29 @@
 
         </Grid>
 
+
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignHorizontalCenterWithPanel="True"
-                Style="{ThemeResource ImageButtonStyle}"
-                Height="{ThemeResource UiButtonSize}"
-                HorizontalAlignment="Center"
+                Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
+                Margin="0,0,0,17.5"
                 Command="{Binding ReturnToPokemonInventoryScreen}">
-            <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
-                   Stretch="Uniform"
-                   HorizontalAlignment="Stretch" />
+            <Image Source="../Assets/Buttons/btn_close.png" />
+        </Button>
+
+        <Button RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Style="{StaticResource ButtonCircleBig}"
+                Tapped="ToggleIncubatorModel"
+                Margin="12.5">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="ItemClick">
+                    <core:CallMethodAction MethodName="Begin"
+                                               TargetObject="{Binding ElementName=ShowContextMenuStoryboard}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <!--TODO: design menu icon-->
+            <!--<Image Source="../Assets/Buttons/XXX" />-->
         </Button>
 
     </RelativePanel>
