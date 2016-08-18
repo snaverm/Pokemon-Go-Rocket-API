@@ -51,7 +51,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -71,33 +70,23 @@
 
                 <TextBlock Grid.Row="1"
                            Grid.Column="0"
-                           x:Uid="SettingsCompassEnabledTextBlock"
-                           Text="Use Compass"
+                           x:Uid="SettingsMapRotationModeGPSTextBlock"
+                           Text="Auto-Rotate based on"
                            Style="{StaticResource TextSettingsTitle}"
                            VerticalAlignment="Center"
                            Margin="15,15,15,25" />
-
-                <CheckBox Grid.Row="1"
-                          Grid.Column="1"
-                          IsChecked="{Binding IsCompassEnabled, Mode=TwoWay}"
-                          Style="{StaticResource SettingsCheckbox}"
-                          Margin="0,0,15,10" />
+				<ComboBox Grid.Column="1"
+									Grid.Row="1" 
+									HorizontalAlignment="Right" VerticalAlignment="Center" 
+									Width="120" 
+									Margin="0,0,15,10"
+									SelectedIndex="{Binding MapOrientationMode_Index, Mode=TwoWay}" >
+					<ComboBoxItem Content="None"/>
+					<ComboBoxItem Content="GPS"/>
+					<ComboBoxItem Content="Compass"/>
+				</ComboBox>
 
                 <TextBlock Grid.Row="2"
-                           Grid.Column="0"
-                           x:Uid="SettingsMapAutoRotateTextBlock"
-                           Text="Auto-Rotate Map"
-                           Style="{StaticResource TextSettingsTitle}"
-                           VerticalAlignment="Center"
-                           Margin="15,15,15,25" />
-
-                <CheckBox Grid.Row="2"
-                          Grid.Column="1"
-                          IsChecked="{Binding IsAutoRotateMapEnabled, Mode=TwoWay}"
-                          Style="{StaticResource SettingsCheckbox}"
-                          Margin="0,0,15,10" />
-
-                <TextBlock Grid.Row="3"
                            Grid.Column="0"
                            x:Uid="SettingsRememberMapZoomTextBlock"
                            Text="Remember Map Zoom"
@@ -105,19 +94,19 @@
                            VerticalAlignment="Center"
                            Margin="15,15,15,25" />
 
-                <CheckBox Grid.Row="3"
+                <CheckBox Grid.Row="2"
                           Grid.Column="1"
                           IsChecked="{Binding IsRememberMapZoomEnabled, Mode=TwoWay}"
                           Style="{StaticResource SettingsCheckbox}"
                           Margin="0,0,15,10"/>
 
-                <Border Grid.Row="4"
+                <Border Grid.Row="3"
                         Grid.ColumnSpan="2"
                         Background="#33ffffff"
                         Height="1"
                         Margin="0,8,0,15" />
 
-                <TextBlock Grid.Row="5"
+                <TextBlock Grid.Row="4"
                            Grid.Column="0"
                            x:Uid="SettingsMusicTextBlock"
                            Text="Music"
@@ -125,13 +114,13 @@
                            VerticalAlignment="Center"
                            Margin="15,15,15,25" />
 
-                <CheckBox Grid.Row="5"
+                <CheckBox Grid.Row="4"
                           Grid.Column="1"
                           IsChecked="{Binding IsMusicEnabled, Mode=TwoWay}"
                           Style="{StaticResource SettingsCheckbox}"
                           Margin="0,0,15,10" />
 
-                <TextBlock Grid.Row="6"
+                <TextBlock Grid.Row="5"
                            Grid.Column="0"
                            x:Uid="SettingsVibrationTextBlock"
                            Text="Vibration"
@@ -139,13 +128,13 @@
                            VerticalAlignment="Center"
                            Margin="15,15,15,25" />
 
-                <CheckBox Grid.Row="6"
+                <CheckBox Grid.Row="5"
                           Grid.Column="1"
                           IsChecked="{Binding IsVibrationEnabled, Mode=TwoWay}"
                           Style="{StaticResource SettingsCheckbox}"
                           Margin="0,0,15,10" />
 
-                <TextBlock Grid.Row="7"
+                <TextBlock Grid.Row="6"
                            Grid.Column="0"
                            x:Uid="SettingsLiveTileTextBlock"
                            Text="Live Tile Mode"
@@ -153,7 +142,7 @@
                            VerticalAlignment="Center"
                            Margin="15,15,15,25" />
                
-                <VariableSizedWrapGrid Grid.Row="8"
+                <VariableSizedWrapGrid Grid.Row="7"
                                        Grid.ColumnSpan="2"
                                        Orientation="Horizontal"
                                        MaximumRowsOrColumns="5"
@@ -210,13 +199,13 @@
                     </Button>
                 </VariableSizedWrapGrid>
 
-                <Border Grid.Row="9"
+                <Border Grid.Row="8"
                         Grid.ColumnSpan="2"
                         Background="#33ffffff"
                         Height="1"
                         Margin="0,24,0,15" />
 
-                <Button Grid.Row="10"
+                <Button Grid.Row="9"
                         Grid.ColumnSpan="2"
                         Command="{Binding DoPtcLogoutCommand}"
                         Style="{StaticResource ButtonNoStyle}">
