@@ -1182,7 +1182,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var playerStats = GameClient.PlayerStats;
+            var playerStats = (PlayerStats) value;
             //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
             return playerStats == null ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }

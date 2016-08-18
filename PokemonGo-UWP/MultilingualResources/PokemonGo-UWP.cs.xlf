@@ -363,7 +363,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="ActivityUnknown" translate="yes" xml:space="preserve">
           <source>Unknown</source>
-          <target state="new">Unknown</target>
+          <target state="translated">Neznámé</target>
         </trans-unit>
         <trans-unit id="ActivityCatchPokemon" translate="yes" xml:space="preserve">
           <source>Pokémon Caught</source>
@@ -2269,7 +2269,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
         </trans-unit>
         <trans-unit id="Psychic" translate="yes" xml:space="preserve">
           <source>Psychic</source>
-          <target state="new">Psychic</target>
+          <target state="translated">Psychik</target>
         </trans-unit>
         <trans-unit id="Rock" translate="yes" xml:space="preserve">
           <source>Rock</source>

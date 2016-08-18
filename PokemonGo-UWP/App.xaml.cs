@@ -176,6 +176,7 @@ namespace PokemonGo_UWP
 
             // Enter into full screen mode
             ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Standard;            
 
             // Forces the display to stay on while we play
             //_displayRequest.RequestActive();

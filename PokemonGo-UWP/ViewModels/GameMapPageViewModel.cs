@@ -197,6 +197,11 @@ namespace PokemonGo_UWP.ViewModels
         public static ObservableCollection<MapPokemonWrapper> CatchablePokemons => GameClient.CatchablePokemons;
 
         /// <summary>
+        ///     Collection of lured Pokemon
+        /// </summary>
+        public static ObservableCollection<LuredPokemon> LuredPokemon => GameClient.LuredPokemons;
+
+        /// <summary>
         ///     Collection of Pokemon in 2 steps from current position
         /// </summary>
         public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons => GameClient.NearbyPokemons;
@@ -245,10 +250,6 @@ namespace PokemonGo_UWP.ViewModels
             });
         }
 
-        /// <summary>
-        /// HACK - Needed to fix #655 (PlayerStats binding converter is not called on update)
-        /// </summary>
-        public object DummyProperty { get; set; }
 
         /// <summary>
         ///     Updates player profile & stats
@@ -261,7 +262,6 @@ namespace PokemonGo_UWP.ViewModels
             LevelUpResponse = await GameClient.UpdatePlayerStats(checkForLevelUp);
             PlayerProfile = GameClient.PlayerProfile;
             PlayerStats = GameClient.PlayerStats;
-            RaisePropertyChanged(() => DummyProperty);
             if (checkForLevelUp && LevelUpResponse != null)
             {
                 switch (LevelUpResponse.Result)

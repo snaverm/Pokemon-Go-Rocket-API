@@ -363,7 +363,7 @@ Open page with installation files for manual install?</target>
         </trans-unit>
         <trans-unit id="ActivityUnknown" translate="yes" xml:space="preserve">
           <source>Unknown</source>
-          <target state="new">Onbekend</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Onbekend</target>
         </trans-unit>
         <trans-unit id="ActivityCatchPokemon" translate="yes" xml:space="preserve">
           <source>Pokémon Caught</source>
@@ -2270,7 +2270,7 @@ Open page with installation files for manual install?</target>
         </trans-unit>
         <trans-unit id="Psychic" translate="yes" xml:space="preserve">
           <source>Psychic</source>
-          <target state="new">Psychic</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Psychisch</target>
         </trans-unit>
         <trans-unit id="Rock" translate="yes" xml:space="preserve">
           <source>Rock</source>

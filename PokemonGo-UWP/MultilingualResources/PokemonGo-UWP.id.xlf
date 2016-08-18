@@ -1919,7 +1919,7 @@ Open page with installation files for manual install?</target>
         </trans-unit>
         <trans-unit id="Psychic" translate="yes" xml:space="preserve">
           <source>Psychic</source>
-          <target state="new">Psychic</target>
+          <target state="translated">Cenayang</target>
         </trans-unit>
         <trans-unit id="PsychoCut" translate="yes" xml:space="preserve">
           <source>Psycho Cut</source>
@@ -2264,7 +2264,7 @@ Open page with installation files for manual install?</target>
         </trans-unit>
         <trans-unit id="Psychic" translate="yes" xml:space="preserve">
           <source>Psychic</source>
-          <target state="new">Psychic</target>
+          <target state="translated">Cenayang</target>
         </trans-unit>
         <trans-unit id="Rock" translate="yes" xml:space="preserve">
           <source>Rock</source>
