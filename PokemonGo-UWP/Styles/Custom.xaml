@@ -1296,7 +1296,6 @@
 
     <Style TargetType="BitmapIcon" x:Key="NearbyPokemonNotInPokedexBitmapIconStyle" BasedOn="{StaticResource NearbyPokemonBitmapIconStyle}">
         <Setter Property="Foreground" Value="#FF888F93" />
-        <Setter Property="Margin" Value="0,-6,0,0"/>
     </Style>
 
     <Style TargetType="Pivot">
