@@ -130,23 +130,45 @@ namespace PokemonGo_UWP.ViewModels
             );
         public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> PokemonEvolutions { get; } =
             new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> EeveeEvolutions { get; } = 
+            new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        private bool _isEevee;
+        public bool IsEevee { get { return _isEevee; } set { Set(ref _isEevee, value); } }
         private void PopulateEvolutions()
         {
             PokemonEvolutions.Clear();
+            EeveeEvolutions.Clear();
+            IsEevee = false;
             PokemonId InitPokemon = SelectedPokedexEntry.Key;
             PokemonSettings CurrPokemon = PokemonDetails;
-            PokemonEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(InitPokemon, GetPokedexEntry(InitPokemon)));
-            while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
+            switch (InitPokemon)
             {
-                PokemonEvolutions.Insert(0, new KeyValuePair<PokemonId, PokedexEntry>(CurrPokemon.ParentPokemonId, GetPokedexEntry(CurrPokemon.ParentPokemonId)));
-                CurrPokemon = GameClient.GetExtraDataForPokemon(CurrPokemon.ParentPokemonId);
-            }
-            CurrPokemon = PokemonDetails;
-            while(CurrPokemon.EvolutionIds.Count > 0)
-            {
-                foreach (var ev in CurrPokemon.EvolutionIds) //for Eevee
-                    PokemonEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(ev, GetPokedexEntry(ev)));
-                CurrPokemon = GameClient.GetExtraDataForPokemon(CurrPokemon.EvolutionIds.ElementAt(0));
+                case PokemonId.Eevee:
+                case PokemonId.Jolteon:
+                case PokemonId.Flareon:
+                case PokemonId.Vaporeon:
+                    InitPokemon = PokemonId.Eevee;
+                    CurrPokemon = GameClient.GetExtraDataForPokemon(InitPokemon);
+                    foreach (var ev in CurrPokemon.EvolutionIds)
+                        EeveeEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(ev, GetPokedexEntry(ev)));
+                    PokemonEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(PokemonId.Eevee, GetPokedexEntry(PokemonId.Eevee)));
+                    IsEevee = true;
+                    break;
+                default:
+                    PokemonEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(InitPokemon, GetPokedexEntry(InitPokemon)));
+                    while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
+                    {
+                        PokemonEvolutions.Insert(0, new KeyValuePair<PokemonId, PokedexEntry>(CurrPokemon.ParentPokemonId, GetPokedexEntry(CurrPokemon.ParentPokemonId)));
+                        CurrPokemon = GameClient.GetExtraDataForPokemon(CurrPokemon.ParentPokemonId);
+                    }
+                    CurrPokemon = PokemonDetails;
+                    while (CurrPokemon.EvolutionIds.Count > 0)
+                    {
+                        foreach (var ev in CurrPokemon.EvolutionIds) //for Eevee
+                            PokemonEvolutions.Add(new KeyValuePair<PokemonId, PokedexEntry>(ev, GetPokedexEntry(ev)));
+                        CurrPokemon = GameClient.GetExtraDataForPokemon(CurrPokemon.EvolutionIds.ElementAt(0));
+                    }
+                    break;
             }
         }
         private PokedexEntry GetPokedexEntry(PokemonId pokemon)

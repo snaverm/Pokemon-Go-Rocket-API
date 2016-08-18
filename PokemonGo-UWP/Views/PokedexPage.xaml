@@ -474,23 +474,49 @@
 
                                 <StackPanel Margin="0,4,0,88" HorizontalAlignment="Center">
                                     <TextBlock x:Uid="PokedexEvolutions" Text="Evolutions" Typography.Capitals="AllSmallCaps" Margin="16,8" FontSize="28" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#577074"/>
-                                    <GridView ItemsSource="{Binding PokemonEvolutions}">
-                                        <GridView.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapGrid Orientation="Horizontal"
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <GridView ItemsSource="{Binding PokemonEvolutions}">
+                                            <GridView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapGrid Orientation="Horizontal"
                                                       HorizontalAlignment="Center"
                                                       VerticalChildrenAlignment="Top"
                                                       MaximumRowsOrColumns="5" 
                                                       ScrollViewer.VerticalScrollMode="Auto"
                                                       ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-                                            </ItemsPanelTemplate>
-                                        </GridView.ItemsPanel>
-                                        <GridView.ItemTemplateSelector>
-                                            <utils:PokedexEntryDataTemplateSelector 
+                                                </ItemsPanelTemplate>
+                                            </GridView.ItemsPanel>
+                                            <GridView.ItemTemplateSelector>
+                                                <utils:PokedexEntryDataTemplateSelector 
                                                 PokemonSeen="{StaticResource PokedexSeen}"
                                                 PokemonUnseen="{StaticResource PokedexUnseen}"/>
-                                        </GridView.ItemTemplateSelector>
-                                    </GridView>
+                                            </GridView.ItemTemplateSelector>
+                                        </GridView>
+
+                                        <GridView Grid.Column="1" Margin="8,0" ItemsSource="{Binding EeveeEvolutions}" Visibility="{Binding IsEevee, Converter={StaticResource BoolVisibility}}">
+                                            <GridView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapGrid Orientation="Horizontal"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalChildrenAlignment="Top"
+                                                      MaximumRowsOrColumns="1" 
+                                                      ScrollViewer.VerticalScrollMode="Auto"
+                                                      ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                                                </ItemsPanelTemplate>
+                                            </GridView.ItemsPanel>
+                                            <GridView.ItemTemplateSelector>
+                                                <utils:PokedexEntryDataTemplateSelector 
+                                                PokemonSeen="{StaticResource PokedexSeen}"
+                                                PokemonUnseen="{StaticResource PokedexUnseen}"/>
+                                            </GridView.ItemTemplateSelector>
+                                        </GridView>
+                                    </Grid>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
