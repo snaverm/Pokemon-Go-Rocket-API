@@ -644,6 +644,14 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
           <source>Remember Map Zoom</source>
           <target state="translated">Mémoriser le zoom de la carte</target>
         </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="new">START INCUBATION</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="new">Use an incubator to incubate the Egg.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -1056,8 +1064,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="Ivysaur" translate="yes" xml:space="preserve">
           <source>Ivysaur</source>
-          <target state="translated">Herbizarre
-</target>
+          <target state="translated">Herbizarre</target>
         </trans-unit>
         <trans-unit id="Jigglypuff" translate="yes" xml:space="preserve">
           <source>Jigglypuff</source>
@@ -1257,9 +1264,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="Poliwag" translate="yes" xml:space="preserve">
           <source>Poliwag</source>
-          <target state="translated">Ptitard
-
-</target>
+          <target state="translated">Ptitard</target>
         </trans-unit>
         <trans-unit id="Poliwhirl" translate="yes" xml:space="preserve">
           <source>Poliwhirl</source>
@@ -1291,12 +1296,11 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="Rapidash" translate="yes" xml:space="preserve">
           <source>Rapidash</source>
-          <target state="translated">Galopa </target>
+          <target state="translated">Galopa</target>
         </trans-unit>
         <trans-unit id="Raticate" translate="yes" xml:space="preserve">
           <source>Raticate</source>
-          <target state="translated">Rattatac
-</target>
+          <target state="translated">Rattatac</target>
         </trans-unit>
         <trans-unit id="Rattata" translate="yes" xml:space="preserve">
           <source>Rattata</source>
@@ -1481,8 +1485,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="FlameWheel" translate="yes" xml:space="preserve">
           <source>Flame Wheel</source>
-          <target state="translated">Roue de Feu
-</target>
+          <target state="translated">Roue de Feu</target>
         </trans-unit>
         <trans-unit id="HyperBeam" translate="yes" xml:space="preserve">
           <source>Hyper Beam</source>
@@ -1594,8 +1597,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="AirSlash" translate="yes" xml:space="preserve">
           <source>Air Slash</source>
-          <target state="translated">Lame d'Air
-</target>
+          <target state="translated">Lame d'Air</target>
         </trans-unit>
         <trans-unit id="AncientPower" translate="yes" xml:space="preserve">
           <source>Ancient Power</source>
@@ -2052,8 +2054,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="SludgeBomb" translate="yes" xml:space="preserve">
           <source>Sludge Bomb</source>
-          <target state="translated">Bomb-Beurk
-</target>
+          <target state="translated">Bomb-Beurk</target>
         </trans-unit>
         <trans-unit id="SludgeWave" translate="yes" xml:space="preserve">
           <source>Sludge Wave</source>

@@ -369,7 +369,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="ActivityCatchLegendPokemon" translate="yes" xml:space="preserve">
           <source>Catch Legendary Pokémon</source>
-          <target state="new">Catch Legendary Pokémon</target>
+          <target state="new">Cattura Pokémon Leggendario</target>
         </trans-unit>
         <trans-unit id="ActivityFleePokemon" translate="yes" xml:space="preserve">
           <source>Pokémon Fled</source>
@@ -638,6 +638,14 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="new">Ricorda l'ingrandimento della mappa</target>
+        </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="new">START INCUBATION</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="new">Use an incubator to incubate the Egg.</target>
         </trans-unit>
       </group>
     </body>

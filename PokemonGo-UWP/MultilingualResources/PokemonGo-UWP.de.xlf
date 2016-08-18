@@ -140,7 +140,7 @@
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
           <source>Hatched {x} Pokemon</source>
-          <target state="translated">{x} Pokemon geschlüpft</target>
+          <target state="translated">{x} Pokémon geschlüpft</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>
@@ -351,11 +351,11 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="TransferPokemonSuccessText" translate="yes" xml:space="preserve">
           <source>Transfer succeeded! Got a {0} Candy from the Professor.</source>
-          <target state="translated">Transfer erfolgreich! Du hast ein {0} Bonbon vom Professor erhalten.</target>
+          <target state="translated">Erfolgreich verschickt! {0}-Bonbon vom Professor erhalten!</target>
         </trans-unit>
         <trans-unit id="TransferPokemonWarningText" translate="yes" xml:space="preserve">
           <source>You can't take it back after it's transferred to the Professor. Do you really want to transfer {0} to the Professor?</source>
-          <target state="translated">Nach dem Transfer zum Professor kannst du es nicht mehr zurückerhalten. Willst du {0} wirklich zum Professor transferieren?</target>
+          <target state="translated">Nachdem du es an den Professor geschickt hast, kannst du es nicht zurückholen. Möchtest du {0} wirklich an den Professor schicken?</target>
         </trans-unit>
         <trans-unit id="LoginExpired" translate="yes" xml:space="preserve">
           <source>Previous login expired.</source>
@@ -458,6 +458,31 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
           <source>Defeat Gym Leader</source>
           <target state="translated">Besiege Arenen Anführer</target>
         </trans-unit>
+        <trans-unit id="Combat" translate="yes" xml:space="preserve">
+          <source>Combat</source>
+          <target state="needs-review-translation">Angiffspunkte</target>
+        </trans-unit>
+        <trans-unit id="Date" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target state="translated">Datum</target>
+        </trans-unit>
+        <trans-unit id="Fav" translate="yes" xml:space="preserve">
+          <source>Favorite</source>
+          <target state="translated">Favorit</target>
+        </trans-unit>
+        <trans-unit id="Health" translate="yes" xml:space="preserve">
+          <source>Health</source>
+          <target state="translated">Gesundheit</target>
+        </trans-unit>
+        <trans-unit id="Name" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="translated">Name</target>
+        </trans-unit>
+        <trans-unit id="Number" translate="yes" xml:space="preserve">
+          <source>Number</source>
+          <target state="translated">Nummer
+</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -489,7 +514,7 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="NearbyPokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>nearby</source>
-          <target state="translated">in der Nähe</target>
+          <target state="translated">GESICHTETE POKÉMON</target>
         </trans-unit>
         <trans-unit id="OutOfRangeTextBlock.Text" translate="yes" xml:space="preserve">
           <source>THIS POKÉSTOP IS TOO FAR AWAY</source>
@@ -582,11 +607,11 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="StartDateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START DATE</source>
-          <target state="translated">BEGINN</target>
+          <target state="translated">STARTDATUM</target>
         </trans-unit>
         <trans-unit id="IncubatorsTextBlock.Text" translate="yes" xml:space="preserve">
           <source>INCUBATORS</source>
-          <target state="translated">Brutmaschine</target>
+          <target state="translated">BRUTMASCHINEN</target>
         </trans-unit>
         <trans-unit id="SettingsUseNianticMapTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use Niantic Map</source>
@@ -618,11 +643,11 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="StardustTextBlock.Text" translate="yes" xml:space="preserve">
           <source>STARDUST</source>
-          <target state="translated">STERNSTAUB</target>
+          <target state="translated">STERNENSTAUB</target>
         </trans-unit>
         <trans-unit id="CandyTextBlock.Text" translate="yes" xml:space="preserve">
           <source> CANDY</source>
-          <target state="translated">BONBON</target>
+          <target state="translated">-BONBON</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Watch out: space before the word!</note>
         </trans-unit>
         <trans-unit id="EvolveButton.Content" translate="yes" xml:space="preserve">
@@ -631,15 +656,23 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="PowerUpButton.Content" translate="yes" xml:space="preserve">
           <source>POWER UP</source>
-          <target state="needs-review-translation">POWER UP</target>
+          <target state="translated">POWER-UP</target>
         </trans-unit>
         <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>
-          <target state="translated">TRANSFER</target>
+          <target state="translated">VERSCHICKEN</target>
         </trans-unit>
         <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="translated">Speichere Karten Zoom</target>
+        </trans-unit>
+        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>START INCUBATION</source>
+          <target state="translated">AUSBRÜTEN BEGINNEN</target>
+        </trans-unit>
+        <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use an incubator to incubate the Egg.</source>
+          <target state="translated">Benutze eine Brutmaschine, um dieses Ei auszubrüten.</target>
         </trans-unit>
       </group>
     </body>
@@ -732,7 +765,7 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
           <source>Incubator Basic Unlimited</source>
-          <target state="translated">Ei-Brutmaschine (Unbegrenzt)</target>
+          <target state="translated">Ei-Brutmaschine ∞</target>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
