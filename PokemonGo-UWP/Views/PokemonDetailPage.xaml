@@ -441,9 +441,9 @@
                                                    FontSize="19"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="#577074">
-                                            <Run Text="{Binding PokemonExtraData.Type}" />
+                                            <Run Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                             <Run Text="/" />
-                                            <Run Text="{Binding PokemonExtraData.Type2}" />
+                                            <Run Text="{Binding PokemonExtraData.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
