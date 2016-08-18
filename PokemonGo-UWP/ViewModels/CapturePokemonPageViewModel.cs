@@ -45,7 +45,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (CurrentPokemon is MapPokemonWrapper)
             {
-                CurrentEncounter = await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);                
+                CurrentEncounter = await GameClient.EncounterPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
                 switch (CurrentEncounter.Status)
                 {
                     case EncounterResponse.Types.Status.PokemonInventoryFull:
@@ -68,7 +68,7 @@ namespace PokemonGo_UWP.ViewModels
                 }
             }
             else
-            {                
+            {
                 CurrentLureEncounter = await GameClient.EncounterLurePokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
                 CurrentEncounter = new EncounterResponse()
                 {
@@ -86,9 +86,9 @@ namespace PokemonGo_UWP.ViewModels
                         break;
                     case DiskEncounterResponse.Types.Result.Success:
                         break;
-                    case DiskEncounterResponse.Types.Result.Unknown:                                      
-                    case DiskEncounterResponse.Types.Result.NotAvailable:                        
-                    case DiskEncounterResponse.Types.Result.NotInRange:                        
+                    case DiskEncounterResponse.Types.Result.Unknown:
+                    case DiskEncounterResponse.Types.Result.NotAvailable:
+                    case DiskEncounterResponse.Types.Result.NotInRange:
                     case DiskEncounterResponse.Types.Result.EncounterAlreadyFinished:
                         await new MessageDialog(Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
                         ReturnToGameScreen.Execute();
@@ -296,17 +296,29 @@ namespace PokemonGo_UWP.ViewModels
         private void SelectStartingBall(bool keepPreviousSelection = false)
         {
             // Set default item (switch to other balls if user has none)
-            if (!keepPreviousSelection)
+            if (keepPreviousSelection && SelectedCaptureItem != null)
             {
-                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == ItemId.ItemPokeBall) ?? new ItemData
+                SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == SelectedCaptureItem.ItemId);
+                if (SelectedCaptureItem == null)
                 {
-                    Count = 0, ItemId = ItemId.ItemPokeBall
-                };
+                    SelectedCaptureItem = new ItemData()
+                    {
+                        Count = 0,
+                        ItemId = ItemId.ItemPokeBall
+                    };
+                }
             }
             else
             {
-                // Start with a ball of the same type as the one that's currently used
-                SelectedCaptureItem = ItemsInventory.First(item => item.ItemId == SelectedCaptureItem.ItemId);
+                SelectedCaptureItem = ItemsInventory.FirstOrDefault(item => item.ItemId == ItemId.ItemPokeBall);
+                if (SelectedCaptureItem == null)
+                {
+                    SelectedCaptureItem = new ItemData()
+                    {
+                        Count = 0,
+                        ItemId = ItemId.ItemPokeBall
+                    };
+                }
             }
             while (SelectedCaptureItem != null && SelectedCaptureItem.Count == 0)
             {
@@ -407,7 +419,10 @@ namespace PokemonGo_UWP.ViewModels
                     else
                         GameClient.LuredPokemons.Remove((LuredPokemon) CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
-                    break;
+
+                    // We always need to update the inventory
+                    await GameClient.UpdateInventory();
+                    return;
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
@@ -435,7 +450,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        ///     Uses the selected berry for the current encounter        
+        ///     Uses the selected berry for the current encounter
         /// </summary>
         /// <returns></returns>
         public async Task ThrowBerry()
