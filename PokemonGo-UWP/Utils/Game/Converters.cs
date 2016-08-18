@@ -921,6 +921,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var fortDataStatus = (FortDataStatus)value;
+            var resourceUriString = "ms-appx:///Assets/Icons/pokestop_";
 
             switch (fortDataStatus)
             {
@@ -938,7 +939,7 @@ namespace PokemonGo_UWP.Utils
                     return new Uri(resourceUriString + "far_lured.png");
                 case FortDataStatus.Opened | FortDataStatus.Cooldown | FortDataStatus.Lure:
                     return new Uri(resourceUriString + "near_inactive_lured.png");
-                case FortDataStatus.Closed | FortDataStatus.Cooldown | FortDataStatus.Lure: 
+                case FortDataStatus.Closed | FortDataStatus.Cooldown | FortDataStatus.Lure:
                     return new Uri(resourceUriString + "far_inactive_lured.png");
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -1180,7 +1181,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats) value;
-            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
+            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;
             return playerStats == null ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }
 

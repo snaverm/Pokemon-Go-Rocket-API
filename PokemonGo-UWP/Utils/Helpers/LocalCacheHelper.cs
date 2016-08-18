@@ -114,7 +114,7 @@ namespace Q42.WinRT.Data
                     return value.File;
                 //Delete old value
                 //Do not await
-                Delete(key, serializerType);
+                var deleteTask = Delete(key, serializerType);
             }
             catch
             {
@@ -151,17 +151,17 @@ namespace Q42.WinRT.Data
         /// <param name="key"></param>
         /// <param name="serializerType">JSON or XML serializer</param>
         /// <returns></returns>
-        public static void Delete(string key, StorageSerializer serializerType = StorageSerializer.JSON)
+        public static Task Delete(string key, StorageSerializer serializerType = StorageSerializer.JSON)
         {
             try
             {
                 IStorageHelper<object> storage = new StorageHelper<object>(_storageFolder, CacheFolder, serializerType);
 
-                storage.DeleteAsync(key);
+                return storage.DeleteAsync(key);
             }
             catch
             {
-
+                return Task.CompletedTask;
             }
         }
 
