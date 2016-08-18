@@ -277,7 +277,7 @@
                         <Button Style="{ThemeResource ImageButtonStyle}"
                                 Command="{x:Bind TryCatchPokemon}">
                             <Image
-                                Source="{Binding LureInfo.ActivePokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                 maps:MapControl.Location="{Binding Geoposition}"
                                 maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                 Stretch="Uniform"
