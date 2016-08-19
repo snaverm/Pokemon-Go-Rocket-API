@@ -109,7 +109,11 @@ namespace PokemonGo_UWP.Utils
 		public bool IsMusicEnabled
 		{
 			get { return Get(false); }
-			set { Set(value); }
+		    set
+		    {
+		        Set(value);
+                AudioUtils.ToggleSounds();
+		    }
 		}
 		public bool IsNianticMapEnabled
 		{
