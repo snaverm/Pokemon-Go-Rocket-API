@@ -293,8 +293,7 @@
                                         <TextBlock Style="{StaticResource TextGridViewTop}">
                                                 <Run x:Uid="CpTextBlock"
                                                      Text="CP" />
-                                                <Run FontSize="15" Text="{x:Bind Cp}"
-                                                     x:Phase="0" />
+                                                <Run FontSize="15" Text="{x:Bind Cp}"/>
                                         </TextBlock>
                                         <Image
                                                 Source="{x:Bind PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"

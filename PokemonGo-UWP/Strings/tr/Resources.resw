@@ -143,4 +143,10 @@
   <data name="SettingsRememberMapZoomTextBlock" xml:space="preserve">
     <value>Harita uzaklığını hatırla</value>
   </data>
+  <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
+    <value>KULUÇKAYI BAŞLAT</value>
+  </data>
+  <data name="EggDetailTextBlock.Text" xml:space="preserve">
+    <value>Yumurta çatlatmak için kuluçka kullanın.</value>
+  </data>
 </root>

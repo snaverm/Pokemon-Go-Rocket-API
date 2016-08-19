@@ -143,4 +143,10 @@
   <data name="TransferButton.Content" xml:space="preserve">
     <value>TRANSFERIR</value>
   </data>
+  <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
+    <value>EMPEZAR INCUBACIÓN</value>
+  </data>
+  <data name="EggDetailTextBlock.Text" xml:space="preserve">
+    <value>Usa una incubadora para incubar este Huevo.</value>
+  </data>
 </root>
