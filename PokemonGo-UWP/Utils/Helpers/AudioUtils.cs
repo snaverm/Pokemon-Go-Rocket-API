@@ -21,9 +21,7 @@ namespace PokemonGo_UWP.Utils
         private static readonly MediaElement GameplaySound = new MediaElement();
         private static readonly MediaElement EncounterSound = new MediaElement();
         private static readonly MediaElement PokemonFoundSound = new MediaElement();
-        #endregion
-
-        private static bool _isPlaying;
+        #endregion       
 
         /// <summary>
         /// Initializes audio assets by loading them from disk
