@@ -130,7 +130,7 @@ namespace PokemonGo_UWP
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             if (SettingsService.Instance.IsVibrationEnabled)
                 _vibrationDevice?.Vibrate(TimeSpan.FromMilliseconds(500));
-            await AudioUtils.PlaySound(@"pokemon_found_ding.wav");
+            AudioUtils.PlaySound(AudioUtils.POKEMON_FOUND_DING);
         }
 
         #endregion
@@ -193,9 +193,10 @@ namespace PokemonGo_UWP
             }
 
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
-                GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
+            GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
-            await AudioUtils.PlaySound(@"Gameplay.mp3");
+            AudioUtils.PlaySound(AudioUtils.GAMEPLAY);
+
             await Task.CompletedTask;
         }
 
