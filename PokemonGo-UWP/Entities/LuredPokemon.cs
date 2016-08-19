@@ -32,7 +32,7 @@ namespace PokemonGo_UWP.Entities
         public LuredPokemon(FortLureInfo lureInfo, double lat, double lng)
         {
             _lureInfo = lureInfo;
-            Geoposition = new Geopoint(GetLocation(lat, lng, 10));
+            Geoposition = new Geopoint(GetLocation(lat, lng, 1));
         }
 
         public void Update(IMapPokemon update)
