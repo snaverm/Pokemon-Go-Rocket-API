@@ -778,12 +778,12 @@ Open page with installation files for manual install?</source>
           <target state="translated">捕捉了 {0} 隻精靈寶可夢</target>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="translated">進化了 [x] 隻精靈寶可夢</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">進化了 {0} 隻精靈寶可夢</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="translated">孵化了 {x} 隻精靈寶可夢</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">孵化了 {0} 隻精靈寶可夢</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>

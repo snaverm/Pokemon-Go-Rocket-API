@@ -140,12 +140,12 @@
           <note from="MultilingualEditor" annotates="source" priority="4">Pokemon vagy Pokémon</note>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="translated">[X] felfejlesztett Pokémon</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">{0} felfejlesztett Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="translated">{x} kikeltett Pokémon</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">{0} kikeltett Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>

@@ -554,16 +554,16 @@ Open page with installation files for manual install?</target>
           <target state="translated">Forscher</target>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="translated">[x] Pokémon entwicklet</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">{0} Pokémon entwicklet</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotal" translate="yes" xml:space="preserve">
           <source>Breeder</source>
           <target state="translated">Züchter</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="translated">{x} Pokémon gschlüpft</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">{0} Pokémon gschlüpft</target>
         </trans-unit>
         <trans-unit id="BadgePikachu" translate="yes" xml:space="preserve">
           <source>Pikachu</source>

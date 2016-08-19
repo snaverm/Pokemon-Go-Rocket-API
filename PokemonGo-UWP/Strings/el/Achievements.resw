@@ -25,10 +25,10 @@
     <value>Εχμαλότισες {0} Pokémon</value>
   </data>
   <data name="BadgeEvolvedTotalDescription" xml:space="preserve">
-    <value>Εξέλιξες [x] Pokémon</value>
+    <value>Εξέλιξες {x} Pokémon</value>
   </data>
   <data name="BadgeHatchedTotalDescription" xml:space="preserve">
-    <value>Εκκόλαψες {x} Pokémon</value>
+    <value>Εκκόλαψες {0} Pokémon</value>
   </data>
   <data name="BadgePikachuDescription" xml:space="preserve">
     <value>Παγίδευσες {0} Pikachu</value>
