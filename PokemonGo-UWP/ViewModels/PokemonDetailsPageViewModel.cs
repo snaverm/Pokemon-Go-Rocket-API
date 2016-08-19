@@ -391,6 +391,18 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Rename
+
+        private DelegateCommand _renamePokemonCommand;
+
+        public DelegateCommand RenamePokemonCommand => _renamePokemonCommand ?? (
+          _renamePokemonCommand = new DelegateCommand(async () =>
+          {
+              // TODO: Implement
+          }, () => true));
+
+        #endregion
+
         #region Power Up
 
         private DelegateCommand _powerUpPokemonCommand;

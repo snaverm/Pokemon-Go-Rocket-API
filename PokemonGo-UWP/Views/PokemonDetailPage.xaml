@@ -379,6 +379,7 @@
                     </interactivity:Interaction.Behaviors>
                     <TextBlock Grid.Column="0"
                                Margin="0,0,15,0"
+                               x:Uid="FavoriteTextBlock"
                                Text="FAVORITE"
                                Style="{StaticResource TextSortTitle}" />
                     <Image Grid.Column="1"
@@ -406,6 +407,7 @@
                     </interactivity:Interaction.Behaviors>
                     <TextBlock Grid.Column="0"
                                Margin="0,0,15,0"
+                               x:Uid="TransferTextBlock"
                                Text="TRANSFER"
                                Style="{StaticResource TextSortTitle}" />
                     <Image Grid.Column="1"
@@ -570,15 +572,36 @@
                             <!-- Name & Stamina -->
                             <StackPanel Orientation="Vertical">
 
-                                <TextBlock
+                                <Grid Margin="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="1"
                                     Text="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
                                     VerticalAlignment="Top"
                                     CharacterSpacing="30"
                                     TextAlignment="Center"
                                     Foreground="#577074"
                                     FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"
-                                    FontSize="28"
-                                    Margin="8" />
+                                    FontSize="28"/>
+                                    <TextBlock Margin="0" 
+                                               Grid.Column="2"
+                                               Padding="8"
+                                               Foreground="#999999" 
+                                               Text="&#59151;" 
+                                               FontFamily="Segoe MDL2 Assets" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left">
+                                        <interactivity:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior EventName="Tapped">
+                                                <core:InvokeCommandAction Command="{Binding RenamePokemonCommand}" />
+                                            </core:EventTriggerBehavior>
+                                        </interactivity:Interaction.Behaviors>
+                                    </TextBlock>
+                                </Grid>
+
 
                                 <StackPanel VerticalAlignment="Bottom">
 
