@@ -135,12 +135,12 @@
           <target state="translated">{0} Pokémon yakalandı</target>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="translated">[x] Pokémon geliştirildi</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">{0} Pokémon geliştirildi</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="translated">{x} Pokémon yumurtadan çıkarıldı</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">{0} Pokémon yumurtadan çıkarıldı</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>

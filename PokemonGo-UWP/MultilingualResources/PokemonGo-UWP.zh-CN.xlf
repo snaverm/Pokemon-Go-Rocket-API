@@ -135,12 +135,12 @@
           <target state="translated">抓到了 {0} 只宝可梦</target>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="translated">进化了 [x] 只宝可梦</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">进化了 {0} 只宝可梦</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="translated">孵化了 {x} 只宝可梦</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">孵化了 {0} 只宝可梦</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>
