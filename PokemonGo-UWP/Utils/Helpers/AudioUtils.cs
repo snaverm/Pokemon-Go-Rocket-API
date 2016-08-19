@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -60,6 +61,7 @@ namespace PokemonGo_UWP.Utils
             switch (asset)
             {
                 case GAMEPLAY:
+                    if (GameplaySound.CurrentState != MediaElementState.Playing)
                         GameplaySound.Play();
                     break;
                 case ENCOUNTER_POKEMON:

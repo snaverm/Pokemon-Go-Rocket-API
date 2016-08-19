@@ -196,8 +196,7 @@ namespace PokemonGo_UWP
             GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
 
-            await AudioUtils.Init();
-            AudioUtils.PlaySound(AudioUtils.GAMEPLAY);
+            await AudioUtils.Init();            
 
             await Task.CompletedTask;
         }
@@ -218,7 +217,7 @@ namespace PokemonGo_UWP
             }
             else
             {
-                await GameClient.InitializeClient();
+                await GameClient.InitializeClient();                
                 NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
             }
 
