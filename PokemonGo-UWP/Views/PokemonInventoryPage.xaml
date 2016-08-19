@@ -309,6 +309,9 @@
                                         <ProgressBar
                                                 Value="{x:Bind Stamina}"
                                                 Maximum="{x:Bind StaminaMax}"
+                                                Style="{StaticResource ExperienceProgressbarStyle}"
+                                                BorderBrush="Black"
+                                                BorderThickness="1"
                                                 Margin="0,5"
                                                 Foreground="#6ee8b7"
                                                 IsIndeterminate="False"

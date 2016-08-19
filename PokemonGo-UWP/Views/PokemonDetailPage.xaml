@@ -385,21 +385,16 @@
 
                                 <StackPanel VerticalAlignment="Bottom">
 
-                                    <Border CornerRadius="2"
-                                            Width="200"
-                                            BorderBrush="#7EDAB5"
-                                            BorderThickness="1">
-
-                                        <ProgressBar Value="{Binding CurrentPokemon.Stamina, Mode=TwoWay}"
-                                                     Width="200"
-                                                     Maximum="{Binding CurrentPokemon.StaminaMax}"
-                                                     Foreground="#6BEFB6"
-                                                     IsIndeterminate="False"
-                                                     HorizontalAlignment="Center"
-                                                     HorizontalContentAlignment="Center"
-                                                     VerticalAlignment="Center" />
-
-                                    </Border>
+                                    <ProgressBar Value="{Binding CurrentPokemon.Stamina, Mode=TwoWay}"
+                                                 Width="200"
+                                                 Maximum="{Binding CurrentPokemon.StaminaMax}"
+                                                 Style="{StaticResource ExperienceProgressbarStyle}"
+                                                 HorizontalAlignment="Stretch"
+                                                 Margin="48,0"
+                                                 BorderBrush="Black"
+                                                 BorderThickness="1"
+                                                 Height="7"
+                                                 Foreground="#6BEFB6" />
 
                                     <TextBlock Margin="0,5"
                                                Foreground="#626264"
@@ -699,7 +694,7 @@
                                         <Grid HorizontalAlignment="Right"
                                               VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="70" />
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel Grid.Column="0"
