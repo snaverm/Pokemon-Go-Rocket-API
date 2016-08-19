@@ -62,7 +62,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                // TODO: ulong needed
+              
                 CurrentPokemon = JsonConvert.DeserializeObject<PokemonDataWrapper>((string)suspensionState[nameof(CurrentPokemon)]);
                 PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
             }
@@ -321,7 +321,6 @@ namespace PokemonGo_UWP.ViewModels
           _transferPokemonCommand = new DelegateCommand(async () =>
           {
               // Ask for confirmation before moving the Pokemon
-              // TODO: better style maybe?
               var dialog =
                   new MessageDialog(string.Format(Resources.CodeResources.GetString("TransferPokemonWarningText"),
                       Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString())));
@@ -346,7 +345,7 @@ namespace PokemonGo_UWP.ViewModels
                       await GameClient.UpdatePlayerStats();
                       NavigationService.GoBack();
                       break;
-                  // TODO: what to do on error?
+                
                   case ReleasePokemonResponse.Types.Result.PokemonDeployed:
                       break;
                   case ReleasePokemonResponse.Types.Result.Failed:
@@ -379,7 +378,7 @@ namespace PokemonGo_UWP.ViewModels
 
                       IsFavorite = !isFavorite;
                       break;
-                  // TODO: what to do on error?
+                  
                   case SetFavoritePokemonResponse.Types.Result.ErrorPokemonNotFound:
                       break;
                   case SetFavoritePokemonResponse.Types.Result.ErrorPokemonIsEgg:
@@ -398,7 +397,7 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand RenamePokemonCommand => _renamePokemonCommand ?? (
           _renamePokemonCommand = new DelegateCommand(async () =>
           {
-              // TODO: Implement
+              
           }, () => true));
 
         #endregion
@@ -422,7 +421,7 @@ namespace PokemonGo_UWP.ViewModels
                     await GameClient.UpdateProfile();
                     UpdateCurrentData();
                     break;
-                // TODO: do something if we have an error!
+                
                 case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
                     break;
                 case UpgradePokemonResponse.Types.Result.ErrorInsufficientResources:
@@ -461,7 +460,7 @@ namespace PokemonGo_UWP.ViewModels
                     await GameClient.UpdateInventory();
                     await GameClient.UpdateProfile();
                     break;
-                // TODO: do something if we have an error!
+               
                 case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
                     break;
                 case EvolvePokemonResponse.Types.Result.FailedInsufficientResources:
