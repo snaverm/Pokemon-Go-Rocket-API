@@ -423,13 +423,13 @@ namespace PokemonGo_UWP.Utils
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv0.png"));
             }
-            if (float.Parse(achievement.Value.ToString()) < float.Parse(silver.Value.ToString()))
-            {
-                level = 1;
-            }
             if (float.Parse(achievement.Value.ToString()) < float.Parse(gold.Value.ToString()))
             {
                 level = 2;
+            }
+            if (float.Parse(achievement.Value.ToString()) < float.Parse(silver.Value.ToString()))
+            {
+                level = 1;
             }
             
             switch (achievement.Key.ToString().ToLower().Replace(" ","")) {
@@ -445,10 +445,8 @@ namespace PokemonGo_UWP.Utils
                 case "scientist":
                 case "youngster":
                     return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/" + achievement.Key.ToString().ToLower().Replace(" ", "") + "_lv" + level.ToString() + ".png"));
-                    break;
                 default:
                     return new BitmapImage(new Uri("ms-appx:///Assets/Achievements/badge_lv" + level.ToString() + ".png"));
-                    break;
             }
         }
 
@@ -973,7 +971,7 @@ namespace PokemonGo_UWP.Utils
                     return new Uri(resourceUriString + "far_lured.png");
                 case FortDataStatus.Opened | FortDataStatus.Cooldown | FortDataStatus.Lure:
                     return new Uri(resourceUriString + "near_inactive_lured.png");
-                case FortDataStatus.Closed | FortDataStatus.Cooldown | FortDataStatus.Lure: 
+                case FortDataStatus.Closed | FortDataStatus.Cooldown | FortDataStatus.Lure:
                     return new Uri(resourceUriString + "far_inactive_lured.png");
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -1013,7 +1011,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null) return 0;
-            var pokemon = (PokemonDataWrapper)value;            
+            var pokemon = (PokemonDataWrapper)value;
             return System.Convert.ToDouble(pokemon.Stamina / pokemon.StaminaMax * 100);
         }
 
@@ -1040,7 +1038,7 @@ namespace PokemonGo_UWP.Utils
                     ? "ms-appx:///Assets/Items/Egg.png"
                     : $"ms-appx:///Assets/Items/E_Item_{(int) GameClient.GetIncubatorFromEgg(egg.WrappedData).ItemId}.png";
             }
-            return new BitmapImage(new Uri(uri));            
+            return new BitmapImage(new Uri(uri));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -1215,7 +1213,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var playerStats = (PlayerStats) value;
-            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;            
+            //return playerStats?.Experience - playerStats?.PrevLevelXp ?? 0;
             return playerStats == null ? 0 : _xpTable[playerStats.Level] - (playerStats.NextLevelXp - playerStats.Experience);
         }
 
