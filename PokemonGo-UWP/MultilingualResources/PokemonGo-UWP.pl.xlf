@@ -767,19 +767,19 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <target state="translated">Hiper Mikstura</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="translated">Chłodne Kadzidło</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="translated">Kwieciste Kadzidło</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="translated">Zwykłe Kadzidło</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="translated">Pikantne Kadzidło</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
@@ -847,7 +847,7 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</tar
           <target state="translated">Super Mikstura</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="translated">Dysk Troy</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">

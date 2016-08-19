@@ -64,16 +64,16 @@
     <value>Incenso Floral</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incenso Comum</value>
+    <value>Incenso</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
     <value>Incenso Picante</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubadora Básica</value>
+    <value>Incubadora</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Incubadora Básica ilimitada</value>
+    <value>Incubadora ilimitada</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
     <value>Melhoria do Armazenamento de Itens</value>
@@ -118,7 +118,7 @@
     <value>Super Poção</value>
   </data>
   <data name="ItemTroyDisk" xml:space="preserve">
-    <value>Troy Disk</value>
+    <value>Lure Module</value>
   </data>
   <data name="ItemUltraBall" xml:space="preserve">
     <value>Ultra Bola</value>

@@ -148,20 +148,20 @@
           <target state="needs-review-translation">Hyper Potion</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
-          <target state="needs-review-translation">Incense Cool</target>
+          <source>Cool Incense</source>
+          <target state="needs-review-translation">Cool Incense</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
-          <target state="needs-review-translation">Incense Floral</target>
+          <source>Floral Incense</source>
+          <target state="needs-review-translation">Floral Incense</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
-          <target state="translated">Incense Ordinary</target>
+          <source>Incense</source>
+          <target state="translated">Incense</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
-          <target state="needs-review-translation">Incense Spicy</target>
+          <source>Spicy Incense</source>
+          <target state="needs-review-translation">Spicy Incense</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>Incubator Basic</source>
@@ -228,7 +228,7 @@
           <target state="needs-review-translation">Super Potion</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="translated">Troy Plate</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">

@@ -770,19 +770,19 @@ Open page with installation files for manual install?</target>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Hyper Potion</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Wierook Cool</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="translated">Wierook Bloem</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Gewone wierook</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Kruidige wierook</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
@@ -850,7 +850,7 @@ Open page with installation files for manual install?</target>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Super Potion</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Troy schijf</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">

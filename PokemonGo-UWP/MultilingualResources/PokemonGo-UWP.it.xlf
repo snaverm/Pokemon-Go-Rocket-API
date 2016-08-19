@@ -765,19 +765,19 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
           <target state="final">Iperpozione</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="final">Aroma fresco</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="final">Aroma floreale</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="final">Aroma</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="final">Aroma speziato</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
@@ -845,7 +845,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
           <target state="final">Superpozione</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="final" state-qualifier="mt-suggestion">Modulo esca</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Unreleased</note>
         </trans-unit>
