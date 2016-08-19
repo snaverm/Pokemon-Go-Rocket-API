@@ -769,19 +769,19 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
           <target state="translated">Hyper Lektvar</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="translated">Chladná Esence</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="translated">Přírodní Esence</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="translated">Obyčejná Esence</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="translated">Kořeněná Esence</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
@@ -849,8 +849,8 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
           <target state="translated">Super Lektvar</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
-          <target state="new">Troy Disk</target>
+          <source>Lure Module</source>
+          <target state="new">Lure Module</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">
           <source>Ultra Ball</source>

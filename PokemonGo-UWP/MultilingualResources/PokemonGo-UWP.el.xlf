@@ -764,19 +764,19 @@ Open page with installation files for manual install?</source>
           <target state="final">Ενεργειτικό Φίλτρο</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="final">Δροσερό θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="final">Άνθινο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="final">Συνιθυσμένο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="final">Πικάντικο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
@@ -844,7 +844,7 @@ Open page with installation files for manual install?</source>
           <target state="final">Σούπερ Φίλτρο</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="final">Δίσκος Τρόι</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">
