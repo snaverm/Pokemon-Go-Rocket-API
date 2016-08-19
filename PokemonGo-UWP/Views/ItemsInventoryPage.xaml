@@ -120,7 +120,7 @@
             </Button>
         </RelativePanel>
 
-        <Border Margin="12,12,12,0" Background="White" CornerRadius="5,5,0,0">
+        <Border Margin="12,12,12,0" Background="White" CornerRadius="5,5,0,0" x:Name="MainUIPanel">
             <Pivot>
                 <PivotItem>
                     <Grid>
