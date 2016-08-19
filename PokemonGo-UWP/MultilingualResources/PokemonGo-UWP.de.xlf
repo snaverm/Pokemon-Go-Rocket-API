@@ -662,14 +662,6 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
           <source>POWER UP</source>
           <target state="translated">POWER-UP</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="translated">VERSCHICKEN</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="translated">Speichere Karten Zoom</target>
-        </trans-unit>
         <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START INCUBATION</source>
           <target state="translated">AUSBRÜTEN BEGINNEN</target>

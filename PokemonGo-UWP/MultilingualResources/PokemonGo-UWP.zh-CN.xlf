@@ -644,10 +644,6 @@ Open page with installation files for manual install?</source>
           <source>POWER UP</source>
           <target state="new">力量強化</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="new">放生</target>
-        </trans-unit>
         <trans-unit id="SettingsMusicTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Music</source>
           <target state="new">Music</target>
@@ -668,10 +664,6 @@ Open page with installation files for manual install?</source>
           <source>Use Niantic Map</source>
           <target state="new">Use Niantic Map</target>
         </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
-        </trans-unit>
         <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START INCUBATION</source>
           <target state="new">START INCUBATION</target>
@@ -679,6 +671,34 @@ Open page with installation files for manual install?</source>
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="new">Use an incubator to incubate the Egg.</target>
+        </trans-unit>
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Remember Map Zoom</source>
+          <target state="new">Remember Map Zoom</target>
+        </trans-unit>
+        <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>TRANSFER</source>
+          <target state="new">TRANSFER</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>You must restart the App to take effect.</source>
+          <target state="new">You must restart the App to take effect.</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="SettingsCompassEnabledTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use compass</source>
+          <target state="new">Use compass</target>
+        </trans-unit>
+        <trans-unit id="SettingsLiveTileTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Live Tile Mode</source>
+          <target state="new">Live Tile Mode</target>
+        </trans-unit>
+        <trans-unit id="FavoriteTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>FAVORITE</source>
+          <target state="new">FAVORITE</target>
         </trans-unit>
       </group>
     </body>

@@ -15,20 +15,26 @@ namespace PokemonGo_UWP.ViewModels
         #region Bindable Game Vars
 
         public string CurrentVersion => GameClient.CurrentVersion;
+	
+		/// <summary>
+		///     How the player wants the map to rotate following is heading (None, GPS, Compass)
+		/// </summary>
+		public int MapAutomaticOrientationMode_Index
+		{
+			get { return (int)System.Enum.ToObject(typeof(MapAutomaticOrientationModes), SettingsService.Instance.MapAutomaticOrientationMode); }
+			set
+			{
+				if (value >= 0 && value <= 2)
+				{
+					SettingsService.Instance.MapAutomaticOrientationMode = (MapAutomaticOrientationModes)System.Enum.ToObject(typeof(MapAutomaticOrientationModes), value);
+				}
+			}
+		}
 
-        /// <summary>
-        ///     Whether the player wants the map to rotate following is heading
-        /// </summary>
-        public bool IsAutoRotateMapEnabled
-        {
-            get { return SettingsService.Instance.IsAutoRotateMapEnabled; }
-            set { SettingsService.Instance.IsAutoRotateMapEnabled = value; }
-        }
-
-        /// <summary>
-        ///     Whether the player wants music
-        /// </summary>
-        public bool IsMusicEnabled
+		/// <summary>
+		///     Whether the player wants music
+		/// </summary>
+		public bool IsMusicEnabled
         {
             get { return SettingsService.Instance.IsMusicEnabled; }
             set { SettingsService.Instance.IsMusicEnabled = value; }

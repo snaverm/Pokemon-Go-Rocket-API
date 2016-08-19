@@ -33,6 +33,7 @@ namespace PokemonGo_UWP.Utils
             // Get folder
             var folder =
                     await (await Package.Current.InstalledLocation.GetFolderAsync("Assets")).GetFolderAsync("Audio");
+            ToggleSounds();
             // Get files and create elements   
             var currentFile = await folder.GetFileAsync(GAMEPLAY);
             var currentStream = await currentFile.OpenAsync(FileAccessMode.Read);
@@ -47,7 +48,16 @@ namespace PokemonGo_UWP.Utils
             PokemonFoundSound.SetSource(currentStream, currentFile.ContentType);
             // Set mode and volume
             GameplaySound.IsLooping = true;
-            GameplaySound.Volume = EncounterSound.Volume = PokemonFoundSound.Volume = 1;
+        }
+
+        /// <summary>
+        /// Sets volume based on settings
+        /// </summary>
+        public static void ToggleSounds()
+        {
+            // TODO: not working yet for some weird reasons
+            GameplaySound.IsMuted =
+                EncounterSound.IsMuted = PokemonFoundSound.IsMuted = !SettingsService.Instance.IsMusicEnabled;
         }
 
         /// <summary>
@@ -57,18 +67,18 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         public static void PlaySound(string asset)
         {
-            if (!SettingsService.Instance.IsMusicEnabled) return;            
             switch (asset)
             {
                 case GAMEPLAY:
                     if (GameplaySound.CurrentState != MediaElementState.Playing)
                         GameplaySound.Play();
+                    EncounterSound.Stop();
                     break;
                 case ENCOUNTER_POKEMON:
-                        GameplaySound.Pause();
-                        EncounterSound.Play();
+                    GameplaySound.Pause();
+                    EncounterSound.Play();
                     break;
-                case POKEMON_FOUND_DING:                    
+                case POKEMON_FOUND_DING:
                     PokemonFoundSound.Play();
                     break;
             }
@@ -80,13 +90,13 @@ namespace PokemonGo_UWP.Utils
         /// <param name="asset"></param>
         /// <returns></returns>
         public static void StopSound(string asset)
-        {            
+        {
             switch (asset)
             {
                 case GAMEPLAY:
                     GameplaySound.Stop();
                     break;
-                case ENCOUNTER_POKEMON:                    
+                case ENCOUNTER_POKEMON:
                     EncounterSound.Stop();
                     break;
                 case POKEMON_FOUND_DING:
