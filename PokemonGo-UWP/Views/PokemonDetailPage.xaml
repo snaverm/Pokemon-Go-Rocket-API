@@ -1063,8 +1063,7 @@
                                                TargetObject="{Binding ElementName=ShowContextMenuStoryboard}" />
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
-            <!--TODO: design menu icon-->
-            <!--<Image Source="../Assets/Buttons/XXX" />-->
+           
         </Button>
 
     </RelativePanel>
