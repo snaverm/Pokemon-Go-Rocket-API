@@ -664,10 +664,6 @@ Open page with installation files for manual install?</source>
           <source>Use Niantic Map</source>
           <target state="new">Use Niantic Map</target>
         </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
-        </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
           <target state="new">Caught:</target>

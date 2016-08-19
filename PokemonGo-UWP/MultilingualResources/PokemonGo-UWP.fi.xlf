@@ -835,14 +835,6 @@ Open page with installation files for manual install?</target>
           <source>POWER UP</source>
           <target state="new">POWER UP</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="new">TRANSFER</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
-        </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
           <target state="new">Caught:</target>

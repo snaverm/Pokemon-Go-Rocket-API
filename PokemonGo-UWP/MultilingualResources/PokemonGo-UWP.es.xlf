@@ -659,13 +659,9 @@ Open page with installation files for manual install?</source>
           <source>POWER UP</source>
           <target state="translated">MÁS PODER</target>
         </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="translated">Recordar zoom del mapa</target>
-        </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="translated">TRANSFERIR</target>
         </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
@@ -714,10 +710,6 @@ Open page with installation files for manual install?</source>
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="new">Use an incubator to incubate the Egg.</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
         </trans-unit>
         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>

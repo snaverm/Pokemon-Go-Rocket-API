@@ -659,11 +659,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
           <source>POWER UP</source>
           <target state="new">POTENZIA</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="new">TRASFERISCI</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="new">Ricorda l'ingrandimento della mappa</target>
         </trans-unit>
@@ -714,10 +710,6 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="translated">Usa un'incubatrice per far schiudere questo Uovo.</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
         </trans-unit>
         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>

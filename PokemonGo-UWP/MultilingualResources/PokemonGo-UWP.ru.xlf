@@ -663,14 +663,6 @@ Open page with installation files for manual install?</source>
           <source>POWER UP</source>
           <target state="translated">Улучшить</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="translated">Передать</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
-        </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
           <target state="new">Caught:</target>

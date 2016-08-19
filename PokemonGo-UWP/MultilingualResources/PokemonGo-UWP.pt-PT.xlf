@@ -718,9 +718,6 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
           <source>times</source>
           <target state="new">times</target>
         </trans-unit>
-        <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>START INCUBATION</source>
-          <target state="new">START INCUBATION</target>
         <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
           <source>You must restart the App to take effect.</source>
           <target state="new">You must restart the App to take effect.</target>

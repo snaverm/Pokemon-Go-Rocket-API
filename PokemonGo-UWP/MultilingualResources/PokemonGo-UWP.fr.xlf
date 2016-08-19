@@ -663,11 +663,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
           <source>POWER UP</source>
           <target state="translated">RECHARGER</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="translated">TRANSFÉRER</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="translated">Mémoriser le zoom de la carte</target>
         </trans-unit>
@@ -718,10 +714,6 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="translated">Utilise un incubateur pour incuber un oeuf.</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
         </trans-unit>
         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>

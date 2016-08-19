@@ -427,11 +427,7 @@ Open page with installation files for manual install?</source>
           <source>POWER UP</source>
           <target state="translated">強化</target>
         </trans-unit>
-        <trans-unit id="TransferButton.Content" translate="yes" xml:space="preserve">
-          <source>TRANSFER</source>
-          <target state="translated">轉換成糖果</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock" translate="yes" xml:space="preserve">
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Remember Map Zoom</source>
           <target state="translated">記住地圖縮放</target>
         </trans-unit>
@@ -482,10 +478,6 @@ Open page with installation files for manual install?</source>
         <trans-unit id="EggDetailTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use an incubator to incubate the Egg.</source>
           <target state="translated">使用孵蛋器開始孵蛋。</target>
-        </trans-unit>
-        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
-          <source>Remember Map Zoom</source>
-          <target state="new">Remember Map Zoom</target>
         </trans-unit>
         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>
