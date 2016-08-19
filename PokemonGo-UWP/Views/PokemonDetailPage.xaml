@@ -391,7 +391,7 @@
                                                  Style="{StaticResource ExperienceProgressbarStyle}"
                                                  HorizontalAlignment="Stretch"
                                                  Margin="48,0"
-                                                 BorderBrush="Black"
+                                                 BorderBrush="#6BEFB6"
                                                  BorderThickness="1"
                                                  Height="7"
                                                  Foreground="#6BEFB6" />

@@ -207,7 +207,7 @@
                                                      Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                                                      HorizontalAlignment="Stretch"
                                                      Margin="48,0"
-                                                     BorderBrush="Black"
+                                                     BorderBrush="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                                                      BorderThickness="1"
                                                      Height="7"
                                                      x:Name="ExperienceProgressBar" />
