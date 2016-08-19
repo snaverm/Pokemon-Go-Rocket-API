@@ -421,7 +421,7 @@
             <!--Close Contextmenu-->
             <Button Style="{StaticResource ButtonCircle}"
                     Grid.Row="1"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="17.5,12.5">
                 <interactivity:Interaction.Behaviors>
@@ -1048,22 +1048,26 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,17.5"
-                Command="{Binding ReturnToPokemonInventoryScreen}"
-                >
+                Command="{Binding ReturnToPokemonInventoryScreen}">
             <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
 
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Style="{StaticResource ButtonCircleBig}"
-                Margin="12.5">
+                Style="{ThemeResource ImageButtonStyle}"
+                Height="{ThemeResource UiButtonSize}"
+                Margin="16">
+            
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
                     <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=ShowContextMenuStoryboard}" />
+                                           TargetObject="{Binding ElementName=ShowContextMenuStoryboard}" />
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
-           
+
+            <Image Source="../Assets/Buttons/btn_menu.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
         </Button>
 
     </RelativePanel>
