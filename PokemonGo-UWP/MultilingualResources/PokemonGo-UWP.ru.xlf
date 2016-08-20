@@ -669,7 +669,7 @@ Open page with installation files for manual install?</source>
         </trans-unit>
          <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
            <source>Remember Map Zoom</source>
-           <target state="translated">Запоминать маштаб какрты/target>
+           <target state="translated">Запоминать маштаб карты</target>
          </trans-unit>
          <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
            <source>TRANSFER</source>
