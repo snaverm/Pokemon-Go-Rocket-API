@@ -481,7 +481,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="PokemonInventoryFullText" translate="yes" xml:space="preserve">
           <source>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</source>
-          <target state="new">Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</target>
+          <target state="new">Il tuo inventario Pokémon è pieno, trasferisci qualche Pokémon prima di provare a catturare {0}.</target>
         </trans-unit>
       </group>
     </body>
