@@ -783,12 +783,14 @@ Open page with installation files for manual install?</source>
 </target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>Incubator Basic</source>
-          <target state="translated">Incubadora</target>
+          <source>Incubator</source>
+          <target state="needs-review-translation">Incubadora</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>Incubator Basic Unlimited</source>
-          <target state="translated">Incubadora ∞</target>
+          <source>∞ Incubator</source>
+          <target state="needs-review-translation">Incubadora ∞</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>

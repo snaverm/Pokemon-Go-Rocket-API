@@ -780,12 +780,14 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</target>
           <target state="translated">Acılı Tütsü</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>Incubator Basic</source>
-          <target state="translated">Basit Kuluçka</target>
+          <source>Incubator</source>
+          <target state="needs-review-translation">Basit Kuluçka</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>Incubator Basic Unlimited</source>
-          <target state="translated">Sınırsız Basit Kuluçka</target>
+          <source>∞ Incubator</source>
+          <target state="needs-review-translation">Sınırsız Basit Kuluçka</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>

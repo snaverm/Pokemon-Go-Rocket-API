@@ -786,12 +786,14 @@ Open page with installation files for manual install?</target>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Kruidige wierook</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>Incubator Basic</source>
+          <source>Incubator</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Incubator Basic</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>Incubator Basic Unlimited</source>
+          <source>∞ Incubator</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Incubator Basic onbeperkt</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
