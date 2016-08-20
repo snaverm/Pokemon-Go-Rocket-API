@@ -254,9 +254,8 @@
                      <StackPanel Orientation="Vertical">
                         <TextBlock Text="POKÉMON"
                                    Style="{StaticResource TextPageTitleDark}"
-                                   Margin="15,15,15,3"
-                                   Foreground="#FF44696C" FontSize="18"
-                                   Width="150" />
+                                   Margin="10,10,10,3"
+                                   Foreground="#FF44696C" FontSize="18" />
                         <TextBlock Style="{StaticResource TextSubTitle}"
                                    HorizontalAlignment="Center"
                                    Foreground="#FF44696C">
@@ -266,9 +265,10 @@
                         </TextBlock>
                         <Rectangle Fill="#FF44696C"
                                    Height="2"
-                                   Margin="20,3,20,15"
+                                   Margin="10,3,10,10"
                                    RadiusX="2"
                                    RadiusY="2"
+                                   Width="100"
                                    Opacity ="{Binding SelectedIndex, ElementName=MainUIPanel, ConverterParameter=1,
                                              Converter={StaticResource PokemonPivotHeaderToVisibleConverter}}" />
                      </StackPanel>
@@ -341,9 +341,8 @@
                      <StackPanel Orientation="Vertical">
                         <TextBlock Text="EGGS"
                                    Style="{StaticResource TextPageTitleDark}"
-                                   Margin="15,15,15,3"
-                                   Foreground="#FF44696C" FontSize="18"
-                                   Width="150" />
+                                   Margin="10,10,10,3"
+                                   Foreground="#FF44696C" FontSize="18" />
                         <TextBlock Style="{StaticResource TextSubTitle}"
                                    HorizontalAlignment="Center"
                                    Foreground="#FF44696C">
@@ -353,9 +352,10 @@
                         </TextBlock>
                         <Rectangle Fill="#FF44696C"
                                    Height="2"
-                                   Margin="20,3,20,15"
+                                   Margin="15,3,15,15"
                                    RadiusX="2"
                                    RadiusY="2"
+                                   Width="100"
                                    Opacity ="{Binding SelectedIndex, ElementName=MainUIPanel, ConverterParameter=0,
                                              Converter={StaticResource PokemonPivotHeaderToVisibleConverter}}" />
                      </StackPanel>
