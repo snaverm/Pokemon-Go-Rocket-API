@@ -247,9 +247,13 @@
 
         <Border Margin="12,12,12,0" Background="White" CornerRadius="5,5,0,0">
 
-            <Pivot x:Name="MainUIPanel" SelectionChanged="SelectionChanged">
+            <Pivot x:Name="MainUIPanel" SelectionChanged="SelectionChanged" >
+                
+                <PivotItem x:Name="PokemonsPivot" >
+                    <PivotItem.Header>
+                        <TextBlock>Test</TextBlock>
+                    </PivotItem.Header>
 
-                <PivotItem x:Name="PokemonsPivot">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -308,9 +312,7 @@
                                         <ProgressBar
                                                 Value="{x:Bind Stamina}"
                                                 Maximum="{x:Bind StaminaMax}"
-                                                Style="{StaticResource ExperienceProgressbarStyle}"
-                                                BorderBrush="#6ee8b7"
-                                                BorderThickness="1"
+                                                Style="{StaticResource PokemonHPProgressBarStyle}"
                                                 Margin="0,5"
                                                 Foreground="#6ee8b7"
                                                 IsIndeterminate="False"

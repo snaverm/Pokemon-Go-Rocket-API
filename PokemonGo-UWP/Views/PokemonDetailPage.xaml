@@ -608,11 +608,9 @@
                                     <ProgressBar Value="{Binding CurrentPokemon.Stamina, Mode=TwoWay}"
                                                  Width="200"
                                                  Maximum="{Binding CurrentPokemon.StaminaMax}"
-                                                 Style="{StaticResource ExperienceProgressbarStyle}"
+                                                 Style="{StaticResource PokemonHPProgressBarStyle}"
                                                  HorizontalAlignment="Stretch"
                                                  Margin="48,0"
-                                                 BorderBrush="#6BEFB6"
-                                                 BorderThickness="1"
                                                  Height="7"
                                                  Foreground="#6BEFB6" />
 

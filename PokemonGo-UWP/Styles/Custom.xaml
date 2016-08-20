@@ -1378,6 +1378,36 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ProgressBar" x:Name="PokemonHPProgressBarStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid Height="{TemplateBinding Height}"
+                          Width="{TemplateBinding Width}"
+                          MinWidth="50" >
+                        <Border x:Name="ProgressBarTrack" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="1" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
+                            </Border.BorderBrush>
+
+                            <Border Background="{TemplateBinding Foreground}"
+                                    CornerRadius="1"
+                                    HorizontalAlignment="Left"
+                                    x:Name="ProgressBarIndicator"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="Image" x:Key="NearbyPokemonImageStyle">
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
