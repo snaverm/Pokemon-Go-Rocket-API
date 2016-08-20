@@ -15,6 +15,7 @@ using Template10.Common;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Metadata;
+using Windows.Networking.Connectivity;
 using Windows.Phone.Devices.Notification;
 using Windows.System.Display;
 using Windows.UI.Core;
@@ -23,6 +24,7 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP
 {
@@ -100,6 +102,26 @@ namespace PokemonGo_UWP
                 HockeyClient.Current.TrackException(e.Exception);
         }
 
+        private async void NetworkInformationOnNetworkStatusChanged(object sender)
+        {
+            var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            var tmpNetworkStatus = connectionProfile != null &&
+                                  connectionProfile.GetNetworkConnectivityLevel() ==
+                                  NetworkConnectivityLevel.InternetAccess;
+            await WindowWrapper.Current().Dispatcher.DispatchAsync(() => {
+                if (tmpNetworkStatus)
+                {
+                    Logger.Write("Network is online");
+                    Busy.SetBusy(false);
+                }
+                else
+                {
+                    Logger.Write("Network is offline");
+                    Busy.SetBusy(true, Utils.Resources.CodeResources.GetString("WaitingForNetworkText"));
+                }
+            });
+        }
+
         /// <summary>
         ///
         /// </summary>
@@ -125,7 +147,7 @@ namespace PokemonGo_UWP
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void CatchablePokemons_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void CatchablePokemons_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             if (SettingsService.Instance.IsVibrationEnabled)
@@ -148,6 +170,8 @@ namespace PokemonGo_UWP
         {            
             GameClient.PokemonsInventory.CollectionChanged -= PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged -= CatchablePokemons_CollectionChanged;
+            NetworkInformation.NetworkStatusChanged -= NetworkInformationOnNetworkStatusChanged;
+
             if (SettingsService.Instance.LiveTileMode == LiveTileModes.Peek)
             {
                 LiveTileUpdater.EnableNotificationQueue(false);
@@ -192,6 +216,9 @@ namespace PokemonGo_UWP
                 LiveTileUpdater.EnableNotificationQueue(true);
             }
 
+            // Check for network status
+            NetworkInformation.NetworkStatusChanged += NetworkInformationOnNetworkStatusChanged;
+
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
             GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
             GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
@@ -199,7 +226,7 @@ namespace PokemonGo_UWP
             await AudioUtils.Init();            
 
             await Task.CompletedTask;
-        }
+        }        
 
         /// <summary>
         ///

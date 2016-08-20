@@ -29,6 +29,26 @@ using Windows.Foundation;
 
 namespace PokemonGo_UWP.Utils
 {
+
+    public class MapZoomLevelToIconSizeConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var zoomLevel = (double) value;
+            var zoomFactor = int.Parse((string)parameter);
+            return System.Convert.ToInt32(Math.Ceiling(zoomFactor * (5.02857 * zoomLevel - 53.2571)));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonIdToNumericId : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
