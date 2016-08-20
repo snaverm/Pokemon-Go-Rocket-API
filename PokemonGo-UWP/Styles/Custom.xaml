@@ -1310,18 +1310,18 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ProgressBar">
                     <Grid Height="{TemplateBinding Height}"
-                              Width="{TemplateBinding Width}"
-                              MinWidth="50" >
+                          Width="{TemplateBinding Width}"
+                          MinWidth="50" >
                         <Border x:Name="ProgressBarTrack" 
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="2" >
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2" >
                             <Border.Background>
                                 <SolidColorBrush Color="Black"
-                                                     Opacity="0.4" />
+                                                 Opacity="0.4" />
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Black"
-                                                     Opacity="0.4" />
+                                                 Opacity="0.4" />
                             </Border.BorderBrush>
 
                             <Border Background="{TemplateBinding Foreground}"
@@ -1329,6 +1329,49 @@
                                     HorizontalAlignment="Left"
                                     x:Name="ProgressBarIndicator"/>
                         </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ProgressBar" x:Name="PlayerProfileExperienceProgressBarStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="ProgressBar"
+                          MinHeight="7"
+                          MinWidth="50" >
+                        <Border x:Name="ProgressBarTrack" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Height="3"
+                                VerticalAlignment="Center"
+                                CornerRadius="2" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{TemplateBinding BorderBrush}"
+                                                 Opacity="0.2" />
+                            </Border.BorderBrush>
+                        </Border>
+
+                        <Grid x:Name="ProgressBarIndicator"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left">
+                            
+                            <Border Background="{TemplateBinding Foreground}"
+                                    CornerRadius="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    Height="3" />
+                            
+                            <Ellipse Width="7" Height="7" 
+                                     Fill="{TemplateBinding Foreground}" 
+                                     Margin="-4,0,0,0"
+                                     HorizontalAlignment="Right"/>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
