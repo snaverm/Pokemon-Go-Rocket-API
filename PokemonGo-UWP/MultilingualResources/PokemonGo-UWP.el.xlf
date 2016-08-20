@@ -135,12 +135,12 @@
           <target state="final">Εχμαλότισες {0} Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Evolved [x] Pokémon</source>
-          <target state="final">Εξέλιξες [x] Pokémon</target>
+          <source>Evolved {0} Pokémon</source>
+          <target state="translated">Εξέλιξες {x} Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-          <source>Hatched {x} Pokemon</source>
-          <target state="final">Εκκόλαψες {x} Pokémon</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">Εκκόλαψες {0} Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>
@@ -764,28 +764,30 @@ Open page with installation files for manual install?</source>
           <target state="final">Ενεργειτικό Φίλτρο</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
+          <source>Cool Incense</source>
           <target state="final">Δροσερό θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
+          <source>Floral Incense</source>
           <target state="final">Άνθινο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
+          <source>Incense</source>
           <target state="final">Συνιθυσμένο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
+          <source>Spicy Incense</source>
           <target state="final">Πικάντικο Θυμίαμα</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>Incubator Basic</source>
-          <target state="final">Βασικό Εκολαπτύριο</target>
+          <source>Incubator</source>
+          <target state="needs-review-translation">Βασικό Εκολαπτύριο</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>Incubator Basic Unlimited</source>
-          <target state="final">Απεριόριστο Βασικό Εκολαπτύριο</target>
+          <source>∞ Incubator</source>
+          <target state="needs-review-translation">Απεριόριστο Βασικό Εκολαπτύριο</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
@@ -844,7 +846,7 @@ Open page with installation files for manual install?</source>
           <target state="final">Σούπερ Φίλτρο</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
+          <source>Lure Module</source>
           <target state="final">Δίσκος Τρόι</target>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">
