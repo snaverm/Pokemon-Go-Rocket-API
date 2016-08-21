@@ -260,5 +260,11 @@ namespace PokemonGo_UWP.Views
                 ReactivateMapAutoUpdate.Visibility = Visibility.Visible;
             }
         }
+
+        private void GameMapControl_OnZoomLevelChanged(MapControl sender, object args)
+        {
+            var currentZoomLevel = sender.ZoomLevel;
+            sender.ZoomLevel = currentZoomLevel < 17 ? 17 : currentZoomLevel;
+        }
     }
 }
