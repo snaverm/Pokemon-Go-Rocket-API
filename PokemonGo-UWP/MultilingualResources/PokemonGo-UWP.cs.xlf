@@ -785,12 +785,14 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </target>
           <target state="translated">Kořeněná Esence</target>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>Incubator Basic</source>
-          <target state="translated">Základní Inkubátor</target>
+          <source>Incubator</source>
+          <target state="needs-review-translation">Základní Inkubátor</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>Incubator Basic Unlimited</source>
-          <target state="translated">Zakladní Nelimitovaný Inkubátor</target>
+          <source>∞ Incubator</source>
+          <target state="needs-review-translation">Zakladní Nelimitovaný Inkubátor</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemItemStorageUpgrade" translate="yes" xml:space="preserve">
           <source>Item Storage Upgrade</source>
