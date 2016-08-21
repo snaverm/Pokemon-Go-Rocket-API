@@ -156,7 +156,7 @@
         </trans-unit>
         <trans-unit id="BadgeSmallRattataDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Rattata</source>
-          <target state="translated">{0} Rattfratz gefangen</target>
+          <target state="translated">{0} winzige Rattfratz gefangen</target>
         </trans-unit>
         <trans-unit id="BadgeTravelKmDescription" translate="yes" xml:space="preserve">
           <source>Walked {0} km</source>
@@ -485,6 +485,10 @@ Seite zu den Dateien für manuelle Installation öffnen?</target>
         <trans-unit id="PokemonInventoryFullText" translate="yes" xml:space="preserve">
           <source>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</source>
           <target state="translated">Das Pokémon Inventar ist voll, verschicken Sie zunächst einige Pokémon, bevore Sie versuchen, {0} zu fangen.</target>
+        </trans-unit>
+        <trans-unit id="WaitingForNetworkText" translate="yes" xml:space="preserve">
+          <source>Waiting for network to be back...</source>
+          <target state="new">Waiting for network to be back...</target>
         </trans-unit>
       </group>
     </body>
