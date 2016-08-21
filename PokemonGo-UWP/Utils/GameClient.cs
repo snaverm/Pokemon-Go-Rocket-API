@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -785,9 +785,27 @@ namespace PokemonGo_UWP.Utils
             FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId == 0), true);
+
+
+            //Dictionary<string, bool> EggsNPokes = new Dictionary<string, bool>();
+            //Dictionary<string, bool> prevEggsNPokes = EggsNPokes;
+
+            List<string> Eggs = new List<string>();
+            List<string> pEggs = Eggs;
+
             UsedIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId != 0), true);
+
+            foreach (EggIncubator egg in UsedIncubatorsInventory)
+            {
+                Eggs.Add(egg.Id);
+            }
+
+            /*foreach (EggIncubator egg in UsedIncubatorsInventory)
+            {
+                EggsNPokes.Add(egg.PokemonId.ToString(), false);
+            }*/
 
             // Update Pokedex
             PokedexInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.PokedexEntry != null)
@@ -798,6 +816,35 @@ namespace PokemonGo_UWP.Utils
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.IsEgg), true);
+
+            foreach (string egg in pEggs)
+            {
+                if (!Eggs.Contains(egg))
+                {
+                    //Play Egg Hatching Animation
+                }
+            }
+
+            #region badcode
+            //pEggs.Where(t => Eggs.Contains(t));
+
+            /*foreach (PokemonData pokemon in PokemonsInventory)
+            {
+                EggsNPokes.Add(pokemon.PokemonId.ToString(), true);
+            }*/
+
+            //Check for Hatching
+            /*foreach (KeyValuePair<string, bool> PoE in EggsNPokes)
+            {
+                foreach (KeyValuePair<string, bool> pPoE in prevEggsNPokes)
+                {
+                    if ((PoE.Key == pPoE.Key) && (PoE.Value != pPoE.Value))
+                    {
+                        //ShowEvolution from Egg to Basic Pokemon
+                    }
+                }
+            }*/
+            #endregion
 
             // Update candies
             CandyInventory.AddRange(from item in fullInventory
