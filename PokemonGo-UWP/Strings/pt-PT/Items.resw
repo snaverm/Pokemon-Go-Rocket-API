@@ -64,16 +64,16 @@
     <value>Incenso Floral</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incenso</value>
+    <value>Incenso Comum</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
     <value>Incenso Picante</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubadora</value>
+    <value>Incubadora Básica</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Incubadora ilimitada</value>
+    <value>Incubadora Básica ilimitada</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
     <value>Melhoria do Armazenamento de Itens</value>
