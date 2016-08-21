@@ -87,9 +87,10 @@
                            TextWrapping="NoWrap"/>
             </Grid>
         </DataTemplate>
+        
         <DataTemplate x:Key="PokemonUnseen">
             <Grid CornerRadius="5" 
-                  Background="Beige"
+                  Background="#CCC7FD"
                   MaxWidth="92"
                   MaxHeight="92"
                   MinWidth="64"
