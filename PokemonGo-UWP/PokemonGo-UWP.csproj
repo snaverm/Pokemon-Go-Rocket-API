@@ -737,6 +737,9 @@
     <Compile Include="Utils\Settings\Settings.cs" />
     <Compile Include="Utils\Settings\SettingsService.cs" />
     <Compile Include="Utils\Game\SortingModes.cs" />
+    <Compile Include="Utils\Signature\DeviceInfosAndroid.cs" />
+    <Compile Include="Utils\Signature\DeviceInfosIOS.cs" />
+    <Compile Include="Utils\Signature\IDeviceInfoExtended.cs" />
     <Compile Include="Utils\Signature\UdidGenerator.cs" />
     <Compile Include="Utils\Game\UpdateManager.cs" />
     <Compile Include="Utils\Signature\Utilities.cs" />
