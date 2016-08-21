@@ -396,27 +396,34 @@
                                              IsIndeterminate="False"
                                              HorizontalAlignment="Center" />
 
-                                <TextBlock Style="{StaticResource TextGridViewTop}">
-                                   <Run Text="{Binding EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.#\}}" />
-                                   <Run Text="/" />
-                                   <Run FontWeight="Bold"
-                                        Text="{Binding EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
-                                   <Run FontWeight="Bold"
-                                        Text="km" />
-                                </TextBlock>
-                             </StackPanel>
-                          </DataTemplate>
-                       </GridView.ItemTemplate>
-                    </GridView>
-                    <Button x:Name="IncubatorButton" Grid.Row="1"
-                            Style="{StaticResource ButtonCircleBigInverse}"
-                            Tapped="ToggleIncubatorModel"
-                            Margin="16">
-                       <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
-                    </Button>
-                 </Grid>
-              </PivotItem>
-           </Pivot>
+                                        <TextBlock Style="{StaticResource TextGridViewTop}">
+                                                <Run
+                                                    Text="{x:Bind EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.#\}}"
+                                                    x:Phase="0" />
+                                                <Run Text="/" />
+                                                <Run FontWeight="Bold"
+                                                     Text="{x:Bind EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}"
+                                                     x:Phase="0" />
+                                                <Run FontWeight="Bold"
+                                                     Text="km" />
+                                        </TextBlock>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+
+                        <Button x:Name="IncubatorButton" Grid.Row="1"
+                                Style="{StaticResource ButtonCircleBigInverse}"
+                                Tapped="ToggleIncubatorModel"
+                                Margin="16">
+                            <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
+                        </Button>
+
+                    </Grid>
+                </PivotItem>
+
+            </Pivot>
         </Border>
 
         <Button Command="{Binding ReturnToGameScreen}"
