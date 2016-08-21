@@ -8,6 +8,7 @@
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:controls="using:PokemonGo_UWP.Controls"
     mc:Ignorable="d">
@@ -322,8 +323,7 @@
 
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <core:CallMethodAction MethodName="Begin"
-                                                               TargetObject="{Binding ElementName=HideEvolveMenuStoryboard}" />
+                                        <media:ControlStoryboardAction Storyboard="{StaticResource HideEvolveMenuStoryboard}" />
                                     </core:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
 
@@ -372,8 +372,7 @@
                     </Grid.RenderTransform>
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
-                            <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=HideContextMenuStoryboard}" />
+                            <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
                             <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
@@ -421,13 +420,12 @@
             <!--Close Contextmenu-->
             <Button Style="{StaticResource ButtonCircle}"
                     Grid.Row="1"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="17.5,12.5">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
-                        <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=HideContextMenuStoryboard}" />
+                        <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
                 <Image Source="../Assets/Buttons/btn_close.png" />
@@ -605,21 +603,14 @@
 
                                 <StackPanel VerticalAlignment="Bottom">
 
-                                    <Border CornerRadius="2"
-                                            Width="200"
-                                            BorderBrush="#7EDAB5"
-                                            BorderThickness="1">
-
-                                        <ProgressBar Value="{Binding CurrentPokemon.Stamina, Mode=TwoWay}"
-                                                     Width="200"
-                                                     Maximum="{Binding CurrentPokemon.StaminaMax}"
-                                                     Foreground="#6BEFB6"
-                                                     IsIndeterminate="False"
-                                                     HorizontalAlignment="Center"
-                                                     HorizontalContentAlignment="Center"
-                                                     VerticalAlignment="Center" />
-
-                                    </Border>
+                                    <ProgressBar Value="{Binding CurrentPokemon.Stamina, Mode=TwoWay}"
+                                                 Width="200"
+                                                 Maximum="{Binding CurrentPokemon.StaminaMax}"
+                                                 Style="{StaticResource PokemonHPProgressBarStyle}"
+                                                 HorizontalAlignment="Stretch"
+                                                 Margin="48,0"
+                                                 Height="7"
+                                                 Foreground="#6BEFB6" />
 
                                     <TextBlock Margin="0,5"
                                                Foreground="#626264"
@@ -920,7 +911,7 @@
                                         <Grid HorizontalAlignment="Right"
                                               VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="70" />
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel Grid.Column="0"
@@ -1048,22 +1039,25 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,17.5"
-                Command="{Binding ReturnToPokemonInventoryScreen}"
-                >
+                Command="{Binding ReturnToPokemonInventoryScreen}">
             <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
 
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Style="{StaticResource ButtonCircleBig}"
-                Margin="12.5">
+                Style="{ThemeResource ImageButtonStyle}"
+                Height="{ThemeResource UiButtonSize}"
+                Margin="16">
+            
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
-                    <core:CallMethodAction MethodName="Begin"
-                                               TargetObject="{Binding ElementName=ShowContextMenuStoryboard}" />
+                    <media:ControlStoryboardAction Storyboard="{StaticResource ShowContextMenuStoryboard}" />
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
-           
+
+            <Image Source="../Assets/Buttons/btn_menu.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
         </Button>
 
     </RelativePanel>

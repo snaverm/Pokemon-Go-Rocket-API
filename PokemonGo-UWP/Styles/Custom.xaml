@@ -1310,18 +1310,91 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ProgressBar">
                     <Grid Height="{TemplateBinding Height}"
-                              Width="{TemplateBinding Width}"
-                              MinWidth="50" >
+                          Width="{TemplateBinding Width}"
+                          MinWidth="50" >
                         <Border x:Name="ProgressBarTrack" 
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="2" >
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2" >
                             <Border.Background>
                                 <SolidColorBrush Color="Black"
-                                                     Opacity="0.4" />
+                                                 Opacity="0.4" />
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Black"
-                                                     Opacity="0.4" />
+                                                 Opacity="0.4" />
+                            </Border.BorderBrush>
+
+                            <Border Background="{TemplateBinding Foreground}"
+                                    CornerRadius="2"
+                                    HorizontalAlignment="Left"
+                                    x:Name="ProgressBarIndicator"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ProgressBar" x:Name="PlayerProfileExperienceProgressBarStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="ProgressBar"
+                          MinHeight="7"
+                          MinWidth="50" >
+                        <Border x:Name="ProgressBarTrack" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Height="3"
+                                VerticalAlignment="Center"
+                                CornerRadius="2" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{TemplateBinding BorderBrush}"
+                                                 Opacity="0.2" />
+                            </Border.BorderBrush>
+                        </Border>
+
+                        <Grid x:Name="ProgressBarIndicator"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left">
+                            
+                            <Border Background="{TemplateBinding Foreground}"
+                                    CornerRadius="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    Height="3" />
+                            
+                            <Ellipse Width="7" Height="7" 
+                                     Fill="{TemplateBinding Foreground}" 
+                                     Margin="-4,0,0,0"
+                                     HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ProgressBar" x:Name="PokemonHPProgressBarStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid Height="{TemplateBinding Height}"
+                          Width="{TemplateBinding Width}"
+                          MinWidth="50" >
+                        <Border x:Name="ProgressBarTrack" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2" />
                             </Border.BorderBrush>
 
                             <Border Background="{TemplateBinding Foreground}"
@@ -1352,7 +1425,7 @@
         <Setter Property="Foreground" Value="#FF888F93" />
     </Style>
 
-    <Style TargetType="Pivot">
+    <Style TargetType="Pivot" x:Key="PokemonInventoryPivotStyle">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -1392,22 +1465,6 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="Orientation">
-                                <VisualState x:Name="Portrait">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Landscape">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
                             <VisualStateGroup x:Name="NavigationButtonsVisibility">
                                 <VisualState x:Name="NavigationButtonsHidden"/>
                                 <VisualState x:Name="NavigationButtonsVisible">
@@ -1514,14 +1571,14 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="0"/>
+                                            <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.RenderTransform>
                                             <CompositeTransform x:Name="PivotLayoutElementTranslateTransform"/>
                                         </Grid.RenderTransform>
                                         <ContentPresenter x:Name="LeftHeaderPresenter" ContentTemplate="{TemplateBinding LeftHeaderTemplate}" Content="{TemplateBinding LeftHeader}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                        <ContentControl x:Name="HeaderClipper" Grid.Column="1" HorizontalContentAlignment="Stretch" UseSystemFocusVisuals="True">
+                                        <ContentControl x:Name="HeaderClipper" Grid.Column="1" HorizontalContentAlignment="Center" UseSystemFocusVisuals="True">
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry"/>
                                             </ContentControl.Clip>
@@ -1557,7 +1614,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="PivotHeaderItem">
+        <Setter Property="Height" Value="Auto" />
+    </Style>
+
     <Style x:Key="SettingsCheckbox" TargetType="CheckBox">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Transparent" />

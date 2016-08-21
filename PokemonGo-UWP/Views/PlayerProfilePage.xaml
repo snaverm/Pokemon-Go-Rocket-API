@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:gif="using:XamlAnimatedGif"
     xmlns:controls="using:PokemonGo_UWP.Controls"
@@ -113,8 +114,7 @@
                             x:Name="CustomizeUICloseButton">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Click">
-                                <core:CallMethodAction MethodName="Begin"
-                                                       TargetObject="{Binding ElementName=HideInventoryStoryboard}" />
+                                <media:ControlStoryboardAction Storyboard="{StaticResource HideInventoryStoryboard}" />
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                         <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
@@ -203,10 +203,13 @@
 
                                         <ProgressBar Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}}"
                                                      Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
-                                                     Foreground="#15E8DB"
+                                                     Style="{StaticResource PlayerProfileExperienceProgressBarStyle}"
+                                                     Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                                                      HorizontalAlignment="Stretch"
-                                                     Height="8"
                                                      Margin="48,0"
+                                                     Background="Black"
+                                                     BorderThickness="0"
+                                                     Height="7"
                                                      x:Name="ExperienceProgressBar" />
 
                                         <StackPanel Orientation="Horizontal"
@@ -232,7 +235,7 @@
                                         </StackPanel>
 
                                         <Rectangle Fill="LightGray" Margin="0,20" Height="2"/>
-
+                                        
                                         <Grid x:Name="InformationGrid">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
@@ -261,14 +264,14 @@
                                                            Text="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamNameConverter}}" />
                                             </StackPanel>
                                         </Grid>
-                                        
+
                                     </StackPanel>
                                     
                                 </Grid>
                             </RelativePanel>
 
                             <Rectangle Fill="LightGray" Margin="20,2" Height="2"/>
-
+                            
                             <RelativePanel x:Name="InventoryUIPanel"
                                            RelativePanel.AlignTopWithPanel="True"
                                            RelativePanel.AlignLeftWithPanel="True"
@@ -370,8 +373,7 @@
 
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:CallMethodAction MethodName="Begin"
-                                                       TargetObject="{Binding ElementName=ShowInventoryStoryboard}" />
+                            <media:ControlStoryboardAction Storyboard="{StaticResource ShowInventoryStoryboard}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
 
