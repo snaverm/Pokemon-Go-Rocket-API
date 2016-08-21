@@ -168,6 +168,9 @@
   <data name="D_ItemUltraBall" xml:space="preserve">
     <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
   </data>
+  <data name="D_ItemUnknown" xml:space="preserve">
+    <value>This item is unknown and may be added in the future.</value>
+  </data>
   <data name="ItemBlukBerry" xml:space="preserve">
     <value>Bluk Berry</value>
   </data>
