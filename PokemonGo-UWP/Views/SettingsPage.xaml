@@ -84,7 +84,7 @@
 									SelectedIndex="{Binding MapAutomaticOrientationMode_Index, Mode=TwoWay}" >
 					<ComboBoxItem Content="None"/>
 					<ComboBoxItem Content="GPS"/>
-					<ComboBoxItem Content="Compass"/>
+					<ComboBoxItem x:Name="CompassBoxItem" Content="Compass"/>
 				</ComboBox>
 
                 <TextBlock Grid.Row="2"

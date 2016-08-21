@@ -697,6 +697,7 @@
                              Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}, Mode=TwoWay}"
                              Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
                              Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
+                             Background="Black"
                              Height="5"
                              Margin="0,-5,0,0"
                              RelativePanel.AlignLeftWithPanel="True"

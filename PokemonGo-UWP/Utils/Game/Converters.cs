@@ -1306,6 +1306,26 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+
+    public class PokemonPivotHeaderToVisibleConverter : IValueConverter
+    {
+        #region IValueConverter PokemonPivotHeaderToVisible
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var selectedPivotIndex = System.Convert.ToUInt64(value);
+            var thisPivotIndex = System.Convert.ToUInt64(parameter);
+            return (selectedPivotIndex == thisPivotIndex) ? "0.0" : "1.0";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+}
     //parameter is optional
     //Use parameter to pass margin between items and page margin
     //format: itemsMargin,pageMargins
