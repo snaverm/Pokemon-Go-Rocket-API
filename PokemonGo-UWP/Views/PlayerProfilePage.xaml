@@ -203,12 +203,12 @@
 
                                         <ProgressBar Value="{Binding PlayerStats, Converter={StaticResource PlayerDataToCurrentExperienceConverter}}"
                                                      Maximum="{Binding PlayerStats, Converter={StaticResource PlayerDataToTotalLevelExperienceConverter}}"
-                                                     Style="{StaticResource ExperienceProgressbarStyle}"
+                                                     Style="{StaticResource PlayerProfileExperienceProgressBarStyle}"
                                                      Foreground="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
                                                      HorizontalAlignment="Stretch"
                                                      Margin="48,0"
-                                                     BorderBrush="{Binding PlayerProfile.Team, Converter={StaticResource PlayerTeamToTeamColorBrushConverter}}"
-                                                     BorderThickness="1"
+                                                     Background="Black"
+                                                     BorderThickness="0"
                                                      Height="7"
                                                      x:Name="ExperienceProgressBar" />
 
