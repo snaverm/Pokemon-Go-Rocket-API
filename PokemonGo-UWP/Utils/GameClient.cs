@@ -825,27 +825,6 @@ namespace PokemonGo_UWP.Utils
                 }
             }
 
-            #region badcode
-            //pEggs.Where(t => Eggs.Contains(t));
-
-            /*foreach (PokemonData pokemon in PokemonsInventory)
-            {
-                EggsNPokes.Add(pokemon.PokemonId.ToString(), true);
-            }*/
-
-            //Check for Hatching
-            /*foreach (KeyValuePair<string, bool> PoE in EggsNPokes)
-            {
-                foreach (KeyValuePair<string, bool> pPoE in prevEggsNPokes)
-                {
-                    if ((PoE.Key == pPoE.Key) && (PoE.Value != pPoE.Value))
-                    {
-                        //ShowEvolution from Egg to Basic Pokemon
-                    }
-                }
-            }*/
-            #endregion
-
             // Update candies
             CandyInventory.AddRange(from item in fullInventory
                                     where item.InventoryItemData?.Candy != null
