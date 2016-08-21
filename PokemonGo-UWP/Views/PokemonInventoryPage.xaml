@@ -252,7 +252,7 @@
               <PivotItem x:Name="PokemonsPivot">
                   <PivotItem.Header>
                      <StackPanel Orientation="Vertical">
-                        <TextBlock Text="POKÉMON"
+                        <TextBlock  x:Uid="PokemonTextBlock" Text="POKÉMON"
                                    Style="{StaticResource TextPageTitleDark}"
                                    Margin="10,10,10,3"
                                    Foreground="#FF44696C" FontSize="18" />
@@ -340,7 +340,7 @@
               <PivotItem x:Name="EggsPivot">
                   <PivotItem.Header>
                      <StackPanel Orientation="Vertical">
-                        <TextBlock Text="EGGS"
+                        <TextBlock x:Uid="EggsTextBlock" Text="EGGS"
                                    Style="{StaticResource TextPageTitleDark}"
                                    Margin="10,10,10,3"
                                    Foreground="#FF44696C" FontSize="18" />
