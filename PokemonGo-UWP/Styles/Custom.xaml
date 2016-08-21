@@ -1387,7 +1387,7 @@
                           MinWidth="50" >
                         <Border x:Name="ProgressBarTrack" 
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="1" >
+                                CornerRadius="2" >
                             <Border.Background>
                                 <SolidColorBrush Color="Black"
                                                  Opacity="0.2" />
@@ -1398,7 +1398,7 @@
                             </Border.BorderBrush>
 
                             <Border Background="{TemplateBinding Foreground}"
-                                    CornerRadius="1"
+                                    CornerRadius="2"
                                     HorizontalAlignment="Left"
                                     x:Name="ProgressBarIndicator"/>
                         </Border>
