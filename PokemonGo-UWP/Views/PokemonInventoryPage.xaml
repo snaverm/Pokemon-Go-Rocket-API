@@ -393,6 +393,7 @@
 
                                 <ProgressBar Value="{Binding Converter={StaticResource EggDataToEggProgressConverter}}"
                                              Margin="0,5"
+                                             Style="{StaticResource PokemonHPProgressBarStyle}"
                                              Foreground="#399FFF"
                                              IsIndeterminate="False"
                                              HorizontalAlignment="Center" />
