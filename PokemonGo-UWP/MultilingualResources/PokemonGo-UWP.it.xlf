@@ -377,7 +377,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="ActivityDefeatFort" translate="yes" xml:space="preserve">
           <source>Defeat Fort</source>
-          <target state="new">Sconfiggi Fort</target>
+          <target state="new">Sconfiggi l'Arena</target>
         </trans-unit>
         <trans-unit id="ActivityEvolvePokemon" translate="yes" xml:space="preserve">
           <source>Evolve a Pokémon</source>
@@ -481,11 +481,11 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="PokemonInventoryFullText" translate="yes" xml:space="preserve">
           <source>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</source>
-          <target state="new">Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</target>
+          <target state="new">Il tuo inventario Pokémon è pieno, trasferisci qualche Pokémon prima di provare a catturare {0}.</target>
         </trans-unit>
         <trans-unit id="WaitingForNetworkText" translate="yes" xml:space="preserve">
           <source>Waiting for network to be back...</source>
-          <target state="new">Waiting for network to be back...</target>
+          <target state="new">In attesa che il network sia nuovamente accessibile...</target>
         </trans-unit>
       </group>
     </body>
@@ -697,15 +697,15 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="PokedexViewCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught</source>
-          <target state="new">Caught</target>
+          <target state="new">Catturati</target>
         </trans-unit>
         <trans-unit id="PokedexViewSeen.Text" translate="yes" xml:space="preserve">
           <source>Seen</source>
-          <target state="new">Seen</target>
+          <target state="new">Visti</target>
         </trans-unit>
         <trans-unit id="TimesTextBlock.Text" translate="yes" xml:space="preserve">
           <source>times</source>
-          <target state="new">times</target>
+          <target state="new">volte</target>
         </trans-unit>
         <trans-unit id="EggDetailButtonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>START INCUBATION</source>
@@ -717,27 +717,27 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
           <source>TRANSFER</source>
-          <target state="new">TRANSFER</target>
+          <target state="new">TRASFERISCI</target>
         </trans-unit>
         <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
           <source>You must restart the App to take effect.</source>
-          <target state="new">You must restart the App to take effect.</target>
+          <target state="new">Devi riavviare l'App per rendere i cambiamenti effettivi.</target>
         </trans-unit>
         <trans-unit id="SettingsLanguageTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Language</target>
+          <target state="new">Lingua</target>
         </trans-unit>
         <trans-unit id="SettingsCompassEnabledTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Use compass</source>
-          <target state="new">Use compass</target>
+          <target state="new">Usa la bussola</target>
         </trans-unit>
         <trans-unit id="SettingsLiveTileTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Live Tile Mode</source>
-          <target state="new">Live Tile Mode</target>
+          <target state="new">Modalità Live Tile</target>
         </trans-unit>
         <trans-unit id="FavoriteTextBlock.Text" translate="yes" xml:space="preserve">
           <source>FAVORITE</source>
-          <target state="new">FAVORITE</target>
+          <target state="new">PREFERITI</target>
         </trans-unit>
       </group>
     </body>
@@ -876,7 +876,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
         </trans-unit>
         <trans-unit id="ItemRazzBerry" translate="yes" xml:space="preserve">
           <source>Razz Berry</source>
-          <target state="final" state-qualifier="mt-suggestion">Baccalampone</target>
+          <target state="final" state-qualifier="mt-suggestion">Baccalampon</target>
         </trans-unit>
         <trans-unit id="ItemRevive" translate="yes" xml:space="preserve">
           <source>Revive</source>
