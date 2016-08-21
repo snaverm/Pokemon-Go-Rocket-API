@@ -599,7 +599,7 @@ Open page with installation files for manual install?</target>
         </trans-unit>
         <trans-unit id="BadgeSmallRattataDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Rattata</source>
-          <target state="translated">{0} Rattfratz gfange</target>
+          <target state="translated">{0} winzige Rattfratz gfange</target>
         </trans-unit>
         <trans-unit id="BadgeTravelKm" translate="yes" xml:space="preserve">
           <source>Jogger</source>
