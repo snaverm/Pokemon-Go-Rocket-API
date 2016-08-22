@@ -41,24 +41,7 @@ namespace PokemonGo_UWP.Views
                 HideNearbyModalAnimation.Completed += (ss, ee) => { NearbyPokemonModal.IsModal = false; };
 
                 // Add reactivate map update button
-
-                //        < Button
-                //    x: Name = "ReactivateMapAutoUpdate"
-                //    Canvas.ZIndex = "1"
-                //    Style = "{ThemeResource ImageButtonStyle}"
-                //    Height = "{ThemeResource UiButtonSize}"
-                //    HorizontalAlignment = "Right"
-                //    Tapped = "ReactivateMapAutoUpdate_Tapped"
-                //    FontSize = "36" Margin = "0,150,34,0"
-                //    RelativePanel.AlignVerticalCenterWithPanel = "True"
-                //    RelativePanel.AlignRightWithPanel = "True" >
-                //    < Image Source = "../Assets/Icons/RecenterMapIcon.png"
-                //           Stretch = "Uniform"
-                //           HorizontalAlignment = "Stretch"
-                //           Height = "32" />
-
-                //</ Button >
-
+                if (ReactivateMapAutoUpdateButton != null) return;
                 ReactivateMapAutoUpdateButton = new Button
                 {
                     Visibility = Visibility.Collapsed,
