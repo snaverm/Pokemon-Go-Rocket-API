@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -88,7 +88,7 @@ namespace PokemonGo_UWP.Utils
 
 
                 //Collect location data for signature
-                DeviceInfos.Instance.CollectLocationData();
+                DeviceInfos.Current.CollectLocationData();
 
                 // We have no settings yet so we just update without further checks
                 if (GameSetting == null)
@@ -369,7 +369,7 @@ namespace PokemonGo_UWP.Utils
                 GooglePassword = SettingsService.Instance.LastLoginService == AuthType.Google ? credentials.Password : null,
             };
 
-            _client = new Client(_clientSettings, null, DeviceInfos.Instance) { AccessToken = LoadAccessToken() };
+            _client = new Client(_clientSettings, null, DeviceInfos.Current) {AccessToken = LoadAccessToken()};
             var apiFailureStrategy = new ApiFailureStrategy(_client);
             _client.ApiFailure = apiFailureStrategy;
             // Register to AccessTokenChanged
@@ -406,7 +406,7 @@ namespace PokemonGo_UWP.Utils
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            _client = new Client(_clientSettings, null, DeviceInfos.Instance);
+            _client = new Client(_clientSettings, null, DeviceInfos.Current);
             var apiFailureStrategy = new ApiFailureStrategy(_client);
             _client.ApiFailure = apiFailureStrategy;
             // Register to AccessTokenChanged
@@ -439,7 +439,7 @@ namespace PokemonGo_UWP.Utils
                 AuthType = AuthType.Google
             };
 
-            _client = new Client(_clientSettings, null, DeviceInfos.Instance);
+            _client = new Client(_clientSettings, null, DeviceInfos.Current);
             var apiFailureStrategy = new ApiFailureStrategy(_client);
             _client.ApiFailure = apiFailureStrategy;
             // Register to AccessTokenChanged
@@ -467,7 +467,7 @@ namespace PokemonGo_UWP.Utils
             if (!SettingsService.Instance.RememberLoginData)
                 SettingsService.Instance.UserCredentials = null;
             _heartbeat?.StopDispatcher();
-            if (_geolocator != null)
+            if(_geolocator != null)
                 _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             _lastGeopositionMapObjectsRequest = null;
@@ -476,63 +476,63 @@ namespace PokemonGo_UWP.Utils
             NearbyPokestops?.Clear();
         }
 
-        #endregion
+		#endregion
 
-        #region Data Updating
-        private static Geolocator _geolocator;
-        private static Compass _compass;
+		#region Data Updating
+		private static Geolocator _geolocator;
+		private static Compass _compass;
 
-        public static Geoposition Geoposition { get; private set; }
+		public static Geoposition Geoposition { get; private set; }
 
-        private static Heartbeat _heartbeat;
+		private static Heartbeat _heartbeat;
 
-        /// <summary>
-        ///     We fire this event when the current position changes
-        /// </summary>
-        public static event EventHandler<Geoposition> GeopositionUpdated;
-        #region Compass Stuff
-        /// <summary>
-        /// We fire this event when the current compass position changes
-        /// </summary>
-        public static event EventHandler<CompassReading> HeadingUpdated;
-        private static void compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
-        {
-            HeadingUpdated?.Invoke(sender, args.Reading);
-        }
-        #endregion
-        /// <summary>
-        ///     Starts the timer to update map objects and the handler to update position
-        /// </summary>
-        public static async Task InitializeDataUpdate()
-        {
-            #region Compass management
-            SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
-            {
-                if (e.PropertyName == nameof(SettingsService.Instance.MapAutomaticOrientationMode))
-                {
-                    switch (SettingsService.Instance.MapAutomaticOrientationMode)
-                    {
-                        case MapAutomaticOrientationModes.Compass:
-                            _compass = Compass.GetDefault();
-                            _compass.ReportInterval = Math.Max(_compass.MinimumReportInterval, 50);
-                            _compass.ReadingChanged += compass_ReadingChanged;
-                            break;
-                        case MapAutomaticOrientationModes.None:
-                        case MapAutomaticOrientationModes.GPS:
-                        default:
-                            if (_compass != null)
-                            {
-                                _compass.ReadingChanged -= compass_ReadingChanged;
-                                _compass = null;
-                            }
-                            break;
-                    }
-                }
-            };
-            //Trick to trigger the PropertyChanged for MapAutomaticOrientationMode ;)
-            SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
-            #endregion
-            _geolocator = new Geolocator
+		/// <summary>
+		///     We fire this event when the current position changes
+		/// </summary>
+		public static event EventHandler<Geoposition> GeopositionUpdated;
+		#region Compass Stuff
+		/// <summary>
+		/// We fire this event when the current compass position changes
+		/// </summary>
+		public static event EventHandler<CompassReading> HeadingUpdated;
+		private static void compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
+		{
+			HeadingUpdated?.Invoke(sender, args.Reading);
+		}
+		#endregion
+		/// <summary>
+		///     Starts the timer to update map objects and the handler to update position
+		/// </summary>
+		public static async Task InitializeDataUpdate()
+		{
+			#region Compass management
+			SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
+			{
+				if (e.PropertyName == nameof(SettingsService.Instance.MapAutomaticOrientationMode))
+				{
+					switch (SettingsService.Instance.MapAutomaticOrientationMode)
+					{
+						case MapAutomaticOrientationModes.Compass:
+							_compass = Compass.GetDefault();
+							_compass.ReportInterval = Math.Max(_compass.MinimumReportInterval, 50);
+							_compass.ReadingChanged += compass_ReadingChanged;
+							break;
+						case MapAutomaticOrientationModes.None:
+						case MapAutomaticOrientationModes.GPS:
+						default:
+							if (_compass != null)
+							{
+								_compass.ReadingChanged -= compass_ReadingChanged;
+								_compass = null;
+							}
+							break;
+					}
+				}
+			};
+			//Trick to trigger the PropertyChanged for MapAutomaticOrientationMode ;)
+			SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
+			#endregion
+			_geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
                 DesiredAccuracyInMeters = 5,
@@ -618,7 +618,7 @@ namespace PokemonGo_UWP.Utils
             var newPokeStops = mapObjects.Item1.MapCells
                 .SelectMany(x => x.Forts)
                 .Where(x => x.Type == FortType.Checkpoint)
-                .ToArray();
+                .ToArray();            
             Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
             NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
@@ -627,7 +627,7 @@ namespace PokemonGo_UWP.Utils
             Logger.Write($"Found {newLuredPokemon.Length} lured Pokemon");
             LuredPokemons.UpdateByIndexWith(newLuredPokemon, x => x);
             Logger.Write("Finished updating map objects");
-
+            
             // Update Hatched Eggs
             GetHatchedEggsResponse hatchedEggResponse = mapObjects.Item2;
             if (hatchedEggResponse.Success)
@@ -793,7 +793,6 @@ namespace PokemonGo_UWP.Utils
             FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId == 0), true);
-
             UsedIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId != 0), true);
@@ -807,22 +806,6 @@ namespace PokemonGo_UWP.Utils
                 .Where(item => item != null && item.PokemonId > 0), true);
             EggsInventory.AddRange(fullInventory.Select(item => item.InventoryItemData.PokemonData)
                 .Where(item => item != null && item.IsEgg), true);
-
-            //List<string> Eggs = new List<string>();
-            //List<string> pEggs = Eggs;
-            //Eggs = new List<string>();
-            /*foreach (EggIncubator egg in UsedIncubatorsInventory)
-            {
-                Eggs.Add(egg.Id);
-            }*/
-
-            /*foreach (string egg in pEggs)
-            {
-                if (!Eggs.Contains(egg))
-                {
-                    //Play Egg Hatching Animation
-                }
-            }*/
 
             // Update candies
             CandyInventory.AddRange(from item in fullInventory
@@ -877,15 +860,6 @@ namespace PokemonGo_UWP.Utils
         public static async Task<DiskEncounterResponse> EncounterLurePokemon(ulong encounterId, string spawnpointId)
         {
             return await _client.Encounter.EncounterLurePokemon(encounterId, spawnpointId);
-        }
-
-        /// <summary>
-        ///     Executes egg hatching
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<GetHatchedEggsResponse> EggHatched()
-        {
-            return await _client.Inventory.GetHatchedEgg();
         }
 
         /// <summary>
