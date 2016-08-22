@@ -812,6 +812,7 @@
     <Content Include="Assets\UI\inventory.png" />
     <Content Include="Assets\UI\Park.jpg" />
     <Content Include="Assets\UI\Pokeball.png" />
+    <Content Include="Assets\UI\PokemonGoGrey.png" />
     <Content Include="Assets\UI\pokestopBG.png" />
     <Content Include="Assets\UI\poksetop.png" />
     <Content Include="Assets\UI\stardust.png" />
