@@ -804,22 +804,5 @@
             </Border>
 
         </Grid>
-
-        <Button
-            x:Name="ReactivateMapAutoUpdate"
-            Canvas.ZIndex="1"
-            Style="{ThemeResource ImageButtonStyle}"
-            Height="{ThemeResource UiButtonSize}"
-            HorizontalAlignment="Right"
-            Tapped="ReactivateMapAutoUpdate_Tapped"
-            FontSize="36" Margin="0,150,34,0"
-            RelativePanel.AlignVerticalCenterWithPanel="True"
-            RelativePanel.AlignRightWithPanel="True">
-            <Image Source="../Assets/Icons/RecenterMapIcon.png"
-                   Stretch="Uniform"
-                   HorizontalAlignment="Stretch"
-                   Height="32" />
-
-        </Button>
     </RelativePanel>
 </Page>
