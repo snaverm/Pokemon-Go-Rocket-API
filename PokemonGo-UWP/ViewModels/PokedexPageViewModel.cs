@@ -51,6 +51,14 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                     }
                 }
+                for(int i = PokemonFoundAndSeen.Count-1; i >= 1; i--)
+                {
+                    var item = PokemonFoundAndSeen[i];
+                    if (item.Value == null || (item.Value.TimesEncountered == 0 && item.Value.TimesCaptured == 0))
+                        PokemonFoundAndSeen.RemoveAt(i);
+                    else //Pokemon seen or captured
+                        break;
+                }
                 CapturedPokemons = pokedexItems.Where(x => x.TimesCaptured > 0).Count();
                 SeenPokemons = pokedexItems.Count;
             }
