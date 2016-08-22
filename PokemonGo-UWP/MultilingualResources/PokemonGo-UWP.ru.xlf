@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="ru" original="POKEMONGO-UWP/STRINGS/EN-US/ACHIEVEMENTS.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
@@ -136,11 +136,11 @@
         </trans-unit>
         <trans-unit id="BadgeEvolvedTotalDescription" translate="yes" xml:space="preserve">
           <source>Evolved {0} Pokémon</source>
-           <target state="translated">Развился {0} Pokémon</target>
+          <target state="translated">Развился {0} Pokémon</target>
         </trans-unit>
         <trans-unit id="BadgeHatchedTotalDescription" translate="yes" xml:space="preserve">
-           <source>Hatched {0} Pokemon</source>
-           <target state="translated">>Пойман {0} Pokemon</target>
+          <source>Hatched {0} Pokemon</source>
+          <target state="translated">&gt;Пойман {0} Pokemon</target>
         </trans-unit>
         <trans-unit id="BadgePikachuDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Pikachu</source>
@@ -155,8 +155,9 @@
           <target state="translated">Посещен {0} Покестоп</target>
         </trans-unit>
         <trans-unit id="BadgeSmallRattataDescription" translate="yes" xml:space="preserve">
-          <source>Caught {0} Rattata</source>
-          <target state="translated">Пойман {0} Раттата</target>
+          <source>Caught {0} small Rattata</source>
+          <target state="needs-review-translation">Пойман {0} Раттата</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BadgeTravelKmDescription" translate="yes" xml:space="preserve">
           <source>Walked {0} km</source>
@@ -711,34 +712,34 @@ Open page with installation files for manual install?</source>
           <source>Use an incubator to incubate the Egg.</source>
           <target state="translated">Используйте инкубатор для яиц.</target>
         </trans-unit>
-         <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>Remember Map Zoom</source>
-           <target state="translated">Запоминать маштаб карты</target>
-         </trans-unit>
-         <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>TRANSFER</source>
-           <target state="translated">Передать</target>
-         </trans-unit>
-         <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>You must restart the App to take effect.</source>
-           <target state="translated">Вы должны перезагузить приложение для получения эффекта.</target>
-         </trans-unit>
-         <trans-unit id="SettingsLanguageTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>Language</source>
-           <target state="translated">язык</target>
-         </trans-unit>
-         <trans-unit id="SettingsCompassEnabledTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>Use compass</source>
-           <target state="translated">Использовать компас</target>
-         </trans-unit>
-         <trans-unit id="SettingsLiveTileTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>Live Tile Mode</source>
-           <target state="translated">Живая плитка</target>
-         </trans-unit>
-         <trans-unit id="FavoriteTextBlock.Text" translate="yes" xml:space="preserve">
-           <source>FAVORITE</source>
-           <target state="translated">Избранные</target>
-         </trans-unit>
+        <trans-unit id="SettingsRememberMapZoomTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Remember Map Zoom</source>
+          <target state="translated">Запоминать маштаб карты</target>
+        </trans-unit>
+        <trans-unit id="TransferTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>TRANSFER</source>
+          <target state="translated">Передать</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageRestartTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>You must restart the App to take effect.</source>
+          <target state="translated">Вы должны перезагузить приложение для получения эффекта.</target>
+        </trans-unit>
+        <trans-unit id="SettingsLanguageTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="translated">язык</target>
+        </trans-unit>
+        <trans-unit id="SettingsCompassEnabledTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Use compass</source>
+          <target state="translated">Использовать компас</target>
+        </trans-unit>
+        <trans-unit id="SettingsLiveTileTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Live Tile Mode</source>
+          <target state="translated">Живая плитка</target>
+        </trans-unit>
+        <trans-unit id="FavoriteTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>FAVORITE</source>
+          <target state="translated">Избранные</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -769,12 +770,14 @@ Open page with installation files for manual install?</source>
           <target state="translated">Благовонии со странным запахом который приманивает диких Покемонов к вам в течении 30 минут.</target>
         </trans-unit>
         <trans-unit id="D_ItemIncubatorBasic" translate="yes" xml:space="preserve">
-          <source>A device that incubates an Egg as you walk until it is ready to hatch.</source>
-          <target state="translated">Девайс который занимается инкубацией яиц пока вы двигаетесь.</target>
+          <source>A device that incubates an Egg as you walk until it is ready to hatch. Breaks after 3 uses.</source>
+          <target state="needs-review-translation">Девайс который занимается инкубацией яиц пока вы двигаетесь.</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="D_ItemIncubatorBasicUnlimited" translate="yes" xml:space="preserve">
-          <source>A device that incubates an Egg as you walk until it is ready to hatch.</source>
-          <target state="translated">Девайс который занимается инкубацией яиц пока вы двигаетесь.</target>
+          <source>A device that incubates an Egg as you walk until it is ready to hatch. Unlimited use!</source>
+          <target state="needs-review-translation">Девайс который занимается инкубацией яиц пока вы двигаетесь.</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="D_ItemMasterBall" translate="yes" xml:space="preserve">
           <source>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</source>
@@ -809,20 +812,24 @@ Open page with installation files for manual install?</source>
           <target state="translated">ГиперМикстура</target>
         </trans-unit>
         <trans-unit id="ItemIncenseCool" translate="yes" xml:space="preserve">
-          <source>Incense Cool</source>
-          <target state="translated">Холодные Благовонии</target>
+          <source>Cool Incense</source>
+          <target state="needs-review-translation">Холодные Благовонии</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncenseFloral" translate="yes" xml:space="preserve">
-          <source>Incense Floral</source>
-          <target state="translated">Растительные Благовонии</target>
+          <source>Floral Incense</source>
+          <target state="needs-review-translation">Растительные Благовонии</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncenseOrdinary" translate="yes" xml:space="preserve">
-          <source>Incense Ordinary</source>
-          <target state="translated">Обычные Благовонии</target>
+          <source>Incense</source>
+          <target state="needs-review-translation">Обычные Благовонии</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncenseSpicy" translate="yes" xml:space="preserve">
-          <source>Incense Spicy</source>
-          <target state="translated">Острые Благовонии</target>
+          <source>Spicy Incense</source>
+          <target state="needs-review-translation">Острые Благовонии</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemIncubatorBasic" translate="yes" xml:space="preserve">
           <source>Incubator</source>
@@ -889,8 +896,9 @@ Open page with installation files for manual install?</source>
           <target state="translated">Супер Микстура</target>
         </trans-unit>
         <trans-unit id="ItemTroyDisk" translate="yes" xml:space="preserve">
-          <source>Troy Disk</source>
-          <target state="translated">Диск "Трой"</target>
+          <source>Lure Module</source>
+          <target state="needs-review-translation">Диск "Трой"</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ItemUltraBall" translate="yes" xml:space="preserve">
           <source>Ultra Ball</source>
@@ -915,6 +923,30 @@ Open page with installation files for manual install?</source>
         <trans-unit id="ItemXMiracle" translate="yes" xml:space="preserve">
           <source>X Miracle</source>
           <target state="translated">X Магия</target>
+        </trans-unit>
+        <trans-unit id="D_ItemLuckyEgg" translate="yes" xml:space="preserve">
+          <source>A Lucky Egg that's filled with happiness! Earns double XP for 30 minutes.</source>
+          <target state="new">A Lucky Egg that's filled with happiness! Earns double XP for 30 minutes.</target>
+        </trans-unit>
+        <trans-unit id="D_ItemRazzBerry" translate="yes" xml:space="preserve">
+          <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
+          <target state="new">Feed this to a Pokémon, and it will be easier to catch on your next throw.</target>
+        </trans-unit>
+        <trans-unit id="D_ItemSpecialCamera" translate="yes" xml:space="preserve">
+          <source>When you encounter Pokémon in the wild, you can use your camera to photograph them.</source>
+          <target state="new">When you encounter Pokémon in the wild, you can use your camera to photograph them.</target>
+        </trans-unit>
+        <trans-unit id="D_ItemSuperPotion" translate="yes" xml:space="preserve">
+          <source>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 50 points.</source>
+          <target state="new">A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 50 points.</target>
+        </trans-unit>
+        <trans-unit id="D_ItemTroyDisk" translate="yes" xml:space="preserve">
+          <source>A module that attracts Pokémon to a Pokéstop for 30 min. The effect benefits other people nearby.</source>
+          <target state="new">A module that attracts Pokémon to a Pokéstop for 30 min. The effect benefits other people nearby.</target>
+        </trans-unit>
+        <trans-unit id="D_ItemUnknown" translate="yes" xml:space="preserve">
+          <source>This item is unknown and may be added in the future.</source>
+          <target state="new">This item is unknown and may be added in the future.</target>
         </trans-unit>
       </group>
     </body>
