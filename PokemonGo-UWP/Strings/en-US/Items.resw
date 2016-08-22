@@ -162,6 +162,9 @@
     <data name="D_ItemPinapBerry" xml:space="preserve">
     <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
   </data>
+    <data name="D_ItemWeparBerry" xml:space="preserve">
+    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
+  </data>
   <data name="D_ItemRevive" xml:space="preserve">
     <value>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</value>
   </data>
