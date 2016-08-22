@@ -114,13 +114,13 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
-        private SensordInfoAndroid _sensors = new SensordInfoAndroid();
+        private SensorInfoAndroid _sensors = new SensorInfoAndroid();
         public ISensorInfo Sensors => _sensors;
 
         //not filled on android
         public IActivityStatus ActivityStatus => null;
 
-        private class SensordInfoAndroid : ISensorInfo
+        private class SensorInfoAndroid : ISensorInfo
         {
             private readonly Random _random = new Random();
 

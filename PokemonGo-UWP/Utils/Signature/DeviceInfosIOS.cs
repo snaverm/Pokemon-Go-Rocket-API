@@ -123,10 +123,10 @@ namespace PokemonGo_UWP.Utils
         }
 
 
-        private SensordInfoIOS _sensors = new SensordInfoIOS();
+        private SensorInfoIOS _sensors = new SensorInfoIOS();
         public ISensorInfo Sensors => _sensors;
 
-        private class SensordInfoIOS : ISensorInfo
+        private class SensorInfoIOS : ISensorInfo
         {
             private readonly Random _random = new Random();
 
