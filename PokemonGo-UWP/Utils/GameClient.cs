@@ -696,6 +696,7 @@ namespace PokemonGo_UWP.Utils
             {
                 PlayerStats = tmpStats;
                 var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
+                await UpdateInventory();
                 return levelUpResponse;
             }
             PlayerStats = tmpStats;
