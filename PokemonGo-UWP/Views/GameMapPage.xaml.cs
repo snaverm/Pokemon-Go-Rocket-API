@@ -74,17 +74,20 @@ namespace PokemonGo_UWP.Views
 
         private void GameMapPage_OrientationChanged(DisplayInformation sender, object args)
         {
-            if (sender.NativeOrientation == DisplayOrientations.Portrait)
+            if (SettingsService.Instance.IsBatterySaverEnabled)
             {
-                HideBatterySaver.Begin();
+                if (sender.NativeOrientation == DisplayOrientations.Portrait)
+                {
+                    HideBatterySaver.Begin();
 
-                IsHitTestVisible = true;
-            }
-            else if (sender.NativeOrientation == DisplayOrientations.PortraitFlipped)
-            {
-                ShowBatterySaver.Begin();
+                    IsHitTestVisible = true;
+                }
+                else if (sender.NativeOrientation == DisplayOrientations.PortraitFlipped)
+                {
+                    ShowBatterySaver.Begin();
 
-                IsHitTestVisible = false;
+                    IsHitTestVisible = false;
+                }
             }
         }
 
