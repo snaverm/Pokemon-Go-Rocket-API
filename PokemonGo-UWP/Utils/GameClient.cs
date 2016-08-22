@@ -627,6 +627,14 @@ namespace PokemonGo_UWP.Utils
             Logger.Write($"Found {newLuredPokemon.Length} lured Pokemon");
             LuredPokemons.UpdateByIndexWith(newLuredPokemon, x => x);
             Logger.Write("Finished updating map objects");
+            
+            // Update Hatched Eggs
+            GetHatchedEggsResponse hatchedEggResponse = mapObjects.Item2;
+            if (hatchedEggResponse.Success)
+            {
+                Logger.Write("Egg Hatched");
+                MessageDialog EggHatched = new MessageDialog("An Egg Hatched into a" + hatchedEggResponse.PokemonId.ToString() + "\nYou also got " + hatchedEggResponse.StardustAwarded.ToString() +  " and " + hatchedEggResponse.ExperienceAwarded.ToString() + "XP");
+            }
         }
 
         #endregion
