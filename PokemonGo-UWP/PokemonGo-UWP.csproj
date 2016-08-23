@@ -687,6 +687,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PoGoMessageDialog.xaml.cs">
+      <DependentUpon>PoGoMessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SemiCircularProgressBar.xaml.cs">
       <DependentUpon>SemiCircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -828,6 +831,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\PoGoMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SemiCircularProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

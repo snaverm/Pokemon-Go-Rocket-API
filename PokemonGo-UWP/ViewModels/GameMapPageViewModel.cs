@@ -21,6 +21,7 @@ using Resources = PokemonGo_UWP.Utils.Resources;
 using POGOProtos.Enums;
 using POGOProtos.Map.Pokemon;
 using Google.Protobuf;
+using PokemonGo_UWP.Controls;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -322,7 +323,17 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _gotoPlayerProfilePage ??
                 (_gotoPlayerProfilePage =
-                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
+                    new DelegateCommand(() => {
+                        //NavigationService.Navigate(typeof(PlayerProfilePage), true); 
+                        var dial = new PoGoMessageDialog();
+                        dial.CoverBackground = true;
+                        dial.ShowCancelButton = true;
+                        dial.AnimationType = PoGoMessageDialogAnimation.Bottom;
+                        dial.CancelText = "ABBRECHEN";
+                        dial.AcceptText = "JO";
+                        dial.ShowDialog();
+
+                    }));
 
         private DelegateCommand _gotoPokedexPage;
         public DelegateCommand GotoPokedexPageCommand

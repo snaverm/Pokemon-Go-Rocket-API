@@ -632,7 +632,7 @@
                                 <!-- Pokemon Data -->
                                 <Grid Margin="16,8"
                                       BorderThickness="0,0,0,0.5"
-                                      BorderBrush="Gray">
+                                      BorderBrush="#dadada">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" x:Name="PokemonTypeCol" />
                                         <ColumnDefinition Width="*" />
@@ -643,9 +643,7 @@
                                     <Grid x:Name="PokemonTypeGrid"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Stretch"
-                                          BorderBrush="Gray"
-                                          Margin="0,0,0,8"
-                                          BorderThickness="0,0,0.5,0">
+                                          Margin="0,0,0,8">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -664,7 +662,7 @@
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="32,0"
-                                                   FontSize="19"
+                                                   FontSize="17"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Grid.Row="0"
                                                    Text="{Binding PokemonExtraData.Type}"
@@ -674,19 +672,23 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    Grid.Row="1"
                                                    x:Uid="TypeTextBlock"
-                                                   FontSize="12"
+                                                   FontSize="10"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Foreground="#FF5D686A" />
+                                        <Rectangle Grid.RowSpan="2" 
+                                                   Width="0.5" 
+                                                   Height="28"
+                                                   HorizontalAlignment="Right" 
+                                                   VerticalAlignment="Top"
+                                                   Fill="#dadada"/>
                                     </Grid>
 
                                     <!-- Pokemon Weight -->
-                                    <Grid VerticalAlignment="Center"
+                                    <Grid VerticalAlignment="Top"
                                           Grid.Column="1"
                                           Margin="0,0,0,8"
-                                          HorizontalAlignment="Stretch"
-                                          BorderBrush="Gray"
-                                          BorderThickness="0,0,0.5,0">
+                                          HorizontalAlignment="Stretch">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -696,20 +698,25 @@
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
                                                    Grid.Row="0">
-                                            <Run
-                                                Text="{Binding CurrentPokemon.WeightKg, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
-                                                FontSize="19" />
+                                            <Run Text="{Binding CurrentPokemon.WeightKg, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
+                                                 FontSize="17" />
                                             <Run x:Uid="KgTextBlock"
-                                                 FontSize="15" />
+                                                 FontSize="13" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    x:Uid="WeightTextBlock"
-                                                   FontSize="12"
+                                                   FontSize="10"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Grid.Row="1"
                                                    Foreground="#FF5D686A" />
+                                        <Rectangle Grid.RowSpan="2" 
+                                                   Width="0.5" 
+                                                   Height="28"
+                                                   HorizontalAlignment="Right" 
+                                                   VerticalAlignment="Top"
+                                                   Fill="#dadada"/>
                                     </Grid>
 
                                     <!-- Pokemon Size -->
@@ -727,15 +734,15 @@
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}">
                                             <Run Text="{Binding CurrentPokemon.HeightM, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
-                                                 FontSize="19" />
+                                                 FontSize="17" />
                                             <Run x:Uid="MTextBlock"
-                                                 FontSize="15" />
+                                                 FontSize="12" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    x:Uid="HeightTextBlock"
                                                    Grid.Row="1"
-                                                   FontSize="12"
+                                                   FontSize="10"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Foreground="#FF5D686A" />
@@ -815,7 +822,7 @@
                                             Margin="25,0,0,0"
                                             Padding="0"
                                             HorizontalAlignment="Stretch"
-                                            Height="50"
+                                            Height="40"
                                             Background="#E8EEE0">
                                         <interactivity:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
@@ -824,11 +831,11 @@
                                         </interactivity:Interaction.Behaviors>
                                         <Grid HorizontalAlignment="Right"
                                               VerticalAlignment="Center"
-                                              Margin="0,0,10,0">
+                                              Margin="0">
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="70" />
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel Grid.Column="0"
@@ -841,7 +848,7 @@
                                                        Margin="0,0,3,0"
                                                        Source="ms-appx:///Assets/Icons/stardust_vector.png" />
                                                 <TextBlock Foreground="#626264"
-                                                           FontSize="14"
+                                                           FontSize="12"
                                                            FontFamily="{StaticResource LatoRegularFont}"
                                                            Text="{Binding StardustToPowerUp}"
                                                            HorizontalAlignment="Left"
@@ -865,7 +872,7 @@
                                                        Margin="0,0,3,0"
                                                        Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                                 <TextBlock Foreground="#626264"
-                                                           FontSize="14"
+                                                           FontSize="12"
                                                            FontFamily="{StaticResource LatoRegularFont}"
                                                            Text="{Binding CandiesToPowerUp}"
                                                            HorizontalAlignment="Left"
@@ -887,21 +894,9 @@
                                             CharacterSpacing="40"
                                             HorizontalAlignment="Stretch"
                                             x:Uid="PowerUpButton"
-                                            FontSize="18"
                                             MinWidth="125"
-                                            Padding="15,0"
-                                            Margin="0,15"
-                                            Command="{Binding PowerUpPokemonCommand}"
-                                            FontFamily="{StaticResource LatoLightFont}"
-                                            Foreground="#FFF5F4F4">
-
-                                        <Button.Background>
-                                            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                                                <GradientStop Color="#FFC5FFAC" Offset="0" />
-                                                <GradientStop Color="#FF35908F" Offset="0.8" />
-                                            </LinearGradientBrush>
-                                        </Button.Background>
-                                    </Button>
+                                            Margin="0,10"
+                                            Command="{Binding PowerUpPokemonCommand}" />
 
                                     <!-- Evolve -->
                                     <Border Grid.Column="0"
@@ -910,7 +905,7 @@
                                             Margin="25,0,0,0"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Top"
-                                            Height="50"
+                                            Height="40"
                                             Background="#E8EEE0"
                                             Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">
                                         <interactivity:Interaction.Behaviors>
@@ -935,11 +930,10 @@
                                                        Margin="0,0,3,0"
                                                        Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                                 <TextBlock Foreground="#626264"
-                                                       FontSize="14"
+                                                           FontSize="12"
                                                            FontFamily="{StaticResource LatoRegularFont}"
-                                                       Text="{Binding PokemonExtraData.CandyToEvolve}"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Center" >
+                                                           Text="{Binding PokemonExtraData.CandyToEvolve}"
+                                                           VerticalAlignment="Center" >
                                                 <interactivity:Interaction.Behaviors>
                                                     <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}" 
                                                                               ComparisonCondition="LessThan" 
@@ -959,22 +953,10 @@
                                             CharacterSpacing="40"
                                             HorizontalAlignment="Stretch"
                                             x:Uid="EvolveButton"
-                                            FontSize="18"
                                             MinWidth="125"
-                                            Padding="15,0"
                                             Margin="0,0,0,15"
-                                            FontFamily="{StaticResource LatoLightFont}"
                                             Command="{Binding EvolvePokemonCommand}"
-                                            Foreground="#FFF5F4F4"
-                                            Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">
-
-                                        <Button.Background>
-                                            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                                                <GradientStop Color="#FFC5FFAC" Offset="0" />
-                                                <GradientStop Color="#FF35908F" Offset="0.8" />
-                                            </LinearGradientBrush>
-                                        </Button.Background>
-                                    </Button>
+                                            Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}" />
 
                                 </Grid>
 
@@ -982,7 +964,7 @@
                                 <Grid Padding="8"
                                       Margin="16,0"
                                       HorizontalAlignment="Stretch"
-                                      BorderBrush="Gray"
+                                      BorderBrush="#dadada"
                                       BorderThickness="0,0.5,0,0.5">
 
                                     <Grid.RowDefinitions>
@@ -1004,6 +986,7 @@
                                                    VerticalAlignment="Bottom" />
                                         <TextBlock Foreground="#A8AAA9"
                                                    FontFamily="{StaticResource LatoRegularFont}"
+                                                   FontSize="13"
                                                    Text="{Binding CurrentPokemon.Move1, Converter={StaticResource PokemonMoveToMoveTypeStringConverter}}"
                                                    VerticalAlignment="Top" />
                                     </StackPanel>
@@ -1013,7 +996,8 @@
                                                Foreground="#414544"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Right"
-                                               Text="{Binding CurrentPokemon.Move1, Converter={StaticResource PokemonMoveToMovePowerConverter}}" />
+                                               Text="{Binding CurrentPokemon.Move1, Converter={StaticResource PokemonMoveToMovePowerConverter}}"
+                                               FontFamily="{StaticResource LatoRegularFont}"/>
 
                                     <!-- Move 2 -->
                                     <StackPanel Grid.Row="1"
@@ -1024,6 +1008,7 @@
                                                    VerticalAlignment="Bottom" />
                                         <TextBlock Foreground="#A8AAA9"
                                                    FontFamily="{StaticResource LatoRegularFont}"
+                                                   FontSize="13"
                                                    Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMoveTypeStringConverter}}"
                                                    VerticalAlignment="Top" />
                                     </StackPanel>
@@ -1033,7 +1018,8 @@
                                                Foreground="#414544"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Right"
-                                               Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMovePowerConverter}}" />
+                                               Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMovePowerConverter}}"
+                                               FontFamily="{StaticResource LatoRegularFont}"/>
 
                                 </Grid>
                                 <TextBlock HorizontalAlignment="Center"

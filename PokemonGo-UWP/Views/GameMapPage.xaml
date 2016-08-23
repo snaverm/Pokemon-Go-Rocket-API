@@ -10,6 +10,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    xmlns:contr="using:PokemonGo_UWP.Controls"
     xmlns:entities="using:PokemonGo_UWP.Entities"
     xmlns:controls="using:Template10.Controls"
     xmlns:utils="using:PokemonGo_UWP.Utils"
@@ -230,6 +231,8 @@
     </Page.Resources>
 
     <RelativePanel>
+
+
 
         <maps:MapControl BusinessLandmarksVisible="False"
                          TargetCameraChanged="GameMapControl_TargetCameraChanged"
@@ -804,5 +807,7 @@
             </Border>
 
         </Grid>
+
+
     </RelativePanel>
 </Page>
