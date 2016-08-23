@@ -237,26 +237,37 @@
                         <Run Text="{Binding SeenPokemons}" Typography.Capitals="AllSmallCaps"/>
                     </TextBlock>
                 </StackPanel>
-                <GridView ItemsSource="{Binding PokemonFoundAndSeen}" 
+                <ScrollViewer Grid.Row="1" 
+                              Canvas.ZIndex="0" 
+                              VerticalScrollMode="Auto" 
+                              VerticalScrollBarVisibility="Hidden" 
+                              HorizontalScrollMode="Disabled"
+                              HorizontalScrollBarVisibility="Hidden">
+                    <StackPanel>
+                        <GridView ItemsSource="{Binding PokemonFoundAndSeen}" 
                           Grid.Row="1"
                           Canvas.ZIndex="0"
                           ScrollViewer.VerticalScrollMode="Auto"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapGrid Orientation="Horizontal"
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapGrid Orientation="Horizontal"
                               HorizontalAlignment="Center"
                               VerticalChildrenAlignment="Top"
                               MaximumRowsOrColumns="5" />
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplateSelector>
-                        <utils:PokedexEntryDataTemplateSelector 
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplateSelector>
+                                <utils:PokedexEntryDataTemplateSelector 
                             PokemonCaptured="{StaticResource PokemonCaptured}"
                             PokemonSeen="{StaticResource PokemonSeen}"
                             PokemonUnseen="{StaticResource PokemonUnseen}"/>
-                    </GridView.ItemTemplateSelector>
-                </GridView>
+                            </GridView.ItemTemplateSelector>
+                        </GridView>
+                        <StackPanel Height="88" /> <!-- Used for exit button margin-->
+                    </StackPanel>
+                </ScrollViewer>
+                
             </Grid>
         </Border>
 
