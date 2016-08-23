@@ -88,7 +88,7 @@ namespace PokemonGo_UWP
         private static async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            await ExceptionHandler.HandleException(new Exception(e.Message));
+            await ExceptionHandler.HandleException(e.Exception);
             // We should be logging these exceptions too so they can be tracked down.
             if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
                 HockeyClient.Current.TrackException(e.Exception);
@@ -222,9 +222,7 @@ namespace PokemonGo_UWP
 
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
             GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
-            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
-
-            await AudioUtils.Init();            
+            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;         
 
             await Task.CompletedTask;
         }        
