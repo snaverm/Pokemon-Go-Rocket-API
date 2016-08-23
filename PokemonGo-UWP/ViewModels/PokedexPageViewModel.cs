@@ -51,6 +51,14 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                     }
                 }
+                for(int i = PokemonFoundAndSeen.Count-1; i >= 1; i--)
+                {
+                    var item = PokemonFoundAndSeen[i];
+                    if (item.Value == null || (item.Value.TimesEncountered == 0 && item.Value.TimesCaptured == 0))
+                        PokemonFoundAndSeen.RemoveAt(i);
+                    else //Pokemon seen or captured
+                        break;
+                }
                 CapturedPokemons = pokedexItems.Where(x => x.TimesCaptured > 0).Count();
                 SeenPokemons = pokedexItems.Count;
             }
@@ -182,7 +190,10 @@ namespace PokemonGo_UWP.ViewModels
         }
         private PokedexEntry GetPokedexEntry(PokemonId pokemon)
         {
-            return PokemonFoundAndSeen.Where(x => x.Key == pokemon).ElementAt(0).Value;
+            var found = PokemonFoundAndSeen.Where(x => x.Key == pokemon);
+            if (found != null && found.Count() > 0)
+                return found.ElementAt(0).Value;
+            return null;
         }
     }
 }
