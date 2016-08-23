@@ -21,7 +21,15 @@
         <GradientStop Color="#43bab6" Offset="0.8" />
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Name="TitleTextColor" Color="#44696c" />
+    <SolidColorBrush x:Key="TitleTextColor" Color="#44696c" />
+
+    <!-- STYLE - FONTS -->
+
+    <FontFamily x:Key="LatoRegularFont">ms-appx:///Assets/Fonts/Lato-Regular.ttf#Lato</FontFamily>
+    <FontFamily x:Key="LatoItalicFont">ms-appx:///Assets/Fonts/Lato-Italic.ttf#Lato</FontFamily>
+    <FontFamily x:Key="LatoLightFont">ms-appx:///Assets/Fonts/Lato-Light.ttf#Lato</FontFamily>
+    <FontFamily x:Key="LatoMediumFont">ms-appx:///Assets/Fonts/Lato-Medium.ttf#Lato</FontFamily>
+    <FontFamily x:Key="LatoBoldFont">ms-appx:///Assets/Fonts/Lato-Bold.ttf#Lato</FontFamily>
 
     <!-- STYLE - BUTTONS -->
 
@@ -790,7 +798,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#ffffff" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="Margin" Value="15" />
     </Style>
 
@@ -823,7 +831,7 @@
     <Style x:Key="ProfilePageText" TargetType="TextBlock">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="#44696C" />
-        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
     </Style>
     
     <Style x:Key="ProfilePageSmallText" TargetType="TextBlock" BasedOn="{StaticResource ProfilePageText}">
@@ -842,7 +850,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#459F87" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="Margin" Value="15" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -851,7 +859,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#459F87" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="../Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="Margin" Value="15" />
     </Style>
 

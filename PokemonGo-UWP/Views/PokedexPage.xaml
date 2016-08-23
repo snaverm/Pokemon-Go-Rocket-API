@@ -304,14 +304,14 @@
                                         Margin="4,0,4,0" 
                                         VerticalAlignment="Center" 
                                         Foreground="#577074"
-                                        FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"/>
+                                        FontFamily="{StaticResource LatoMediumFont}"/>
                                 <TextBlock
                                         Text="{Binding SelectedPokedexEntry.Key, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
                                         VerticalAlignment="Bottom"
                                         CharacterSpacing="30"
                                         HorizontalAlignment="Left"
                                         Foreground="#577074"
-                                        FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"
+                                        FontFamily="{StaticResource LatoMediumFont}"
                                         FontSize="28"
                                         Grid.Column="2"
                                         Margin="4,0,0,0" />

@@ -511,7 +511,7 @@
                                    x:Uid="CpTextBlock"
                                    Foreground="White"
                                    FontSize="20"
-                                   FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"/>
+                                   FontFamily="{StaticResource LatoMediumFont}"/>
 
                         <TextBlock Grid.Column="1"
                                    Margin="0,0,0,-2"
@@ -520,7 +520,7 @@
                                    Text="{Binding CurrentPokemon.Cp}"
                                    Foreground="White"
                                    FontSize="29"
-                                   FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium" />
+                                   FontFamily="{StaticResource LatoMediumFont}" />
 
 
 
@@ -582,7 +582,7 @@
                                     CharacterSpacing="30"
                                     TextAlignment="Center"
                                     Foreground="{StaticResource TitleTextColor}"
-                                    FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"
+                                    FontFamily="{StaticResource LatoMediumFont}"
                                     FontSize="28"/>
                                     <TextBlock Margin="0" 
                                                Grid.Column="2"
@@ -613,6 +613,7 @@
                                                  Foreground="#6BEFB6" />
 
                                     <TextBlock Margin="0,5"
+                                               FontFamily="{StaticResource LatoRegularFont}"
                                                Foreground="#626264"
                                                HorizontalAlignment="Center">
                                         <Run x:Uid="HpTextBlock" />
@@ -653,6 +654,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="0,0,8,0"
                                                    FontSize="19"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="{StaticResource TitleTextColor}">
                                             <Run Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
@@ -663,6 +665,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="32,0"
                                                    FontSize="19"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Grid.Row="0"
                                                    Text="{Binding PokemonExtraData.Type}"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
@@ -672,6 +675,7 @@
                                                    Grid.Row="1"
                                                    x:Uid="TypeTextBlock"
                                                    FontSize="12"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Foreground="#FF5D686A" />
                                     </Grid>
@@ -689,6 +693,7 @@
                                         </Grid.RowDefinitions>
 
                                         <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
                                                    Grid.Row="0">
                                             <Run
@@ -701,6 +706,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    x:Uid="WeightTextBlock"
                                                    FontSize="12"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Grid.Row="1"
                                                    Foreground="#FF5D686A" />
@@ -718,6 +724,7 @@
 
 
                                         <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}">
                                             <Run Text="{Binding CurrentPokemon.HeightM, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
                                                  FontSize="19" />
@@ -729,6 +736,7 @@
                                                    x:Uid="HeightTextBlock"
                                                    Grid.Row="1"
                                                    FontSize="12"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Margin="0,3"
                                                    Foreground="#FF5D686A" />
                                     </Grid>
@@ -759,6 +767,7 @@
                                                    Source="ms-appx:///Assets/Icons/stardust_vector.png" />
                                             <TextBlock Foreground="#626264"
                                                        FontSize="19"
+                                                       FontFamily="{StaticResource LatoRegularFont}"
                                                        Text="{Binding StardustAmount}"
                                                        Margin="-4,0,0,0"
                                                        HorizontalAlignment="Left"
@@ -783,6 +792,7 @@
                                                    Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                             <TextBlock Foreground="#626264"
                                                        FontSize="19"
+                                                       FontFamily="{StaticResource LatoRegularFont}"
                                                        Text="{Binding CurrentCandy.Candy_}"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center" />
@@ -832,6 +842,7 @@
                                                        Source="ms-appx:///Assets/Icons/stardust_vector.png" />
                                                 <TextBlock Foreground="#626264"
                                                            FontSize="14"
+                                                           FontFamily="{StaticResource LatoRegularFont}"
                                                            Text="{Binding StardustToPowerUp}"
                                                            HorizontalAlignment="Left"
                                                            Margin="-6,0,0,0"
@@ -855,6 +866,7 @@
                                                        Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                                 <TextBlock Foreground="#626264"
                                                            FontSize="14"
+                                                           FontFamily="{StaticResource LatoRegularFont}"
                                                            Text="{Binding CandiesToPowerUp}"
                                                            HorizontalAlignment="Left"
                                                            VerticalAlignment="Center" >
@@ -924,6 +936,7 @@
                                                        Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                                 <TextBlock Foreground="#626264"
                                                        FontSize="14"
+                                                           FontFamily="{StaticResource LatoRegularFont}"
                                                        Text="{Binding PokemonExtraData.CandyToEvolve}"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center" >
@@ -986,9 +999,11 @@
                                     <StackPanel Grid.Row="0"
                                                 Grid.Column="0">
                                         <TextBlock Foreground="#414544"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Text="{Binding CurrentPokemon.Move1, Converter={StaticResource PokemonMoveToMoveNameConverter}}"
                                                    VerticalAlignment="Bottom" />
                                         <TextBlock Foreground="#A8AAA9"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Text="{Binding CurrentPokemon.Move1, Converter={StaticResource PokemonMoveToMoveTypeStringConverter}}"
                                                    VerticalAlignment="Top" />
                                     </StackPanel>
@@ -1004,9 +1019,11 @@
                                     <StackPanel Grid.Row="1"
                                                 Grid.Column="0">
                                         <TextBlock Foreground="#414544"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMoveNameConverter}}"
                                                    VerticalAlignment="Bottom" />
                                         <TextBlock Foreground="#A8AAA9"
+                                                   FontFamily="{StaticResource LatoRegularFont}"
                                                    Text="{Binding CurrentPokemon.Move2, Converter={StaticResource PokemonMoveToMoveTypeStringConverter}}"
                                                    VerticalAlignment="Top" />
                                     </StackPanel>
@@ -1023,8 +1040,8 @@
                                            Margin="5"
                                            Foreground="#626264"
                                            FontSize="10"
-                                           Text="{Binding CurrentPokemon.CreationTimeMs, Converter={StaticResource MsToDateFormatConverter}}"
-                                           x:Uid="StardustTextBlock"/>
+                                           FontFamily="{StaticResource LatoRegularFont}"
+                                           Text="{Binding CurrentPokemon.CreationTimeMs, Converter={StaticResource MsToDateFormatConverter}}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
