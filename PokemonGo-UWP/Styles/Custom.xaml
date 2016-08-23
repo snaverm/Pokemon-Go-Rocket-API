@@ -13,6 +13,13 @@
         <GradientStop Color="#ffffff" Offset="0" />
         <GradientStop Color="#b6ffa7" Offset="0.8" />
     </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="PageBackgroundGradient" 
+                         StartPoint="0,0" 
+                         EndPoint="1,1">
+        <GradientStop Color="#b3ee9a" Offset="0" />
+        <GradientStop Color="#43bab6" Offset="0.8" />
+    </LinearGradientBrush>
 
     <!-- STYLE - BUTTONS -->
 
