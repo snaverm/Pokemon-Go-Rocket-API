@@ -581,7 +581,7 @@
                                     VerticalAlignment="Top"
                                     CharacterSpacing="30"
                                     TextAlignment="Center"
-                                    Foreground="#577074"
+                                    Foreground="{StaticResource TitleTextColor}"
                                     FontFamily="ms-appx:/Assets/Fonts/Lato-Medium.ttf#Lato Medium"
                                     FontSize="28"/>
                                     <TextBlock Margin="0" 
@@ -654,7 +654,7 @@
                                                    Margin="0,0,8,0"
                                                    FontSize="19"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
-                                                   Foreground="#577074">
+                                                   Foreground="{StaticResource TitleTextColor}">
                                             <Run Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                             <Run Text="/" />
                                             <Run Text="{Binding PokemonExtraData.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
@@ -666,7 +666,7 @@
                                                    Grid.Row="0"
                                                    Text="{Binding PokemonExtraData.Type}"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
-                                                   Foreground="#577074" />
+                                                   Foreground="{StaticResource TitleTextColor}" />
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Grid.Row="1"
@@ -689,7 +689,7 @@
                                         </Grid.RowDefinitions>
 
                                         <TextBlock HorizontalAlignment="Center"
-                                                   Foreground="#577074"
+                                                   Foreground="{StaticResource TitleTextColor}"
                                                    Grid.Row="0">
                                             <Run
                                                 Text="{Binding CurrentPokemon.WeightKg, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
@@ -718,10 +718,9 @@
 
 
                                         <TextBlock HorizontalAlignment="Center"
-                                                   Foreground="#577074">
-                                            <Run
-                                                Text="{Binding CurrentPokemon.HeightM, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
-                                                FontSize="19" />
+                                                   Foreground="{StaticResource TitleTextColor}">
+                                            <Run Text="{Binding CurrentPokemon.HeightM, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:N2\}}"
+                                                 FontSize="19" />
                                             <Run x:Uid="MTextBlock"
                                                  FontSize="15" />
                                         </TextBlock>

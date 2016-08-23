@@ -21,6 +21,8 @@
         <GradientStop Color="#43bab6" Offset="0.8" />
     </LinearGradientBrush>
 
+    <SolidColorBrush x:Name="TitleTextColor" Color="#44696c" />
+
     <!-- STYLE - BUTTONS -->
 
     <Style x:Key="ButtonSubmit" TargetType="Button">
