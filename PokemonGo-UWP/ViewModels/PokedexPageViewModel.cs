@@ -190,7 +190,10 @@ namespace PokemonGo_UWP.ViewModels
         }
         private PokedexEntry GetPokedexEntry(PokemonId pokemon)
         {
-            return PokemonFoundAndSeen.Where(x => x.Key == pokemon).ElementAt(0).Value;
+            var found = PokemonFoundAndSeen.Where(x => x.Key == pokemon);
+            if (found != null && found.Count() > 0)
+                return found.ElementAt(0).Value;
+            return null;
         }
     }
 }
