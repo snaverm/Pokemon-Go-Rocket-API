@@ -323,17 +323,7 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _gotoPlayerProfilePage ??
                 (_gotoPlayerProfilePage =
-                    new DelegateCommand(() => {
-                        //NavigationService.Navigate(typeof(PlayerProfilePage), true); 
-                        var dial = new PoGoMessageDialog();
-                        dial.CoverBackground = true;
-                        dial.ShowCancelButton = true;
-                        dial.AnimationType = PoGoMessageDialogAnimation.Bottom;
-                        dial.CancelText = "ABBRECHEN";
-                        dial.AcceptText = "JO";
-                        dial.ShowDialog();
-
-                    }));
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
 
         private DelegateCommand _gotoPokedexPage;
         public DelegateCommand GotoPokedexPageCommand
