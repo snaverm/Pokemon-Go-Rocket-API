@@ -247,7 +247,7 @@
 
     <Grid>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
-            <Image Source="../Assets/UI/PokemonGoGrey.png" Opacity=".2" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Image Source="../Assets/UI/logoDark.png" MaxWidth="180" MaxHeight="180" Opacity=".2" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </StackPanel>
         <RelativePanel Name="GamePanel" Grid.Row="0">
             <maps:MapControl BusinessLandmarksVisible="False"
