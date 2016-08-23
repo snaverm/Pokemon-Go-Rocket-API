@@ -1024,24 +1024,6 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
-    
-        public class CurrentTimeToMapCenterIcon : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            var currentTime = int.Parse(DateTime.Now.ToString("HH"));
-            return currentTime > 7 && currentTime < 19 ? MapColorScheme.Light : MapColorScheme.Dark;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
 
     public class PokemonDataToPokemonStaminaConverter : IValueConverter
     {
