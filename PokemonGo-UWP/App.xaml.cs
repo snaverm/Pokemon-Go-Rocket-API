@@ -24,7 +24,6 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP
 {

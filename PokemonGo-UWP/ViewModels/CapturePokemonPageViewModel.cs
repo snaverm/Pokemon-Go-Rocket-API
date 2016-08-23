@@ -17,7 +17,6 @@ using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
-using Universal_Authenticator_v2.Views;
 using Resources = PokemonGo_UWP.Utils.Resources;
 using POGOProtos.Settings.Master;
 

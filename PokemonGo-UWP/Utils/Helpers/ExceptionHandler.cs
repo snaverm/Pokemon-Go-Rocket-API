@@ -2,7 +2,6 @@
 using Windows.UI.Popups;
 using PokemonGo_UWP.Views;
 using Template10.Common;
-using Universal_Authenticator_v2.Views;
 using System;
 using System.Diagnostics;
 
