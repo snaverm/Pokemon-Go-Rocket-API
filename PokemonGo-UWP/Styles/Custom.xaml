@@ -37,21 +37,23 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#a8e090" Offset="0" />
-                    <GradientStop Color="#35908f" Offset="0.8" />
+                    <GradientStop Color="#a2db95" Offset="0" />
+                    <GradientStop Color="#24ccaa" Offset="1" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Height" Value="50" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="15" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="15,0" />
+        <Setter Property="Foreground" Value="#BBFFFFFF" />
         <Setter Property="FontSize" Value="15" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -115,7 +117,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}" Margin="0" CornerRadius="25">
+                                Background="{TemplateBinding Background}" Margin="0" CornerRadius="20">
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Content="{TemplateBinding Content}"
@@ -134,14 +136,16 @@
         <Setter Property="Background" Value="#cc0000" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Height" Value="50" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="15" />
+        <Setter Property="Padding" Value="15,0" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="15" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -198,7 +202,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}" Margin="0" CornerRadius="25">
+                                Background="{TemplateBinding Background}" Margin="0" CornerRadius="20">
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Content="{TemplateBinding Content}"
@@ -222,9 +226,10 @@
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="15" />
+        <Setter Property="Padding" Value="15,0" />
         <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -283,6 +288,72 @@
                                               Margin="{TemplateBinding Padding}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonCancel" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="15" />
+        <Setter Property="Padding" Value="15,0" />
+        <Setter Property="Foreground" Value="#48c597" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoBoldFont}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="Grid" Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="PointerOver" To="Pressed">
+                                        <Storyboard />
+                                    </VisualTransition>
+                                    <VisualTransition From="Pressed" To="PointerOver">
+                                        <Storyboard />
+                                    </VisualTransition>
+                                    <VisualTransition From="PointerOver" To="Normal">
+                                        <Storyboard />
+                                    </VisualTransition>
+                                    <VisualTransition From="Pressed" To="Normal">
+                                        <Storyboard />
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Pressed">
+                                    <!--a4030a-->
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                                       Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#a4030a" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="FontSize"
+                                                                       Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="17" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          Foreground="{TemplateBinding Foreground}" FontWeight="Normal"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -727,9 +798,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-    
 
 
     <!-- STYLE - END -->
