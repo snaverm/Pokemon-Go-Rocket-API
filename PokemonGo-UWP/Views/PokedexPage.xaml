@@ -385,16 +385,16 @@
                                                    FontSize="19"
                                                    Visibility="{Binding PokemonDetails.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="#577074">
-                                            <Run Text="{Binding PokemonDetails.Type}" />
+                                            <Run Text="{Binding PokemonDetails.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                             <Run Text="/" />
-                                            <Run Text="{Binding PokemonDetails.Type2}" />
+                                            <Run Text="{Binding PokemonDetails.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="32,0"
                                                    FontSize="19"
                                                    Grid.Row="0"
-                                                   Text="{Binding PokemonDetails.Type}"
+                                                   Text="{Binding PokemonDetails.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
                                                    Visibility="{Binding PokemonDetails.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="#577074" />
 
