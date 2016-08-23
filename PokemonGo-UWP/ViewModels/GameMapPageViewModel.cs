@@ -20,6 +20,7 @@ using Template10.Mvvm;
 using Resources = PokemonGo_UWP.Utils.Resources;
 using POGOProtos.Enums;
 using POGOProtos.Map.Pokemon;
+using Google.Protobuf;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -70,12 +71,14 @@ namespace PokemonGo_UWP.ViewModels
             if (parameter == null || mode == NavigationMode.Back) return;
             var gameMapNavigationMode = (GameMapNavigationModes)parameter;
 
+            AudioUtils.PlaySound(AudioUtils.GAMEPLAY);
+
             // We just resumed from suspension so we restart update service and we get data from suspension state
             if (suspensionState.Any())
             {
                 // Recovering the state
-                PlayerProfile = JsonConvert.DeserializeObject<PlayerData>((string)suspensionState[nameof(PlayerProfile)]);
-                PlayerStats = JsonConvert.DeserializeObject<PlayerStats>((string)suspensionState[nameof(PlayerStats)]);
+                PlayerProfile.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerProfile)]).CreateCodedInput());
+                PlayerStats.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerStats)]).CreateCodedInput());
                 // Restarting update service
                 await StartGpsDataService();
                 return;
@@ -117,9 +120,9 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
             if (suspending)
-            {
-                suspensionState[nameof(PlayerProfile)] = JsonConvert.SerializeObject(PlayerProfile);
-                suspensionState[nameof(PlayerStats)] = JsonConvert.SerializeObject(PlayerStats);
+            {                
+                suspensionState[nameof(PlayerProfile)] = PlayerProfile.ToByteString().ToBase64();
+                suspensionState[nameof(PlayerStats)] = PlayerStats.ToByteString().ToBase64();
             }
             await Task.CompletedTask;
         }
@@ -320,6 +323,13 @@ namespace PokemonGo_UWP.ViewModels
                 _gotoPlayerProfilePage ??
                 (_gotoPlayerProfilePage =
                     new DelegateCommand(() => { NavigationService.Navigate(typeof(PlayerProfilePage), true); }));
+
+        private DelegateCommand _gotoPokedexPage;
+        public DelegateCommand GotoPokedexPageCommand
+            =>
+                _gotoPokedexPage ??
+                (_gotoPokedexPage =
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(PokedexPage)); }));
 
         #endregion
 

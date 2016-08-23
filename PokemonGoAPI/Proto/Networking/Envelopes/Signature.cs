@@ -23,7 +23,7 @@ namespace POGOProtos.Networking.Envelopes {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ci9QT0dPUHJvdG9zL05ldHdvcmtpbmcvRW52ZWxvcGVzL1NpZ25hdHVyZS5w",
-            "cm90bxIfUE9HT1Byb3Rvcy5OZXR3b3JraW5nLkVudmVsb3BlcyKtDwoJU2ln",
+            "cm90bxIfUE9HT1Byb3Rvcy5OZXR3b3JraW5nLkVudmVsb3BlcyK0DwoJU2ln",
             "bmF0dXJlEh0KFXRpbWVzdGFtcF9zaW5jZV9zdGFydBgCIAEoBBJMCgxsb2Nh",
             "dGlvbl9maXgYBCADKAsyNi5QT0dPUHJvdG9zLk5ldHdvcmtpbmcuRW52ZWxv",
             "cGVzLlNpZ25hdHVyZS5Mb2NhdGlvbkZpeBJLCghncHNfaW5mbxgFIAEoCzI5",
@@ -36,42 +36,42 @@ namespace POGOProtos.Networking.Envelopes {
             "aWduYXR1cmUuQWN0aXZpdHlTdGF0dXMSFgoObG9jYXRpb25faGFzaDEYCiAB",
             "KAQSFgoObG9jYXRpb25faGFzaDIYFCABKAQSFAoMc2Vzc2lvbl9oYXNoGBYg",
             "ASgMEhEKCXRpbWVzdGFtcBgXIAEoBBIUCgxyZXF1ZXN0X2hhc2gYGCADKAQS",
-            "EQoJdW5rbm93bjI1GBkgASgDGukBCgtMb2NhdGlvbkZpeBIQCghwcm92aWRl",
+            "EQoJdW5rbm93bjI1GBkgASgDGvABCgtMb2NhdGlvbkZpeBIQCghwcm92aWRl",
             "chgBIAEoCRIaChJ0aW1lc3RhbXBfc25hcHNob3QYAiABKAQSEAoIbGF0aXR1",
             "ZGUYDSABKAISEQoJbG9uZ2l0dWRlGA4gASgCEhsKE2hvcml6b250YWxfYWNj",
-            "dXJhY3kYFCABKAISEAoIYWx0aXR1ZGUYFSABKAISGQoRdmVydGljYWxfYWNj",
-            "dXJhY3kYFiABKAISFwoPcHJvdmlkZXJfc3RhdHVzGBogASgEEg0KBWZsb29y",
-            "GBsgASgNEhUKDWxvY2F0aW9uX3R5cGUYHCABKAQarwEKDkFuZHJvaWRHcHNJ",
-            "bmZvEhMKC3RpbWVfdG9fZml4GAEgASgEEhYKDnNhdGVsbGl0ZXNfcHJuGAIg",
-            "AygFEg8KB2F6aW11dGgYAyADKAISEQoJZWxldmF0aW9uGAQgAygCEgsKA3Nu",
-            "chgFIAMoAhITCgtoYXNfYWxtYW5hYxgGIAMoCBIVCg1oYXNfZXBoZW1lcmlz",
-            "GAcgAygIEhMKC3VzZWRfaW5fZml4GAggAygIGr4DCgpTZW5zb3JJbmZvEhoK",
-            "EnRpbWVzdGFtcF9zbmFwc2hvdBgBIAEoBBIWCg5tYWduZXRvbWV0ZXJfeBgD",
-            "IAEoARIWCg5tYWduZXRvbWV0ZXJfeRgEIAEoARIWCg5tYWduZXRvbWV0ZXJf",
-            "ehgFIAEoARIaChJhbmdsZV9ub3JtYWxpemVkX3gYBiABKAESGgoSYW5nbGVf",
-            "bm9ybWFsaXplZF95GAcgASgBEhoKEmFuZ2xlX25vcm1hbGl6ZWRfehgIIAEo",
-            "ARITCgthY2NlbF9yYXdfeBgKIAEoARITCgthY2NlbF9yYXdfeRgLIAEoARIT",
-            "CgthY2NlbF9yYXdfehgMIAEoARIXCg9neXJvc2NvcGVfcmF3X3gYDSABKAES",
-            "FwoPZ3lyb3Njb3BlX3Jhd195GA4gASgBEhcKD2d5cm9zY29wZV9yYXdfehgP",
-            "IAEoARIaChJhY2NlbF9ub3JtYWxpemVkX3gYECABKAESGgoSYWNjZWxfbm9y",
-            "bWFsaXplZF95GBEgASgBEhoKEmFjY2VsX25vcm1hbGl6ZWRfehgSIAEoARIa",
-            "ChJhY2NlbGVyb21ldGVyX2F4ZXMYEyABKAQa2gIKCkRldmljZUluZm8SEQoJ",
-            "ZGV2aWNlX2lkGAEgASgJEhoKEmFuZHJvaWRfYm9hcmRfbmFtZRgCIAEoCRIa",
-            "ChJhbmRyb2lkX2Jvb3Rsb2FkZXIYAyABKAkSFAoMZGV2aWNlX2JyYW5kGAQg",
-            "ASgJEhQKDGRldmljZV9tb2RlbBgFIAEoCRIfChdkZXZpY2VfbW9kZWxfaWRl",
-            "bnRpZmllchgGIAEoCRIZChFkZXZpY2VfbW9kZWxfYm9vdBgHIAEoCRIdChVo",
-            "YXJkd2FyZV9tYW51ZmFjdHVyZXIYCCABKAkSFgoOaGFyZHdhcmVfbW9kZWwY",
-            "CSABKAkSFgoOZmlybXdhcmVfYnJhbmQYCiABKAkSFQoNZmlybXdhcmVfdGFn",
-            "cxgMIAEoCRIVCg1maXJtd2FyZV90eXBlGA0gASgJEhwKFGZpcm13YXJlX2Zp",
-            "bmdlcnByaW50GA4gASgJGrsBCg5BY3Rpdml0eVN0YXR1cxIVCg1zdGFydF90",
-            "aW1lX21zGAEgASgEEhYKDnVua25vd25fc3RhdHVzGAIgASgIEg8KB3dhbGtp",
-            "bmcYAyABKAgSDwoHcnVubmluZxgEIAEoCBISCgpzdGF0aW9uYXJ5GAUgASgI",
-            "EhIKCmF1dG9tb3RpdmUYBiABKAgSDwoHdGlsdGluZxgHIAEoCBIPCgdjeWNs",
-            "aW5nGAggASgIEg4KBnN0YXR1cxgJIAEoDGIGcHJvdG8z"));
+            "dXJhY3kYFCABKAISFwoPcmFkaWFsX2FjY3VyYWN5GBUgASgCEhkKEXZlcnRp",
+            "Y2FsX2FjY3VyYWN5GBYgASgCEhcKD3Byb3ZpZGVyX3N0YXR1cxgaIAEoBBIN",
+            "CgVmbG9vchgbIAEoDRIVCg1sb2NhdGlvbl90eXBlGBwgASgEGq8BCg5BbmRy",
+            "b2lkR3BzSW5mbxITCgt0aW1lX3RvX2ZpeBgBIAEoBBIWCg5zYXRlbGxpdGVz",
+            "X3BybhgCIAMoBRIPCgdhemltdXRoGAMgAygCEhEKCWVsZXZhdGlvbhgEIAMo",
+            "AhILCgNzbnIYBSADKAISEwoLaGFzX2FsbWFuYWMYBiADKAgSFQoNaGFzX2Vw",
+            "aGVtZXJpcxgHIAMoCBITCgt1c2VkX2luX2ZpeBgIIAMoCBq+AwoKU2Vuc29y",
+            "SW5mbxIaChJ0aW1lc3RhbXBfc25hcHNob3QYASABKAQSFgoObWFnbmV0b21l",
+            "dGVyX3gYAyABKAESFgoObWFnbmV0b21ldGVyX3kYBCABKAESFgoObWFnbmV0",
+            "b21ldGVyX3oYBSABKAESGgoSYW5nbGVfbm9ybWFsaXplZF94GAYgASgBEhoK",
+            "EmFuZ2xlX25vcm1hbGl6ZWRfeRgHIAEoARIaChJhbmdsZV9ub3JtYWxpemVk",
+            "X3oYCCABKAESEwoLYWNjZWxfcmF3X3gYCiABKAESEwoLYWNjZWxfcmF3X3kY",
+            "CyABKAESEwoLYWNjZWxfcmF3X3oYDCABKAESFwoPZ3lyb3Njb3BlX3Jhd194",
+            "GA0gASgBEhcKD2d5cm9zY29wZV9yYXdfeRgOIAEoARIXCg9neXJvc2NvcGVf",
+            "cmF3X3oYDyABKAESGgoSYWNjZWxfbm9ybWFsaXplZF94GBAgASgBEhoKEmFj",
+            "Y2VsX25vcm1hbGl6ZWRfeRgRIAEoARIaChJhY2NlbF9ub3JtYWxpemVkX3oY",
+            "EiABKAESGgoSYWNjZWxlcm9tZXRlcl9heGVzGBMgASgEGtoCCgpEZXZpY2VJ",
+            "bmZvEhEKCWRldmljZV9pZBgBIAEoCRIaChJhbmRyb2lkX2JvYXJkX25hbWUY",
+            "AiABKAkSGgoSYW5kcm9pZF9ib290bG9hZGVyGAMgASgJEhQKDGRldmljZV9i",
+            "cmFuZBgEIAEoCRIUCgxkZXZpY2VfbW9kZWwYBSABKAkSHwoXZGV2aWNlX21v",
+            "ZGVsX2lkZW50aWZpZXIYBiABKAkSGQoRZGV2aWNlX21vZGVsX2Jvb3QYByAB",
+            "KAkSHQoVaGFyZHdhcmVfbWFudWZhY3R1cmVyGAggASgJEhYKDmhhcmR3YXJl",
+            "X21vZGVsGAkgASgJEhYKDmZpcm13YXJlX2JyYW5kGAogASgJEhUKDWZpcm13",
+            "YXJlX3RhZ3MYDCABKAkSFQoNZmlybXdhcmVfdHlwZRgNIAEoCRIcChRmaXJt",
+            "d2FyZV9maW5nZXJwcmludBgOIAEoCRq7AQoOQWN0aXZpdHlTdGF0dXMSFQoN",
+            "c3RhcnRfdGltZV9tcxgBIAEoBBIWCg51bmtub3duX3N0YXR1cxgCIAEoCBIP",
+            "Cgd3YWxraW5nGAMgASgIEg8KB3J1bm5pbmcYBCABKAgSEgoKc3RhdGlvbmFy",
+            "eRgFIAEoCBISCgphdXRvbW90aXZlGAYgASgIEg8KB3RpbHRpbmcYByABKAgS",
+            "DwoHY3ljbGluZxgIIAEoCBIOCgZzdGF0dXMYCSABKAxiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature), global::POGOProtos.Networking.Envelopes.Signature.Parser, new[]{ "TimestampSinceStart", "LocationFix", "GpsInfo", "SensorInfo", "DeviceInfo", "ActivityStatus", "LocationHash1", "LocationHash2", "SessionHash", "Timestamp", "RequestHash", "Unknown25" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature.Types.LocationFix), global::POGOProtos.Networking.Envelopes.Signature.Types.LocationFix.Parser, new[]{ "Provider", "TimestampSnapshot", "Latitude", "Longitude", "HorizontalAccuracy", "Altitude", "VerticalAccuracy", "ProviderStatus", "Floor", "LocationType" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature), global::POGOProtos.Networking.Envelopes.Signature.Parser, new[]{ "TimestampSinceStart", "LocationFix", "GpsInfo", "SensorInfo", "DeviceInfo", "ActivityStatus", "LocationHash1", "LocationHash2", "SessionHash", "Timestamp", "RequestHash", "Unknown25" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature.Types.LocationFix), global::POGOProtos.Networking.Envelopes.Signature.Types.LocationFix.Parser, new[]{ "Provider", "TimestampSnapshot", "Latitude", "Longitude", "HorizontalAccuracy", "RadialAccuracy", "VerticalAccuracy", "ProviderStatus", "Floor", "LocationType" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature.Types.AndroidGpsInfo), global::POGOProtos.Networking.Envelopes.Signature.Types.AndroidGpsInfo.Parser, new[]{ "TimeToFix", "SatellitesPrn", "Azimuth", "Elevation", "Snr", "HasAlmanac", "HasEphemeris", "UsedInFix" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature.Types.SensorInfo), global::POGOProtos.Networking.Envelopes.Signature.Types.SensorInfo.Parser, new[]{ "TimestampSnapshot", "MagnetometerX", "MagnetometerY", "MagnetometerZ", "AngleNormalizedX", "AngleNormalizedY", "AngleNormalizedZ", "AccelRawX", "AccelRawY", "AccelRawZ", "GyroscopeRawX", "GyroscopeRawY", "GyroscopeRawZ", "AccelNormalizedX", "AccelNormalizedY", "AccelNormalizedZ", "AccelerometerAxes" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::POGOProtos.Networking.Envelopes.Signature.Types.DeviceInfo), global::POGOProtos.Networking.Envelopes.Signature.Types.DeviceInfo.Parser, new[]{ "DeviceId", "AndroidBoardName", "AndroidBootloader", "DeviceBrand", "DeviceModel", "DeviceModelIdentifier", "DeviceModelBoot", "HardwareManufacturer", "HardwareModel", "FirmwareBrand", "FirmwareTags", "FirmwareType", "FirmwareFingerprint" }, null, null, null),
@@ -568,7 +568,7 @@ namespace POGOProtos.Networking.Envelopes {
           latitude_ = other.latitude_;
           longitude_ = other.longitude_;
           horizontalAccuracy_ = other.horizontalAccuracy_;
-          altitude_ = other.altitude_;
+          radialAccuracy_ = other.radialAccuracy_;
           verticalAccuracy_ = other.verticalAccuracy_;
           providerStatus_ = other.providerStatus_;
           floor_ = other.floor_;
@@ -634,6 +634,13 @@ namespace POGOProtos.Networking.Envelopes {
         public const int HorizontalAccuracyFieldNumber = 20;
         private float horizontalAccuracy_;
         /// <summary>
+        ///  uint32 unknown11 = 11;
+        ///  uint32 unknown12 = 12;
+        ///  uint32 unknown15 = 15;
+        ///  uint32 unknown16 = 16;
+        ///  uint32 unknown17 = 17;
+        ///  uint32 unknown18 = 18;
+        ///  uint32 unknown19 = 19;
         ///  ??? shows up in struct, dunno where these go
         ///  float device_speed;
         ///  float device_course;
@@ -646,14 +653,17 @@ namespace POGOProtos.Networking.Envelopes {
           }
         }
 
-        /// <summary>Field number for the "altitude" field.</summary>
-        public const int AltitudeFieldNumber = 21;
-        private float altitude_;
+        /// <summary>Field number for the "radial_accuracy" field.</summary>
+        public const int RadialAccuracyFieldNumber = 21;
+        private float radialAccuracy_;
+        /// <summary>
+        ///  in meters, android only?
+        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public float Altitude {
-          get { return altitude_; }
+        public float RadialAccuracy {
+          get { return radialAccuracy_; }
           set {
-            altitude_ = value;
+            radialAccuracy_ = value;
           }
         }
 
@@ -731,7 +741,7 @@ namespace POGOProtos.Networking.Envelopes {
           if (Latitude != other.Latitude) return false;
           if (Longitude != other.Longitude) return false;
           if (HorizontalAccuracy != other.HorizontalAccuracy) return false;
-          if (Altitude != other.Altitude) return false;
+          if (RadialAccuracy != other.RadialAccuracy) return false;
           if (VerticalAccuracy != other.VerticalAccuracy) return false;
           if (ProviderStatus != other.ProviderStatus) return false;
           if (Floor != other.Floor) return false;
@@ -747,7 +757,7 @@ namespace POGOProtos.Networking.Envelopes {
           if (Latitude != 0F) hash ^= Latitude.GetHashCode();
           if (Longitude != 0F) hash ^= Longitude.GetHashCode();
           if (HorizontalAccuracy != 0F) hash ^= HorizontalAccuracy.GetHashCode();
-          if (Altitude != 0F) hash ^= Altitude.GetHashCode();
+          if (RadialAccuracy != 0F) hash ^= RadialAccuracy.GetHashCode();
           if (VerticalAccuracy != 0F) hash ^= VerticalAccuracy.GetHashCode();
           if (ProviderStatus != 0UL) hash ^= ProviderStatus.GetHashCode();
           if (Floor != 0) hash ^= Floor.GetHashCode();
@@ -782,9 +792,9 @@ namespace POGOProtos.Networking.Envelopes {
             output.WriteRawTag(165, 1);
             output.WriteFloat(HorizontalAccuracy);
           }
-          if (Altitude != 0F) {
+          if (RadialAccuracy != 0F) {
             output.WriteRawTag(173, 1);
-            output.WriteFloat(Altitude);
+            output.WriteFloat(RadialAccuracy);
           }
           if (VerticalAccuracy != 0F) {
             output.WriteRawTag(181, 1);
@@ -822,7 +832,7 @@ namespace POGOProtos.Networking.Envelopes {
           if (HorizontalAccuracy != 0F) {
             size += 2 + 4;
           }
-          if (Altitude != 0F) {
+          if (RadialAccuracy != 0F) {
             size += 2 + 4;
           }
           if (VerticalAccuracy != 0F) {
@@ -860,8 +870,8 @@ namespace POGOProtos.Networking.Envelopes {
           if (other.HorizontalAccuracy != 0F) {
             HorizontalAccuracy = other.HorizontalAccuracy;
           }
-          if (other.Altitude != 0F) {
-            Altitude = other.Altitude;
+          if (other.RadialAccuracy != 0F) {
+            RadialAccuracy = other.RadialAccuracy;
           }
           if (other.VerticalAccuracy != 0F) {
             VerticalAccuracy = other.VerticalAccuracy;
@@ -906,7 +916,7 @@ namespace POGOProtos.Networking.Envelopes {
                 break;
               }
               case 173: {
-                Altitude = input.ReadFloat();
+                RadialAccuracy = input.ReadFloat();
                 break;
               }
               case 181: {
