@@ -214,9 +214,11 @@
     <Content Include="Assets\Icons\Footprint_Mid.png" />
     <Content Include="Assets\Icons\Footprint_Near.png" />
     <Content Include="Assets\Icons\FrontPortraitRing.png" />
+    <Content Include="Assets\Icons\ic_candy_light.png" />
     <Content Include="Assets\Icons\ic_combat.png" />
     <Content Include="Assets\Icons\ic_date.png" />
     <Content Include="Assets\Icons\ic_fav.png" />
+    <Content Include="Assets\Icons\ic_fav_light.png" />
     <Content Include="Assets\Icons\ic_health.png" />
     <Content Include="Assets\Icons\ic_name.png" />
     <Content Include="Assets\Icons\ic_number.png" />
