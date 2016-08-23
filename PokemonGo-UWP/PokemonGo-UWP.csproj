@@ -135,6 +135,8 @@
     <Content Include="Assets\Achievements\youngster_lv1.png" />
     <Content Include="Assets\Achievements\youngster_lv2.png" />
     <Content Include="Assets\Achievements\youngster_lv3.png" />
+    <Content Include="Assets\Audio\EncounterPokemon.mp3" />
+    <Content Include="Assets\Audio\Gameplay.mp3" />
     <Content Include="Assets\Audio\pokemon_found_ding.wav" />
     <Content Include="Assets\Backgrounds\details_type_bg_bug.png" />
     <Content Include="Assets\Backgrounds\details_type_bg_default.png" />
@@ -301,6 +303,7 @@
     <Content Include="Assets\LiveTiles\Transparent\Square71x71Logo.scale-400.png" />
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.png" />
     <Content Include="Assets\UI\night_sky_texture_by_amdillon.jpg" />
     <Content Include="Assets\Pokemons\1.png" />
     <Content Include="Assets\Pokemons\10.png" />
@@ -474,6 +477,13 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\de-CH\Resources.resw" />
+    <PRIResource Include="Strings\de-CH\PokemonTypes.resw" />
+    <PRIResource Include="Strings\de-CH\PokemonMoves.resw" />
+    <PRIResource Include="Strings\de-CH\Pokemon.resw" />
+    <PRIResource Include="Strings\de-CH\Items.resw" />
+    <PRIResource Include="Strings\de-CH\CodeResources.resw" />
+    <PRIResource Include="Strings\de-CH\Achievements.resw" />
     <PRIResource Include="Strings\tr\PokemonTypes.resw" />
     <PRIResource Include="Strings\es\PokemonTypes.resw" />
     <PRIResource Include="Strings\sk\PokemonTypes.resw" />
@@ -523,6 +533,27 @@
     <PRIResource Include="Strings\zh-HK\PokemonTypes.resw" />
     <PRIResource Include="Strings\zh-CN\PokemonTypes.resw" />
     <PRIResource Include="Strings\en-US\PokemonTypes.resw" />
+    <PRIResource Include="Strings\tr\Pokedex.resw" />
+    <PRIResource Include="Strings\es\Pokedex.resw" />
+    <PRIResource Include="Strings\sk\Pokedex.resw" />
+    <PRIResource Include="Strings\ru\Pokedex.resw" />
+    <PRIResource Include="Strings\pt-PT\Pokedex.resw" />
+    <PRIResource Include="Strings\pt-BR\Pokedex.resw" />
+    <PRIResource Include="Strings\pl\Pokedex.resw" />
+    <PRIResource Include="Strings\ja\Pokedex.resw" />
+    <PRIResource Include="Strings\it\Pokedex.resw" />
+    <PRIResource Include="Strings\id\Pokedex.resw" />
+    <PRIResource Include="Strings\hu\Pokedex.resw" />
+    <PRIResource Include="Strings\el\Pokedex.resw" />
+    <PRIResource Include="Strings\de\Pokedex.resw" />
+    <PRIResource Include="Strings\fr\Pokedex.resw" />
+    <PRIResource Include="Strings\fi\Pokedex.resw" />
+    <PRIResource Include="Strings\nl\Pokedex.resw" />
+    <PRIResource Include="Strings\cs\Pokedex.resw" />
+    <PRIResource Include="Strings\zh-TW\Pokedex.resw" />
+    <PRIResource Include="Strings\zh-HK\Pokedex.resw" />
+    <PRIResource Include="Strings\zh-CN\Pokedex.resw" />
+    <PRIResource Include="Strings\en-US\Pokedex.resw" />
     <PRIResource Include="Strings\fi\Resources.resw" />
     <PRIResource Include="Strings\fi\PokemonMoves.resw" />
     <PRIResource Include="Strings\fi\Pokemon.resw" />
@@ -569,7 +600,9 @@
     <PRIResource Include="Strings\en-US\Achievements.resw" />
     <PRIResource Include="Strings\en-US\PokemonMoves.resw" />
     <PRIResource Include="Strings\en-US\Items.resw" />
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
     <PRIResource Include="Strings\en-US\Pokemon.resw" />
     <PRIResource Include="Strings\es\Achievements.resw" />
     <PRIResource Include="Strings\es\CodeResources.resw" />
@@ -663,6 +696,7 @@
     <Compile Include="Entities\FortDataWrapper.cs" />
     <Compile Include="Entities\IMapPokemon.cs" />
     <Compile Include="Entities\IUpdatable.cs" />
+    <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\LuredPokemon.cs" />
     <Compile Include="Entities\MapPokemonWrapper.cs" />
     <Compile Include="Entities\NearbyPokemonWrapper.cs" />
@@ -677,6 +711,7 @@
     <Compile Include="Utils\Achievements\GoldAttribute.cs" />
     <Compile Include="Utils\Achievements\AchievementType.cs" />
     <Compile Include="Utils\ApplicationKeys.cs" />
+    <Compile Include="Utils\Game\DataTemplateSelectors.cs" />
     <Compile Include="Utils\Game\FortDataStatus.cs" />
     <Compile Include="Utils\Helpers\AsyncSynchronisationContext.cs" />
     <Compile Include="Utils\Helpers\AudioUtils.cs" />
@@ -686,6 +721,7 @@
     <Compile Include="Utils\Helpers\GeoHelper.cs" />
     <Compile Include="Utils\Helpers\IStorageHelper.cs" />
     <Compile Include="Utils\Helpers\LiveTileHelper.cs" />
+    <Compile Include="Utils\Helpers\MapOrientationModes.cs" />
     <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />
@@ -701,6 +737,9 @@
     <Compile Include="Utils\Settings\Settings.cs" />
     <Compile Include="Utils\Settings\SettingsService.cs" />
     <Compile Include="Utils\Game\SortingModes.cs" />
+    <Compile Include="Utils\Signature\DeviceInfosAndroid.cs" />
+    <Compile Include="Utils\Signature\DeviceInfosIOS.cs" />
+    <Compile Include="Utils\Signature\IDeviceInfoExtended.cs" />
     <Compile Include="Utils\Signature\UdidGenerator.cs" />
     <Compile Include="Utils\Game\UpdateManager.cs" />
     <Compile Include="Utils\Signature\Utilities.cs" />
@@ -709,6 +748,7 @@
     <Compile Include="ViewModels\GameMapPageViewModel.cs" />
     <Compile Include="ViewModels\AchievementDetailPageViewModel.cs" />
     <Compile Include="ViewModels\PlayerProfileViewModel.cs" />
+    <Compile Include="ViewModels\PokedexPageViewModel.cs" />
     <Compile Include="ViewModels\PokemonDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\ItemsInventoryPageViewModel.cs" />
     <Compile Include="ViewModels\PokemonInventoryPageViewModel.cs" />
@@ -723,6 +763,9 @@
     </Compile>
     <Compile Include="Views\PlayerProfilePage.xaml.cs">
       <DependentUpon>PlayerProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PokedexPage.xaml.cs">
+      <DependentUpon>PokedexPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PokemonDetailPage.xaml.cs">
       <DependentUpon>PokemonDetailPage.xaml</DependentUpon>
@@ -777,7 +820,6 @@
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LiveTiles\Normal\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Normal\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\LiveTiles\Normal\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
@@ -808,6 +850,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PlayerProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PokedexPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -869,6 +915,7 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.cs.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.de-CH.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.es.xlf" />

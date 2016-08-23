@@ -14,8 +14,20 @@ namespace PokemonGo.RocketAPI.Helpers
         ulong Timestamp { get; }
         float HorizontalAccuracy { get; }
         float VerticalAccuracy { get; }
-
+        float RadialAccuracy { get; }
     }
+
+    public interface IGpsSattelitesInfo
+    {
+        int SattelitesPrn { get; }
+        float Azimuth { get; }
+        float Elevation { get; }
+        float Snr { get; }
+        bool Almanac { get; }
+        bool Emphasis { get; }
+        bool UsedInFix { get; }
+    }
+
 
     public interface IDeviceInfo
     {
@@ -37,5 +49,6 @@ namespace PokemonGo.RocketAPI.Helpers
         string FirmwareBrand { get; }
         string FirmwareType { get; }
         ILocationFix[] LocationFixes { get; }
+        IGpsSattelitesInfo[] GpsSattelitesInfo { get; }
     }
 }

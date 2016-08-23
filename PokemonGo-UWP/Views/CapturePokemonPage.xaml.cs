@@ -7,8 +7,10 @@ using Windows.System.Threading;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using PokemonGo_UWP.Utils;
 using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
+using POGOProtos.Inventory.Item;
 using Template10.Common;
 
 namespace PokemonGo_UWP.Views
@@ -27,7 +29,8 @@ namespace PokemonGo_UWP.Views
                 ShowCatchStatsModalAnimation.From = CatchStatsTranslateTransform.Y = ActualHeight;
                 // HACK - somehow binding doesn't work as expected so we manually disable the item if count is 0
                 LaunchPokeballButton.IsEnabled =
-                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectedCaptureItem.Count > 0;                
+                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectAvailablePokeBall().Count > 0;
+                AudioUtils.PlaySound(AudioUtils.ENCOUNTER_POKEMON);
             };
         }
 
@@ -79,7 +82,7 @@ namespace PokemonGo_UWP.Views
                     timer.Cancel();
                     pokeballStopped = true;
                     Logger.Write("Missed Pokemon! " + ThrowItemPosition.X + ", " + ThrowItemPosition.Y + ", " +
-                                 ThrowItemPosition.Z);                    
+                                 ThrowItemPosition.Z);
                 }
 
                 UpdateLoopMutex.ReleaseMutex();
@@ -95,22 +98,42 @@ namespace PokemonGo_UWP.Views
                         if (pokemonHit)
                         {
                             // TODO: il casino è qua, se parte l'animazione poi non funziona più il movimento
-                            CatchStarted.Begin();
+
                             ViewModel.UseSelectedCaptureItem.Execute(true);
+                            var last = ViewModel.LastItemUsed;
+                            if (last != null)
+                            {
+                                if (last == ItemId.ItemRazzBerry ||
+                                    last == ItemId.ItemBlukBerry ||
+                                    last == ItemId.ItemNanabBerry ||
+                                    last == ItemId.ItemPinapBerry ||
+                                    last == ItemId.ItemWeparBerry)
+                                {
+                                    ReInitItemLocation();
+                                    return;
+                                }
+                            }
+                            CatchStarted.Begin();
+                            LaunchPokeballButton.IsEnabled = false;
                         }
                         else
                         {
                             // TODO: move the missed command if you want
                             ViewModel.UseSelectedCaptureItem.Execute(false);
-                            PokeballTransform.TranslateX = InitItemX;
-                            PokeballTransform.TranslateY = InitItemY;
-                            PokeballTransform.ScaleX = 1;
-                            PokeballTransform.ScaleY = 1;
-                            LaunchPokeballButton.IsEnabled = true;
+                            ReInitItemLocation();
                         }
                     }
                 });
             }
+        }
+
+        private void ReInitItemLocation()
+        {
+            PokeballTransform.TranslateX = InitItemX;
+            PokeballTransform.TranslateY = InitItemY;
+            PokeballTransform.ScaleX = 1;
+            PokeballTransform.ScaleY = 1;
+            LaunchPokeballButton.IsEnabled = true;
         }
 
         #endregion
@@ -195,7 +218,7 @@ namespace PokemonGo_UWP.Views
             ViewModel.CatchSuccess += GameManagerViewModelOnCatchSuccess;
             ViewModel.CatchEscape += GameManagerViewModelOnCatchEscape;
             ViewModel.CatchFlee += GameManagerViewModelOnCatchFlee;
-            // Add also handlers to enable the button once the animation is done  
+            // Add also handlers to enable the button once the animation is done
             CatchEscape.Completed += (s, e) =>
             {
                 PokeballTransform.TranslateX = 0;
@@ -210,7 +233,7 @@ namespace PokemonGo_UWP.Views
                 // Go back once the animation finishes
                 BootStrapper.Current.NavigationService.GoBack();
             };
-        }        
+        }
 
         private void UnsubscribeToCaptureEvents()
         {
@@ -220,13 +243,13 @@ namespace PokemonGo_UWP.Views
         }
 
         private void GameManagerViewModelOnCatchEscape(object sender, EventArgs eventArgs)
-        {            
-            CatchStarted.Stop();            
+        {
+            CatchStarted.Stop();
             CatchEscape.Begin();
         }
 
         private void GameManagerViewModelOnCatchSuccess(object sender, EventArgs eventArgs)
-        {            
+        {
             CatchStarted.Stop();
             ShowCatchStatsModalStoryboard.Begin();
         }
@@ -235,6 +258,7 @@ namespace PokemonGo_UWP.Views
         {
             CatchEscape.Completed += (s, e) =>
             {
+                LaunchPokeballButton.IsEnabled = false;
                 CatchFlee.Begin();
             };
             CatchStarted.Stop();
@@ -272,7 +296,7 @@ namespace PokemonGo_UWP.Views
                 DateTime.Now
                 ));
 
-            // Remove anything from the queue that is more than 300ms old, we don't 
+            // Remove anything from the queue that is more than 300ms old, we don't
             // want to track that far in the past
             while (PastPositions.Count > 1 && (PastPositions.Peek().Item2 - DateTime.Now).Milliseconds > 300)
             {

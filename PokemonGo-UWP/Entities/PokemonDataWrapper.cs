@@ -49,6 +49,7 @@ namespace PokemonGo_UWP.Entities
             _gotoPokemonDetailsCommand = new DelegateCommand(() =>
             {
                 NavigationHelper.NavigationState["CurrentPokemon"] = this;
+                NavigationHelper.NavigationState["LastSelectedID"] = Id;
                 BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage));
             }, () => true));
 
@@ -76,7 +77,10 @@ namespace PokemonGo_UWP.Entities
 
         public double EggKmWalkedTarget => WrappedData.EggKmWalkedTarget;
 
-        public double EggKmWalkedStart => WrappedData.EggKmWalkedStart;
+        /// <summary>
+        /// HACK - ProgressBar requires a two-way binding for value, so we need this workaround
+        /// </summary>
+        public double EggKmWalkedStart {get { return WrappedData.EggKmWalkedStart; } set {} } 
 
         public int Origin => WrappedData.Origin;
 

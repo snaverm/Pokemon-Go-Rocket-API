@@ -106,17 +106,36 @@ namespace PokemonGo.RocketAPI.Helpers
                 }*/
             };
 
+
+            if(_deviceInfo.GpsSattelitesInfo.Length > 0)
+            {
+                sig.GpsInfo = new Signature.Types.AndroidGpsInfo();
+                //sig.GpsInfo.TimeToFix //currently not filled
+
+                _deviceInfo.GpsSattelitesInfo.ToList().ForEach(sat =>
+                {
+                    sig.GpsInfo.Azimuth.Add(sat.Azimuth);
+                    sig.GpsInfo.Elevation.Add(sat.Elevation);
+                    sig.GpsInfo.HasAlmanac.Add(sat.Almanac);
+                    sig.GpsInfo.HasEphemeris.Add(sat.Emphasis);
+                    sig.GpsInfo.SatellitesPrn.Add(sat.SattelitesPrn);
+                    sig.GpsInfo.Snr.Add(sat.Snr);
+                    sig.GpsInfo.UsedInFix.Add(sat.UsedInFix);
+                });
+            }
+
             _deviceInfo.LocationFixes.ToList().ForEach(loc => sig.LocationFix.Add(new Signature.Types.LocationFix
             {
                 Floor = loc.Floor,
                 Longitude = loc.Longitude,
                 Latitude = loc.Latitude,
-                Altitude = loc.Altitude,
+                //Altitude = loc.Altitude, //currently probably not filled
                 LocationType = loc.LocationType,
                 Provider = loc.Provider,
                 ProviderStatus = loc.ProviderStatus,
                 HorizontalAccuracy = loc.HorizontalAccuracy,
                 VerticalAccuracy = loc.VerticalAccuracy,
+                RadialAccuracy = loc.RadialAccuracy,
                 TimestampSnapshot = loc.Timestamp
 
             }));
