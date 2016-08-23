@@ -52,11 +52,25 @@ namespace PokemonGo_UWP.Views
                     Margin = new Thickness(0,8,0,0),
                     Content = new Image()
                     {
-                        Source = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Icons/RecenterMapIcon.png") },
-                        Stretch = Stretch.Uniform,
-                        Height = 36,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment                        = VerticalAlignment.Center
+                    	var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+                        if (currentTime > 7 && currentTime < 19) {
+                        	var colorSchemeRecenterMapIcon = "Light";
+                        } else {
+                                var colorSchemeRecenterMapIcon = "Dark";
+                        }
+                        if (colorSchemeRecenterMapIcon == "Light") {
+                        	Source = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Icons/RecenterMapIconLight.png") },
+                        	Stretch = Stretch.Uniform,
+                		Height = 36,
+                        	HorizontalAlignment = HorizontalAlignment.Center,
+                        	VerticalAlignment                        = VerticalAlignment.Center
+                        } else {
+                        	Source = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Icons/RecenterMapIconDark.png") },
+                        	Stretch = Stretch.Uniform,
+                        	Height = 36,
+                        	HorizontalAlignment = HorizontalAlignment.Center,
+                		VerticalAlignment                        = VerticalAlignment.Center
+                        }
                     }
                 };
                 ReactivateMapAutoUpdateButton.Tapped += ReactivateMapAutoUpdate_Tapped;
