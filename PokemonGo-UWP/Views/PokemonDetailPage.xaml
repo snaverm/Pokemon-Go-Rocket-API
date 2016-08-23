@@ -664,7 +664,7 @@
                                                    Margin="32,0"
                                                    FontSize="19"
                                                    Grid.Row="0"
-                                                   Text="{Binding PokemonExtraData.Type}"
+                                                   Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="#577074" />
 
