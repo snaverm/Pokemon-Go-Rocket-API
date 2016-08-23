@@ -489,8 +489,10 @@ Open page with installation files for manual install?</source>
           <target state="new">Waiting for network to be back...</target>
         </trans-unit>
         <trans-unit id="EggHatchMessage" translate="yes" xml:space="preserve">
-          <source>An Egg hatched into a {0}.\nYou also got {1} Stardust, {2} Cany and {3} XP.</source>
-          <target state="new">An Egg hatched into a {0}.\nYou also got {1} Stardust, {2} Cany and {3} XP.</target>
+          <source>An Egg hatched into a {0}.
+You also got {1} Stardust, {2} Candy and {3} XP.</source>
+          <target state="new">An Egg hatched into a {0}.
+You also got {1} Stardust, {2} Candy and {3} XP.</target>
         </trans-unit>
       </group>
     </body>

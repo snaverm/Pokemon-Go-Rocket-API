@@ -638,7 +638,8 @@ namespace PokemonGo_UWP.Utils
                 for (var i = 0; i < hatchedEggResponse.PokemonId.Count; i++)
                 {
                     Logger.Write("Egg Hatched");
-                    await new MessageDialog(string.Format(Resources.CodeResources.GetString("EggHatchMessage"), hatchedEggResponse.PokemonId[i], hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i], hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
+                    var currentPokemonId = PokemonsInventory.First(item => item.Id == hatchedEggResponse.PokemonId[i]).PokemonId;
+                    await new MessageDialog(string.Format(Resources.CodeResources.GetString("EggHatchMessage"), currentPokemonId, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i], hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
                 }
             }
         }
