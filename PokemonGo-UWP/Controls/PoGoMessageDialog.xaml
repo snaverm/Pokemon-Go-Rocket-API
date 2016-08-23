@@ -15,17 +15,37 @@
 
         <!--ANIMATIONS-->
 
-        <TranslateTransform Y="{Dynami DownwardsTranslationRange, mode}" x:Name="DownwardsTranslation"/>
-        
-        <x:Double x:Key="DownwardsTranslationRange">0</x:Double>
-
         <!--Fade-->
         <Storyboard x:Name="ShowMDFadeStoryboard">
-            
+            <DoubleAnimation
+                Storyboard.TargetName="CoverGrid"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                BeginTime="0:0:0.05"
+                Duration="0:0:0.1" />
+            <DoubleAnimation
+                Storyboard.TargetName="BackgroundRect"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0.6"
+                Duration="0:0:0.15" />
         </Storyboard>
 
         <Storyboard x:Name="HideMDFadeStoryboard">
-            
+            <DoubleAnimation
+                Storyboard.TargetName="CoverGrid"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                BeginTime="0:0:0.05"
+                Duration="0:0:0.1" />
+            <DoubleAnimation
+                Storyboard.TargetName="BackgroundRect"
+                Storyboard.TargetProperty="Opacity"
+                From="0.6"
+                To="0"
+                Duration="0:0:0.15" />
         </Storyboard>
         
         <!--Bottom-->
@@ -35,11 +55,18 @@
                 Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="1"
-                Duration="0:0:0.2" />
+                Duration="0:0:0.1" />
+            <DoubleAnimation
+                Storyboard.TargetName="BackgroundRect"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0.6"
+                Duration="0:0:0.15" />
             <DoubleAnimation Storyboard.TargetName="DownwardsTranslation"
                              Storyboard.TargetProperty="Y"
-                             From="{StaticResource DownwardsTranslationRange}"
+                             From="{x:Bind DownwardsTranslationRange, Mode=OneWay}"
                              To="0"
+                             BeginTime="0:0:0.1"
                              Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut" />
@@ -53,40 +80,24 @@
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
-                Duration="0:0:0.2"
-                BeginTime="0:0:0.1"/>
+                Duration="0:0:0.05"
+                BeginTime="0:0:0.25"/>
+            <DoubleAnimation
+                Storyboard.TargetName="BackgroundRect"
+                Storyboard.TargetProperty="Opacity"
+                From="0.6"
+                To="0"
+                Duration="0:0:0.15"
+                BeginTime="0:0:0.15"/>
             <DoubleAnimation Storyboard.TargetName="DownwardsTranslation"
                              Storyboard.TargetProperty="Y"
                              From="0"
-                             To="{StaticResource DownwardsTranslationRange}"
+                             To="{x:Bind DownwardsTranslationRange, Mode=OneWay}"
                              Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ContextMenuFavoriteTranslateTransform"
-                             Storyboard.TargetProperty="Y"
-                             From="0"
-                             To="100"
-                             Duration="0:0:0.2">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
-                                           Storyboard.TargetName="ContextMenuPanel">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>10</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
 
@@ -94,16 +105,22 @@
           VerticalAlignment="Stretch" 
           HorizontalAlignment="Stretch" 
           Background="Transparent"
-          Opacity="0">
-        <Rectangle  Fill="{StaticResource PageBackgroundGradient}" 
-                    Opacity="0.6" 
-                    Visibility="{x:Bind CoverBackground, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+          Opacity="1">
+        <Rectangle x:Name="BackgroundRect" 
+                   Fill="{StaticResource PageBackgroundGradient}"
+                   Opacity="0"
+                   Visibility="{x:Bind CoverBackground, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <Grid x:Name="ContentGrid" 
               Style="{StaticResource GridContainer}" 
               HorizontalAlignment="Center" 
               VerticalAlignment="Center" 
-              MaxWidth="800" Margin="25" 
+              MaxWidth="800" 
+              MinWidth="250"
+              Margin="25" 
               Padding="25,25,25,15">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="0" x:Name="DownwardsTranslation"/>
+            </Grid.RenderTransform>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" 
                                      EndPoint="0.8,1">
@@ -125,7 +142,7 @@
                 <Button x:Name="CancelButton" 
                         Style="{StaticResource ButtonCancel}" 
                         Content="{x:Bind CancelText, Mode=OneWay, FallbackValue='CANCEL'}"
-                        Margin="15,15,15,0"
+                        Margin="0,15,0,0"
                         Visibility="{x:Bind ShowCancelButton, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </StackPanel>
 

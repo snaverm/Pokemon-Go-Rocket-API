@@ -61,9 +61,9 @@ namespace PokemonGo_UWP.Controls
                 if (AnimationType == PoGoMessageDialogAnimation.Bottom)
                 {
                     // preconditions
-                    DownwardsTranslation = new TranslateTransform();
-                    DownwardsTranslation.Y = (modal.Height / 2) + (this.Height / 2) + 1;
-                    ContentGrid.RenderTransform = DownwardsTranslation;
+                    double Ytranslation = (modal.ActualHeight / 2) + 300;
+                    DownwardsTranslationRange = Ytranslation;
+                    DownwardsTranslation.Y = Ytranslation;
 
                     // animate
                     Storyboard sb = this.Resources["ShowMDBottomStoryboard"] as Storyboard;
@@ -80,6 +80,16 @@ namespace PokemonGo_UWP.Controls
         #region Propertys
 
         private Brush _formerModalBrush = null;
+
+        public static readonly DependencyProperty DownwardsTranslationRangeProperty =
+    DependencyProperty.Register(nameof(DownwardsTranslationRange), typeof(Double?), typeof(PoGoMessageDialog),
+        new PropertyMetadata(0.0));
+
+        public Double? DownwardsTranslationRange
+        {
+            get { return (Double?)GetValue(DownwardsTranslationRangeProperty); }
+            set { SetValue(DownwardsTranslationRangeProperty, value); }
+        }
 
         public static readonly DependencyProperty AcceptTextProperty = 
             DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
@@ -160,8 +170,9 @@ namespace PokemonGo_UWP.Controls
                 if (AnimationType == PoGoMessageDialogAnimation.Bottom)
                 {
                     // preconditions
-                    DownwardsTranslation.Y = (modal.Height / 2) + (this.Height / 2) + 1;
-                    ContentGrid.RenderTransform = DownwardsTranslation;
+                    double Ytranslation = (modal.ActualHeight / 2) + 300;
+                    DownwardsTranslationRange = Ytranslation;
+                    DownwardsTranslation.Y = Ytranslation;
 
                     // animate
                     Storyboard sb = this.Resources["HideMDBottomStoryboard"] as Storyboard;
