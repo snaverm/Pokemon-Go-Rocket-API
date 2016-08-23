@@ -67,8 +67,16 @@ namespace PokemonGo_UWP.ViewModels
                 SelectedPokedexEntry = new KeyValuePair<PokemonId, PokedexEntry>((PokemonId)parameter, GetPokedexEntry((PokemonId)parameter));
                 IsPokemonDetailsOpen = true;
             }
+            NavigationService.FrameFacade.BackRequested += FrameFacade_BackRequested;
             return Task.CompletedTask;
         }
+
+        private void FrameFacade_BackRequested(object sender, Template10.Common.HandledEventArgs e)
+        {
+            e.Handled = true;
+            CloseCommand.Execute();
+        }
+
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
             if (suspending)
@@ -90,6 +98,7 @@ namespace PokemonGo_UWP.ViewModels
                 EeveeEvolutions?.Clear();
                 PokemonEvolutions?.Clear();
             }
+            NavigationService.FrameFacade.BackRequested -= FrameFacade_BackRequested;
             return Task.CompletedTask;
         }
         #endregion
