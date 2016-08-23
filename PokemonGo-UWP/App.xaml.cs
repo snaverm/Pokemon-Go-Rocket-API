@@ -222,9 +222,7 @@ namespace PokemonGo_UWP
 
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
             GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
-            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
-
-            await AudioUtils.Init();            
+            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;         
 
             await Task.CompletedTask;
         }        
