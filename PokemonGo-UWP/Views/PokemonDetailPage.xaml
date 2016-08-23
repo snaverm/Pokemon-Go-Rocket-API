@@ -361,7 +361,7 @@
 
                 <!--Favorite-->
                 <Grid HorizontalAlignment="Right" 
-                      Margin="0"
+                      Margin="0,15,0,0"
                       Padding="17.5,4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -382,10 +382,10 @@
                                Text="FAVORITE"
                                Style="{StaticResource TextSortTitle}" />
                     <Image Grid.Column="1"
-                           Height="15"
-                           Width="15"
+                           Height="25"
+                           Width="25"
                            Margin="12,5"
-                           Source="../Assets/Buttons/btn_close.png" />
+                           Source="../Assets/Icons/ic_fav_light.png" />
                 </Grid>
 
                 <!--Transfer-->
@@ -410,10 +410,10 @@
                                Text="TRANSFER"
                                Style="{StaticResource TextSortTitle}" />
                     <Image Grid.Column="1"
-                           Height="15"
-                           Width="15"
+                           Height="25"
+                           Width="25"
                            Margin="12,5"
-                           Source="../Assets/Buttons/btn_close.png" />
+                           Source="../Assets/Icons/ic_candy_light.png" />
                 </Grid>
             </StackPanel>
 
@@ -664,7 +664,7 @@
                                                    Margin="32,0"
                                                    FontSize="19"
                                                    Grid.Row="0"
-                                                   Text="{Binding PokemonExtraData.Type}"
+                                                   Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
                                                    Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="#577074" />
 
