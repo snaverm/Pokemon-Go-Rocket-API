@@ -493,7 +493,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--Favorite-->
-                        <CheckBox MinWidth="30" 
+                        <CheckBox MinWidth="33" 
                                   Grid.Column="3"
                                   Style="{StaticResource CheckStar}" 
                                   Margin="0" 
@@ -892,7 +892,7 @@
                                             Padding="15,0"
                                             Margin="0,15"
                                             Command="{Binding PowerUpPokemonCommand}"
-                                            FontFamily="ms-appx:/Assets/Fonts/Lato-Light.ttf#Lato Light"
+                                            FontFamily="{StaticResource LatoLightFont}"
                                             Foreground="#FFF5F4F4">
 
                                         <Button.Background>
@@ -963,7 +963,7 @@
                                             MinWidth="125"
                                             Padding="15,0"
                                             Margin="0,0,0,15"
-                                            FontFamily="ms-appx:/Assets/Fonts/Lato-Light.ttf#Lato Light"
+                                            FontFamily="{StaticResource LatoLightFont}"
                                             Command="{Binding EvolvePokemonCommand}"
                                             Foreground="#FFF5F4F4"
                                             Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">

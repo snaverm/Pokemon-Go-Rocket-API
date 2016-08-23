@@ -712,14 +712,24 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Path x:Name="Star" Stretch="Fill" Fill="Transparent" Stroke="White" StrokeThickness="1.5" Data="F1 M 145.637,174.227L 127.619,110.39L 180.809,70.7577L 114.528,68.1664L 93.2725,5.33333L 70.3262,67.569L 4,68.3681L 56.0988,109.423L 36.3629,172.75L 91.508,135.888L 145.637,174.227 Z"/>
-                        <Path x:Name="StarFill" Visibility="Collapsed"  Stretch="Fill" Fill="Gold" Stroke="Gold" StrokeThickness="1.5" Data="F1 M 145.637,174.227L 127.619,110.39L 180.809,70.7577L 114.528,68.1664L 93.2725,5.33333L 70.3262,67.569L 4,68.3681L 56.0988,109.423L 36.3629,172.75L 91.508,135.888L 145.637,174.227 Z"/>
+                        <Path x:Name="Star" Stretch="Fill" Fill="Transparent" Stroke="White" StrokeThickness="1.8" Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000Z"/>
+                        <Path x:Name="StarFill" Visibility="Collapsed"  Stretch="Fill" Stroke="#ffd711" StrokeThickness="1.5" Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000">
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0,0" 
+                                                     EndPoint="1,1">
+                                    <GradientStop Color="#fed10f" Offset="0" />
+                                    <GradientStop Color="#efb100" Offset="0.8" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+
+    
 
 
     <!-- STYLE - END -->
