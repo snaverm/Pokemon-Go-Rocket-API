@@ -155,6 +155,11 @@ namespace PokemonGo_UWP.Utils
 			get { return Get(12D); }
 			set { Set(value); }
 		}
+        public bool IsBatterySaverEnabled
+        {
+            get { return Get(false); }
+            set { Set(value); }
+        }
 		#endregion
 	}
 }

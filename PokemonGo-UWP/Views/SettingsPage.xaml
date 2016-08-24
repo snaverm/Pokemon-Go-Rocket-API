@@ -118,7 +118,7 @@
                         <ColumnDefinition Width="135" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               x:Uid="BattSaverVibrationTextBlock"
+                               x:Uid="SettingsBatterySaverTextBlock"
                                Text="Battery Saver"
                                Style="{StaticResource TextSettingsTitle}" />
 
