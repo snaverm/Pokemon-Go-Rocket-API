@@ -35,7 +35,6 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
-                CurrentGym.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentGym)]).CreateCodedInput());
                 CurrentGym = JsonConvert.DeserializeObject<FortDataWrapper>((string)suspensionState[nameof(CurrentGym)]);
                 CurrentGymInfo = JsonConvert.DeserializeObject<GetGymDetailsResponse>((string)suspensionState[nameof(CurrentGymInfo)]);
                 CurrentEnterResponse = JsonConvert.DeserializeObject<GetGymDetailsResponse>((string)suspensionState[nameof(CurrentEnterResponse)]);
