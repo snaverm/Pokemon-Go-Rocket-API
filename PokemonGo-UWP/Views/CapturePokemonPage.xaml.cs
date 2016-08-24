@@ -28,8 +28,7 @@ namespace PokemonGo_UWP.Views
             {
                 ShowCatchStatsModalAnimation.From = CatchStatsTranslateTransform.Y = ActualHeight;
                 // HACK - somehow binding doesn't work as expected so we manually disable the item if count is 0
-                LaunchPokeballButton.IsEnabled =
-                    LaunchPokeballButton.IsHitTestVisible = ViewModel.SelectAvailablePokeBall().Count > 0;
+                ViewModel.PokeballButtonEnabled = ViewModel.SelectAvailablePokeBall().Count > 0;
                 AudioUtils.PlaySound(AudioUtils.ENCOUNTER_POKEMON);
             };
         }
@@ -114,7 +113,7 @@ namespace PokemonGo_UWP.Views
                                 }
                             }
                             CatchStarted.Begin();
-                            LaunchPokeballButton.IsEnabled = false;
+                            ViewModel.PokeballButtonEnabled = false;
                         }
                         else
                         {
@@ -133,7 +132,7 @@ namespace PokemonGo_UWP.Views
             PokeballTransform.TranslateY = InitItemY;
             PokeballTransform.ScaleX = 1;
             PokeballTransform.ScaleY = 1;
-            LaunchPokeballButton.IsEnabled = true;
+            ViewModel.PokeballButtonEnabled = true;
         }
 
         #endregion
@@ -226,7 +225,7 @@ namespace PokemonGo_UWP.Views
                 PokeballTransform.ScaleX = 1;
                 PokeballTransform.ScaleY = 1;
                 LaunchPokeballButton.RenderTransform = PokeballTransform;
-                LaunchPokeballButton.IsEnabled = true;
+                ViewModel.PokeballButtonEnabled = true;
             };
             CatchFlee.Completed += (s, e) =>
             {
@@ -258,7 +257,7 @@ namespace PokemonGo_UWP.Views
         {
             CatchEscape.Completed += (s, e) =>
             {
-                LaunchPokeballButton.IsEnabled = false;
+                ViewModel.PokeballButtonEnabled = false;
                 CatchFlee.Begin();
             };
             CatchStarted.Stop();
@@ -309,7 +308,7 @@ namespace PokemonGo_UWP.Views
             Logger.Write("Manipulation Completed...");
 
             // Disable the pokeball so that we can't try and throw it again
-            LaunchPokeballButton.IsEnabled = false;
+            ViewModel.PokeballButtonEnabled = false;
 
             var EndingX = (float) PokeballTransform.TranslateX;
             var EndingY = (float) PokeballTransform.TranslateY;

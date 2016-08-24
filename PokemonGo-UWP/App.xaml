@@ -73,18 +73,6 @@
             <utils:PokemonPivotHeaderToVisibleConverter x:Key="PokemonPivotHeaderToVisibleConverter" />
             <utils:WidthConverter x:Key="WidthConverter" />
 
-            <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:Double>0</x:Double>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <x:Boolean>False</x:Boolean>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <x:Boolean>True</x:Boolean>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>
-
             <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
                 <converters:ValueWhenConverter.When>
                     <x:Int32>0</x:Int32>

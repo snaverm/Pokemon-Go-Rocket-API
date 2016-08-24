@@ -215,18 +215,18 @@
                                         Height="84"
                                         Margin="3,0"
                                         Grid.RowSpan="2" />
-                                    <Border Grid.Row="1" 
+                                    <Border Grid.Row="1"
                                             Grid.Column="0"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Bottom"
                                             Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
-                                            Background="LightGray" 
-                                            CornerRadius="8" 
+                                            Background="LightGray"
+                                            CornerRadius="8"
                                             Padding="3,1">
                                         <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                                    TextAlignment="Center">
                                             <Run Text="x" />
-                                            <Run FontWeight="Bold" 
+                                            <Run FontWeight="Bold"
                                                  Text="{Binding Count}" />
                                         </TextBlock>
                                     </Border>
@@ -542,8 +542,8 @@
                     Margin="5"
                     Height="100"
                     HorizontalAlignment="Center"
-                    IsHitTestVisible="{Binding SelectedCaptureItem.Count, Converter={StaticResource EnabledWhenHasElementsConverter}}"
-                    IsEnabled="{Binding SelectedCaptureItem.Count, Converter={StaticResource EnabledWhenHasElementsConverter}}"
+                    IsHitTestVisible="{Binding PokeballButtonEnabled}"
+                    IsEnabled="{Binding PokeballButtonEnabled}"
                     x:Name="LaunchPokeballButton"
                     ManipulationMode="TranslateX, TranslateY"
                     ManipulationStarted="LaunchPokeballButton_ManipulationStarted"
