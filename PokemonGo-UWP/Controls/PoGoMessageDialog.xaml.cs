@@ -39,10 +39,16 @@ namespace PokemonGo_UWP.Controls
             CancelButton.Click += TerminalButtonClick;
         }
 
+        public PoGoMessageDialog(string title, string text) : this()
+        {
+            Title = title;
+            Text = text;
+        }
+
         /// <summary>
         /// Displays the PoGoMessageDialog with the animation defined
         /// </summary>
-        public void ShowDialog()
+        public void Show()
         {
             WindowWrapper.Current().Dispatcher.Dispatch(() =>
             {
@@ -71,6 +77,7 @@ namespace PokemonGo_UWP.Controls
                 }
                 else if (AnimationType == PoGoMessageDialogAnimation.Fade)
                 {
+                    // animate
                     Storyboard sb = this.Resources["ShowMDFadeStoryboard"] as Storyboard;
                     sb.Begin();
                 }
@@ -79,6 +86,7 @@ namespace PokemonGo_UWP.Controls
 
         #region Propertys
 
+        // Internal
         private Brush _formerModalBrush = null;
 
         public static readonly DependencyProperty DownwardsTranslationRangeProperty =
@@ -90,6 +98,15 @@ namespace PokemonGo_UWP.Controls
             get { return (Double?)GetValue(DownwardsTranslationRangeProperty); }
             set { SetValue(DownwardsTranslationRangeProperty, value); }
         }
+
+        // Public
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register(nameof(Title), typeof(string), typeof(PoGoMessageDialog),
+                new PropertyMetadata("Title"));
+
+        public static readonly DependencyProperty TextProperty = 
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(PoGoMessageDialog),
+                new PropertyMetadata("Text"));
 
         public static readonly DependencyProperty AcceptTextProperty = 
             DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
@@ -105,6 +122,18 @@ namespace PokemonGo_UWP.Controls
         public static readonly DependencyProperty CoverBackgroundProperty = 
             DependencyProperty.Register(nameof(CoverBackground), typeof(bool), typeof(PoGoMessageDialog), new PropertyMetadata(false));
 
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
         public string AcceptText
         {
             get { return (string)GetValue(AcceptTextProperty); }
@@ -114,7 +143,13 @@ namespace PokemonGo_UWP.Controls
         public string CancelText
         {
             get { return (string)GetValue(CancelTextProperty); }
-            set { SetValue(CancelTextProperty, value); }
+            set {
+                if(value != null)
+                {
+                    ShowCancelButton = true;
+                }
+                SetValue(CancelTextProperty, value);
+            }
         }
 
         public bool ShowCancelButton
@@ -181,9 +216,13 @@ namespace PokemonGo_UWP.Controls
                 }
                 else if (AnimationType == PoGoMessageDialogAnimation.Fade)
                 {
+                    // animate
                     Storyboard sb = this.Resources["HideMDFadeStoryboard"] as Storyboard;
                     sb.Begin();
                     sb.Completed += Cleanup;
+                } else
+                {
+                    Cleanup(this, this);
                 }
             });
         }

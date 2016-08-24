@@ -10,8 +10,9 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
-        
+
         <utils:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
 
         <!--ANIMATIONS-->
 
@@ -129,6 +130,21 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <StackPanel Orientation="Vertical">
+                <TextBlock Foreground="{StaticResource TitleTextColor}" 
+                           Margin="0,0,0,15" 
+                           Visibility="{x:Bind Title, Converter={StaticResource StringToVisibilityConverter}}"
+                           Text="{x:Bind Title, Mode=OneWay}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="17"
+                           FontFamily="{StaticResource LatoBoldFont}"/>
+                <TextBlock Foreground="{StaticResource TitleTextColor}"
+                           Visibility="{x:Bind Text, Converter={StaticResource StringToVisibilityConverter}}"
+                           Text="{x:Bind Text, Mode=OneWay}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="15"
+                           FontFamily="{StaticResource LatoRegularFont}"/>
                 <ContentPresenter FontSize="15" 
                                   TextWrapping="Wrap" 
                                   Foreground="{StaticResource TitleTextColor}" 
