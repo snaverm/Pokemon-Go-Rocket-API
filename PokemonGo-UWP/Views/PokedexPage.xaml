@@ -55,6 +55,7 @@
         </converters:ValueWhenConverter>
 
         <x:Int32 x:Key="MinItemsForRow">3</x:Int32>
+        <x:Int32 x:Key="GridWidth">1</x:Int32>
         <!--Pokemon captured-->
         <DataTemplate x:Key="PokemonCaptured">
             <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92">
@@ -238,36 +239,37 @@
                     </TextBlock>
                 </StackPanel>
                 <ScrollViewer Grid.Row="1" 
-                              Canvas.ZIndex="0" 
-                              VerticalScrollMode="Auto" 
                               VerticalScrollBarVisibility="Hidden" 
-                              HorizontalScrollMode="Disabled"
-                              HorizontalScrollBarVisibility="Hidden">
-                    <StackPanel>
-                        <GridView ItemsSource="{Binding PokemonFoundAndSeen}" 
-                          Grid.Row="1"
-                          Canvas.ZIndex="0"
-                          ScrollViewer.VerticalScrollMode="Auto"
-                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                              HorizontalScrollMode="Disabled">
+                    <StackPanel SizeChanged="OnSizeChanged">
+                        <GridView x:Name="pokeindex"
+                                  ItemsSource="{Binding PokemonFoundAndSeen}" 
+                                  Canvas.ZIndex="0"
+                                  HorizontalAlignment="Stretch"
+                                  ScrollViewer.VerticalScrollMode="Auto"
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <GridView.Width>
+                                <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource GridWidth}" ConverterParameter="0,28"/>
+                            </GridView.Width>
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapGrid Orientation="Horizontal"
-                              HorizontalAlignment="Center"
-                              VerticalChildrenAlignment="Top"
-                              MaximumRowsOrColumns="5" />
+                                              HorizontalAlignment="Center"
+                                              VerticalChildrenAlignment="Top"
+                                              MaximumRowsOrColumns="5"/>
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
                             <GridView.ItemTemplateSelector>
                                 <utils:PokedexEntryDataTemplateSelector 
-                            PokemonCaptured="{StaticResource PokemonCaptured}"
-                            PokemonSeen="{StaticResource PokemonSeen}"
-                            PokemonUnseen="{StaticResource PokemonUnseen}"/>
+                                        PokemonCaptured="{StaticResource PokemonCaptured}"
+                                        PokemonSeen="{StaticResource PokemonSeen}"
+                                        PokemonUnseen="{StaticResource PokemonUnseen}"/>
                             </GridView.ItemTemplateSelector>
                         </GridView>
-                        <StackPanel Height="88" /> <!-- Used for exit button margin-->
+
+                        <StackPanel Margin="0,0,0,88"/>
                     </StackPanel>
                 </ScrollViewer>
-                
             </Grid>
         </Border>
 
