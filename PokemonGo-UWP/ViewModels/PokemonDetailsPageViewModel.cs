@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using Google.Protobuf;
 using PokemonGo_UWP.Controls;
+using PokemonGo_UWP.Views;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -309,7 +310,11 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand ReturnToPokemonInventoryScreen => _returnToPokemonInventoryScreen ?? (
             _returnToPokemonInventoryScreen = new DelegateCommand(() =>
             {
-                NavigationService.GoBack();
+                // HACK - if we're coming fro the inventory we may go back, otherwise we go to map page
+                if (NavigationService.Frame.BackStack.Last().SourcePageType == typeof(PokemonInventoryPage))
+                    NavigationService.GoBack();
+                else
+                    NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
             }, () => true)
             );
 
