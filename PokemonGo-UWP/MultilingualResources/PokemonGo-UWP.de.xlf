@@ -693,7 +693,7 @@ Du hast auch {1} Sternenstaub, {2} Bonbon und {3} EP erhalten.</target>
         </trans-unit>
         <trans-unit id="PokedexCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught:</source>
-          <target state="translated">Gefangent:</target>
+          <target state="translated">Gefangen:</target>
         </trans-unit>
         <trans-unit id="PokedexEvolutions.Text" translate="yes" xml:space="preserve">
           <source>Evolutions</source>
