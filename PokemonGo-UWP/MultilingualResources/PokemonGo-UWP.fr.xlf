@@ -353,7 +353,7 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="TransferPokemonWarningText" translate="yes" xml:space="preserve">
           <source>You can't take it back after it's transferred to the Professor.</source>
-          <target state="translated">Tu ne pourras pas le reprendre après l'avoir transféré au Professeur.</target>
+          <target state="translated">Rayon Signal</target>
         </trans-unit>
         <trans-unit id="LoginExpired" translate="yes" xml:space="preserve">
           <source>Previous login expired.</source>
@@ -444,13 +444,12 @@ Ouvrir la page avec les fichiers d'installation pour une installation manuelle ?
         </trans-unit>
         <trans-unit id="ActivityHatchEggMediumBonus" translate="yes" xml:space="preserve">
           <source>Hatch Egg Medium Bonus</source>
-          <target state="translated">Un oeuf à éclos en {0}.
-Tu as aussi reçu {1} Poudre d'étoile, {2} Bonbon et {3} XP.</target>
+          <target state="needs-review-translation">Eclos un Oeuf Moyen Bonus</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Please verify the translation’s accuracy</note>
         </trans-unit>
         <trans-unit id="ActivityHatchEggLargeBonus" translate="yes" xml:space="preserve">
           <source>Hatch Egg Large Bonus</source>
-          <target state="translated">Eclos un Oeuf Grand Bonus</target>
+          <target state="needs-review-translation">Eclos un Oeuf Grand Bonus</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Please verify the translation’s accuracy</note>
         </trans-unit>
         <trans-unit id="ActivityDefeatGymDefender" translate="yes" xml:space="preserve">
@@ -496,7 +495,8 @@ Tu as aussi reçu {1} Poudre d'étoile, {2} Bonbon et {3} XP.</target>
         <trans-unit id="EggHatchMessage" translate="yes" xml:space="preserve">
           <source>An Egg hatched into a {0}.
 You also got {1} Stardust, {2} Candy and {3} XP.</source>
-          <target state="translated">Vive-Attaque</target>
+          <target state="translated">Un oeuf à éclos en {0}.
+Tu as aussi reçu {1} Poudre d'étoile, {2} Bonbon et {3} XP.</target>
         </trans-unit>
         <trans-unit id="EvolvePokemonWarningText" translate="yes" xml:space="preserve">
           <source>Do you want to evolve {0}?</source>
@@ -960,7 +960,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</source>
         </trans-unit>
         <trans-unit id="D_ItemUnknown" translate="yes" xml:space="preserve">
           <source>This item is unknown and may be added in the future.</source>
-          <target state="translated">A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 50 points.</target>
+          <target state="translated">Cet objet est inconnu est peut être ajouter dans le futur.</target>
         </trans-unit>
         <trans-unit id="D_ItemBlukBerry" translate="yes" xml:space="preserve">
           <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
@@ -1541,7 +1541,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</source>
         </trans-unit>
         <trans-unit id="Venomoth" translate="yes" xml:space="preserve">
           <source>Venomoth</source>
-          <target state="translated">Dard-Venin</target>
+          <target state="translated">Aéromite</target>
         </trans-unit>
         <trans-unit id="Venonat" translate="yes" xml:space="preserve">
           <source>Venonat</source>
@@ -1565,7 +1565,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</source>
         </trans-unit>
         <trans-unit id="Vulpix" translate="yes" xml:space="preserve">
           <source>Vulpix</source>
-          <target state="translated">Veux-tu vraiment transférer {0} au Professeur?</target>
+          <target state="translated">Goupix</target>
         </trans-unit>
         <trans-unit id="Wartortle" translate="yes" xml:space="preserve">
           <source>Wartortle</source>
@@ -2312,7 +2312,6 @@ You also got {1} Stardust, {2} Candy and {3} XP.</source>
         <trans-unit id="WrapGreen" translate="yes" xml:space="preserve">
           <source>Wrap Green</source>
           <target state="needs-review-translation">TéléporVert</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Attaque unique a pokemon go. Trad?</note>
         </trans-unit>
         <trans-unit id="WrapPink" translate="yes" xml:space="preserve">
@@ -2784,7 +2783,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</source>
         </trans-unit>
         <trans-unit id="Rhydon.Description" translate="yes" xml:space="preserve">
           <source>Rhydon has a horn that serves as a drill. It is used for destroying rocks and boulders. This Pokémon occasionally rams into streams of magma, but the armor-like hide prevents it from feeling the heat.</source>
-          <target state="translated">Nitrocharge</target>
+          <target state="translated">La corne de Rhinoféros lui sert de foreuse. Il l’utilise pour détruire des rochers et des cailloux. Ce Pokémon charge de temps en temps dans du magma en fusion, mais sa peau blindée le protège de la chaleur.</target>
         </trans-unit>
         <trans-unit id="Chansey.Description" translate="yes" xml:space="preserve">
           <source>Chansey lays nutritionally excellent eggs on an everyday basis. The eggs are so delicious, they are easily and eagerly devoured by even those people who have lost their appetite.</source>
