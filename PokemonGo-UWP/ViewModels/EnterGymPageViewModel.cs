@@ -15,6 +15,7 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Universal_Authenticator_v2.Views;
 using Newtonsoft.Json;
+using Google.Protobuf;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -34,6 +35,7 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
+                CurrentGym.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentGym)]).CreateCodedInput());
                 CurrentGym = JsonConvert.DeserializeObject<FortDataWrapper>((string)suspensionState[nameof(CurrentGym)]);
                 CurrentGymInfo = JsonConvert.DeserializeObject<GetGymDetailsResponse>((string)suspensionState[nameof(CurrentGymInfo)]);
                 CurrentEnterResponse = JsonConvert.DeserializeObject<GetGymDetailsResponse>((string)suspensionState[nameof(CurrentEnterResponse)]);
@@ -162,7 +164,6 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Gym Events
 
-        /// TODO: Events fired 
         /// <summary>
         ///     Event fired if the user was able to enter the Gym
         /// </summary>
@@ -202,7 +203,7 @@ namespace PokemonGo_UWP.ViewModels
                         // Success, we play the animation and update inventory
                         Logger.Write("Entering Gym success");
 
-                        // TODO: What to do when we are in the Gym?
+                        // What to do when we are in the Gym?
                         EnterSuccess?.Invoke(this, null);
                         await GameClient.UpdateInventory();
                         break;
