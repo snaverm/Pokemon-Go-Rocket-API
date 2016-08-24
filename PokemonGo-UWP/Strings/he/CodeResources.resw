@@ -124,195 +124,182 @@
     <value>dd.MM.yyyy hh:mm tt</value>
   </data>
   <data name="PokemonFledText" xml:space="preserve">
-    <value>{0} fled</value>
+    <value>{0} נמלטו</value>
   </data>
   <data name="GettingGpsSignalText" xml:space="preserve">
-    <value>Getting GPS signal...</value>
+    <value>מקבל קליטת GPS...</value>
   </data>
   <data name="GettingUserDataText" xml:space="preserve">
-    <value>Getting user data...</value>
+    <value>מקבל נתוני משתמש...</value>
   </data>
   <data name="GoogleErrorText" xml:space="preserve">
-    <value>Google returned error: </value>
+    <value>Google החזיר שגיאה:</value>
   </data>
   <data name="GoogleNotRespondingText" xml:space="preserve">
-    <value>Google is not responding, please try again later.</value>
+    <value>גוגל אינו מגיב, אנא נסה שוב מאוחר יותר.</value>
   </data>
   <data name="LoginExpired" xml:space="preserve">
-    <value>Previous login expired.</value>
+    <value>כניסה הקודמת פגה.</value>
   </data>
   <data name="LoadingEncounterText" xml:space="preserve">
-    <value>Loading encounter with {0}</value>
+    <value>טעינת המפגש עם {0}</value>
   </data>
   <data name="LoggingInText" xml:space="preserve">
-    <value>Logging in...</value>
+    <value>כניסה...</value>
   </data>
   <data name="LoginFailedText" xml:space="preserve">
-    <value>Login failed, please try again.</value>
+    <value>הכניסה נכשלה, נא לנסות שוב.</value>
   </data>
   <data name="NoText" xml:space="preserve">
-    <value>No</value>
+    <value>לא</value>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
-    <value>We need GPS permissions to run the game, please enable it and try again.</value>
+    <value>אנחנו צריכים הרשאות ה-GPS כדי להפעיל את המשחק, בבקשה לאפשר אותו ולנסות שוב.</value>
   </data>
   <data name="PokemonRanAwayText" xml:space="preserve">
-    <value>Pokémon ran away, sorry :(</value>
+    <value>פוקימון ברח, מצטער :(</value>
   </data>
   <data name="PtcDownText" xml:space="preserve">
-    <value>PTC login is probably down, please retry later.</value>
+    <value>כניסה PTC למטה, אנא נסה שוב מאוחר יותר.</value>
   </data>
   <data name="SomethingWentWrongText" xml:space="preserve">
-    <value>Something went wrong and app may be unstable now. Do you want to logout and try again?</value>
+    <value>משהו השתבש, app עשוי להיות לא יציב עכשיו. האם אתה רוצה להתנתק ולנסות שוב?</value>
   </data>
   <data name="TimeFormat" xml:space="preserve">
     <value>hh:mm tt</value>
   </data>
   <data name="UpdateDownloadingText" xml:space="preserve">
-    <value>Downloading update {0}</value>
+    <value>הורדת עדכון {0}</value>
   </data>
   <data name="UpdatedVersionText" xml:space="preserve">
-    <value>An updated version {0} is available. Do you want to update?
+    <value>{0} גירסה מעודכנת זמינה. האם ברצונך לעדכן?
 {1}</value>
   </data>
   <data name="UpdateFailedText" xml:space="preserve">
-    <value>Update failed: {0}
-Open page with installation files for manual install?</value>
+    <value>העדכון נכשל: {0}
+פתח את דף עם קבצי התקנה להתקנה ידנית?</value>
   </data>
   <data name="UpdateInstallingText" xml:space="preserve">
-    <value>Installing update, app is restarting...</value>
+    <value>התקנת עדכון, מופעל מחדש יישום </value>
   </data>
   <data name="WrongUsernameText" xml:space="preserve">
-    <value>Wrong username/password or offline server, please try again.</value>
+    <value>הלא נכון שם משתמש/סיסמה או שרת מנותק, אנא נסה שנית.</value>
   </data>
   <data name="YesText" xml:space="preserve">
-    <value>Yes</value>
+    <value>כן</value>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
-    <value>Instinct</value>
+    <value>אינסטינקט</value>
   </data>
   <data name="NoTeamText" xml:space="preserve">
-    <value>No Team</value>
+    <value>אין צוות</value>
   </data>
   <data name="ValorTeamText" xml:space="preserve">
-    <value>Valor</value>
+    <value>גבורה</value>
   </data>
   <data name="MysticTeamText" xml:space="preserve">
-    <value>Mystic</value>
+    <value>מיסטיק</value>
   </data>
   <data name="TransferPokemonSuccessText" xml:space="preserve">
-    <value>Transfer succeeded! Got a {0} Candy from the Professor.</value>
+    <value>העברת הצליח! יש {0} ממתקים הפרופסור.</value>
   </data>
   <data name="TransferPokemonWarningText" xml:space="preserve">
-    <value>You can't take it back after it's transferred to the Professor.</value>
+    <value>לא לקחת את זה בחזרה אחרי זה הועבר הפרופסור. ? אתה באמת רוצה להעביר {0} הפרופסור</value>
   </data>
   <data name="ActivityUnknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>ידוע</value>
   </data>
   <data name="ActivityCatchPokemon" xml:space="preserve">
-    <value>Pokémon Caught</value>
+    <value>פוקימון נתפס</value>
   </data>
   <data name="ActivityCatchLegendPokemon" xml:space="preserve">
-    <value>Catch Legendary Pokémon</value>
+    <value>לתפוס פוקימון האגדי</value>
   </data>
   <data name="ActivityFleePokemon" xml:space="preserve">
-    <value>Pokémon Fled</value>
+    <value>פוקימון נמלטו</value>
   </data>
   <data name="ActivityDefeatFort" xml:space="preserve">
-    <value>Defeat Fort</value>
+    <value>התבוסה פורט</value>
   </data>
   <data name="ActivityEvolvePokemon" xml:space="preserve">
-    <value>Evolve a Pokémon</value>
+    <value>להתפתח פוקימון</value>
   </data>
   <data name="ActivityHatchEgg" xml:space="preserve">
-    <value>Egg Hatched!</value>
+    <value>ביצה בקעו!</value>
   </data>
   <data name="ActivityWalkKm" xml:space="preserve">
-    <value>Walk Km</value>
+    <value>ק מ הליכה</value>
   </data>
   <data name="ActivityPokedexEntryNew" xml:space="preserve">
-    <value>New Pokémon</value>
+    <value>פוקימון חדש</value>
   </data>
   <data name="ActivityCatchFirstThrow" xml:space="preserve">
-    <value>First Throw</value>
+    <value>הזריקה הראשונה</value>
   </data>
   <data name="ActivityCatchNiceThrow" xml:space="preserve">
-    <value>Nice Throw</value>
+    <value>. זריקה טובה</value>
   </data>
   <data name="ActivityCatchGreatThrow" xml:space="preserve">
-    <value>Great Throw</value>
+    <value>זריקה נהדרת</value>
   </data>
   <data name="ActivityCatchExcellentThrow" xml:space="preserve">
-    <value>Excellent Throw</value>
+    <value>זריקה מעולה</value>
   </data>
   <data name="ActivityCatchCurveball" xml:space="preserve">
-    <value>Curveball</value>
+    <value>מסובב</value>
   </data>
   <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
-    <value>First Catch of Day!</value>
+    <value>התפיסה הראשונה היום!</value>
   </data>
   <data name="ActivityCatchMilestone" xml:space="preserve">
-    <value>Catch Milestone</value>
+    <value>לתפוס אבן דרך</value>
   </data>
   <data name="ActivityTrainPokemon" xml:space="preserve">
-    <value>Train Pokémon</value>
+    <value>הרכבת פוקימון</value>
   </data>
   <data name="ActivitySearchFort" xml:space="preserve">
-    <value>Search Fort</value>
+    <value>חיפוש פורט</value>
   </data>
   <data name="ActivityReleasePokemon" xml:space="preserve">
-    <value>Release Pokémon</value>
+    <value>לשחרר פוקימון</value>
   </data>
   <data name="ActivityHatchEggSmallBonus" xml:space="preserve">
-    <value>Hatch Egg Small Bonus</value>
+    <value>הפתח ביצה בונוס קטן</value>
   </data>
   <data name="ActivityHatchEggMediumBonus" xml:space="preserve">
-    <value>Hatch Egg Medium Bonus</value>
+    <value>הפתח ביצה בינונית בונוס</value>
   </data>
   <data name="ActivityHatchEggLargeBonus" xml:space="preserve">
-    <value>Hatch Egg Large Bonus</value>
+    <value>הפתח ביצה בונוס גדול</value>
   </data>
   <data name="ActivityDefeatGymDefender" xml:space="preserve">
-    <value>Defeat Gym Defender</value>
+    <value>להביס את המגן כושר</value>
   </data>
   <data name="ActivityDefeatGymLeader" xml:space="preserve">
-    <value>Defeat Gym Leader</value>
+    <value>מנהיגת מכון תבוסה</value>
   </data>
   <data name="Combat" xml:space="preserve">
-    <value>Combat</value>
+    <value>קרב</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>תאריך</value>
   </data>
   <data name="Fav" xml:space="preserve">
-    <value>Favorite</value>
+    <value>מועדף</value>
   </data>
   <data name="Health" xml:space="preserve">
-    <value>Health</value>
+    <value>בריאות</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>שם</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Number</value>
+    <value>מספר</value>
   </data>
   <data name="PokemonInventoryFullText" xml:space="preserve">
-    <value>Your Pokémon inventory is full, transfer some Pokémon before trying to catch {0}.</value>
+    <value>המלאי פוקימון שלך הוא מלא, להעביר איזה פוקימון לפני מנסה לתפוס {0}.</value>
   </data>
   <data name="WaitingForNetworkText" xml:space="preserve">
-    <value>Waiting for network to be back...</value>
-  </data>
-  <data name="EggHatchMessage" xml:space="preserve">
-    <value>An Egg hatched into a {0}.
-You also got {1} Stardust, {2} Candy and {3} XP.</value>
-  </data>
-  <data name="EvolvePokemonWarningText" xml:space="preserve">
-    <value>Do you want to evolve {0}?</value>
-  </data>
-  <data name="PowerUpPokemonWarningText" xml:space="preserve">
-    <value>Do you want to use a power up for {0}?</value>
-  </data>
-  <data name="TransferPokemonWarningTitle" xml:space="preserve">
-    <value>Do you really want to transfer {0} to the Professor?</value>
+    <value>מחכה הרשת לחזור</value>
   </data>
 </root>

@@ -231,6 +231,8 @@
     <Content Include="Assets\Icons\pokestop_near_inactive_lured.png" />
     <Content Include="Assets\Icons\pokestop_near_lured.png" />
     <Content Include="Assets\Icons\RecenterMapIcon.png" />
+    <Content Include="Assets\Icons\RecenterMapIconDark.png" />
+    <Content Include="Assets\Icons\RecenterMapIconLight.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
     <Content Include="Assets\Icons\stardust_vector.png" />
     <Content Include="Assets\Items\Egg.png" />
@@ -689,6 +691,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PoGoMessageDialog.xaml.cs">
+      <DependentUpon>PoGoMessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SemiCircularProgressBar.xaml.cs">
       <DependentUpon>SemiCircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -727,6 +732,7 @@
     <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
     <Compile Include="Utils\Helpers\ProximityHelper.cs" />
+    <Compile Include="Utils\Helpers\ProtobufJsonNetConverter.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />
     <Compile Include="Utils\Signature\DeviceInfos.cs" />
     <Compile Include="Utils\Helpers\ExceptionHandler.cs" />
@@ -831,6 +837,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\PoGoMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SemiCircularProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -17,7 +17,6 @@ using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
-using Universal_Authenticator_v2.Views;
 using Resources = PokemonGo_UWP.Utils.Resources;
 using POGOProtos.Settings.Master;
 
@@ -113,8 +112,12 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             if (suspensionState.Any())
-            {                
+            {
                 // Recovering the state
+                CurrentEncounter = new EncounterResponse();
+                CurrentLureEncounter = new DiskEncounterResponse();
+                CurrentCaptureAward = new CaptureAward();
+                SelectedCaptureItem = new ItemData();
                 CurrentPokemon = JsonConvert.DeserializeObject<IMapPokemon>((string) suspensionState[nameof(CurrentPokemon)]);
                 CurrentEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentEncounter)]).CreateCodedInput());
                 CurrentLureEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentLureEncounter)]).CreateCodedInput());

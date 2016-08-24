@@ -24,7 +24,9 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Universal_Authenticator_v2.Views;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PokemonGo_UWP.Utils.Helpers;
 
 namespace PokemonGo_UWP
 {
