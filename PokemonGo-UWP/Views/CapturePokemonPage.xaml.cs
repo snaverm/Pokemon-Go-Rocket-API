@@ -132,7 +132,6 @@ namespace PokemonGo_UWP.Views
             PokeballTransform.TranslateY = InitItemY;
             PokeballTransform.ScaleX = 1;
             PokeballTransform.ScaleY = 1;
-            ViewModel.PokeballButtonEnabled = true;
         }
 
         #endregion
