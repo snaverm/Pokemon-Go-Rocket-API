@@ -13,48 +13,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Bug" xml:space="preserve">
-    <value>Insecte</value>
+    <value>Insekt</value>
   </data>
   <data name="Dark" xml:space="preserve">
-    <value>Ténèbres</value>
+    <value>Sort</value>
+  </data>
+  <data name="Dragon" xml:space="preserve">
+    <value>Drage</value>
   </data>
   <data name="Electric" xml:space="preserve">
-    <value>Électrik</value>
+    <value>Elektrisk</value>
   </data>
   <data name="Fairy" xml:space="preserve">
-    <value>Fée</value>
-  </data>
-  <data name="Fighting" xml:space="preserve">
-    <value>Combat</value>
+    <value>Fe</value>
   </data>
   <data name="Fire" xml:space="preserve">
-    <value>Feu</value>
+    <value>Ild</value>
   </data>
   <data name="Flying" xml:space="preserve">
-    <value>Vol</value>
+    <value>Flyvende</value>
   </data>
   <data name="Ghost" xml:space="preserve">
-    <value>Spectre</value>
+    <value>Spøgelse</value>
   </data>
   <data name="Grass" xml:space="preserve">
-    <value>Plante</value>
+    <value>Græs</value>
   </data>
   <data name="Ground" xml:space="preserve">
-    <value>Sol</value>
+    <value>Jord</value>
   </data>
   <data name="Ice" xml:space="preserve">
-    <value>Glace</value>
+    <value>Is</value>
+  </data>
+  <data name="Poison" xml:space="preserve">
+    <value>Eleksir</value>
   </data>
   <data name="Psychic" xml:space="preserve">
-    <value>Psy</value>
+    <value>Psykiater</value>
   </data>
   <data name="Rock" xml:space="preserve">
-    <value>Roche</value>
+    <value>Sten</value>
   </data>
   <data name="Steel" xml:space="preserve">
-    <value>Acier</value>
+    <value>Stål</value>
   </data>
   <data name="Water" xml:space="preserve">
-    <value>Eau</value>
+    <value>Vand</value>
   </data>
 </root>

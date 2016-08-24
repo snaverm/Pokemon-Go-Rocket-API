@@ -481,6 +481,18 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\da\Resources.resw" />
+    <PRIResource Include="Strings\da\PokemonTypes.resw" />
+    <PRIResource Include="Strings\da\PokemonMoves.resw" />
+    <PRIResource Include="Strings\da\Pokemon.resw" />
+    <PRIResource Include="Strings\da\Pokedex.resw" />
+    <PRIResource Include="Strings\da\Items.resw" />
+    <PRIResource Include="Strings\da\CodeResources.resw" />
+    <PRIResource Include="Strings\da\Achievements.resw" />
+    <PRIResource Include="Strings\de-CH\Pokedex.resw" />
+    <PRIResource Include="Strings\nb-NO\Pokedex.resw" />
+    <PRIResource Include="Strings\hr-HR\Pokedex.resw" />
+    <PRIResource Include="Strings\hr\Pokedex.resw" />
     <PRIResource Include="Strings\de-CH\Resources.resw" />
     <PRIResource Include="Strings\de-CH\PokemonTypes.resw" />
     <PRIResource Include="Strings\de-CH\PokemonMoves.resw" />
@@ -923,6 +935,7 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.cs.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.da.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de-CH.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
