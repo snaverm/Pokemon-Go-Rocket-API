@@ -135,7 +135,12 @@ namespace PokemonGo_UWP.Utils
 			get { return Get(false); }
 			set { Set(value); }
 		}
-		public LiveTileModes LiveTileMode
+        public bool IsBatterySaverEnabled
+        {
+            get { return Get(false); }
+            set { Set(value); }
+        }
+        public LiveTileModes LiveTileMode
 		{
 			get { return Get(LiveTileModes.Off); }
 			set { Set(value); }

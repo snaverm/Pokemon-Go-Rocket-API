@@ -48,6 +48,8 @@ namespace PokemonGo_UWP
         /// </summary>
         private readonly DisplayRequest _displayRequest;
 
+        private readonly Utils.Helpers.ProximityHelper _proximityHelper;
+
         #endregion
 
         #region Properties
@@ -81,6 +83,9 @@ namespace PokemonGo_UWP
 
             // Initialize the Live Tile Updater.
             LiveTileUpdater = TileUpdateManager.CreateTileUpdaterForApplication();
+
+            // Init the proximity helper to turn the screen off when it's in your pocket
+            _proximityHelper = new Utils.Helpers.ProximityHelper();
         }
 
         #endregion
@@ -174,11 +179,20 @@ namespace PokemonGo_UWP
             GameClient.CatchablePokemons.CollectionChanged -= CatchablePokemons_CollectionChanged;
             NetworkInformation.NetworkStatusChanged -= NetworkInformationOnNetworkStatusChanged;
 
+            if (SettingsService.Instance.IsBatterySaverEnabled)
+                _proximityHelper.EnableDisplayAutoOff(false);
+
             if (SettingsService.Instance.LiveTileMode == LiveTileModes.Peek)
             {
                 LiveTileUpdater.EnableNotificationQueue(false);
             }
             return base.OnSuspendingAsync(s, e, prelaunchActivated);
+        }
+
+        public override void OnResuming(object s, object e, AppExecutionState previousExecutionState)
+        {
+            if (SettingsService.Instance.IsBatterySaverEnabled)
+                _proximityHelper.EnableDisplayAutoOff(true);
         }
 
         /// <summary>
@@ -207,6 +221,10 @@ namespace PokemonGo_UWP
             // Forces the display to stay on while we play
             //_displayRequest.RequestActive();
             WindowWrapper.Current().Window.VisibilityChanged += WindowOnVisibilityChanged;
+
+            // Turn the display off when the proximity stuff detects the display is covered (battery saver)
+            if (SettingsService.Instance.IsBatterySaverEnabled)
+                _proximityHelper.EnableDisplayAutoOff(true);
 
             // Init vibration device
             if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice"))
