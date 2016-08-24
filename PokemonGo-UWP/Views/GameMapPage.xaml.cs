@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -52,7 +52,7 @@ namespace PokemonGo_UWP.Views
                     Margin = new Thickness(0,8,0,0),
                     Content = new Image()
                     {
-                        Source = new BitmapImage() { UriSource = new Uri($"ms-appx:///Assets/Icons/RecenterMapIcon{ViewModel.CurrentTheme}.png")) },
+                        Source = new BitmapImage() { UriSource = new Uri($"ms-appx:///Assets/Icons/RecenterMapIcon{ViewModel.CurrentTheme}.png") },
                         Stretch = Stretch.Uniform,
                         Height = 36,
                         HorizontalAlignment = HorizontalAlignment.Center,
