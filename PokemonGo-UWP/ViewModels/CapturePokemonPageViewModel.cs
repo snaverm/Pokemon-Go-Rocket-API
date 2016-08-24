@@ -370,6 +370,7 @@ namespace PokemonGo_UWP.ViewModels
             if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
             {
                 PokeballButtonEnabled = false;
+                Busy.SetBusy(true);
                 // Player's using a PokeBall so we try to catch the Pokemon
                 await ThrowPokeball(hitPokemon);
 
@@ -377,7 +378,8 @@ namespace PokemonGo_UWP.ViewModels
                 await GameClient.UpdateInventory();
                 SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
 
-                if(SelectedCaptureItem.Count != 0)
+                Busy.SetBusy(false);
+                if (SelectedCaptureItem.Count != 0)
                     PokeballButtonEnabled = true;
             }
             else
@@ -386,6 +388,7 @@ namespace PokemonGo_UWP.ViewModels
                 SelectedCaptureItem = SelectAvailablePokeBall();
 
                 PokeballButtonEnabled = false;
+                Busy.SetBusy(true);
                 // He's using a berry
                 await ThrowBerry();
 
@@ -393,6 +396,7 @@ namespace PokemonGo_UWP.ViewModels
                 await GameClient.UpdateInventory();
                 SelectedCaptureItem = SelectAvailablePokeBall();
 
+                Busy.SetBusy(false);
                 if (SelectedCaptureItem.Count != 0)
                     PokeballButtonEnabled = true;
             }
