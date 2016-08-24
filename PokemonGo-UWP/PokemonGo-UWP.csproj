@@ -731,6 +731,7 @@
     <Compile Include="Utils\Helpers\MapOrientationModes.cs" />
     <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
+    <Compile Include="Utils\Helpers\ProtobufJsonNetConverter.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />
     <Compile Include="Utils\Signature\DeviceInfos.cs" />
     <Compile Include="Utils\Helpers\ExceptionHandler.cs" />

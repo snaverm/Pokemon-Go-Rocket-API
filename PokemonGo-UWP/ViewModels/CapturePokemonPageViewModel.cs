@@ -112,8 +112,12 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             if (suspensionState.Any())
-            {                
+            {
                 // Recovering the state
+                CurrentEncounter = new EncounterResponse();
+                CurrentLureEncounter = new DiskEncounterResponse();
+                CurrentCaptureAward = new CaptureAward();
+                SelectedCaptureItem = new ItemData();
                 CurrentPokemon = JsonConvert.DeserializeObject<IMapPokemon>((string) suspensionState[nameof(CurrentPokemon)]);
                 CurrentEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentEncounter)]).CreateCodedInput());
                 CurrentLureEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentLureEncounter)]).CreateCodedInput());
