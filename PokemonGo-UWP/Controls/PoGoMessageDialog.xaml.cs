@@ -102,11 +102,11 @@ namespace PokemonGo_UWP.Controls
         // Public
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(PoGoMessageDialog),
-                new PropertyMetadata("Title"));
+                new PropertyMetadata(""));
 
         public static readonly DependencyProperty TextProperty = 
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(PoGoMessageDialog),
-                new PropertyMetadata("Text"));
+                new PropertyMetadata(""));
 
         public static readonly DependencyProperty AcceptTextProperty = 
             DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
