@@ -350,7 +350,11 @@ namespace PokemonGo_UWP.ViewModels
                                       Resources.Pokemon.GetString(CurrentCandy.FamilyId.ToString().Replace("Family", "")))).ShowAsyncQueue();
                           await GameClient.UpdateInventory();
                           await GameClient.UpdatePlayerStats();
-                          NavigationService.GoBack();
+                          // HACK - if we're coming fro the inventory we may go back, otherwise we go to map page
+                          if (NavigationService.Frame.BackStack.Last().SourcePageType == typeof(PokemonInventoryPage))
+                              NavigationService.GoBack();
+                          else
+                              NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
                           break;
 
                       case ReleasePokemonResponse.Types.Result.PokemonDeployed:
