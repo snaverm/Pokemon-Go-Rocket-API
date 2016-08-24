@@ -125,6 +125,15 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
+        /// <summary>
+        ///     Whether the player wants battery save mode (when the device is being held upside down)
+        /// </summary>
+        public bool IsBatterySaverEnabled
+        {
+            get { return SettingsService.Instance.IsBatterySaverEnabled; }
+            set { SettingsService.Instance.IsBatterySaverEnabled = value; }
+        }
+
         #endregion
 
         #region Constructor

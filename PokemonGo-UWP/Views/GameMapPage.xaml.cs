@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Utils;
 using Template10.Common;
+using Windows.Graphics.Display;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -66,8 +67,28 @@ namespace PokemonGo_UWP.Views
                         VisualTreeHelper.GetChild(
                             VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GameMapControl, 0), 1), 0), 0);   
                 
-                tsp.Children.Add(ReactivateMapAutoUpdateButton);             
+                tsp.Children.Add(ReactivateMapAutoUpdateButton);
+                DisplayInformation.GetForCurrentView().OrientationChanged += GameMapPage_OrientationChanged;
             };
+        }
+
+        private void GameMapPage_OrientationChanged(DisplayInformation sender, object args)
+        {
+            if (SettingsService.Instance.IsBatterySaverEnabled)
+            {
+                if (sender.NativeOrientation == DisplayOrientations.Portrait)
+                {
+                    HideBatterySaver.Begin();
+
+                    IsHitTestVisible = true;
+                }
+                else if (sender.NativeOrientation == DisplayOrientations.PortraitFlipped)
+                {
+                    ShowBatterySaver.Begin();
+
+                    IsHitTestVisible = false;
+                }
+            }
         }
 
         private void SetupMap()
