@@ -24,7 +24,6 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Universal_Authenticator_v2.Views;
 
 namespace PokemonGo_UWP
 {
@@ -88,7 +87,7 @@ namespace PokemonGo_UWP
         private static async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            await ExceptionHandler.HandleException(new Exception(e.Message));
+            await ExceptionHandler.HandleException(e.Exception);
             // We should be logging these exceptions too so they can be tracked down.
             if (!string.IsNullOrEmpty(ApplicationKeys.HockeyAppToken))
                 HockeyClient.Current.TrackException(e.Exception);
@@ -191,7 +190,7 @@ namespace PokemonGo_UWP
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
 #endif            
             // If we have a phone contract, hide the status bar
-            if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 var statusBar = StatusBar.GetForCurrentView();
                 await statusBar.HideAsync();
@@ -199,6 +198,7 @@ namespace PokemonGo_UWP
 
             // Enter into full screen mode
             ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
             ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Standard;            
 
             // Forces the display to stay on while we play
@@ -221,9 +221,7 @@ namespace PokemonGo_UWP
 
             // Respond to changes in inventory and Pokemon in the immediate viscinity.
             GameClient.PokemonsInventory.CollectionChanged += PokemonsInventory_CollectionChanged;
-            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;
-
-            await AudioUtils.Init();            
+            GameClient.CatchablePokemons.CollectionChanged += CatchablePokemons_CollectionChanged;         
 
             await Task.CompletedTask;
         }        

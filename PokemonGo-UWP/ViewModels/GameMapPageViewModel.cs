@@ -21,6 +21,7 @@ using Resources = PokemonGo_UWP.Utils.Resources;
 using POGOProtos.Enums;
 using POGOProtos.Map.Pokemon;
 using Google.Protobuf;
+using PokemonGo_UWP.Controls;
 
 namespace PokemonGo_UWP.ViewModels
 {
