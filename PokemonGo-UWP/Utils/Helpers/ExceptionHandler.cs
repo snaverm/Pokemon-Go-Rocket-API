@@ -2,26 +2,19 @@
 using Windows.UI.Popups;
 using PokemonGo_UWP.Views;
 using Template10.Common;
-using Universal_Authenticator_v2.Views;
 using System;
 using System.Diagnostics;
 using PokemonGo.RocketAPI.Exceptions;
 
 namespace PokemonGo_UWP.Utils
 {
-    internal class ApiHandledException : Exception
-    {
-        public ApiHandledException(string reloginCompleted) : base(reloginCompleted)
-        {
-        }
-    }
     public static class ExceptionHandler
     {
         public static async Task HandleException(Exception e = null)
         {
             if (e != null && (e.GetType() == typeof(ApiNonRecoverableException)))
             {
-                Debug.WriteLine("[Relogin] ApiHandledException from API handled.");
+                Debug.WriteLine($"[Relogin] {nameof(ApiNonRecoverableException)} from API handled.");
                 Debug.WriteLine("[Relogin] Successfuly ended.");
             }
             else if (e != null && e.GetType() == (typeof(AccessTokenExpiredException)))

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,159 +118,129 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>A good, high-performance Poké Ball that provides a higher catch rate than a standard Poké Ball.</value>
+    <value>התקן ללכידת פוקימון פראי. הוא נזרק כמו כדור-פוקימון פראי, בנוחות לבצע את המטרה.</value>
   </data>
   <data name="D_ItemIncenseCool" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>קטורת בניחוח מסתורי זה מפתה פוקימון פראי למיקום שלך במשך 30 דקות</value>
   </data>
   <data name="D_ItemIncenseFloral" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>קטורת בניחוח מסתורי זה מפתה פוקימון פראי למיקום שלך במשך 30 דקות</value>
   </data>
   <data name="D_ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>קטורת בניחוח מסתורי זה מפתה פוקימון פראי למיקום שלך במשך 30 דקות</value>
   </data>
   <data name="D_ItemIncenseSpicy" xml:space="preserve">
-    <value>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</value>
+    <value>קטורת בניחוח מסתורי זה מפתה פוקימון פראי למיקום שלך במשך 30 דקות</value>
   </data>
   <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch. Breaks after 3 uses.</value>
+    <value>התקן דוגר ביצה תוך הליכה עד שזה מוכן לבקיעה.</value>
   </data>
   <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>A device that incubates an Egg as you walk until it is ready to hatch. Unlimited use!</value>
-  </data>
-  <data name="D_ItemLuckyEgg" xml:space="preserve">
-    <value>A Lucky Egg that's filled with happiness! Earns double XP for 30 minutes.</value>
+    <value>התקן דוגר ביצה תוך הליכה עד שזה מוכן לבקיעה.</value>
   </data>
   <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>The best Poké Ball with the ultimate level of performance. With it you will catch any Pokémon without fail.</value>
+    <value>התקן ללכידת פוקימון פראי. הוא נזרק כמו כדור-פוקימון פראי, בנוחות לבצע את המטרה.</value>
   </data>
   <data name="D_ItemPokeBall" xml:space="preserve">
-    <value>A device for capturing wild Pokémon. It's thrown like a ball at a wild Pokémon, comfortably encapsulating its target.</value>
+    <value>התקן ללכידת פוקימון פראי. הוא נזרק כמו כדור-פוקימון פראי, בנוחות לבצע את המטרה.</value>
   </data>
   <data name="D_ItemPotion" xml:space="preserve">
-    <value>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 20 points.</value>
-  </data>
-  <data name="D_ItemRazzBerry" xml:space="preserve">
-    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
-  </data>
-    <data name="D_ItemBlukBerry" xml:space="preserve">
-    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
-  </data>
-    <data name="D_ItemNanabBerry" xml:space="preserve">
-    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
-  </data>
-    <data name="D_ItemPinapBerry" xml:space="preserve">
-    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
-  </data>
-    <data name="D_ItemWeparBerry" xml:space="preserve">
-    <value>Feed this to a Pokémon, and it will be easier to catch on your next throw.</value>
+    <value>תרופה מסוג תרסיס לטיפול פצעים. זה משחזר את HP של פוקימון אחד ב- 20 נקודות.</value>
   </data>
   <data name="D_ItemRevive" xml:space="preserve">
-    <value>A medicine that can revive fainted Pokémon. It also restores half of a fainted Pokémon's maximum HP.</value>
-  </data>
-  <data name="D_ItemSpecialCamera" xml:space="preserve">
-    <value>When you encounter Pokémon in the wild, you can use your camera to photograph them.</value>
-  </data>
-  <data name="D_ItemSuperPotion" xml:space="preserve">
-    <value>A spray-type medicine for treating wounds. It restores the HP of one Pokémon by 50 points.</value>
-  </data>
-  <data name="D_ItemTroyDisk" xml:space="preserve">
-    <value>A module that attracts Pokémon to a Pokéstop for 30 min. The effect benefits other people nearby.</value>
+    <value>תרופה זאת יכול להחיות התעלף פוקימון. זה גם משחזר את מחצית HP המרבי של פוקימון התעלף.</value>
   </data>
   <data name="D_ItemUltraBall" xml:space="preserve">
-    <value>An ultra-high performance Poké Ball that provides a higher success rate for catching Pokémon than a Great.</value>
-  </data>
-  <data name="D_ItemUnknown" xml:space="preserve">
-    <value>This item is unknown and may be added in the future.</value>
+    <value>התקן ללכידת פוקימון פראי. הוא נזרק כמו כדור-פוקימון פראי, בנוחות לבצע את המטרה.</value>
   </data>
   <data name="ItemBlukBerry" xml:space="preserve">
-    <value>Bluk Berry</value>
+    <value>Bluk ברי</value>
   </data>
   <data name="ItemGreatBall" xml:space="preserve">
-    <value>Great Ball</value>
+    <value>נשף גדול</value>
   </data>
   <data name="ItemHyperPotion" xml:space="preserve">
-    <value>Hyper Potion</value>
+    <value>היפר שיקוי</value>
   </data>
   <data name="ItemIncenseCool" xml:space="preserve">
-    <value>Cool Incense</value>
+    <value>קטורת מגניב</value>
   </data>
   <data name="ItemIncenseFloral" xml:space="preserve">
-    <value>Floral Incense</value>
+    <value>קטורת פרחוני</value>
   </data>
   <data name="ItemIncenseOrdinary" xml:space="preserve">
-    <value>Incense</value>
+    <value>קטורת</value>
   </data>
   <data name="ItemIncenseSpicy" xml:space="preserve">
-    <value>Spicy Incense</value>
+    <value>קטורת חריף</value>
   </data>
   <data name="ItemIncubatorBasic" xml:space="preserve">
-    <value>Incubator</value>
+    <value>חממה</value>
   </data>
   <data name="ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>∞ Incubator</value>
+    <value>∞ חממה</value>
   </data>
   <data name="ItemItemStorageUpgrade" xml:space="preserve">
-    <value>Item Storage Upgrade</value>
+    <value>פריט אחסון שדרוג</value>
   </data>
   <data name="ItemLuckyEgg" xml:space="preserve">
-    <value>Lucky Egg</value>
+    <value>מזל ביצה</value>
   </data>
   <data name="ItemMasterBall" xml:space="preserve">
-    <value>Master Ball</value>
+    <value>כדור מאסטר</value>
   </data>
   <data name="ItemMaxPotion" xml:space="preserve">
-    <value>Max Potion</value>
+    <value>מקס שיקוי</value>
   </data>
   <data name="ItemMaxRevive" xml:space="preserve">
-    <value>Max Revive</value>
+    <value>מקס להחיות</value>
   </data>
   <data name="ItemNanabBerry" xml:space="preserve">
-    <value>Nanab Berry</value>
+    <value>Nanab ברי</value>
   </data>
   <data name="ItemPinapBerry" xml:space="preserve">
-    <value>Pinap Berry</value>
+    <value>Pinap ברי</value>
   </data>
   <data name="ItemPokeBall" xml:space="preserve">
-    <value>Poke Ball</value>
+    <value>לתקוע כדור</value>
   </data>
   <data name="ItemPokemonStorageUpgrade" xml:space="preserve">
-    <value>Pokemon Storage Upgrade</value>
+    <value>שדרוג פוקימון אחסון</value>
   </data>
   <data name="ItemPotion" xml:space="preserve">
-    <value>Potion</value>
+    <value>שיקוי</value>
   </data>
   <data name="ItemRazzBerry" xml:space="preserve">
-    <value>Razz Berry</value>
+    <value>ראז ברי</value>
   </data>
   <data name="ItemRevive" xml:space="preserve">
-    <value>Revive</value>
+    <value>להחיות</value>
   </data>
   <data name="ItemSpecialCamera" xml:space="preserve">
-    <value>Special Camera</value>
+    <value>מצלמה מיוחדת</value>
   </data>
   <data name="ItemSuperPotion" xml:space="preserve">
-    <value>Super Potion</value>
+    <value>סופר שיקוי</value>
   </data>
   <data name="ItemTroyDisk" xml:space="preserve">
-    <value>Lure Module</value>
+    <value>לפתות את מודול</value>
   </data>
   <data name="ItemUltraBall" xml:space="preserve">
-    <value>Ultra Ball</value>
+    <value>הכדור אולטרה</value>
   </data>
   <data name="ItemUnknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>ידוע</value>
   </data>
   <data name="ItemWeparBerry" xml:space="preserve">
-    <value>Wepar Berry</value>
+    <value>Wepar ברי</value>
   </data>
   <data name="ItemXAttack" xml:space="preserve">
-    <value>X Attack</value>
+    <value>X תקיפה</value>
   </data>
   <data name="ItemXDefense" xml:space="preserve">
-    <value>X Defense</value>
+    <value>X ההגנה</value>
   </data>
   <data name="ItemXMiracle" xml:space="preserve">
-    <value>X Miracle</value>
+    <value>X נס</value>
   </data>
 </root>
