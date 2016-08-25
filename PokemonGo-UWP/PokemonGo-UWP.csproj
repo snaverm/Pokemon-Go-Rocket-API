@@ -230,7 +230,6 @@
     <Content Include="Assets\Icons\pokestop_near_inactive.png" />
     <Content Include="Assets\Icons\pokestop_near_inactive_lured.png" />
     <Content Include="Assets\Icons\pokestop_near_lured.png" />
-    <Content Include="Assets\Icons\RecenterMapIcon.png" />
     <Content Include="Assets\Icons\RecenterMapIconDark.png" />
     <Content Include="Assets\Icons\RecenterMapIconLight.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
