@@ -18,7 +18,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>PokemonGo-UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppxBundle>Never</AppxBundle>
   </PropertyGroup>
@@ -230,7 +230,6 @@
     <Content Include="Assets\Icons\pokestop_near_inactive.png" />
     <Content Include="Assets\Icons\pokestop_near_inactive_lured.png" />
     <Content Include="Assets\Icons\pokestop_near_lured.png" />
-    <Content Include="Assets\Icons\RecenterMapIcon.png" />
     <Content Include="Assets\Icons\RecenterMapIconDark.png" />
     <Content Include="Assets\Icons\RecenterMapIconLight.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
