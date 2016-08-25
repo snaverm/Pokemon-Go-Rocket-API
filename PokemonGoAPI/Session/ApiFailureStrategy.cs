@@ -24,7 +24,9 @@ namespace PokemonGoAPI.Session
         private int _retryCount;
 
         public event EventHandler OnAccessTokenUpdated;
-        
+
+        public event Action<bool> OnFailureToggleUpdateTimer;
+
         public ApiFailureStrategy(Client client)
         {
             _client = client;
@@ -47,7 +49,7 @@ namespace PokemonGoAPI.Session
                 while (_client.AccessToken == null)
                 {
                     try
-                    {                        
+                    {
                         await _client.Login.DoLogin();
                     }
                     catch (Exception exception)
@@ -63,7 +65,7 @@ namespace PokemonGoAPI.Session
                             await Task.Delay(sleepSeconds * 1000);
                         }
                     }
-                }                
+                }
                 OnAccessTokenUpdated?.Invoke(this, null);
             }
             ReauthenticateMutex.ReleaseMutex();
@@ -111,9 +113,11 @@ namespace PokemonGoAPI.Session
                 case StatusCode.InvalidToken:
                     // Invalid auth
                     Logger.Write("Received StatusCode 102, reauthenticating.");
+                    OnFailureToggleUpdateTimer?.Invoke(false);
                     _client.AccessToken.Expire();
                     await Reauthenticate();
                     request.AuthTicket = _client.AuthTicket;
+                    OnFailureToggleUpdateTimer?.Invoke(true);
                     throw new ApiNonRecoverableException("Relogin completed.");
                 default:
                     Logger.Write($"Unknown status code: {response.StatusCode}");
@@ -133,7 +137,7 @@ namespace PokemonGoAPI.Session
             _retryCount = 0;
             // Check if we got an updated ticket
             if (response.AuthTicket == null) return;
-            // Update the new token               
+            // Update the new token
             _client.AccessToken.AuthTicket = response.AuthTicket;
             OnAccessTokenUpdated?.Invoke(this, null);
             Logger.Write("Received a new AuthTicket from Pokémon!");
