@@ -229,6 +229,12 @@ namespace PokemonGo_UWP.Utils
             new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
+        ///     Collection of Gyms in the current area
+        /// </summary>
+        public static ObservableCollection<FortDataWrapper> NearbyGyms { get; set; } =
+            new ObservableCollection<FortDataWrapper>();
+
+        /// <summary>
         ///     Stores Items in the current inventory
         /// </summary>
         public static ObservableCollection<ItemData> ItemsInventory { get; set; } = new ObservableCollection<ItemData>()
@@ -474,6 +480,7 @@ namespace PokemonGo_UWP.Utils
             CatchablePokemons?.Clear();
             NearbyPokemons?.Clear();
             NearbyPokestops?.Clear();
+            NearbyGyms?.Clear();
         }
 
 		#endregion
@@ -616,13 +623,22 @@ namespace PokemonGo_UWP.Utils
             // for this collection the ordering is important, so we follow a slightly different update mechanism
             NearbyPokemons.UpdateByIndexWith(newNearByPokemons, x => new NearbyPokemonWrapper(x));
 
-            // update poke stops on map (gyms are ignored for now)
+            // update poke stops on map
             var newPokeStops = mapObjects.Item1.MapCells
                 .SelectMany(x => x.Forts)
                 .Where(x => x.Type == FortType.Checkpoint)
                 .ToArray();            
             Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
             NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
+
+            // update gyms on map
+            var newGyms = mapObjects.Item1.MapCells
+                .SelectMany(x => x.Forts)
+                .Where(x => x.Type == FortType.Gym)
+                .ToArray();
+            Logger.Write($"Found {newGyms.Length} nearby Gyms");
+            // For now, we do not show the gyms on the map, as they are not complete yet. Code remains, so we can still work on it.
+            //NearbyGyms.UpdateWith(newGyms, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
             // Update LuredPokemon
             var newLuredPokemon = newPokeStops.Where(item => item.LureInfo != null).Select(item => new LuredPokemon(item.LureInfo, item.Latitude, item.Longitude)).ToArray();
@@ -977,6 +993,28 @@ namespace PokemonGo_UWP.Utils
         {
             return await _client.Fort.SearchFort(pokestopId, latitude, longitude);
         }
+
+        #endregion
+
+        #region Gym Handling
+
+        /// <summary>
+        ///     Gets the details for the given Gym
+        /// </summary>
+        /// <param name="gymid"></param>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
+        public static async Task<GetGymDetailsResponse> GetGymDetails(string gymid, double latitude, double longitude)
+        {
+            return await _client.Fort.GetGymDetails(gymid, latitude, longitude);
+        }
+
+        /// The following _client.Fort methods need implementation:
+        /// FortDeployPokemon
+        /// FortRecallPokemon
+        /// StartGymBattle
+        /// AttackGym
 
         #endregion
 
