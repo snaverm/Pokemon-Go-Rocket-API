@@ -13,7 +13,6 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
-using Universal_Authenticator_v2.Views;
 using Newtonsoft.Json;
 using Google.Protobuf;
 
@@ -41,7 +40,7 @@ namespace PokemonGo_UWP.ViewModels
             }
             else
             {
-                // Navigating from game page, so we need to actually load the Gym                  
+                // Navigating from game page, so we need to actually load the Gym
                 Busy.SetBusy(true, "Loading Gym");
                 CurrentGym = (FortDataWrapper)NavigationHelper.NavigationState[nameof(CurrentGym)];
                 NavigationHelper.NavigationState.Remove(nameof(CurrentGym));

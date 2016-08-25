@@ -380,6 +380,7 @@ namespace PokemonGo_UWP.Utils
             _client.ApiFailure = apiFailureStrategy;
             // Register to AccessTokenChanged
             apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
+            apiFailureStrategy.OnFailureToggleUpdateTimer += ToggleUpdateTimer;
             try
             {
                 await _client.Login.DoLogin();
@@ -477,71 +478,67 @@ namespace PokemonGo_UWP.Utils
                 _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             _lastGeopositionMapObjectsRequest = null;
-            CatchablePokemons?.Clear();
-            NearbyPokemons?.Clear();
-            NearbyPokestops?.Clear();
-            NearbyGyms?.Clear();
         }
 
-		#endregion
+        #endregion
 
-		#region Data Updating
-		private static Geolocator _geolocator;
-		private static Compass _compass;
+        #region Data Updating
+        private static Geolocator _geolocator;
+        private static Compass _compass;
 
-		public static Geoposition Geoposition { get; private set; }
+        public static Geoposition Geoposition { get; private set; }
 
-		private static Heartbeat _heartbeat;
+        private static Heartbeat _heartbeat;
 
         public static event EventHandler<GetHatchedEggsResponse> OnEggHatched;
 
-		/// <summary>
-		///     We fire this event when the current position changes
-		/// </summary>
-		public static event EventHandler<Geoposition> GeopositionUpdated;
-		#region Compass Stuff
-		/// <summary>
-		/// We fire this event when the current compass position changes
-		/// </summary>
-		public static event EventHandler<CompassReading> HeadingUpdated;
-		private static void compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
-		{
-			HeadingUpdated?.Invoke(sender, args.Reading);
-		}
-		#endregion
-		/// <summary>
-		///     Starts the timer to update map objects and the handler to update position
-		/// </summary>
-		public static async Task InitializeDataUpdate()
-		{
-			#region Compass management
-			SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
-			{
-				if (e.PropertyName == nameof(SettingsService.Instance.MapAutomaticOrientationMode))
-				{
-					switch (SettingsService.Instance.MapAutomaticOrientationMode)
-					{
-						case MapAutomaticOrientationModes.Compass:
-							_compass = Compass.GetDefault();
-							_compass.ReportInterval = Math.Max(_compass.MinimumReportInterval, 50);
-							_compass.ReadingChanged += compass_ReadingChanged;
-							break;
-						case MapAutomaticOrientationModes.None:
-						case MapAutomaticOrientationModes.GPS:
-						default:
-							if (_compass != null)
-							{
-								_compass.ReadingChanged -= compass_ReadingChanged;
-								_compass = null;
-							}
-							break;
-					}
-				}
-			};
-			//Trick to trigger the PropertyChanged for MapAutomaticOrientationMode ;)
-			SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
-			#endregion
-			_geolocator = new Geolocator
+        /// <summary>
+        ///     We fire this event when the current position changes
+        /// </summary>
+        public static event EventHandler<Geoposition> GeopositionUpdated;
+        #region Compass Stuff
+        /// <summary>
+        /// We fire this event when the current compass position changes
+        /// </summary>
+        public static event EventHandler<CompassReading> HeadingUpdated;
+        private static void compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
+        {
+            HeadingUpdated?.Invoke(sender, args.Reading);
+        }
+        #endregion
+        /// <summary>
+        ///     Starts the timer to update map objects and the handler to update position
+        /// </summary>
+        public static async Task InitializeDataUpdate()
+        {
+            #region Compass management
+            SettingsService.Instance.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
+            {
+                if (e.PropertyName == nameof(SettingsService.Instance.MapAutomaticOrientationMode))
+                {
+                    switch (SettingsService.Instance.MapAutomaticOrientationMode)
+                    {
+                        case MapAutomaticOrientationModes.Compass:
+                            _compass = Compass.GetDefault();
+                            _compass.ReportInterval = Math.Max(_compass.MinimumReportInterval, 50);
+                            _compass.ReadingChanged += compass_ReadingChanged;
+                            break;
+                        case MapAutomaticOrientationModes.None:
+                        case MapAutomaticOrientationModes.GPS:
+                        default:
+                            if (_compass != null)
+                            {
+                                _compass.ReadingChanged -= compass_ReadingChanged;
+                                _compass = null;
+                            }
+                            break;
+                    }
+                }
+            };
+            //Trick to trigger the PropertyChanged for MapAutomaticOrientationMode ;)
+            SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
+            #endregion
+            _geolocator = new Geolocator
             {
                 DesiredAccuracy = PositionAccuracy.High,
                 DesiredAccuracyInMeters = 5,
@@ -592,6 +589,7 @@ namespace PokemonGo_UWP.Utils
         /// <param name="isEnabled"></param>
         public static async void ToggleUpdateTimer(bool isEnabled = true)
         {
+            Logger.Write($"Called ToggleUpdateTimer({isEnabled})");
             if (isEnabled)
                 await _heartbeat.StartDispatcher();
             else
@@ -627,7 +625,7 @@ namespace PokemonGo_UWP.Utils
             var newPokeStops = mapObjects.Item1.MapCells
                 .SelectMany(x => x.Forts)
                 .Where(x => x.Type == FortType.Checkpoint)
-                .ToArray();            
+                .ToArray();
             Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
             NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
@@ -645,17 +643,35 @@ namespace PokemonGo_UWP.Utils
             Logger.Write($"Found {newLuredPokemon.Length} lured Pokemon");
             LuredPokemons.UpdateByIndexWith(newLuredPokemon, x => x);
             Logger.Write("Finished updating map objects");
-            
+
             // Update Hatched Eggs
-            var hatchedEggResponse = mapObjects.Item2;            
+            var hatchedEggResponse = mapObjects.Item2;
             if (hatchedEggResponse.Success)
             {
-                //OnEggHatched?.Invoke(null, hatchedEggResponse);             
+                //OnEggHatched?.Invoke(null, hatchedEggResponse);
+
                 for (var i = 0; i < hatchedEggResponse.PokemonId.Count; i++)
                 {
                     Logger.Write("Egg Hatched");
-                    var currentPokemonId = PokemonsInventory.First(item => item.Id == hatchedEggResponse.PokemonId[i]).PokemonId;
-                    await new MessageDialog(string.Format(Resources.CodeResources.GetString("EggHatchMessage"), currentPokemonId, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i], hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
+                    await UpdateInventory();
+
+                    //TODO: Fix hatching of more than one pokemon at a time
+                    var currentPokemon = PokemonsInventory
+                        .FirstOrDefault(item => item.Id == hatchedEggResponse.PokemonId[i]);
+
+                    if(currentPokemon == null)
+                        continue;
+
+                    await
+                        new MessageDialog(string.Format(
+                            Resources.CodeResources.GetString("EggHatchMessage"),
+                            currentPokemon.PokemonId, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i],
+                            hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
+
+                    NavigationHelper.NavigationState["CurrentPokemon"] =
+                        new PokemonDataWrapper(currentPokemon);
+                    BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage));
+
                 }
             }
         }
