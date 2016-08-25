@@ -661,15 +661,16 @@ namespace PokemonGo_UWP.Utils
                     if(currentPokemon == null)
                         continue;
 
+                    await
+                        new MessageDialog(string.Format(
+                            Resources.CodeResources.GetString("EggHatchMessage"),
+                            currentPokemon.PokemonId, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i],
+                            hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
+
                     NavigationHelper.NavigationState["CurrentPokemon"] =
                         new PokemonDataWrapper(currentPokemon);
                     BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage));
 
-                    await
-                        new MessageDialog(string.Format(
-                            Resources.CodeResources.GetString("EggHatchMessage"),
-                            currentPokemon.Nickname, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i],
-                            hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
                 }
             }
         }
