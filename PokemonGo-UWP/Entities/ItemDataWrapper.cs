@@ -5,16 +5,18 @@ using PokemonGo_UWP.Views;
 using POGOProtos.Inventory.Item;
 using Template10.Common;
 using Template10.Mvvm;
+using System.ComponentModel;
 
 namespace PokemonGo_UWP.Entities
 {
-    public class ItemDataWrapper
+    public class ItemDataWrapper : INotifyPropertyChanged
     {
         private DelegateCommand _gotoDiscardCommand;
+        private ItemData _wrappedData;
 
         public ItemDataWrapper(ItemData itemData)
         {
-            WrappedData = itemData;
+            _wrappedData = itemData;
         }
 
         [JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
@@ -30,13 +32,35 @@ namespace PokemonGo_UWP.Entities
                 //BootStrapper.Current.NavigationService.Navigate(typeof(EggDetailPage), true);
             }, () => true));
 
+        public void Update(ItemData update)
+        {
+            _wrappedData = update;
+
+            OnPropertyChanged(nameof(ItemId));
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(Unseen));
+        }
+
         #region Wrapped Properties
 
-        public ItemId ItemId => WrappedData.ItemId;
+        public ItemData WrappedData => _wrappedData;
 
-        public int Count => WrappedData.Count;
+        public ItemId ItemId => _wrappedData.ItemId;
 
-        public bool Unseen => WrappedData.Unseen;
+        public int Count => _wrappedData.Count;
+
+        public bool Unseen => _wrappedData.Unseen;
+
+        #endregion
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
     }
