@@ -691,8 +691,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PoGoMessageDialog.xaml.cs">
+    <Compile Include="Controls\MessageDialog\PoGoMessageDialog.xaml.cs">
       <DependentUpon>PoGoMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageDialog\StepperMessageDialog.xaml.cs">
+      <DependentUpon>StepperMessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SemiCircularProgressBar.xaml.cs">
       <DependentUpon>SemiCircularProgressBar.xaml</DependentUpon>
@@ -835,7 +838,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\PoGoMessageDialog.xaml">
+    <Page Include="Controls\MessageDialog\PoGoMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageDialog\StepperMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
