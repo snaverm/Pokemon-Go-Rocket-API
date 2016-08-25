@@ -770,7 +770,7 @@ Hai ottenuto anche {1} Polvere di stella, {2} Caramelle e {3} PE.</target>
       <group id="POKEMONGO-UWP/STRINGS/EN-US/ITEMS.RESW" datatype="resx">
         <trans-unit id="D_ItemGreatBall" translate="yes" xml:space="preserve">
           <source>A good, high-performance Poké Ball that provides a higher catch rate than a standard Poké Ball.</source>
-          <target state="final">Poké Ball dalle ottime prestazioni: fornisce maggiori probabilità di cattura rispetto alla normale PokéBall.</target>
+          <target state="final">PokéBall dalle ottime prestazioni: fornisce maggiori probabilità di cattura rispetto alla normale PokéBall.</target>
         </trans-unit>
         <trans-unit id="D_ItemIncenseCool" translate="yes" xml:space="preserve">
           <source>Incense with a mysterious fragrance that lures wild Pokémon to your location for 30 minutes</source>
@@ -814,7 +814,7 @@ Hai ottenuto anche {1} Polvere di stella, {2} Caramelle e {3} PE.</target>
         </trans-unit>
         <trans-unit id="D_ItemUltraBall" translate="yes" xml:space="preserve">
           <source>An ultra-high performance Poké Ball that provides a higher success rate for catching Pokémon than a Great.</source>
-          <target state="final">Poké Ball dalle prestazioni eccellenti: fornisce maggiori probabilità di cattura rispetto alla MegaBall.</target>
+          <target state="final">PokéBall dalle prestazioni eccellenti: fornisce maggiori probabilità di cattura rispetto alla MegaBall.</target>
         </trans-unit>
         <trans-unit id="ItemBlukBerry" translate="yes" xml:space="preserve">
           <source>Bluk Berry</source>
