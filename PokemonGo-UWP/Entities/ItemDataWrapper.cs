@@ -20,7 +20,7 @@ namespace PokemonGo_UWP.Entities
         }
 
         [JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
-        public ItemData WrappedData { get; }
+        public ItemData WrappedData { get { return _wrappedData; } }
 
         /// <summary>
         ///     Navigate to detail page for the selected egg
@@ -42,8 +42,6 @@ namespace PokemonGo_UWP.Entities
         }
 
         #region Wrapped Properties
-
-        public ItemData WrappedData => _wrappedData;
 
         public ItemId ItemId => _wrappedData.ItemId;
 
