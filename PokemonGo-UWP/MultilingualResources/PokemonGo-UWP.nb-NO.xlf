@@ -1071,15 +1071,6 @@ Du fikk også {1} Stjernestøv, {2} Candy og {3} XP.</target>
           <source>Discard {0}?</source>
           <target state="new">Discard {0}?</target>
         </trans-unit>
-        <trans-unit id="CancelText" translate="yes" xml:space="preserve">
-          <source>CANCEL</source>
-          <target state="new">CANCEL</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
-        </trans-unit>
-        <trans-unit id="ItemDiscardWarningText" translate="yes" xml:space="preserve">
-          <source>Discard {0}?</source>
-          <target state="new">Discard {0}?</target>
-        </trans-unit>
       </group>
     </body>
   </file>
