@@ -589,6 +589,7 @@ namespace PokemonGo_UWP.Utils
         /// <param name="isEnabled"></param>
         public static async void ToggleUpdateTimer(bool isEnabled = true)
         {
+            Logger.Write($"Called ToggleUpdateTimer({isEnabled})");
             if (isEnabled)
                 await _heartbeat.StartDispatcher();
             else
