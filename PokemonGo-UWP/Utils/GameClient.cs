@@ -574,7 +574,7 @@ namespace PokemonGo_UWP.Utils
             // Updating player's position
             var position = Geoposition.Coordinate.Point.Position;
             if (_client != null)
-                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, position.Altitude);
+                await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, Geoposition.Coordinate.Accuracy);
             GeopositionUpdated?.Invoke(null, Geoposition);
         }
 
