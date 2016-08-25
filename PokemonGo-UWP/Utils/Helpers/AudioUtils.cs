@@ -20,11 +20,11 @@ namespace PokemonGo_UWP.Utils
         #endregion
 
         #region Media Elements
-        /*
-        private static readonly MediaPlayer GameplaySound = new MediaPlayer();
-        private static readonly MediaPlayer EncounterSound = new MediaPlayer();
-        private static readonly MediaPlayer PokemonFoundSound = new MediaPlayer();
-        */
+        
+        //private static readonly MediaPlayer GameplaySound = new MediaPlayer();
+        //private static readonly MediaPlayer EncounterSound = new MediaPlayer();
+        //private static readonly MediaPlayer PokemonFoundSound = new MediaPlayer();
+        
         #endregion       
 
         /// <summary>
@@ -32,28 +32,26 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         /// <returns></returns>
         static AudioUtils()
-        {            
-            /*
-            // Get files and create elements   
-            GameplaySound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{GAMEPLAY}"));
-            EncounterSound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{ENCOUNTER_POKEMON}"));
-            PokemonFoundSound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{POKEMON_FOUND_DING}"));
-            // Set mode and volume
-            GameplaySound.AudioCategory = EncounterSound.AudioCategory = PokemonFoundSound.AudioCategory = MediaPlayerAudioCategory.GameMedia;
-            GameplaySound.IsLoopingEnabled = true;
-            ToggleSounds();
-            */
+        {                        
+            //// Get files and create elements   
+            //GameplaySound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{GAMEPLAY}"));
+            //EncounterSound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{ENCOUNTER_POKEMON}"));
+            //PokemonFoundSound.Source = MediaSource.CreateFromUri(new Uri($"ms-appx:///Assets/Audio/{POKEMON_FOUND_DING}"));
+            //// Set mode and volume
+            //GameplaySound.AudioCategory = EncounterSound.AudioCategory = PokemonFoundSound.AudioCategory = MediaPlayerAudioCategory.GameMedia;
+            //GameplaySound.IsLoopingEnabled = true;
+            //ToggleSounds();
+            
         }
 
         /// <summary>
         /// Sets volume based on settings
         /// </summary>
         public static void ToggleSounds()
-        {           
-            /* 
-            GameplaySound.IsMuted =
-                EncounterSound.IsMuted = PokemonFoundSound.IsMuted = !SettingsService.Instance.IsMusicEnabled;
-                */
+        {                      
+            //GameplaySound.IsMuted =
+            //    EncounterSound.IsMuted = PokemonFoundSound.IsMuted = !SettingsService.Instance.IsMusicEnabled;
+                
         }
 
         /// <summary>
@@ -62,24 +60,22 @@ namespace PokemonGo_UWP.Utils
         /// <param name="asset"></param>
         /// <returns></returns>
         public static void PlaySound(string asset)
-        {
-            /*
-            switch (asset)
-            {
-                case GAMEPLAY:
-                    if (GameplaySound.CurrentState != MediaPlayerState.Playing)
-                        GameplaySound.Play();
-                    StopSound(ENCOUNTER_POKEMON);                  
-                    break;
-                case ENCOUNTER_POKEMON:
-                    GameplaySound.Pause();
-                    EncounterSound.Play();
-                    break;
-                case POKEMON_FOUND_DING:
-                    PokemonFoundSound.Play();
-                    break;
-            }
-            */
+        {            
+            //switch (asset)
+            //{
+            //    case GAMEPLAY:
+            //        if (GameplaySound.PlaybackSession.PlaybackState != MediaPlaybackState.Playing)
+            //            GameplaySound.Play();
+            //        StopSound(ENCOUNTER_POKEMON);                  
+            //        break;
+            //    case ENCOUNTER_POKEMON:
+            //        GameplaySound.Pause();
+            //        EncounterSound.Play();
+            //        break;
+            //    case POKEMON_FOUND_DING:
+            //        PokemonFoundSound.Play();
+            //        break;
+            //}            
         }
 
         /// <summary>
@@ -88,39 +84,35 @@ namespace PokemonGo_UWP.Utils
         /// <param name="asset"></param>
         /// <returns></returns>
         public static void StopSound(string asset)
-        {
-            /*
-            switch (asset)
-            {
-                case GAMEPLAY:
-                    GameplaySound.Pause();
-                    GameplaySound.Position = TimeSpan.Zero;
-                    break;
-                case ENCOUNTER_POKEMON:
-                    EncounterSound.Pause();
-                    EncounterSound.Position = TimeSpan.Zero;
-                    break;
-                case POKEMON_FOUND_DING:
-                    PokemonFoundSound.Pause();
-                    PokemonFoundSound.Position = TimeSpan.Zero;
-                    break;
-            }
-            */
+        {            
+            //switch (asset)
+            //{
+            //    case GAMEPLAY:
+            //        GameplaySound.Pause();
+            //        GameplaySound.PlaybackSession.Position = TimeSpan.Zero;
+            //        break;
+            //    case ENCOUNTER_POKEMON:
+            //        EncounterSound.Pause();
+            //        EncounterSound.PlaybackSession.Position = TimeSpan.Zero;
+            //        break;
+            //    case POKEMON_FOUND_DING:
+            //        PokemonFoundSound.Pause();
+            //        PokemonFoundSound.PlaybackSession.Position = TimeSpan.Zero;
+            //        break;
+            //}            
         }
 
         /// <summary>
         /// Stops all playing sounds
         /// </summary>
         public static void StopSounds()
-        {
-            /*
-            GameplaySound.Pause();
-            GameplaySound.Position = TimeSpan.Zero;
-            EncounterSound.Pause();
-            EncounterSound.Position = TimeSpan.Zero;
-            PokemonFoundSound.Pause();
-            PokemonFoundSound.Position = TimeSpan.Zero;
-            */
+        {            
+            //GameplaySound.Pause();
+            //GameplaySound.PlaybackSession.Position = TimeSpan.Zero;
+            //EncounterSound.Pause();
+            //EncounterSound.PlaybackSession.Position = TimeSpan.Zero;
+            //PokemonFoundSound.Pause();
+            //PokemonFoundSound.PlaybackSession.Position = TimeSpan.Zero;            
         }
     }
 }
