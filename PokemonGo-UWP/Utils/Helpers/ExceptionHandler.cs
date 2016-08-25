@@ -59,9 +59,6 @@ namespace PokemonGo_UWP.Utils
             catch (Exception ex)
             {
                 HockeyClient.Current.TrackException(ex);
-            }
-            finally
-            {
                 Application.Current.Exit();
             }
         }
