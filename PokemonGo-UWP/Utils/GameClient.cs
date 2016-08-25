@@ -477,10 +477,6 @@ namespace PokemonGo_UWP.Utils
                 _geolocator.PositionChanged -= GeolocatorOnPositionChanged;
             _geolocator = null;
             _lastGeopositionMapObjectsRequest = null;
-            CatchablePokemons?.Clear();
-            NearbyPokemons?.Clear();
-            NearbyPokestops?.Clear();
-            NearbyGyms?.Clear();
         }
 
 		#endregion
@@ -627,7 +623,7 @@ namespace PokemonGo_UWP.Utils
             var newPokeStops = mapObjects.Item1.MapCells
                 .SelectMany(x => x.Forts)
                 .Where(x => x.Type == FortType.Checkpoint)
-                .ToArray();            
+                .ToArray();
             Logger.Write($"Found {newPokeStops.Length} nearby PokeStops");
             NearbyPokestops.UpdateWith(newPokeStops, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
@@ -645,12 +641,12 @@ namespace PokemonGo_UWP.Utils
             Logger.Write($"Found {newLuredPokemon.Length} lured Pokemon");
             LuredPokemons.UpdateByIndexWith(newLuredPokemon, x => x);
             Logger.Write("Finished updating map objects");
-            
+
             // Update Hatched Eggs
-            var hatchedEggResponse = mapObjects.Item2;            
+            var hatchedEggResponse = mapObjects.Item2;
             if (hatchedEggResponse.Success)
             {
-                //OnEggHatched?.Invoke(null, hatchedEggResponse);             
+                //OnEggHatched?.Invoke(null, hatchedEggResponse);
                 for (var i = 0; i < hatchedEggResponse.PokemonId.Count; i++)
                 {
                     Logger.Write("Egg Hatched");
