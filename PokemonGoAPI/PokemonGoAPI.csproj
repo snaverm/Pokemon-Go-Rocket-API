@@ -148,6 +148,8 @@
     <Compile Include="Login\GSPOAuthSharp.cs" />
     <Compile Include="Login\ILoginType.cs" />
     <Compile Include="Login\PtcLogin.cs" />
+    <Compile Include="Proto\Data\BuddyPokemon.cs" />
+    <Compile Include="Proto\Data\Logs\BuddyPokemonLogEntry.cs" />
     <Compile Include="Proto\Networking\Envelopes\Signature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proto\Data\AssetDigestEntry.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Proto\Networking\Requests\Messages\AttackGymMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\CatchPokemonMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\CheckAwardedBadgesMessage.cs" />
+    <Compile Include="Proto\Networking\Requests\Messages\CheckChallenge.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\CheckCodenameAvailableMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\ClaimCodenameMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\CollectDailyBonusMessage.cs" />
@@ -253,6 +256,7 @@
     <Compile Include="Proto\Networking\Requests\Messages\FortRecallPokemonMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\FortSearchMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\GetAssetDigestMessage.cs" />
+    <Compile Include="Proto\Networking\Requests\Messages\GetBuddyWalked.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\GetDownloadUrlsMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\GetGymDetailsMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\GetHatchedEggsMessage.cs" />
@@ -270,6 +274,7 @@
     <Compile Include="Proto\Networking\Requests\Messages\RecycleInventoryItemMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\ReleasePokemonMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\SetAvatarMessage.cs" />
+    <Compile Include="Proto\Networking\Requests\Messages\SetBuddyPokemon.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\SetContactSettingsMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\SetFavoritePokemonMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\SetPlayerTeamMessage.cs" />
@@ -283,12 +288,14 @@
     <Compile Include="Proto\Networking\Requests\Messages\UseItemPotionMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\UseItemReviveMessage.cs" />
     <Compile Include="Proto\Networking\Requests\Messages\UseItemXpBoostMessage.cs" />
+    <Compile Include="Proto\Networking\Requests\Messages\VerifyChallenge.cs" />
     <Compile Include="Proto\Networking\Requests\Request.cs" />
     <Compile Include="Proto\Networking\Requests\RequestType.cs" />
     <Compile Include="Proto\Networking\Responses\AddFortModifierResponse.cs" />
     <Compile Include="Proto\Networking\Responses\AttackGymResponse.cs" />
     <Compile Include="Proto\Networking\Responses\CatchPokemonResponse.cs" />
     <Compile Include="Proto\Networking\Responses\CheckAwardedBadgesResponse.cs" />
+    <Compile Include="Proto\Networking\Responses\CheckChallengeResponse.cs" />
     <Compile Include="Proto\Networking\Responses\CheckCodenameAvailableResponse.cs" />
     <Compile Include="Proto\Networking\Responses\ClaimCodenameResponse.cs" />
     <Compile Include="Proto\Networking\Responses\CollectDailyBonusResponse.cs" />
@@ -307,6 +314,7 @@
     <Compile Include="Proto\Networking\Responses\FortRecallPokemonResponse.cs" />
     <Compile Include="Proto\Networking\Responses\FortSearchResponse.cs" />
     <Compile Include="Proto\Networking\Responses\GetAssetDigestResponse.cs" />
+    <Compile Include="Proto\Networking\Responses\GetBuddyWalkedResponse.cs" />
     <Compile Include="Proto\Networking\Responses\GetDownloadUrlsResponse.cs" />
     <Compile Include="Proto\Networking\Responses\GetGymDetailsResponse.cs" />
     <Compile Include="Proto\Networking\Responses\GetHatchedEggsResponse.cs" />
@@ -324,6 +332,7 @@
     <Compile Include="Proto\Networking\Responses\RecycleInventoryItemResponse.cs" />
     <Compile Include="Proto\Networking\Responses\ReleasePokemonResponse.cs" />
     <Compile Include="Proto\Networking\Responses\SetAvatarResponse.cs" />
+    <Compile Include="Proto\Networking\Responses\SetBuddyPokemonResponse.cs" />
     <Compile Include="Proto\Networking\Responses\SetContactSettingsResponse.cs" />
     <Compile Include="Proto\Networking\Responses\SetFavoritePokemonResponse.cs" />
     <Compile Include="Proto\Networking\Responses\SetPlayerTeamResponse.cs" />
@@ -337,6 +346,7 @@
     <Compile Include="Proto\Networking\Responses\UseItemPotionResponse.cs" />
     <Compile Include="Proto\Networking\Responses\UseItemReviveResponse.cs" />
     <Compile Include="Proto\Networking\Responses\UseItemXpBoostResponse.cs" />
+    <Compile Include="Proto\Networking\Responses\VerifyChallengeResponse.cs" />
     <Compile Include="Proto\Settings\DownloadSettingsAction.cs" />
     <Compile Include="Proto\Settings\FortSettings.cs" />
     <Compile Include="Proto\Settings\GlobalSettings.cs" />

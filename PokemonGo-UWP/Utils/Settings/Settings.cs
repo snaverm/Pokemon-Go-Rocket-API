@@ -12,7 +12,7 @@ namespace PokemonGo.RocketAPI.Console
 
         public double DefaultLongitude { get; set; }
 
-        public double DefaultAltitude { get; set; }
+        public double DefaultAccuracy { get; set; }
 
         public string GoogleRefreshToken { get; set; }
 
