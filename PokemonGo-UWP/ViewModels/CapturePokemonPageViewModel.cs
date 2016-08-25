@@ -271,8 +271,19 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (_returnToGameScreen = new DelegateCommand(
                                                          () =>
                                                          {
-                                                             NavigationHelper.NavigationState["CurrentPokemon"] = new PokemonDataWrapper(GameClient.PokemonsInventory.First(item => item.Id == _capturedPokemonId));
-                                                             NavigationService.Navigate(typeof(PokemonDetailPage));
+                                                             var currentPokemon =
+                                                                 GameClient.PokemonsInventory
+                                                                 .FirstOrDefault(item => item.Id == _capturedPokemonId);
+                                                             if (currentPokemon != null)
+                                                             {
+                                                                 NavigationHelper.NavigationState["CurrentPokemon"] =
+                                                                     new PokemonDataWrapper(currentPokemon);
+                                                                 NavigationService.Navigate(typeof(PokemonDetailPage));
+                                                             }
+                                                             else
+                                                             {
+                                                                 NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
+                                                             }
                                                          }, () => true));
 
         private DelegateCommand _escapeEncounterCommand;
