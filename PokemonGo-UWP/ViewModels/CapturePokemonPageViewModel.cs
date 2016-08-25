@@ -390,8 +390,6 @@ namespace PokemonGo_UWP.ViewModels
                 SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
 
                 Busy.SetBusy(false);
-                if (SelectedCaptureItem.Count != 0)
-                    PokeballButtonEnabled = true;
             }
             else
             {
@@ -449,7 +447,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                         GameClient.LuredPokemons.Remove((LuredPokemon) CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
-                    break;
+                    return;
 
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
@@ -475,6 +473,9 @@ namespace PokemonGo_UWP.ViewModels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (SelectedCaptureItem.Count != 0)
+                PokeballButtonEnabled = true;
         }
 
         /// <summary>
