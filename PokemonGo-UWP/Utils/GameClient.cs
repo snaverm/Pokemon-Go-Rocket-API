@@ -651,6 +651,7 @@ namespace PokemonGo_UWP.Utils
                 for (var i = 0; i < hatchedEggResponse.PokemonId.Count; i++)
                 {
                     Logger.Write("Egg Hatched");
+                    await UpdateInventory();
 
                     //TODO: Fix hatching of more than one pokemon at a time
                     var currentPokemon = PokemonsInventory
