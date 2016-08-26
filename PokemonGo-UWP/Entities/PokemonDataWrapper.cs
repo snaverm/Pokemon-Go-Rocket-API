@@ -124,6 +124,8 @@ namespace PokemonGo_UWP.Entities
 
         public int FromFort => WrappedData.FromFort;
 
+        public string Name { get { return WrappedData.Nickname == "" ? Resources.Pokemon.GetString(WrappedData.PokemonId.ToString()) : WrappedData.Nickname; } }
+
         #endregion
     }
 

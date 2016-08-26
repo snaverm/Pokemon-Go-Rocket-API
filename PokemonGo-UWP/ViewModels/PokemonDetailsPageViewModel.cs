@@ -414,9 +414,44 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _renamePokemonCommand;
 
         public DelegateCommand RenamePokemonCommand => _renamePokemonCommand ?? (
-          _renamePokemonCommand = new DelegateCommand(async () =>
+          _renamePokemonCommand = new DelegateCommand(() =>
           {
-              
+              var dialog = new PoGoMessageDialog(Resources.CodeResources.GetString("SetNickName"), "");
+              dialog.AcceptText = Resources.CodeResources.GetString("YesText");
+              dialog.CancelText = Resources.CodeResources.GetString("NoText");
+              dialog.CoverBackground = true;
+              dialog.InputField = CurrentPokemon.Name;
+              dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
+              dialog.AcceptInvoked += async (sender, e) =>
+              {
+                  // Send rename request
+                  var res = await GameClient.SetPokemonNickName((ulong)CurrentPokemon.Id, dialog.InputField);
+                  switch (res.Result)
+                  {
+                      case NicknamePokemonResponse.Types.Result.Unset:
+                          break;
+                      case NicknamePokemonResponse.Types.Result.Success:
+                          // Reload updated data
+                          var currentPokemonData = CurrentPokemon.WrappedData;
+                          currentPokemonData.Nickname = dialog.InputField;
+                          CurrentPokemon = new PokemonDataWrapper(currentPokemonData);
+                          await GameClient.UpdateInventory();
+                          await GameClient.UpdateProfile();
+                          UpdateCurrentData();
+                          break;
+                      case NicknamePokemonResponse.Types.Result.ErrorPokemonNotFound:
+                          break;
+                      case NicknamePokemonResponse.Types.Result.ErrorInvalidNickname:
+                          break;
+                      case NicknamePokemonResponse.Types.Result.ErrorPokemonIsEgg:
+                          break;
+                      default:
+                          throw new ArgumentOutOfRangeException();
+                  }
+              };
+
+              dialog.Show();
+
           }, () => true));
 
         #endregion

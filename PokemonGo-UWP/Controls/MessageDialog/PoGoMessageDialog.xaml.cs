@@ -42,6 +42,7 @@ namespace PokemonGo_UWP.Controls
         {
             Title = title;
             Text = text;
+            InputField = "";
         }
 
         /// <summary>
@@ -111,6 +112,10 @@ namespace PokemonGo_UWP.Controls
             DependencyProperty.Register(nameof(DialogContent), typeof(Object), typeof(PoGoMessageDialog), 
                 new PropertyMetadata(null));
 
+        public static readonly DependencyProperty InputFieldProperty =
+            DependencyProperty.Register(nameof(InputField), typeof(string), typeof(PoGoMessageDialog),
+                new PropertyMetadata(""));
+
         public static readonly DependencyProperty AcceptTextProperty = 
             DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
                 new PropertyMetadata("O. K."));
@@ -141,6 +146,12 @@ namespace PokemonGo_UWP.Controls
         {
             get { return (Object)GetValue(DialogContentProperty); }
             set { SetValue(DialogContentProperty, value); }
+        }
+
+        public string InputField
+        {
+            get { return (string)GetValue(InputFieldProperty); }
+            set { SetValue(InputFieldProperty, value); }
         }
 
         public string AcceptText

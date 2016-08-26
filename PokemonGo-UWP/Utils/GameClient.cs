@@ -998,6 +998,11 @@ namespace PokemonGo_UWP.Utils
             return await _client.Inventory.SetFavoritePokemon(pokeId, isFavorite);
         }
 
+        public static async Task<NicknamePokemonResponse> SetPokemonNickName(ulong pokemonId, string nickName)
+        {
+            return await _client.Inventory.NicknamePokemon(pokemonId, nickName);
+        }
+
         #endregion
 
         #endregion
