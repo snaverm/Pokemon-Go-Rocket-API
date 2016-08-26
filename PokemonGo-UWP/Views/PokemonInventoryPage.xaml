@@ -292,7 +292,7 @@
                                        Height="48"
                                        Margin="5"
                                        x:Phase="2" />
-                                <TextBlock Text="{x:Bind PokemonId, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
+                                <TextBlock Text="{x:Bind Name}"
                                            Style="{StaticResource TextPokemonName}"
                                            x:Phase="0" />
                                 <ProgressBar Value="{x:Bind Stamina}"

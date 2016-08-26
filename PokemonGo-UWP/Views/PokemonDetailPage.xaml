@@ -577,7 +577,7 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="1"
-                                    Text="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
+                                    Text="{Binding CurrentPokemon.Name}"
                                     VerticalAlignment="Top"
                                     CharacterSpacing="30"
                                     TextAlignment="Center"
