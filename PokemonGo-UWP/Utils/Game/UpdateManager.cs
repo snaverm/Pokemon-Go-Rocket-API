@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -10,23 +9,18 @@ using Windows.Storage;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.Web.Http;
-using Octokit;
-using Universal_Authenticator_v2.Views;
+using PokemonGo_UWP.Views;
+using PokemonGo_UWP.Entities;
+using Windows.Web.Http.Filters;
 
 namespace PokemonGo_UWP.Utils
 {
     /// <summary>
-    ///     Manager that checks if there's an updated version on GitHub
+    ///     Manager that checks if there's an updated version on air
     /// </summary>
     public static class UpdateManager
     {
-        private const string FileExtensionAppxbundle = ".appxbundle";
-        private const string FileExtensionAppx = ".appx";
-
-        /// <summary>
-        ///     Client to access GitHub
-        /// </summary>
-        private static readonly GitHubClient GitHubClient = new GitHubClient(new ProductHeaderValue("PoGo-UWP"));
+        private const string VersionFileUrl = @"https://raw.githubusercontent.com/PoGo-Devs/PoGo/master/version.json";
 
         /// <summary>
         ///     Checks if we have an updated version and returns update info
@@ -39,56 +33,80 @@ namespace PokemonGo_UWP.Utils
                 //clean update folder on backgraound, dont bother with result - we are ready for collisions
                 var t1 = CleanTemporaryUpdateFolderAsync();
 
-                var releases = await GitHubClient.Repository.Release.GetAll("ST-Apps", "PoGo-UWP");
-                Release latestRelease = null;
+                var httpFilter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+                httpFilter.CacheControl.ReadBehavior =
+                    Windows.Web.Http.Filters.HttpCacheReadBehavior.MostRecent;
 
-                foreach (var release in releases)
+                //dwonload version info
+                using (var client = new HttpClient(httpFilter))
                 {
-                    //Look only for releases for our architecture
-                    var archAssets = FilterAssetsByArchitecture(release);
-
-                    // We skip prereleases, only stable ones
-                    if (!release.Prerelease && archAssets.Count > 0)
+                    using (var response = await client.GetAsync(new Uri(VersionFileUrl), HttpCompletionOption.ResponseContentRead))
                     {
-                        latestRelease = release;
-                        break;
+                        string json = await response.Content.ReadAsStringAsync();
+                        if (!VersionInfo.SetInstance(json))
+                        {
+                            return new UpdateInfo(UpdateStatus.NoInternet);
+                        }
                     }
                 }
 
-                if (latestRelease == null)
-                    return null;
-
                 // Check if version is newer
                 var currentVersion = Package.Current.Id.Version;
-                var regex = new Regex(@"\D*(\d*)\.(\d*)\.(\d*).*");
-                var match = regex.Match(latestRelease.TagName);
-
-                if (!match.Success || match.Groups.Count < 4) return null;
-                var repoVersion = new PackageVersion
-                {
-                    Major = ushort.Parse(match.Groups[1].Value),
-                    Minor = ushort.Parse(match.Groups[2].Value),
-                    Build = ushort.Parse(match.Groups[3].Value)
-                };
+                var repoVersion = GetVersionFromPattern(@"(\d*)\.(\d*)\.(\d*)", VersionInfo.Instance.latest_release.version);
+                var minVersion = GetVersionFromPattern(@"(\d*)\.(\d*)\.(\d*)", VersionInfo.Instance.minimum_version);
 
                 //compare major & minor & build (ignore revision)
-                if ((repoVersion.Major > currentVersion.Major)
-                    || (repoVersion.Major == currentVersion.Major && repoVersion.Minor > currentVersion.Minor)
-                    ||
-                    (repoVersion.Major == currentVersion.Major && repoVersion.Minor == currentVersion.Minor &&
-                     repoVersion.Build > currentVersion.Build)
-                    )
+                if (IsVersionGreater(currentVersion, repoVersion))
                 {
-                    return new UpdateInfo(repoVersion.Major + "." + repoVersion.Minor + "." + repoVersion.Build,
-                        latestRelease.HtmlUrl, latestRelease.Body, latestRelease);
+                    UpdateStatus updateStatus = UpdateStatus.UpdateAvailable;
+                    //patch architecture
+                    VersionInfo.Instance.latest_release.setup_file = VersionInfo.Instance.latest_release.setup_file.Replace("{arch}", Package.Current.Id.Architecture.ToString());
+
+                    if (IsVersionGreater(currentVersion, minVersion))
+                    {
+                        updateStatus = UpdateStatus.UpdateForced;
+                    }
+
+
+                    return new UpdateInfo(updateStatus, repoVersion.Major + "." + repoVersion.Minor + "." + repoVersion.Build,
+                    VersionInfo.Instance.latest_release.setup_file, VersionInfo.Instance.latest_release.changes);
+                }
+                else if(IsVersionGreater(repoVersion, minVersion))
+                {
+                    return new UpdateInfo(UpdateStatus.NextVersionNotReady);
                 }
 
-                return null;
+                return new UpdateInfo(UpdateStatus.NoUpdate);
             }
             catch (Exception)
             {
-                return null;
+                return new UpdateInfo(UpdateStatus.NoInternet);
             }
+        }
+
+        public static bool IsVersionGreater(PackageVersion currentVersion, PackageVersion newVersion)
+        {
+            return ((newVersion.Major > currentVersion.Major)
+                   || (newVersion.Major == currentVersion.Major && newVersion.Minor > currentVersion.Minor)
+                   || (newVersion.Major == currentVersion.Major && newVersion.Minor == currentVersion.Minor &&
+                      newVersion.Build > currentVersion.Build)
+                   );
+        }
+
+        public static PackageVersion GetVersionFromPattern(string pattern, string version)
+        {
+            var regex = new Regex(pattern);
+            var match = regex.Match(version);
+            if (!match.Success || match.Groups.Count < 4)
+                throw new Exception("Version format wrong");
+
+            PackageVersion repoVersion = new PackageVersion
+            {
+                Major = ushort.Parse(match.Groups[1].Value),
+                Minor = ushort.Parse(match.Groups[2].Value),
+                Build = ushort.Parse(match.Groups[3].Value)
+            };
+            return repoVersion;
         }
 
         /// <summary>
@@ -96,83 +114,62 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         /// <param name="release">release to which update</param>
         /// <returns></returns>
-        public static async Task InstallUpdate(Release release)
+        public static async Task InstallUpdate()
         {
             var browserFallback = true;
 
 
             var updateError = "";
 
-            //if we have some assets try to install them or fallback to browser link
-            if (release.Assets.Count > 0)
+
+            try
             {
-                var archAssets = FilterAssetsByArchitecture(release);
+                //this needs restricted capability "packageManagement" in appxmanifest
+                var packageManager = new PackageManager();
 
-                //find bundle
-                var mainAsset = archAssets.FirstOrDefault(asset => asset.Name.EndsWith(FileExtensionAppxbundle));
+                var dependencies = new List<Uri>();
 
-                if (mainAsset != null)
+                var uri = new Uri(VersionInfo.Instance.latest_release.setup_file);
+
+                Busy.SetBusy(true,
+                    string.Format(Resources.CodeResources.GetString("UpdateDownloadingText"),
+                        VersionInfo.Instance.latest_release.version));
+
+
+                //Download dependencies
+                foreach (string assetUrl in VersionInfo.Instance.latest_release.dependencies)
                 {
-                    //only dependencies will stay
-                    archAssets.Remove(mainAsset);
+                    string url = assetUrl.Replace("{arch}", Package.Current.Id.Architecture.ToString());
+                    var assetUri = new Uri(url);
+                    var file = await GetTemporaryUpdateFileAsync(Path.GetFileName(assetUri.LocalPath));
+                    await DownloadFile(file, assetUri);
 
-                    try
-                    {
-                        //this needs restricted capability "packageManagement" in appxmanifest
-                        var packageManager = new PackageManager();
-
-                        var dependencies = new List<Uri>();
-
-                        try
-                        {
-                            var uri = new Uri(mainAsset.BrowserDownloadUrl);
-
-                            Busy.SetBusy(true,
-                                string.Format(Resources.CodeResources.GetString("UpdateDownloadingText"),
-                                    release.TagName));
-
-
-                            //Download dependencies
-                            foreach (var asset in archAssets)
-                            {
-                                if (asset.Name.EndsWith(FileExtensionAppx))
-                                {
-                                    var file = await GetTemporaryUpdateFileAsync(asset.Name);
-                                    await DownloadFile(file, new Uri(asset.BrowserDownloadUrl));
-
-                                    dependencies.Add(new Uri(file.Path));
-                                }
-                            }
-
-
-                            var destinationFile = await GetTemporaryUpdateFileAsync(mainAsset.Name);
-                            await DownloadFile(destinationFile, uri);
-                            Busy.SetBusy(false);
-                            Busy.SetBusy(true, Resources.CodeResources.GetString("UpdateInstallingText"));
-
-                            await packageManager.UpdatePackageAsync(new Uri(destinationFile.Path),
-                                dependencies,
-                                DeploymentOptions.ForceApplicationShutdown);
-
-                            //in case of error COMException is thrown so we cant get result (?????)
-                            browserFallback = false;
-                        }
-                        finally
-                        {
-                            //clean all temorary files and dont wait on it
-                            var t1 = CleanTemporaryUpdateFolderAsync();
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        updateError = exc.HResult.ToString("0x") + " " + exc.Message;
-                        //lets do fallback to browser
-                    }
-                    finally
-                    {
-                        Busy.SetBusy(false);
-                    }
+                    dependencies.Add(new Uri(file.Path));
                 }
+
+
+                var destinationFile = await GetTemporaryUpdateFileAsync(Path.GetFileName(uri.LocalPath));
+                await DownloadFile(destinationFile, uri);
+                Busy.SetBusy(false);
+                Busy.SetBusy(true, Resources.CodeResources.GetString("UpdateInstallingText"));
+
+                await packageManager.UpdatePackageAsync(new Uri(destinationFile.Path),
+                    dependencies,
+                    DeploymentOptions.ForceApplicationShutdown);
+
+                //in case of error COMException is thrown so we cant get result (?????)
+                browserFallback = false;
+            }
+            catch (Exception exc)
+            {
+                updateError = exc.HResult.ToString("0x") + " " + exc.Message;
+                //lets do fallback to browser
+            }
+            finally
+            {
+                //clean all temorary files and dont wait on it
+                var t1 = CleanTemporaryUpdateFolderAsync();
+                Busy.SetBusy(false);
             }
 
             if (browserFallback)
@@ -191,8 +188,8 @@ namespace PokemonGo_UWP.Utils
                 if ((int) result.Id != 0)
                     return;
 
-                //we can laso open direct link to appx/appxbundle with mainAsset.BrowserDownloadUrl, but Edge waits on click small unseeable "Save" button before download
-                await Launcher.LaunchUriAsync(new Uri(release.HtmlUrl));
+                //open appx to download
+                await Launcher.LaunchUriAsync(new Uri(VersionInfo.Instance.latest_release.setup_file));
             }
         }
 
@@ -250,7 +247,10 @@ namespace PokemonGo_UWP.Utils
         /// <returns></returns>
         private static async Task DownloadFile(StorageFile destinationFile, Uri uri)
         {
-            using (var client = new HttpClient())
+            var filter = new HttpBaseProtocolFilter();
+            filter.AllowAutoRedirect = true;
+
+            using (var client = new HttpClient(filter))
             {
                 using (var response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead))
                 {
@@ -263,22 +263,20 @@ namespace PokemonGo_UWP.Utils
         }
 
 
-        /// <summary>
-        ///     Filter assets only to current architecture
-        /// </summary>
-        /// <param name="release"></param>
-        /// <returns></returns>
-        private static List<ReleaseAsset> FilterAssetsByArchitecture(Release release)
+        public enum UpdateStatus
         {
-            return
-                release.Assets.Where(
-                    asset =>
-                        asset.Name.ToLower().Contains("_" + Package.Current.Id.Architecture.ToString().ToLower() + "_")
-                        ||
-                        asset.Name.ToLower().Contains("." + Package.Current.Id.Architecture.ToString().ToLower() + "."))
-                    .ToList();
-        }
+            //No internet connection
+            NoInternet,
+            //no update available
+            NoUpdate,
+            //Update is available and user can choose if he start update
+            UpdateAvailable,
+            //Update is available and will be installed without user permission
+            UpdateForced,
+            //This version is old, but update is not ready yet
+            NextVersionNotReady
 
+        }
 
         /// <summary>
         ///     Describes update details
@@ -286,16 +284,20 @@ namespace PokemonGo_UWP.Utils
         public class UpdateInfo
         {
             public string Description;
-            public Release Release;
             public string Url;
             public string Version;
+            public UpdateStatus Status;
 
-            public UpdateInfo(string version, string url, string description, Release release)
+            public UpdateInfo(UpdateStatus status, string version, string url, string description)
             {
+                Status = status;
                 Version = version;
                 Url = url;
-                Release = release;
                 Description = description;
+            }
+            public UpdateInfo(UpdateStatus status)
+            {
+                Status = status;
             }
         }
     }

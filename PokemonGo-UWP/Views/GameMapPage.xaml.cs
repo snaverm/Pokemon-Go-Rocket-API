@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Utils;
 using Template10.Common;
+using Windows.Graphics.Display;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -52,11 +53,11 @@ namespace PokemonGo_UWP.Views
                     Margin = new Thickness(0,8,0,0),
                     Content = new Image()
                     {
-                        Source = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Icons/RecenterMapIcon.png") },
+                        Source = new BitmapImage() { UriSource = new Uri($"ms-appx:///Assets/Icons/RecenterMapIcon{ViewModel.CurrentTheme}.png") },
                         Stretch = Stretch.Uniform,
                         Height = 36,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment                        = VerticalAlignment.Center
+                        VerticalAlignment = VerticalAlignment.Center
                     }
                 };
                 ReactivateMapAutoUpdateButton.Tapped += ReactivateMapAutoUpdate_Tapped;
@@ -64,10 +65,30 @@ namespace PokemonGo_UWP.Views
                 var tsp = (StackPanel)
                     VisualTreeHelper.GetChild(
                         VisualTreeHelper.GetChild(
-                            VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GameMapControl, 0), 1), 0), 0);   
-                
-                tsp.Children.Add(ReactivateMapAutoUpdateButton);             
+                            VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GameMapControl, 0), 1), 0), 0);
+
+                tsp.Children.Add(ReactivateMapAutoUpdateButton);
+                DisplayInformation.GetForCurrentView().OrientationChanged += GameMapPage_OrientationChanged;
             };
+        }
+
+        private void GameMapPage_OrientationChanged(DisplayInformation sender, object args)
+        {
+            if (SettingsService.Instance.IsBatterySaverEnabled)
+            {
+                if (sender.NativeOrientation == DisplayOrientations.Portrait)
+                {
+                    HideBatterySaver.Begin();
+
+                    IsHitTestVisible = true;
+                }
+                else if (sender.NativeOrientation == DisplayOrientations.PortraitFlipped)
+                {
+                    ShowBatterySaver.Begin();
+
+                    IsHitTestVisible = false;
+                }
+            }
         }
 
         private void SetupMap()
@@ -100,8 +121,8 @@ namespace PokemonGo_UWP.Views
             }
             else
             {
-                // Fallback to Bing Maps   
-                // TODO: map color scheme is set but the visual style doesn't update!             
+                // Fallback to Bing Maps
+                // TODO: map color scheme is set but the visual style doesn't update!
                 GameMapControl.ColorScheme = ViewModel.CurrentTheme == ElementTheme.Dark
                     ? MapColorScheme.Dark
                     : MapColorScheme.Light;
@@ -155,7 +176,7 @@ namespace PokemonGo_UWP.Views
             if (GameClient.Geoposition != null)
                 UpdateMap(GameClient.Geoposition);
             SubscribeToCaptureEvents();
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;            
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -206,7 +227,7 @@ namespace PokemonGo_UWP.Views
                     // Set player icon's position
                     MapControl.SetLocation(PlayerImage, position.Coordinate.Point);
 
-								// Update angle and center only if map is not being manipulated 
+								// Update angle and center only if map is not being manipulated
 								if (lastAutoPosition == null)
 								{
 									lastAutoPosition = GameMapControl.Center;

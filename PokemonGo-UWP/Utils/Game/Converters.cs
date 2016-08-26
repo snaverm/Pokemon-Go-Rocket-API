@@ -1245,6 +1245,8 @@ namespace PokemonGo_UWP.Utils
 
     public class StringFormatConverter : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return string.Format(parameter as string, value);
@@ -1254,6 +1256,8 @@ namespace PokemonGo_UWP.Utils
         {
             return null;
         }
+
+        #endregion
     }
 
     public class PlayerDataToCurrentExperienceConverter : IValueConverter
@@ -1361,6 +1365,7 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+
     //parameter is optional
     //Use parameter to pass margin between items and page margin
     //format: itemsMargin,pageMargins
@@ -1369,6 +1374,9 @@ namespace PokemonGo_UWP.Utils
     public class WidthConverter : IValueConverter
     {
         private static readonly char[] splitValue = { ',' };
+
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             int minColumns = (int)value;
@@ -1397,9 +1405,14 @@ namespace PokemonGo_UWP.Utils
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
+
     public class PokemonTypeToBackgroundImageConverter : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null || !(value is PokemonType)) return new Uri("ms-appx:///Assets/Backgrounds/details_type_bg_normal.png");
@@ -1411,5 +1424,57 @@ namespace PokemonGo_UWP.Utils
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+    }
+
+    public class BooleanToVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        private object GetVisibility(object value)
+        {
+            if (!(value is bool))
+                return Visibility.Collapsed;
+            bool objValue = (bool)value;
+            if (objValue)
+            {
+                return Visibility.Visible;
+            }
+            return Visibility.Collapsed;
+        }
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return GetVisibility(value);
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    public class StringToVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (string.IsNullOrEmpty((string)value))
+            {
+                return Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
