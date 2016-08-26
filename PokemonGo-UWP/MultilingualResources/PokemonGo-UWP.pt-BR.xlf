@@ -281,8 +281,10 @@
           <target state="translated">Falha no login, por favor tente novamente.</target>
         </trans-unit>
         <trans-unit id="NoText" translate="yes" xml:space="preserve">
-          <source>No</source>
-          <target state="translated">Não</target>
+          <source>NO</source>
+          <target state="needs-review-translation">Não</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="NoGpsPermissionsText" translate="yes" xml:space="preserve">
           <source>We need GPS permissions to run the game, please enable it and try again.</source>
@@ -330,8 +332,10 @@ Abrir a página com os arquivos de instalação para instalação manual?</targe
           <target state="translated">Nome de usuário/Senha incorretos ou servidor offline, por favor tente novamente.</target>
         </trans-unit>
         <trans-unit id="YesText" translate="yes" xml:space="preserve">
-          <source>Yes</source>
-          <target state="translated">Sim</target>
+          <source>YES</source>
+          <target state="needs-review-translation">Sim</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="InstinctTeamText" translate="yes" xml:space="preserve">
           <source>Instinct</source>
@@ -508,6 +512,15 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
           <source>Do you really want to transfer {0} to the Professor?</source>
           <target state="new">Do you really want to transfer {0} to the Professor?</target>
         </trans-unit>
+        <trans-unit id="CancelText" translate="yes" xml:space="preserve">
+          <source>CANCEL</source>
+          <target state="new">CANCEL</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
+        </trans-unit>
+        <trans-unit id="ItemDiscardWarningText" translate="yes" xml:space="preserve">
+          <source>Discard {0}?</source>
+          <target state="new">Discard {0}?</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -598,7 +611,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
         </trans-unit>
         <trans-unit id="PokedexTextBlock.Text" translate="yes" xml:space="preserve">
           <source>POKÉDEX</source>
-          <target state="new">POKÉDEX</target>
+          <target state="translated">POKÉDEX</target>
         </trans-unit>
         <trans-unit id="LowercaseItemsTextBlock.Text" translate="yes" xml:space="preserve">
           <source>items</source>
@@ -1413,7 +1426,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
         </trans-unit>
         <trans-unit id="Pikachu" translate="yes" xml:space="preserve">
           <source>Pikachu</source>
-          <target state="new">Pikachu</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pikachu</target>
         </trans-unit>
         <trans-unit id="Pinsir" translate="yes" xml:space="preserve">
           <source>Pinsir</source>

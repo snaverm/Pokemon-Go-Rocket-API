@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="D_ItemGreatBall" xml:space="preserve">
-    <value>Een apparaat voor het vangen van wilde Pokémon. Je gooit het als een bal op een wilde Pokémon.</value>
+    <value>Een goed, effectief apparaat voor het vangen van wilde Pokémon. Geeft een hogere kans van slagen als een normale Pokéball.</value>
   </data>
   <data name="D_ItemIncenseCool" xml:space="preserve">
     <value>Wierook met een mysterieuze geur die wilde Pokémon voor 30 minuten naar je locatie lokt</value>
@@ -28,13 +28,14 @@
     <value>Wierook met een mysterieuze geur die wilde Pokémon voor 30 minuten naar je locatie lokt</value>
   </data>
   <data name="D_ItemIncubatorBasic" xml:space="preserve">
-    <value>Een apparaat waar je een ei in legt en waarmee je loopt totdat het klaar is om uit te komen.</value>
+    <value>Een apparaat waar je een ei in legt en waarmee je loopt totdat het klaar is om uit te komen. Kan drie keer gebruikt worden.</value>
   </data>
   <data name="D_ItemIncubatorBasicUnlimited" xml:space="preserve">
-    <value>Een apparaat waar je een ei in legt en waarmee je loopt totdat het klaar is om uit te komen.</value>
+    <value>Een apparaat waar je een ei in legt en waarmee je loopt totdat het klaar is om uit te komen. Kan onbeperkt gebruikt worden!
+</value>
   </data>
   <data name="D_ItemMasterBall" xml:space="preserve">
-    <value>Een apparaat voor het vangen van wilde Pokémon. Je gooit het als een bal op een wilde Pokémon.</value>
+    <value>Het beste apparaat voor het vangen van wilde Pokémon met de hoogste slagingskans. Hiermee vang je elke Pokémon zonder twijfel.</value>
   </data>
   <data name="D_ItemPokeBall" xml:space="preserve">
     <value>Een apparaat voor het vangen van wilde Pokémon. Je gooit het als een bal op een wilde Pokémon.</value>

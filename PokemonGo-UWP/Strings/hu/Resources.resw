@@ -140,4 +140,7 @@
   <data name="SettingsRememberMapZoomTextBlock.Text" xml:space="preserve">
     <value>Térkép Közelítésének Megjegyzése</value>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
 </root>

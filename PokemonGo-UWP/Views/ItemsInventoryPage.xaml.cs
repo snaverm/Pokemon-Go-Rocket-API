@@ -26,7 +26,6 @@ namespace PokemonGo_UWP.Views
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
         {
-            if (!(DiscardPanel.Opacity > 0)) return;
             backRequestedEventArgs.Handled = true;
             HideDiscardStoryboard.Begin();
         }

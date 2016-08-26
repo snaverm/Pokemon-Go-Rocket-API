@@ -16,32 +16,62 @@
     <value>Borbena djevojka
 </value>
   </data>
+  <data name="BadgeBattleAttackWonDescription" xml:space="preserve">
+    <value>Pobjeđeno {0} borba u dvoranama</value>
+  </data>
   <data name="BadgeBattleTrainingWon" xml:space="preserve">
     <value>Trener prvaka</value>
+  </data>
+  <data name="BadgeBattleTrainingWonDescription" xml:space="preserve">
+    <value>Pobjeđeno {0} trening borba</value>
   </data>
   <data name="BadgeBigMagikarp" xml:space="preserve">
     <value>Ribič</value>
   </data>
+  <data name="BadgeBigMagikarpDescription" xml:space="preserve">
+    <value>Uhvačeno {0} Magikarp</value>
+  </data>
   <data name="BadgeCaptureTotal" xml:space="preserve">
     <value>Sakupljač</value>
+  </data>
+  <data name="BadgeCaptureTotalDescription" xml:space="preserve">
+    <value>Uhvačeno {0} Pokemon</value>
   </data>
   <data name="BadgeEvolvedTotal" xml:space="preserve">
     <value>Znanstvenik</value>
   </data>
+  <data name="BadgeEvolvedTotalDescription" xml:space="preserve">
+    <value>Evoluirano {0} Pokémon</value>
+  </data>
   <data name="BadgeHatchedTotal" xml:space="preserve">
     <value>Uzgajivač</value>
+  </data>
+  <data name="BadgeHatchedTotalDescription" xml:space="preserve">
+    <value>Izlegnuto {0} Pokemon</value>
   </data>
   <data name="BadgePikachu" xml:space="preserve">
     <value>Pikachu</value>
   </data>
+  <data name="BadgePikachuDescription" xml:space="preserve">
+    <value>Ulovljeno {0} Pikachu</value>
+  </data>
   <data name="BadgePokedexEntries" xml:space="preserve">
     <value>Kanto</value>
+  </data>
+  <data name="BadgePokedexEntriesDescription" xml:space="preserve">
+    <value>Registrirano {0} Pokemona u Pokedex</value>
   </data>
   <data name="BadgePokestopsVisited" xml:space="preserve">
     <value>Ruksak-turist</value>
   </data>
+  <data name="BadgePokestopsVisitedDescription" xml:space="preserve">
+    <value>Obiđeno {0} Pokestops</value>
+  </data>
   <data name="BadgeSmallRattata" xml:space="preserve">
     <value>Tinejđer</value>
+  </data>
+  <data name="BadgeSmallRattataDescription" xml:space="preserve">
+    <value>Ulovljeno {0} small Rattata</value>
   </data>
   <data name="BadgeTravelKm" xml:space="preserve">
     <value>Trkač</value>

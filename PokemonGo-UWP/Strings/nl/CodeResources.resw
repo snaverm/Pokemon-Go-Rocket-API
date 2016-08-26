@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateFormat" xml:space="preserve">
-    <value>DD. MM.yyyy</value>
+    <value>dd-MM-yyyy</value>
   </data>
   <data name="DateTimeFormat" xml:space="preserve">
-    <value>DD. MM.yyyy uu: mm tt</value>
+    <value>dd-MM-yyyy uu: mm tt</value>
   </data>
   <data name="PokemonFledText" xml:space="preserve">
-    <value>{0} gevlucht</value>
+    <value>{0} is gevlucht</value>
   </data>
   <data name="GettingGpsSignalText" xml:space="preserve">
     <value>GPS-signaal verkrijgen...</value>
@@ -44,12 +44,13 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Nee</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Voor dit spel zijn GPS machtigingen nodig. Activeer deze in je telefoon en probeer het opnieuw.</value>
   </data>
   <data name="PokemonRanAwayText" xml:space="preserve">
-    <value>Pokemon weggelopen, jammer :(</value>
+    <value>Pokémon weggelopen, jammer :(</value>
   </data>
   <data name="PtcDownText" xml:space="preserve">
     <value>PTC login is waarschijnlijk offline, probeer later opnieuw.</value>
@@ -63,14 +64,23 @@
   <data name="UpdateDownloadingText" xml:space="preserve">
     <value>Downloaden update {0}</value>
   </data>
+  <data name="UpdatedVersionText" xml:space="preserve">
+    <value>Er is een nieuwe versie ({0}) beschikbaar. Wil je updaten?
+{1}</value>
+  </data>
+  <data name="UpdateFailedText" xml:space="preserve">
+    <value>Update mislukt: {0}
+Open de pagina met installatiebestanden voor handmatige installatie?</value>
+  </data>
   <data name="UpdateInstallingText" xml:space="preserve">
-    <value>Het installeren van update, opstarten app...</value>
+    <value>Installeren van update en opstarten app...</value>
   </data>
   <data name="WrongUsernameText" xml:space="preserve">
     <value>Verkeerde gebruikersnaam/wachtwoord of de server is offline, probeer het later opnieuw.</value>
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Ja</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>
@@ -84,7 +94,119 @@
   <data name="MysticTeamText" xml:space="preserve">
     <value>Mystic</value>
   </data>
+  <data name="TransferPokemonSuccessText" xml:space="preserve">
+    <value>Overbrengen compleet! Je hebt {0} snoepjes gekregen van de professor.</value>
+  </data>
+  <data name="TransferPokemonWarningText" xml:space="preserve">
+    <value>Je kan het niet terugnemen nadat het is overgebracht naar de professor.</value>
+  </data>
+  <data name="LoginExpired" xml:space="preserve">
+    <value>Vorige login is verlopen.</value>
+  </data>
   <data name="ActivityUnknown" xml:space="preserve">
     <value>Onbekend</value>
+  </data>
+  <data name="ActivityCatchPokemon" xml:space="preserve">
+    <value>Pokémon gevangen</value>
+  </data>
+  <data name="ActivityCatchLegendPokemon" xml:space="preserve">
+    <value>Legendarische Pokémon gevangen</value>
+  </data>
+  <data name="ActivityFleePokemon" xml:space="preserve">
+    <value>Pokémon is gevlucht</value>
+  </data>
+  <data name="ActivityEvolvePokemon" xml:space="preserve">
+    <value>Evolueer een Pokemon</value>
+  </data>
+  <data name="ActivityHatchEgg" xml:space="preserve">
+    <value>Ei is uitgekomen!</value>
+  </data>
+  <data name="ActivityWalkKm" xml:space="preserve">
+    <value>Gelopen Km</value>
+  </data>
+  <data name="ActivityPokedexEntryNew" xml:space="preserve">
+    <value>Nieuwe Pokémon</value>
+  </data>
+  <data name="ActivityCatchFirstThrow" xml:space="preserve">
+    <value>Eerste worp</value>
+  </data>
+  <data name="ActivityCatchNiceThrow" xml:space="preserve">
+    <value>Goede worp</value>
+  </data>
+  <data name="ActivityCatchGreatThrow" xml:space="preserve">
+    <value>Geweldige worp</value>
+  </data>
+  <data name="ActivityCatchExcellentThrow" xml:space="preserve">
+    <value>Uitstekende worp</value>
+  </data>
+  <data name="ActivityCatchCurveball" xml:space="preserve">
+    <value>Effectbal</value>
+  </data>
+  <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
+    <value>Eerste vangst van de dag!</value>
+  </data>
+  <data name="ActivityCatchMilestone" xml:space="preserve">
+    <value>Mijlpaal behaald</value>
+  </data>
+  <data name="ActivityTrainPokemon" xml:space="preserve">
+    <value>Train Pokémon</value>
+  </data>
+  <data name="ActivitySearchFort" xml:space="preserve">
+    <value>Doorzoek Pokéstop</value>
+  </data>
+  <data name="ActivityReleasePokemon" xml:space="preserve">
+    <value>Laat Pokémon los</value>
+  </data>
+  <data name="ActivityHatchEggSmallBonus" xml:space="preserve">
+    <value>Ei uitgekomen kleine bonus</value>
+  </data>
+  <data name="ActivityHatchEggMediumBonus" xml:space="preserve">
+    <value>Ei uitgekomen bonus</value>
+  </data>
+  <data name="ActivityHatchEggLargeBonus" xml:space="preserve">
+    <value>Ei uitgekomen grote bonus</value>
+  </data>
+  <data name="ActivityDefeatGymDefender" xml:space="preserve">
+    <value>Versla Gym verdediger</value>
+  </data>
+  <data name="ActivityDefeatGymLeader" xml:space="preserve">
+    <value>Versla Gym leider</value>
+  </data>
+  <data name="Combat" xml:space="preserve">
+    <value>Gevecht</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Fav" xml:space="preserve">
+    <value>Favoriet</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Gezondheid</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="PokemonInventoryFullText" xml:space="preserve">
+    <value>Je Pokémon inventaris is vol, verplaats een aantal Pokémon voordat je {0} probeert te vangen.</value>
+  </data>
+  <data name="WaitingForNetworkText" xml:space="preserve">
+    <value>Wachten tot het netwerk terug is...</value>
+  </data>
+  <data name="EggHatchMessage" xml:space="preserve">
+    <value>Er is een ei uitgekomen, het is een {0}.
+Je hebt ook {1} Stardust, {2} Candy en {3} XP gekregen.</value>
+  </data>
+  <data name="EvolvePokemonWarningText" xml:space="preserve">
+    <value>Wil je {0} evolueren?</value>
+  </data>
+  <data name="PowerUpPokemonWarningText" xml:space="preserve">
+    <value>Wil je een powerup gebruiken voor {0}?</value>
+  </data>
+  <data name="TransferPokemonWarningTitle" xml:space="preserve">
+    <value>Wil je echt {0} overbrengen naar de Professor?</value>
   </data>
 </root>

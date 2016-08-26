@@ -38,6 +38,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Ne</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>K používání hry potřebujete GPS, prosím zapněte GPS v nastavení.</value>
@@ -71,6 +72,7 @@ Chcete otevřít stránku se soubory pro manuální instalaci? </value>
   <data name="YesText" xml:space="preserve">
     <value>Ano
 </value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoTeamText" xml:space="preserve">
     <value>Bez týmu</value>

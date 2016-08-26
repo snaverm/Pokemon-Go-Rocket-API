@@ -85,4 +85,7 @@
     <value> 糖果</value>
     <comment>Watch out: space before the word!</comment>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>宝可梦图鉴</value>
+  </data>
 </root>

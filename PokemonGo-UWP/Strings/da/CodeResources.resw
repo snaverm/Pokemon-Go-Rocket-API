@@ -48,6 +48,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Nej</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Vi behøverGPS tillatelse for at starte spillet, vennligst aktiver det og prøv på ny.</value>
@@ -83,6 +84,7 @@
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Ja</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>

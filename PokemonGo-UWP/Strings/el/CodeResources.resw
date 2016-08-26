@@ -38,6 +38,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Όχι</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Χρειαζόμαστε άδεια να χρησιμοποιήσουμε το GPS σας για να τρέξουμε το παιχνίδι, παρακαλόυμε ενεργοποιήστε το και προσπαθήστε ξανά.</value>
@@ -70,6 +71,7 @@
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Ναί</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Ίνστινκτ</value>

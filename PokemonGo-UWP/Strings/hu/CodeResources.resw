@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Nem</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>A játék futásához engedélyezni kell a GPS-t.  Bekapcsolás után próbáld újra.</value>
@@ -79,6 +80,7 @@ Megnyitja a telepítési fájlokat tartalmazó oldalt, hogy manuálisan tudjon f
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Igen</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>
