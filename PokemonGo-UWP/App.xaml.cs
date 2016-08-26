@@ -27,6 +27,7 @@ using Windows.UI.Xaml.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PokemonGo_UWP.Utils.Helpers;
+using PokemonGo_UWP.Controls;
 
 namespace PokemonGo_UWP
 {
@@ -255,23 +256,30 @@ namespace PokemonGo_UWP
         /// <returns></returns>
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            AsyncSynchronizationContext.Register();            
-            var currentAccessToken = GameClient.LoadAccessToken();
-            if (currentAccessToken == null)
-            {
-                await NavigationService.NavigateAsync(typeof(MainPage));
-            }
-            else
-            {
-                await GameClient.InitializeClient();                
-                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
-            }
-
+            bool forceToMainPage = false;
             // Check for updates (ignore resume)
             if (startKind == StartKind.Launch)
             {
                 var latestUpdateInfo = await UpdateManager.IsUpdateAvailable();
-                if (latestUpdateInfo != null)
+
+                while (latestUpdateInfo == null || latestUpdateInfo.Status == UpdateManager.UpdateStatus.NoInternet)
+                {
+                    var dialog = new MessageDialog("Do you want try to connect again?", "No internet connection");
+
+                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("YesText")) { Id = 0 });
+                    dialog.Commands.Add(new UICommand(Utils.Resources.CodeResources.GetString("NoText")) { Id = 1 });
+                    dialog.DefaultCommandIndex = 0;
+                    dialog.CancelCommandIndex = 1;
+
+                    var result = await dialog.ShowAsyncQueue();
+
+                    if ((int)result.Id != 0)
+                        App.Current.Exit();
+                    else
+                        latestUpdateInfo = await UpdateManager.IsUpdateAvailable();
+                }
+
+                if (latestUpdateInfo.Status == UpdateManager.UpdateStatus.UpdateAvailable)
                 {
                     var dialog =
                         new MessageDialog(string.Format(Utils.Resources.CodeResources.GetString("UpdatedVersion"),
@@ -287,11 +295,42 @@ namespace PokemonGo_UWP
                     if ((int)result.Id != 0)
                         return;
 
-                    //continue with execution because we need Busy page working (cannot work on splash screen)
-                    //result is irrelevant
-                    var t1 = UpdateManager.InstallUpdate(latestUpdateInfo.Release);
+                    var t1 = UpdateManager.InstallUpdate();
+                    forceToMainPage = true;
+                }
+                else if (latestUpdateInfo.Status == UpdateManager.UpdateStatus.UpdateForced)
+                {
+                    //start forced update
+                    var t1 = UpdateManager.InstallUpdate();
+                    forceToMainPage = true;
+                }
+                else if (latestUpdateInfo.Status == UpdateManager.UpdateStatus.NextVersionNotReady)
+                {
+                    var dialog = new MessageDialog("Please wait on next update", "This version is obsolete");
+                    dialog.Commands.Add(new UICommand("OK"));
+                    dialog.DefaultCommandIndex = 0;
+                    dialog.CancelCommandIndex = 1;
+
+                    var result = await dialog.ShowAsyncQueue();
+
+                    App.Current.Exit();
                 }
             }
+
+
+            AsyncSynchronizationContext.Register();
+            var currentAccessToken = GameClient.LoadAccessToken();
+            if (currentAccessToken == null || forceToMainPage)
+            {
+                await NavigationService.NavigateAsync(typeof(MainPage));
+            }
+            else
+            {
+                await GameClient.InitializeClient();
+                NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.AppStart);
+            }
+
+
             await Task.CompletedTask;
         }
 
