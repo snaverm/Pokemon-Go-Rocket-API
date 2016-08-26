@@ -705,7 +705,7 @@ namespace PokemonGo_UWP.Utils
         /// <summary>
         ///     List of items that can be used when trying to catch a Pokemon
         /// </summary>
-        private static readonly List<ItemId> CatchItemIds = new List<ItemId>
+        public static readonly List<ItemId> CatchItemIds = new List<ItemId>
         {
             ItemId.ItemPokeBall,
             ItemId.ItemGreatBall,
@@ -716,6 +716,24 @@ namespace PokemonGo_UWP.Utils
             ItemId.ItemRazzBerry,
             ItemId.ItemUltraBall,
             ItemId.ItemWeparBerry
+        };
+
+        /// <summary>
+        /// List of items, that can be used from the normal ItemsInventoryPage
+        /// </summary>
+        public static readonly List<ItemId> NormalUseItemIds = new List<ItemId>
+        {
+            ItemId.ItemPotion,
+            ItemId.ItemSuperPotion,
+            ItemId.ItemHyperPotion,
+            ItemId.ItemMaxPotion,
+            ItemId.ItemRevive,
+            ItemId.ItemMaxRevive,
+            ItemId.ItemLuckyEgg,
+            ItemId.ItemIncenseOrdinary,
+            ItemId.ItemIncenseSpicy,
+            ItemId.ItemIncenseCool,
+            ItemId.ItemIncenseFloral,
         };
 
         /// <summary>
@@ -1031,6 +1049,21 @@ namespace PokemonGo_UWP.Utils
         /// FortRecallPokemon
         /// StartGymBattle
         /// AttackGym
+
+        #endregion
+
+        #region Items Handling
+
+        /// <summary>
+        ///     Recycles the given amount of the selected item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static async Task<RecycleInventoryItemResponse> RecycleItem(ItemId item, int amount)
+        {
+            return await _client.Inventory.RecycleItem(item, amount);
+        }
 
         #endregion
 

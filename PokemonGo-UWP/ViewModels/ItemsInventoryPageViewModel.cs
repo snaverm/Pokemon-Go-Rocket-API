@@ -9,12 +9,24 @@ using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.Views;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using PokemonGo_UWP.Controls;
+using POGOProtos.Networking.Responses;
+using System;
 
 namespace PokemonGo_UWP.ViewModels
 {
     public class ItemsInventoryPageViewModel : ViewModelBase
     {
         #region Lifecycle Handlers
+
+        /// <summary>
+        /// Defines the modes, the ItemsInventoryPage can be viewed
+        /// </summary>
+        public enum ItemsInventoryViewMode
+        {
+            Normal,
+            Catch
+        }
 
         /// <summary>
         /// </summary>
@@ -33,9 +45,11 @@ namespace PokemonGo_UWP.ViewModels
             else if (parameter is bool)
             {
                 // Navigating from game page, so we need to actually load the inventory
-                // The sorting mode is directly bound to the settings
-                ItemsInventory = new ObservableCollection<ItemDataWrapper>(
-                    GameClient.ItemsInventory.Select(itemData => new ItemDataWrapper(itemData)));
+                // The sorting is directly bound to the ViewMode
+                ItemsInventory = new ObservableCollection<ItemDataWrapper>(this.SortItems(
+                    GameClient.ItemsInventory.Where(
+                        itemData => ((POGOProtos.Inventory.Item.ItemData)itemData).Count > 0).Select(
+                        itemData => new ItemDataWrapper(itemData))));
 
                 RaisePropertyChanged(() => ItemsInventory);
             }
@@ -68,6 +82,22 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Datahandling
+
+        /// <summary>
+        /// Orders the list of items accorfing to the viewmode set
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        private IOrderedEnumerable<ItemDataWrapper> SortItems(IEnumerable<ItemDataWrapper> items)
+        {
+            var useableList = ViewMode == ItemsInventoryViewMode.Normal ? GameClient.NormalUseItemIds : GameClient.CatchItemIds;
+            return items.OrderBy(item => !useableList.Contains(item.ItemId)).ThenBy(item => item.ItemId);
+        }
+
+        #endregion
+
         #region Bindable Game Vars
 
         /// <summary>
@@ -82,6 +112,8 @@ namespace PokemonGo_UWP.ViewModels
             get { return _itemsTotalCount; }
             private set { Set(ref _itemsTotalCount, value); }
         }
+
+        public ItemsInventoryViewMode ViewMode { get; set; }
 
         #endregion
 
@@ -101,6 +133,58 @@ namespace PokemonGo_UWP.ViewModels
                     new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
 
         public int MaxItemStorageFieldNumber => GameClient.PlayerProfile.MaxItemStorage;
+
+        #endregion
+
+        #region Recycle
+
+        private DelegateCommand<ItemDataWrapper> _recycleItemCommand;
+
+        public DelegateCommand<ItemDataWrapper> RecycleItemCommand => _recycleItemCommand ?? (
+          _recycleItemCommand = new DelegateCommand<ItemDataWrapper>((ItemDataWrapper item) =>
+          {
+
+              var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("ItemDiscardWarningText"), Resources.Items.GetString(item.ItemId.ToString())));
+              var stepper = new StepperMessageDialog(1, item.Count, 1);
+              dialog.DialogContent = stepper;
+              dialog.AcceptText = Resources.CodeResources.GetString("YesText");
+              dialog.CancelText = Resources.CodeResources.GetString("CancelText");
+              dialog.CoverBackground = true;
+              dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
+              dialog.AcceptInvoked += async (sender, e) =>
+              {
+                  // Send recycle request
+                  var res = await GameClient.RecycleItem(item.ItemId, stepper.Value);
+                  switch (res.Result)
+                  {
+                      case RecycleInventoryItemResponse.Types.Result.Unset:
+                          break;
+                      case RecycleInventoryItemResponse.Types.Result.Success:
+                          // Refresh the Item amount
+                          item.WrappedData.Count = res.NewCount;
+                          // Hacky? you guessed it...
+                          item.Update(item.WrappedData);
+
+                          // Handle if there are no more items of this type
+                          if(res.NewCount == 0)
+                          {
+                              GameClient.ItemsInventory.Remove(item.WrappedData);
+                              ItemsInventory.Remove(item);
+                          }
+                          // Update the total count
+                          ItemsTotalCount = ItemsInventory.Sum(i => i.WrappedData.Count);
+                          break;
+                      case RecycleInventoryItemResponse.Types.Result.ErrorNotEnoughCopies:
+                          break;
+                      case RecycleInventoryItemResponse.Types.Result.ErrorCannotRecycleIncubators:
+                          break;
+                      default:
+                          throw new ArgumentOutOfRangeException();
+                  }
+              };
+
+              dialog.Show();
+          }, (ItemDataWrapper item) => true));
 
         #endregion
 

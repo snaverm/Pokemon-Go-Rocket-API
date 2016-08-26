@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace PokemonGo_UWP.Controls
 {
@@ -89,9 +88,9 @@ namespace PokemonGo_UWP.Controls
         // Internal
         private Brush _formerModalBrush = null;
 
-        public static readonly DependencyProperty DownwardsTranslationRangeProperty =
-    DependencyProperty.Register(nameof(DownwardsTranslationRange), typeof(Double?), typeof(PoGoMessageDialog),
-        new PropertyMetadata(0.0));
+        public static readonly DependencyProperty DownwardsTranslationRangeProperty = 
+            DependencyProperty.Register(nameof(DownwardsTranslationRange), typeof(Double?), typeof(PoGoMessageDialog), 
+                new PropertyMetadata(0.0));
 
         public Double? DownwardsTranslationRange
         {
@@ -107,6 +106,10 @@ namespace PokemonGo_UWP.Controls
         public static readonly DependencyProperty TextProperty = 
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(PoGoMessageDialog),
                 new PropertyMetadata(""));
+
+        public static readonly DependencyProperty DialogContentProperty = 
+            DependencyProperty.Register(nameof(DialogContent), typeof(Object), typeof(PoGoMessageDialog), 
+                new PropertyMetadata(null));
 
         public static readonly DependencyProperty AcceptTextProperty = 
             DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
@@ -132,6 +135,12 @@ namespace PokemonGo_UWP.Controls
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        public Object DialogContent
+        {
+            get { return (Object)GetValue(DialogContentProperty); }
+            set { SetValue(DialogContentProperty, value); }
         }
 
         public string AcceptText

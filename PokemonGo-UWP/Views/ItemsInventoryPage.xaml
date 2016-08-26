@@ -7,7 +7,9 @@
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:utils="using:PokemonGo_UWP.Utils"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    x:Name="Root"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -15,6 +17,9 @@
     </Page.DataContext>
 
     <Page.Resources>
+        <utils:ItemUseabilityToOpacityConverter x:Key="ItemUseabilityToOpacityConverter" 
+                                                CurrentViewMode="{Binding ViewMode}" />
+        
         <Storyboard x:Name="ShowDiscardStoryboard">
 
             <DoubleAnimation
@@ -78,165 +83,122 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource PageBackgroundGradient}">
-        <RelativePanel x:Name="DiscardPanel"
-                       RelativePanel.AlignTopWithPanel="True"
-                       RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignBottomWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                       Opacity="0"
-                       Canvas.ZIndex="0"
-                       Visibility="Collapsed">
+        <Border Margin="12,0" Background="White" x:Name="MainUIPanel">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" 
+                            Padding="0,15,0,2" 
+                            BorderThickness="0,0,0,1" 
+                            BorderBrush="#dadada">
+                    <TextBlock x:Uid="ITEMS"
+                               Text="ITEMS"
+                               Style="{StaticResource TextPageTitleDark}" />
+                    <TextBlock Style="{StaticResource TextSubTitle}"
+                               HorizontalAlignment="Center">
+                        <Run Text="{Binding ItemsTotalCount}" />
+                        <Run Text="/" />
+                        <Run Text="{Binding MaxItemStorageFieldNumber}" />
+                    </TextBlock>
+                </StackPanel>
 
-            <RelativePanel.Background>
-                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green_02.png"
-                            Stretch="UniformToFill" />
-            </RelativePanel.Background>
+                <ListView ItemsSource="{Binding ItemsInventory}" 
+                          IsItemClickEnabled="False"
+                          SelectionMode="None"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          Margin="8,0"
+                          Grid.Row="1"
+                          Padding="0,0,0,60">
 
-            <Button RelativePanel.AlignBottomWithPanel="True"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    Height="{ThemeResource UiButtonSize}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    x:Name="CloseDiscardButton"
-                    Margin="24">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Click">
-                        <media:ControlStoryboardAction Storyboard="{StaticResource HideDiscardStoryboard}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,10" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                <Image Source="../Assets/Buttons/btn_close_normal_dark.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Stretch" />
-            </Button>
-        </RelativePanel>
-
-        <Border Margin="12,12,12,0" Background="White" CornerRadius="5,5,0,0" x:Name="MainUIPanel">
-            <Pivot>
-                <PivotItem>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
-                            <TextBlock x:Name="PokemonsPivotHeader"
-                                       x:Uid="ITEMS"
-                                       Text="ITEMS"
-                                       Style="{StaticResource TextPageTitleDark}" />
-                            <Border Background="#000" Width="150" Height="1" />
-                            <TextBlock Style="{StaticResource TextSubTitle}"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,8">
-                                <Run Text="{Binding ItemsTotalCount}"/><Run Text="/"/><Run Text="{Binding MaxItemStorageFieldNumber}"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <ListView
-                ItemsSource="{Binding ItemsInventory}"
-                IsItemClickEnabled="False"
-                SelectionMode="None"
-                Margin="8,0"
-                Grid.Row="1"
-                Padding="0,0,0,60">
-
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,8">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="0"
-                                      Margin="0,0,8,0">
-
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Image
-                                        Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"
-                                        Stretch="Uniform"
-                                        VerticalAlignment="Center"
-                                        Width="84"
-                                        Height="84"
-                                        Margin="3,0"
-                                        Grid.RowSpan="2" />
-                                            <Border Grid.Row="1" 
-                                            Grid.Column="0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Bottom"
-                                            Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
-                                            Background="LightGray" 
-                                            CornerRadius="8" 
-                                            Padding="3,1">
-                                                <TextBlock Style="{StaticResource BodyTextBlockStyle}"
-                                                   TextAlignment="Center">
-                                            <Run Text="x" />
-                                            <Run FontWeight="Bold" 
-                                                 Text="{Binding Count}" />
-                                                </TextBlock>
-                                            </Border>
-                                        </Grid>
-
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="*" />
-                                            </Grid.RowDefinitions>
-
-                                            <TextBlock        Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                                        FontFamily="../Assets/Fonts/Lato-Bold.ttf#Lato"
-                                        Foreground="#FF45686A"
-                                        Grid.Row="0"
-                                        FontSize="22"
-                                        FontWeight="SemiBold" 
-																				TextTrimming="CharacterEllipsis" />
-
-                                            <!--<Button IsEnabled="False"
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            Padding="0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="Tapped">
-                                        <core:CallMethodAction MethodName="Begin"
-                                                   TargetObject="{Binding ElementName=ShowDiscardStoryboard}" />
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                
+                                <Image Grid.RowSpan="3"
+                                       Grid.Column="0"
+                                       Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"
+                                       Stretch="Uniform"
+                                       VerticalAlignment="Center"
+                                       Width="84"
+                                       Height="84"
+                                       Margin="3,0,8,0"
+                                       Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"/>
+                                <Border Grid.Row="2" 
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Bottom"
+                                        Margin="10,0,0,0"
+                                        Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
+                                        Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"
+                                        Background="#aadddddd" 
+                                        CornerRadius="8" 
+                                        Padding="3,1">
+                                    <TextBlock Foreground="{StaticResource TitleTextColor}"
+                                               TextAlignment="Left"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                                            <Run Text="x" FontFamily="{StaticResource LatoLightFont}" FontSize="13"/><Run FontFamily="{StaticResource LatoBoldFont}" Text="{Binding Count}" />
+                                    </TextBlock>
+                                </Border>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="2"
+                                           Margin="0,15,0,0"
+                                           Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                           FontFamily="{StaticResource LatoBoldFont}"
+                                           Foreground="{StaticResource TitleTextColor}"
+                                           FontSize="17"
+                                           TextTrimming="CharacterEllipsis"
+                                           Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"/>
+                                <Button Grid.Row="0"
+                                        Grid.Column="2"
+                                        Height="28" 
+                                        Margin="0,5,0,0"
+                                        Padding="5"
+                                        VerticalAlignment="Top"
+                                        Style="{StaticResource ButtonSymbolIcon}"
+                                        Visibility="{Binding Converter={StaticResource ItemToItemRecycleVisibilityConverter}}"
+                                        Command="{Binding ElementName=Root, Path=DataContext.RecycleItemCommand}"
+                                        CommandParameter="{Binding}">
+                                    <Viewbox>
                                         <SymbolIcon Symbol="Delete" />
-                                    </Button>-->
-
-                                            <TextBlock        Text="{Binding Converter={StaticResource ItemToItemDescriptionConverter}}"
-                                        TextWrapping="WrapWholeWords"
-																				TextTrimming="CharacterEllipsis"
-                                        FontFamily="../Assets/Fonts/Lato-Light.ttf#Lato"
-                                        Foreground="#FF45686A"
-                                        Grid.Row="1"
-                                        FontSize="14"
-                                        FontWeight="SemiLight" />
-                                        </Grid>
-
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </PivotItem>
-            </Pivot>
+                                    </Viewbox>
+                                </Button>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Grid.RowSpan="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Converter={StaticResource ItemToItemDescriptionConverter}}"
+                                           TextWrapping="WrapWholeWords"
+                                           TextTrimming="CharacterEllipsis"
+                                           FontFamily="{StaticResource LatoLightFont}"
+                                           Foreground="{StaticResource TitleTextColor}"
+                                           FontSize="14"
+                                           FontWeight="SemiLight"
+                                           Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Border>
 
         <Button Command="{Binding ReturnToGameScreen}"

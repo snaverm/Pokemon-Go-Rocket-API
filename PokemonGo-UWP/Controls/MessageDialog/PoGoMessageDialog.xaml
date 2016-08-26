@@ -147,6 +147,8 @@
                            FontFamily="{StaticResource LatoRegularFont}"/>
                 <ContentPresenter FontSize="15" 
                                   TextWrapping="Wrap" 
+                                  HorizontalAlignment="Stretch"
+                                  Content="{x:Bind DialogContent}"
                                   Foreground="{StaticResource TitleTextColor}" 
                                   FontFamily="{StaticResource LatoRegularFont}" />
                 <Button x:Name="AcceptButton" 
