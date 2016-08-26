@@ -151,7 +151,8 @@
     <value>Login failed, please try again.</value>
   </data>
   <data name="NoText" xml:space="preserve">
-    <value>No</value>
+    <value>NO</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>We need GPS permissions to run the game, please enable it and try again.</value>
@@ -186,7 +187,8 @@ Open page with installation files for manual install?</value>
     <value>Wrong username/password or offline server, please try again.</value>
   </data>
   <data name="YesText" xml:space="preserve">
-    <value>Yes</value>
+    <value>YES</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>
@@ -314,5 +316,12 @@ You also got {1} Stardust, {2} Candy and {3} XP.</value>
   </data>
   <data name="TransferPokemonWarningTitle" xml:space="preserve">
     <value>Do you really want to transfer {0} to the Professor?</value>
+  </data>
+  <data name="CancelText" xml:space="preserve">
+    <value>CANCEL</value>
+    <comment>Capslock</comment>
+  </data>
+  <data name="ItemDiscardWarningText" xml:space="preserve">
+    <value>Discard {0}?</value>
   </data>
 </root>
