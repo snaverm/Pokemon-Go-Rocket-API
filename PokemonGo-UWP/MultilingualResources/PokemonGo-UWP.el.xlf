@@ -281,8 +281,10 @@
           <target state="final">Αποτυχία σύνδεσης, παρακαλώ δοκιμάστε ξανά.</target>
         </trans-unit>
         <trans-unit id="NoText" translate="yes" xml:space="preserve">
-          <source>No</source>
-          <target state="final">Όχι</target>
+          <source>NO</source>
+          <target state="needs-review-translation">Όχι</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="NoGpsPermissionsText" translate="yes" xml:space="preserve">
           <source>We need GPS permissions to run the game, please enable it and try again.</source>
@@ -329,8 +331,10 @@ Open page with installation files for manual install?</source>
           <target state="final">Λάθος Όνομα-Χρήστη/Κωδικός ή offline server, παρακαλώ δοκιμάστε ξανά.</target>
         </trans-unit>
         <trans-unit id="YesText" translate="yes" xml:space="preserve">
-          <source>Yes</source>
-          <target state="final">Ναί</target>
+          <source>YES</source>
+          <target state="needs-review-translation">Ναί</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="InstinctTeamText" translate="yes" xml:space="preserve">
           <source>Instinct</source>
@@ -506,6 +510,15 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
         <trans-unit id="TransferPokemonWarningTitle" translate="yes" xml:space="preserve">
           <source>Do you really want to transfer {0} to the Professor?</source>
           <target state="new">Do you really want to transfer {0} to the Professor?</target>
+        </trans-unit>
+        <trans-unit id="CancelText" translate="yes" xml:space="preserve">
+          <source>CANCEL</source>
+          <target state="new">CANCEL</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
+        </trans-unit>
+        <trans-unit id="ItemDiscardWarningText" translate="yes" xml:space="preserve">
+          <source>Discard {0}?</source>
+          <target state="new">Discard {0}?</target>
         </trans-unit>
       </group>
     </body>
