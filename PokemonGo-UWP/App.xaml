@@ -30,6 +30,7 @@
             <utils:ItemToItemIconConverter x:Key="ItemToItemIconConverter" />
             <utils:NearbyPokemonDistanceToDistanceImageConverter x:Key="NearbyPokemonDistanceToDistanceImageConverter" />
             <utils:PokestopToIconConverter x:Key="PokestopToIconConverter" />
+            <utils:GymToIconConverter x:Key="GymToIconConverter" />
             <utils:CurrentTimeToMapColorSchemeConverter x:Key="CurrentTimeToMapColorSchemeConverter" />
             <utils:PokemonDataToPokemonStaminaConverter x:Key="PokemonDataToPokemonStaminaConverter" />
             <utils:PokemonIdToPokemonNameConverter x:Key="PokemonIdToPokemonNameConverter" />
@@ -71,18 +72,6 @@
             <utils:AchievementDescriptionTranslationConverter x:Key="AchievementDescriptionTranslationConverter"/>
             <utils:PokemonPivotHeaderToVisibleConverter x:Key="PokemonPivotHeaderToVisibleConverter" />
             <utils:WidthConverter x:Key="WidthConverter" />
-
-            <converters:ValueWhenConverter x:Key="EnabledWhenHasElementsConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:Double>0</x:Double>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <x:Boolean>False</x:Boolean>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <x:Boolean>True</x:Boolean>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>
 
             <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
                 <converters:ValueWhenConverter.When>

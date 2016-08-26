@@ -38,7 +38,7 @@ namespace PokemonGo.RocketAPI
             Misc = new Misc(this);
             DeviceInfo = deviceInfo;
 
-            Player.SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+            Player.SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAccuracy);
         }
 
         public IApiFailureStrategy ApiFailure { get; set; }
@@ -47,7 +47,7 @@ namespace PokemonGo.RocketAPI
 
         public double CurrentLatitude { get; internal set; }
         public double CurrentLongitude { get; internal set; }
-        public double CurrentAltitude { get; internal set; }
+        public double CurrentAccuracy { get; internal set; }
 
         public AuthType AuthType => Settings.AuthType;
         internal string ApiUrl { get; set; }

@@ -28,7 +28,7 @@ namespace PokemonGo.RocketAPI.Rpc
         protected RequestBuilder RequestBuilder
             =>
                 new RequestBuilder(Client.AuthToken, Client.AuthType, Client.CurrentLatitude, Client.CurrentLongitude,
-                    Client.CurrentAltitude, Client.DeviceInfo, Client.AuthTicket);
+                    Client.CurrentAccuracy, Client.DeviceInfo, Client.AuthTicket);
 
         private string ApiUrl => $"https://{Client.ApiUrl}/rpc";
 

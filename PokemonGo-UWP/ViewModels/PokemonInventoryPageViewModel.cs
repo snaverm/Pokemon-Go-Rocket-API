@@ -27,7 +27,7 @@ namespace PokemonGo_UWP.ViewModels
 
         public int LastVisibleIndex
         {
-            get { return Utilities.EnsureRange(_lastVisibleIndex, 0, PokemonInventory.Count); }
+            get { return Utilities.EnsureRange(_lastVisibleIndex, 0, PokemonInventory.Count-1); }
             set { _lastVisibleIndex = value; }
         }
 

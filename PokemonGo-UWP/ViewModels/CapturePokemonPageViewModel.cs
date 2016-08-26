@@ -144,7 +144,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
             if (suspending)
-            {                
+            {
                 suspensionState[nameof(CurrentPokemon)] = JsonConvert.SerializeObject(CurrentPokemon);
                 suspensionState[nameof(CurrentEncounter)] = CurrentEncounter.ToByteString().ToBase64();
                 suspensionState[nameof(CurrentLureEncounter)] = CurrentLureEncounter.ToByteString().ToBase64();
@@ -271,8 +271,19 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand ReturnToGameScreen => _returnToGameScreen ?? (_returnToGameScreen = new DelegateCommand(
                                                          () =>
                                                          {
-                                                             NavigationHelper.NavigationState["CurrentPokemon"] = new PokemonDataWrapper(GameClient.PokemonsInventory.First(item => item.Id == _capturedPokemonId));
-                                                             NavigationService.Navigate(typeof(PokemonDetailPage));
+                                                             var currentPokemon =
+                                                                 GameClient.PokemonsInventory
+                                                                 .FirstOrDefault(item => item.Id == _capturedPokemonId);
+                                                             if (currentPokemon != null)
+                                                             {
+                                                                 NavigationHelper.NavigationState["CurrentPokemon"] =
+                                                                     new PokemonDataWrapper(currentPokemon);
+                                                                 NavigationService.Navigate(typeof(PokemonDetailPage));
+                                                             }
+                                                             else
+                                                             {
+                                                                 NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
+                                                             }
                                                          }, () => true));
 
         private DelegateCommand _escapeEncounterCommand;
@@ -351,7 +362,15 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         private DelegateCommand<bool> _useSelectedCaptureItem;
-        public ItemId? LastItemUsed = null;
+        public ItemId? LastItemUsed;
+
+        private bool _pokeballButtonEnabled;
+        public bool PokeballButtonEnabled
+        {
+            get { return _pokeballButtonEnabled; }
+            set { Set(ref _pokeballButtonEnabled, value); }
+        }
+
         /// <summary>
         ///     We throw the selected item to the Pokemon and see what happens
         /// </summary>
@@ -361,24 +380,34 @@ namespace PokemonGo_UWP.ViewModels
             Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
             if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
             {
+                PokeballButtonEnabled = false;
+                Busy.SetBusy(true);
                 // Player's using a PokeBall so we try to catch the Pokemon
                 await ThrowPokeball(hitPokemon);
 
                 // We always need to update the inventory
                 await GameClient.UpdateInventory();
                 SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
+
+                Busy.SetBusy(false);
             }
             else
             {
                 //So that after using berry pokeball is immediatelly rendered
                 SelectedCaptureItem = SelectAvailablePokeBall();
 
+                PokeballButtonEnabled = false;
+                Busy.SetBusy(true);
                 // He's using a berry
                 await ThrowBerry();
 
                 // We always need to update the inventory
                 await GameClient.UpdateInventory();
                 SelectedCaptureItem = SelectAvailablePokeBall();
+
+                Busy.SetBusy(false);
+                if (SelectedCaptureItem.Count != 0)
+                    PokeballButtonEnabled = true;
             }
             Busy.SetBusy(false);
             LastItemUsed = null;
@@ -418,7 +447,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                         GameClient.LuredPokemons.Remove((LuredPokemon) CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
-                    break;
+                    return;
 
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
@@ -444,6 +473,9 @@ namespace PokemonGo_UWP.ViewModels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (SelectedCaptureItem.Count != 0)
+                PokeballButtonEnabled = true;
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace PokemonGo.RocketAPI
         AuthType AuthType { get; set; }
         double DefaultLatitude { get; set; }
         double DefaultLongitude { get; set; }
-        double DefaultAltitude { get; set; }
+        double DefaultAccuracy { get; set; }
         string GoogleRefreshToken { get; set; }
         string PtcPassword { get; set; }
         string PtcUsername { get; set; }
