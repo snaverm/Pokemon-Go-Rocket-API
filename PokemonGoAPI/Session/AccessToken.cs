@@ -30,7 +30,7 @@ namespace PokemonGoAPI.Session
         public AuthType AuthType { get; internal set; }
 
         [JsonIgnore]
-        public bool IsExpired => DateTime.UtcNow > Expiry;
+        public bool IsExpired => Expiry <= DateTime.UtcNow;
 
         [JsonIgnore]
         public AuthTicket AuthTicket { get; internal set; }
