@@ -54,6 +54,9 @@
   <data name="ItemsTextBlock.Text" xml:space="preserve">
     <value>ITENS</value>
   </data>
+  <data name="PokedexTextBlock.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
   <data name="LowercaseItemsTextBlock.Text" xml:space="preserve">
     <value>Itens</value>
   </data>

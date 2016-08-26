@@ -522,6 +522,12 @@
   <data name="VineWhipFast" xml:space="preserve">
     <value>Удар плетью</value>
   </data>
+  <data name="WaterGunFast" xml:space="preserve">
+    <value>Водяное ружьё</value>
+  </data>
+  <data name="WaterGunFastBlastoise" xml:space="preserve">
+    <value>Водяное ружьё</value>
+  </data>
   <data name="WaterPulse" xml:space="preserve">
     <value>Водный пульс</value>
   </data>

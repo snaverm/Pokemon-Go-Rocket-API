@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>No</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Necesitamos permiso sobre tu ubicación para ejecutar el juego, por favor habilítalo e inténtelo de nuevo.</value>
@@ -79,6 +80,7 @@
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Sí</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinto</value>

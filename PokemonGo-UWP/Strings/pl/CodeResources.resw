@@ -38,6 +38,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Nie</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Potrzebujemy pozwolenia na użycie GPS żeby uruchomić grę, włącz je i spróbuj ponownie.</value>
@@ -70,6 +71,7 @@ Czy otworzyć stronę z plikami instalacyjnymi w celu instalacji manualnej?</val
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Tak</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoTeamText" xml:space="preserve">
     <value>Brak drużyny</value>

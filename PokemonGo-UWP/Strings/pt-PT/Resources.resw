@@ -91,4 +91,7 @@
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>INCUBADORAS</value>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
 </root>

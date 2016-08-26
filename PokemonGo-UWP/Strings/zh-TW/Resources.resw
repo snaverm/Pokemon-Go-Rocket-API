@@ -140,6 +140,9 @@
   <data name="SettingsRememberMapZoomTextBlock.Text" xml:space="preserve">
     <value>記住地圖縮放</value>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>圖鑑</value>
+  </data>
   <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
     <value>開始孵蛋</value>
   </data>

@@ -725,7 +725,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
         </trans-unit>
         <trans-unit id="PokedexText.Text" translate="yes" xml:space="preserve">
           <source>POKÉDEX</source>
-          <target state="new">POKÉDEX</target>
+          <target state="translated">宝可梦图鉴</target>
         </trans-unit>
         <trans-unit id="PokedexViewCaught.Text" translate="yes" xml:space="preserve">
           <source>Caught</source>

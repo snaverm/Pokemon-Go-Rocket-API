@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>否</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>遊戲需要 GPS 權限，請授權後再試一次。</value>
@@ -79,6 +80,7 @@
   </data>
   <data name="YesText" xml:space="preserve">
     <value>是</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct 陣營</value>

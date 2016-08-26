@@ -134,6 +134,9 @@
   <data name="PowerUpButton.Content" xml:space="preserve">
     <value>Улучшить</value>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>ПОКЕДЕКС</value>
+  </data>
   <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
     <value>Начать инкубацию</value>
   </data>

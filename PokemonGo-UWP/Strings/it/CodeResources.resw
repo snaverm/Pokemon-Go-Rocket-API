@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>No</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Abilitare l'utilizzo del GPS per eseguire il gioco, si prega di attivarlo e riprovare.</value>
@@ -79,6 +80,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Sì</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Istinto</value>
@@ -195,6 +197,7 @@ Vuoi aprire la pagina con il file di installazione per l'installazione manuale?<
     <value>In attesa che la rete sia nuovamente accessibile...</value>
   </data>
   <data name="EggHatchMessage" xml:space="preserve">
-    <value>Da un Uovo si è schiuso un {0}.\nHai ottenuto anche {1} Polvere di stelle, {2} Caramelle e {3} PE.</value>
+    <value>Da un Uovo si è schiuso un {0}.
+Hai ottenuto anche {1} Polvere di stella, {2} Caramelle e {3} PE.</value>
   </data>
 </root>

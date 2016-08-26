@@ -63,4 +63,7 @@
   <data name="Clefable" xml:space="preserve">
     <value>Clefable</value>
   </data>
+  <data name="Pikachu" xml:space="preserve">
+    <value>Pikachu</value>
+  </data>
 </root>

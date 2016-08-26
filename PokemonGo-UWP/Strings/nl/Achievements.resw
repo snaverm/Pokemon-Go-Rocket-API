@@ -12,6 +12,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BadgeBattleAttackWon" xml:space="preserve">
+    <value>Battle Girl</value>
+  </data>
   <data name="BadgeBattleTrainingWon" xml:space="preserve">
     <value>ACE Trainer</value>
   </data>
@@ -38,6 +41,9 @@
   </data>
   <data name="BadgeSmallRattata" xml:space="preserve">
     <value>Jongeling</value>
+  </data>
+  <data name="BadgeTravelKm" xml:space="preserve">
+    <value>Jogger</value>
   </data>
   <data name="Bug" xml:space="preserve">
     <value>Insect vanger</value>
@@ -90,5 +96,83 @@
   </data>
   <data name="Water" xml:space="preserve">
     <value>Zwemmer</value>
+  </data>
+  <data name="BadgeBattleAttackWonDescription" xml:space="preserve">
+    <value>{0} gym gevechten gewonnen</value>
+  </data>
+  <data name="BadgeBattleTrainingWonDescription" xml:space="preserve">
+    <value>{0} training gevechten gewonnen</value>
+  </data>
+  <data name="BadgeBigMagikarpDescription" xml:space="preserve">
+    <value>{0} Magikarp gevangen</value>
+  </data>
+  <data name="BadgeCaptureTotalDescription" xml:space="preserve">
+    <value>{0} Pokemon gevangen</value>
+  </data>
+  <data name="BadgeEvolvedTotalDescription" xml:space="preserve">
+    <value>{0} Pokémon geëvolueerd</value>
+  </data>
+  <data name="BadgePikachuDescription" xml:space="preserve">
+    <value>{0} Pikachu gevangen</value>
+  </data>
+  <data name="BadgePokedexEntriesDescription" xml:space="preserve">
+    <value>{0} Pokemon in the Pokédex geregistreerd</value>
+  </data>
+  <data name="BadgePokestopsVisitedDescription" xml:space="preserve">
+    <value>{0} Pokestops bezocht</value>
+  </data>
+  <data name="BadgeSmallRattataDescription" xml:space="preserve">
+    <value>{0} kleine Rattata gevangen</value>
+  </data>
+  <data name="BadgeTravelKmDescription" xml:space="preserve">
+    <value>{0} km gelopen</value>
+  </data>
+  <data name="BugDescription" xml:space="preserve">
+    <value>{0} insect Pokemon gevangen</value>
+  </data>
+  <data name="DragonDescription" xml:space="preserve">
+    <value>{0} Draken Pokemon gevangen</value>
+  </data>
+  <data name="ElectricDescription" xml:space="preserve">
+    <value>{0} Electrische Pokemon gevangen</value>
+  </data>
+  <data name="FairyDescription" xml:space="preserve">
+    <value>{0} Fee Pokemon gevangen</value>
+  </data>
+  <data name="FightingDescription" xml:space="preserve">
+    <value>{0} Vecht Pokemon gevangen</value>
+  </data>
+  <data name="FireDescription" xml:space="preserve">
+    <value>{0} Vuur Pokemon gevangen</value>
+  </data>
+  <data name="FlyingDescription" xml:space="preserve">
+    <value>{0} Vliegende Pokemon gevangen</value>
+  </data>
+  <data name="GhostDescription" xml:space="preserve">
+    <value>{0} Geest Pokemon gevangen</value>
+  </data>
+  <data name="GrassDescription" xml:space="preserve">
+    <value>{0} Gras Pokemon gevangen</value>
+  </data>
+  <data name="GroundDescription" xml:space="preserve">
+    <value>{0} Grond Pokemon gevangen</value>
+  </data>
+  <data name="IceDescription" xml:space="preserve">
+    <value>{0} Ijs Pokemon gevangen</value>
+  </data>
+  <data name="NormalDescription" xml:space="preserve">
+    <value>{0} Normale Pokemon gevangen</value>
+  </data>
+  <data name="PoisonDescription" xml:space="preserve">
+    <value>{0} Giftige Pokemon gevangen</value>
+  </data>
+  <data name="RockDescription" xml:space="preserve">
+    <value>{0} Steen Pokemon gevangen</value>
+  </data>
+  <data name="SteelDescription" xml:space="preserve">
+    <value>{0} Staal Pokemon gevangen</value>
+  </data>
+  <data name="WaterDescription" xml:space="preserve">
+    <value>{0} Water Pokemon gevangen</value>
   </data>
 </root>

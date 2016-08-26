@@ -18,9 +18,9 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>PokemonGo-UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxBundle>Never</AppxBundle>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -484,6 +484,30 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\es-MX\Resources.resw" />
+    <PRIResource Include="Strings\es-MX\PokemonTypes.resw" />
+    <PRIResource Include="Strings\es-MX\PokemonMoves.resw" />
+    <PRIResource Include="Strings\es-MX\Pokemon.resw" />
+    <PRIResource Include="Strings\es-MX\Pokedex.resw" />
+    <PRIResource Include="Strings\es-MX\Items.resw" />
+    <PRIResource Include="Strings\es-MX\CodeResources.resw" />
+    <PRIResource Include="Strings\es-MX\Achievements.resw" />
+    <PRIResource Include="Strings\en-GB\Resources.resw" />
+    <PRIResource Include="Strings\en-GB\PokemonTypes.resw" />
+    <PRIResource Include="Strings\en-GB\PokemonMoves.resw" />
+    <PRIResource Include="Strings\en-GB\Pokemon.resw" />
+    <PRIResource Include="Strings\en-GB\Pokedex.resw" />
+    <PRIResource Include="Strings\en-GB\Items.resw" />
+    <PRIResource Include="Strings\en-GB\CodeResources.resw" />
+    <PRIResource Include="Strings\en-GB\Achievements.resw" />
+    <PRIResource Include="Strings\he\Resources.resw" />
+    <PRIResource Include="Strings\he\PokemonTypes.resw" />
+    <PRIResource Include="Strings\he\PokemonMoves.resw" />
+    <PRIResource Include="Strings\he\Pokemon.resw" />
+    <PRIResource Include="Strings\he\Pokedex.resw" />
+    <PRIResource Include="Strings\he\Items.resw" />
+    <PRIResource Include="Strings\he\CodeResources.resw" />
+    <PRIResource Include="Strings\he\Achievements.resw" />
     <PRIResource Include="Strings\da\Resources.resw" />
     <PRIResource Include="Strings\da\PokemonTypes.resw" />
     <PRIResource Include="Strings\da\PokemonMoves.resw" />
@@ -958,9 +982,12 @@
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de-CH.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.de.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.el.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.en-GB.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.es-MX.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.es.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.fi.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.fr.xlf" />
+    <XliffResource Include="MultilingualResources\PokemonGo-UWP.he.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.hr-HR.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.hr.xlf" />
     <XliffResource Include="MultilingualResources\PokemonGo-UWP.hu.xlf" />

@@ -140,6 +140,9 @@
   <data name="SettingsRememberMapZoomTextBlock.Text" xml:space="preserve">
     <value>Απομνημόνευση Zoom του Χάρτη</value>
   </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
   <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
     <value>ΈΝΑΡΞΗ ΕΚΚΟΛΑΨΗΣ</value>
   </data>

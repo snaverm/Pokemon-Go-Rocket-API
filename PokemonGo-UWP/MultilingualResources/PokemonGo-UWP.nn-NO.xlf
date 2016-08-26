@@ -835,8 +835,9 @@
         </trans-unit>
         <trans-unit id="NoText" translate="yes" xml:space="preserve">
           <source>NO</source>
-          <target state="new">NEI</target>
+          <target state="needs-review-translation">Nei</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NoGpsPermissionsText" translate="yes" xml:space="preserve">
           <source>We need GPS permissions to run the game, please enable it and try again.</source>
@@ -884,8 +885,9 @@ Vil du åpne nettsiden med installasjonsfilene for manuell installasjon?</target
         </trans-unit>
         <trans-unit id="YesText" translate="yes" xml:space="preserve">
           <source>YES</source>
-          <target state="new">JA</target>
+          <target state="needs-review-translation">Ja</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="InstinctTeamText" translate="yes" xml:space="preserve">
           <source>Instinct</source>

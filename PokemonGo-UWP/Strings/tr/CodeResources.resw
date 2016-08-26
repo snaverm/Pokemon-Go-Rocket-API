@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Hayır</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Oyunu çalıştırmak için GPS iznine ihtiyacımız var, lütfen izin verin ve tekrar deneyin.</value>
@@ -79,6 +80,7 @@ Elle yükleme için yükleme dosyaları sayfası açılsın mı?</value>
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Evet</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>

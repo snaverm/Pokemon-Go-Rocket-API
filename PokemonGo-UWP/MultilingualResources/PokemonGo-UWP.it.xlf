@@ -977,19 +977,19 @@ Hai ottenuto anche {1} Polvere di stella, {2} Caramelle e {3} PE.</target>
         </trans-unit>
         <trans-unit id="D_ItemBlukBerry" translate="yes" xml:space="preserve">
           <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
-          <target state="new">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
+          <target state="final">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
         </trans-unit>
         <trans-unit id="D_ItemNanabBerry" translate="yes" xml:space="preserve">
           <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
-          <target state="new">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
+          <target state="final">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
         </trans-unit>
         <trans-unit id="D_ItemPinapBerry" translate="yes" xml:space="preserve">
           <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
-          <target state="new">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
+          <target state="final">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
         </trans-unit>
         <trans-unit id="D_ItemWeparBerry" translate="yes" xml:space="preserve">
           <source>Feed this to a Pokémon, and it will be easier to catch on your next throw.</source>
-          <target state="new">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
+          <target state="final">Dalla a un Pokémon e sarà più facile catturarlo al prossimo tentativo.</target>
         </trans-unit>
       </group>
     </body>

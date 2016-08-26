@@ -44,6 +44,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>Não</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>Precisamos de permissões de GPS para correr o jogo, por favor ative-o e tente novamente.</value>
@@ -79,6 +80,7 @@ Abrir a página com os arquivos de instalação para instalação manual?</value
   </data>
   <data name="YesText" xml:space="preserve">
     <value>Sim</value>
+    <comment>Capslock</comment>
   </data>
   <data name="InstinctTeamText" xml:space="preserve">
     <value>Instinct</value>

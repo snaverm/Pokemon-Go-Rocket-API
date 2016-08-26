@@ -20,6 +20,7 @@
   </data>
   <data name="NoText" xml:space="preserve">
     <value>否</value>
+    <comment>Capslock</comment>
   </data>
   <data name="NoGpsPermissionsText" xml:space="preserve">
     <value>我們需要 GPS 權限來運行遊戲，請啟用它，然後再試一次。</value>
@@ -38,6 +39,7 @@
   </data>
   <data name="YesText" xml:space="preserve">
     <value>是</value>
+    <comment>Capslock</comment>
   </data>
   <data name="ActivityUnknown" xml:space="preserve">
     <value>未知</value>

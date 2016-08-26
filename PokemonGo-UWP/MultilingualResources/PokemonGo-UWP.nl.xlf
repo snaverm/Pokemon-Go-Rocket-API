@@ -281,8 +281,10 @@
           <target state="translated" state-qualifier="mt-suggestion">De aanmelding is mislukt, probeer het later opnieuw.</target>
         </trans-unit>
         <trans-unit id="NoText" translate="yes" xml:space="preserve">
-          <source>No</source>
-          <target state="translated" state-qualifier="tm-suggestion">Nee</target>
+          <source>NO</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nee</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="NoGpsPermissionsText" translate="yes" xml:space="preserve">
           <source>We need GPS permissions to run the game, please enable it and try again.</source>
@@ -329,8 +331,10 @@ Open de pagina met installatiebestanden voor handmatige installatie?</target>
           <target state="translated">Verkeerde gebruikersnaam/wachtwoord of de server is offline, probeer het later opnieuw.</target>
         </trans-unit>
         <trans-unit id="YesText" translate="yes" xml:space="preserve">
-          <source>Yes</source>
-          <target state="translated" state-qualifier="tm-suggestion">Ja</target>
+          <source>YES</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ja</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
         <trans-unit id="InstinctTeamText" translate="yes" xml:space="preserve">
           <source>Instinct</source>

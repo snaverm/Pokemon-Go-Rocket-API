@@ -25,13 +25,13 @@
     <value>Login met PTC Account</value>
   </data>
   <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
-    <value>Je moet je gebruikersnaam/e-mail en wachtwoord in voeren om in te loggen. Als je dit niet vertrouwt, sluit de app dan. Gebruik deze app op eigen risico</value>
+    <value>Je moet je gebruikersnaam/e-mail en wachtwoord invoeren om je aan te melden. Als je dit niet vertrouwt, sluit de app dan. Gebruik deze app op eigen risico.</value>
   </data>
   <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
     <value>in de buurt</value>
   </data>
   <data name="OutOfRangeTextBlock.Text" xml:space="preserve">
-    <value>Je bent buiten het bereik</value>
+    <value>Je bent te ver weg</value>
   </data>
   <data name="LoginPasswordPasswordBox.PlaceholderText" xml:space="preserve">
     <value>PASSWORD</value>
@@ -64,7 +64,8 @@
     <value>Afmelden</value>
   </data>
   <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
-    <value>Vibratie</value>
+    <value>Trillen
+</value>
   </data>
   <data name="ItemsTextBlock.Text" xml:space="preserve">
     <value>Voorwerpen</value>
@@ -92,7 +93,7 @@
     <value>Level omhoog!</value>
   </data>
   <data name="LevelTextBlock.Text" xml:space="preserve">
-    <value>Niveau</value>
+    <value>Level</value>
   </data>
   <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
     <value>Kaart automatisch draaien</value>
@@ -102,6 +103,9 @@
   </data>
   <data name="IncubatorsTextBlock.Text" xml:space="preserve">
     <value>INCUBATORS</value>
+  </data>
+  <data name="SettingsUseNianticMapTextBlock.Text" xml:space="preserve">
+    <value>Niantic kaart</value>
   </data>
   <data name="HpTextBlock.Text" xml:space="preserve">
     <value>HP </value>
@@ -116,7 +120,7 @@
     <value>Gewicht</value>
   </data>
   <data name="HeightTextBlock.Text" xml:space="preserve">
-    <value>Height</value>
+    <value>Hoogte</value>
   </data>
   <data name="MTextBlock.Text" xml:space="preserve">
     <value>m</value>
@@ -133,5 +137,62 @@
   </data>
   <data name="PowerUpButton.Content" xml:space="preserve">
     <value>POWER UP</value>
+  </data>
+  <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
+    <value>START INCUBATION</value>
+  </data>
+  <data name="EggDetailTextBlock.Text" xml:space="preserve">
+    <value>Gebruik een incubator om het ei uit te laten komen.</value>
+  </data>
+  <data name="PokedexCaught.Text" xml:space="preserve">
+    <value>Gevangen:</value>
+  </data>
+  <data name="PokedexEvolutions.Text" xml:space="preserve">
+    <value>Evoluties</value>
+  </data>
+  <data name="PokedexPokemonHeight.Text" xml:space="preserve">
+    <value>Hoogte:</value>
+  </data>
+  <data name="PokedexPokemonType.Text" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="PokedexPokemonWeight.Text" xml:space="preserve">
+    <value>Gewicht:</value>
+  </data>
+  <data name="PokedexSeen.Text" xml:space="preserve">
+    <value>Gezien:</value>
+  </data>
+  <data name="PokedexText.Text" xml:space="preserve">
+    <value>POKÉDEX</value>
+  </data>
+  <data name="PokedexViewCaught.Text" xml:space="preserve">
+    <value>Gevangen</value>
+  </data>
+  <data name="PokedexViewSeen.Text" xml:space="preserve">
+    <value>Gezien</value>
+  </data>
+  <data name="TimesTextBlock.Text" xml:space="preserve">
+    <value>keer</value>
+  </data>
+  <data name="SettingsRememberMapZoomTextBlock.Text" xml:space="preserve">
+    <value>Onthou kaart zoom</value>
+  </data>
+  <data name="TransferTextBlock.Text" xml:space="preserve">
+    <value>OVERBRENGEN</value>
+  </data>
+  <data name="SettingsLanguageRestartTextBlock.Text" xml:space="preserve">
+    <value>Je moet de App herstarten om dit door te voeren.</value>
+  </data>
+  <data name="SettingsLanguageTextBlock.Text" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="SettingsCompassEnabledTextBlock.Text" xml:space="preserve">
+    <value>Gebruik kompas</value>
+  </data>
+  <data name="SettingsLiveTileTextBlock.Text" xml:space="preserve">
+    <value>Live Tile modus</value>
+  </data>
+  <data name="FavoriteTextBlock.Text" xml:space="preserve">
+    <value>FAVORIET</value>
   </data>
 </root>

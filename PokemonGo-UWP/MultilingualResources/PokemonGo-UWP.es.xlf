@@ -165,7 +165,7 @@
         </trans-unit>
         <trans-unit id="BugDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Bug Pokemon</source>
-          <target state="translated">{0} Pokémon de tipo Bicho atrapados</target>
+          <target state="final">{0} Pokémon de tipo Bicho atrapados</target>
         </trans-unit>
         <trans-unit id="DragonDescription" translate="yes" xml:space="preserve">
           <source>Caught {0} Dragon Pokemon</source>

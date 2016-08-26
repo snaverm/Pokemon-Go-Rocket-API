@@ -124,7 +124,7 @@
     <value>{0} Pokéstop visitati</value>
   </data>
   <data name="BadgeSmallRattataDescription" xml:space="preserve">
-    <value>{0} Rattata piccoli catturati</value>
+    <value>{0} piccoli Rattata catturati</value>
   </data>
   <data name="BadgeTravelKmDescription" xml:space="preserve">
     <value>Hai camminato per {0} km</value>
