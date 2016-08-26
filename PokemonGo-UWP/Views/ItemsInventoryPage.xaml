@@ -120,8 +120,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0,10" 
-                                  Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}">
+                            <Grid Margin="0,10" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
@@ -140,13 +139,15 @@
                                        VerticalAlignment="Center"
                                        Width="84"
                                        Height="84"
-                                       Margin="3,0,8,0" />
+                                       Margin="3,0,8,0"
+                                       Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"/>
                                 <Border Grid.Row="2" 
                                         Grid.Column="0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom"
                                         Margin="10,0,0,0"
                                         Visibility="{Binding Count, Converter={StaticResource VisibleWhenGreaterThanConverter}, ConverterParameter=1}"
+                                        Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"
                                         Background="#aadddddd" 
                                         CornerRadius="8" 
                                         Padding="3,1">
@@ -165,7 +166,8 @@
                                            FontFamily="{StaticResource LatoBoldFont}"
                                            Foreground="{StaticResource TitleTextColor}"
                                            FontSize="17"
-                                           TextTrimming="CharacterEllipsis" />
+                                           TextTrimming="CharacterEllipsis"
+                                           Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}"/>
                                 <Button Grid.Row="0"
                                         Grid.Column="2"
                                         Height="28" 
@@ -190,7 +192,8 @@
                                            FontFamily="{StaticResource LatoLightFont}"
                                            Foreground="{StaticResource TitleTextColor}"
                                            FontSize="14"
-                                           FontWeight="SemiLight" />
+                                           FontWeight="SemiLight"
+                                           Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
