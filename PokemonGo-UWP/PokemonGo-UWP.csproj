@@ -735,6 +735,7 @@
     <Compile Include="Utils\ApplicationKeys.cs" />
     <Compile Include="Utils\Game\DataTemplateSelectors.cs" />
     <Compile Include="Utils\Game\FortDataStatus.cs" />
+    <Compile Include="Entities\VersionInfo.cs" />
     <Compile Include="Utils\Helpers\AsyncSynchronisationContext.cs" />
     <Compile Include="Utils\Helpers\AudioUtils.cs" />
     <Compile Include="Utils\Extensions\CollectionExtensions.cs" />
