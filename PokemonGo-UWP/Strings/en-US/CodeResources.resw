@@ -324,4 +324,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</value>
   <data name="ItemDiscardWarningText" xml:space="preserve">
     <value>Discard {0}?</value>
   </data>
+  <data name="SetNickName" xml:space="preserve">
+    <value>Set Nickname</value>
+  </data>
 </root>
