@@ -37,7 +37,7 @@ namespace PokemonGoAPI.Session
 
         public void Expire()
         {
-            Expiry = DateTime.UtcNow;
+            Expiry = DateTime.UtcNow.AddSeconds(-60);
             AuthTicket = null;
         }
     }
