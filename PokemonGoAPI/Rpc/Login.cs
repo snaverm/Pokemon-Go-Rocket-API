@@ -1,14 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Google.Protobuf;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.Exceptions;
-using PokemonGo.RocketAPI.Extensions;
-using PokemonGo.RocketAPI.Login;
-using PokemonGoAPI.Session;
+﻿using Google.Protobuf;
 using POGOProtos.Networking.Requests;
 using POGOProtos.Networking.Requests.Messages;
+using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.Exceptions;
+using PokemonGo.RocketAPI.Login;
 using PokemonGoAPI.Enums;
+using System;
+using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Rpc
 {
@@ -40,26 +38,23 @@ namespace PokemonGo.RocketAPI.Rpc
         public async Task DoLogin()
         {
             if (Client.AccessToken == null || Client.AccessToken.IsExpired)
-                Client.AccessToken = await login.GetAccessToken().ConfigureAwait(false);            
+            {
+                Client.AccessToken = await login.GetAccessToken().ConfigureAwait(false);
+            }
+            ///robertmclaws: Is it really necessary to put this in a separate function?
             await SetServer().ConfigureAwait(false);                        
         }
 
         private async Task SetServer()
         {
-            #region Standard intial request messages in right Order
-
-            var getPlayerMessage = new GetPlayerMessage();
-
-            #endregion
 
             var serverRequest = RequestBuilder.GetInitialRequestEnvelope(
                 new Request
                 {
                     RequestType = RequestType.GetPlayer,
-                    RequestMessage = getPlayerMessage.ToByteString()
+                    RequestMessage = new GetPlayerMessage().ToByteString()
                 }
             );
-
 
             var serverResponse = await PostProto<Request>(Resources.RpcUrl, serverRequest);
 
