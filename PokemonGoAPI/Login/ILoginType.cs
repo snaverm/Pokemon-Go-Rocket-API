@@ -13,5 +13,7 @@ namespace PokemonGo.RocketAPI.Login
         /// </summary>
         /// <returns></returns>
         Task<AccessToken> GetAccessToken();
+
     }
+
 }

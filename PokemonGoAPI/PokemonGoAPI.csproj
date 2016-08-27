@@ -129,6 +129,7 @@
     <Compile Include="Exceptions\LoginFailedException.cs" />
     <Compile Include="Exceptions\PTCOfflineException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\Crypt.cs" />
     <Compile Include="Helpers\IDeviceInfos.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
@@ -146,7 +147,9 @@
     <Compile Include="Login\GoogleLogin.cs" />
     <Compile Include="Login\GSPOAuthSharp.cs" />
     <Compile Include="Login\ILoginType.cs" />
+    <Compile Include="Login\PtcAuthenticationTicketResponse.cs" />
     <Compile Include="Login\PtcLogin.cs" />
+    <Compile Include="Login\PtcLoginParameters.cs" />
     <Compile Include="Proto\Data\BuddyPokemon.cs" />
     <Compile Include="Proto\Data\Logs\BuddyPokemonLogEntry.cs" />
     <Compile Include="Proto\Networking\Envelopes\Signature.cs" />

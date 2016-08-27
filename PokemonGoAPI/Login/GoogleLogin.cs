@@ -64,7 +64,7 @@ namespace PokemonGo.RocketAPI.Login
             {
                 Username = _email,
                 Token = oauthResponse["Auth"],
-                Expiry = DateTimeExtensions.GetDateTimeFromSeconds(int.Parse(oauthResponse["Expiry"])),
+                ExpiresUtc = DateTimeExtensions.GetDateTimeFromSeconds(int.Parse(oauthResponse["Expiry"])),
                 AuthType = AuthType.Google
             };
         }
