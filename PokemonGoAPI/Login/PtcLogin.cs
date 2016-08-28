@@ -25,11 +25,6 @@ namespace PokemonGo.RocketAPI.Login
         #region Private Members
 
         /// <summary>
-        /// The <see cref="HttpClientHandler"/> instance to use for all requests. 
-        /// </summary>
-        private HttpClientHandler HttpHandler { get; }
-
-        /// <summary>
         /// The Password for the user currently attempting  to authenticate.
         /// </summary>
         private string Password { get; }
@@ -50,11 +45,6 @@ namespace PokemonGo.RocketAPI.Login
         /// <param name="password"></param>
         public PtcLogin(string username, string password)
         {
-            HttpHandler = new HttpClientHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip,
-                AllowAutoRedirect = false
-            };
             Username = username;
             Password = password;
         }
@@ -69,21 +59,33 @@ namespace PokemonGo.RocketAPI.Login
         /// <returns></returns>
         public async Task<AccessToken> GetAccessToken()
         {
-            using (var httpClient = new HttpClient(HttpHandler))
+            using (var handler = GetHttpClientHandler())
             {
-                // robertmclaws: Should we be setting every UserAgent property like the other requests?
-                httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd(Constants.LoginUserAgent);
+                using (var httpClient = new HttpClient(handler))
+                {
+                    // robertmclaws: Should we be setting every UserAgent property like the other requests?
+                    httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd(Constants.LoginUserAgent);
 
-                var loginData = await GetLoginParameters(httpClient).ConfigureAwait(false);
-                var authTicket = await GetAuthenticationTicket(httpClient, loginData).ConfigureAwait(false);
-                var accessToken = await GetOAuthToken(httpClient, authTicket).ConfigureAwait(false);
-                return accessToken;
+                    var loginData = await GetLoginParameters(httpClient).ConfigureAwait(false);
+                    var authTicket = await GetAuthenticationTicket(httpClient, loginData).ConfigureAwait(false);
+                    var accessToken = await GetOAuthToken(httpClient, authTicket).ConfigureAwait(false);
+                    return accessToken;
+                }
             }
         }
 
         #endregion
 
         #region Private Methods
+
+        private HttpClientHandler GetHttpClientHandler()
+        {
+            return new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip,
+                AllowAutoRedirect = false
+            };
+        }
 
         /// <summary>
         /// Responsible for retrieving login parameters for <see cref="GetAuthenticationTicket" />.
