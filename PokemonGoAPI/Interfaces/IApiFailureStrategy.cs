@@ -1,10 +1,6 @@
-﻿using POGOProtos.Networking.Envelopes;
+﻿using System.Threading.Tasks;
 using PokemonGoAPI.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using POGOProtos.Networking.Envelopes;
 
 namespace PokemonGoAPI.Interfaces
 {

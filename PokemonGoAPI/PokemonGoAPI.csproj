@@ -146,7 +146,9 @@
     <Compile Include="Login\GoogleLogin.cs" />
     <Compile Include="Login\GSPOAuthSharp.cs" />
     <Compile Include="Login\ILoginType.cs" />
+    <Compile Include="Login\PtcAuthenticationTicketResponse.cs" />
     <Compile Include="Login\PtcLogin.cs" />
+    <Compile Include="Login\PtcLoginParameters.cs" />
     <Compile Include="Proto\Data\BuddyPokemon.cs" />
     <Compile Include="Proto\Data\Logs\BuddyPokemonLogEntry.cs" />
     <Compile Include="Proto\Networking\Envelopes\Signature.cs" />
