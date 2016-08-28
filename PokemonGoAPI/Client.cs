@@ -167,7 +167,7 @@ namespace PokemonGo.RocketAPI
             where TRequest : IMessage<TRequest>
         {
             // robertmclaws: Let's be pro-active about token failures, instead of reactive.
-            if (AccessToken.IsExpired)
+            if (AccessToken == null || AccessToken.IsExpired)
             {
                 await Login.DoLogin();
             }
