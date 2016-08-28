@@ -518,6 +518,10 @@ Aynı zamanda {1} Stardust, {2} Şeker ve {3} XP kazandın.</target>
           <source>Discard {0}?</source>
           <target state="new">Discard {0}?</target>
         </trans-unit>
+        <trans-unit id="SetNickName" translate="yes" xml:space="preserve">
+          <source>Set Nickname</source>
+          <target state="new">Set Nickname</target>
+        </trans-unit>
       </group>
     </body>
   </file>

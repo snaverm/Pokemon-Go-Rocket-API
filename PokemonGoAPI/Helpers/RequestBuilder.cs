@@ -134,13 +134,14 @@ namespace PokemonGo.RocketAPI.Helpers
                 Floor = loc.Floor,
                 Longitude = loc.Longitude,
                 Latitude = loc.Latitude,
-                //Altitude = loc.Altitude, //currently probably not filled
+                Altitude = loc.Altitude,
                 LocationType = loc.LocationType,
                 Provider = loc.Provider,
                 ProviderStatus = loc.ProviderStatus,
                 HorizontalAccuracy = loc.HorizontalAccuracy,
                 VerticalAccuracy = loc.VerticalAccuracy,
-                Unknown20 = loc.Unknown20,
+                Course = loc.Course,
+                Speed = loc.Speed,
                 TimestampSnapshot = loc.TimeSnapshot
 
             }));

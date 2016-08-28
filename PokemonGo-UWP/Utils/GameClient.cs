@@ -390,6 +390,7 @@ namespace PokemonGo_UWP.Utils
                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
                 {
                     Debug.WriteLine("AccessTokenExpired Exception caught");
+                    _client.AccessToken.Expire();
                     await _client.Login.DoLogin();
                 }
                 else
@@ -996,6 +997,11 @@ namespace PokemonGo_UWP.Utils
             // Cast ulong to long... because Niantic is a bunch of retarded idiots...
             long pokeId = (long)pokemonId;
             return await _client.Inventory.SetFavoritePokemon(pokeId, isFavorite);
+        }
+
+        public static async Task<NicknamePokemonResponse> SetPokemonNickName(ulong pokemonId, string nickName)
+        {
+            return await _client.Inventory.NicknamePokemon(pokemonId, nickName);
         }
 
         #endregion

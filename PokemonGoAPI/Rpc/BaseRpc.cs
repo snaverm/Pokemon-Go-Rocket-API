@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
-using Google.Protobuf;
-using PokemonGo.RocketAPI.Extensions;
-using PokemonGo.RocketAPI.Helpers;
+﻿using Google.Protobuf;
 using POGOProtos.Networking.Envelopes;
 using POGOProtos.Networking.Requests;
+using PokemonGo.RocketAPI.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Rpc
 {
@@ -39,7 +36,7 @@ namespace PokemonGo.RocketAPI.Rpc
             var requestEnvelops = RequestBuilder.GetRequestEnvelope(type, message);
             return
                 await
-                    Client.PokemonHttpClient.PostProtoPayload<TRequest, TResponsePayload>(ApiUrl, requestEnvelops,
+                    Client.PostProtoPayload<TRequest, TResponsePayload>(ApiUrl, requestEnvelops,
                         Client.ApiFailure);
         }
 
@@ -49,7 +46,7 @@ namespace PokemonGo.RocketAPI.Rpc
         {
             return
                 await
-                    Client.PokemonHttpClient.PostProtoPayload<TRequest, TResponsePayload>(ApiUrl, requestEnvelope,
+                    Client.PostProtoPayload<TRequest, TResponsePayload>(ApiUrl, requestEnvelope,
                         Client.ApiFailure);
         }
 
@@ -107,21 +104,21 @@ namespace PokemonGo.RocketAPI.Rpc
             LastRpcRequest = DateTime.Now;
             return
                 await
-                    Client.PokemonHttpClient.PostProtoPayload<TRequest>(ApiUrl, requestEnvelope, Client.ApiFailure,
+                    Client.PostProtoPayload<TRequest>(ApiUrl, requestEnvelope, Client.ApiFailure,
                         responseTypes);
         }
 
         protected async Task<ResponseEnvelope> PostProto<TRequest>(RequestEnvelope requestEnvelope)
             where TRequest : IMessage<TRequest>
         {
-            return await Client.PokemonHttpClient.PostProto<TRequest>(ApiUrl, requestEnvelope);
+            return await Client.PostProto<TRequest>(ApiUrl, requestEnvelope);
         }
 
         protected async Task<ResponseEnvelope> PostProto<TRequest>(string url, RequestEnvelope requestEnvelope)
             where TRequest : IMessage<TRequest>
         {            
             LastRpcRequest = DateTime.Now;            
-            return await Client.PokemonHttpClient.PostProto<TRequest>(url, requestEnvelope);
+            return await Client.PostProto<TRequest>(url, requestEnvelope);
         }
     }
 }
