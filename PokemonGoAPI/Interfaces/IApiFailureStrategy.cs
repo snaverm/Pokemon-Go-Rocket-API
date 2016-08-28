@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using PokemonGoAPI.Enums;
 using POGOProtos.Networking.Envelopes;
 
 namespace PokemonGoAPI.Interfaces
