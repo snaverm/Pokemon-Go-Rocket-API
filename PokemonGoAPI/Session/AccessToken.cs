@@ -45,7 +45,7 @@ namespace PokemonGoAPI.Session
         /// <summary>
         /// The time this token expired in UTC.
         /// </summary>
-        [JsonProperty("expiresUtc", Required = Required.Always)]
+        [JsonProperty("expiresUtc")]
         public DateTime ExpiresUtc { get; internal set; }
 
         /// <summary>
