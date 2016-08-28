@@ -390,6 +390,7 @@ namespace PokemonGo_UWP.Utils
                 if (e is PokemonGo.RocketAPI.Exceptions.AccessTokenExpiredException)
                 {
                     Debug.WriteLine("AccessTokenExpired Exception caught");
+                    _client.AccessToken.Expire();
                     await _client.Login.DoLogin();
                 }
                 else

@@ -218,7 +218,7 @@ namespace PokemonGo_UWP.Utils
 
                 loc.VerticalAccuracy = (float?)GameClient.Geoposition.Coordinate?.AltitudeAccuracy ?? (float)_random.NextDouble(10.0, 30.0);
 
-                loc.Unknown20 = -1.0f;
+                loc.Course = -1.0f;
 
                 return loc;
             }
@@ -240,7 +240,9 @@ namespace PokemonGo_UWP.Utils
             public long TimeSnapshot { get; private set; }
             public float HorizontalAccuracy { get; private set; }
             public float VerticalAccuracy { get; private set; }
-            public float Unknown20 { get; private set; }
+            public float Course { get; private set; }
+
+            public float Speed { get; private set; }
 
         }
 

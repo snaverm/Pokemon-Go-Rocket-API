@@ -14,7 +14,8 @@ namespace PokemonGo.RocketAPI.Helpers
         long TimeSnapshot { get; }
         float HorizontalAccuracy { get; }
         float VerticalAccuracy { get; }
-        float Unknown20 { get; }
+        float Course { get; }
+        float Speed { get; }
     }
 
     public interface IGpsSattelitesInfo

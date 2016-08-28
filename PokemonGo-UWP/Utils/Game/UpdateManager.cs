@@ -12,6 +12,7 @@ using Windows.Web.Http;
 using PokemonGo_UWP.Views;
 using PokemonGo_UWP.Entities;
 using Windows.Web.Http.Filters;
+using System.Diagnostics;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -30,6 +31,11 @@ namespace PokemonGo_UWP.Utils
         {
             try
             {
+                if (Debugger.IsAttached)
+                {
+                    return new UpdateInfo(UpdateStatus.NoUpdate);
+                }
+
                 //clean update folder on backgraound, dont bother with result - we are ready for collisions
                 var t1 = CleanTemporaryUpdateFolderAsync();
 

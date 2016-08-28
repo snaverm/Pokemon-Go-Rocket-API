@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using POGOProtos.Networking.Envelopes;
+using PokemonGo.RocketAPI;
+using PokemonGo.RocketAPI.Exceptions;
+using PokemonGoAPI.Enums;
+using PokemonGoAPI.Interfaces;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using PokemonGo.RocketAPI;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.Extensions;
-using POGOProtos.Networking.Envelopes;
-using PokemonGoAPI.Enums;
-using PokemonGo.RocketAPI.Exceptions;
 
 namespace PokemonGoAPI.Session
 {
@@ -19,7 +15,7 @@ namespace PokemonGoAPI.Session
 
         private Client _client;
 
-        private const int MaxRetries = 50;
+        private const int MaxRetries = 25;
 
         private int _retryCount;
 
@@ -39,7 +35,7 @@ namespace PokemonGoAPI.Session
         /// <summary>
         ///     Ensures the <see cref="Session" /> gets reauthenticated, no matter how long it takes.
         /// </summary>
-        private async Task Reauthenticate()
+        internal async Task Reauthenticate()
         {
             ReauthenticateMutex.WaitOne();
             if (_client.AccessToken.IsExpired)
@@ -97,7 +93,7 @@ namespace PokemonGoAPI.Session
                 case StatusCode.ServerOverloaded:
                     // Slow servers?
                     Logger.Write("Server may be slow, let's wait a little bit");
-                    await Task.Delay(2000);
+                    await Task.Delay(11000);
                     break;
                 case StatusCode.Redirect:
                     // New RPC url
