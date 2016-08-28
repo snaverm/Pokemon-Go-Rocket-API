@@ -9,6 +9,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation.Peers;
+using Windows.UI.Xaml.Automation.Provider;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -42,7 +44,6 @@ namespace PokemonGo_UWP.Controls
         {
             Title = title;
             Text = text;
-            InputField = "";
         }
 
         /// <summary>
@@ -74,12 +75,14 @@ namespace PokemonGo_UWP.Controls
                     // animate
                     Storyboard sb = this.Resources["ShowMDBottomStoryboard"] as Storyboard;
                     sb.Begin();
+                    sb.Completed += AppearCompleted;
                 }
                 else if (AnimationType == PoGoMessageDialogAnimation.Fade)
                 {
                     // animate
                     Storyboard sb = this.Resources["ShowMDFadeStoryboard"] as Storyboard;
                     sb.Begin();
+                    sb.Completed += AppearCompleted;
                 }
             });
         }
@@ -89,8 +92,8 @@ namespace PokemonGo_UWP.Controls
         // Internal
         private Brush _formerModalBrush = null;
 
-        public static readonly DependencyProperty DownwardsTranslationRangeProperty = 
-            DependencyProperty.Register(nameof(DownwardsTranslationRange), typeof(Double?), typeof(PoGoMessageDialog), 
+        public static readonly DependencyProperty DownwardsTranslationRangeProperty =
+            DependencyProperty.Register(nameof(DownwardsTranslationRange), typeof(Double?), typeof(PoGoMessageDialog),
                 new PropertyMetadata(0.0));
 
         public Double? DownwardsTranslationRange
@@ -104,30 +107,26 @@ namespace PokemonGo_UWP.Controls
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(PoGoMessageDialog),
                 new PropertyMetadata(""));
 
-        public static readonly DependencyProperty TextProperty = 
+        public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(PoGoMessageDialog),
                 new PropertyMetadata(""));
 
-        public static readonly DependencyProperty DialogContentProperty = 
-            DependencyProperty.Register(nameof(DialogContent), typeof(Object), typeof(PoGoMessageDialog), 
+        public static readonly DependencyProperty DialogContentProperty =
+            DependencyProperty.Register(nameof(DialogContent), typeof(Object), typeof(PoGoMessageDialog),
                 new PropertyMetadata(null));
 
-        public static readonly DependencyProperty InputFieldProperty =
-            DependencyProperty.Register(nameof(InputField), typeof(string), typeof(PoGoMessageDialog),
-                new PropertyMetadata(""));
-
-        public static readonly DependencyProperty AcceptTextProperty = 
-            DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog), 
+        public static readonly DependencyProperty AcceptTextProperty =
+            DependencyProperty.Register(nameof(AcceptText), typeof(string), typeof(PoGoMessageDialog),
                 new PropertyMetadata("O. K."));
 
-        public static readonly DependencyProperty CancelTextProperty = 
-            DependencyProperty.Register(nameof(CancelText), typeof(string), typeof(PoGoMessageDialog), 
+        public static readonly DependencyProperty CancelTextProperty =
+            DependencyProperty.Register(nameof(CancelText), typeof(string), typeof(PoGoMessageDialog),
                 new PropertyMetadata("CANCEL"));
 
         public static readonly DependencyProperty ShowCancelButtonProperty =
             DependencyProperty.Register(nameof(ShowCancelButton), typeof(bool), typeof(PoGoMessageDialog), new PropertyMetadata(false));
 
-        public static readonly DependencyProperty CoverBackgroundProperty = 
+        public static readonly DependencyProperty CoverBackgroundProperty =
             DependencyProperty.Register(nameof(CoverBackground), typeof(bool), typeof(PoGoMessageDialog), new PropertyMetadata(false));
 
         public string Title
@@ -146,12 +145,6 @@ namespace PokemonGo_UWP.Controls
         {
             get { return (Object)GetValue(DialogContentProperty); }
             set { SetValue(DialogContentProperty, value); }
-        }
-
-        public string InputField
-        {
-            get { return (string)GetValue(InputFieldProperty); }
-            set { SetValue(InputFieldProperty, value); }
         }
 
         public string AcceptText
@@ -193,6 +186,13 @@ namespace PokemonGo_UWP.Controls
             }
         }
 
+        private bool _backgroundTapInvokesCancel;
+        public bool BackgroundTapInvokesCancel
+        {
+            get { return _backgroundTapInvokesCancel; }
+            set { _backgroundTapInvokesCancel = value; }
+        }
+
         public PoGoMessageDialogAnimation AnimationType { get; set; }
 
         #endregion
@@ -209,6 +209,19 @@ namespace PokemonGo_UWP.Controls
         {
             add { CancelButton.Click += value; }
             remove { CancelButton.Click -= value; }
+        }
+
+        public event EventHandler<object> AppearCompleted;
+        public event EventHandler<object> DisappearCompleted;
+
+        private void Background_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if(_backgroundTapInvokesCancel)
+            {
+                ButtonAutomationPeer peer = new ButtonAutomationPeer(CancelButton);
+                IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv.Invoke();
+            }
         }
 
         private void TerminalButtonClick(object sender, RoutedEventArgs e)
@@ -233,6 +246,7 @@ namespace PokemonGo_UWP.Controls
                     Storyboard sb = this.Resources["HideMDBottomStoryboard"] as Storyboard;
                     sb.Begin();
                     sb.Completed += Cleanup;
+                    sb.Completed += DisappearCompleted;
                 }
                 else if (AnimationType == PoGoMessageDialogAnimation.Fade)
                 {
@@ -240,6 +254,7 @@ namespace PokemonGo_UWP.Controls
                     Storyboard sb = this.Resources["HideMDFadeStoryboard"] as Storyboard;
                     sb.Begin();
                     sb.Completed += Cleanup;
+                    sb.Completed += DisappearCompleted;
                 } else
                 {
                     Cleanup(this, this);

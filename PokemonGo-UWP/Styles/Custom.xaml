@@ -13,7 +13,7 @@
         <GradientStop Color="#ffffff" Offset="0" />
         <GradientStop Color="#b6ffa7" Offset="0.8" />
     </LinearGradientBrush>
-    
+
     <LinearGradientBrush x:Key="PageBackgroundGradient" 
                          StartPoint="0,0" 
                          EndPoint="1,1">
@@ -1077,15 +1077,15 @@
         <Setter Property="Foreground" Value="#44696C" />
         <Setter Property="FontFamily" Value="{StaticResource LatoMediumFont}" />
     </Style>
-    
+
     <Style x:Key="ProfilePageSmallText" TargetType="TextBlock" BasedOn="{StaticResource ProfilePageText}">
         <Setter Property="FontSize" Value="13" />
     </Style>
-    
+
     <Style x:Key="ProfilePageMediumText" TargetType="TextBlock" BasedOn="{StaticResource ProfilePageText}">
         <Setter Property="FontSize" Value="20" />
     </Style>
-    
+
     <Style x:Key="ProfilePageLargeText" TargetType="TextBlock" BasedOn="{StaticResource ProfilePageText}">
         <Setter Property="FontSize" Value="25" />
     </Style>
@@ -1332,6 +1332,57 @@
                                 Style="{StaticResource DeleteButtonStyle}" Visibility="Collapsed"
                                 VerticalAlignment="Stretch" />
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MessageDialogTextBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="#48c597" />
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegularFont}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="SelectionHighlightColor" Value="#48c597" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border" 
+                            Height="35" 
+                            CornerRadius="13" 
+                            BorderBrush="#1bc6c6" 
+                            BorderThickness="1" 
+                            Padding="0,0" 
+                            Background="White">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                               Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#f5f5f5" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ScrollViewer x:Name="ContentElement" 
+                                      HorizontalScrollMode="Disabled" 
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollMode="Disabled" 
+                                      VerticalScrollBarVisibility="Hidden" 
+                                      IsHorizontalRailEnabled="True" 
+                                      IsVerticalRailEnabled="False" 
+                                      IsDeferredScrollingEnabled="False" 
+                                      Margin="13,0,0,0"
+                                      VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" 
+                                      IsTabStop="False" 
+                                      AutomationProperties.AccessibilityView="Raw" 
+                                      ZoomMode="Disabled" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -1621,13 +1672,13 @@
                         <Grid x:Name="ProgressBarIndicator"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left">
-                            
+
                             <Border Background="{TemplateBinding Foreground}"
                                     CornerRadius="2"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Stretch"
                                     Height="3" />
-                            
+
                             <Ellipse Width="7" Height="7" 
                                      Fill="{TemplateBinding Foreground}" 
                                      Margin="-4,0,0,0"
@@ -1675,7 +1726,7 @@
         <!--<Setter Property="Width" Value="36"/>
         <Setter Property="Height" Value="36"/>-->
     </Style>
-    
+
     <Style TargetType="BitmapIcon" x:Key="NearbyPokemonBitmapIconStyle">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <!--<Setter Property="Width" Value="36"/>

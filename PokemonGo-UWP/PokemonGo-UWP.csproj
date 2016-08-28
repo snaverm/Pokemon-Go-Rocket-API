@@ -736,6 +736,9 @@
     <Compile Include="Controls\MessageDialog\StepperMessageDialog.xaml.cs">
       <DependentUpon>StepperMessageDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MessageDialog\TextboxMessageDialog.xaml.cs">
+      <DependentUpon>TextboxMessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SemiCircularProgressBar.xaml.cs">
       <DependentUpon>SemiCircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -889,6 +892,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MessageDialog\StepperMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageDialog\TextboxMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -417,15 +417,22 @@ namespace PokemonGo_UWP.ViewModels
           _renamePokemonCommand = new DelegateCommand(() =>
           {
               var dialog = new PoGoMessageDialog(Resources.CodeResources.GetString("SetNickName"), "");
-              dialog.AcceptText = Resources.CodeResources.GetString("YesText");
-              dialog.CancelText = Resources.CodeResources.GetString("NoText");
+              var textbox = new TextboxMessageDialog(CurrentPokemon.Name, 12);
+              dialog.DialogContent = textbox;
+              dialog.AcceptText = Resources.CodeResources.GetString("OkText");
+              dialog.CancelText = Resources.CodeResources.GetString("CancelText");
               dialog.CoverBackground = true;
-              dialog.InputField = CurrentPokemon.Name;
+              dialog.BackgroundTapInvokesCancel = true;
               dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
+              dialog.AppearCompleted += (sender, e) =>
+              {
+                  textbox.SelectAllOnTextBoxFocus = true;
+                  textbox.FocusTextbox(FocusState.Programmatic);
+              };
               dialog.AcceptInvoked += async (sender, e) =>
               {
                   // Send rename request
-                  var res = await GameClient.SetPokemonNickName((ulong)CurrentPokemon.Id, dialog.InputField);
+                  var res = await GameClient.SetPokemonNickName((ulong)CurrentPokemon.Id, textbox.Text);
                   switch (res.Result)
                   {
                       case NicknamePokemonResponse.Types.Result.Unset:
@@ -433,7 +440,7 @@ namespace PokemonGo_UWP.ViewModels
                       case NicknamePokemonResponse.Types.Result.Success:
                           // Reload updated data
                           var currentPokemonData = CurrentPokemon.WrappedData;
-                          currentPokemonData.Nickname = dialog.InputField;
+                          currentPokemonData.Nickname = textbox.Text;
                           CurrentPokemon = new PokemonDataWrapper(currentPokemonData);
                           await GameClient.UpdateInventory();
                           await GameClient.UpdateProfile();
