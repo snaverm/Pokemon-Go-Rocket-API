@@ -35,8 +35,8 @@ namespace PokemonGo_UWP.Controls
                 new PropertyMetadata(""));
 
         public static readonly DependencyProperty MaxLengthProperty =
-            DependencyProperty.Register(nameof(MaxLength), typeof(string), typeof(TextboxMessageDialog),
-                new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(MaxLength), typeof(int), typeof(TextboxMessageDialog),
+                new PropertyMetadata(50));
 
         public string Text
         {
