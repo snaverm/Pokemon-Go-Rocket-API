@@ -29,6 +29,10 @@ namespace PokemonGo_UWP.Controls
             DependencyProperty.Register(nameof(StrokeThickness), typeof(int), typeof(ArcProgressBar),
                 new PropertyMetadata(5));
 
+        public static readonly DependencyProperty ValueEndCapDiameterProperty =
+            DependencyProperty.Register(nameof(ValueEndCapDiameter), typeof(int), typeof(ArcProgressBar),
+                new PropertyMetadata(5));
+
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(int), typeof(ArcProgressBar),
                 new PropertyMetadata(0, OnValuePropertyChanged));
@@ -43,11 +47,11 @@ namespace PokemonGo_UWP.Controls
 
         public static readonly DependencyProperty EmptyColorProperty =
             DependencyProperty.Register(nameof(EmptyColor), typeof(Color), typeof(ArcProgressBar),
-                new PropertyMetadata(100));
+                new PropertyMetadata(Color.FromArgb(0x00, 0x00, 0x00, 0x00)));
 
         public static readonly DependencyProperty FilledColorProperty =
             DependencyProperty.Register(nameof(FilledColor), typeof(Color), typeof(ArcProgressBar),
-                new PropertyMetadata(100));
+                new PropertyMetadata(Color.FromArgb(0x00, 0x00, 0x00, 0x00)));
 
         public int Radius
         {
@@ -59,6 +63,12 @@ namespace PokemonGo_UWP.Controls
         {
             get { return (int)GetValue(StrokeThicknessProperty); }
             set { SetValue(StrokeThicknessProperty, value); }
+        }
+
+        public int ValueEndCapDiameter
+        {
+            get { return (int)GetValue(ValueEndCapDiameterProperty); }
+            set { SetValue(ValueEndCapDiameterProperty, value); }
         }
 
         public int Value
@@ -99,8 +109,6 @@ namespace PokemonGo_UWP.Controls
             Draw();
         }
 
-
-
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ArcProgressBar;
@@ -108,32 +116,48 @@ namespace PokemonGo_UWP.Controls
             control.Draw();
         }
 
-
-
         private static void OnMaximumPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
             var control = d as ArcProgressBar;
             control.SetControlSize();
             control.Draw();
-
         }
 
         private void Draw()
         {
             Children.Clear();
 
-            Path radialStrip = GetCircleSegment(GetCenterPoint(), Radius, GetAngle());
-            radialStrip.Stroke = new SolidColorBrush(FilledColor);
-            radialStrip.StrokeThickness = StrokeThickness;
+            Path radialBackgroundStrip = GetCircleSegment(GetCenterPoint(), Radius, 180);
+            radialBackgroundStrip.Stroke = new SolidColorBrush(EmptyColor);
+            radialBackgroundStrip.StrokeStartLineCap = PenLineCap.Round;
+            radialBackgroundStrip.StrokeEndLineCap = PenLineCap.Round;
+            radialBackgroundStrip.StrokeThickness = StrokeThickness;
 
-            Children.Add(radialStrip);
+            Children.Add(radialBackgroundStrip);
+
+            Path radialValueStrip = GetCircleSegment(GetCenterPoint(), Radius, GetAngle());
+            radialValueStrip.Stroke = new SolidColorBrush(FilledColor);
+            radialValueStrip.StrokeStartLineCap = PenLineCap.Round;
+            radialValueStrip.StrokeThickness = StrokeThickness;
+
+            Children.Add(radialValueStrip);
+
+            Ellipse valueEndpoint = new Ellipse();
+            valueEndpoint.Fill = new SolidColorBrush(FilledColor);
+            valueEndpoint.Height = ValueEndCapDiameter;
+            valueEndpoint.Width = ValueEndCapDiameter;
+            Point valuePointCenter = ScaleUnitCirclePoint(GetCenterPoint(), Radius, GetAngle());
+            SetLeft(valueEndpoint, valuePointCenter.X - (ValueEndCapDiameter / 2));
+            SetTop(valueEndpoint, valuePointCenter.Y - (ValueEndCapDiameter / 2));
+
+            Children.Add(valueEndpoint);
         }
 
         private void SetControlSize()
         {
-            Width = Radius * 2 + StrokeThickness;
-            Height = Radius + (StrokeThickness / 2);
+            Width = Radius * 2 + Math.Max(StrokeThickness, ValueEndCapDiameter);
+            Height = Radius + Math.Max(StrokeThickness, ValueEndCapDiameter);
         }
 
         private Point GetCenterPoint()
@@ -143,8 +167,7 @@ namespace PokemonGo_UWP.Controls
 
         private double GetAngle()
         {
-            int cleanedVal = Value < Minimum ? Minimum : Value;
-            double angle = (cleanedVal - Minimum) / (Maximum - Minimum) * 180;
+            double angle = (double)(Math.Min(Math.Max(Value, Minimum), Maximum) - Minimum) / (double)(Maximum - Minimum) * 180;
 
             if (angle >= 180)
             {
@@ -165,8 +188,8 @@ namespace PokemonGo_UWP.Controls
 
             var arcSegment = new ArcSegment
             {
-                IsLargeArc = angle > 180.0,
-                Point = ScaleUnitCirclePoint(centerPoint, angle, radius),
+                IsLargeArc = false,
+                Point = ScaleUnitCirclePoint(centerPoint, radius, angle),
                 Size = new Size(radius, radius),
                 SweepDirection = SweepDirection.Clockwise,
                 RotationAngle = -90
@@ -185,9 +208,9 @@ namespace PokemonGo_UWP.Controls
             return path;
         }
 
-        private static Point ScaleUnitCirclePoint(Point origin, double angle, double radius)
+        private Point ScaleUnitCirclePoint(Point origin, double radius, double angle)
         {
-            return new Point(origin.X + Math.Sin(RADIANS * angle) * radius, origin.Y - Math.Cos(RADIANS * angle) * radius);
+            return new Point(origin.X - Math.Cos(RADIANS * angle) * radius, origin.Y - Math.Sin(RADIANS * angle) * radius);
         }
     }
 }

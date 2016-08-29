@@ -483,7 +483,7 @@
                           Canvas.ZIndex="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="165" />
+                            <RowDefinition Height="200" />
                             <RowDefinition Height="135" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -521,28 +521,17 @@
                                    Foreground="White"
                                    FontSize="29"
                                    FontFamily="{StaticResource LatoMediumFont}" />
-
-
-
-                        <!--<controls:SemiCircularProgressBar Grid.Row="1"
-                                                          Grid.RowSpan="2"
-                                                          Grid.ColumnSpan="3"
-                                                          Height="300"
-                                                          Width="300"
-                                                          Diameter="590"
-                                                          x:Name="LevelProgressBar"
-                                                      Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}"
-                                                      Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}"
-                                                      SegmentColor="White"
-                                                      InnerSegmentColor="Gray"
-                                                      StrokeThickness="5"
-                                                      HorizontalContentAlignment="Center"
-                                                      RenderTransformOrigin="0.5,0.5"-->
-                        <controls:ArcProgressBar Grid.Row="1" Grid.ColumnSpan="3" Radius="163" StrokeThickness="4" FilledColor="Red" Minimum="0" Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}" Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
-                        <!--<controls:SemiCircularProgressBar.RenderTransform>
-                                <CompositeTransform Rotation="-90" />
-                            </controls:SemiCircularProgressBar.RenderTransform>
-                        </controls:SemiCircularProgressBar>-->
+                        <controls:ArcProgressBar Margin="0, 10, 0, 20" 
+                                                 Grid.Row="1" 
+                                                 Grid.ColumnSpan="3" 
+                                                 Radius="170" 
+                                                 StrokeThickness="4" 
+                                                 FilledColor="White" 
+                                                 ValueEndCapDiameter="10" 
+                                                 EmptyColor="#55888888" 
+                                                 Minimum="1" 
+                                                 Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}" 
+                                                 Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
 
                         <Image x:Name="PokemonImage"
                                Grid.ColumnSpan="3"
