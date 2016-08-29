@@ -1846,6 +1846,11 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
           <source>Set Nickname</source>
           <target state="new">Set Nickname</target>
         </trans-unit>
+        <trans-unit id="OkText" translate="yes" xml:space="preserve">
+          <source>O. K.</source>
+          <target state="new">O. K.</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Space between . and K</note>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -2329,6 +2334,11 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
         <trans-unit id="FavoriteTextBlock.Text" translate="yes" xml:space="preserve">
           <source>FAVORITE</source>
           <target state="translated">FAVOURITE</target>
+        </trans-unit>
+        <trans-unit id="AppraiseTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>APPRAISE</source>
+          <target state="new">APPRAISE</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Capslock</note>
         </trans-unit>
       </group>
     </body>
