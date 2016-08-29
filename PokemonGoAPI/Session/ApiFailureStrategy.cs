@@ -110,7 +110,7 @@ namespace PokemonGoAPI.Session
                     // Invalid auth
                     Logger.Write("Received StatusCode 102, reauthenticating.");
                     OnFailureToggleUpdateTimer?.Invoke(false);
-                    _client.AccessToken.Expire();
+                    _client.AccessToken?.Expire();
                     await Reauthenticate();
                     request.AuthTicket = _client.AuthTicket;
                     OnFailureToggleUpdateTimer?.Invoke(true);
