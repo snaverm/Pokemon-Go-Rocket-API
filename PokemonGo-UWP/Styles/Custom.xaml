@@ -581,7 +581,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="External" BorderBrush="#33000000" BorderThickness="1" Margin="0" CornerRadius="25">
+                        <Border x:Name="External" BorderBrush="#33000000" BorderThickness="2" Margin="0" CornerRadius="25">
                             <Border x:Name="Line" Background="{TemplateBinding BorderBrush}" Padding="1" BorderBrush="{TemplateBinding Background}" BorderThickness="3" CornerRadius="25">
                                 <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0" CornerRadius="25">
                                     <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" FontWeight="Normal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -652,7 +652,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0" CornerRadius="25">
+                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                Margin="0" 
+                                CornerRadius="25">
                             <ContentPresenter x:Name="ContentPresenter" 
                                               AutomationProperties.AccessibilityView="Raw" 
                                               ContentTemplate="{TemplateBinding ContentTemplate}" 

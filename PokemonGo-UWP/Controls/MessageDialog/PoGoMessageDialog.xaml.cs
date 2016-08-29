@@ -8,6 +8,7 @@ using Template10.Controls;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Automation.Provider;
@@ -64,6 +65,10 @@ namespace PokemonGo_UWP.Controls
                 modal.ModalContent = this;
                 modal.IsModal = true;
 
+                // Subscribe to keyboard events
+                InputPane.GetForCurrentView().Showing += OnKeyboardShowing;
+                InputPane.GetForCurrentView().Hiding += OnKeyboardHiding;
+
                 // Start the animation
                 if (AnimationType == PoGoMessageDialogAnimation.Bottom)
                 {
@@ -90,6 +95,7 @@ namespace PokemonGo_UWP.Controls
         #region Propertys
 
         // Internal
+        private bool _keyboardVisible = false;
         private Brush _formerModalBrush = null;
 
         public static readonly DependencyProperty DownwardsTranslationRangeProperty =
@@ -216,7 +222,7 @@ namespace PokemonGo_UWP.Controls
 
         private void Background_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(_backgroundTapInvokesCancel)
+            if(_backgroundTapInvokesCancel && !_keyboardVisible)
             {
                 ButtonAutomationPeer peer = new ButtonAutomationPeer(CancelButton);
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
@@ -262,8 +268,22 @@ namespace PokemonGo_UWP.Controls
             });
         }
 
+        private void OnKeyboardShowing(InputPane sender, InputPaneVisibilityEventArgs args)
+        {
+            _keyboardVisible = true;
+        }
+
+        private void OnKeyboardHiding(InputPane sender, InputPaneVisibilityEventArgs args)
+        {
+            _keyboardVisible = false;
+        }
+
         private void Cleanup(object sender, object e)
         {
+            // Unsubscribe from keyboard events
+            InputPane.GetForCurrentView().Showing -= OnKeyboardShowing;
+            InputPane.GetForCurrentView().Hiding -= OnKeyboardHiding;
+
             var modal = Window.Current.Content as ModalDialog;
             if (modal == null)
             {

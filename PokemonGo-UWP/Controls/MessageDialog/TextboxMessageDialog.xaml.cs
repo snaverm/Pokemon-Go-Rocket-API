@@ -20,6 +20,8 @@ namespace PokemonGo_UWP.Controls
         public TextboxMessageDialog()
         {
             this.InitializeComponent();
+
+            InputField.GotFocus += InputField_GotFocus;
         }
 
         public TextboxMessageDialog(string text, int maxLength) : this()
@@ -61,12 +63,15 @@ namespace PokemonGo_UWP.Controls
 
         public void FocusTextbox(FocusState focusState)
         {
-            if(_selectAllOnTextBoxFocus)
-            {
-                InputField.SelectAll();
-            }
             InputField.Focus(focusState);
         }
 
+        private void InputField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (_selectAllOnTextBoxFocus)
+            {
+                InputField.SelectAll();
+            }
+        }
     }
 }

@@ -209,9 +209,6 @@
     </Page.Resources>
 
     <RelativePanel>
-        <!--<ColumnDefinition Width="Auto" x:Name="PokemonTypeCol" />
-        <ColumnDefinition Width="*" x:Name="PokemonWeightCol"/>
-        <ColumnDefinition Width="*" x:Name="PokemonHeightCol"/>-->
         <!--Adaptive Layout-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -454,9 +451,9 @@
             <!--Close Contextmenu-->
             <Button Style="{StaticResource ButtonCircle}"
                     Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="17.5,12.5">
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,21,21">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
@@ -555,7 +552,9 @@
                                    Foreground="White"
                                    FontSize="29"
                                    FontFamily="{StaticResource LatoMediumFont}" />
-                        <Viewbox Margin="0, 10, 0, 20" Grid.Row="1" Grid.ColumnSpan="3" >
+                        <Viewbox Grid.Row="1" 
+                                 Grid.ColumnSpan="3"
+                                 Margin="0, 10, 0, 20" >
                             <controls:ArcProgressBar 
                                                  Radius="170" 
                                                  StrokeThickness="4" 
@@ -567,17 +566,19 @@
                                                  Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
                         </Viewbox>
 
-
-                        <Image x:Name="PokemonImage"
-                               Grid.ColumnSpan="3"
-                               Grid.Row="1"
+                        <Viewbox Grid.Row="1"
+                                 Grid.ColumnSpan="3"
+                                 Margin="30,30,30,-32"
+                                 MaxWidth="310"
+                                 VerticalAlignment="Bottom"
+                                 HorizontalAlignment="Center"
+                                 StretchDirection="DownOnly">
+                            <Image x:Name="PokemonImage"
                                Height="128"
                                Source="{Binding CurrentPokemon.PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Center"
                                Canvas.ZIndex="5"
-                               Margin="0,0,0,-32"
                                Stretch="Uniform"/>
+                        </Viewbox>
                     </Grid>
 
                     <Border CornerRadius="5"
@@ -980,7 +981,6 @@
 
                                     <Button x:Name="EvolveButton" Grid.Column="0"
                                             Grid.Row="2"
-                                            Content="TEXTLANGE"
                                             Style="{StaticResource ButtonSubmit}"
                                             CharacterSpacing="40"
                                             HorizontalAlignment="Stretch"
@@ -1072,15 +1072,14 @@
                 RelativePanel.AlignHorizontalCenterWithPanel="True"
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
-                Margin="0,0,0,17.5"
+                Margin="0,0,0,21"
                 Command="{Binding ReturnToPokemonInventoryScreen}">
             <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
 
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Style="{ThemeResource ImageButtonStyle}"
-                Height="{ThemeResource UiButtonSize}"
+                Style="{StaticResource ButtonCircleBig}"
                 Margin="16">
             
             <interactivity:Interaction.Behaviors>
@@ -1089,9 +1088,20 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-            <Image Source="../Assets/Buttons/btn_menu.png"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+            <Path Data="M 2,2 H 19 M 2,8 H 19 M 2,14 H 19" 
+                  HorizontalAlignment="Center" 
+                  StrokeEndLineCap="Round" 
+                  StrokeDashCap="Round" 
+                  StrokeStartLineCap="Round" 
+                  StrokeThickness="3"
+                  Margin="-2">
+                <Path.Stroke>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#b0ffb0" Offset="0"/>
+                        <GradientStop Color="#66eecc" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </Path.Stroke>
+            </Path>
         </Button>
 
     </RelativePanel>
