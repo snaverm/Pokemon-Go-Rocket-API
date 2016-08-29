@@ -524,7 +524,7 @@
 
 
 
-                        <controls:SemiCircularProgressBar Grid.Row="1"
+                        <!--<controls:SemiCircularProgressBar Grid.Row="1"
                                                           Grid.RowSpan="2"
                                                           Grid.ColumnSpan="3"
                                                           Height="300"
@@ -537,12 +537,12 @@
                                                       InnerSegmentColor="Gray"
                                                       StrokeThickness="5"
                                                       HorizontalContentAlignment="Center"
-                                                      RenderTransformOrigin="0.5,0.5"
-                                                          >
-                            <controls:SemiCircularProgressBar.RenderTransform>
+                                                      RenderTransformOrigin="0.5,0.5"-->
+                        <controls:ArcProgressBar Grid.Row="1" Grid.ColumnSpan="3" Radius="163" StrokeThickness="4" FilledColor="Red" Minimum="0" Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}" Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
+                        <!--<controls:SemiCircularProgressBar.RenderTransform>
                                 <CompositeTransform Rotation="-90" />
                             </controls:SemiCircularProgressBar.RenderTransform>
-                        </controls:SemiCircularProgressBar>
+                        </controls:SemiCircularProgressBar>-->
 
                         <Image x:Name="PokemonImage"
                                Grid.ColumnSpan="3"
@@ -584,22 +584,20 @@
                                     Foreground="{StaticResource TitleTextColor}"
                                     FontFamily="{StaticResource LatoMediumFont}"
                                     FontSize="28"/>
-                                    <TextBlock Margin="0" 
-                                               Grid.Column="2"
-                                               Padding="8"
-                                               Foreground="#999999" 
-                                               Text="&#59151;" 
-                                               FontFamily="Segoe MDL2 Assets" 
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left">
-                                        <interactivity:Interaction.Behaviors>
-                                            <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{Binding RenamePokemonCommand}" />
-                                            </core:EventTriggerBehavior>
-                                        </interactivity:Interaction.Behaviors>
-                                    </TextBlock>
+                                    <Button Grid.Row="0"
+                                        Grid.Column="2"
+                                        Height="28" 
+                                        Margin="0,3,0,0"
+                                        Padding="5"
+                                        VerticalAlignment="Stretch"
+                                        HorizontalAlignment="Left"
+                                        Style="{StaticResource ButtonSymbolIcon}"
+                                        Command="{Binding RenamePokemonCommand}">
+                                        <Viewbox>
+                                            <SymbolIcon Symbol="Edit" />
+                                        </Viewbox>
+                                    </Button>
                                 </Grid>
-
 
                                 <StackPanel VerticalAlignment="Bottom">
 
@@ -1026,7 +1024,7 @@
                                            Margin="5"
                                            Foreground="#626264"
                                            FontSize="10"
-                                           FontFamily="{StaticResource LatoRegularFont}"
+                                           FontFamily="{StaticResource LatoMediumFont}"
                                            Text="{Binding CurrentPokemon.CreationTimeMs, Converter={StaticResource MsToDateFormatConverter}}" />
                             </StackPanel>
                         </StackPanel>

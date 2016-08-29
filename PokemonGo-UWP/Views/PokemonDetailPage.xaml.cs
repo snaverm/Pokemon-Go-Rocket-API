@@ -37,7 +37,7 @@ namespace PokemonGo_UWP.Views
 
                 PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
                 PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
-                LevelProgressBar.Diameter = (int) this.ActualWidth*3/2 -16;
+                //LevelProgressBar.Diameter = (int) this.ActualWidth*3/2 -16;
             };
         }
 
