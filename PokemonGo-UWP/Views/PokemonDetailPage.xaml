@@ -131,18 +131,9 @@
                 From="0"
                 To="1"
                 Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetName="ContextMenuTransferTranslateTransform"
+            <DoubleAnimation Storyboard.TargetName="ContextMenuTranslateTransform"
                              Storyboard.TargetProperty="Y"
-                             From="150"
-                             To="0"
-                             Duration="0:0:0.2">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ContextMenuFavoriteTranslateTransform"
-                             Storyboard.TargetProperty="Y"
-                             From="150"
+                             From="200"
                              To="0"
                              Duration="0:0:0.2">
                 <DoubleAnimation.EasingFunction>
@@ -172,19 +163,10 @@
                 From="1"
                 To="0"
                 Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetName="ContextMenuTransferTranslateTransform"
+            <DoubleAnimation Storyboard.TargetName="ContextMenuTranslateTransform"
                              Storyboard.TargetProperty="Y"
                              From="0"
-                             To="100"
-                             Duration="0:0:0.2">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ContextMenuFavoriteTranslateTransform"
-                             Storyboard.TargetProperty="Y"
-                             From="0"
-                             To="100"
+                             To="200"
                              Duration="0:0:0.2">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseIn" />
@@ -389,63 +371,89 @@
 
             <StackPanel Grid.Row="0"
                         VerticalAlignment="Bottom">
-
+                <StackPanel.RenderTransform>
+                    <TranslateTransform Y="200" x:Name="ContextMenuTranslateTransform"/>
+                </StackPanel.RenderTransform>
+                
                 <!--Favorite-->
-                <Grid HorizontalAlignment="Right" 
-                      Margin="0,15,0,0"
-                      Padding="17.5,4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RenderTransform>
-                        <TranslateTransform Y="150" x:Name="ContextMenuFavoriteTranslateTransform"/>
-                    </Grid.RenderTransform>
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
-                            <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                    <TextBlock Grid.Column="0"
-                               Margin="0,0,15,0"
-                               x:Uid="FavoriteTextBlock"
-                               Text="FAVORITE"
-                               Style="{StaticResource TextSortTitle}" />
-                    <Image Grid.Column="1"
-                           Height="25"
-                           Width="25"
-                           Margin="12,5"
-                           Source="../Assets/Icons/ic_fav_light.png" />
-                </Grid>
+                <Button Style="{StaticResource ButtonContextMenu}" 
+                        Height="43" 
+                        Padding="0" >
+                    <Grid HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="82" />
+                        </Grid.ColumnDefinitions>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
+                                <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <TextBlock Grid.Column="0"
+                                   x:Uid="FavoriteTextBlock"
+                                   Text="FAVORITE"
+                                   Style="{StaticResource TextSortTitle}"
+                                   Foreground="#e4ffde"/>
+                        <Image Grid.Column="1"
+                               Height="25"
+                               Width="25"
+                               Source="../Assets/Icons/ic_fav_light.png" />
+                    </Grid>
+                </Button>
+                
+                <!--Appraise-->
+                <Button Style="{StaticResource ButtonContextMenu}" 
+                        Height="43" 
+                        Padding="0" >
+                    <Grid HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="82" />
+                        </Grid.ColumnDefinitions>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
+                                <core:InvokeCommandAction Command="{Binding AppraisePokemonCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <TextBlock Grid.Column="0"
+                                   x:Uid="AppraiseTextBlock"
+                                   Text="APPRAISE"
+                                   Style="{StaticResource TextSortTitle}"
+                                   Foreground="#e4ffde"/>
+                        <Image Grid.Column="1"
+                               Height="25"
+                               Width="25"
+                               Source="../Assets/Buttons/btn_close.png" />
+                    </Grid>
+                </Button>
 
                 <!--Transfer-->
-                <Grid HorizontalAlignment="Right" 
-                      Margin="0"
-                      Padding="17.5,4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RenderTransform>
-                        <TranslateTransform Y="150" x:Name="ContextMenuTransferTranslateTransform"/>
-                    </Grid.RenderTransform>
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding TransferPokemonCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                    <TextBlock Grid.Column="0"
-                               Margin="0,0,15,0"
-                               x:Uid="TransferTextBlock"
-                               Text="TRANSFER"
-                               Style="{StaticResource TextSortTitle}" />
-                    <Image Grid.Column="1"
-                           Height="25"
-                           Width="25"
-                           Margin="12,5"
-                           Source="../Assets/Icons/ic_candy_light.png" />
-                </Grid>
+                <Button Style="{StaticResource ButtonContextMenu}" 
+                        Height="43" 
+                        Padding="0" >
+                    <Grid HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="82" />
+                        </Grid.ColumnDefinitions>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding TransferPokemonCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <TextBlock Grid.Column="0"
+                                   x:Uid="TransferTextBlock"
+                                   Text="TRANSFER"
+                                   Style="{StaticResource TextSortTitle}"
+                                   Foreground="#e4ffde"/>
+                        <Image Grid.Column="1"
+                               Height="25"
+                               Width="25"
+                               Source="../Assets/Icons/ic_candy_light.png" />
+                    </Grid>
+                </Button>
             </StackPanel>
 
             <!--Close Contextmenu-->
@@ -555,15 +563,14 @@
                         <Viewbox Grid.Row="1" 
                                  Grid.ColumnSpan="3"
                                  Margin="0, 10, 0, 20" >
-                            <controls:ArcProgressBar 
-                                                 Radius="170" 
-                                                 StrokeThickness="4" 
-                                                 FilledColor="White" 
-                                                 ValueEndCapDiameter="10" 
-                                                 EmptyColor="#55cccccc" 
-                                                 Minimum="1" 
-                                                 Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}" 
-                                                 Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
+                            <controls:ArcProgressBar Radius="170"
+                                                     StrokeThickness="4" 
+                                                     FilledColor="White" 
+                                                     ValueEndCapDiameter="10" 
+                                                     EmptyColor="#55eeeeee"
+                                                     Minimum="1"
+                                                     Maximum="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToMaxLevelBarConverter}}" 
+                                                     Value="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToLevelBarConverter}}" />
                         </Viewbox>
 
                         <Viewbox Grid.Row="1"
@@ -1081,7 +1088,6 @@
                 RelativePanel.AlignRightWithPanel="True"
                 Style="{StaticResource ButtonCircleBig}"
                 Margin="16">
-            
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
                     <media:ControlStoryboardAction Storyboard="{StaticResource ShowContextMenuStoryboard}" />

@@ -320,6 +320,20 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Appraise
+
+        private DelegateCommand _appraisePokemonCommand;
+
+        public DelegateCommand AppraisePokemonCommand => _appraisePokemonCommand ?? (
+          _appraisePokemonCommand = new DelegateCommand(() =>
+          {
+              // TODO: Implement appraise
+              var dialog = new MessageDialog("Sorry, check back later ;)", "Not yet implemented");
+              dialog.ShowAsync();
+          }, () => true));
+
+        #endregion
+
         #region Transfer
 
         private DelegateCommand _transferPokemonCommand;
