@@ -136,7 +136,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="135" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                    <StackPanel Grid.Column="0">
                         <TextBlock x:Uid="SettingsLanguageTextBlock"
                                    Text="Language"
                                    Style="{StaticResource TextSettingsTitle}"
@@ -147,9 +147,9 @@
                                    FontSize="12" Margin="15,0" Foreground="#ddd"/>
                     </StackPanel>
                     <ComboBox x:Name="LanguageComboBox"
-                              Grid.Row="1"
                               Grid.Column="0"
                               Grid.ColumnSpan="2"
+                              HorizontalAlignment="Right"
                               ItemsSource="{Binding languageList, Mode=OneWay}" SelectedItem="{Binding UserLanguage, Mode=TwoWay}" 
                               Margin="0,8,15,10" />
                 </Grid>
