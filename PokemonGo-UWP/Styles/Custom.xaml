@@ -121,7 +121,9 @@
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Content="{TemplateBinding Content}"
-                                              Foreground="{TemplateBinding Foreground}" FontWeight="Normal"
+                                              Foreground="{TemplateBinding Foreground}" 
+                                              FontWeight="Normal"
+                                              FontSize="{TemplateBinding FontSize}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Margin="{TemplateBinding Padding}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
