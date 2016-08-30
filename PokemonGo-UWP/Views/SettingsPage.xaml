@@ -127,16 +127,12 @@
                               Style="{StaticResource SettingsCheckbox}"
                               Margin="0,8,15,10" />
                 </Grid>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="135" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
+                    <StackPanel VerticalAlignment="Center">
                         <TextBlock x:Uid="SettingsLanguageTextBlock"
                                    Text="Language"
                                    Style="{StaticResource TextSettingsTitle}"
@@ -144,10 +140,10 @@
                         <TextBlock x:Uid="SettingsLanguageRestartTextBlock"
                                    Text="You must restart the App to take effect."
                                    Style="{StaticResource TextSettingsTitle}"
-                                   FontSize="12" Margin="15,0" Foreground="#ddd"/>
+                                   FontSize="12" Margin="15,0,15,15" Foreground="#ddd"/>
                     </StackPanel>
                     <ComboBox x:Name="LanguageComboBox"
-                              Grid.Column="0"
+                              VerticalAlignment="Center"
                               Grid.ColumnSpan="2"
                               HorizontalAlignment="Right"
                               ItemsSource="{Binding languageList, Mode=OneWay}" SelectedItem="{Binding UserLanguage, Mode=TwoWay}" 
