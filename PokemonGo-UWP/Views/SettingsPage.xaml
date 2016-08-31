@@ -82,7 +82,21 @@
                               Style="{StaticResource SettingsCheckbox}"
                               Margin="0,8,15,10" />
                 </Grid>
-                <Border Background="#33ffffff" Height="1" Margin="15" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="135" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0"
+                               x:Uid="SettingsRememberMapHeadingTextBlock"
+                               Text="Remember Map Angle"
+                               Style="{StaticResource TextSettingsTitle}" />
+					<CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsRememberMapHeadingEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+				</Grid>
+				<Border Background="#33ffffff" Height="1" Margin="15" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

@@ -61,10 +61,10 @@ namespace PokemonGo_UWP.ViewModels
             get { return SettingsService.Instance.IsRememberMapZoomEnabled; }
             set { SettingsService.Instance.IsRememberMapZoomEnabled = value; }
         }
-		public bool IsRememberMapAngleEnabled
+		public bool IsRememberMapHeadingEnabled
 		{
-			get { return SettingsService.Instance.IsRememberMapAngleEnabled; }
-			set { SettingsService.Instance.IsRememberMapAngleEnabled = value; }
+			get { return SettingsService.Instance.IsRememberMapHeadingEnabled; }
+			set { SettingsService.Instance.IsRememberMapHeadingEnabled = value; }
 		}
 
 				/// <summary>
