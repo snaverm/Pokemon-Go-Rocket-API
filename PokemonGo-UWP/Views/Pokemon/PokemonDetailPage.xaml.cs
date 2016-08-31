@@ -33,10 +33,10 @@ namespace PokemonGo_UWP.Views
             // Setup evolution stats translation
             Loaded += (s, e) =>
             {
-                ShowEvolveStatsModalAnimation.From = EvolveStatsTranslateTransform.Y = ActualHeight;
+                //ShowEvolveStatsModalAnimation.From = EvolveStatsTranslateTransform.Y = ActualHeight;
 
-                PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
-                PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
+                //PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
+                //PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
             };
         }
 
@@ -45,7 +45,7 @@ namespace PokemonGo_UWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            SubscribeToCaptureEvents();
+            //SubscribeToCaptureEvents();
         }
 
         #region Overrides of Page
@@ -53,7 +53,7 @@ namespace PokemonGo_UWP.Views
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
-            UnsubscribeToCaptureEvents();
+            //UnsubscribeToCaptureEvents();
         }
 
         #endregion
@@ -62,30 +62,30 @@ namespace PokemonGo_UWP.Views
 
         #region Handlers
 
-        private void SubscribeToCaptureEvents()
-        {
-            ViewModel.PokemonEvolved += ViewModelOnPokemonEvolved;
-            ShowEvolveMenuStoryboard.Completed += async (s, e) =>
-            {
-                await Task.Delay(1000);
-                EvolvePokemonStoryboard.Begin();
-            };
-            EvolvePokemonStoryboard.Completed += async (s, e) =>
-            {
-                await Task.Delay(1000);
-                ShowEvolveStatsModalStoryboard.Begin();
-            };
-        }        
+        //private void SubscribeToCaptureEvents()
+        //{
+        //    ViewModel.PokemonEvolved += ViewModelOnPokemonEvolved;
+        //    ShowEvolveMenuStoryboard.Completed += async (s, e) =>
+        //    {
+        //        await Task.Delay(1000);
+        //        EvolvePokemonStoryboard.Begin();
+        //    };
+        //    EvolvePokemonStoryboard.Completed += async (s, e) =>
+        //    {
+        //        await Task.Delay(1000);
+        //        ShowEvolveStatsModalStoryboard.Begin();
+        //    };
+        //}        
 
-        private void UnsubscribeToCaptureEvents()
-        {
-            ViewModel.PokemonEvolved -= ViewModelOnPokemonEvolved;
-        }
+        //private void UnsubscribeToCaptureEvents()
+        //{
+        //    ViewModel.PokemonEvolved -= ViewModelOnPokemonEvolved;
+        //}
 
-        private void ViewModelOnPokemonEvolved(object sender, EventArgs evolvePokemonResponse)
-        {
-            ShowEvolveMenuStoryboard.Begin();
-        }
+        //private void ViewModelOnPokemonEvolved(object sender, EventArgs evolvePokemonResponse)
+        //{
+        //    ShowEvolveMenuStoryboard.Begin();
+        //}
 
         #endregion
     }
