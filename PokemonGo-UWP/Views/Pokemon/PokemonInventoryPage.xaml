@@ -148,7 +148,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
 
-                <Image Source="../Assets/Buttons/btn_close_dark.png" />
+                <Image Source="../../Assets/Buttons/btn_close_dark.png" />
             </Button>
         </Grid>
 
@@ -404,7 +404,7 @@
                                 Style="{StaticResource ButtonCircleBigInverse}"
                                 Tapped="ToggleIncubatorModel"
                                 Margin="16">
-                            <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
+                            <Image Source="../../Assets/Buttons/btn_incubator_dark.png" />
                         </Button>
 
                     </Grid>
@@ -417,7 +417,7 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,17.5">
-            <Image Source="../Assets/Buttons/btn_close.png" />
+            <Image Source="../../Assets/Buttons/btn_close.png" />
         </Button>
 
     </Grid>

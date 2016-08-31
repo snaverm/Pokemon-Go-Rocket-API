@@ -22,6 +22,8 @@ namespace PokemonGo_UWP.Views
         public PokemonDetailControl()
         {
             this.InitializeComponent();
+
+            var test = DataContext;
         }
     }
 }

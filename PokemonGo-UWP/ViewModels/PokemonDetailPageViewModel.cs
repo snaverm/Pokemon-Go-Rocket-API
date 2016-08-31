@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Google.Protobuf;
 using PokemonGo_UWP.Controls;
 using PokemonGo_UWP.Views;
+using PokemonGo_UWP.Utils.Extensions;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -66,13 +67,17 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Recovering the state
                 PlayerProfile = new PlayerData();
+                PokemonInventory = JsonConvert.DeserializeObject<List<PokemonDataWrapper>>((string)suspensionState[nameof(PokemonInventory)]);
                 CurrentPokemon = JsonConvert.DeserializeObject<PokemonDataWrapper>((string)suspensionState[nameof(CurrentPokemon)]);
                 PlayerProfile.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerProfile)]).CreateCodedInput());
             }
             else
             {
-                // Navigating from inventory page so we need to load the pokemon
-                CurrentPokemon = (PokemonDataWrapper)NavigationHelper.NavigationState[nameof(CurrentPokemon)];
+                SelectedPokemonNavModel navParam = (SelectedPokemonNavModel)parameter;
+
+                // Navigating from inventory page so we need to load the pokemoninventory and the current pokemon
+                PokemonInventory = new List<PokemonDataWrapper>(GameClient.PokemonsInventory.Select(pokemonData => new PokemonDataWrapper(pokemonData)).SortBySortingmode(navParam.SortingMode));
+                CurrentPokemon = PokemonInventory.FirstOrDefault(pokemon => pokemon.Id == Convert.ToUInt64(navParam.SelectedPokemonId));
                 UpdateCurrentData();
             }
             await Task.CompletedTask;
@@ -88,7 +93,9 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (suspending)
             {
+                suspensionState[nameof(PokemonInventory)] = JsonConvert.SerializeObject(PokemonInventory);
                 suspensionState[nameof(CurrentPokemon)] = JsonConvert.SerializeObject(CurrentPokemon);
+                
                 suspensionState[nameof(PlayerProfile)] = PlayerProfile.ToByteString().ToBase64();
             }
             await Task.CompletedTask;
@@ -153,20 +160,7 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Bindable Game Vars
 
-        /// <summary>
-        ///     Key for Bing's Map Service (not included in GIT, you need to get your own token to use maps!)
-        /// </summary>
-        public string MapServiceToken => ApplicationKeys.MapServiceToken;
-
-        public ElementTheme CurrentTheme
-        {
-            get
-            {
-                // Set theme
-                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
-                return currentTime > 7 && currentTime < 19 ? ElementTheme.Light : ElementTheme.Dark;
-            }
-        }
+        public List<PokemonDataWrapper> PokemonInventory { get; private set; } = new List<PokemonDataWrapper>();
 
         /// <summary>
         ///     Pokemon that we're trying to capture
@@ -287,20 +281,36 @@ namespace PokemonGo_UWP.ViewModels
         private void UpdateCurrentData()
         {
             // Retrieve data
-            PlayerProfile = GameClient.PlayerProfile;
-            IsFavorite = Convert.ToBoolean(CurrentPokemon.Favorite);
-            StardustAmount = PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount;
-            var upgradeCosts =
-                GameClient.PokemonUpgradeCosts[
-                    Convert.ToInt32(Math.Round(PokemonInfo.GetLevel(CurrentPokemon.WrappedData)) - 1)];
-            CandiesToPowerUp = Convert.ToInt32(upgradeCosts[0]);
-            StardustToPowerUp = Convert.ToInt32(upgradeCosts[1]);
-            PokemonExtraData = GameClient.GetExtraDataForPokemon(CurrentPokemon.PokemonId);
-            CurrentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == PokemonExtraData.FamilyId);
-            RaisePropertyChanged(() => PokemonExtraData);
-            PowerUpPokemonCommand.RaiseCanExecuteChanged();
-            EvolvePokemonCommand.RaiseCanExecuteChanged();
+            //PlayerProfile = GameClient.PlayerProfile;
+            //IsFavorite = Convert.ToBoolean(CurrentPokemon.Favorite);
+            //StardustAmount = PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount;
+            //var upgradeCosts =
+            //    GameClient.PokemonUpgradeCosts[
+            //        Convert.ToInt32(Math.Round(PokemonInfo.GetLevel(CurrentPokemon.WrappedData)) - 1)];
+            //CandiesToPowerUp = Convert.ToInt32(upgradeCosts[0]);
+            //StardustToPowerUp = Convert.ToInt32(upgradeCosts[1]);
+            //PokemonExtraData = GameClient.GetExtraDataForPokemon(CurrentPokemon.PokemonId);
+            //CurrentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == PokemonExtraData.FamilyId);
+            //RaisePropertyChanged(() => PokemonExtraData);
+            //PowerUpPokemonCommand.RaiseCanExecuteChanged();
+            //EvolvePokemonCommand.RaiseCanExecuteChanged();
         }
+
+
+        private int _firstRuns = 2;
+        private DelegateCommand<PokemonDataWrapper> _currentPokemonChanged;
+
+        public DelegateCommand<PokemonDataWrapper> CurrentPokemonChanged => _currentPokemonChanged ?? (
+            _currentPokemonChanged = new DelegateCommand<PokemonDataWrapper>((pokemon) =>
+        {
+            // Hack to prevent FlipView from automatically go back to index 0
+            if (_firstRuns > 0)
+            {
+                _firstRuns--;
+                return;
+            }
+            CurrentPokemon = pokemon;
+        }));
 
         private DelegateCommand _returnToPokemonInventoryScreen;
 
@@ -398,11 +408,6 @@ namespace PokemonGo_UWP.ViewModels
               dialog.Show();
 
           }, () => true));
-
-        private void Dialog_CancelInvoked(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
 

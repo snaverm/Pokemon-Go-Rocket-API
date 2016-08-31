@@ -12,6 +12,8 @@ using POGOProtos.Data;
 using POGOProtos.Inventory;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using PokemonGo_UWP.Utils.Extensions;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -56,9 +58,9 @@ namespace PokemonGo_UWP.ViewModels
             {
                 // Navigating from game page, so we need to actually load the inventory
                 // The sorting mode is directly bound to the settings
-                PokemonInventory = new ObservableCollection<PokemonDataWrapper>(GetSortedPokemonCollection(
-                    GameClient.PokemonsInventory.Select(pokemonData => new PokemonDataWrapper(pokemonData)),
-                    CurrentPokemonSortingMode));
+                PokemonInventory = new ObservableCollection<PokemonDataWrapper>(GameClient.PokemonsInventory
+                    .Select(pokemonData => new PokemonDataWrapper(pokemonData))
+                    .SortBySortingmode(CurrentPokemonSortingMode));
 
                 RaisePropertyChanged(() => PokemonInventory);
 
@@ -175,47 +177,12 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Pokemon Inventory Handling
 
-
         private void UpdateSorting()
         {
             PokemonInventory =
-                new ObservableCollection<PokemonDataWrapper>(GetSortedPokemonCollection(PokemonInventory,
-                    CurrentPokemonSortingMode));
+                new ObservableCollection<PokemonDataWrapper>(PokemonInventory.SortBySortingmode(CurrentPokemonSortingMode));
 
             RaisePropertyChanged(() => PokemonInventory);
-        }
-
-        /// <summary>
-        ///     Returns a new ObservableCollection of the pokemonInventory sorted by the sortingMode
-        /// </summary>
-        /// <param name="pokemonInventory">Original inventory</param>
-        /// <param name="sortingMode">Sorting Mode</param>
-        /// <returns>A new ObservableCollection of the pokemonInventory sorted by the sortingMode</returns>
-        private static IEnumerable<PokemonDataWrapper> GetSortedPokemonCollection(
-            IEnumerable<PokemonDataWrapper> pokemonInventory, PokemonSortingModes sortingMode)
-        {
-            switch (sortingMode)
-            {
-                case PokemonSortingModes.Date:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.CreationTimeMs);
-                case PokemonSortingModes.Fav:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Favorite)
-                         .ThenByDescending(pokemon => pokemon.Cp);
-                case PokemonSortingModes.Number:
-                    return pokemonInventory.OrderBy(pokemon => pokemon.PokemonId)
-                         .ThenByDescending(pokemon => pokemon.Cp);
-                case PokemonSortingModes.Health:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Stamina)
-                        .ThenByDescending(pokemon => pokemon.Cp);
-                case PokemonSortingModes.Name:
-                    return pokemonInventory.OrderBy(pokemon =>pokemon.Name)
-                            .ThenByDescending(pokemon => pokemon.Cp);
-                case PokemonSortingModes.Combat:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Cp)
-                        .ThenBy(pokemon => Resources.Pokemon.GetString(pokemon.PokemonId.ToString()));
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(CurrentPokemonSortingMode), sortingMode, null);
-            }
         }
 
         #endregion
@@ -227,7 +194,13 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _gotoPokemonDetailPage ??
                 (_gotoPokemonDetailPage =
-                    new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => { NavigationService.Navigate(typeof(PokemonDetailPage), Tuple.Create(PokemonInventory, selectedPokemon)); }));
+                    new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => {
+                        NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
+                        {
+                            SelectedPokemonId = selectedPokemon.Id.ToString(),
+                            SortingMode = CurrentPokemonSortingMode
+                        }, new SuppressNavigationTransitionInfo());
+                    }));
 
         #endregion
 
