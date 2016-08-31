@@ -170,7 +170,7 @@ namespace PokemonGo_UWP.Views
         private void GameMapControl_OnZoomLevelChanged(MapControl sender, object args)
         {
             var currentZoomLevel = sender.ZoomLevel;
-            sender.ZoomLevel = currentZoomLevel < 17 ? 17 : currentZoomLevel;
+            sender.ZoomLevel = currentZoomLevel < 18 ? 18 : currentZoomLevel;
         }
 
         #region Overrides of Page
