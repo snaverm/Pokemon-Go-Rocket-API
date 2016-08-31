@@ -385,38 +385,17 @@ namespace PokemonGo_UWP.ViewModels
 
                 // Player's using a PokeBall so we try to catch the Pokemon
                 catched = await ThrowPokeball(hitPokemon);
-
-                var lastused = SelectPokeballType(LastItemUsed);
-                if (lastused != null)
-                {
-                    lastused.Count--;
-                    RaisePropertyChanged(() => SelectedCaptureItem);
-                }
-
-                SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
             }
             else
             {
                 PokeballButtonEnabled = false;
 
-                //So that after using berry pokeball is immediatelly rendered
-                SelectedCaptureItem = SelectAvailablePokeBall();
-
                 // He's using a berry
                 await ThrowBerry();
-                var lastused = SelectPokeballType(LastItemUsed);
-                if (lastused != null)
-                {
-                    lastused.Count--;
-                    RaisePropertyChanged(() => lastused.Count);
-                }
             }
 
             if (SelectedCaptureItem != null && SelectedCaptureItem.Count > 0 && !catched)
                 PokeballButtonEnabled = true;
-
-            if (catched)
-                await GameClient.UpdateInventory();
 
             LastItemUsed = null;
         }, hitPokemon => true));
@@ -432,7 +411,12 @@ namespace PokemonGo_UWP.ViewModels
             // We use to simulate a 5 second wait to get animation going
             // If server takes too much to reply then we don't use the delay
             var requestTime = DateTime.Now;
+
             var caughtPokemonResponse = await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, SelectedCaptureItem.ItemId, hitPokemon);
+
+            await GameClient.UpdateInventory(); //TODO: Change to delta update inventory, so it doesn't take so long (and offico client does it too)
+            SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall(); //To restore it after UpdateInventory, which overrides it
+
             var responseDelay = DateTime.Now - requestTime;
             if (responseDelay.TotalSeconds < 5 && hitPokemon)
                 await Task.Delay(TimeSpan.FromSeconds(5 - (int) responseDelay.TotalSeconds));
@@ -491,9 +475,13 @@ namespace PokemonGo_UWP.ViewModels
         /// <returns></returns>
         private async Task ThrowBerry()
         {
+            SelectedCaptureItem = SelectAvailablePokeBall(); //To set it immediatelly, because button image would be berry until responses
             Logger.Write($"Used {LastItemUsed}.");
 
             var berryResponse = await GameClient.UseCaptureItem(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, LastItemUsed ?? ItemId.ItemRazzBerry);
+            await GameClient.UpdateInventory(); //TODO: Change to delta update inventory, so it doesn't take so long (and offico client does it too)
+            SelectedCaptureItem = SelectAvailablePokeBall(); //To restore it after UpdateInventory, which overrides it
+
             if (berryResponse.Success)
             {
                 // TODO: visual feedback
