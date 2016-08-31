@@ -60,7 +60,8 @@
         <!--Pokemon captured-->
         <DataTemplate x:Key="PokemonCaptured">
             <Grid MinWidth="64" 
-                  MinHeight="64">
+                  MinHeight="64"
+                  Padding="8">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding DataContext.OpenPokedexEntry, ElementName=page}"
@@ -77,7 +78,10 @@
         <!-- Pokemon seen/not captured -->
         <DataTemplate x:Key="PokemonSeen">
             <Grid MinWidth="64" 
-                  MinHeight="64">
+                  MinHeight="64"
+                  CornerRadius="5"
+                  Padding="8"
+                  Background="#d8cefd">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding DataContext.OpenPokedexEntry, ElementName=page}"
@@ -88,13 +92,13 @@
                     UriSource="{Binding Key, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Foreground="Black" />
+                    Foreground="#bcafe3" />
             </Grid>
         </DataTemplate>
         <!--Pokemon unseen-->
         <DataTemplate x:Key="PokemonUnseen">
             <Grid CornerRadius="5"
-                  Background="#CCC7FD"
+                  Background="#d8cefd"
                   MinWidth="64"
                   MinHeight="64">
 
@@ -207,7 +211,7 @@
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal"
                                            HorizontalAlignment="Center"
-                                           MaximumRowsOrColumns="5" />
+                                           MaximumRowsOrColumns="6" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplateSelector>
