@@ -377,39 +377,47 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand<bool> UseSelectedCaptureItem => _useSelectedCaptureItem ?? (_useSelectedCaptureItem = new DelegateCommand<bool>(async hitPokemon =>
         {
             LastItemUsed = SelectedCaptureItem.ItemId;
+            var catched = false;
             Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
             if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
             {
                 PokeballButtonEnabled = false;
-                Busy.SetBusy(true);
+
                 // Player's using a PokeBall so we try to catch the Pokemon
-                await ThrowPokeball(hitPokemon);
+                catched = await ThrowPokeball(hitPokemon);
 
-                // We always need to update the inventory
-                await GameClient.UpdateInventory();
+                var lastused = SelectPokeballType(LastItemUsed);
+                if (lastused != null)
+                {
+                    lastused.Count--;
+                    RaisePropertyChanged(() => SelectedCaptureItem);
+                }
+
                 SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
-
-                Busy.SetBusy(false);
             }
             else
             {
+                PokeballButtonEnabled = false;
+
                 //So that after using berry pokeball is immediatelly rendered
                 SelectedCaptureItem = SelectAvailablePokeBall();
 
-                PokeballButtonEnabled = false;
-                Busy.SetBusy(true);
                 // He's using a berry
                 await ThrowBerry();
-
-                // We always need to update the inventory
-                await GameClient.UpdateInventory();
-                SelectedCaptureItem = SelectAvailablePokeBall();
-
-                Busy.SetBusy(false);
-                if (SelectedCaptureItem.Count != 0)
-                    PokeballButtonEnabled = true;
+                var lastused = SelectPokeballType(LastItemUsed);
+                if (lastused != null)
+                {
+                    lastused.Count--;
+                    RaisePropertyChanged(() => lastused.Count);
+                }
             }
-            Busy.SetBusy(false);
+
+            if (SelectedCaptureItem != null && SelectedCaptureItem.Count > 0 && !catched)
+                PokeballButtonEnabled = true;
+
+            if (catched)
+                await GameClient.UpdateInventory();
+
             LastItemUsed = null;
         }, hitPokemon => true));
 
@@ -419,14 +427,14 @@ namespace PokemonGo_UWP.ViewModels
         ///     Launches the PokeBall for the current encounter, handling the different catch responses
         /// </summary>
         /// <returns></returns>
-        private async Task ThrowPokeball(bool hitPokemon)
+        private async Task<bool> ThrowPokeball(bool hitPokemon)
         {
             // We use to simulate a 5 second wait to get animation going
             // If server takes too much to reply then we don't use the delay
             var requestTime = DateTime.Now;
             var caughtPokemonResponse = await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, SelectedCaptureItem.ItemId, hitPokemon);
             var responseDelay = DateTime.Now - requestTime;
-            if (responseDelay.TotalSeconds < 5)
+            if (responseDelay.TotalSeconds < 5 && hitPokemon)
                 await Task.Delay(TimeSpan.FromSeconds(5 - (int) responseDelay.TotalSeconds));
             var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
 
@@ -447,7 +455,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                         GameClient.LuredPokemons.Remove((LuredPokemon) CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
-                    return;
+                    return true;
 
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
@@ -474,8 +482,7 @@ namespace PokemonGo_UWP.ViewModels
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (SelectedCaptureItem.Count != 0)
-                PokeballButtonEnabled = true;
+            return false;
         }
 
         /// <summary>
