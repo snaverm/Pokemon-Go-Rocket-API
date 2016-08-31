@@ -220,6 +220,17 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
+        #region Pokemon Detail
+
+        private DelegateCommand<PokemonDataWrapper> _gotoPokemonDetailPage;
+        public DelegateCommand<PokemonDataWrapper> GotoPokemonDetailPage
+            =>
+                _gotoPokemonDetailPage ??
+                (_gotoPokemonDetailPage =
+                    new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => { NavigationService.Navigate(typeof(PokemonDetailPage), Tuple.Create(PokemonInventory, selectedPokemon)); }));
+
+        #endregion
+
         #endregion
     }
 }

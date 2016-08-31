@@ -21,10 +21,10 @@ using PokemonGo_UWP.Views;
 
 namespace PokemonGo_UWP.ViewModels
 {
-    public class PokemonDetailsPageViewModel : ViewModelBase
+    public class PokemonDetailPageViewModel : ViewModelBase
     {
 
-        public PokemonDetailsPageViewModel()
+        public PokemonDetailPageViewModel()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
