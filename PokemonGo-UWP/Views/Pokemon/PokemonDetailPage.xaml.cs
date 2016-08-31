@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Navigation;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Utils;
 using POGOProtos.Networking.Responses;
+using Windows.System.Threading;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -62,6 +64,26 @@ namespace PokemonGo_UWP.Views
 
         #region Handlers
 
+        /// <summary>
+        /// Hack to prevent flickering of the FlipView... it's just sad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PokemonDetailControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TimeSpan delay = TimeSpan.FromMilliseconds(50);
+
+            ThreadPoolTimer DelayThread = ThreadPoolTimer.CreateTimer(
+            (source1) =>
+            {
+                Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                {
+                    PokemonDetailControl pkmnContrl = (PokemonDetailControl)sender;
+                    pkmnContrl.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                });
+            }, delay);
+        }
+
         //private void SubscribeToCaptureEvents()
         //{
         //    ViewModel.PokemonEvolved += ViewModelOnPokemonEvolved;
@@ -88,5 +110,7 @@ namespace PokemonGo_UWP.Views
         //}
 
         #endregion
+
+
     }
 }

@@ -171,7 +171,7 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _returnToGameScreen ??
                 (_returnToGameScreen =
-                    new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate); }, () => true));
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
 
         #endregion
 
@@ -201,17 +201,6 @@ namespace PokemonGo_UWP.ViewModels
                             SortingMode = CurrentPokemonSortingMode
                         }, new SuppressNavigationTransitionInfo());
                     }));
-
-        #endregion
-
-        #region Pokemon Detail
-
-        private DelegateCommand<PokemonDataWrapper> _gotoPokemonDetailPage;
-        public DelegateCommand<PokemonDataWrapper> GotoPokemonDetailPage
-            =>
-                _gotoPokemonDetailPage ??
-                (_gotoPokemonDetailPage =
-                    new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => { NavigationService.Navigate(typeof(PokemonDetailPage), Tuple.Create(PokemonInventory, selectedPokemon)); }));
 
         #endregion
 
