@@ -178,7 +178,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{StaticResource PageBackgroundGradient}">
+    <Grid Background="{StaticResource PokedexPageBackgroundGradient}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -207,6 +207,7 @@
                           HorizontalAlignment="Stretch"
                           ScrollViewer.VerticalScrollMode="Auto"
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
+                
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal"
@@ -214,6 +215,13 @@
                                            MaximumRowsOrColumns="6" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
+
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="2"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
                 <GridView.ItemTemplateSelector>
                     <utils:PokedexEntryDataTemplateSelector
                             PokemonCaptured="{StaticResource PokemonCaptured}"
