@@ -178,7 +178,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{StaticResource PageBackgroundGradient}">
+    <Grid Background="{StaticResource PokedexPageBackgroundGradient}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
