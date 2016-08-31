@@ -170,7 +170,7 @@ namespace PokemonGo_UWP.Views
 
         #region Overrides of Page
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             // Hide PokeMenu panel just in case
@@ -186,7 +186,9 @@ namespace PokemonGo_UWP.Views
             }
             // Set first position if we shomehow missed it
                 UpdateMap();
-            SubscribeToCaptureEvents();
+			await GameMapControl.TryRotateToAsync(SettingsService.Instance.MapHeading);
+			await GameMapControl.TryTiltToAsync(SettingsService.Instance.MapPitch);
+			SubscribeToCaptureEvents();
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
@@ -204,12 +206,7 @@ namespace PokemonGo_UWP.Views
             SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
             if (SettingsService.Instance.IsRememberMapZoomEnabled)
                 SaveZoomLevel();
-			if (SettingsService.Instance.IsRememberMapHeadingEnabled)
-				SaveMapHeading();
-        }
-
-		private void SaveMapHeading()
-		{
+				SettingsService.Instance.MapPitch = GameMapControl.Pitch;
 			SettingsService.Instance.MapHeading = GameMapControl.Heading;
 		}
 
@@ -235,10 +232,6 @@ namespace PokemonGo_UWP.Views
         private async void UpdateMap()
         {
 
-			//Rotation de la map (nord/sud) : await GameMapControl.TryRotateToAsync(180);
-			//Tilt (angle de vue horizon/vue du haut) : await GameMapControl.TryTiltToAsync(250);
-			//Zoom (ne marche pas) : await GameMapControl.TryZoomToAsync(2);
-
 			if (GameClient.Geoposition != null)
 			{ 
 				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -253,7 +246,6 @@ namespace PokemonGo_UWP.Views
 									//Save Center
                         lastAutoPosition = GameMapControl.Center;
 									//Reset orientation to default
-									//TODO: check if needed!
                         if (GameMapControl.Heading == GameClient.Geoposition.Coordinate.Heading)
                             GameMapControl.Heading = 0;
                     }
@@ -267,8 +259,8 @@ namespace PokemonGo_UWP.Views
                     {
                         //Previous position was set automatically, continue!
                         ReactivateMapAutoUpdateButton.Visibility = Visibility.Collapsed;
-                        //GameMapControl.Center = GameClient.Geoposition.Coordinate.Point;
-												await GameMapControl.TrySetViewAsync(GameClient.Geoposition.Coordinate.Point);
+                        GameMapControl.Center = GameClient.Geoposition.Coordinate.Point;
+												//await GameMapControl.TrySetViewAsync(GameClient.Geoposition.Coordinate.Point);
 
                         lastAutoPosition = GameMapControl.Center;
 
@@ -278,12 +270,7 @@ namespace PokemonGo_UWP.Views
 
                         if (SettingsService.Instance.IsRememberMapZoomEnabled)
                             GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
-									//if (SettingsService.Instance.IsRememberMapHeadingEnabled)
-									//	GameMapControl. = SettingsService.Instance.MapHeading;
                     }
-							//if ((SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPS) &&
-												//(GameClient.Geoposition.Coordinate.Heading != null))
-								//await GameMapControl.TryRotateToAsync(GameClient.Geoposition.Coordinate.Heading.Value);
 						});
 			}
 		}
