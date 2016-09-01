@@ -260,6 +260,10 @@
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <local:PokemonDetailControl DataContext="{Binding}"
+                                                FavoritePokemonCommand="{Binding ElementName=Root, Path=DataContext.FavoritePokemonCommand}"
+                                                RenamePokemonCommand="{Binding ElementName=Root, Path=DataContext.RenamePokemonCommand}"
+                                                PowerUpPokemonCommand="{Binding ElementName=Root, Path=DataContext.PowerUpPokemonCommand}"
+                                                EvolvePokemonCommand="{Binding ElementName=Root, Path=DataContext.EvolvePokemonCommand}"
                                                 Loaded="PokemonDetailControl_Loaded"
                                                 Visibility="Collapsed" />
                 </DataTemplate>

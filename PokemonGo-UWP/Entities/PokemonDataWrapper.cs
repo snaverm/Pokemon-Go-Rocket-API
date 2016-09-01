@@ -120,6 +120,8 @@ namespace PokemonGo_UWP.Entities
 
         public int Favorite => WrappedData.Favorite;
 
+        public bool IsFavorite => System.Convert.ToBoolean(Favorite);
+
         public string Nickname => WrappedData.Nickname;
 
         public int FromFort => WrappedData.FromFort;
