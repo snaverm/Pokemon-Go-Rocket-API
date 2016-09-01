@@ -136,6 +136,10 @@ namespace PokemonGo_UWP.ViewModels
                 CurrentLureEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentLureEncounter)]).CreateCodedInput());
                 CurrentCaptureAward.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentCaptureAward)]).CreateCodedInput());
                 SelectedCaptureItem.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(SelectedCaptureItem)]).CreateCodedInput());
+                RaisePropertyChanged(() => CurrentEncounter);
+                RaisePropertyChanged(() => CurrentLureEncounter);
+                RaisePropertyChanged(() => CurrentCaptureAward);
+                RaisePropertyChanged(() => SelectedCaptureItem);
             }
             else
             {
