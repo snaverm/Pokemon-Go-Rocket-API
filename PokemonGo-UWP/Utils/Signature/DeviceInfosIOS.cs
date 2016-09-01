@@ -114,9 +114,6 @@ namespace PokemonGo_UWP.Utils
 
             private const double stationaryMax = 0.2;   // .44 MPH (to account for GPS drift)
             private const double tiltingMax = 0.33528;  // 3/4 MPH
-            private const double walkingMax = 1.78816;  // 4 MPH
-            private const double runningMax = 3.57632;  // 8 MPH
-            private const double cyclingMax = 6.7056;   // 15 MPH
 
             #endregion
 
