@@ -47,8 +47,7 @@
                 <Visibility>Visible</Visibility>
             </converters:ValueWhenConverter.Otherwise>
         </converters:ValueWhenConverter>
-
-
+        
         <!-- Pokemon evolution / Pokemon captured -->
         <DataTemplate x:Key="PokedexCaptured">
             <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92">
@@ -58,11 +57,12 @@
                 <Grid.Height>
                     <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,28"/>
                 </Grid.Height>
+                <!--
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding DataContext.OpenPokedexEntry, ElementName=page}" CommandParameter="{Binding}" />
                     </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+                </interactivity:Interaction.Behaviors>-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -417,7 +417,7 @@
                                     Foreground="#577074"
                                     Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}">
                                     <Run
-                                        Text="{Binding Id, Converter={StaticResource PokemonIdToPokedexDescription}}" />
+                                        Text="{Binding Description}" />
                                         </TextBlock>
 
                                         <StackPanel

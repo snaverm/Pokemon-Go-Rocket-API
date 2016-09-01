@@ -20,14 +20,8 @@ namespace PokemonGo_UWP.ViewModels
     {
         public int CapturedPokemons { get; set; } = 0;
         public int SeenPokemons { get; set; } = 0;
-        public ObservableCollection<PokedexPokemonModel> PokedexItems { get; private set; } = new ObservableCollection<PokedexPokemonModel>();
+        public ObservableCollection<PokemonModel> PokedexItems { get; private set; } = new ObservableCollection<PokemonModel>();
 
-        public class PokedexPokemonModel : PokemonModel
-        {
-            public int TimesCaptured { get; set; }
-            public PokedexPokemonModel(PokemonSettings x): base(x) { }
-            public PokedexPokemonModel(PokemonId x) : base(x) { }
-        }
 
 
         public void Load()
@@ -38,27 +32,9 @@ namespace PokemonGo_UWP.ViewModels
             {
                 IEnumerable<PokemonId> listAllPokemon = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>();
 
-                List< PokemonModel > pokedexes = new List<PokemonModel>();
-
                 foreach (PokemonId id in listAllPokemon.Where(t => t != PokemonId.Missingno && pokedexItems.Any(y => y.PokemonId == t)))
                 {
-                    PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
-                    PokedexPokemonModel pokemonModel = new PokedexPokemonModel(pokeman);
-                    var CurrPokemon = pokemonModel;
-                    pokemonModel.Evolutions.Add(pokemonModel);
-                    while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
-                    {
-
-                        pokemonModel.Evolutions.Insert(0, new PokedexPokemonModel(CurrPokemon.ParentPokemonId));
-                        CurrPokemon = new PokedexPokemonModel(CurrPokemon.ParentPokemonId);
-                    }
-                    CurrPokemon = pokemonModel;
-                    while (CurrPokemon.EvolutionIds.Count > 0)
-                    {
-                        foreach (var ev in CurrPokemon.EvolutionIds) //for Eevee
-                            pokemonModel.Evolutions.Add(new PokedexPokemonModel(ev));
-                        CurrPokemon = new PokedexPokemonModel(CurrPokemon.EvolutionIds.ElementAt(0));
-                    }
+                    var pokemonModel = new PokemonModel(id);
 
                     PokedexItems.Add(pokemonModel);
                 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using Google.Protobuf.WellKnownTypes;
 using PokemonGo_UWP.Utils;
+using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Settings.Master;
 using POGOProtos.Settings.Master.Pokemon;
@@ -18,7 +19,9 @@ namespace PokemonGo_UWP.Models
 
         public string Name => (string)new PokemonIdToPokemonNameConverter().Convert(this.Id, typeof(string), null, string.Empty);
         public BitmapImage Sprite => (BitmapImage)new PokemonIdToPokemonSpriteConverter().Convert(this.Id, typeof(BitmapImage), null, string.Empty);
-        public Uri BackgroundImage => (Uri)new PokemonTypeToBackgroundImageConverter().Convert(this.Id,typeof(Uri),null,string.Empty);
+        public Uri BackgroundImage => (Uri)new PokemonTypeToBackgroundImageConverter().Convert(this.Id, typeof(Uri), null, string.Empty);
+
+        public string Description => (string)new PokemonIdToPokedexDescription().Convert(this.Id, typeof(string), null, string.Empty);
         public List<PokemonModel> Evolutions { get; set; } = new List<PokemonModel>();
         public List<PokemonId> EvolutionIds { get; set; } = new List<PokemonId>();
 
@@ -50,7 +53,58 @@ namespace PokemonGo_UWP.Models
         {
             PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
             BuildFromSettings(pokeman);
+
+            PokedexEntry pokedexEntry = GameClient.PokedexInventory.FirstOrDefault(x => x.PokemonId == id);
+            BuildFromPokedexEntry(pokedexEntry);
+
+            PokemonModel pokemonModel = new PokemonModel(pokeman, pokedexEntry);
+
+            var CurrPokemon = pokemonModel;
+            Evolutions.Add(pokemonModel);
+            while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
+            {
+
+                Evolutions.Insert(0, FromId(CurrPokemon.ParentPokemonId));
+                CurrPokemon = FromId(CurrPokemon.ParentPokemonId);
+            }
+            CurrPokemon = pokemonModel;
+            while (CurrPokemon.EvolutionIds.Count > 0)
+            {
+                foreach (PokemonId ev in CurrPokemon.EvolutionIds) //for Eevee
+                    Evolutions.Add(FromId(ev));
+                CurrPokemon = new PokemonModel(CurrPokemon.EvolutionIds.ElementAt(0));
+            }
+
+
         }
+
+        private PokemonModel FromId(PokemonId id)
+        {
+            PokemonModel temp = new PokemonModel();
+            PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
+            temp.BuildFromSettings(pokeman);
+
+            return temp;
+        }
+
+        public PokemonModel(PokemonSettings settings, PokedexEntry pokedexEntry)
+        {
+            BuildFromSettings(settings);
+            BuildFromPokedexEntry(pokedexEntry);
+        }
+
+        public void BuildFromPokedexEntry(PokedexEntry pokedexEntry)
+        {
+            if (pokedexEntry != null)
+            {
+                TimesCaptured = pokedexEntry.TimesCaptured;
+                TimesEncountered = pokedexEntry.TimesEncountered;
+            }
+        }
+
+        public int TimesEncountered { get; set; }
+
+        public int TimesCaptured { get; set; }
 
         public float PokedexWeightKg { get; set; }
 
@@ -65,13 +119,13 @@ namespace PokemonGo_UWP.Models
         public PokemonType Type { get; set; } = PokemonType.Bug;
         public PokemonType Type2 { get; set; } = PokemonType.Bug;
         public CameraAttributes Camera { get; set; }
-        
+
         public int CandyToEvolve { get; set; } = 0;
     }
 
     public static class PokemonModelExtensions
     {
-        
+
     }
 
 }
