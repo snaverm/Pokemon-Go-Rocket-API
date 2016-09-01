@@ -110,31 +110,38 @@ namespace PokemonGo_UWP.Utils
 
         private class ActivityStatusIOS : IActivityStatus
         {
-            #region Private Members
+            public bool Stationary => true;
+            public bool Tilting => GameClient.Geoposition?.Coordinate?.Speed < 3 ? true : false;
+            public bool Walking => GameClient.Geoposition?.Coordinate?.Speed > 3 && GameClient.Geoposition.Coordinate?.Speed > 7 ? true : false;
+            public bool Automotive => GameClient.Geoposition?.Coordinate?.Speed > 20 ? true : false;
+            public bool Cycling => false;
+            public bool Running => false;
 
-            private const double stationaryMax = 0.2;   // .44 MPH (to account for GPS drift)
-            private const double tiltingMax = 0.33528;  // 3/4 MPH
-            private const double walkingMax = 3;  // 6.7 MPH
-            private const double runningMax = 6;  // 13.4 MPH
-            private const double cyclingMax = 15;   // 33 MPH, this is the speed when the "driving" dialog pops up.
+            //#region Private Members
 
-            #endregion
+            //private const double stationaryMax = 0.2;   // .44 MPH (to account for GPS drift)
+            //private const double tiltingMax = 0.33528;  // 3/4 MPH
+            //private const double walkingMax = 3;  // 6.7 MPH
+            //private const double runningMax = 6;  // 13.4 MPH
+            //private const double cyclingMax = 15;   // 33 MPH, this is the speed when the "driving" dialog pops up.
 
-            #region Properties
+            //#endregion
 
-            public bool Automotive => GameClient.Geoposition?.Coordinate?.Speed > cyclingMax;
+            //#region Properties
 
-            public bool Cycling => GameClient.Geoposition?.Coordinate?.Speed > runningMax && GameClient.Geoposition.Coordinate?.Speed <= cyclingMax;
+            //public bool Automotive => GameClient.Geoposition?.Coordinate?.Speed > cyclingMax;
 
-            public bool Running => GameClient.Geoposition?.Coordinate?.Speed > walkingMax && GameClient.Geoposition.Coordinate?.Speed <= runningMax;
+            //public bool Cycling => GameClient.Geoposition?.Coordinate?.Speed > runningMax && GameClient.Geoposition.Coordinate?.Speed <= cyclingMax;
 
-            public bool Stationary => GameClient.Geoposition?.Coordinate?.Speed <= stationaryMax;
+            //public bool Running => GameClient.Geoposition?.Coordinate?.Speed > walkingMax && GameClient.Geoposition.Coordinate?.Speed <= runningMax;
 
-            public bool Tilting => GameClient.Geoposition?.Coordinate?.Speed > stationaryMax && GameClient.Geoposition.Coordinate?.Speed <= tiltingMax;
+            //public bool Stationary => GameClient.Geoposition?.Coordinate?.Speed <= stationaryMax;
 
-            public bool Walking => GameClient.Geoposition?.Coordinate?.Speed > tiltingMax && GameClient.Geoposition.Coordinate?.Speed <= walkingMax;
+            //public bool Tilting => GameClient.Geoposition?.Coordinate?.Speed > stationaryMax && GameClient.Geoposition.Coordinate?.Speed <= tiltingMax;
 
-            #endregion
+            //public bool Walking => GameClient.Geoposition?.Coordinate?.Speed > tiltingMax && GameClient.Geoposition.Coordinate?.Speed <= walkingMax;
+
+            //#endregion
 
         }
 
