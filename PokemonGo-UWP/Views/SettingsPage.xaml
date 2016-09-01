@@ -13,165 +13,190 @@
         <viewModels:SettingsPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Grid>
-        <Grid.Background>
+    <RelativePanel>
+        <RelativePanel.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#4ab583" Offset="0" />
                 <GradientStop Color="#266378" Offset="0.8" />
             </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        </RelativePanel.Background>
 
-        <StackPanel Grid.Row="0">
+        <StackPanel x:Name="HeaderStackPanel" Grid.Row="0"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True">
             <TextBlock x:Uid="SettingsHeaderText"
                        Text="SETTINGS"
                        Style="{StaticResource TextPageTitle}" />
             <Border Background="#ffffff"
                     Width="150"
                     Height="1" />
+            <TextBlock Style="{StaticResource TextSettingsTitle}"
+                       HorizontalAlignment="Center"
+                       Margin="0,8"
+                       Text="{Binding CurrentVersion}" />
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1">
-            <StackPanel Margin="0,0,0,57.5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
-                               x:Uid="SettingsUseNianticMapTextBlock"
-                               Text="Use Niantic Map"
-                               Style="{StaticResource TextSettingsTitle}" />
+        <ScrollViewer RelativePanel.Below="HeaderStackPanel"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True">
+            <RelativePanel Margin="0,0,0,57.5">
+                <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignVerticalCenterWith="NianticMapGrid"
+                           RelativePanel.LeftOf="NianticMapGrid"
+                           x:Uid="SettingsUseNianticMapTextBlock"
+                           Text="Use Niantic Map"
+                           Style="{StaticResource TextSettingsTitle}"
+                           HorizontalAlignment="Left" />
 
-                    <CheckBox Grid.Column="1"
-                              IsChecked="{Binding IsNianticMapEnabled, Mode=TwoWay}"
-                              Style="{StaticResource SettingsCheckbox}"
-                              Margin="0,8,15,10" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
-                               x:Uid="SettingsMapRotationModeGPSTextBlock"
-                               Text="Auto-Rotate based on"
-                               Style="{StaticResource TextSettingsTitle}" />
-                    <ComboBox Grid.Column="1"
-                              SelectedIndex="{Binding MapAutomaticOrientationMode_Index, Mode=TwoWay}"
-                              Margin="0,8,15,10">
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="GPS"/>
-                        <ComboBoxItem x:Name="CompassBoxItem" Content="Compass"/>
-                    </ComboBox>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                <CheckBox x:Name="NianticMapGrid"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignTopWithPanel="True"
+                          IsChecked="{Binding IsNianticMapEnabled, Mode=TwoWay}"
+                          Style="{StaticResource SettingsCheckbox}"
+                          Margin="0,8,15,10"
+                          HorizontalAlignment="Right" />
+
+                <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignVerticalCenterWith="MapRotationGrid"
+                           RelativePanel.LeftOf="MapRotationGrid"
+                           x:Uid="SettingsMapRotationModeGPSTextBlock"
+                           Text="Auto-Rotate based on"
+                           Style="{StaticResource TextSettingsTitle}"
+                           HorizontalAlignment="Left" />
+                <ComboBox x:Name="MapRotationGrid"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.Below="NianticMapGrid"
+                          SelectedIndex="{Binding MapAutomaticOrientationMode_Index, Mode=TwoWay}"
+                          Margin="0,8,15,10"
+                          HorizontalAlignment="Right">
+                    <ComboBoxItem Content="None" />
+                    <ComboBoxItem Content="GPS" />
+                    <ComboBoxItem x:Name="CompassBoxItem"
+                                  Content="Compass" />
+                </ComboBox>
+
+                    <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignVerticalCenterWith="RememberMapZoomGrid"
+                               RelativePanel.LeftOf="RememberMapZoomGrid"
                                x:Uid="SettingsRememberMapZoomTextBlock"
                                Text="Remember Map Zoom"
-                               Style="{StaticResource TextSettingsTitle}" />
-                    <CheckBox Grid.Column="1"
+                               Style="{StaticResource TextSettingsTitle}"
+                               HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="RememberMapZoomGrid"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="MapRotationGrid"
                               IsChecked="{Binding IsRememberMapZoomEnabled, Mode=TwoWay}"
                               Style="{StaticResource SettingsCheckbox}"
-                              Margin="0,8,15,10" />
-                </Grid>
-				<Border Background="#33ffffff" Height="1" Margin="15" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                              Margin="0,8,15,10"
+                              HorizontalAlignment="Right"/>
+
+                <Border x:Name="GeneralBorder"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="RememberMapZoomGrid"
+                        Background="#33ffffff"
+                        Height="1"
+                        Margin="15" />
+
+                <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignVerticalCenterWith="MusicGrid"
+                           RelativePanel.LeftOf="MusicGrid"
                                x:Uid="SettingsMusicTextBlock"
                                Text="Music"
-                               Style="{StaticResource TextSettingsTitle}" />
-                    <CheckBox Grid.Column="1"
+                               Style="{StaticResource TextSettingsTitle}"
+                               HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="MusicGrid"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="GeneralBorder"
                               IsChecked="{Binding IsMusicEnabled, Mode=TwoWay}"
                               Style="{StaticResource SettingsCheckbox}"
-                              Margin="0,8,15,10" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                              Margin="0,8,15,10" 
+                              HorizontalAlignment="Right"/>
+
+                    <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignVerticalCenterWith="VibrationGrid"
+                               RelativePanel.LeftOf="VibrationGrid"
                                x:Uid="SettingsVibrationTextBlock"
                                Text="Vibration"
-                               Style="{StaticResource TextSettingsTitle}" />
-
-                    <CheckBox Grid.Column="1"
+                               Style="{StaticResource TextSettingsTitle}" 
+                               HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="VibrationGrid"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="MusicGrid"
                               IsChecked="{Binding IsVibrationEnabled, Mode=TwoWay}"
                               Style="{StaticResource SettingsCheckbox}"
-                              Margin="0,8,15,10" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                              Margin="0,8,15,10"
+                              HorizontalAlignment="Right"/>
+
+                    <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignVerticalCenterWith="BatterySaverGrid"
+                               RelativePanel.LeftOf="BatterySaverGrid"
                                x:Uid="SettingsBatterySaverTextBlock"
                                Text="Battery Saver"
-                               Style="{StaticResource TextSettingsTitle}" />
+                               Style="{StaticResource TextSettingsTitle}" 
+                               HorizontalAlignment="Left"/>
 
-                    <CheckBox Grid.Column="1"
+                    <CheckBox x:Name="BatterySaverGrid"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="VibrationGrid"
                               IsChecked="{Binding IsBatterySaverEnabled, Mode=TwoWay}"
                               Style="{StaticResource SettingsCheckbox}"
-                              Margin="0,8,15,10" />
-                </Grid>
-                <Grid VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock x:Uid="SettingsLanguageTextBlock"
+                              Margin="0,8,15,10" 
+                              HorizontalAlignment="Right"/>
+
+                <StackPanel RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWith="LanguageComboBox"
+                            RelativePanel.LeftOf="LanguageComboBox">
+                    <TextBlock x:Uid="SettingsLanguageTextBlock"
                                    Text="Language"
                                    Style="{StaticResource TextSettingsTitle}"
                                    Margin="15,15,15,5" />
                         <TextBlock x:Uid="SettingsLanguageRestartTextBlock"
                                    Text="You must restart the App to take effect."
                                    Style="{StaticResource TextSettingsTitle}"
-                                   FontSize="12" Margin="15,0,15,15" Foreground="#ddd"/>
+                                   FontSize="12"
+                                   Margin="15,0,15,15"
+                                   Foreground="#ddd" />
                     </StackPanel>
                     <ComboBox x:Name="LanguageComboBox"
-                              VerticalAlignment="Center"
-                              Grid.ColumnSpan="2"
-                              HorizontalAlignment="Right"
-                              ItemsSource="{Binding languageList, Mode=OneWay}" SelectedItem="{Binding UserLanguage, Mode=TwoWay}" 
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="BatterySaverGrid"
+                              ItemsSource="{Binding languageList, Mode=OneWay}"
+                              SelectedItem="{Binding UserLanguage, Mode=TwoWay}"
                               Margin="0,8,15,10" />
-                </Grid>
-                <Border Background="#33ffffff" Height="1" Margin="15" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="135" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                <Border x:Name="GameBorder"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="LanguageComboBox"
+                        Background="#33ffffff"
+                        Height="1"
+                        Margin="15" />
+
+                <TextBlock x:Name="TileTextGrid"
+                               RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.Below="GameBorder"
                                x:Uid="SettingsLiveTileTextBlock"
+                               HorizontalAlignment="Left"
                                Text="Live Tile Mode"
                                Style="{StaticResource TextSettingsTitle}" />
-                </Grid>
-                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+
+                <ScrollViewer x:Name="TileScrollViewer"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.Below="TileTextGrid"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
                               Margin="15,0,15,15">
-                    <StackPanel Orientation="Horizontal" Height="100">
-                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                    <StackPanel Orientation="Horizontal"
+                                Height="100">
+                        <Button Command="{Binding LiveTileSelectionCommand}"
                                 CommandParameter="0"
                                 Style="{StaticResource ButtonNoStyle}"
                                 Margin="0,0,10,0"
                                 Padding="0">
                             <Image Source="/Assets/LiveTiles/Normal/Square150x150Logo.scale-200.png" />
                         </Button>
-                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                        <Button Command="{Binding LiveTileSelectionCommand}"
                                 CommandParameter="1"
                                 Style="{StaticResource ButtonNoStyle}"
                                 Background="#11000000"
@@ -179,14 +204,14 @@
                                 Padding="0">
                             <Image Source="/Assets/LiveTiles/Transparent/Square150x150Logo.scale-200.png" />
                         </Button>
-                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                        <Button Command="{Binding LiveTileSelectionCommand}"
                                 CommandParameter="2"
                                 Style="{StaticResource ButtonNoStyle}"
                                 Margin="0,0,10,0"
                                 Padding="0">
                             <Image Source="../Assets/LiveTiles/Peek.gif" />
                         </Button>
-                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                        <Button Command="{Binding LiveTileSelectionCommand}"
                                 CommandParameter="3"
                                 Style="{StaticResource ButtonNoStyle}"
                                 Margin="0,0,0,0"
@@ -205,35 +230,38 @@
                         <!-- End -->
                     </StackPanel>
                 </ScrollViewer>
-                <Border Background="#33ffffff" Height="1" Margin="15,15,15,0" />
-                <Button Command="{Binding DoPtcLogoutCommand}"
+                <Border x:Name="TileBorder"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="TileScrollViewer"
+                        Background="#33ffffff"
+                        Height="1"
+                        Margin="15,15,15,0" />
+                <Button RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="TileBorder"
+                        Command="{Binding DoPtcLogoutCommand}"
                         Style="{StaticResource ButtonNoStyle}"
                         Padding="0,15,0,0">
-                    <TextBlock x:Uid="SettingsSignOutTextBlock"
-                                Text="Sign Out"
-                                Style="{StaticResource TextSettingsTitle}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right" Margin="15,15,15,10"/>
+                    <TextBlock RelativePanel.AlignHorizontalCenterWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               x:Uid="SettingsSignOutTextBlock"
+                               Text="Sign Out"
+                               Style="{StaticResource TextSettingsTitle}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="15,15,15,10" />
                 </Button>
-                <TextBlock 
-                   Style="{StaticResource TextSettingsTitle}"
-                   Text="{Binding CurrentVersion}"
-                   FontSize="12"
-                   Foreground="#ccc"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Right"
-                   Padding="0" Margin="15,0,15,15"/>
-            </StackPanel>
-
+            </RelativePanel>
         </ScrollViewer>
 
-        <Button Grid.Row="1"
+        <Button RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
                 Command="{Binding CloseCommand}"
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom">
             <Image Source="../Assets/Buttons/btn_close.png" />
         </Button>
 
-    </Grid>
+    </RelativePanel>
 
 </Page>
