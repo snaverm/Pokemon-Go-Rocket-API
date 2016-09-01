@@ -20,9 +20,14 @@ namespace PokemonGo_UWP.ViewModels
     {
         public int CapturedPokemons { get; set; } = 0;
         public int SeenPokemons { get; set; } = 0;
-        public ObservableCollection<Models.PokemonModel> PokedexItems { get; private set; } = new ObservableCollection<PokemonModel>();
+        public ObservableCollection<PokedexPokemonModel> PokedexItems { get; private set; } = new ObservableCollection<PokedexPokemonModel>();
 
-
+        public class PokedexPokemonModel : PokemonModel
+        {
+            public int TimesCaptured { get; set; }
+            public PokedexPokemonModel(PokemonSettings x): base(x) { }
+            public PokedexPokemonModel(PokemonId x) : base(x) { }
+        }
 
 
         public void Load()
@@ -38,12 +43,26 @@ namespace PokemonGo_UWP.ViewModels
                 foreach (PokemonId id in listAllPokemon.Where(t => t != PokemonId.Missingno && pokedexItems.Any(y => y.PokemonId == t)))
                 {
                     PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
-                    PokemonModel pokemonModel = new PokemonModel(pokeman);
-                    pokedexes.Add(pokemonModel);
+                    PokedexPokemonModel pokemonModel = new PokedexPokemonModel(pokeman);
+                    var CurrPokemon = pokemonModel;
+                    pokemonModel.Evolutions.Add(pokemonModel);
+                    while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
+                    {
+
+                        pokemonModel.Evolutions.Insert(0, new PokedexPokemonModel(CurrPokemon.ParentPokemonId));
+                        CurrPokemon = new PokedexPokemonModel(CurrPokemon.ParentPokemonId);
+                    }
+                    CurrPokemon = pokemonModel;
+                    while (CurrPokemon.EvolutionIds.Count > 0)
+                    {
+                        foreach (var ev in CurrPokemon.EvolutionIds) //for Eevee
+                            pokemonModel.Evolutions.Add(new PokedexPokemonModel(ev));
+                        CurrPokemon = new PokedexPokemonModel(CurrPokemon.EvolutionIds.ElementAt(0));
+                    }
+
+                    PokedexItems.Add(pokemonModel);
                 }
-
-                PokedexItems.AddRange(pokedexes);
-
+                
                 CapturedPokemons = pokedexItems.Count(x => x.TimesCaptured > 0);
                 if (pokedexItems != null) SeenPokemons = pokedexItems.Count;
             }
@@ -55,6 +74,16 @@ namespace PokemonGo_UWP.ViewModels
 
             Debug.WriteLine("Loaded!");
         }
+
+        private DelegateCommand _closeCommand;
+        public DelegateCommand CloseCommand
+          =>
+          _closeCommand ??
+          (_closeCommand = new DelegateCommand(() =>
+          {
+                  NavigationService.GoBack();
+          }, () => true)
+          );
 
         //private void PopulateEvolutions()
         //{

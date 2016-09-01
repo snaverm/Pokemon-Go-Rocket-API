@@ -20,16 +20,17 @@ namespace PokemonGo_UWP.Models
         public BitmapImage Sprite => (BitmapImage)new PokemonIdToPokemonSpriteConverter().Convert(this.Id, typeof(BitmapImage), null, string.Empty);
         public Uri BackgroundImage => (Uri)new PokemonTypeToBackgroundImageConverter().Convert(this.Id,typeof(Uri),null,string.Empty);
         public List<PokemonModel> Evolutions { get; set; } = new List<PokemonModel>();
+        public List<PokemonId> EvolutionIds { get; set; } = new List<PokemonId>();
 
 
-        public float ModelScale { get; set; } = 1;
-        public PokemonType Type { get; set; } = PokemonType.Bug;
-        public PokemonType Type2 { get; set; } = PokemonType.Bug;
-        public CameraAttributes Camera { get; set; }
-
-        public int CandyToEvolve { get; set; } = 0;
+        public PokemonModel() { }
 
         public PokemonModel(PokemonSettings settings)
+        {
+            BuildFromSettings(settings);
+        }
+
+        private void BuildFromSettings(PokemonSettings settings)
         {
             Id = settings.PokemonId;
             ModelScale = settings.ModelScale;
@@ -37,7 +38,35 @@ namespace PokemonGo_UWP.Models
             Type2 = settings.Type2;
             Camera = settings.Camera;
             CandyToEvolve = settings.CandyToEvolve;
+            HeightStdDev = settings.HeightStdDev;
+            KmBuddyDistance = settings.KmBuddyDistance;
+            ParentPokemonId = settings.ParentPokemonId;
+            PokedexHeightM = settings.PokedexHeightM;
+            PokedexWeightKg = settings.PokedexWeightKg;
+            EvolutionIds = settings.EvolutionIds.ToList();
         }
+
+        public PokemonModel(PokemonId id)
+        {
+            PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
+            BuildFromSettings(pokeman);
+        }
+
+        public float PokedexWeightKg { get; set; }
+
+        public float PokedexHeightM { get; set; }
+
+        public PokemonId ParentPokemonId { get; set; }
+
+        public float KmBuddyDistance { get; set; }
+
+        public float HeightStdDev { get; set; }
+        public float ModelScale { get; set; } = 1;
+        public PokemonType Type { get; set; } = PokemonType.Bug;
+        public PokemonType Type2 { get; set; } = PokemonType.Bug;
+        public CameraAttributes Camera { get; set; }
+        
+        public int CandyToEvolve { get; set; } = 0;
     }
 
     public static class PokemonModelExtensions
