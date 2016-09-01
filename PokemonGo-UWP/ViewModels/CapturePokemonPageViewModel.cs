@@ -54,15 +54,22 @@ namespace PokemonGo_UWP.ViewModels
                         ReturnToGameScreen.Execute();
                         break;
                     case EncounterResponse.Types.Status.EncounterSuccess:
-                        break;
-                    case EncounterResponse.Types.Status.EncounterPokemonFled:
+                        break;                    
                     case EncounterResponse.Types.Status.EncounterError:
                     case EncounterResponse.Types.Status.EncounterNotFound:
                     case EncounterResponse.Types.Status.EncounterClosed:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterErrorText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
                     case EncounterResponse.Types.Status.EncounterNotInRange:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterNotInRangeText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
+                    case EncounterResponse.Types.Status.EncounterPokemonFled:
                     case EncounterResponse.Types.Status.EncounterAlreadyHappened:
                         await new MessageDialog(Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
                         ReturnToGameScreen.Execute();
+                        GameClient.CatchablePokemons.Remove((MapPokemonWrapper) CurrentPokemon);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -89,7 +96,13 @@ namespace PokemonGo_UWP.ViewModels
                         break;
                     case DiskEncounterResponse.Types.Result.Unknown:
                     case DiskEncounterResponse.Types.Result.NotAvailable:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterErrorText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
                     case DiskEncounterResponse.Types.Result.NotInRange:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterNotInRangeText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
                     case DiskEncounterResponse.Types.Result.EncounterAlreadyFinished:
                         await new MessageDialog(Resources.CodeResources.GetString("PokemonRanAwayText")).ShowAsyncQueue();
                         ReturnToGameScreen.Execute();
