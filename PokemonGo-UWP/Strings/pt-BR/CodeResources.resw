@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PokemonFledText" xml:space="preserve">
+    <value>{0} fugiu</value>
+  </data>
+  <data name="GettingGpsSignalText" xml:space="preserve">
+    <value>Recebendo o sinal do GPS...</value>
+  </data>
+  <data name="GettingUserDataText" xml:space="preserve">
+    <value>Recebendo dados do usuário...</value>
+  </data>
+  <data name="GoogleErrorText" xml:space="preserve">
+    <value>Google retornou um erro: </value>
+  </data>
+  <data name="GoogleNotRespondingText" xml:space="preserve">
+    <value>Google não responde, por favor, tente novamente mais tarde.</value>
+  </data>
+  <data name="LoadingEncounterText" xml:space="preserve">
+    <value>Carregando encontro com {0}</value>
+  </data>
+  <data name="LoggingInText" xml:space="preserve">
+    <value>Fazendo login...</value>
+  </data>
+  <data name="LoginFailedText" xml:space="preserve">
+    <value>Falha no login, por favor tente novamente.</value>
+  </data>
+  <data name="NoText" xml:space="preserve">
+    <value>Não</value>
+    <comment>Capslock</comment>
+  </data>
+  <data name="NoGpsPermissionsText" xml:space="preserve">
+    <value>Precisamos de permissão para usar o GPS no jogo, por favor, ative-o e tente novamente.</value>
+  </data>
+  <data name="PokemonRanAwayText" xml:space="preserve">
+    <value>O Pokémon fugiu, sinto muito :(</value>
+  </data>
+  <data name="PtcDownText" xml:space="preserve">
+    <value>Login PTC provavelmente caiu, por favor, tente novamente mais tarde.</value>
+  </data>
+  <data name="SomethingWentWrongText" xml:space="preserve">
+    <value>Algo deu errado e app pode estar instável agora. Você quer sair e tentar de novo?</value>
+  </data>
+  <data name="UpdateDownloadingText" xml:space="preserve">
+    <value>Baixando atualização {0}</value>
+  </data>
+  <data name="UpdatedVersionText" xml:space="preserve">
+    <value>A nova versão {0} está disponível. Você quer atualizar? 
+{1}</value>
+  </data>
+  <data name="UpdateFailedText" xml:space="preserve">
+    <value>Falha na atualização: {0}
+Abrir a página com os arquivos de instalação para instalação manual?</value>
+  </data>
+  <data name="UpdateInstallingText" xml:space="preserve">
+    <value>Instalando atualização, reiniciando o app...</value>
+  </data>
+  <data name="WrongUsernameText" xml:space="preserve">
+    <value>Nome de usuário/Senha incorretos ou servidor offline, por favor tente novamente.</value>
+  </data>
+  <data name="YesText" xml:space="preserve">
+    <value>Sim</value>
+    <comment>Capslock</comment>
+  </data>
+  <data name="NoTeamText" xml:space="preserve">
+    <value>Sem equipe</value>
+  </data>
+  <data name="TransferPokemonSuccessText" xml:space="preserve">
+    <value>Transferencia bem sucedida! Você ganhou {0} doce do professor.</value>
+  </data>
+  <data name="TransferPokemonWarningText" xml:space="preserve">
+    <value>Você nao poderá obter seu pokemon novamente depois que ele for transferido para o professor. Você quer realmente transferir {0} para o professor?</value>
+  </data>
+  <data name="LoginExpired" xml:space="preserve">
+    <value>Login Expirou.</value>
+  </data>
+  <data name="ActivityUnknown" xml:space="preserve">
+    <value>Desconhecido</value>
+  </data>
+  <data name="ActivityCatchPokemon" xml:space="preserve">
+    <value>Pokémon Capturado</value>
+  </data>
+  <data name="ActivityCatchLegendPokemon" xml:space="preserve">
+    <value>Pokémon Legendário Capturado</value>
+  </data>
+  <data name="ActivityFleePokemon" xml:space="preserve">
+    <value>Pokémon Fugiu</value>
+  </data>
+  <data name="ActivityDefeatFort" xml:space="preserve">
+    <value>Derrota Forte</value>
+  </data>
+  <data name="ActivityEvolvePokemon" xml:space="preserve">
+    <value>Evoluir um Pokémon</value>
+  </data>
+  <data name="ActivityHatchEgg" xml:space="preserve">
+    <value>Ovo Chocado!</value>
+  </data>
+  <data name="ActivityWalkKm" xml:space="preserve">
+    <value>Km Caminhados</value>
+  </data>
+  <data name="ActivityPokedexEntryNew" xml:space="preserve">
+    <value>Novo Pokémon</value>
+  </data>
+  <data name="ActivityCatchFirstThrow" xml:space="preserve">
+    <value>Primeiro Lançamento</value>
+  </data>
+  <data name="ActivityCatchNiceThrow" xml:space="preserve">
+    <value>Bom Lançamento</value>
+  </data>
+  <data name="ActivityCatchGreatThrow" xml:space="preserve">
+    <value>Ótimo Lançamento</value>
+  </data>
+  <data name="ActivityCatchExcellentThrow" xml:space="preserve">
+    <value>Excelente Lançamento</value>
+  </data>
+  <data name="ActivityCatchCurveball" xml:space="preserve">
+    <value>Bola Curva!</value>
+  </data>
+  <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
+    <value>Primeira Captura do dia!</value>
+  </data>
+  <data name="ActivityCatchMilestone" xml:space="preserve">
+    <value>Marco de Captura</value>
+  </data>
+  <data name="ActivityTrainPokemon" xml:space="preserve">
+    <value>Treinar Pokémon</value>
+  </data>
+  <data name="ActivitySearchFort" xml:space="preserve">
+    <value>Buscar Fortes</value>
+  </data>
+  <data name="ActivityReleasePokemon" xml:space="preserve">
+    <value>Libertar Pokémon</value>
+  </data>
+  <data name="ActivityHatchEggSmallBonus" xml:space="preserve">
+    <value>Ovos chocados Pequeno bonus</value>
+  </data>
+  <data name="ActivityHatchEggMediumBonus" xml:space="preserve">
+    <value>Ovos chocados Bonus Médio</value>
+  </data>
+  <data name="ActivityHatchEggLargeBonus" xml:space="preserve">
+    <value>Ovos chocados Bonus Grande</value>
+  </data>
+  <data name="ActivityDefeatGymDefender" xml:space="preserve">
+    <value>Derroto o Defensor do Ginásio</value>
+  </data>
+  <data name="ActivityDefeatGymLeader" xml:space="preserve">
+    <value>Derrote o Líder do Ginásio</value>
+  </data>
+  <data name="Combat" xml:space="preserve">
+    <value>Combate</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Fav" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Sáude</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="PokemonInventoryFullText" xml:space="preserve">
+    <value>Seu inventário Pokemon está cheio, transfira algun Pokémon antes de pegar {0}.</value>
+  </data>
+</root>

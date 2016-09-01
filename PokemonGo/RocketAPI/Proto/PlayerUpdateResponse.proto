@@ -1,9 +1,0 @@
-﻿syntax = "proto3";
-
-package PokemonGo.RocketAPI.GeneratedCode;
-
-message PlayerUpdateResponse {
-	int32 WildPokemon = 1;
-	int32 Fort = 2;
-	int32 FortsNearby = 3;
- }

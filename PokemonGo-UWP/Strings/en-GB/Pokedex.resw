@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Venusaur.Description" xml:space="preserve">
+    <value>There is a large flower on Venusaur’s back. The flower is said to take on vivid colours if it gets plenty of nutrition and sunlight. The flower’s aroma soothes the emotions of people.</value>
+  </data>
+  <data name="Charmeleon.Description" xml:space="preserve">
+    <value>Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe, it turns aggressive. In this excited state, the flame at the tip of its tail flares with a bluish white colour.</value>
+  </data>
+  <data name="Squirtle.Description" xml:space="preserve">
+    <value>Squirtle’s shell is not merely used for protection. The shell’s rounded shape and the grooves on its surface help minimise resistance in water, enabling this Pokémon to swim at high speeds.</value>
+  </data>
+  <data name="Wartortle.Description" xml:space="preserve">
+    <value>Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in colour as Wartortle ages. The scratches on its shell are evidence of this Pokémon’s toughness as a battler.</value>
+  </data>
+  <data name="Caterpie.Description" xml:space="preserve">
+    <value>Caterpie has a voracious appetite. It can devour leaves bigger than its body right before your eyes. From its antenna, this Pokémon releases a terrifically strong odour.</value>
+  </data>
+  <data name="Weedle.Description" xml:space="preserve">
+    <value>Weedle has an extremely acute sense of smell. It is capable of distinguishing its favourite kinds of leaves from those it dislikes just by sniffing with its big red proboscis (nose).</value>
+  </data>
+  <data name="Fearow.Description" xml:space="preserve">
+    <value>Fearow is recognised by its long neck and elongated beak. They are conveniently shaped for catching prey in soil or water. It deftly moves its long and skinny beak to pluck prey.</value>
+  </data>
+  <data name="Vileplume.Description" xml:space="preserve">
+    <value>Vileplume has the world’s largest petals. They are used to attract prey that are then doused with toxic spores. Once the prey are immobilised, this Pokémon catches and devours them.</value>
+  </data>
+  <data name="Venomoth.Description" xml:space="preserve">
+    <value>Venomoth is nocturnal—it is a Pokémon that only becomes active at night. Its favourite prey are small insects that gather around streetlights, attracted by the light in the darkness.</value>
+  </data>
+  <data name="Machoke.Description" xml:space="preserve">
+    <value>Machoke undertakes bodybuilding every day even as it helps people with tough, physically demanding labour. On its days off, this Pokémon heads to the fields and mountains to exercise and train.</value>
+  </data>
+  <data name="Graveler.Description" xml:space="preserve">
+    <value>Rocks are Graveler’s favourite food. This Pokémon will climb a mountain from the base to the summit, crunchingly feasting on rocks all the while. Upon reaching the peak, it rolls back down to the bottom.</value>
+  </data>
+  <data name="Muk.Description" xml:space="preserve">
+    <value>This Pokémon’s favourite food is anything that is repugnantly filthy. In dirty towns where people think nothing of throwing away litter on the streets, Muk are certain to gather.</value>
+  </data>
+  <data name="Voltorb.Description" xml:space="preserve">
+    <value>Voltorb is extremely sensitive—it explodes at the slightest of shocks. It is rumoured that it was first created when a Poké Ball was exposed to a powerful pulse of energy.</value>
+  </data>
+  <data name="Lickitung.Description" xml:space="preserve">
+    <value>Whenever Lickitung comes across something new, it will unfailingly give it a lick. It does so because it memorises things by texture and by taste. It is somewhat put off by sour things.</value>
+  </data>
+  <data name="Rhydon.Description" xml:space="preserve">
+    <value>Rhydon has a horn that serves as a drill. It is used for destroying rocks and boulders. This Pokémon occasionally rams into streams of magma, but the armour-like hide prevents it from feeling the heat.</value>
+  </data>
+  <data name="Starmie.Description" xml:space="preserve">
+    <value>Starmie swims through water by spinning its star-shaped body as if it were a propeller on a ship. The core at the center of this Pokémon’s body glows in seven colours.</value>
+  </data>
+</root>

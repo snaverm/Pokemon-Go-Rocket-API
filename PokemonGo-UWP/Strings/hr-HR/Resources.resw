@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CooldownTextBlock.Text" xml:space="preserve">
+    <value>Moras čekati neko vrijeme</value>
+  </data>
+  <data name="GoogleLoginTextBlock.Text" xml:space="preserve">
+    <value>GOOGLE</value>
+  </data>
+  <data name="InventoryFullTextBlock.Text" xml:space="preserve">
+    <value>Inventorij ti je pun!</value>
+  </data>
+  <data name="PtcLoginTextBlock.Text" xml:space="preserve">
+    <value>Ulogiraj se sa PTC Računom</value>
+  </data>
+  <data name="LoginDisclaimerTextBox.Text" xml:space="preserve">
+    <value>Da bi ste se ulogirali, unesite Nadimak/Email i lozinku od gore. Ako ne vjeruješ toj aplikaciji, izađi odmah. Niantic vas moze banovati zbog korištenja ove aplikacije. Koristi na vlastitu odgovornost</value>
+  </data>
+  <data name="NearbyPokemonTextBlock.Text" xml:space="preserve">
+    <value>U blizini</value>
+  </data>
+  <data name="OutOfRangeTextBlock.Text" xml:space="preserve">
+    <value>OVAJ POKÉSTOP JE PREDALEKO</value>
+  </data>
+  <data name="LoginPasswordPasswordBox.PlaceholderText" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
+  <data name="LoginUsernameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Nadimak/Lozinka</value>
+  </data>
+  <data name="EggsTextBlock.Text" xml:space="preserve">
+    <value>JAJA</value>
+  </data>
+  <data name="SettingsMusicTextBlock.Text" xml:space="preserve">
+    <value>MUZIKA</value>
+  </data>
+  <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
+    <value>POSTAVKE</value>
+  </data>
+  <data name="SettingsSignOutTextBlock.Text" xml:space="preserve">
+    <value>Izlogiraj se</value>
+  </data>
+  <data name="SettingsVibrationTextBlock.Text" xml:space="preserve">
+    <value>Vibracija</value>
+  </data>
+  <data name="ItemsTextBlock.Text" xml:space="preserve">
+    <value>STVARI</value>
+  </data>
+  <data name="LowercaseItemsTextBlock.Text" xml:space="preserve">
+    <value>stvari</value>
+  </data>
+  <data name="TotalExperienceTextBlock.Text" xml:space="preserve">
+    <value>UKUPNO</value>
+  </data>
+  <data name="LevelUpTextBlock.Text" xml:space="preserve">
+    <value>Viša razina!</value>
+  </data>
+  <data name="LevelTextBlock.Text" xml:space="preserve">
+    <value>Razina</value>
+  </data>
+  <data name="SettingsMapAutoRotateTextBlock.Text" xml:space="preserve">
+    <value>Auto-Rotacija Mape</value>
+  </data>
+  <data name="StartDateTextBlock.Text" xml:space="preserve">
+    <value>DATUM POČETKA</value>
+  </data>
+  <data name="IncubatorsTextBlock.Text" xml:space="preserve">
+    <value>INKUBATORI</value>
+  </data>
+  <data name="SettingsUseNianticMapTextBlock.Text" xml:space="preserve">
+    <value>Koristi Niantic Kartu</value>
+  </data>
+  <data name="CandyTextBlock.Text" xml:space="preserve">
+    <value>SLATKIŠ</value>
+    <comment>Watch out: space before the word!</comment>
+  </data>
+  <data name="HeightTextBlock.Text" xml:space="preserve">
+    <value>Visina</value>
+  </data>
+  <data name="StardustTextBlock.Text" xml:space="preserve">
+    <value>ZVJEZDANA PRAŠINA</value>
+  </data>
+  <data name="TypeTextBlock.Text" xml:space="preserve">
+    <value>Vrsta</value>
+  </data>
+  <data name="WeightTextBlock.Text" xml:space="preserve">
+    <value>Težina</value>
+  </data>
+  <data name="EvolveButton.Content" xml:space="preserve">
+    <value>EVOLUIRATI</value>
+  </data>
+  <data name="PowerUpButton.Content" xml:space="preserve">
+    <value>POVEČAJ SNAGU</value>
+  </data>
+  <data name="EggDetailButtonTextBlock.Text" xml:space="preserve">
+    <value>KRENI SA INKUBACIJOM</value>
+  </data>
+  <data name="EggDetailTextBlock.Text" xml:space="preserve">
+    <value>Koristi inkubator da bi ste inkubirali Jaje.</value>
+  </data>
+  <data name="SettingsRememberMapZoomTextBlock.Text" xml:space="preserve">
+    <value>Zapamti Zoom Karte</value>
+  </data>
+  <data name="TransferTextBlock.Text" xml:space="preserve">
+    <value>TRANSFERAJ</value>
+  </data>
+  <data name="SettingsLanguageRestartTextBlock.Text" xml:space="preserve">
+    <value>Morate ponnovno pokrenuti aplikaciju da bi promjenjene postavke primile efekte.</value>
+  </data>
+  <data name="SettingsLanguageTextBlock.Text" xml:space="preserve">
+    <value>Jezik</value>
+  </data>
+  <data name="SettingsCompassEnabledTextBlock.Text" xml:space="preserve">
+    <value>Koristi Kompas</value>
+  </data>
+  <data name="SettingsLiveTileTextBlock.Text" xml:space="preserve">
+    <value>Mod Živih Ploča</value>
+  </data>
+  <data name="FavoriteTextBlock.Text" xml:space="preserve">
+    <value>FAVORITI</value>
+  </data>
+  <data name="PokedexCaught.Text" xml:space="preserve">
+    <value>Ulovljeno:</value>
+  </data>
+  <data name="PokedexEvolutions.Text" xml:space="preserve">
+    <value>Evolucije</value>
+  </data>
+  <data name="PokedexPokemonHeight.Text" xml:space="preserve">
+    <value>Visina</value>
+  </data>
+  <data name="PokedexPokemonType.Text" xml:space="preserve">
+    <value>Tip:</value>
+  </data>
+  <data name="PokedexPokemonWeight.Text" xml:space="preserve">
+    <value>Težina:</value>
+  </data>
+  <data name="PokedexSeen.Text" xml:space="preserve">
+    <value>Viđeno:</value>
+  </data>
+  <data name="PokedexViewCaught.Text" xml:space="preserve">
+    <value>Ulovljeno</value>
+  </data>
+  <data name="PokedexViewSeen.Text" xml:space="preserve">
+    <value>Viđeno</value>
+  </data>
+  <data name="TimesTextBlock.Text" xml:space="preserve">
+    <value>Puta</value>
+  </data>
+</root>

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Absorb" xml:space="preserve">
+    <value>לספוג</value>
+  </data>
+  <data name="Acid" xml:space="preserve">
+    <value>חומצה</value>
+  </data>
+  <data name="Blizzard" xml:space="preserve">
+    <value>סופת השלגים</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>לחתוך</value>
+  </data>
+  <data name="CutFast" xml:space="preserve">
+    <value>לחתוך</value>
+  </data>
+  <data name="Dig" xml:space="preserve">
+    <value>לחפור</value>
+  </data>
+  <data name="Discharge" xml:space="preserve">
+    <value>פריקה</value>
+  </data>
+  <data name="Earthquake" xml:space="preserve">
+    <value>רעידת אדמה</value>
+  </data>
+  <data name="Ember" xml:space="preserve">
+    <value>גחלת</value>
+  </data>
+  <data name="Flamethrower" xml:space="preserve">
+    <value>להביור</value>
+  </data>
+  <data name="Headbutt" xml:space="preserve">
+    <value>הלכנו</value>
+  </data>
+  <data name="Hurricane" xml:space="preserve">
+    <value>הוריקן</value>
+  </data>
+  <data name="Lick" xml:space="preserve">
+    <value>ליקוק</value>
+  </data>
+  <data name="Megahorn" xml:space="preserve">
+    <value>מגההורן</value>
+  </data>
+  <data name="Peck" xml:space="preserve">
+    <value>פק</value>
+  </data>
+  <data name="PeckFast" xml:space="preserve">
+    <value>פק</value>
+  </data>
+  <data name="Pound" xml:space="preserve">
+    <value>לירה</value>
+  </data>
+  <data name="Psybeam" xml:space="preserve">
+    <value>קרן מדיום</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>מדיום</value>
+  </data>
+  <data name="Psyshock" xml:space="preserve">
+    <value>הלם נפשי</value>
+  </data>
+  <data name="Psystrike" xml:space="preserve">
+    <value>השביתה מדיום</value>
+  </data>
+  <data name="Scald" xml:space="preserve">
+    <value>לשלוק</value>
+  </data>
+  <data name="ScaldBlastoise" xml:space="preserve">
+    <value>לשלוק</value>
+  </data>
+  <data name="Scratch" xml:space="preserve">
+    <value>שריטה</value>
+  </data>
+  <data name="ScratchFast" xml:space="preserve">
+    <value>שריטה</value>
+  </data>
+  <data name="Slam" xml:space="preserve">
+    <value>תיסלם</value>
+  </data>
+  <data name="Slash" xml:space="preserve">
+    <value>לוכסן</value>
+  </data>
+  <data name="Sludge" xml:space="preserve">
+    <value>בוצה</value>
+  </data>
+  <data name="Smog" xml:space="preserve">
+    <value>ערפיח</value>
+  </data>
+  <data name="Spark" xml:space="preserve">
+    <value>הניצוץ</value>
+  </data>
+  <data name="Splash" xml:space="preserve">
+    <value>ספלאש</value>
+  </data>
+  <data name="SplashFast" xml:space="preserve">
+    <value>ספלאש</value>
+  </data>
+  <data name="Stomp" xml:space="preserve">
+    <value>לרקוע</value>
+  </data>
+  <data name="Struggle" xml:space="preserve">
+    <value>המאבק</value>
+  </data>
+  <data name="Submission" xml:space="preserve">
+    <value>כניעה</value>
+  </data>
+  <data name="Swift" xml:space="preserve">
+    <value>סוויפט</value>
+  </data>
+  <data name="Tackle" xml:space="preserve">
+    <value>למדינתו</value>
+  </data>
+  <data name="TackleFast" xml:space="preserve">
+    <value>למדינתו</value>
+  </data>
+  <data name="Thunder" xml:space="preserve">
+    <value>רעם</value>
+  </data>
+  <data name="Thunderbolt" xml:space="preserve">
+    <value>יונתן</value>
+  </data>
+  <data name="Twineedle" xml:space="preserve">
+    <value> מחט</value>
+  </data>
+  <data name="Twister" xml:space="preserve">
+    <value>טוויסטר</value>
+  </data>
+  <data name="Wrap" xml:space="preserve">
+    <value>לעטוף</value>
+  </data>
+  <data name="XScissor" xml:space="preserve">
+    <value> מספריים</value>
+  </data>
+</root>

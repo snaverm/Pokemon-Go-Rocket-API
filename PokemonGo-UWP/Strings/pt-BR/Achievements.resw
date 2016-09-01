@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BadgeBattleAttackWon" xml:space="preserve">
+    <value>Menina de Batalha</value>
+  </data>
+  <data name="BadgeBattleTrainingWon" xml:space="preserve">
+    <value>Treinador ás</value>
+  </data>
+  <data name="BadgeBigMagikarp" xml:space="preserve">
+    <value>Pescador</value>
+  </data>
+  <data name="BadgeCaptureTotal" xml:space="preserve">
+    <value>Colecionador</value>
+  </data>
+  <data name="BadgeEvolvedTotal" xml:space="preserve">
+    <value>Cientista</value>
+  </data>
+  <data name="BadgeHatchedTotal" xml:space="preserve">
+    <value>Reprodutor</value>
+  </data>
+  <data name="BadgePikachu" xml:space="preserve">
+    <value>Pikachu</value>
+  </data>
+  <data name="BadgePokestopsVisited" xml:space="preserve">
+    <value>Mochileiro</value>
+  </data>
+  <data name="BadgeSmallRattata" xml:space="preserve">
+    <value>Jovem</value>
+  </data>
+  <data name="BadgeTravelKm" xml:space="preserve">
+    <value>Corredora</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>Caçador de Insetos</value>
+  </data>
+  <data name="Dragon" xml:space="preserve">
+    <value>Domador de dragões</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>Oscilante</value>
+  </data>
+  <data name="Fairy" xml:space="preserve">
+    <value>Menina de conto de fadas</value>
+  </data>
+  <data name="Fighting" xml:space="preserve">
+    <value>Faixa Preta</value>
+  </data>
+  <data name="Fire" xml:space="preserve">
+    <value>Incendiador</value>
+  </data>
+  <data name="Flying" xml:space="preserve">
+    <value>Guardião de pássaros</value>
+  </data>
+  <data name="Ghost" xml:space="preserve">
+    <value>Maniaco dos Feitiços</value>
+  </data>
+  <data name="Grass" xml:space="preserve">
+    <value>Jardineiro</value>
+  </data>
+  <data name="Ground" xml:space="preserve">
+    <value>Maníaco de ruínas</value>
+  </data>
+  <data name="Ice" xml:space="preserve">
+    <value>Esquiador</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Garoto da escola</value>
+  </data>
+  <data name="Poison" xml:space="preserve">
+    <value>Menina punk</value>
+  </data>
+  <data name="Psychic" xml:space="preserve">
+    <value>Psíquico</value>
+  </data>
+  <data name="Rock" xml:space="preserve">
+    <value>Alpinista</value>
+  </data>
+  <data name="Steel" xml:space="preserve">
+    <value>Agente de depósito</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>Nadador</value>
+  </data>
+  <data name="BadgeBattleAttackWonDescription" xml:space="preserve">
+    <value>Ganhou {0} batalhas de ginásio.</value>
+  </data>
+  <data name="BadgeBattleTrainingWonDescription" xml:space="preserve">
+    <value>Ganhou {0} batalhas de treinamento</value>
+  </data>
+  <data name="BadgeBigMagikarpDescription" xml:space="preserve">
+    <value>Capturou {0} Magikarp</value>
+  </data>
+  <data name="BadgeCaptureTotalDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemon</value>
+  </data>
+  <data name="BadgeEvolvedTotalDescription" xml:space="preserve">
+    <value>Evoluiu {0} Pokémon</value>
+  </data>
+  <data name="BadgeHatchedTotalDescription" xml:space="preserve">
+    <value>Chocou {0} Pokemon</value>
+  </data>
+  <data name="BadgePikachuDescription" xml:space="preserve">
+    <value>Capturou {0} Pikachu</value>
+  </data>
+  <data name="BadgePokedexEntriesDescription" xml:space="preserve">
+    <value>{0} Pokemons registrados na Pokedex</value>
+  </data>
+  <data name="BadgePokestopsVisitedDescription" xml:space="preserve">
+    <value>Visitou {0} Pokestops</value>
+  </data>
+  <data name="BadgeSmallRattataDescription" xml:space="preserve">
+    <value>Capturou {0} Rattata</value>
+  </data>
+  <data name="BadgeTravelKmDescription" xml:space="preserve">
+    <value>Andou {0} km</value>
+  </data>
+  <data name="BugDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemon Insetos</value>
+  </data>
+  <data name="DragonDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemon Dragoes</value>
+  </data>
+  <data name="ElectricDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Elétricos</value>
+  </data>
+  <data name="FairyDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Mágicos</value>
+  </data>
+  <data name="FightingDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Lutadores</value>
+  </data>
+  <data name="FireDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons de Fogo</value>
+  </data>
+  <data name="FlyingDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Voadores</value>
+  </data>
+  <data name="GhostDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Fantasmas</value>
+  </data>
+  <data name="GrassDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Grama</value>
+  </data>
+  <data name="GroundDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Terra</value>
+  </data>
+  <data name="IceDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Gelo</value>
+  </data>
+  <data name="NormalDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Normais</value>
+  </data>
+  <data name="PoisonDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Venenosos</value>
+  </data>
+  <data name="PsychicDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemon Pisiquicos</value>
+  </data>
+  <data name="RockDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons Rocha</value>
+  </data>
+  <data name="SteelDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemons de Aço</value>
+  </data>
+  <data name="WaterDescription" xml:space="preserve">
+    <value>Capturou {0} Pokemon de Água</value>
+  </data>
+</root>
