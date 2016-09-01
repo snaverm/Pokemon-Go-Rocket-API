@@ -71,7 +71,7 @@ namespace PokemonGo_UWP.Views
         /// <param name="e"></param>
         private void PokemonDetailControl_Loaded(object sender, RoutedEventArgs e)
         {
-            TimeSpan delay = TimeSpan.FromMilliseconds(50);
+            TimeSpan delay = TimeSpan.FromMilliseconds(10);
 
             ThreadPoolTimer DelayThread = ThreadPoolTimer.CreateTimer(
             (source1) =>

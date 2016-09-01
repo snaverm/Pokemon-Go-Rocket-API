@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="PokemonGo_UWP.Views.PokemonDetailControl"
+             x:Name="Root"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:PokemonGo_UWP.Views"
@@ -82,7 +83,7 @@
                           HorizontalAlignment="Right"
                           BorderBrush="White"
                           BorderThickness="4"
-                          Command="{Binding FavoritePokemonCommand}"
+                          Command="{Binding ElementName=Root, Path=FavoritePokemonCommand}"
                           IsChecked="{Binding IsFavorite, Mode=OneWay}" />
 
                 <TextBlock Grid.Column="0"
@@ -167,7 +168,7 @@
                                     VerticalAlignment="Stretch"
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource ButtonSymbolIcon}"
-                                    Command="{Binding RenamePokemonCommand}">
+                                    Command="{Binding ElementName=Root, Path=RenamePokemonCommand}">
                                 <Viewbox>
                                     <SymbolIcon Symbol="Edit" />
                                 </Viewbox>
@@ -232,19 +233,19 @@
                                                    Margin="0,0,8,0"
                                                    FontSize="17"
                                                    FontFamily="{StaticResource LatoRegularFont}"
-                                                   Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
+                                                   Visibility="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="{StaticResource TitleTextColor}">
-                                                    <Run Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
+                                                    <Run Text="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                                     <Run Text="/" />
-                                                    <Run Text="{Binding PokemonExtraData.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
+                                                    <Run Text="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="32,0"
                                                    FontSize="17"
                                                    FontFamily="{StaticResource LatoRegularFont}"
-                                                   Text="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
-                                                   Visibility="{Binding PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
+                                                   Text="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
+                                                   Visibility="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
                                                    Foreground="{StaticResource TitleTextColor}" />
                                     </Grid>
                                 </Viewbox>
@@ -381,7 +382,7 @@
                                     <Image Margin="2,0"
                                            HorizontalAlignment="Left"
                                            Height="25"
-                                           Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                           Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                     <TextBlock FontSize="19"
                                                FontFamily="{StaticResource LatoRegularFont}"
                                                Foreground="{StaticResource TitleTextColor}"
@@ -411,7 +412,7 @@
                                     Background="#E8EEE0">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <core:InvokeCommandAction Command="{Binding PowerUpPokemonCommand}" />
+                                        <core:InvokeCommandAction Command="{Binding ElementName=Root, Path=PowerUpPokemonCommand}" />
                                     </core:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
                                 <Grid HorizontalAlignment="Right"
@@ -458,7 +459,7 @@
                                                VerticalAlignment="Center"
                                                Height="20"
                                                Margin="0,0,3,0"
-                                               Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                               Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
@@ -488,7 +489,7 @@
                                     x:Uid="PowerUpButton"
                                     MinWidth="125"
                                     Margin="0,10"
-                                    Command="{Binding PowerUpPokemonCommand}" />
+                                    Command="{Binding ElementName=Root, Path=PowerUpPokemonCommand}" />
 
                             <!-- Evolve -->
                             <Border Grid.Column="0"
@@ -499,10 +500,10 @@
                                     VerticalAlignment="Top"
                                     Height="40"
                                     Background="#E8EEE0"
-                                    Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">
+                                    Visibility="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
-                                        <core:InvokeCommandAction Command="{Binding EvolvePokemonCommand}" />
+                                        <core:InvokeCommandAction Command="{Binding ElementName=Root, Path=EvolvePokemonCommand}" />
                                     </core:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
 
@@ -520,16 +521,16 @@
                                                VerticalAlignment="Center"
                                                Height="20"
                                                Margin="0,0,3,0"
-                                               Source="{Binding PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                               Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding PokemonExtraData.CandyToEvolve}"
+                                                   Text="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve}"
                                                    VerticalAlignment="Center">
                                                 <interactivity:Interaction.Behaviors>
                                                     <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}"
                                                                               ComparisonCondition="LessThan"
-                                                                              Value="{Binding PokemonExtraData.CandyToEvolve}">
+                                                                              Value="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve}">
                                                         <core:ChangePropertyAction PropertyName="Foreground"
                                                                                    Value="Red" />
                                                     </core:DataTriggerBehavior>
@@ -548,8 +549,8 @@
                                     x:Uid="EvolveButton"
                                     MinWidth="125"
                                     Margin="0,0,0,15"
-                                    Command="{Binding EvolvePokemonCommand}"
-                                    Visibility="{Binding PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}" />
+                                    Command="{Binding ElementName=Root, Path=EvolvePokemonCommand}"
+                                    Visibility="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}" />
 
                         </Grid>
 

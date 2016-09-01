@@ -742,31 +742,46 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ButtonNoStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0,15,0,15" />
-        <Setter Property="MinHeight" Value="0" />
-        <Setter Property="MinWidth" Value="0" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Style x:Key="ButtonNoStyle"
+           TargetType="Button">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="0,15,0,15" />
+        <Setter Property="MinHeight"
+                Value="0" />
+        <Setter Property="MinWidth"
+                Value="0" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid x:Name="Grid" Background="Transparent">
+                    <Grid x:Name="Grid"
+                          Background="Transparent">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Pressed" To="PointerOver">
+                                    <VisualTransition From="Pressed"
+                                                      To="PointerOver">
                                         <Storyboard />
                                     </VisualTransition>
-                                    <VisualTransition From="PointerOver" To="Normal">
+                                    <VisualTransition From="PointerOver"
+                                                      To="Normal">
                                         <Storyboard />
                                     </VisualTransition>
-                                    <VisualTransition From="Pressed" To="Normal">
+                                    <VisualTransition From="Pressed"
+                                                      To="Normal">
                                         <Storyboard />
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
@@ -777,11 +792,13 @@
                                         <PointerDownThemeAnimation Storyboard.TargetName="Grid" />
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
                                                                        Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="White" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                        Storyboard.TargetName="Border">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="Transparent" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -806,71 +823,21 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
+                        <Border x:Name="Border"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}" Margin="0">
-                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
+                                Background="{TemplateBinding Background}"
+                                Margin="0">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              AutomationProperties.AccessibilityView="Raw"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Content="{TemplateBinding Content}"
-                                              Foreground="{TemplateBinding Foreground}" FontWeight="Normal"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              FontWeight="Normal"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Margin="{TemplateBinding Padding}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ButtonContextMenu" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="#e4ffde" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0,15,0,15" />
-        <Setter Property="MinHeight" Value="0" />
-        <Setter Property="MinWidth" Value="0" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="Grid" Background="Transparent">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition From="PointerOver" To="Pressed">
-                                        <Storyboard/>
-                                    </VisualTransition>
-                                    <VisualTransition From="Pressed" To="PointerOver">
-                                        <Storyboard />
-                                    </VisualTransition>
-                                    <VisualTransition From="PointerOver" To="Normal">
-                                        <Storyboard />
-                                    </VisualTransition>
-                                    <VisualTransition From="Pressed" To="Normal">
-                                        <Storyboard />
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver" />
-                                <VisualState x:Name="Pressed" />
-                                <VisualState x:Name="Disabled" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}"
-                                              Foreground="{TemplateBinding Foreground}" FontWeight="Normal"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
-                            <ContentPresenter.RenderTransform>
-                                <ScaleTransform ScaleX="1.0" ScaleY="1.0" x:Name="ButtonScaleTransform" />
-                            </ContentPresenter.RenderTransform>
-                        </ContentPresenter>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
