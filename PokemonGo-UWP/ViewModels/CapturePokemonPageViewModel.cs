@@ -394,39 +394,26 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand<bool> UseSelectedCaptureItem => _useSelectedCaptureItem ?? (_useSelectedCaptureItem = new DelegateCommand<bool>(async hitPokemon =>
         {
             LastItemUsed = SelectedCaptureItem.ItemId;
+            var catched = false;
             Logger.Write($"Launched {SelectedCaptureItem} at {CurrentPokemon.PokemonId}");
             if (SelectedCaptureItem.ItemId == ItemId.ItemPokeBall || SelectedCaptureItem.ItemId == ItemId.ItemGreatBall || SelectedCaptureItem.ItemId == ItemId.ItemMasterBall || SelectedCaptureItem.ItemId == ItemId.ItemUltraBall)
             {
                 PokeballButtonEnabled = false;
-                Busy.SetBusy(true);
+
                 // Player's using a PokeBall so we try to catch the Pokemon
-                await ThrowPokeball(hitPokemon);
-
-                // We always need to update the inventory
-                await GameClient.UpdateInventory();
-                SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall();
-
-                Busy.SetBusy(false);
+                catched = await ThrowPokeball(hitPokemon);
             }
             else
             {
-                //So that after using berry pokeball is immediatelly rendered
-                SelectedCaptureItem = SelectAvailablePokeBall();
-
                 PokeballButtonEnabled = false;
-                Busy.SetBusy(true);
+
                 // He's using a berry
                 await ThrowBerry();
-
-                // We always need to update the inventory
-                await GameClient.UpdateInventory();
-                SelectedCaptureItem = SelectAvailablePokeBall();
-
-                Busy.SetBusy(false);
-                if (SelectedCaptureItem.Count != 0)
-                    PokeballButtonEnabled = true;
             }
-            Busy.SetBusy(false);
+
+            if (SelectedCaptureItem != null && SelectedCaptureItem.Count > 0 && !catched)
+                PokeballButtonEnabled = true;
+
             LastItemUsed = null;
         }, hitPokemon => true));
 
@@ -436,14 +423,19 @@ namespace PokemonGo_UWP.ViewModels
         ///     Launches the PokeBall for the current encounter, handling the different catch responses
         /// </summary>
         /// <returns></returns>
-        private async Task ThrowPokeball(bool hitPokemon)
+        private async Task<bool> ThrowPokeball(bool hitPokemon)
         {
             // We use to simulate a 5 second wait to get animation going
             // If server takes too much to reply then we don't use the delay
             var requestTime = DateTime.Now;
+
             var caughtPokemonResponse = await GameClient.CatchPokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, SelectedCaptureItem.ItemId, hitPokemon);
+
+            await GameClient.UpdateInventory(); //TODO: Change to delta update inventory, so it doesn't take so long (and offico client does it too)
+            SelectedCaptureItem = SelectPokeballType(LastItemUsed) ?? SelectAvailablePokeBall(); //To restore it after UpdateInventory, which overrides it
+
             var responseDelay = DateTime.Now - requestTime;
-            if (responseDelay.TotalSeconds < 5)
+            if (responseDelay.TotalSeconds < 5 && hitPokemon)
                 await Task.Delay(TimeSpan.FromSeconds(5 - (int) responseDelay.TotalSeconds));
             var nearbyPokemon = GameClient.NearbyPokemons.FirstOrDefault(pokemon => pokemon.EncounterId == CurrentPokemon.EncounterId);
 
@@ -464,7 +456,7 @@ namespace PokemonGo_UWP.ViewModels
                     else
                         GameClient.LuredPokemons.Remove((LuredPokemon) CurrentPokemon);
                     GameClient.NearbyPokemons.Remove(nearbyPokemon);
-                    return;
+                    return true;
 
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
@@ -491,8 +483,7 @@ namespace PokemonGo_UWP.ViewModels
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (SelectedCaptureItem.Count != 0)
-                PokeballButtonEnabled = true;
+            return false;
         }
 
         /// <summary>
@@ -501,9 +492,13 @@ namespace PokemonGo_UWP.ViewModels
         /// <returns></returns>
         private async Task ThrowBerry()
         {
+            SelectedCaptureItem = SelectAvailablePokeBall(); //To set it immediatelly, because button image would be berry until responses
             Logger.Write($"Used {LastItemUsed}.");
 
             var berryResponse = await GameClient.UseCaptureItem(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId, LastItemUsed ?? ItemId.ItemRazzBerry);
+            await GameClient.UpdateInventory(); //TODO: Change to delta update inventory, so it doesn't take so long (and offico client does it too)
+            SelectedCaptureItem = SelectAvailablePokeBall(); //To restore it after UpdateInventory, which overrides it
+
             if (berryResponse.Success)
             {
                 // TODO: visual feedback
