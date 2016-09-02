@@ -233,19 +233,19 @@
                                                    Margin="0,0,8,0"
                                                    FontSize="17"
                                                    FontFamily="{StaticResource LatoRegularFont}"
-                                                   Visibility="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}"
+                                                   Visibility="{Binding Converter={StaticResource PokemonToPokemonSecondTypeVisibilityConverter}, ConverterParameter=False}"
                                                    Foreground="{StaticResource TitleTextColor}">
-                                                    <Run Text="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
+                                                    <Run Text="{Binding Converter={StaticResource PokemonToTranslatedPokemonTypeConverter}, ConverterParameter=1}" />
                                                     <Run Text="/" />
-                                                    <Run Text="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
+                                                    <Run Text="{Binding Converter={StaticResource PokemonToTranslatedPokemonTypeConverter}, ConverterParameter=2}" />
                                         </TextBlock>
 
                                         <TextBlock HorizontalAlignment="Center"
                                                    Margin="32,0"
                                                    FontSize="17"
                                                    FontFamily="{StaticResource LatoRegularFont}"
-                                                   Text="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonTypeTranslationConverter}}"
-                                                   Visibility="{Binding ElementName=Root, Path=PokemonExtraData.Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}"
+                                                   Text="{Binding Converter={StaticResource PokemonToTranslatedPokemonTypeConverter}, ConverterParameter=1}"
+                                                   Visibility="{Binding Converter={StaticResource PokemonToPokemonSecondTypeVisibilityConverter}, ConverterParameter=True}"
                                                    Foreground="{StaticResource TitleTextColor}" />
                                     </Grid>
                                 </Viewbox>
@@ -382,11 +382,11 @@
                                     <Image Margin="2,0"
                                            HorizontalAlignment="Left"
                                            Height="25"
-                                           Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                           Source="{Binding Converter={StaticResource PokemonToCandyImageConverter}}" />
                                     <TextBlock FontSize="19"
                                                FontFamily="{StaticResource LatoRegularFont}"
                                                Foreground="{StaticResource TitleTextColor}"
-                                               Text="{Binding CurrentCandy.Candy_}"
+                                               Text="{Binding Converter={StaticResource PokemonToCurrentCandiesConverter}}"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -396,7 +396,7 @@
                                            FontSize="10"
                                            Margin="-10,0"
                                            VerticalAlignment="Center">
-                                            <Run Text="{Binding CurrentCandy.FamilyId, Converter={StaticResource PokemonFamilyNameToStringConverter}}" />
+                                            <Run Text="{Binding Converter={StaticResource PokemonToPokemonFamilyNameStringConverter}}" />
                                             <Run x:Uid="CandyTextBlock" />
                                 </TextBlock>
                             </StackPanel>
@@ -436,14 +436,14 @@
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding Converter=PokemonToStardustForPowerUpConverter}"
+                                                   Text="{Binding Converter={StaticResource PokemonToStardustForPowerUpConverter}}"
                                                    HorizontalAlignment="Left"
                                                    Margin="-6,0,0,0"
                                                    VerticalAlignment="Center">
                                                     <interactivity:Interaction.Behaviors>
                                                         <core:DataTriggerBehavior Binding="{Binding ElementName=Root, Path=StardustAmount}"
                                                                                   ComparisonCondition="LessThan"
-                                                                                  Value="{Binding Converter=PokemonToStardustForPowerUpConverter}">
+                                                                                  Value="{Binding Converter={StaticResource PokemonToStardustForPowerUpConverter}}">
                                                             <core:ChangePropertyAction PropertyName="Foreground"
                                                                                        Value="Red" />
                                                         </core:DataTriggerBehavior>
@@ -459,17 +459,17 @@
                                                VerticalAlignment="Center"
                                                Height="20"
                                                Margin="0,0,3,0"
-                                               Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                               Source="{Binding Converter={StaticResource PokemonToCandyImageConverter}}" />
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding Converter=PokemonToCandiesForPowerUpConverter}"
+                                                   Text="{Binding Converter={StaticResource PokemonToCandiesForPowerUpConverter}}"
                                                    HorizontalAlignment="Left"
                                                    VerticalAlignment="Center">
                                                     <interactivity:Interaction.Behaviors>
-                                                        <core:DataTriggerBehavior Binding="{Binding Converter=PokemonToCurrentCandiesConverter}"
+                                                        <core:DataTriggerBehavior Binding="{Binding Converter={StaticResource PokemonToCurrentCandiesConverter}}"
                                                                                   ComparisonCondition="LessThan"
-                                                                                  Value="{Binding Converter=PokemonToCandiesForPowerUpConverter}">
+                                                                                  Value="{Binding Converter={StaticResource PokemonToCandiesForPowerUpConverter}}">
                                                             <core:ChangePropertyAction PropertyName="Foreground"
                                                                                        Value="Red" />
                                                         </core:DataTriggerBehavior>
@@ -500,7 +500,7 @@
                                     VerticalAlignment="Top"
                                     Height="40"
                                     Background="#E8EEE0"
-                                    Visibility="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}">
+                                    Visibility="{Binding Converter={StaticResource PokemonToPokemonEvolveVisibilityConverter}}">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="Tapped">
                                         <core:InvokeCommandAction Command="{Binding ElementName=Root, Path=EvolvePokemonCommand}" />
@@ -521,16 +521,16 @@
                                                VerticalAlignment="Center"
                                                Height="20"
                                                Margin="0,0,3,0"
-                                               Source="{Binding ElementName=Root, Path=PokemonExtraData.Type, Converter={StaticResource PokemonFamilyToCandyImageConverter}}" />
+                                               Source="{Binding Converter={StaticResource PokemonToCandyImageConverter}}" />
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve}"
+                                                   Text="{Binding Converter={StaticResource PokemonToCandiesForEvolveConverter}}"
                                                    VerticalAlignment="Center">
                                                 <interactivity:Interaction.Behaviors>
-                                                    <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}"
+                                                    <core:DataTriggerBehavior Binding="{Binding Converter={StaticResource PokemonToCurrentCandiesConverter}}"
                                                                               ComparisonCondition="LessThan"
-                                                                              Value="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve}">
+                                                                              Value="{Binding Converter={StaticResource PokemonToCandiesForEvolveConverter}}">
                                                         <core:ChangePropertyAction PropertyName="Foreground"
                                                                                    Value="Red" />
                                                     </core:DataTriggerBehavior>
@@ -550,7 +550,7 @@
                                     MinWidth="125"
                                     Margin="0,0,0,15"
                                     Command="{Binding ElementName=Root, Path=EvolvePokemonCommand}"
-                                    Visibility="{Binding ElementName=Root, Path=PokemonExtraData.CandyToEvolve, Converter={StaticResource VisibleWhenCanEvolveConverter}}" />
+                                    Visibility="{Binding Converter={StaticResource PokemonToPokemonEvolveVisibilityConverter}}" />
 
                         </Grid>
 

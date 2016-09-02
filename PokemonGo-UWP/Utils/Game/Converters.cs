@@ -186,7 +186,7 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).FamilyId);
+            return GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).FamilyId).Candy_;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -203,8 +203,8 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return Convert.ToInt32(GameClient.PokemonUpgradeSettings.StardustCost[
-                    Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+            return System.Convert.ToInt32(GameClient.PokemonUpgradeSettings.StardustCost[
+                    System.Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -221,8 +221,141 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[
-                Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+            return System.Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[
+                System.Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToCandiesForEvolveConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return 0;
+            return GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).CandyToEvolve;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonFamilyNameStringConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return "";
+            return Resources.Pokemon.GetString(GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).FamilyId.ToString().Replace("Family", "")).ToUpperInvariant();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToCandyImageConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return "";
+            return new PokemonFamilyToCandyImageConverter()
+                .Convert(GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).Type, targetType, parameter, language);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToTranslatedPokemonTypeConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            PokemonType pokeType;
+            if(System.Convert.ToInt32(parameter) == 2)
+            {
+                pokeType = GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).Type2;
+            } else
+            {
+                pokeType = GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).Type;
+            }
+            return new PokemonTypeTranslationConverter().Convert(pokeType, targetType, null, language);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonSecondTypeVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return Visibility.Collapsed;
+
+            Visibility visibility = Visibility.Collapsed;
+            if(System.Convert.ToBoolean(parameter))
+            {
+                visibility = (Visibility)new InverseVisibleWhenTypeIsNotNoneConverter()
+                    .Convert(GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).Type2, targetType, null, language);
+            } else
+            {
+                visibility = (Visibility)new VisibleWhenTypeIsNotNoneConverter()
+                    .Convert(GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).Type2, targetType, null, language);
+            }
+
+            return visibility;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonEvolveVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null || (int)new PokemonToCandiesForEvolveConverter()
+                .Convert(value, targetType, parameter, language) == 0)
+            {
+                return Visibility.Collapsed;
+            }
+
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -262,7 +395,8 @@ namespace PokemonGo_UWP.Utils
         {
             if (value == null) return string.Empty;
             var move = (PokemonMove)value;
-            return new PokemonTypeTranslationConverter().Convert(GameClient.MoveSettings.First(item => item.MovementId == move).PokemonType, targetType, parameter, language);
+            return new PokemonTypeTranslationConverter()
+                .Convert(GameClient.MoveSettings.First(item => item.MovementId == move).PokemonType, targetType, parameter, language);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

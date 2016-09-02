@@ -18,6 +18,15 @@
             <utils:PokemonIdToNumericId x:Key="PokemonIdToNumericId" />
             <utils:PokemonIdToPokemonSpriteConverter x:Key="PokemonIdToPokemonSpriteConverter" />
             <utils:PokemonTypeTranslationConverter x:Key="PokemonTypeTranslationConverter" />
+            <utils:PokemonToCurrentCandiesConverter x:Key="PokemonToCurrentCandiesConverter" />
+            <utils:PokemonToStardustForPowerUpConverter x:Key="PokemonToStardustForPowerUpConverter" />
+            <utils:PokemonToCandiesForPowerUpConverter x:Key="PokemonToCandiesForPowerUpConverter" />
+            <utils:PokemonToPokemonFamilyNameStringConverter x:Key="PokemonToPokemonFamilyNameStringConverter" />
+            <utils:PokemonToCandyImageConverter x:Key="PokemonToCandyImageConverter" />
+            <utils:PokemonToTranslatedPokemonTypeConverter x:Key="PokemonToTranslatedPokemonTypeConverter" />
+            <utils:PokemonToPokemonSecondTypeVisibilityConverter x:Key="PokemonToPokemonSecondTypeVisibilityConverter" />
+            <utils:PokemonToCandiesForEvolveConverter x:Key="PokemonToCandiesForEvolveConverter" />
+            <utils:PokemonToPokemonEvolveVisibilityConverter x:Key="PokemonToPokemonEvolveVisibilityConverter" />
             <utils:EmptyConverter x:Key="EmptyConverter" />
             <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter" />
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter" />
@@ -73,30 +82,6 @@
             <utils:AchievementDescriptionTranslationConverter x:Key="AchievementDescriptionTranslationConverter"/>
             <utils:PokemonPivotHeaderToVisibleConverter x:Key="PokemonPivotHeaderToVisibleConverter" />
             <utils:WidthConverter x:Key="WidthConverter" />
-
-            <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:Int32>0</x:Int32>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <Visibility>Collapsed</Visibility>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <Visibility>Visible</Visibility>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>
-
-            <!--<converters:ValueWhenConverter x:Key="VisibleWhenStringNotEmptyConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:String></x:String>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <Visibility>Visible</Visibility>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <Visibility>Collapsed</Visibility>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>-->
 
         </ResourceDictionary>
     </Application.Resources>
