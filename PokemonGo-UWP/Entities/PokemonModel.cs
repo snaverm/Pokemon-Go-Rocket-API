@@ -12,7 +12,7 @@ using POGOProtos.Enums;
 using POGOProtos.Settings.Master;
 using POGOProtos.Settings.Master.Pokemon;
 
-namespace PokemonGo_UWP.Models
+namespace PokemonGo_UWP.Entities
 {
     public class PokemonModel
     {

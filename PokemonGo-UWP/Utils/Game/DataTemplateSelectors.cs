@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using PokemonGo_UWP.Models;
+using PokemonGo_UWP.Entities;
 
 namespace PokemonGo_UWP.Utils
 {
