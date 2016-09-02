@@ -7,12 +7,15 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Template10.Mvvm;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Threading;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -24,6 +27,53 @@ namespace PokemonGo_UWP.Views
         public PokemonDetailControl()
         {
             this.InitializeComponent();
+
+            Loaded += PokemonDetailControl_Loaded;
+
+            // Design time data
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                //var pokeData = new PokemonData
+                //{
+                //    PokemonId = PokemonId.Abra,
+                //    Cp = 10,
+                //    Stamina = 800,
+                //    StaminaMax = 1000,
+                //    WeightKg = 12,
+                //    BattlesAttacked = 5
+
+                //};
+                //CurrentPokemon = new PokemonDataWrapper(pokeData);
+                //StardustAmount = 18000;
+                //StardustToPowerUp = 1800;
+                //CandiesToPowerUp = 100;
+                //CurrentCandy = new Candy
+                //{
+                //    FamilyId = PokemonFamilyId.FamilyAbra,
+                //    Candy_ = 10
+                //};
+            }
+        }
+
+        /// <summary>
+        /// Hack to prevent flickering of the FlipView... it's just sad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PokemonDetailControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            //TimeSpan delay = TimeSpan.FromMilliseconds(50);
+
+            //ThreadPoolTimer DelayThread = ThreadPoolTimer.CreateTimer(
+            //(source1) =>
+            //{
+            //    Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            //    {
+            //        PokemonDetailControl pkmnContrl = (PokemonDetailControl)sender;
+            //        pkmnContrl.Visibility = Visibility.Visible;
+            //    });
+            //}, delay);
         }
 
         #region Dependency Propertys
@@ -43,6 +93,10 @@ namespace PokemonGo_UWP.Views
         public static readonly DependencyProperty EvolvePokemonCommandProperty =
             DependencyProperty.Register(nameof(EvolvePokemonCommand), typeof(DelegateCommand), typeof(PokemonDetailControl),
                 new PropertyMetadata(null));
+
+        public static readonly DependencyProperty StardustAmountProperty =
+            DependencyProperty.Register(nameof(StardustAmount), typeof(int), typeof(PokemonDetailControl),
+                new PropertyMetadata(0));
 
         public static readonly DependencyProperty PokemonExtraDataProperty =
             DependencyProperty.Register(nameof(PokemonExtraData), typeof(DelegateCommand), typeof(PokemonDetailControl),
@@ -70,6 +124,12 @@ namespace PokemonGo_UWP.Views
         {
             get { return (DelegateCommand)GetValue(EvolvePokemonCommandProperty); }
             set { SetValue(EvolvePokemonCommandProperty, value); }
+        }
+
+        public int StardustAmount
+        {
+            get { return (int)GetValue(StardustAmountProperty); }
+            set { SetValue(StardustAmountProperty, value); }
         }
 
         public PokemonSettings PokemonExtraData
