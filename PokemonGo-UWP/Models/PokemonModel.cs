@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,10 @@ namespace PokemonGo_UWP.Models
     public class PokemonModel
     {
         public PokemonId Id { get; set; } = PokemonId.Missingno;
-
+        public string NumericId => (string) new PokemonIdToNumericId().Convert(this.Id, typeof(string), null, string.Empty);
         public string Name => (string)new PokemonIdToPokemonNameConverter().Convert(this.Id, typeof(string), null, string.Empty);
         public BitmapImage Sprite => (BitmapImage)new PokemonIdToPokemonSpriteConverter().Convert(this.Id, typeof(BitmapImage), null, string.Empty);
+        public Uri SpritePath => (Uri)new PokemonIdToPokemonSpriteConverter().Convert(this.Id, typeof(Uri), "uri", string.Empty);
         public Uri BackgroundImage => (Uri)new PokemonTypeToBackgroundImageConverter().Convert(this.Id, typeof(Uri), null, string.Empty);
 
         public string Description => (string)new PokemonIdToPokedexDescription().Convert(this.Id, typeof(string), null, string.Empty);
@@ -47,7 +49,19 @@ namespace PokemonGo_UWP.Models
             PokedexHeightM = settings.PokedexHeightM;
             PokedexWeightKg = settings.PokedexWeightKg;
             EvolutionIds = settings.EvolutionIds.ToList();
+            FamilyId = settings.FamilyId;
+            WeightStdDev = settings.WeightStdDev;
+            Encounter = settings.Encounter;
+            Rarity = settings.Rarity;
         }
+
+        public PokemonRarity Rarity { get; set; }
+
+        public EncounterAttributes Encounter { get; set; }
+
+        public float WeightStdDev { get; set; }
+
+        public PokemonFamilyId FamilyId { get; set; }
 
         public PokemonModel(PokemonId id)
         {
@@ -64,18 +78,25 @@ namespace PokemonGo_UWP.Models
             while (CurrPokemon.ParentPokemonId != PokemonId.Missingno)
             {
 
-                Evolutions.Insert(0, FromId(CurrPokemon.ParentPokemonId));
+                var insertme = FromId(CurrPokemon.ParentPokemonId);
+                Evolutions.Insert(0, insertme);
                 CurrPokemon = FromId(CurrPokemon.ParentPokemonId);
             }
             CurrPokemon = pokemonModel;
             while (CurrPokemon.EvolutionIds.Count > 0)
             {
-                foreach (PokemonId ev in CurrPokemon.EvolutionIds) //for Eevee
-                    Evolutions.Add(FromId(ev));
+                foreach (PokemonId ev in CurrPokemon.EvolutionIds)
+                {
+                    var addme = FromId(ev);
+                    Evolutions.Add(addme);
+                }
                 CurrPokemon = new PokemonModel(CurrPokemon.EvolutionIds.ElementAt(0));
             }
 
-
+            if (TimesCaptured == 0 && Id == PokemonId.Poliwag)
+            {
+                Debug.WriteLine(Name);
+            }
         }
 
         private PokemonModel FromId(PokemonId id)
@@ -83,6 +104,9 @@ namespace PokemonGo_UWP.Models
             PokemonModel temp = new PokemonModel();
             PokemonSettings pokeman = GameClient.GetExtraDataForPokemon(id);
             temp.BuildFromSettings(pokeman);
+
+            PokedexEntry pokedexEntry = GameClient.PokedexInventory.FirstOrDefault(x => x.PokemonId == id);
+            temp.BuildFromPokedexEntry(pokedexEntry);
 
             return temp;
         }
@@ -95,12 +119,17 @@ namespace PokemonGo_UWP.Models
 
         public void BuildFromPokedexEntry(PokedexEntry pokedexEntry)
         {
-            if (pokedexEntry != null)
-            {
-                TimesCaptured = pokedexEntry.TimesCaptured;
-                TimesEncountered = pokedexEntry.TimesEncountered;
-            }
+            if (pokedexEntry == null) return;
+
+            TimesCaptured = pokedexEntry.TimesCaptured;
+            TimesEncountered = pokedexEntry.TimesEncountered;
+            EvolutionStonePieces = pokedexEntry.EvolutionStonePieces;
+            EvolutionStones = pokedexEntry.EvolutionStones;
         }
+
+        public int EvolutionStones { get; set; }
+
+        public int EvolutionStonePieces { get; set; }
 
         public int TimesEncountered { get; set; }
 

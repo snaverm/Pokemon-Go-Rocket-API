@@ -12,7 +12,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PokemonGo_UWP.Utils;
 using PokemonGo_UWP.ViewModels;
+using POGOProtos.Enums;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,7 +34,15 @@ namespace PokemonGo_UWP.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ((PokedexDetailViewModel)this.DataContext).Load();
+            base.OnNavigatedTo(e);
+
+            PokemonId prm =
+                    ((JObject)JsonConvert.DeserializeObject((string)e.Parameter)).Last
+                        .ToObject<PokemonId>();
+
+            
+            ((PokedexDetailViewModel)this.DataContext).Load(prm);
         }
+        
     }
 }

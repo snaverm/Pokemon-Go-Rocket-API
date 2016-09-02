@@ -24,32 +24,11 @@
             </converters:ValueWhenConverter.Otherwise>
         </converters:ValueWhenConverter>
 
-        <converters:ValueWhenConverter x:Key="BoolVisibility">
-            <converters:ValueWhenConverter.When>
-                <x:Boolean>True</x:Boolean>
-            </converters:ValueWhenConverter.When>
-            <converters:ValueWhenConverter.Value>
-                <Visibility>Visible</Visibility>
-            </converters:ValueWhenConverter.Value>
-            <converters:ValueWhenConverter.Otherwise>
-                <Visibility>Collapsed</Visibility>
-            </converters:ValueWhenConverter.Otherwise>
-        </converters:ValueWhenConverter>
-
-        <converters:ValueWhenConverter x:Key="NotBoolVisibility">
-            <converters:ValueWhenConverter.When>
-                <x:Boolean>True</x:Boolean>
-            </converters:ValueWhenConverter.When>
-            <converters:ValueWhenConverter.Value>
-                <Visibility>Collapsed</Visibility>
-            </converters:ValueWhenConverter.Value>
-            <converters:ValueWhenConverter.Otherwise>
-                <Visibility>Visible</Visibility>
-            </converters:ValueWhenConverter.Otherwise>
-        </converters:ValueWhenConverter>
-        
+        <x:Int32 x:Key="MinItemsForRow">3</x:Int32>
+        <x:Int32 x:Key="GridWidth">1</x:Int32>
         <!-- Pokemon evolution / Pokemon captured -->
         <DataTemplate x:Key="PokedexCaptured">
+            
             <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92">
                 <Grid.Width>
                     <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,28"/>
@@ -74,7 +53,7 @@
                        Margin="4,0"
                        Source="{Binding Sprite}"/>
 
-                <TextBlock Text="{Binding Id, Converter={StaticResource PokemonIdToPokemonNameConverter}}"
+                <TextBlock Text="{Binding Name}"
                            Style="{StaticResource TextPokemonName}"
                            Grid.Row="1"
                            Foreground="#577074"
@@ -92,9 +71,10 @@
                   Background="#d8cefd">
               
                 <BitmapIcon
-                    UriSource="{Binding Sprite}"
+                    UriSource="{Binding SpritePath}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
+                    Opacity="0.75"
                     Foreground="#bcafe3" />
             </Grid>
         </DataTemplate>
@@ -105,7 +85,7 @@
                   MinWidth="64"
                   MinHeight="64">
 
-                <TextBlock Text="{Binding Id, Converter={StaticResource PokemonIdToNumericId}}"
+                <TextBlock Text="{Binding NumericId}"
                            FontFamily="../Assets/Fonts/Lato-Light.ttf#Lato"
                            FontSize="28"
                            FontWeight="ExtraLight"
@@ -117,10 +97,7 @@
             </Grid>
         </DataTemplate>
 
-        <x:Int32 x:Key="MinItemsForRow">3</x:Int32>
-        <x:Int32 x:Key="GridWidth">1</x:Int32>
-        
-        <!-- Pokemon evolution / Pokemon captured -->
+  
        
         <!-- Used to see evolutions / pokemon unseen -->
         <DataTemplate x:Key="PokedexUnseen">
@@ -135,11 +112,12 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <BitmapIcon UriSource="{Binding Sprite}"
+                <BitmapIcon UriSource="{Binding SpritePath}"
                             Grid.Row="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Foreground="Black"
+                            Opacity="0.5"
                             Margin="4,0" />
 
                 <TextBlock Text="???"
@@ -151,7 +129,6 @@
                            TextWrapping="NoWrap"/>
             </Grid>
         </DataTemplate>
-
 
 
         <DataTemplate x:Key="PokedexItem">
@@ -238,7 +215,7 @@
                                        Grid.Column="0"
                                        Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" />
                                         <TextBlock
-                                    Text="{Binding Id, Converter={StaticResource PokemonIdToNumericId}}"
+                                    Text="{Binding NumericId}"
                                     Grid.Column="1"
                                     FontSize="16"
                                     Margin="4,0,4,0"
@@ -451,7 +428,7 @@
                                                         </ItemsPanelTemplate>
                                                     </GridView.ItemsPanel>
                                                     <GridView.ItemTemplateSelector>
-                                                        <utils:PokedexEntryDataTemplateSelector
+                                                        <utils:PokedexItemDataTemplateSelector
                                                     PokemonCaptured="{StaticResource PokedexCaptured}"
                                                     PokemonSeen="{StaticResource PokemonSeen}"
                                                     PokemonUnseen="{StaticResource PokedexUnseen}" />
@@ -467,6 +444,8 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+
+
     </Page.Resources>
 
     <Page.DataContext>
@@ -474,7 +453,7 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView ItemsSource="{Binding PokedexItems}" ItemTemplate="{StaticResource PokedexItem}"/>
+        <FlipView ItemsSource="{Binding PokedexItems}" ItemTemplate="{StaticResource PokedexItem}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
         <Button Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,18"

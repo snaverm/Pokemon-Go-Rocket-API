@@ -23,8 +23,15 @@ namespace PokemonGo_UWP.ViewModels
         public ObservableCollection<PokemonModel> PokedexItems { get; private set; } = new ObservableCollection<PokemonModel>();
 
 
+        private PokemonModel selectedItem;
+        public PokemonModel SelectedItem
+        {
+            get { return selectedItem; }
+            set { Set(ref selectedItem, value); }
+        }
+        
 
-        public void Load()
+        public void Load(PokemonId loadedId = PokemonId.Missingno)
         {
             var pokedexItems = GameClient.PokedexInventory;
             var lastPokemonIdSeen = pokedexItems == null || pokedexItems.Count == 0 ? 0 : pokedexItems.Max(x => (int)x.PokemonId);
@@ -46,6 +53,11 @@ namespace PokemonGo_UWP.ViewModels
             {
                 CapturedPokemons = 0;
                 SeenPokemons = 0;
+            }
+
+            if (loadedId != PokemonId.Missingno)
+            {
+                SelectedItem = PokedexItems.First(t => t.Id == loadedId);
             }
 
             Debug.WriteLine("Loaded!");
