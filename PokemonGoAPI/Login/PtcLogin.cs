@@ -24,6 +24,8 @@ namespace PokemonGo.RocketAPI.Login
 
         #region Private Members
 
+        private static HttpClient HttpClient;
+
         /// <summary>
         /// The Password for the user currently attempting  to authenticate.
         /// </summary>
@@ -37,6 +39,18 @@ namespace PokemonGo.RocketAPI.Login
         #endregion
 
         #region Constructors
+
+        static PtcLogin()
+        {
+            HttpClient = new HttpClient(
+                new HttpClientHandler
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip,
+                    AllowAutoRedirect = false
+                }
+            );
+            HttpClient.DefaultRequestHeaders.UserAgent.TryParseAdd(Constants.LoginUserAgent);
+        }
 
         /// <summary>
         /// 
@@ -59,42 +73,26 @@ namespace PokemonGo.RocketAPI.Login
         /// <returns></returns>
         public async Task<AccessToken> GetAccessToken()
         {
-            using (var handler = GetHttpClientHandler())
-            {
-                using (var httpClient = new HttpClient(handler))
-                {
-                    // robertmclaws: Should we be setting every UserAgent property like the other requests?
-                    httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd(Constants.LoginUserAgent);
+                // robertmclaws: Should we be setting every UserAgent property like the other requests?
 
-                    var loginData = await GetLoginParameters(httpClient).ConfigureAwait(false);
-                    var authTicket = await GetAuthenticationTicket(httpClient, loginData).ConfigureAwait(false);
-                    var accessToken = await GetOAuthToken(httpClient, authTicket).ConfigureAwait(false);
-                    return accessToken;
-                }
-            }
+                var loginData = await GetLoginParameters().ConfigureAwait(false);
+                var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
+                var accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
+                return accessToken;
         }
 
         #endregion
 
         #region Private Methods
 
-        private HttpClientHandler GetHttpClientHandler()
-        {
-            return new HttpClientHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip,
-                AllowAutoRedirect = false
-            };
-        }
-
         /// <summary>
         /// Responsible for retrieving login parameters for <see cref="GetAuthenticationTicket" />.
         /// </summary>
         /// <param name="httpClient">An initialized <see cref="HttpClient" /></param>
         /// <returns><see cref="PtcLoginParameters" /> for <see cref="GetAuthenticationTicket" />.</returns>
-        private async Task<PtcLoginParameters> GetLoginParameters(HttpClient httpClient)
+        private async Task<PtcLoginParameters> GetLoginParameters()
         {
-            var response = await httpClient.GetAsync(Constants.LoginUrl);
+            var response = await HttpClient.GetAsync(Constants.LoginUrl);
             var loginData = JsonConvert.DeserializeObject<PtcLoginParameters>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             return loginData;
         }
@@ -105,7 +103,7 @@ namespace PokemonGo.RocketAPI.Login
         /// <param name="httpClient">The <see cref="HttpClient"/> instance to use for this request.</param>
         /// <param name="loginData">The <see cref="PtcLoginParameters" /> to use from this request. Obtained by calling <see cref="GetLoginParameters(HttpClient)"/>.</param>
         /// <returns></returns>
-        private async Task<string> GetAuthenticationTicket(HttpClient httpClient, PtcLoginParameters loginData)
+        private async Task<string> GetAuthenticationTicket(PtcLoginParameters loginData)
         {
             var requestData = new Dictionary<string, string>
                 {
@@ -116,7 +114,7 @@ namespace PokemonGo.RocketAPI.Login
                     {"password", Password}
                 };
 
-            var responseMessage = await httpClient.PostAsync(Constants.LoginUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
+            var responseMessage = await HttpClient.PostAsync(Constants.LoginUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
 
             // robertmclaws: No need to even read the string if we have results from the location query.
             if (responseMessage.Headers.Location != null)
@@ -149,7 +147,7 @@ namespace PokemonGo.RocketAPI.Login
         /// <param name="httpClient">The <see cref="HttpClient"/> instance to use for this request.</param>
         /// <param name="authTicket">The Authentication Ticket to use for this request. Obtained by calling <see cref="GetAuthenticationTicket(HttpClient, PtcLoginParameters)"/>.</param>
         /// <returns></returns>
-        private async Task<AccessToken> GetOAuthToken(HttpClient httpClient, string authTicket)
+        private async Task<AccessToken> GetOAuthToken(string authTicket)
         {
             var requestData = new Dictionary<string, string>
                 {
@@ -160,7 +158,7 @@ namespace PokemonGo.RocketAPI.Login
                     {"code", authTicket}
                 };
 
-            var responseMessage = await httpClient.PostAsync(Constants.LoginOauthUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
+            var responseMessage = await HttpClient.PostAsync(Constants.LoginOauthUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
             var responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             if (string.IsNullOrWhiteSpace(responseContent))
