@@ -178,15 +178,15 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PokemonWeightToWeightStringConverter : IValueConverter
+    #region PokemonDetailControlConverters
+
+    public class PokemonToCurrentCandiesConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null) return new Uri("ms-appx:///Assets/Backgrounds/details_type_bg_normal.png");
-            var pokemonData = (PokemonDataWrapper)value;
-            return new Uri($"ms-appx:///Assets/Backgrounds/details_type_bg_{GameClient.GetExtraDataForPokemon(pokemonData.PokemonId).Type}.png");
+            return GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).FamilyId);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -196,6 +196,44 @@ namespace PokemonGo_UWP.Utils
 
         #endregion
     }
+
+    public class PokemonToStardustForPowerUpConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return Convert.ToInt32(GameClient.PokemonUpgradeSettings.StardustCost[
+                    Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToCandiesForPowerUpConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[
+                Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    #endregion
 
     public class PokemonMoveToMoveNameConverter : IValueConverter
     {

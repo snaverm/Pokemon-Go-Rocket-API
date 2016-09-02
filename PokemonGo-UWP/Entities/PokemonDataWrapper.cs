@@ -9,6 +9,7 @@ using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using Template10.Common;
 using Template10.Mvvm;
+using System.ComponentModel;
 
 namespace PokemonGo_UWP.Entities
 {
@@ -118,15 +119,46 @@ namespace PokemonGo_UWP.Entities
 
         public float AdditionalCpMultiplier => WrappedData.AdditionalCpMultiplier;
 
-        public int Favorite => WrappedData.Favorite;
+        public int Favorite
+        {
+            get { return WrappedData.Favorite; }
+            set
+            {
+                if (WrappedData.Favorite == value) return;
+                WrappedData.Favorite = value;
+                OnPropertyChanged(nameof(Favorite));
+                OnPropertyChanged(nameof(IsFavorite));
+            }
+        }
 
         public bool IsFavorite => System.Convert.ToBoolean(Favorite);
 
-        public string Nickname => WrappedData.Nickname;
+        public string Nickname
+        {
+            get { return WrappedData.Nickname; }
+            set
+            {
+                if (WrappedData.Nickname == value) return;
+                WrappedData.Nickname = value;
+                OnPropertyChanged(nameof(Nickname));
+                OnPropertyChanged(nameof(Name));
+            }
+        }
 
         public int FromFort => WrappedData.FromFort;
 
         public string Name { get { return WrappedData.Nickname == "" ? Resources.Pokemon.GetString(WrappedData.PokemonId.ToString()) : WrappedData.Nickname; } }
+
+        #endregion
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
     }

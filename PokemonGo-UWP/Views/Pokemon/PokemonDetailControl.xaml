@@ -361,7 +361,7 @@
                                     <TextBlock FontSize="19"
                                                FontFamily="{StaticResource LatoRegularFont}"
                                                Foreground="{StaticResource TitleTextColor}"
-                                               Text="{Binding StardustAmount}"
+                                               Text="{Binding ElementName=Root, Path=StardustAmount}"
                                                Margin="-4,0,0,0"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center" />
@@ -436,14 +436,14 @@
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding StardustToPowerUp}"
+                                                   Text="{Binding Converter=PokemonToStardustForPowerUpConverter}"
                                                    HorizontalAlignment="Left"
                                                    Margin="-6,0,0,0"
                                                    VerticalAlignment="Center">
                                                     <interactivity:Interaction.Behaviors>
-                                                        <core:DataTriggerBehavior Binding="{Binding StardustAmount}"
+                                                        <core:DataTriggerBehavior Binding="{Binding ElementName=Root, Path=StardustAmount}"
                                                                                   ComparisonCondition="LessThan"
-                                                                                  Value="{Binding StardustToPowerUp}">
+                                                                                  Value="{Binding Converter=PokemonToStardustForPowerUpConverter}">
                                                             <core:ChangePropertyAction PropertyName="Foreground"
                                                                                        Value="Red" />
                                                         </core:DataTriggerBehavior>
@@ -463,13 +463,13 @@
                                         <TextBlock FontSize="12"
                                                    FontFamily="{StaticResource LatoRegularFont}"
                                                    Foreground="{StaticResource TitleTextColor}"
-                                                   Text="{Binding CandiesToPowerUp}"
+                                                   Text="{Binding Converter=PokemonToCandiesForPowerUpConverter}"
                                                    HorizontalAlignment="Left"
                                                    VerticalAlignment="Center">
                                                     <interactivity:Interaction.Behaviors>
-                                                        <core:DataTriggerBehavior Binding="{Binding CurrentCandy.Candy_}"
+                                                        <core:DataTriggerBehavior Binding="{Binding Converter=PokemonToCurrentCandiesConverter}"
                                                                                   ComparisonCondition="LessThan"
-                                                                                  Value="{Binding CandiesToPowerUp}">
+                                                                                  Value="{Binding Converter=PokemonToCandiesForPowerUpConverter}">
                                                             <core:ChangePropertyAction PropertyName="Foreground"
                                                                                        Value="Red" />
                                                         </core:DataTriggerBehavior>
