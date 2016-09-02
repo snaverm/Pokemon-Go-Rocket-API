@@ -1,4 +1,5 @@
 ﻿using PokemonGo_UWP.Utils;
+using PokemonGo_UWP.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,6 +26,11 @@ namespace PokemonGo_UWP.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+        }
+
+        private void Pokeindex_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ((PokedexPageViewModel)DataContext).OpenPokedexEntry.Execute(e.ClickedItem);
         }
     }
 }

@@ -62,12 +62,6 @@
             <Grid MinWidth="64" 
                   MinHeight="64"
                   Padding="8">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding DataContext.OpenPokedexEntry, ElementName=page}"
-                                                  CommandParameter="{Binding}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
                 <Image Stretch="Uniform"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -82,12 +76,6 @@
                   CornerRadius="5"
                   Padding="8"
                   Background="#d8cefd">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding DataContext.OpenPokedexEntry, ElementName=page}"
-                                                  CommandParameter="{Binding}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
                 <BitmapIcon
                     UriSource="{Binding Key, Converter={StaticResource PokemonIdToPokemonSpriteConverter}, ConverterParameter=uri}"
                     VerticalAlignment="Center"
@@ -201,24 +189,29 @@
             </StackPanel>
 
             <GridView x:Name="pokeindex"
-                          ItemsSource="{Binding PokemonFoundAndSeen}"
-                          Canvas.ZIndex="0"
-                          Grid.Row="1"
-                          HorizontalAlignment="Stretch"
-                          ScrollViewer.VerticalScrollMode="Auto"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
-                
+                      ItemsSource="{Binding PokemonFoundAndSeen}"
+                      Canvas.ZIndex="0"
+                      Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollMode="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      SelectionMode="None" 
+                      IsItemClickEnabled="True"
+                      ItemClick="Pokeindex_ItemClick">
+
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal"
-                                           HorizontalAlignment="Center"
-                                           MaximumRowsOrColumns="6" />
+                                       HorizontalAlignment="Center"
+                                       MaximumRowsOrColumns="6" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
 
                 <GridView.ItemContainerStyle>
-                    <Style TargetType="FrameworkElement">
+                    <Style TargetType="GridViewItem">
                         <Setter Property="Margin" Value="2"/>
+                        <Setter Property="MaxWidth" Value="64"/>
+                        <Setter Property="MaxHeight" Value="64"/>
                     </Style>
                 </GridView.ItemContainerStyle>
 
