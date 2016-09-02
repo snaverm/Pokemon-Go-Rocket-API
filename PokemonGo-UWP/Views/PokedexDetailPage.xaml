@@ -29,7 +29,7 @@
         <!-- Pokemon evolution / Pokemon captured -->
         <DataTemplate x:Key="PokedexCaptured">
             
-            <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92">
+            <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92" Tapped="EvolutionTapped">
                 <Grid.Width>
                     <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,28"/>
                 </Grid.Width>

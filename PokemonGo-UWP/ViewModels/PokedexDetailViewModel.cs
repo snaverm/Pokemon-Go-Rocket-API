@@ -110,5 +110,12 @@ namespace PokemonGo_UWP.ViewModels
         //            break;
         //    }
         //}
+        public void GoToPokemon(PokemonModel pokemon)
+        {
+            if (pokemon.Id != PokemonId.Missingno)
+            {
+                SelectedItem = PokedexItems.First(t => t.Id == pokemon.Id);
+            }
+        }
     }
 }
