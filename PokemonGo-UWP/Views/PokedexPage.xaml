@@ -54,6 +54,7 @@
             </converters:ValueWhenConverter.Otherwise>
         </converters:ValueWhenConverter>
 
+
         <x:Int32 x:Key="MinItemsForRow">3</x:Int32>
         <x:Int32 x:Key="GridWidth">1</x:Int32>
 
@@ -176,6 +177,7 @@
                            TextWrapping="NoWrap"/>
             </Grid>
         </DataTemplate>
+
     </Page.Resources>
 
     <Grid Background="{StaticResource PokedexPageBackgroundGradient}">
@@ -189,10 +191,10 @@
                                Text="POKEDEX"
                                Style="{StaticResource TextPageTitleDark}" />
                 <Border Background="#000" Width="150" Height="1" />
-                <TextBlock Style="{StaticResource TextSubTitle}"
-                               FontSize="16"
-                               Margin="0,8"
-                               HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TextSubTitle}" 
+                           FontSize="16" 
+                           Margin="0,8" 
+                           HorizontalAlignment="Center">
                         <Run x:Uid="PokedexCaught" Text="CAUGHT:" Typography.Capitals="AllSmallCaps" />
                         <Run Text="{Binding CapturedPokemons}" Typography.Capitals="AllSmallCaps" />
                         <Run x:Uid="PokedexSeen" Text="SEEN:" Typography.Capitals="AllSmallCaps" />
@@ -201,18 +203,18 @@
             </StackPanel>
 
             <GridView x:Name="pokeindex"
-                          ItemsSource="{Binding PokemonFoundAndSeen}"
-                          Canvas.ZIndex="0"
-                          Grid.Row="1"
-                          HorizontalAlignment="Stretch"
-                          ScrollViewer.VerticalScrollMode="Auto"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                      ItemsSource="{Binding PokemonFoundAndSeen}"
+                      Canvas.ZIndex="0"
+                      Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollMode="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal"
-                                           HorizontalAlignment="Center"
-                                           MaximumRowsOrColumns="6" />
+                                       HorizontalAlignment="Center"
+                                       MaximumRowsOrColumns="6" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
 

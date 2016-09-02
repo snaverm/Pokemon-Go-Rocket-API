@@ -25,19 +25,38 @@
 
         <!-- Pokemon evolution / Pokemon captured -->
         <DataTemplate x:Key="PokedexCaptured">
-            <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92" Tapped="EvolutionTapped">
+            <Grid Margin="8,4,8,4" 
+                  MinWidth="64" 
+                  MinHeight="64" 
+                  MaxWidth="92" 
+                  MaxHeight="92" 
+                  Tapped="EvolutionTapped">
                 <Grid.Width>
-                    <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,28"/>
+                    <Binding Converter="{StaticResource WidthConverter}" 
+                             Source="{StaticResource MinItemsForRow}" 
+                             ConverterParameter="20,28"/>
                 </Grid.Width>
                 <Grid.Height>
-                    <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,28"/>
+                    <Binding Converter="{StaticResource WidthConverter}" 
+                             Source="{StaticResource MinItemsForRow}" 
+                             ConverterParameter="20,28"/>
                 </Grid.Height>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Image Stretch="Uniform" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4,0" Source="{Binding Sprite}"/>
-                <TextBlock Text="{Binding Name}" Style="{StaticResource TextPokemonName}" Grid.Row="1" Foreground="#577074" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                <Image Stretch="Uniform" 
+                       Grid.Row="0" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Margin="4,0" 
+                       Source="{Binding Sprite}"/>
+                <TextBlock Text="{Binding Name}" 
+                           Style="{StaticResource TextPokemonName}" 
+                           Grid.Row="1" 
+                           Foreground="#577074" 
+                           TextTrimming="CharacterEllipsis" 
+                           TextWrapping="NoWrap"/>
             </Grid>
         </DataTemplate>
 
@@ -60,12 +79,20 @@
 
         <!-- Used to see evolutions / pokemon unseen -->
         <DataTemplate x:Key="PokedexUnseen">
-            <Grid Margin="8,4,8,4" MinWidth="64" MinHeight="64" MaxWidth="92" MaxHeight="92">
+            <Grid Margin="8,4,8,4" 
+                  MinWidth="64" 
+                  MinHeight="64" 
+                  MaxWidth="92" 
+                  MaxHeight="92">
                 <Grid.Width>
-                    <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,24"/>
+                    <Binding Converter="{StaticResource WidthConverter}" 
+                             Source="{StaticResource MinItemsForRow}" 
+                             ConverterParameter="20,24"/>
                 </Grid.Width>
                 <Grid.Height>
-                    <Binding Converter="{StaticResource WidthConverter}" Source="{StaticResource MinItemsForRow}" ConverterParameter="20,24"/>
+                    <Binding Converter="{StaticResource WidthConverter}" 
+                             Source="{StaticResource MinItemsForRow}" 
+                             ConverterParameter="20,24"/>
                 </Grid.Height>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -105,26 +132,28 @@
                         </TransitionCollection>
                     </Grid.Transitions>
 
-                    <Grid Grid.Row="2" RenderTransformOrigin="0.5,0.5">
+                    <Grid Grid.Row="2" 
+                          RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="180" />
                         </Grid.RenderTransform>
                         <Grid.Background>
-                            <ImageBrush
-                        ImageSource="{Binding BackgroundImage, Mode=OneWay}"
-                        Stretch="Fill" />
+                            <ImageBrush ImageSource="{Binding BackgroundImage, Mode=OneWay}"
+                                        Stretch="Fill" />
                         </Grid.Background>
                     </Grid>
 
-                    <Grid Grid.Row="0" Grid.RowSpan="2">
+                    <Grid Grid.Row="0" 
+                          Grid.RowSpan="2">
                         <Grid.Background>
-                            <ImageBrush
-                        ImageSource="{Binding Type, Converter={StaticResource PokemonTypeToBackgroundConverter}}"
-                        Stretch="Fill" />
+                            <ImageBrush ImageSource="{Binding Type, Converter={StaticResource PokemonTypeToBackgroundConverter}}"
+                                        Stretch="Fill" />
                         </Grid.Background>
                     </Grid>
 
-                    <Grid Grid.Row="0" Canvas.ZIndex="0" Grid.RowSpan="3">
+                    <Grid Grid.Row="0" 
+                          Canvas.ZIndex="0" 
+                          Grid.RowSpan="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
@@ -134,10 +163,27 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" Grid.RowSpan="2" Height="128" Source="{Binding Sprite}" VerticalAlignment="Bottom" Canvas.ZIndex="100" Margin="0,0,0,-32" Stretch="Uniform" />
-                        <Border CornerRadius="5" Background="#FAFAFA" BorderBrush="#FAFAFA" Margin="10,0,10,-10" Padding="0,32,0,0" BorderThickness="3" Grid.RowSpan="4" Grid.Row="2">
+                        <Image Grid.Row="0" 
+                               Grid.RowSpan="2" 
+                               Height="128" 
+                               Source="{Binding Sprite}" 
+                               VerticalAlignment="Bottom" 
+                               Canvas.ZIndex="100" 
+                               Margin="0,0,0,-32" 
+                               Stretch="Uniform" />
+                        <Border CornerRadius="5" 
+                                Background="#FAFAFA" 
+                                BorderBrush="#FAFAFA" 
+                                Margin="10,0,10,-10" 
+                                Padding="0,32,0,0" 
+                                BorderThickness="3" 
+                                Grid.RowSpan="4" 
+                                Grid.Row="2">
 
-                            <ScrollViewer x:Name="scrollPokedexEntry" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer x:Name="scrollPokedexEntry" 
+                                          HorizontalScrollMode="Disabled" 
+                                          VerticalScrollMode="Enabled" 
+                                          VerticalScrollBarVisibility="Hidden">
 
                                 <StackPanel Orientation="Vertical">
 
@@ -148,19 +194,35 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <Image Source="/Assets/UI/Pokeball.png"
-                                       Height="16"
-                                       Width="16"
-                                       VerticalAlignment="Center"
-                                       Grid.Column="0"
-                                       Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" />
-                                        <TextBlock Text="{Binding NumericId}" Grid.Column="1" FontSize="16" Margin="4,0,4,0" VerticalAlignment="Center" Foreground="#577074" FontFamily="{StaticResource LatoMediumFont}" />
-                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Bottom" CharacterSpacing="30" HorizontalAlignment="Left" Foreground="#577074" FontFamily="{StaticResource LatoMediumFont}" FontSize="28" Grid.Column="2" Margin="4,0,0,0" />
+                                        <Image Source="/Assets/UI/Pokeball.png" 
+                                               Height="16" 
+                                               Width="16" 
+                                               VerticalAlignment="Center" 
+                                               Grid.Column="0" 
+                                               Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" />
+                                        <TextBlock Text="{Binding NumericId}" 
+                                                   Grid.Column="1" 
+                                                   FontSize="16" 
+                                                   Margin="4,0,4,0" 
+                                                   VerticalAlignment="Center" 
+                                                   Foreground="#577074" 
+                                                   FontFamily="{StaticResource LatoMediumFont}" />
+                                        <TextBlock Text="{Binding Name}" 
+                                                   VerticalAlignment="Bottom" 
+                                                   CharacterSpacing="30" 
+                                                   HorizontalAlignment="Left" 
+                                                   Foreground="#577074" 
+                                                   FontFamily="{StaticResource LatoMediumFont}" 
+                                                   FontSize="28" 
+                                                   Grid.Column="2" 
+                                                   Margin="4,0,0,0" />
                                     </Grid>
 
                                     <StackPanel>
                                         <!-- Pokemon Data -->
-                                        <Grid Margin="16,8" BorderThickness="0,0,0,0.5" BorderBrush="Gray">
+                                        <Grid Margin="16,8" 
+                                              BorderThickness="0,0,0,0.5" 
+                                              BorderBrush="Gray">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
@@ -171,76 +233,139 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
 
-                                            <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" BorderBrush="Gray" Margin="0,0,0,8" BorderThickness="0,0,0.5,0">
+                                            <Grid VerticalAlignment="Center" 
+                                                  HorizontalAlignment="Stretch" 
+                                                  Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" 
+                                                  BorderBrush="Gray" 
+                                                  Margin="0,0,0,8" 
+                                                  BorderThickness="0,0,0.5,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
 
-                                                <TextBlock HorizontalAlignment="Center" Margin="0,0,8,0" FontSize="19" Visibility="{Binding Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}" Foreground="#577074">
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Margin="0,0,8,0" 
+                                                           FontSize="19" 
+                                                           Visibility="{Binding Type2, Converter={StaticResource VisibleWhenTypeIsNotNoneConverter}}" 
+                                                           Foreground="#577074">
                                                     <Run Text="{Binding Type, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                                     <Run Text="/" />
                                                     <Run Text="{Binding Type2, Converter={StaticResource PokemonTypeTranslationConverter}}" />
                                                 </TextBlock>
 
-                                                <TextBlock HorizontalAlignment="Center" Margin="32,0" FontSize="19" Grid.Row="0" Text="{Binding Type, Converter={StaticResource PokemonTypeTranslationConverter}}" Visibility="{Binding Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}" Foreground="#577074" />
-                                                <TextBlock HorizontalAlignment="Center" Grid.Row="1" x:Uid="TypeTextBlock" FontSize="12" Margin="0,3" Foreground="#FF5D686A" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Margin="32,0" 
+                                                           FontSize="19" 
+                                                           Grid.Row="0" 
+                                                           Text="{Binding Type, Converter={StaticResource PokemonTypeTranslationConverter}}" 
+                                                           Visibility="{Binding Type2, Converter={StaticResource InverseVisibleWhenTypeIsNotNoneConverter}}" 
+                                                           Foreground="#577074" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Grid.Row="1" 
+                                                           x:Uid="TypeTextBlock" 
+                                                           FontSize="12" Margin="0,3" 
+                                                           Foreground="#FF5D686A" />
                                             </Grid>
 
-                                            <Grid VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,8" HorizontalAlignment="Stretch" Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" BorderBrush="Gray" BorderThickness="0,0,0.5,0">
+                                            <Grid VerticalAlignment="Center" 
+                                                  Grid.Column="1" 
+                                                  Margin="0,0,0,8" 
+                                                  HorizontalAlignment="Stretch" 
+                                                  Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" 
+                                                  BorderBrush="Gray" 
+                                                  BorderThickness="0,0,0.5,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
 
-                                                <TextBlock HorizontalAlignment="Center" Foreground="#577074" Grid.Row="0"> 
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Foreground="#577074" 
+                                                           Grid.Row="0"> 
                                                     <Run Text="{Binding PokedexWeightKg}" FontSize="19" />
                                                     <Run x:Uid="KgTextBlock" FontSize="15" />
                                                 </TextBlock>
 
-                                                <TextBlock HorizontalAlignment="Center" x:Uid="WeightTextBlock" FontSize="12" Margin="0,3" Grid.Row="1" Foreground="#FF5D686A" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           x:Uid="WeightTextBlock" 
+                                                           FontSize="12" 
+                                                           Margin="0,3" Grid.Row="1" 
+                                                           Foreground="#FF5D686A" />
                                             </Grid>
 
-                                            <Grid VerticalAlignment="Center" Grid.Column="2" Margin="0,0,0,8" Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" HorizontalAlignment="Stretch">
+                                            <Grid VerticalAlignment="Center" 
+                                                  Grid.Column="2" 
+                                                  Margin="0,0,0,8" 
+                                                  Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" 
+                                                  HorizontalAlignment="Stretch">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
 
-                                                <TextBlock HorizontalAlignment="Center" Foreground="#577074">
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Foreground="#577074">
                                                     <Run Text="{Binding PokedexHeightM}" FontSize="19" />
                                                     <Run x:Uid="MTextBlock" FontSize="15" />
                                                 </TextBlock>
 
-                                                <TextBlock HorizontalAlignment="Center" x:Uid="HeightTextBlock" Grid.Row="1" FontSize="12" Margin="0,3" Foreground="#FF5D686A" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           x:Uid="HeightTextBlock" 
+                                                           Grid.Row="1" 
+                                                           FontSize="12" 
+                                                           Margin="0,3" 
+                                                           Foreground="#FF5D686A" />
                                             </Grid>
 
-                                            <Grid VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+                                            <Grid VerticalAlignment="Center" 
+                                                  Grid.Column="0" 
+                                                  Grid.Row="1" 
+                                                  Margin="0,0,0,8" 
+                                                  HorizontalAlignment="Stretch">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
 
-                                                <TextBlock HorizontalAlignment="Center" Foreground="#577074">
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Foreground="#577074">
                                                     <Run Text="{Binding TimesEncountered}" FontSize="19" />
                                                     <Run x:Uid="TimesTextBlock" Text="times" FontSize="15" />
                                                 </TextBlock>
 
-                                                <TextBlock HorizontalAlignment="Center" Grid.Row="1" x:Uid="PokedexViewSeen" Text="Seen" FontSize="12" Margin="0,3" Foreground="#FF5D686A" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Grid.Row="1" 
+                                                           x:Uid="PokedexViewSeen" 
+                                                           Text="Seen" 
+                                                           FontSize="12" 
+                                                           Margin="0,3" 
+                                                           Foreground="#FF5D686A" />
                                             </Grid>
 
-                                            <Grid VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+                                            <Grid VerticalAlignment="Center" 
+                                                  Grid.Column="2" 
+                                                  Grid.Row="1" 
+                                                  Margin="0,0,0,8" 
+                                                  HorizontalAlignment="Stretch">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
 
-                                                <TextBlock HorizontalAlignment="Center" Foreground="#577074">
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Foreground="#577074">
                                                     <Run Text="{Binding TimesCaptured}" FontSize="19" />
                                                     <Run x:Uid="TimesTextBlock" Text="times" FontSize="15" />
                                                 </TextBlock>
 
-                                                <TextBlock HorizontalAlignment="Center" Grid.Row="1" x:Uid="PokedexViewCaught" Text="Caught" FontSize="12" Margin="0,3" Foreground="#FF5D686A" />
+                                                <TextBlock HorizontalAlignment="Center" 
+                                                           Grid.Row="1" 
+                                                           x:Uid="PokedexViewCaught" 
+                                                           Text="Caught" 
+                                                           FontSize="12" 
+                                                           Margin="0,3" 
+                                                           Foreground="#FF5D686A" />
                                             </Grid>
                                         </Grid>
 
@@ -248,8 +373,17 @@
                                             <Run Text="{Binding Description}" />
                                         </TextBlock>
 
-                                        <StackPanel Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" Margin="0,4,0,88" HorizontalAlignment="Center">
-                                            <TextBlock x:Uid="PokedexEvolutions" Text="Evolutions" Typography.Capitals="AllSmallCaps" Margin="16,8" FontSize="28" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#577074" />
+                                        <StackPanel Visibility="{Binding TimesCaptured, Converter={StaticResource IntVisibility}}" 
+                                                    Margin="0,4,0,88" 
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock x:Uid="PokedexEvolutions" 
+                                                       Text="Evolutions" 
+                                                       Typography.Capitals="AllSmallCaps" 
+                                                       Margin="16,8" 
+                                                       FontSize="28" 
+                                                       HorizontalAlignment="Center" 
+                                                       FontWeight="Bold" 
+                                                       Foreground="#577074" />
 
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -292,7 +426,9 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView ItemsSource="{Binding PokedexItems}" ItemTemplate="{StaticResource PokedexItem}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
+        <FlipView ItemsSource="{Binding PokedexItems}" 
+                  ItemTemplate="{StaticResource PokedexItem}" 
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
         <Button Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,18"

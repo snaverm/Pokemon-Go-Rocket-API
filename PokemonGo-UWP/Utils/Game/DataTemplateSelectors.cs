@@ -18,21 +18,13 @@ namespace PokemonGo_UWP.Utils
         public DataTemplate PokemonUnseen { get; set; }
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            try
-            {
-                KeyValuePair<PokemonId, PokedexEntry> pokemon = (KeyValuePair<PokemonId, PokedexEntry>)item;
-                if (pokemon.Value == null)
-                    return PokemonUnseen;
-                else if (pokemon.Value.TimesEncountered > 0 && pokemon.Value.TimesCaptured == 0)
-                    return PokemonSeen;
-                else
-                    return PokemonCaptured;
-            }
-            catch
-            {
-            }
-
-            return PokemonCaptured;
+            KeyValuePair<PokemonId, PokedexEntry> pokemon = (KeyValuePair<PokemonId, PokedexEntry>)item;
+            if (pokemon.Value == null)
+                return PokemonUnseen;
+            else if (pokemon.Value.TimesEncountered > 0 && pokemon.Value.TimesCaptured == 0)
+                return PokemonSeen;
+            else
+                return PokemonCaptured;
         }
     }
 
@@ -43,27 +35,25 @@ namespace PokemonGo_UWP.Utils
         public DataTemplate PokemonUnseen { get; set; }
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-                PokemonModel pokemon = item as PokemonModel;
+            DataTemplate template = null;
+            PokemonModel pokemon = item as PokemonModel;
             if (pokemon != null)
             {
-                if (pokemon.TimesEncountered == 0 && pokemon.TimesCaptured == 0)
+                if (pokemon.TimesEncountered > 0)
                 {
-                    return PokemonUnseen;
+                    template = pokemon.TimesCaptured == 0 ? PokemonSeen : PokemonCaptured;
                 }
-
-                if (pokemon.TimesEncountered > 0 && pokemon.TimesCaptured == 0)
+                else
                 {
-                    return PokemonSeen;
-                }
-                
-                {
-                    return PokemonCaptured;
+                    template = PokemonUnseen;
                 }
             }
             else
             {
-                return PokemonUnseen;
+                template = PokemonUnseen;
             }
+
+            return template;
         }
     }
 }
