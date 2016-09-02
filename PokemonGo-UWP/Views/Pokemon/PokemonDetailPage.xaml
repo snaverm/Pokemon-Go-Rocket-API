@@ -89,8 +89,7 @@
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignRightWithPanel="True"
-              Opacity="0"
-              Canvas.ZIndex="0">
+              Opacity="0" >
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5,0"
                                      EndPoint="0.5,1">
@@ -220,20 +219,20 @@
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <Rectangle  Grid.Row="0">
+            <Rectangle Grid.Row="0" >
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToPokemonTypeBackgroundConverter}}"
+                    <ImageBrush ImageSource="{Binding SelectedPokemon, Converter={StaticResource PokemonDataToPokemonTypeBackgroundConverter}}"
                                 Stretch="Fill" />
                 </Rectangle.Fill>
             </Rectangle>
 
             <Rectangle Grid.Row="1"
-                       RenderTransformOrigin="0.5,0.5">
+                       RenderTransformOrigin="0.5,0.5" >
                 <Rectangle.RenderTransform>
                     <CompositeTransform Rotation="180" />
                 </Rectangle.RenderTransform>
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding CurrentPokemon, Converter={StaticResource PokemonDataToPokemonTypeBackgroundConverter}}"
+                    <ImageBrush ImageSource="{Binding SelectedPokemon, Converter={StaticResource PokemonDataToPokemonTypeBackgroundConverter}}"
                                 Stretch="Fill" />
                 </Rectangle.Fill>
             </Rectangle>
@@ -244,28 +243,16 @@
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.AlignBottomWithPanel="True"
                   RelativePanel.AlignRightWithPanel="True"
-                  ItemsSource="{x:Bind ViewModel.PokemonInventory, Mode=OneWay}"
-                  SelectedItem="{x:Bind ViewModel.CurrentPokemon, Mode=OneWay}">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding CurrentPokemonChanged}"
-                                              CommandParameter="{Binding ElementName=PokeDetailFlip, Path=SelectedItem}"  />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-            <FlipView.Transitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition />
-                </TransitionCollection>
-            </FlipView.Transitions>
+                  ItemsSource="{Binding PokemonInventory, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedPokemon, Mode=TwoWay}"
+                  Opacity="0">
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <local:PokemonDetailControl DataContext="{Binding}"
-                                                FavoritePokemonCommand="{Binding ElementName=Root, Path=DataContext.FavoritePokemonCommand}"
+                    <local:PokemonDetailControl FavoritePokemonCommand="{Binding ElementName=Root, Path=DataContext.FavoritePokemonCommand}"
                                                 RenamePokemonCommand="{Binding ElementName=Root, Path=DataContext.RenamePokemonCommand}"
                                                 PowerUpPokemonCommand="{Binding ElementName=Root, Path=DataContext.PowerUpPokemonCommand}"
                                                 EvolvePokemonCommand="{Binding ElementName=Root, Path=DataContext.EvolvePokemonCommand}"
-                                                Loaded="PokemonDetailControl_Loaded"
-                                                Visibility="Collapsed" />
+                                                StardustAmount="{Binding ElementName=Root, Path=DataContext.StardustAmount}"/>
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
@@ -275,14 +262,14 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,21"
-                Command="{Binding ReturnToPokemonInventoryScreen}">
+                Command="{Binding ReturnToPokemonInventoryScreen}" >
             <Image Source="../../Assets/Buttons/btn_close.png" />
         </Button>
 
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
                 Style="{StaticResource ButtonCircleBig}"
-                Margin="16">
+                Margin="16" >
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
                     <media:ControlStoryboardAction Storyboard="{StaticResource ShowContextMenuStoryboard}" />
