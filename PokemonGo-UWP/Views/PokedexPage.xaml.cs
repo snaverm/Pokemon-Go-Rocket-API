@@ -14,10 +14,5 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
         }
-
-        private void Pokeindex_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ((PokedexPageViewModel)DataContext).OpenPokedexEntry.Execute(e.ClickedItem);
-        }
     }
 }
