@@ -51,6 +51,8 @@ namespace PokemonGo_UWP.Utils
 
     public class PokemonIdToNumericId : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is PokemonId)
@@ -62,9 +64,32 @@ namespace PokemonGo_UWP.Utils
         {
             return value;
         }
+
+        #endregion
     }
+
+    public class ItemClickEventArgsToClickedItemConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            ItemClickEventArgs args = (ItemClickEventArgs)value;
+            return args.ClickedItem;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonIdToPokedexDescription : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var path = $"{value.ToString()}/Description";
@@ -76,7 +101,10 @@ namespace PokemonGo_UWP.Utils
         {
             return value;
         }
+
+        #endregion
     }
+
     public class PokemonIdToPokemonNameConverter : IValueConverter
     {
         #region Implementation of IValueConverter

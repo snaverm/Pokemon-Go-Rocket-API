@@ -14,22 +14,5 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
-        }
-        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            
-        }
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
-        }
-
-        private void Pokeindex_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ((PokedexPageViewModel)DataContext).OpenPokedexEntry.Execute(e.ClickedItem);
-        }
     }
 }
