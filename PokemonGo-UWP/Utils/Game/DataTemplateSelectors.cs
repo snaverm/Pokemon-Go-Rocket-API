@@ -18,10 +18,11 @@ namespace PokemonGo_UWP.Utils
         public DataTemplate PokemonUnseen { get; set; }
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            KeyValuePair<PokemonId, PokedexEntry> pokemon = (KeyValuePair<PokemonId, PokedexEntry>)item;
-            if (pokemon.Value == null)
+            PokemonId id = (PokemonId)item;
+            var pokedexEntry = GameClient.PokedexInventory.FirstOrDefault(x => x.PokemonId == id);
+            if (pokedexEntry == null)
                 return PokemonUnseen;
-            else if (pokemon.Value.TimesEncountered > 0 && pokemon.Value.TimesCaptured == 0)
+            else if (pokedexEntry.TimesEncountered > 0 && pokedexEntry.TimesCaptured == 0)
                 return PokemonSeen;
             else
                 return PokemonCaptured;
