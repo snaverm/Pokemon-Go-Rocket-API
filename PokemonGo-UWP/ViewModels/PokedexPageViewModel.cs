@@ -21,7 +21,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             if (state.Any())
             {
-                PokemonFoundAndSeen = (ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>)state[nameof(PokemonFoundAndSeen)];
+                PokemonFoundAndSeen = (ObservableCollection<PokemonId>)state[nameof(PokemonFoundAndSeen)];
                 SeenPokemons = (int)state[nameof(SeenPokemons)];
                 CapturedPokemons = (int)state[nameof(CapturedPokemons)];
             }
@@ -48,15 +48,7 @@ namespace PokemonGo_UWP.ViewModels
                             default:
                                 {
                                     var pokedexEntry = pokedexItems.Where(x => x.PokemonId == item);
-                                    if (pokedexEntry.Count() == 1)
-                                    {
-                                        PokemonFoundAndSeen.Add(new KeyValuePair<PokemonId, PokedexEntry>(item,
-                                            pokedexEntry.ElementAt(0)));
-                                    }
-                                    else
-                                    {
-                                        PokemonFoundAndSeen.Add(new KeyValuePair<PokemonId, PokedexEntry>(item, null));
-                                    }
+                                    PokemonFoundAndSeen.Add(item);
                                     break;
                                 }
                         }
@@ -108,23 +100,24 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Variables
-        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> PokemonFoundAndSeen { get; private set; } = new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        public ObservableCollection<PokemonId> PokemonFoundAndSeen { get; private set; } = new ObservableCollection<PokemonId>();
         private int _captured, _seen;
         public int CapturedPokemons { get { return _captured; } set { Set(ref _captured, value); } }
         public int SeenPokemons { get { return _seen; } set { Set(ref _seen, value); } }
         private PokemonSettings _pokemonDetails;
         public PokemonSettings PokemonDetails { get { return _pokemonDetails; } set { Set(ref _pokemonDetails, value); } }
-        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> PokemonEvolutions { get; } = new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
-        public ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>> EeveeEvolutions { get; } = new ObservableCollection<KeyValuePair<PokemonId, PokedexEntry>>();
+        public ObservableCollection<PokemonId> PokemonEvolutions { get; } = new ObservableCollection<PokemonId>();
+        public ObservableCollection<PokemonId> EeveeEvolutions { get; } = new ObservableCollection<PokemonId>();
         #endregion
 
-        private DelegateCommand<KeyValuePair<PokemonId, PokedexEntry>> _openPokedexEntry;
-        public DelegateCommand<KeyValuePair<PokemonId, PokedexEntry>> OpenPokedexEntry =>
+        private DelegateCommand<PokemonId> _openPokedexEntry;
+        public DelegateCommand<PokemonId> OpenPokedexEntry =>
             _openPokedexEntry ??
-            (_openPokedexEntry = new DelegateCommand<KeyValuePair<PokemonId, PokedexEntry>>(
-                (x) =>
+            (_openPokedexEntry = new DelegateCommand<PokemonId>(
+                (id) =>
                 {
-                    NavigationService.Navigate(typeof(PokedexDetailPage), x.Key);
+                    if (GameClient.PokedexInventory.Count(x => x.PokemonId == id) == 0) return;
+                    NavigationService.Navigate(typeof(PokedexDetailPage), id);
                 },
                     (x) => true)
             );
