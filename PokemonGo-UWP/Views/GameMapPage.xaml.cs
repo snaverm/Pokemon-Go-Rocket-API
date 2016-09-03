@@ -178,7 +178,7 @@ namespace PokemonGo_UWP.Views
             // See if we need to update the map
             if ((e.Parameter != null) && (e.NavigationMode != NavigationMode.Back))
             {
-                var mode =
+                GameMapNavigationModes mode =
                     ((JObject) JsonConvert.DeserializeObject((string) e.Parameter)).Last
                         .ToObject<GameMapNavigationModes>();
                 if ((mode == GameMapNavigationModes.AppStart) || (mode == GameMapNavigationModes.SettingsUpdate))

@@ -20,8 +20,7 @@ namespace PokemonGo_UWP.Views
         }
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName.CompareTo(nameof(ViewModel.SelectedPokedexEntry)) == 0)
-                scrollPokedexEntry.ChangeView(0, 0, scrollPokedexEntry.ZoomFactor);
+            
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
