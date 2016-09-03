@@ -114,9 +114,10 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand<PokemonId> OpenPokedexEntry =>
             _openPokedexEntry ??
             (_openPokedexEntry = new DelegateCommand<PokemonId>(
-                (x) =>
+                (id) =>
                 {
-                    NavigationService.Navigate(typeof(PokedexDetailPage), x);
+                    if (GameClient.PokedexInventory.Count(x => x.PokemonId == id) == 0) return;
+                    NavigationService.Navigate(typeof(PokedexDetailPage), id);
                 },
                     (x) => true)
             );
