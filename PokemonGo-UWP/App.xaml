@@ -27,6 +27,10 @@
             <utils:PokemonToPokemonSecondTypeVisibilityConverter x:Key="PokemonToPokemonSecondTypeVisibilityConverter" />
             <utils:PokemonToCandiesForEvolveConverter x:Key="PokemonToCandiesForEvolveConverter" />
             <utils:PokemonToPokemonEvolveVisibilityConverter x:Key="PokemonToPokemonEvolveVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalWeightVisibilityConverter x:Key="PokemonToPokemonExceptionalWeightVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalWeightTagConverter x:Key="PokemonToPokemonExceptionalWeightTagConverter" />
+            <utils:PokemonToPokemonExceptionalHeightVisibilityConverter x:Key="PokemonToPokemonExceptionalHeightVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalHeightTagConverter x:Key="PokemonToPokemonExceptionalHeightTagConverter" />
             <utils:EmptyConverter x:Key="EmptyConverter" />
             <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter" />
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter" />

@@ -63,6 +63,7 @@ namespace PokemonGo_UWP.Utils
             return value;
         }
     }
+
     public class PokemonIdToPokedexDescription : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -77,6 +78,7 @@ namespace PokemonGo_UWP.Utils
             return value;
         }
     }
+
     public class PokemonIdToPokemonNameConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -356,6 +358,104 @@ namespace PokemonGo_UWP.Utils
             }
 
             return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonExceptionalWeightVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return Visibility.Collapsed;
+
+            PokemonDataWrapper pokemon = (PokemonDataWrapper)value;
+            var extraData = GameClient.GetExtraDataForPokemon(pokemon.PokemonId);
+            float commonWeight = extraData.PokedexWeightKg;
+            float weightStdDev = extraData.WeightStdDev;
+
+            return (pokemon.WeightKg > commonWeight + weightStdDev || pokemon.WeightKg < commonWeight - weightStdDev) ?
+                Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonExceptionalWeightTagConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return "";
+
+            PokemonDataWrapper pokemon = (PokemonDataWrapper)value;
+            var extraData = GameClient.GetExtraDataForPokemon(pokemon.PokemonId);
+            float commonWeight = extraData.PokedexWeightKg;
+            float weightStdDev = extraData.WeightStdDev;
+
+            return (pokemon.WeightKg > commonWeight + weightStdDev) ? "XL" : "XS";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonExceptionalHeightVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return Visibility.Collapsed;
+
+            PokemonDataWrapper pokemon = (PokemonDataWrapper)value;
+            var extraData = GameClient.GetExtraDataForPokemon(pokemon.PokemonId);
+            float commonHeight = extraData.PokedexHeightM;
+            float heightStdDev = extraData.HeightStdDev * 2;
+
+            return (pokemon.HeightM > commonHeight + heightStdDev || pokemon.HeightM < commonHeight - heightStdDev) ?
+                Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToPokemonExceptionalHeightTagConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return "";
+
+            PokemonDataWrapper pokemon = (PokemonDataWrapper)value;
+            var extraData = GameClient.GetExtraDataForPokemon(pokemon.PokemonId);
+            float commonHeight = extraData.PokedexHeightM;
+            float heightStdDev = extraData.HeightStdDev * 2;
+
+            return (pokemon.HeightM > commonHeight + heightStdDev) ? "XL" : "XS";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -53,6 +53,9 @@ namespace PokemonGo_UWP.Views
                 //    Candy_ = 10
                 //};
             }
+
+            PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
+            PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
         }
 
         /// <summary>
