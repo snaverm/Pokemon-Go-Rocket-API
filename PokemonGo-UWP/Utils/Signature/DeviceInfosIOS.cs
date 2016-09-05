@@ -13,7 +13,7 @@ namespace PokemonGo_UWP.Utils
     /// <summary>
     /// Device infos used to sign requests
     /// </summary>
-    public class DeviceInfosIOS : IDeviceInfoExtended
+    public class DeviceInfosIOS : DeviceInfoBase, IDeviceInfoExtended
     {
 
         public DeviceInfosIOS()
@@ -95,10 +95,6 @@ namespace PokemonGo_UWP.Utils
 
 
         public string Platform => "IOS";
-
-        public int Version => 3300;
-
-        public long TimeSnapshot => DeviceInfos.RelativeTimeFromStart;
 
 
         //IOS doe not use sattelites info

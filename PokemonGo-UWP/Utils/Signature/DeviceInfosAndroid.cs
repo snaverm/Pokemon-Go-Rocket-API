@@ -9,7 +9,7 @@ namespace PokemonGo_UWP.Utils
     /// <summary>
     /// Device infos used to sign requests
     /// </summary>
-    public class DeviceInfosAndroid : IDeviceInfoExtended
+    public class DeviceInfosAndroid : DeviceInfoBase, IDeviceInfoExtended
     {
 
         public DeviceInfosAndroid()
@@ -44,8 +44,6 @@ namespace PokemonGo_UWP.Utils
         public string FirmwareBrand => "shamu";
 
         public string FirmwareType => "user";
-
-        public long TimeSnapshot => DeviceInfos.RelativeTimeFromStart;
 
         #endregion
 
@@ -86,8 +84,6 @@ namespace PokemonGo_UWP.Utils
 
 
         public string Platform => "ANDROID";
-
-        public int Version => 3300;
 
         private List<IGpsSattelitesInfo> _gpsSattelitesInfo = new List<IGpsSattelitesInfo>();
         private object _gpsSattelitesInfoLock = new object();
