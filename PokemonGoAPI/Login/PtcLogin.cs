@@ -74,7 +74,6 @@ namespace PokemonGo.RocketAPI.Login
         public async Task<AccessToken> GetAccessToken()
         {
                 // robertmclaws: Should we be setting every UserAgent property like the other requests?
-
                 var loginData = await GetLoginParameters().ConfigureAwait(false);
                 var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
                 var accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
@@ -176,7 +175,8 @@ namespace PokemonGo.RocketAPI.Login
             {
                 Username = this.Username,
                 Token = decoder.GetFirstValueByName("access_token"),
-                ExpiresUtc = DateTime.UtcNow.AddSeconds(int.Parse(decoder.GetFirstValueByName("expires"))),
+                // @robertmclaws: Subtract 1 hour from the token to solve this issue: https://github.com/pogodevorg/pgoapi/issues/86
+                ExpiresUtc = DateTime.UtcNow.AddSeconds(int.Parse(decoder.GetFirstValueByName("expires")) - 3600),
                 AuthType = AuthType.Ptc
             };
         }

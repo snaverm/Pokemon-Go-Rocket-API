@@ -2,9 +2,6 @@
 using Superbest_random;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 
 namespace PokemonGo_UWP.Utils
@@ -208,7 +205,9 @@ namespace PokemonGo_UWP.Utils
 
                 loc.TimeSnapshot = DeviceInfos.RelativeTimeFromStart;
 
-                loc.HorizontalAccuracy = (float?)GameClient.Geoposition.Coordinate?.Accuracy ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
+                loc.HorizontalAccuracy = (float?)GameClient.Geoposition.Coordinate?.SatelliteData.HorizontalDilutionOfPrecision ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
+                // @robertmclaws: VericalAccuracy is not currently transmitted in the payload. 
+                //loc.VerticalAccuracy = (float?)GameClient.Geoposition.Coordinate?.SatelliteData.VerticalDilutionOfPrecision ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
 
                 return loc;
             }
