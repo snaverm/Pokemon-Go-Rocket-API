@@ -773,6 +773,7 @@
     <Compile Include="Utils\Helpers\GeoHelper.cs" />
     <Compile Include="Utils\Helpers\IStorageHelper.cs" />
     <Compile Include="Utils\Helpers\LiveTileHelper.cs" />
+    <Compile Include="Utils\Helpers\LocationServiceHelper.cs" />
     <Compile Include="Utils\Helpers\MapOrientationModes.cs" />
     <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
