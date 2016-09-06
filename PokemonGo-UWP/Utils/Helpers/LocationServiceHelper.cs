@@ -37,7 +37,7 @@ namespace PokemonGo_UWP.Utils.Helpers
 			private set { Set(ref _Geoposition, value); }
 		}
 
-		public async void InitializeAsync()
+		public async Task InitializeAsync()
 		{
 			Geoposition = Geoposition ?? await _geolocator.GetGeopositionAsync();
 		}

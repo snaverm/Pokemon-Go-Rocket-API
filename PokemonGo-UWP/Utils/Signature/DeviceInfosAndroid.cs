@@ -3,9 +3,6 @@ using PokemonGo_UWP.Utils.Helpers;
 using Superbest_random;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 
 namespace PokemonGo_UWP.Utils
@@ -13,7 +10,7 @@ namespace PokemonGo_UWP.Utils
     /// <summary>
     /// Device infos used to sign requests
     /// </summary>
-    public class DeviceInfosAndroid : IDeviceInfoExtended
+    public class DeviceInfosAndroid : DeviceInfoBase, IDeviceInfoExtended
     {
 
         public DeviceInfosAndroid()
@@ -48,8 +45,6 @@ namespace PokemonGo_UWP.Utils
         public string FirmwareBrand => "shamu";
 
         public string FirmwareType => "user";
-
-        public long TimeSnapshot => DeviceInfos.RelativeTimeFromStart;
 
         #endregion
 
@@ -90,8 +85,6 @@ namespace PokemonGo_UWP.Utils
 
 
         public string Platform => "ANDROID";
-
-        public int Version => 3300;
 
         private List<IGpsSattelitesInfo> _gpsSattelitesInfo = new List<IGpsSattelitesInfo>();
         private object _gpsSattelitesInfoLock = new object();
@@ -209,9 +202,11 @@ namespace PokemonGo_UWP.Utils
 
                 loc.TimeSnapshot = DeviceInfos.RelativeTimeFromStart;
 
-                loc.HorizontalAccuracy = (float?)LocationServiceHelper.Instance.Geoposition.Coordinate?.Accuracy ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
+                loc.HorizontalAccuracy = (float?)LocationServiceHelper.Instance.Geoposition.Coordinate?.SatelliteData.HorizontalDilutionOfPrecision ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
+																																																																																																								 // @robertmclaws: VericalAccuracy is not currently transmitted in the payload. 
+																																																																																																								 //loc.VerticalAccuracy = (float?)LocationServiceHelper.Instance.Geoposition.Coordinate?.SatelliteData.VerticalDilutionOfPrecision ?? (float)Math.Floor((float)_random.NextGaussian(1.0, 1.0)); //better would be exp distribution
 
-                return loc;
+				return loc;
             }
 
             public string Provider { get; private set; }

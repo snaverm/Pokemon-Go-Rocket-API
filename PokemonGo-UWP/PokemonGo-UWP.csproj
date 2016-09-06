@@ -780,6 +780,7 @@
     <Compile Include="Utils\Helpers\ProximityHelper.cs" />
     <Compile Include="Utils\Helpers\ProtobufJsonNetConverter.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />
+    <Compile Include="Utils\Signature\DeviceInfoBase.cs" />
     <Compile Include="Utils\Signature\DeviceInfos.cs" />
     <Compile Include="Utils\Helpers\ExceptionHandler.cs" />
     <Compile Include="Utils\GameClient.cs" />
