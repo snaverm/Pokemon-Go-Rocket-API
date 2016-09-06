@@ -535,6 +535,10 @@ Aynı zamanda {1} Stardust, {2} Şeker ve {3} XP kazandın.</target>
           <source>{0} is not in catch range anymore.</source>
           <target state="new">{0} is not in catch range anymore.</target>
         </trans-unit>
+        <trans-unit id="CannotTransferFavorite" translate="yes" xml:space="preserve">
+          <source>Cannot transfer a favorite Pokémon!</source>
+          <target state="new">Cannot transfer a favorite Pokémon!</target>
+        </trans-unit>
       </group>
     </body>
   </file>
