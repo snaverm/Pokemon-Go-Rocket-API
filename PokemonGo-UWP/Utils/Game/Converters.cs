@@ -1496,6 +1496,47 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class IntToBooleanConverter : IValueConverter {
+
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            return value.Equals(1);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    public class PokemonLastHoursVisibiltyConverter : IValueConverter {
+       
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            if(value == null) {
+                return Visibility.Collapsed;
+            }
+            var ms = System.Convert.ToUInt64(value);
+            var creationDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+            creationDate = creationDate.Add(TimeSpan.FromMilliseconds(ms));
+            var now = DateTime.Now;
+            if (now.AddDays(-10) <= creationDate) {
+                return Visibility.Visible;
+            } else {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
     public class PokemonTypeToBackgroundImageConverter : IValueConverter
     {
         #region Implementation of IValueConverter

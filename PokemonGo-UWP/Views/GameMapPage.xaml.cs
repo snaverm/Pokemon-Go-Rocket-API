@@ -256,7 +256,7 @@ namespace PokemonGo_UWP.Views
                         $"{GameMapControl.Center.Position.Latitude: 000.0000} ; {GameMapControl.Center.Position.Longitude: 000.0000}";
                     string previousCoord =
                         $"{lastAutoPosition.Position.Latitude: 000.0000} ; {lastAutoPosition.Position.Longitude: 000.0000}";
-                    if (currentCoord == previousCoord)
+                    if (ReactivateMapAutoUpdateButton != null && currentCoord == previousCoord)
                     {
                         //Previous position was set automatically, continue!
                         ReactivateMapAutoUpdateButton.Visibility = Visibility.Collapsed;

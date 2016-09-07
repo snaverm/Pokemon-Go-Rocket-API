@@ -532,13 +532,12 @@
                         </Grid.ColumnDefinitions>
 
                         <!--Favorite-->
-                        <CheckBox MinWidth="33" 
+                        <CheckBox Width="33" 
+                                  Height="33"
                                   Grid.Column="3"
                                   Style="{StaticResource CheckStar}" 
                                   Margin="0" 
-                                  HorizontalAlignment="Right" 
-                                  BorderBrush="White" 
-                                  BorderThickness="4" 
+                                  HorizontalAlignment="Right"
                                   Command="{Binding FavoritePokemonCommand}" 
                                   IsChecked="{Binding IsFavorite, Mode=OneWay}"/>
 
