@@ -116,7 +116,7 @@ namespace PokemonGo_UWP.ViewModels
             (_openPokedexEntry = new DelegateCommand<PokemonId>(
                 (id) =>
                 {
-                    if (!GameClient.PokedexInventory.Any(x => x.PokemonId == id)) return;
+                    if (GameClient.PokedexInventory.All(x => x.PokemonId != id)) return;
                     NavigationService.Navigate(typeof(PokedexDetailPage), id);
                 },
                     (x) => true)
