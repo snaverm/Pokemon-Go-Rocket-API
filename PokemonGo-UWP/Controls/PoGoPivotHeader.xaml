@@ -18,9 +18,9 @@
         <TextBlock Style="{StaticResource TextSubTitle}"
                    HorizontalAlignment="Center"
                    Foreground="#FF44696C">
-            <Run Text="{x:Bind DataCurrent}" />
+            <Run Text="{x:Bind DataCurrent, Mode=OneWay}" />
             <Run Text=" / " />
-            <Run Text="{x:Bind DataMaximum}" />
+            <Run Text="{x:Bind DataMaximum, Mode=OneWay}" />
         </TextBlock>
     </StackPanel>
 </UserControl>

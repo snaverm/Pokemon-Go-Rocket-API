@@ -247,8 +247,8 @@
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="PokemonHeader"
                                               Title="POKÉMON"
-                                              DataCurrent="{x:Bind ViewModel.PokemonInventory.Count}"
-                                              DataMaximum="250"/>
+                                              DataCurrent="{Binding PokemonInventory.Count}"
+                                              DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}"/>
                     </PivotItem.Header>
                     <RelativePanel>
                         <GridView x:Name="PokemonInventoryGridView"
@@ -298,20 +298,8 @@
                                               RelativePanel.AlignRightWith="PokemonImage"
                                               Visibility="{x:Bind CreationTimeMs, Converter={StaticResource PokemonLastHoursVisibiltyConverter}}">
                                             <Ellipse Fill="Blue"
-                                                       Margin="5"
-                                                       Opacity="0.01" />
-                                            <Ellipse Fill="Blue"
-                                                       Margin="4"
-                                                       Opacity="0.005" />
-                                            <Ellipse Fill="Blue"
-                                                       Margin="3"
-                                                       Opacity="0.015" />
-                                            <Ellipse Fill="Blue"
-                                                       Margin="2"
-                                                       Opacity="0.005" />
-                                            <Ellipse Fill="Blue"
-                                                       Margin="1"
-                                                       Opacity="0.001" />
+                                                     Margin="5"
+                                                     Opacity="0.05" />
                                         </Grid>
                                         <CheckBox x:Name="FavoriteCheckBox"
                                                   RelativePanel.AlignTopWith="PokemonImage"
@@ -362,7 +350,7 @@
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="EggsHeader"
                                                 Title="EGGS"
-                                                DataCurrent="{x:Bind ViewModel.EggsInventory.Count}"
+                                                DataCurrent="{Binding EggsInventory.Count}"
                                                 DataMaximum="9" />
                     </PivotItem.Header>
                     <RelativePanel>

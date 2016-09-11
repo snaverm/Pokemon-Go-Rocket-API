@@ -12,12 +12,18 @@ using POGOProtos.Data;
 using POGOProtos.Inventory;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using Google.Protobuf;
 
 namespace PokemonGo_UWP.ViewModels
 {
     public class PokemonInventoryPageViewModel : ViewModelBase
     {
         #region Game Management Vars
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        private PlayerData _playerProfile;
 
         /// <summary>
         ///     Egg selected for incubation
@@ -51,6 +57,9 @@ namespace PokemonGo_UWP.ViewModels
                 // Recovering the state
                 PokemonInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(PokemonInventory)]);
                 EggsInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(EggsInventory)]);
+                PlayerProfile = new PlayerData();
+                PlayerProfile.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerProfile)]).CreateCodedInput());
+                RaisePropertyChanged(() => PlayerProfile);
             }
             else
             {
@@ -81,6 +90,8 @@ namespace PokemonGo_UWP.ViewModels
 
                 if(mode == NavigationMode.Back)
                     ResetView?.Invoke();
+
+                PlayerProfile = GameClient.PlayerProfile;
             }
 
             await Task.CompletedTask;
@@ -111,6 +122,15 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Bindable Game Vars
+
+        /// <summary>
+        ///     Player's profile, we use it just for the username
+        /// </summary>
+        public PlayerData PlayerProfile
+        {
+            get { return _playerProfile; }
+            set { Set(ref _playerProfile, value); }
+        }
 
         /// <summary>
         ///     Sorting mode for current Pokemon view

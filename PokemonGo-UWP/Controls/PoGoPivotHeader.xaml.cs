@@ -33,8 +33,8 @@ namespace PokemonGo_UWP.Controls {
 
         public string DataCurrent
         {
-            get { return (string)GetValue(DataContextProperty); }
-            set { SetValue(DataContextProperty, value); }
+            get { return (string)GetValue(DataCurrentProperty); }
+            set { SetValue(DataCurrentProperty, value); }
         }
 
         public string DataMaximum
