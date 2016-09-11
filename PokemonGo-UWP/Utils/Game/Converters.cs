@@ -439,7 +439,7 @@ namespace PokemonGo_UWP.Utils
             var badgeType =
                 (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
 
-            return badgeType == null ? "" : string.Format(Resources.Achievements.GetString(badgeType.Value.ToString() + "Description"), achievementType.Value);
+            return badgeType == null ? "" : string.Format(Resources.Achievements.GetString(badgeType.Value + "Description"), new AchievementValueConverter().Convert(achievementType.Value, null, null, string.Empty));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -569,7 +569,11 @@ namespace PokemonGo_UWP.Utils
             }
             if (value is float)
             {
-                return float.Parse(value.ToString()).ToString("N1");
+                return ((float)value).ToString("N1");
+            }
+            if (value is double)
+            {
+                return ((double)value).ToString("N1");
             }
             return value;
         }

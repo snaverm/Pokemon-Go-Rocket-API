@@ -536,7 +536,7 @@ namespace PokemonGo_UWP.Utils
             SettingsService.Instance.MapAutomaticOrientationMode = SettingsService.Instance.MapAutomaticOrientationMode;
 			#endregion
       Busy.SetBusy(true, Resources.CodeResources.GetString("GettingGpsSignalText"));
-			LocationServiceHelper.Instance.InitializeAsync();
+			await LocationServiceHelper.Instance.InitializeAsync();
 			LocationServiceHelper.Instance.PropertyChanged += LocationHelperPropertyChanged;
 			// Before starting we need game settings
 			GameSetting =
@@ -553,7 +553,8 @@ namespace PokemonGo_UWP.Utils
             //await UpdateMapObjects();
             await UpdateInventory();
             await UpdateItemTemplates();
-            Busy.SetBusy(false);
+            if(PlayerProfile != null && PlayerStats != null)
+                Busy.SetBusy(false);
         }
 
 		private static async void LocationHelperPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -751,9 +752,13 @@ namespace PokemonGo_UWP.Utils
                 PlayerStats = tmpStats;
                 var levelUpResponse = await GetLevelUpRewards(tmpStats.Level);
                 await UpdateInventory();
+                // Set busy to false because initial loading may have left it going until we had PlayerStats
+                Busy.SetBusy(false);
                 return levelUpResponse;
             }
             PlayerStats = tmpStats;
+            // Set busy to false because initial loading may have left it going until we had PlayerStats
+            Busy.SetBusy(false);
             return null;
         }
 
