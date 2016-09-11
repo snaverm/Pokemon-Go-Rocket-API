@@ -484,6 +484,7 @@
     <Content Include="Assets\Fonts\Lato-Regular.ttf" />
     <Content Include="Assets\Fonts\Lato-Bold.ttf" />
     <None Include="project.json" />
+    <Content Include="Styles\NianticStyleLight.json" />
     <PRIResource Include="Strings\es-MX\Resources.resw" />
     <PRIResource Include="Strings\es-MX\PokemonTypes.resw" />
     <PRIResource Include="Strings\es-MX\PokemonMoves.resw" />
@@ -777,6 +778,7 @@
     <Compile Include="Utils\Helpers\MapOrientationModes.cs" />
     <Compile Include="Utils\Helpers\LiveTileModes.cs" />
     <Compile Include="Utils\Helpers\LocalCacheHelper.cs" />
+    <Compile Include="Utils\Helpers\MapStyleHelpers.cs" />
     <Compile Include="Utils\Helpers\ProximityHelper.cs" />
     <Compile Include="Utils\Helpers\ProtobufJsonNetConverter.cs" />
     <Compile Include="Utils\Helpers\StorageHelper.cs" />

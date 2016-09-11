@@ -250,6 +250,22 @@
             <Image Source="../Assets/UI/logoDark.png" MaxWidth="180" MaxHeight="180" Opacity=".2" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </StackPanel>
         <RelativePanel Name="GamePanel" Grid.Row="0">
+
+            <Border RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    x:Name="GoogleAttributionBorder"
+                    Canvas.ZIndex="10">
+                <Border.Background>
+                    <SolidColorBrush Color="White"
+                                     Opacity="0.6"/>
+                </Border.Background>
+                
+                <TextBlock Margin="2"
+                       Foreground="Black"
+                       Text="Maps data ©2015 Google"
+                           FontSize="12"/>
+            </Border>
+
             <maps:MapControl BusinessLandmarksVisible="False"
                          TargetCameraChanged="GameMapControl_TargetCameraChanged"
                          LandmarksVisible="False"
