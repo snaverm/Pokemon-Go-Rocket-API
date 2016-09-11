@@ -9,6 +9,7 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:entities="using:PokemonGo_UWP.Entities"
+      xmlns:pogo="using:PokemonGo_UWP.Controls"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -94,11 +95,15 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource PageBackgroundGradient}">
-        <Grid x:Name="SortMenuPanel"
+        <RelativePanel x:Name="SortMenuPanel"
               Opacity="0"
               Canvas.ZIndex="0"
               Background="{StaticResource PageBackgroundGradient}">
-            <ListView ItemsSource="{Binding Converter={StaticResource PokemonSortingModesToSortingModesListConverter}}"
+            <ListView RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Above="CloseSortMenuButton"
+                      ItemsSource="{Binding Converter={StaticResource PokemonSortingModesToSortingModesListConverter}}"
                       SelectedItem="{Binding CurrentPokemonSortingMode, Mode=TwoWay}"
                       IsItemClickEnabled="True"
                       VerticalAlignment="Bottom"
@@ -138,9 +143,9 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button x:Name="CloseSortMenuButton"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                     Style="{StaticResource ButtonCircleInverse}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
                     Margin="0,0,0,17.5">
 
                 <interactivity:Interaction.Behaviors>
@@ -151,7 +156,7 @@
 
                 <Image Source="../Assets/Buttons/btn_close_dark.png" />
             </Button>
-        </Grid>
+        </RelativePanel>
 
         <Grid x:Name="IncubatorsContainer"
               Canvas.ZIndex="5">
@@ -174,13 +179,11 @@
                             Background="White"
                             BorderBrush="#efefef"
                             BorderThickness="0,1,0,0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0">
+                        <RelativePanel>
+                            <StackPanel x:Name="HeaderPanel"
+                                        RelativePanel.AlignTopWithPanel="True"
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                        RelativePanel.AlignRightWithPanel="True">
                                 <TextBlock x:Uid="incubatorsText"
                                            Text="INCUBATORS"
                                            Style="{StaticResource TextPageTitleDark}" />
@@ -188,7 +191,10 @@
                                         Width="150"
                                         Height="1" />
                             </StackPanel>
-                            <GridView Grid.Row="1"
+                            <GridView RelativePanel.Below="HeaderPanel"
+                                      RelativePanel.Above="CloseIncubatorsGridViewButton"
+                                      RelativePanel.AlignLeftWithPanel="True"
+                                      RelativePanel.AlignRightWithPanel="True"
                                       ItemsSource="{Binding IncubatorsInventory}"
                                       IsItemClickEnabled="False"
                                       SelectionMode="None">
@@ -217,62 +223,39 @@
                                 </GridView.ItemTemplate>
                             </GridView>
                             <Button x:Name="CloseIncubatorsGridViewButton"
-                                    Grid.Row="2"
+                                    RelativePanel.AlignBottomWithPanel="True"
+                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                                     Tapped="ToggleIncubatorModel"
                                     Style="{StaticResource ButtonCircle}"
-                                    VerticalAlignment="Bottom"
                                     Margin="0,0,0,17.5">
                                 <Image Source="../Assets/Buttons/btn_close.png" />
                             </Button>
-                        </Grid>
+                        </RelativePanel>
                     </Border>
 
                 </controls:ModalDialog.ModalContent>
             </controls:ModalDialog>
 
         </Grid>
-        <!-- Da rifare -->
 
         <Border Margin="12,0,12,0"
                 Background="White"
                 CornerRadius="5,5,0,0">
             <Pivot x:Name="MainUIPanel"
-                   SelectionChanged="SelectionChanged"
-                   Style="{StaticResource PokemonInventoryPivotStyle}">
+                   SelectionChanged="SelectionChanged">
                 <PivotItem x:Name="PokemonsPivot">
                     <PivotItem.Header>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock  x:Uid="PokemonTextBlock"
-                                        Text="POKÉMON"
-                                        Style="{StaticResource TextPageTitleDark}"
-                                        Margin="10,10,10,3"
-                                        Foreground="#FF44696C"
-                                        FontSize="18" />
-                            <TextBlock Style="{StaticResource TextSubTitle}"
-                                       HorizontalAlignment="Center"
-                                       Foreground="#FF44696C">
-                           <Run Text="{x:Bind ViewModel.PokemonInventory.Count}" />
-                           <Run Text=" / " />
-                           <Run Text="250" />
-                            </TextBlock>
-                            <Rectangle Fill="#FF44696C"
-                                       Height="2"
-                                       Margin="10,3,10,10"
-                                       RadiusX="2"
-                                       RadiusY="2"
-                                       Width="100"
-                                       Opacity="{Binding SelectedIndex, ElementName=MainUIPanel, ConverterParameter=1,
-                                             Converter={StaticResource PokemonPivotHeaderToVisibleConverter}}" />
-                        </StackPanel>
+                        <pogo:PoGoPivotHeader x:Uid="PokemonHeader"
+                                              Title="POKÉMON"
+                                              DataCurrent="{x:Bind ViewModel.PokemonInventory.Count}"
+                                              DataMaximum="250"/>
                     </PivotItem.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <RelativePanel>
                         <GridView x:Name="PokemonInventoryGridView"
+                                  RelativePanel.AlignTopWithPanel="True"
+                                  RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                  RelativePanel.Above="SortingButton"
                                   ItemsSource="{Binding PokemonInventory, Mode=OneWay}"
-                                  Grid.Row="1"
                                   SelectionMode="None"
                                   Padding="0,0,0,57.5"
                                   ShowsScrollingPlaceholders="True"
@@ -361,7 +344,8 @@
                             </GridView.ItemTemplate>
                         </GridView>
                         <Button x:Name="SortingButton"
-                                Grid.Row="1"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
                                 Style="{StaticResource ButtonCircleBigInverse}"
                                 Margin="16">
                             <interactivity:Interaction.Behaviors>
@@ -371,44 +355,23 @@
                             </interactivity:Interaction.Behaviors>
                             <Image Source="{Binding CurrentPokemonSortingMode, Converter={StaticResource PokemonSortingModesToIconConverter}}" />
                         </Button>
-                    </Grid>
+                    </RelativePanel>
                 </PivotItem>
 
                 <PivotItem x:Name="EggsPivot">
                     <PivotItem.Header>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock x:Uid="EggsTextBlock"
-                                       Text="EGGS"
-                                       Style="{StaticResource TextPageTitleDark}"
-                                       Margin="10,10,10,3"
-                                       Foreground="#FF44696C"
-                                       FontSize="18" />
-                            <TextBlock Style="{StaticResource TextSubTitle}"
-                                       HorizontalAlignment="Center"
-                                       Foreground="#FF44696C">
-                           <Run Text="{x:Bind ViewModel.EggsInventory.Count}" />
-                           <Run Text=" / " />
-                           <Run Text="9" />
-                            </TextBlock>
-                            <Rectangle Fill="#FF44696C"
-                                       Height="2"
-                                       Margin="15,3,15,15"
-                                       RadiusX="2"
-                                       RadiusY="2"
-                                       Width="100"
-                                       Opacity="{Binding SelectedIndex, ElementName=MainUIPanel, ConverterParameter=0,
-                                             Converter={StaticResource PokemonPivotHeaderToVisibleConverter}}" />
-                        </StackPanel>
+                        <pogo:PoGoPivotHeader x:Uid="EggsHeader"
+                                                Title="EGGS"
+                                                DataCurrent="{x:Bind ViewModel.EggsInventory.Count}"
+                                                DataMaximum="9" />
                     </PivotItem.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <RelativePanel>
                         <GridView x:Name="EggsInventoryGridView"
-                                  ItemsSource="{x:Bind ViewModel.EggsInventory}"
+                                  RelativePanel.AlignTopWithPanel="True"
+                                  RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                  RelativePanel.Above="IncubatorButton"
+                                  ItemsSource="{Binding EggsInventory}"
                                   SelectionMode="None"
-                                  Grid.Row="1"
                                   Padding="0,0,0,57.5"
                                   SizeChanged="GridViewEggsSizeChanged">
 
@@ -452,14 +415,15 @@
                         </GridView>
 
                         <Button x:Name="IncubatorButton"
-                                Grid.Row="1"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
                                 Style="{StaticResource ButtonCircleBigInverse}"
                                 Tapped="ToggleIncubatorModel"
                                 Margin="16">
                             <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
                         </Button>
 
-                    </Grid>
+                    </RelativePanel>
                 </PivotItem>
 
             </Pivot>
