@@ -141,7 +141,7 @@ namespace PokemonGo_UWP.ViewModels
             set
             {
                 SettingsService.Instance.PokemonSortingMode = value;
-                RaisePropertyChanged(nameof(CurrentPokemonSortingMode));
+                RaisePropertyChanged(() => CurrentPokemonSortingMode);
 
                 // When this changes we need to sort the collection again
                 UpdateSorting();
