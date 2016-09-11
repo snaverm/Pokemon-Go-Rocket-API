@@ -238,9 +238,10 @@
 
         </Grid>
 
-        <Border Margin="12,0,12,0"
-                Background="White"
-                CornerRadius="5,5,0,0">
+        <Border Margin="0">
+            <Border.Background>
+                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green.png" />
+            </Border.Background>
             <Pivot x:Name="MainUIPanel"
                    SelectionChanged="SelectionChanged"
                    Style="{StaticResource PokemonInventoryPivotStyle}">
