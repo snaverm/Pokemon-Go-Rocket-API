@@ -242,13 +242,14 @@
                 Background="White"
                 CornerRadius="5,5,0,0">
             <Pivot x:Name="MainUIPanel"
-                   SelectionChanged="SelectionChanged">
+                   SelectionChanged="SelectionChanged"
+                   Style="{StaticResource PokemonInventoryPivotStyle}">
                 <PivotItem x:Name="PokemonsPivot">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="PokemonHeader"
                                               Title="POKÉMON"
                                               DataCurrent="{Binding PokemonInventory.Count}"
-                                              DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}"/>
+                                              DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}" />
                     </PivotItem.Header>
                     <RelativePanel>
                         <GridView x:Name="PokemonInventoryGridView"
