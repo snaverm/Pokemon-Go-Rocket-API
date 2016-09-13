@@ -340,4 +340,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</value>
   <data name="CannotTransferFavorite" xml:space="preserve">
     <value>Cannot transfer a favorite Pokémon!</value>
   </data>
+  <data name="CantUseBerryText" xml:space="preserve">
+    <value>You already used a Berry.</value>
+  </data>
 </root>

@@ -539,6 +539,10 @@ Aynı zamanda {1} Stardust, {2} Şeker ve {3} XP kazandın.</target>
           <source>Cannot transfer a favorite Pokémon!</source>
           <target state="new">Cannot transfer a favorite Pokémon!</target>
         </trans-unit>
+        <trans-unit id="CantUseBerryText" translate="yes" xml:space="preserve">
+          <source>You already used a Berry.</source>
+          <target state="new">You already used a Berry.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -799,6 +803,14 @@ Aynı zamanda {1} Stardust, {2} Şeker ve {3} XP kazandın.</target>
         <trans-unit id="AwardedExperienceTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Experience</source>
           <target state="new">Experience</target>
+        </trans-unit>
+        <trans-unit id="EggsHeader.Title" translate="yes" xml:space="preserve">
+          <source>EGGS</source>
+          <target state="new">EGGS</target>
+        </trans-unit>
+        <trans-unit id="PokemonHeader.Title" translate="yes" xml:space="preserve">
+          <source>POKÉMON</source>
+          <target state="new">POKÉMON</target>
         </trans-unit>
       </group>
     </body>

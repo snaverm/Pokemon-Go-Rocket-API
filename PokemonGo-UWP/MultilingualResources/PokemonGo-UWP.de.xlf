@@ -540,6 +540,10 @@ Du hast auch {1} Sternenstaub, {2} Bonbon und {3} EP erhalten.</target>
           <source>Cannot transfer a favorite Pokémon!</source>
           <target state="new">Cannot transfer a favorite Pokémon!</target>
         </trans-unit>
+        <trans-unit id="CantUseBerryText" translate="yes" xml:space="preserve">
+          <source>You already used a Berry.</source>
+          <target state="new">You already used a Berry.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
