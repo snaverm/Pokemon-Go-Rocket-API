@@ -211,6 +211,8 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         private CaptureAward _currentCaptureAward;
 
+        private bool _canUseBerry = true;
+
         #endregion
 
         #region Bindable Game Vars
@@ -253,7 +255,19 @@ namespace PokemonGo_UWP.ViewModels
         public ItemData SelectedCaptureItem
         {
             get { return _selectedCaptureItem; }
-            set { Set(ref _selectedCaptureItem, value); }
+            set
+            {
+                // If user selected a berry we need to see if he can select it
+                if (!_canUseBerry &&
+                    (value.ItemId == ItemId.ItemRazzBerry || value.ItemId == ItemId.ItemBlukBerry ||
+                     value.ItemId == ItemId.ItemNanabBerry || value.ItemId == ItemId.ItemWeparBerry ||
+                     value.ItemId == ItemId.ItemPinapBerry))
+                {
+                    new MessageDialog(Resources.CodeResources.GetString("CantUseBerryText")).ShowAsyncQueue();
+                    return;
+                }
+                Set(ref _selectedCaptureItem, value);
+            }
         }
 
         /// <summary>
@@ -465,6 +479,7 @@ namespace PokemonGo_UWP.ViewModels
                 case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
                     Logger.Write($"{CurrentPokemon.PokemonId} escaped");
                     CatchEscape?.Invoke(this, null);
+                    _canUseBerry = true;
                     break;
 
                 case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
@@ -488,7 +503,7 @@ namespace PokemonGo_UWP.ViewModels
             }
 
             return false;
-        }
+        }        
 
         /// <summary>
         ///     Uses the selected berry for the current encounter
@@ -509,6 +524,7 @@ namespace PokemonGo_UWP.ViewModels
                 // TODO: do we need to handle the returned values or are they needed just to animate the 3d model?
                 Logger.Write($"Success when using {LastItemUsed}.");
                 BerrySuccess?.Invoke(this, null);
+                _canUseBerry = false;
             }
             else
                 Logger.Write($"Failure when using {LastItemUsed}.");
