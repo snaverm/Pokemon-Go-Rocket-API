@@ -460,6 +460,7 @@ namespace PokemonGo_UWP.ViewModels
                         Logger.Write("Adding Pokestop modifier success");
                         AddModifierSuccess?.Invoke(this, null);
                         await GameClient.UpdateInventory();
+						RaisePropertyChanged(() => IsPokestopLured);
                         break;
                     case AddFortModifierResponse.Types.Result.TooFarAway:
                         // PokeStop can't be modified because it's too far away, there's nothing that we can do
