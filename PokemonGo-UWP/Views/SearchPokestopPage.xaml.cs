@@ -103,10 +103,14 @@ namespace PokemonGo_UWP.Views
             ShowFortModifierDetails.Begin();
             FortModifierPanel.Visibility = Visibility.Visible;
             ErrorMessageBorder.Visibility = Visibility.Collapsed;
-			if (ViewModel.IsPokestopLured || !ViewModel.IsModifierAvailable)
+			if (ViewModel.IsPokestopLured)									// Cannot choose item when there is a module installed
 			{
 				DeployModifierButton.IsEnabled = false;
 				DeployModifierButton.Opacity = .5;
+			}
+			if (!ViewModel.IsModifierAvailable)								// When there is no item in the players' inventory, do not show it at all
+			{
+				DeployModifierButton.Visibility = Visibility.Collapsed;
 			}
         }
 
