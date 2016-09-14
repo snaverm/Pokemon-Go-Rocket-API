@@ -75,6 +75,7 @@
             <utils:WidthConverter x:Key="WidthConverter" />
             <utils:IntToBooleanConverter x:Key="IntToBooleanConverter" />
             <utils:PokemonLastHoursVisibiltyConverter x:Key="PokemonLastHoursVisibiltyConverter" />
+            <utils:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
             <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
                 <converters:ValueWhenConverter.When>
