@@ -51,6 +51,8 @@ namespace PokemonGo_UWP.Utils
 
     public class PokemonIdToNumericId : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is PokemonId)
@@ -62,10 +64,32 @@ namespace PokemonGo_UWP.Utils
         {
             return value;
         }
+
+        #endregion
+    }
+
+    public class ItemClickEventArgsToClickedItemConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            ItemClickEventArgs args = (ItemClickEventArgs)value;
+            return args.ClickedItem;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
     }
 
     public class PokemonIdToPokedexDescription : IValueConverter
     {
+        #region Implementation of IValueConverter
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var path = $"{value.ToString()}/Description";
@@ -77,6 +101,8 @@ namespace PokemonGo_UWP.Utils
         {
             return value;
         }
+
+        #endregion
     }
 
     public class PokemonIdToPokemonNameConverter : IValueConverter
@@ -683,7 +709,7 @@ namespace PokemonGo_UWP.Utils
             var badgeType =
                 (BadgeTypeAttribute)fieldInfo.GetCustomAttributes(typeof(BadgeTypeAttribute), false).First();
 
-            return badgeType == null ? "" : string.Format(Resources.Achievements.GetString(badgeType.Value.ToString() + "Description"), achievementType.Value);
+            return badgeType == null ? "" : string.Format(Resources.Achievements.GetString(badgeType.Value + "Description"), new AchievementValueConverter().Convert(achievementType.Value, null, null, string.Empty));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -813,7 +839,11 @@ namespace PokemonGo_UWP.Utils
             }
             if (value is float)
             {
-                return float.Parse(value.ToString()).ToString("N1");
+                return ((float)value).ToString("N1");
+            }
+            if (value is double)
+            {
+                return ((double)value).ToString("N1");
             }
             return value;
         }
@@ -1678,25 +1708,6 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PokemonPivotHeaderToVisibleConverter : IValueConverter
-    {
-        #region IValueConverter PokemonPivotHeaderToVisible
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            var selectedPivotIndex = System.Convert.ToUInt64(value);
-            var thisPivotIndex = System.Convert.ToUInt64(parameter);
-            return (selectedPivotIndex == thisPivotIndex) ? "0.0" : "1.0";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     //parameter is optional
     //Use parameter to pass margin between items and page margin
     //format: itemsMargin,pageMargins
@@ -1734,6 +1745,47 @@ namespace PokemonGo_UWP.Utils
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    public class IntToBooleanConverter : IValueConverter {
+
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            return value.Equals(1);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    public class PokemonLastHoursVisibiltyConverter : IValueConverter {
+       
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            if(value == null) {
+                return Visibility.Collapsed;
+            }
+            var ms = System.Convert.ToUInt64(value);
+            var creationDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+            creationDate = creationDate.Add(TimeSpan.FromMilliseconds(ms));
+            var now = DateTime.Now;
+            if (now.AddDays(-1) <= creationDate) {
+                return Visibility.Visible;
+            } else {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
             throw new NotImplementedException();
         }
 

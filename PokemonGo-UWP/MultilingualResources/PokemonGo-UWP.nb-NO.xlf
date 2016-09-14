@@ -556,6 +556,14 @@
           <source>Experience</source>
           <target state="new">Experience</target>
         </trans-unit>
+        <trans-unit id="EggsHeader.Title" translate="yes" xml:space="preserve">
+          <source>EGGS</source>
+          <target state="new">EGGS</target>
+        </trans-unit>
+        <trans-unit id="PokemonHeader.Title" translate="yes" xml:space="preserve">
+          <source>POKÉMON</source>
+          <target state="new">POKÉMON</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -1097,6 +1105,14 @@ Du fikk også {1} Stjernestøv, {2} Candy og {3} XP.</target>
         <trans-unit id="PokemonEncounterNotInRangeText" translate="yes" xml:space="preserve">
           <source>{0} is not in catch range anymore.</source>
           <target state="new">{0} is not in catch range anymore.</target>
+        </trans-unit>
+        <trans-unit id="CannotTransferFavorite" translate="yes" xml:space="preserve">
+          <source>Cannot transfer a favorite Pokémon!</source>
+          <target state="new">Cannot transfer a favorite Pokémon!</target>
+        </trans-unit>
+        <trans-unit id="CantUseBerryText" translate="yes" xml:space="preserve">
+          <source>You already used a Berry.</source>
+          <target state="new">You already used a Berry.</target>
         </trans-unit>
       </group>
     </body>

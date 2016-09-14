@@ -74,7 +74,6 @@ namespace PokemonGo.RocketAPI.Login
         public async Task<AccessToken> GetAccessToken()
         {
                 // robertmclaws: Should we be setting every UserAgent property like the other requests?
-
                 var loginData = await GetLoginParameters().ConfigureAwait(false);
                 var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
                 var accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
@@ -93,7 +92,8 @@ namespace PokemonGo.RocketAPI.Login
         private async Task<PtcLoginParameters> GetLoginParameters()
         {
             var response = await HttpClient.GetAsync(Constants.LoginUrl);
-            var loginData = JsonConvert.DeserializeObject<PtcLoginParameters>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var loginData = JsonConvert.DeserializeObject<PtcLoginParameters>(responseContent);
             return loginData;
         }
 
@@ -129,14 +129,31 @@ namespace PokemonGo.RocketAPI.Login
             }
 
             var responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var response = JsonConvert.DeserializeObject<PtcAuthenticationTicketResponse>(responseContent);
+            PtcAuthenticationTicketResponse response = null;
+
+            // @robertmclaws: Let's try to catch situations we haven't thought of yet.
+            try
+            {
+                response = JsonConvert.DeserializeObject<PtcAuthenticationTicketResponse>(responseContent);
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.Message);
+                throw new LoginFailedException("We encountered a response from the PTC login servers thet we didn't anticipate. Please take a screenshot and open a ticket."
+                    + Environment.NewLine + responseContent.Replace("/n", ""));
+            }
+
+            if (!string.IsNullOrWhiteSpace(response.ErrorCode) && response.ErrorCode.EndsWith("activation_required"))
+            {
+                throw new LoginFailedException($"Your two-day grace period has expired, and your PTC account must now be activated." + Environment.NewLine + $"Please visit {response.Redirect}.");
+            }
 
             var loginFailedWords = new string[] { "incorrect", "disabled" };
 
             var loginFailed = loginFailedWords.Any(failedWord => response.Errors.Any(error => error.Contains(failedWord)));
             if (loginFailed)
             {
-                throw new LoginFailedException(responseMessage);
+                throw new LoginFailedException(response.Errors[0]);
             }
             throw new Exception($"Pokemon Trainer Club responded with the following error(s): '{string.Join(", ", response.Errors)}'");
         }
@@ -176,7 +193,8 @@ namespace PokemonGo.RocketAPI.Login
             {
                 Username = this.Username,
                 Token = decoder.GetFirstValueByName("access_token"),
-                ExpiresUtc = DateTime.UtcNow.AddSeconds(int.Parse(decoder.GetFirstValueByName("expires"))),
+                // @robertmclaws: Subtract 1 hour from the token to solve this issue: https://github.com/pogodevorg/pgoapi/issues/86
+                ExpiresUtc = DateTime.UtcNow.AddSeconds(int.Parse(decoder.GetFirstValueByName("expires")) - 3600),
                 AuthType = AuthType.Ptc
             };
         }
