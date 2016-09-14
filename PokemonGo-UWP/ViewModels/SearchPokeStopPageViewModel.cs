@@ -432,7 +432,9 @@ namespace PokemonGo_UWP.ViewModels
             {
                 Busy.SetBusy(true, String.Empty);
                 Logger.Write($"hiding modifier details for {CurrentPokestopInfo.Name} [ID = {CurrentPokestop.Id}]");
-                HideModifierDetails?.Invoke(this, null);
+				CurrentPokestopInfo =
+					await GameClient.GetFort(CurrentPokestop.Id, CurrentPokestop.Latitude, CurrentPokestop.Longitude);
+				HideModifierDetails?.Invoke(this, null);
                 Busy.SetBusy(false);
             }, () => true));
 
