@@ -306,4 +306,16 @@
   <data name="AwardedExperienceTextBlock.Text" xml:space="preserve">
     <value>Experience</value>
   </data>
+  <data name="FortAlreadyHasModifierTextBlock.Text" xml:space="preserve">
+    <value>This pokestop already has a lure module installed</value>
+  </data>
+  <data name="NoItemInInventoryTextBlock.Text" xml:space="preserve">
+    <value>There is no troy disc in your inventory</value>
+  </data>
+  <data name="TooFarAwayTextBlock.Text" xml:space="preserve">
+    <value>This pokestop is too far away</value>
+  </data>
+  <data name="AddModifierSuccessTextBlock.Text" xml:space="preserve">
+    <value>Successfully added lure module</value>
+  </data>
 </root>
