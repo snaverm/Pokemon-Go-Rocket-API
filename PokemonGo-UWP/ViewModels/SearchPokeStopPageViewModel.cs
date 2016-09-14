@@ -491,6 +491,22 @@ namespace PokemonGo_UWP.ViewModels
             return fallback;
         }
 
+		/// <summary>
+		/// Checks whether there is a modifier available
+		/// </summary>
+		/// <returns></returns>
+		public bool IsModifierAvailable
+		{
+			get
+			{
+				var modifier = SelectModifierType(ItemId.ItemTroyDisk);
+				if (modifier != null && modifier.Count != 0)
+					return true;
+
+				return false;
+			}
+		}
+
         /// <summary>Selects the modifier type from Inventory</summary>
         /// <param name="itemId">The item identifier</param>
         /// <returns>Found modifier or null</returns>

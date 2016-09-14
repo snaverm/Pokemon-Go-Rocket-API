@@ -103,8 +103,11 @@ namespace PokemonGo_UWP.Views
             ShowFortModifierDetails.Begin();
             FortModifierPanel.Visibility = Visibility.Visible;
             ErrorMessageBorder.Visibility = Visibility.Collapsed;
-            DeployModifierButton.IsEnabled = !ViewModel.IsPokestopLured;
-            DeployModifierButton.Opacity = ViewModel.IsPokestopLured ? .5 : 1;
+			if (ViewModel.IsPokestopLured || !ViewModel.IsModifierAvailable)
+			{
+				DeployModifierButton.IsEnabled = false;
+				DeployModifierButton.Opacity = .5;
+			}
         }
 
         private void GameManagerViewModelOnHideModifierDetails(object sender, EventArgs eventArgs)
