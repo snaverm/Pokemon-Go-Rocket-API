@@ -21,12 +21,15 @@
             <utils:PokemonTypeTranslationConverter x:Key="PokemonTypeTranslationConverter" />
             <utils:PokemonToCurrentCandiesConverter x:Key="PokemonToCurrentCandiesConverter" />
             <utils:PokemonToStardustForPowerUpConverter x:Key="PokemonToStardustForPowerUpConverter" />
+            <utils:PokemonToStardustForPowerUpForegroundConverter x:Key="PokemonToStardustForPowerUpForegroundConverter" />
             <utils:PokemonToCandiesForPowerUpConverter x:Key="PokemonToCandiesForPowerUpConverter" />
+            <utils:PokemonToCandiesForPowerUpForegroundConverter x:Key="PokemonToCandiesForPowerUpForegroundConverter" />
             <utils:PokemonToPokemonFamilyNameStringConverter x:Key="PokemonToPokemonFamilyNameStringConverter" />
             <utils:PokemonToCandyImageConverter x:Key="PokemonToCandyImageConverter" />
             <utils:PokemonToTranslatedPokemonTypeConverter x:Key="PokemonToTranslatedPokemonTypeConverter" />
             <utils:PokemonToPokemonSecondTypeVisibilityConverter x:Key="PokemonToPokemonSecondTypeVisibilityConverter" />
             <utils:PokemonToCandiesForEvolveConverter x:Key="PokemonToCandiesForEvolveConverter" />
+            <utils:PokemonToCandiesForEvolveForegroundConverter x:Key="PokemonToCandiesForEvolveForegroundConverter" />
             <utils:PokemonToPokemonEvolveVisibilityConverter x:Key="PokemonToPokemonEvolveVisibilityConverter" />
             <utils:PokemonToPokemonExceptionalWeightVisibilityConverter x:Key="PokemonToPokemonExceptionalWeightVisibilityConverter" />
             <utils:PokemonToPokemonExceptionalWeightTagConverter x:Key="PokemonToPokemonExceptionalWeightTagConverter" />

@@ -223,8 +223,6 @@
     <Content Include="Assets\Icons\ic_date.png" />
     <Content Include="Assets\Icons\ic_fav.png" />
     <Content Include="Assets\Icons\ic_fav_light.png" />
-    <Content Include="Assets\Icons\ic_fav_new.png" />
-    <Content Include="Assets\Icons\ic_fav_pressed.png" />
     <Content Include="Assets\Icons\ic_health.png" />
     <Content Include="Assets\Icons\ic_name.png" />
     <Content Include="Assets\Icons\ic_number.png" />
@@ -1058,9 +1056,7 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\NavigationModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

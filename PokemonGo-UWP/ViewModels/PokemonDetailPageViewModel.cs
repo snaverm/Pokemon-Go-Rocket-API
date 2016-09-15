@@ -25,59 +25,99 @@ namespace PokemonGo_UWP.ViewModels
     public class PokemonDetailPageViewModel : ViewModelBase
     {
 
-        public PokemonDetailPageViewModel()
-        {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-
-            }
-        }
-
-
-        public List<PokemonDataWrapper> PokemonInventory { get; private set; } = new List<PokemonDataWrapper>();
-
-        private PokemonDataWrapper _selectedPokemon;
-        /// <summary>
-        ///     Pokemon that we're trying to capture
-        /// </summary>
-        public PokemonDataWrapper SelectedPokemon
-        {
-            get { return _selectedPokemon; }
-            set
-            {
-                Set(ref _selectedPokemon, value);
-                //RaisePropertyChanged(() => EvolvedPokemonId);
-            }
-        }
-
-        private int _stardustAmount;
-        public int StardustAmount
-        {
-            get { return _stardustAmount; }
-            set { Set(ref _stardustAmount, value); }
-        }
+        public PokemonDetailPageViewModel() { }
 
         #region Lifecycle Handlers
 
-        public void Load(ulong selectedPokemonId, PokemonSortingModes sortingMode)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            // Navigating from inventory page so we need to load the pokemoninventory and the current pokemon
-            PokemonInventory.Clear();
-            PokemonInventory.AddRange(GameClient.PokemonsInventory.Select(pokemonData => new PokemonDataWrapper(pokemonData)).SortBySortingmode(sortingMode));
+            if (suspensionState.Any())
+            {
+                // Recovering the state
+            } else
+            {
+                // Navigating from inventory page so we need to load the pokemoninventory and the current pokemon
+                var navParam =  (SelectedPokemonNavModel)parameter;
+                Load(Convert.ToUInt64(navParam.SelectedPokemonId), navParam.SortingMode, navParam.ViewMode);
+            }
 
-            SelectedPokemon = PokemonInventory.FirstOrDefault(pokemon => pokemon.Id == selectedPokemonId);
+            await Task.CompletedTask;
+        }
+
+        public void Load(ulong selectedPokemonId, PokemonSortingModes sortingMode, PokemonDetailPageViewMode viewMode)
+        {
+            PokemonInventory.Clear();
+            SortingMode = sortingMode;
+            ViewMode = viewMode;
+            if(viewMode == PokemonDetailPageViewMode.Normal)
+            {
+                // Navigating from inventory page so we need to load the pokemoninventory and the current pokemon
+                PokemonInventory.AddRange(GameClient.PokemonsInventory.Select(pokemonData => new PokemonDataWrapper(pokemonData)).SortBySortingmode(sortingMode));
+                SelectedPokemon = PokemonInventory.FirstOrDefault(pokemon => pokemon.Id == selectedPokemonId);
+            } else
+            {
+                // Navigating from Capture, Egg hatch or evolve, only show this pokemon
+                PokemonInventory.Add(GameClient.PokemonsInventory.Where(pokemon => pokemon.Id == selectedPokemonId).Select(pokemonData => new PokemonDataWrapper(pokemonData)).FirstOrDefault());
+                SelectedPokemon = PokemonInventory.First();
+            }
 
             StardustAmount = GameClient.PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount;
         }
 
         #endregion
 
+        #region Bindable Vars
 
+        public List<PokemonDataWrapper> PokemonInventory { get; private set; } = new List<PokemonDataWrapper>();
 
-        #region Bindable Game Vars
+        public PokemonSortingModes SortingMode { get; private set; }
+        public PokemonDetailPageViewMode ViewMode { get; private set; }
 
-        
+        /// <summary>
+        /// Current displayed Pokemon
+        /// </summary>
+        private PokemonDataWrapper _selectedPokemon;
+        public PokemonDataWrapper SelectedPokemon
+        {
+            get { return _selectedPokemon; }
+            set
+            {
+                Set(ref _selectedPokemon, value);
+                PowerUpPokemonCommand.RaiseCanExecuteChanged();
+                EvolvePokemonCommand.RaiseCanExecuteChanged();
+            }
+        }
 
+        /// <summary>
+        /// The ID of the resulting pokemon type of an ongoing evolution
+        /// </summary>
+        public PokemonId EvolvedPokemonId
+        {
+            get { return EvolvedPokemon == null ? PokemonId.Missingno : EvolvedPokemon.PokemonId; }
+        }
+
+        /// <summary>
+        /// The resulting pokemon of an ongoing evolution
+        /// </summary>
+        private PokemonDataWrapper _evolvedPokemon;
+        public PokemonDataWrapper EvolvedPokemon
+        {
+            get { return _evolvedPokemon; }
+            set {
+                Set(ref _evolvedPokemon, value);
+                RaisePropertyChanged(() => EvolvedPokemonId);
+            }
+        }
+
+        /// <summary>
+        /// Currently available amount of stardust
+        /// </summary>
+        private int _stardustAmount;
+        public int StardustAmount
+        {
+            get { return _stardustAmount; }
+            set { Set(ref _stardustAmount, value); }
+        }
 
         #endregion
 
@@ -112,7 +152,7 @@ namespace PokemonGo_UWP.ViewModels
           _appraisePokemonCommand = new DelegateCommand(() =>
           {
               // TODO: Implement appraise
-              var dialog = new MessageDialog("Sorry, check back later ;)", "Not yet implemented");
+              var dialog = new MessageDialog("Sorry, check back later 😉", "Not yet implemented");
               dialog.ShowAsync();
           }, () => true));
 
@@ -125,6 +165,18 @@ namespace PokemonGo_UWP.ViewModels
         public DelegateCommand TransferPokemonCommand => _transferPokemonCommand ?? (
           _transferPokemonCommand = new DelegateCommand(() =>
           {
+              // Catch if the Pokémon is a Favorite, transfering in this case is not permitted
+              // TODO: This isn't a MessageDialog in the original apps, implement error style (Shell needed)
+              if (Convert.ToBoolean(SelectedPokemon.Favorite))
+              {
+                  var cannotTransferDialog = new PoGoMessageDialog(Resources.CodeResources.GetString("CannotTransferFavorite"), "")
+                  {
+                      CoverBackground = true,
+                      AnimationType = PoGoMessageDialogAnimation.Bottom
+                  };
+                  cannotTransferDialog.Show();
+                  return;
+              }
               // Ask for confirmation before moving the Pokemon
               var name = Resources.Pokemon.GetString(SelectedPokemon.PokemonId.ToString());
               var dialog =
@@ -151,7 +203,7 @@ namespace PokemonGo_UWP.ViewModels
                           case ReleasePokemonResponse.Types.Result.Unset:
                               break;
                           case ReleasePokemonResponse.Types.Result.Success:
-                              // This isn't a MessageDialog in the original. Need to implement the additional UI
+                              // TODO: Implement message informing about success of transfer (Shell needed)
                               await GameClient.UpdateInventory();
                               await GameClient.UpdatePlayerStats();
                               // HACK - if we're coming fro the inventory we may go back, otherwise we go to map page
@@ -203,11 +255,8 @@ namespace PokemonGo_UWP.ViewModels
                           break;
                       case SetFavoritePokemonResponse.Types.Result.Success:
                           // Inverse favorite state
-                          SelectedPokemon.WrappedData.Favorite = Convert.ToInt32(!isFavorite);
-
-                          //IsFavorite = !isFavorite;
+                          SelectedPokemon.Favorite = Convert.ToInt32(!isFavorite);
                           break;
-
                       case SetFavoritePokemonResponse.Types.Result.ErrorPokemonNotFound:
                           break;
                       case SetFavoritePokemonResponse.Types.Result.ErrorPokemonIsEgg:
@@ -260,13 +309,7 @@ namespace PokemonGo_UWP.ViewModels
                           case NicknamePokemonResponse.Types.Result.Unset:
                               break;
                           case NicknamePokemonResponse.Types.Result.Success:
-                              // Reload updated data
-                              var currentPokemonData = SelectedPokemon.WrappedData;
-                              currentPokemonData.Nickname = textbox.Text;
-                              SelectedPokemon = new PokemonDataWrapper(currentPokemonData);
-                              await GameClient.UpdateInventory();
-                              await GameClient.UpdateProfile();
-                              //UpdateCurrentData();
+                              SelectedPokemon.Nickname = textbox.Text;
                               break;
                           case NicknamePokemonResponse.Types.Result.ErrorPokemonNotFound:
                               break;
@@ -312,10 +355,14 @@ namespace PokemonGo_UWP.ViewModels
                         break;
                     case UpgradePokemonResponse.Types.Result.Success:
                         // Reload updated data
-                        SelectedPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
+                        PokemonInventory.Remove(SelectedPokemon);
+                        var uppedPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
+                        PokemonInventory.Add(uppedPokemon);
+                        PokemonInventory.SortBySortingmode(SortingMode);
+                        SelectedPokemon = uppedPokemon;
+                        RaisePropertyChanged(nameof(SelectedPokemon));
                         await GameClient.UpdateInventory();
                         await GameClient.UpdateProfile();
-                        //UpdateCurrentData();
                         break;
 
                     case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
@@ -336,10 +383,13 @@ namespace PokemonGo_UWP.ViewModels
 
         private bool CanPowerUp()
         {
-            //if (CurrentPokemon == null) return false;
-            //var pokemonLevel = PokemonInfo.GetLevel(CurrentPokemon.WrappedData);
-            //return CurrentCandy != null && StardustAmount >= StardustToPowerUp && CurrentCandy.Candy_ >= CandiesToPowerUp && pokemonLevel < GameClient.PlayerStats.Level + 1.5;
-            return true;
+            if (SelectedPokemon == null) return false;
+            var pokemonLevel = PokemonInfo.GetLevel(SelectedPokemon.WrappedData);
+            var currentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).FamilyId);
+            var candiesToPowerUp = Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(SelectedPokemon.WrappedData)) - 1)]);
+            var stardustToPowerUp = Convert.ToInt32(GameClient.PokemonUpgradeSettings.StardustCost[Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(SelectedPokemon.WrappedData)) - 1)]);
+
+            return currentCandy != null && StardustAmount >= stardustToPowerUp && currentCandy.Candy_ >= candiesToPowerUp && pokemonLevel < GameClient.PlayerStats.Level + 1.5;
         }
 
         #endregion
@@ -356,54 +406,62 @@ namespace PokemonGo_UWP.ViewModels
 
         public DelegateCommand EvolvePokemonCommand => _evolvePokemonCommand ?? (_evolvePokemonCommand = new DelegateCommand(() =>
         {
+            // Ask for confirmation before evolving the Pokemon
+            var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("EvolvePokemonWarningText"),
+                Resources.Pokemon.GetString(SelectedPokemon.PokemonId.ToString())))
+            {
+                AcceptText = Resources.CodeResources.GetString("YesText"),
+                CancelText = Resources.CodeResources.GetString("NoText"),
+                CoverBackground = true,
+                AnimationType = PoGoMessageDialogAnimation.Bottom
+            };
+            dialog.AcceptInvoked += async (sender, e) =>
+            {
+                EvolvePokemonResponse res = await GameClient.EvolvePokemon(SelectedPokemon.WrappedData);
+                RaisePropertyChanged(() => EvolvedPokemonId);
+                switch (res.Result)
+                {
+                    case EvolvePokemonResponse.Types.Result.Unset:
+                        break;
+                    case EvolvePokemonResponse.Types.Result.Success:
+                        EvolvedPokemon = new PokemonDataWrapper(res.EvolvedPokemonData);
+                        PokemonEvolved?.Invoke(this, null);
+                        await GameClient.UpdateInventory();
+                        await GameClient.UpdateProfile();
+                        break;
 
-        }, () => true));
-        //public DelegateCommand EvolvePokemonCommand => _evolvePokemonCommand ?? (_evolvePokemonCommand = new DelegateCommand(() =>
-        //{
-        //    // Ask for confirmation before evolving the Pokemon
-        //    var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("EvolvePokemonWarningText"),
-        //        Resources.Pokemon.GetString(CurrentPokemon.PokemonId.ToString())));
-        //    dialog.AcceptText = Resources.CodeResources.GetString("YesText");
-        //    dialog.CancelText = Resources.CodeResources.GetString("NoText");
-        //    dialog.CoverBackground = true;
-        //    dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
-        //    dialog.AcceptInvoked += async (sender, e) =>
-        //    {
-        //        EvolvePokemonResponse = await GameClient.EvolvePokemon(CurrentPokemon.WrappedData);
-        //        RaisePropertyChanged(() => EvolvedPokemonId);
-        //        switch (EvolvePokemonResponse.Result)
-        //        {
-        //            case EvolvePokemonResponse.Types.Result.Unset:
-        //                break;
-        //            case EvolvePokemonResponse.Types.Result.Success:
-        //                PokemonEvolved?.Invoke(this, null);
-        //                await GameClient.UpdateInventory();
-        //                await GameClient.UpdateProfile();
-        //                break;
+                    case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
+                        break;
+                    case EvolvePokemonResponse.Types.Result.FailedInsufficientResources:
+                        break;
+                    case EvolvePokemonResponse.Types.Result.FailedPokemonCannotEvolve:
+                        break;
+                    case EvolvePokemonResponse.Types.Result.FailedPokemonIsDeployed:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                };
+            };
 
-        //            case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
-        //                break;
-        //            case EvolvePokemonResponse.Types.Result.FailedInsufficientResources:
-        //                break;
-        //            case EvolvePokemonResponse.Types.Result.FailedPokemonCannotEvolve:
-        //                break;
-        //            case EvolvePokemonResponse.Types.Result.FailedPokemonIsDeployed:
-        //                break;
-        //            default:
-        //                throw new ArgumentOutOfRangeException();
-        //        }
-        //    };
+            dialog.Show();
+            }, CanEvolve));
 
-        //    dialog.Show();
-        //}, () => CurrentCandy != null && CurrentCandy.Candy_ >= PokemonExtraData.CandyToEvolve));
-
-        private DelegateCommand _replaceEvolvedPokemonCommand;
-
-        public DelegateCommand ReplaceEvolvedPokemonCommand => _replaceEvolvedPokemonCommand ?? (
-            _replaceEvolvedPokemonCommand = new DelegateCommand(() =>
+        private bool CanEvolve()
         {
-            //CurrentPokemon = new PokemonDataWrapper(EvolvePokemonResponse.EvolvedPokemonData);
-            //UpdateCurrentData();
+            if (SelectedPokemon == null) return false;
+            var currentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).FamilyId);
+            return currentCandy != null && currentCandy.Candy_ >= GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).CandyToEvolve;
+        }
+
+        private DelegateCommand _navigateToEvolvedPokemonCommand;
+
+        public DelegateCommand NavigateToEvolvedPokemonCommand => _navigateToEvolvedPokemonCommand ?? (_navigateToEvolvedPokemonCommand = new DelegateCommand(() =>
+        {
+            NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
+            {
+                SelectedPokemonId = EvolvedPokemon.Id.ToString(),
+                ViewMode = PokemonDetailPageViewMode.ReceivedPokemon
+            });
         }));
 
         #endregion

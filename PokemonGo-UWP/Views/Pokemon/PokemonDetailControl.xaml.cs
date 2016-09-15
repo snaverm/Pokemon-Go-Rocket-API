@@ -28,55 +28,15 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
 
-            Loaded += PokemonDetailControl_Loaded;
-
-            // Design time data
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                //var pokeData = new PokemonData
-                //{
-                //    PokemonId = PokemonId.Abra,
-                //    Cp = 10,
-                //    Stamina = 800,
-                //    StaminaMax = 1000,
-                //    WeightKg = 12,
-                //    BattlesAttacked = 5
-
-                //};
-                //CurrentPokemon = new PokemonDataWrapper(pokeData);
-                //StardustAmount = 18000;
-                //StardustToPowerUp = 1800;
-                //CandiesToPowerUp = 100;
-                //CurrentCandy = new Candy
-                //{
-                //    FamilyId = PokemonFamilyId.FamilyAbra,
-                //    Candy_ = 10
-                //};
-            }
+            DataContextChanged += DataContextChangedEvent;
 
             PokemonTypeCol.MinWidth = PokemonTypeCol.ActualWidth;
             PokemonTypeCol.Width = new GridLength(1, GridUnitType.Star);
         }
 
-        /// <summary>
-        /// Hack to prevent flickering of the FlipView... it's just sad
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PokemonDetailControl_Loaded(object sender, RoutedEventArgs e)
+        private void DataContextChangedEvent(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-
-            //TimeSpan delay = TimeSpan.FromMilliseconds(50);
-
-            //ThreadPoolTimer DelayThread = ThreadPoolTimer.CreateTimer(
-            //(source1) =>
-            //{
-            //    Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            //    {
-            //        PokemonDetailControl pkmnContrl = (PokemonDetailControl)sender;
-            //        pkmnContrl.Visibility = Visibility.Visible;
-            //    });
-            //}, delay);
+            ContentScroll.ChangeView(0.0, 0.0, 1.0f);
         }
 
         #region Dependency Propertys
@@ -142,5 +102,6 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
+
     }
 }

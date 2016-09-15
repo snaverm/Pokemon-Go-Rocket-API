@@ -658,10 +658,11 @@ namespace PokemonGo_UWP.Utils
                             currentPokemon.PokemonId, hatchedEggResponse.StardustAwarded[i], hatchedEggResponse.CandyAwarded[i],
                             hatchedEggResponse.ExperienceAwarded[i])).ShowAsyncQueue();
 
-                    NavigationHelper.NavigationState["CurrentPokemon"] =
-                        new PokemonDataWrapper(currentPokemon);
-                    BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage));
-
+                    BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
+                    {
+                        SelectedPokemonId = currentPokemon.PokemonId.ToString(),
+                        ViewMode = PokemonDetailPageViewMode.ReceivedPokemon
+                    });
                 }
             }
         }

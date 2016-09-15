@@ -13,10 +13,9 @@ using System.ComponentModel;
 
 namespace PokemonGo_UWP.Entities
 {
-    public class PokemonDataWrapper
+    public class PokemonDataWrapper : INotifyPropertyChanged
     {
         private DelegateCommand _gotoEggDetailsCommand;
-        private DelegateCommand _gotoPokemonDetailsCommand;
 
         [JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
         private PokemonData _wrappedData;
@@ -47,17 +46,6 @@ namespace PokemonGo_UWP.Entities
             {
                 NavigationHelper.NavigationState["CurrentEgg"] = this;
                 BootStrapper.Current.NavigationService.Navigate(typeof(EggDetailPage));
-            }, () => true));
-
-        /// <summary>
-        ///     Navigate to detail page for the selected Pokemon
-        /// </summary>
-        public DelegateCommand GotoPokemonDetailsCommand => _gotoPokemonDetailsCommand ?? (
-            _gotoPokemonDetailsCommand = new DelegateCommand(() =>
-            {
-                NavigationHelper.NavigationState["CurrentPokemon"] = this;
-                NavigationHelper.NavigationState["LastSelectedID"] = Id;
-                BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage));
             }, () => true));
 
         #region Wrapped Properties

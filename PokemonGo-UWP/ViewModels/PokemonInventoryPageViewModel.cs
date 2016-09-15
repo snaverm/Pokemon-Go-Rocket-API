@@ -171,7 +171,7 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _returnToGameScreen ??
                 (_returnToGameScreen =
-                    new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage)); }, () => true));
+                    new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate); }, () => true));
 
         #endregion
 
@@ -198,7 +198,8 @@ namespace PokemonGo_UWP.ViewModels
                         NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
                         {
                             SelectedPokemonId = selectedPokemon.Id.ToString(),
-                            SortingMode = CurrentPokemonSortingMode
+                            SortingMode = CurrentPokemonSortingMode,
+                            ViewMode = PokemonDetailPageViewMode.Normal
                         }, new SuppressNavigationTransitionInfo());
                     }));
 

@@ -243,6 +243,25 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PokemonToStardustForPowerUpForegroundConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var startustToPowerUp =  System.Convert.ToInt32(GameClient.PokemonUpgradeSettings.StardustCost[
+                System.Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+            return startustToPowerUp > GameClient.PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount ? new SolidColorBrush(Color.FromArgb(255, 255, 0, 0)) : App.Current.Resources["TitleTextColor"];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonToCandiesForPowerUpConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -261,6 +280,27 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PokemonToCandiesForPowerUpForegroundConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            var extraData = GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId);
+            var candyToPowerUp = System.Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[
+                System.Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(((PokemonDataWrapper)value).WrappedData)) - 1)]);
+            return candyToPowerUp > GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == extraData.FamilyId).Candy_ ? new SolidColorBrush(Color.FromArgb(255, 255, 0, 0)) : App.Current.Resources["TitleTextColor"];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     public class PokemonToCandiesForEvolveConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -269,6 +309,25 @@ namespace PokemonGo_UWP.Utils
         {
             if (value == null) return 0;
             return GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId).CandyToEvolve;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonToCandiesForEvolveForegroundConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return new SolidColorBrush(Color.FromArgb(0,0,0,0));
+            var extraData = GameClient.GetExtraDataForPokemon(((PokemonDataWrapper)value).PokemonId);
+            return extraData.CandyToEvolve > GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == extraData.FamilyId).Candy_ ? new SolidColorBrush(Color.FromArgb(255,255,0,0)) : App.Current.Resources["TitleTextColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

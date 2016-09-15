@@ -916,38 +916,56 @@
 
     <Style x:Key="CheckStar"
            TargetType="CheckBox">
+        <Setter Property="BorderBrush"
+                Value="Gray" />
+        <Setter Property="BorderThickness"
+                Value="4" />
+        <Setter Property="Width"
+                Value="30" />
+        <Setter Property="Height"
+                Value="30" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="Margin"
+                Value="15" />
+        <Setter Property="Foreground"
+                Value="Gold" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="CheckBox" >
+                <ControlTemplate TargetType="CheckBox">
                     <Grid x:Name="Grid"
-                          Margin="{TemplateBinding Margin}"
-                          Width="{TemplateBinding Width}"
-                          Height="{TemplateBinding Height}"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Top">
+                          Background="Transparent"
+                          Margin="2">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="MouseOver" />
                                 <VisualState x:Name="Pressed" />
-                                <VisualState x:Name="Disabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="Star.Width" Value="0" />
-                                        <Setter Target="Star.Height" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
+                                <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CheckStates">
                                 <VisualState x:Name="Checked">
                                     <VisualState.Setters>
-                                        <Setter Target="StarFill.Visibility" Value="Visible" />
-                                        <Setter Target="Star.Visibility" Value="Collapsed" />
+                                        <Setter Target="StarFill.Visibility"
+                                                Value="Visible" />
+                                        <Setter Target="Star.Visibility"
+                                                Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Unchecked">
                                     <VisualState.Setters>
-                                        <Setter Target="StarFill.Visibility" Value="Collapsed" />
-                                        <Setter Target="Star.Visibility" Value="Visible" />
+                                        <Setter Target="StarFill.Visibility"
+                                                Value="Collapsed" />
+                                        <Setter Target="Star.Visibility"
+                                                Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -956,16 +974,28 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Image x:Name="Star"
-                               Stretch="UniformToFill"
-                               Visibility="Visible"
-                               Margin="{TemplateBinding Margin}"
-                               Source="../Assets/Icons/ic_fav_new.png" />
-                        <Image x:Name="StarFill"
-                               Stretch="UniformToFill"
-                               Visibility="Collapsed"
-                               Margin="{TemplateBinding Margin}"
-                               Source="../Assets/Icons/ic_fav_pressed.png" />
+                        <Path x:Name="Star"
+                              Stretch="Fill"
+                              Fill="Transparent"
+                              Stroke="White"
+                              StrokeThickness="1.8"
+                              Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000Z" />
+                        <Path x:Name="StarFill"
+                              Visibility="Collapsed"
+                              Stretch="Fill"
+                              Stroke="#fed214"
+                              StrokeThickness="1.5"
+                              Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000">
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0,0"
+                                                     EndPoint="1,1">
+                                    <GradientStop Color="#fed214"
+                                                  Offset="0" />
+                                    <GradientStop Color="#ecaf06"
+                                                  Offset="0.8" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
