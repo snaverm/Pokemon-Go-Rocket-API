@@ -128,6 +128,7 @@
     <Compile Include="Exceptions\InvalidResponseException.cs" />
     <Compile Include="Exceptions\LoginFailedException.cs" />
     <Compile Include="Exceptions\PTCOfflineException.cs" />
+    <Compile Include="Extensions\CookieContainerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Helpers\Crypt.cs" />
     <Compile Include="Helpers\IDeviceInfos.cs" />

@@ -79,8 +79,10 @@ namespace PokemonGo.RocketAPI.Login
         {
             AccessToken accessToken;
             PtcLoginParameters loginData = null;
-            var cookies = Cookies.GetCookies(new Uri("https://sso.pokemon.com"));
-            if (cookies.Count == 0)
+            var cookies = Cookies.GetCookies("sso.pokemon.com").ToList();
+            // @robertmclaws: "CASTGC" is the name of the login cookie that the service looks for, afaik.
+            //                The second one is listed as a backup in case they change the cookie name.
+            if (!cookies.Any(c => c.Name == "CASTGC") || cookies.Count == 0)
             {
                 loginData = await GetLoginParameters().ConfigureAwait(false);
             }
