@@ -258,7 +258,7 @@ namespace PokemonGo_UWP.ViewModels
             set
             {
                 // If user selected a berry we need to see if he can select it
-                if (!_canUseBerry &&
+                if (!_canUseBerry && value != null &&
                     (value.ItemId == ItemId.ItemRazzBerry || value.ItemId == ItemId.ItemBlukBerry ||
                      value.ItemId == ItemId.ItemNanabBerry || value.ItemId == ItemId.ItemWeparBerry ||
                      value.ItemId == ItemId.ItemPinapBerry))
