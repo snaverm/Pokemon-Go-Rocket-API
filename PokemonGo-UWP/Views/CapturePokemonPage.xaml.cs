@@ -329,6 +329,16 @@ namespace PokemonGo_UWP.Views
             // Set our initial position and velocity in world space
             ThrowItemPosition = new Vector3(EndingX, EndingY, 0);
             ThrowItemVelocity = distance*100.0f/timeDelta*throwDirection;
+            // Cutoff to prevent wasting balls when you didn't actually throw them
+            if (ThrowItemVelocity.LengthSquared() < 100)
+            {
+                PokeballTransform.TranslateX = InitItemX;
+                PokeballTransform.TranslateY = InitItemY;
+                PokeballTransform.ScaleX = 1;
+                PokeballTransform.ScaleY = 1;
+                ViewModel.PokeballButtonEnabled = true;
+                return;
+            }
 
             /*
             Logger.Write("Init throwDirection " + throwDirection.X + ", " + throwDirection.X + ", " + throwDirection.Z);
