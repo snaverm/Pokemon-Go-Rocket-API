@@ -14,6 +14,7 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using PokemonGo_UWP.Utils.Extensions;
 using Windows.UI.Xaml.Media.Animation;
+using Google.Protobuf;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -21,10 +22,6 @@ namespace PokemonGo_UWP.ViewModels
     {
         #region Game Management Vars
 
-        /// <summary>
-        ///     Egg selected for incubation
-        /// </summary>
-        private PokemonData _selectedEgg;
         private int _lastVisibleIndex;
 
         public int LastVisibleIndex
@@ -53,6 +50,9 @@ namespace PokemonGo_UWP.ViewModels
                 // Recovering the state
                 PokemonInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(PokemonInventory)]);
                 EggsInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(EggsInventory)]);
+                PlayerProfile = new PlayerData();
+                PlayerProfile.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerProfile)]).CreateCodedInput());
+                RaisePropertyChanged(() => PlayerProfile);
             }
             else
             {
@@ -83,6 +83,8 @@ namespace PokemonGo_UWP.ViewModels
 
                 if(mode == NavigationMode.Back)
                     ResetView?.Invoke();
+
+                PlayerProfile = GameClient.PlayerProfile;
             }
 
             await Task.CompletedTask;
@@ -115,7 +117,17 @@ namespace PokemonGo_UWP.ViewModels
         #region Bindable Game Vars
 
         /// <summary>
-        ///     Sorting mode for current Pokemon view
+        /// Player's profile, we use it just for the maximum ammount of pokemon
+        /// </summary>
+        private PlayerData _playerProfile;
+        public PlayerData PlayerProfile
+        {
+            get { return _playerProfile; }
+            set { Set(ref _playerProfile, value); }
+        }
+
+        /// <summary>
+        /// Sorting mode for current Pokemon view
         /// </summary>
         public PokemonSortingModes CurrentPokemonSortingMode
         {
@@ -131,8 +143,9 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        ///     Egg selected for incubation
+        /// Egg selected for incubation
         /// </summary>
+        private PokemonData _selectedEgg;
         public PokemonData SelectedEgg
         {
             get { return _selectedEgg; }

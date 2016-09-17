@@ -62,6 +62,7 @@ namespace PokemonGo_UWP.ViewModels
             }
 
             StardustAmount = GameClient.PlayerProfile.Currencies.FirstOrDefault(item => item.Name.Equals("STARDUST")).Amount;
+            PlayerTeamIsSet = GameClient.PlayerProfile.Team != TeamColor.Neutral;
         }
 
         #endregion
@@ -117,6 +118,16 @@ namespace PokemonGo_UWP.ViewModels
         {
             get { return _stardustAmount; }
             set { Set(ref _stardustAmount, value); }
+        }
+
+        /// <summary>
+        /// Indicator if the player has already chosen a team. This is needed for the appraise function.
+        /// </summary>
+        private bool _playerTeamIsSet;
+        public bool PlayerTeamIsSet
+        {
+            get { return _playerTeamIsSet; }
+            set { Set(ref _playerTeamIsSet, value); }
         }
 
         #endregion

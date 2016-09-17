@@ -254,13 +254,14 @@
                     <Image Grid.Column="1"
                            Height="25"
                            Width="25"
-                           Source="../../Assets/Icons/ic_fav_light.png" />
+                           Source="ms-appx:///Assets/Icons/ic_fav_light.png" />
                 </Grid>
 
                 <!--Appraise-->
                 <Grid HorizontalAlignment="Right"
                       Background="Transparent"
-                      Height="43">
+                      Height="43"
+                      Visibility="{Binding PlayerTeamIsSet, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="82" />
@@ -280,7 +281,7 @@
                     <Image Grid.Column="1"
                            Height="25"
                            Width="25"
-                           Source="../../Assets/Buttons/btn_close.png" />
+                           Source="ms-appx:///Assets/Buttons/btn_close.png" />
                 </Grid>
 
                 <!--Transfer-->
@@ -304,7 +305,7 @@
                     <Image Grid.Column="1"
                            Height="25"
                            Width="25"
-                           Source="../../Assets/Icons/ic_candy_light.png" />
+                           Source="ms-appx:///Assets/Icons/ic_candy_light.png" />
                 </Grid>
             </StackPanel>
 
@@ -319,7 +320,7 @@
                         <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-                <Image Source="../../Assets/Buttons/btn_close.png" />
+                <Image Source="ms-appx:///Assets/Buttons/btn_close.png" />
             </Button>
         </Grid>
 
@@ -384,7 +385,7 @@
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,21"
                 Command="{Binding ReturnToPokemonInventoryScreen}">
-            <Image Source="../../Assets/Buttons/btn_close.png" />
+            <Image Source="{Binding ViewMode, Converter={StaticResource PokemonDetailPageViewModeToCloseButtonImageSourceConverter}}" />
         </Button>
 
         <Button RelativePanel.AlignBottomWithPanel="True"

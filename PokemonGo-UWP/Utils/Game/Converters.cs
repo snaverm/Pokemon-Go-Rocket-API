@@ -166,27 +166,6 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PokemonDataToCapturedGepositionConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value == null) return new BasicGeoposition();
-            var pokemonData = (PokemonData)value;
-            // TODO: still give wrong position!
-            var cellCenter = new S2CellId(pokemonData.CapturedCellId).ChildEndForLevel(30).ToLatLng();// new S2LatLng(new S2Cell(new S2CellId(pokemonData.CapturedCellId).RangeMax).Center);
-            return new Geopoint(new BasicGeoposition() { Latitude = cellCenter.LatDegrees, Longitude = cellCenter.LngDegrees });
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     public class PokemonDataToPokemonTypeBackgroundConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -207,6 +186,32 @@ namespace PokemonGo_UWP.Utils
     }
 
     #region PokemonDetailControlConverters
+
+    public class PokemonDetailPageViewModeToCloseButtonImageSourceConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            BitmapImage close = new BitmapImage(new Uri("ms-appx:///Assets/Buttons/btn_close.png"));
+            BitmapImage ok = new BitmapImage(new Uri("ms-appx:///Assets/Buttons/btn_ok.png"));
+
+            if (value == null || !(value is Enum))
+            {
+                return close;
+            }
+
+            var mode = (Views.PokemonDetailPageViewMode)value;
+            return mode == Views.PokemonDetailPageViewMode.Normal ? close : ok;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
 
     public class PokemonToCurrentCandiesConverter : IValueConverter
     {
