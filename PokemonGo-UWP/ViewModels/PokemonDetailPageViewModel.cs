@@ -72,7 +72,16 @@ namespace PokemonGo_UWP.ViewModels
         public List<PokemonDataWrapper> PokemonInventory { get; private set; } = new List<PokemonDataWrapper>();
 
         public PokemonSortingModes SortingMode { get; private set; }
-        public PokemonDetailPageViewMode ViewMode { get; private set; }
+
+        /// <summary>
+        /// Viewmode for current Pokemon
+        /// </summary>
+        private PokemonDetailPageViewMode _viewMode;
+        public PokemonDetailPageViewMode ViewMode
+        {
+            get { return _viewMode; }
+            set { Set(ref _viewMode, value); }
+        }
 
         /// <summary>
         /// Current displayed Pokemon
