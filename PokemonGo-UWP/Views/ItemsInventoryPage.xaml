@@ -19,7 +19,8 @@
     <Page.Resources>
         <utils:ItemUseabilityToOpacityConverter x:Key="ItemUseabilityToOpacityConverter" 
                                                 CurrentViewMode="{Binding ViewMode}" />
-        
+        <utils:ItemUseabilityToBooleanConverter x:Key="ItemUseabilityToBooleanConverter"
+                                                CurrentViewMode="{Binding ViewMode}" />
         <Storyboard x:Name="ShowDiscardStoryboard">
 
             <DoubleAnimation
@@ -194,6 +195,14 @@
                                            FontSize="14"
                                            FontWeight="SemiLight"
                                            Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}" />
+                                <Button Grid.RowSpan="3" 
+                                        Grid.ColumnSpan="2" 
+                                        Style="{StaticResource ButtonNoStyleNoDisabledStyle}"
+                                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                        IsEnabled="{Binding Converter={StaticResource ItemUseabilityToBooleanConverter}}"
+                                        Command="{Binding ElementName=Root, Path=DataContext.UseItemCommand}"
+                                        CommandParameter="{Binding}"/>
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

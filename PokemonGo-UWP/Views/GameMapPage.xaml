@@ -12,6 +12,7 @@
     xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
     xmlns:entities="using:PokemonGo_UWP.Entities"
     xmlns:controls="using:Template10.Controls"
+    xmlns:POGOcontrols="using:PokemonGo_UWP.Controls"
     xmlns:utils="using:PokemonGo_UWP.Utils"
     x:Name="GamePage"
     RequestedTheme="{Binding CurrentTheme, Mode=OneWay}"
@@ -237,6 +238,14 @@
                              From="0"
                              To="350"
                              Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Name="ShowAppliedItemStoryboard">
+            
+        </Storyboard>
+
+        <Storyboard x:Name="HideAppliedItemStoryboard">
+
         </Storyboard>
 
         <utils:NearbyPokemonInPokedexToVisibilityConverter x:Key="NearbyPokemonInPokedexToVisibilityConverter" />
@@ -704,6 +713,66 @@
             </Button>
 
         </RelativePanel>
+            
+        <ListView   x:Name="AppliedItemsList"
+                    ItemsSource="{Binding AppliedItems}"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Margin="0,24,12,0"
+                    Canvas.ZIndex="10">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="8"
+                            Height="68">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                            Style="{ThemeResource AppliedItemNameTextBlock}"
+                            Visibility="Collapsed"/>
+
+                        <Ellipse Style="{ThemeResource AppliedItemBackgroundCircle}">
+                            <Ellipse.Fill>
+                                <SolidColorBrush Color="White"
+                                                    Opacity="0.5" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                            <Viewbox Style="{ThemeResource AppliedItemRemainingSecondsViewbox}">
+                                <POGOcontrols:RoundProgressBar Style="{ThemeResource AppliedItemRemainingSecondsProgressBar}"
+                                    Minimum="0"
+                                    Maximum="{Binding MaxSeconds}"
+                                    Value="{Binding RemainingSeconds}"/>
+                        </Viewbox>
+
+                        <Image Style="{ThemeResource AppliedItemIconImage}" 
+                                Source="{Binding Converter={StaticResource ItemToItemIconConverter}, ConverterParameter=Inventory}"/>
+
+                            <Border Style="{ThemeResource RemainingTimeBorder}">
+                                <TextBlock Style="{ThemeResource RemainingTimeTextStyle}"
+                                           Text="{Binding RemainingTime}" />
+                            </Border>
+                        </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
         <Grid x:Name="UIBottomPanel"
               RelativePanel.AlignBottomWithPanel="True"

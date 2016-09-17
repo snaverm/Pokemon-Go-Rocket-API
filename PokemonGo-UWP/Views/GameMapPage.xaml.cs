@@ -17,6 +17,7 @@ using PokemonGo_UWP.Utils;
 using Template10.Common;
 using PokemonGo_UWP.Utils.Helpers;
 using System.ComponentModel;
+using PokemonGo_UWP.Entities;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -273,6 +274,8 @@ namespace PokemonGo_UWP.Views
 			LocationServiceHelper.Instance.PropertyChanged += LocationHelperPropertyChanged;
             GameClient.HeadingUpdated += HeadingUpdated;
             ViewModel.LevelUpRewardsAwarded += ViewModelOnLevelUpRewardsAwarded;
+			ViewModel.AppliedItemExpired += ViewModelOnAppliedItemExpired;
+			ViewModel.AppliedItemStarted += ViewModelOnAppliedItemStarted;
         }
 
         private TimeSpan tick = new TimeSpan(DateTime.Now.Ticks);
@@ -311,6 +314,15 @@ namespace PokemonGo_UWP.Views
             ShowLevelUpPanelStoryboard.Begin();
         }
 
+		private void ViewModelOnAppliedItemExpired(object sender, AppliedItemWrapper AppliedItem)
+		{
+			HideAppliedItemStoryboard.Begin();
+		}
+
+		private void ViewModelOnAppliedItemStarted(object sender, AppliedItemWrapper AppliedItem)
+		{
+			ShowAppliedItemStoryboard.Begin();
+		}
         #endregion
     }
 }

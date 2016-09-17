@@ -68,10 +68,15 @@ namespace PokemonGo_UWP.Utils
             /// </summary>
             private DispatcherTimer _mapUpdateTimer;
 
-            /// <summary>
-            /// True if another update operation is in progress.
-            /// </summary>
-            private bool _isHeartbeating;
+			/// <summary>
+			/// Timer used to update applied item
+			/// </summary>
+			private DispatcherTimer _appliedItemUpdateTimer;
+
+			/// <summary>
+			/// True if another update operation is in progress.
+			/// </summary>
+			private bool _isHeartbeating;
 
             /// <summary>
             /// Checks if we need to update data
@@ -149,15 +154,39 @@ namespace PokemonGo_UWP.Utils
             internal async Task StartDispatcher()
             {
                 _keepHeartbeating = true;
-                if (_mapUpdateTimer != null) return;
-
-                await DispatcherHelper.RunInDispatcherAndAwait(() =>
-                {
-                    _mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-                    _mapUpdateTimer.Tick += HeartbeatTick;
-                    _mapUpdateTimer.Start();
-                });
+				if (_mapUpdateTimer == null)
+				{
+					await DispatcherHelper.RunInDispatcherAndAwait(() =>
+					{
+						_mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+						_mapUpdateTimer.Tick += HeartbeatTick;
+						_mapUpdateTimer.Start();
+					});
+				}
+				if (_appliedItemUpdateTimer == null)
+				{
+					await DispatcherHelper.RunInDispatcherAndAwait((Action)(() =>
+					{
+						_appliedItemUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+						_appliedItemUpdateTimer.Tick += this._appliedItemUpdateTimer_Tick;
+						_appliedItemUpdateTimer.Start();
+					}));
+				}
             }
+
+			private void _appliedItemUpdateTimer_Tick(object sender, object e)
+			{
+				foreach(AppliedItemWrapper appliedItem in AppliedItems)
+				{
+					if (appliedItem.IsExpired)
+					{
+						OnAppliedItemExpired?.Invoke(null, appliedItem);
+						AppliedItems.Remove(appliedItem);
+						break;
+					}
+					appliedItem.Update(appliedItem.WrappedData);
+				}
+			}
 
             /// <summary>
             /// Stops heartbeat
@@ -203,6 +232,11 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static InventoryDelta InventoryDelta { get; private set; }
 
+		/// <summary>
+		///		Collection of applied items
+		/// </summary>
+		public static ObservableCollection<AppliedItemWrapper> AppliedItems { get; set; } =
+			new ObservableCollection<AppliedItemWrapper>();
         #region Collections
 
         /// <summary>
@@ -314,6 +348,7 @@ namespace PokemonGo_UWP.Utils
         static GameClient()
         {
             PokedexInventory.CollectionChanged += PokedexInventory_CollectionChanged;
+			AppliedItems.CollectionChanged += AppliedItems_CollectionChanged;
             // TODO: Investigate whether or not this needs to be unsubscribed when the app closes.
         }
 
@@ -336,7 +371,15 @@ namespace PokemonGo_UWP.Utils
             }
         }
 
-        #endregion
+		private static void AppliedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				OnAppliedItemStarted?.Invoke(null, (AppliedItemWrapper)e.NewItems[0]);
+			}
+		}
+
+		#endregion
 
         #region Game Logic
 
@@ -492,6 +535,8 @@ namespace PokemonGo_UWP.Utils
         private static Heartbeat _heartbeat;
 
         public static event EventHandler<GetHatchedEggsResponse> OnEggHatched;
+		public static event EventHandler<AppliedItemWrapper> OnAppliedItemExpired;
+		public static event EventHandler<AppliedItemWrapper> OnAppliedItemStarted;
 
         #region Compass Stuff
         /// <summary>
@@ -1059,9 +1104,29 @@ namespace PokemonGo_UWP.Utils
         /// StartGymBattle
         /// AttackGym
 
-        #endregion
+		#endregion
 
-        #region Items Handling
+		#region Items Handling
+
+		/// <summary>
+		///     Uses the given incense item
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public static async Task<UseIncenseResponse> UseIncense(ItemId item)
+		{
+			return await _client.Inventory.UseIncense(item);
+		}
+
+		/// <summary>
+		///     Uses the given XpBoost item
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public static async Task<UseItemXpBoostResponse> UseXpBoost(ItemId item)
+		{
+			return await _client.Inventory.UseItemXpBoost();
+		}
 
         /// <summary>
         ///     Recycles the given amount of the selected item

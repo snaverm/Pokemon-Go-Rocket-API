@@ -23,6 +23,7 @@ using POGOProtos.Enums;
 using POGOProtos.Map.Pokemon;
 using Google.Protobuf;
 using PokemonGo_UWP.Controls;
+using POGOProtos.Inventory;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -56,6 +57,15 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
+		private void GameClient_OnAppliedItemExpired(object sender, AppliedItemWrapper e)
+		{
+			AppliedItemExpired?.Invoke(null, e);
+		}
+
+		private void GameClient_OnAppliedItemStarted(object sender, AppliedItemWrapper e)
+		{
+			AppliedItemStarted?.Invoke(null, e);
+		}
 
         #region Lifecycle Handlers
 
@@ -68,6 +78,9 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState)
         {
+			GameClient.OnAppliedItemExpired += GameClient_OnAppliedItemExpired;
+			GameClient.OnAppliedItemStarted += GameClient_OnAppliedItemStarted;
+
             // Prevent from going back to other pages
             NavigationService.ClearHistory();
             if (parameter == null || mode == NavigationMode.Back) return;
@@ -202,6 +215,11 @@ namespace PokemonGo_UWP.ViewModels
             private set { Set(ref _levelUpRewards, value); }
         }
 
+		/// <summary>
+		///		Collection of Applied items, like Incense
+		/// </summary>
+		public static ObservableCollection<AppliedItemWrapper> AppliedItems => GameClient.AppliedItems;
+
         /// <summary>
         ///     Collection of Pokemon in 1 step from current position
         /// </summary>
@@ -241,6 +259,20 @@ namespace PokemonGo_UWP.ViewModels
         public event EventHandler LevelUpRewardsAwarded;
 
         #endregion
+
+		#region AppliedItem Events
+
+		/// <summary>
+		///		Event fired when an applied item has expired
+		/// </summary>
+		public event EventHandler<AppliedItemWrapper> AppliedItemExpired;
+
+		/// <summary>
+		///		Event fired when an new item has been applied
+		/// </summary>
+		public event EventHandler<AppliedItemWrapper> AppliedItemStarted;
+
+		#endregion
 
         /// <summary>
         ///     Waits for GPS auth and, if auth is given, starts updating data

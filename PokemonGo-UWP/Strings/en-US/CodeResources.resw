@@ -355,4 +355,7 @@ You also got {1} Stardust, {2} Candy and {3} XP.</value>
   <data name="LureTitleTextFilled" xml:space="preserve">
     <value>Lure Module</value>
   </data>
+  <data name="ItemUseQuestionText" xml:space="preserve">
+    <value>Use {0} ?</value>
+  </data>
 </root>
