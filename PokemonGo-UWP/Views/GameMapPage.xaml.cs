@@ -123,7 +123,7 @@ namespace PokemonGo_UWP.Views
                     ? MapColorScheme.Dark
                     : MapColorScheme.Light;
                 GameMapControl.TileSources.Clear();
-                GameMapControl.Style = MapStyle.Terrain;
+                GameMapControl.Style = MapStyle.Road;
 
                 GoogleAttributionBorder.Visibility = Visibility.Collapsed;
             }
