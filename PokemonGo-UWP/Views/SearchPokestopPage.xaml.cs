@@ -19,6 +19,10 @@ namespace PokemonGo_UWP.Views
             {
                 // Of course binding doesn't work so we need to manually setup height for animations
                 ShowGatheredItemsMenuAnimation.From = GatheredItemsTranslateTransform.Y = ActualHeight;
+
+                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
+                MainGrid.Background = (Windows.UI.Xaml.Media.Brush)
+                    Resources[currentTime > 7 && currentTime < 19 ? "DayBackground" : "NightBackground"];
             };
         }
 
@@ -84,18 +88,21 @@ namespace PokemonGo_UWP.Views
         {
             SearchPokestopButton.IsEnabled = false;
             SpinPokestopImage.Begin();
+            ShowPokestopInPurple.Begin();
             InventoryFullTextBlock.Visibility = ErrorMessageBorder.Visibility = Visibility.Visible;
         }
 
         private void GameManagerViewModelOnSearchInCooldown(object sender, EventArgs eventArgs)
         {            
             CooldownTextBlock.Visibility = ErrorMessageBorder.Visibility = Visibility.Visible;
+            ShowPokestopInPurple.Begin();
         }
 
         private void GameManagerViewModelOnSearchSuccess(object sender, EventArgs eventArgs)
         {
             SearchPokestopButton.IsEnabled = false;
             SpinPokestopImage.Begin();
+            ShowPokestopInPurple.Begin();
         }
 
         private void GameManagerViewModelOnShowModifierDetails(object sender, EventArgs eventArgs)
