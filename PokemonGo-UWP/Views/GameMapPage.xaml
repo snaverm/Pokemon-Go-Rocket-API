@@ -82,6 +82,13 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation 
+                Storyboard.TargetName="AppliedItemsList"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="HidePokeMenuStoryboard">
@@ -142,6 +149,13 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation 
+                Storyboard.TargetName="AppliedItemsList"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="ShowLevelUpPanelStoryboard">
@@ -229,6 +243,14 @@
                              From="350"
                              To="0"
                              Duration="0:0:0.2" />
+
+            <DoubleAnimation 
+                Storyboard.TargetName="AppliedItemsList"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2"/>
+
         </Storyboard>
 
         <Storyboard x:Name="HideNearbyModalStoryboard">
@@ -238,6 +260,14 @@
                              From="0"
                              To="350"
                              Duration="0:0:0.2" />
+
+            <DoubleAnimation 
+                Storyboard.TargetName="AppliedItemsList"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2"/>
+
         </Storyboard>
 
         <Storyboard x:Name="ShowAppliedItemStoryboard">
@@ -713,13 +743,14 @@
             </Button>
 
         </RelativePanel>
-            
+
         <ListView   x:Name="AppliedItemsList"
                     ItemsSource="{Binding AppliedItems}"
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignTopWithPanel="True"
-                    Margin="0,24,12,0"
-                    Canvas.ZIndex="10">
+                    Margin="0,12,0,0"
+                    Canvas.ZIndex="10"
+                    SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"
@@ -742,12 +773,12 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock
-                            Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                            Style="{ThemeResource AppliedItemNameTextBlock}"
-                            Visibility="Collapsed"/>
+                            <TextBlock
+                                Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                Style="{ThemeResource AppliedItemNameTextBlock}"
+                                Visibility="Collapsed" />
 
-                        <Ellipse Style="{ThemeResource AppliedItemBackgroundCircle}">
+                            <Ellipse Style="{ThemeResource AppliedItemBackgroundCircle}">
                             <Ellipse.Fill>
                                 <SolidColorBrush Color="White"
                                                     Opacity="0.5" />
