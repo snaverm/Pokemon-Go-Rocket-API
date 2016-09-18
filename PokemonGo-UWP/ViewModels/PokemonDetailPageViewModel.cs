@@ -74,6 +74,23 @@ namespace PokemonGo_UWP.ViewModels
         public PokemonSortingModes SortingMode { get; private set; }
 
         /// <summary>
+        /// Flag for an ongoing server request. Used to disable the controls
+        /// </summary>
+        private bool _serverRequestRunning;
+        public bool ServerRequestRunning
+        {
+            get { return _serverRequestRunning; }
+            set
+            {
+                Set(ref _serverRequestRunning, value);
+                FavoritePokemonCommand.RaiseCanExecuteChanged();
+                PowerUpPokemonCommand.RaiseCanExecuteChanged();
+                EvolvePokemonCommand.RaiseCanExecuteChanged();
+                TransferPokemonCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
         /// Viewmode for current Pokemon
         /// </summary>
         private PokemonDetailPageViewMode _viewMode;
@@ -215,7 +232,7 @@ namespace PokemonGo_UWP.ViewModels
                   // User confirmed transfer
                   try
                   {
-                      Busy.SetBusy(true);
+                      ServerRequestRunning = true;
                       var pokemonTransferResponse = await GameClient.TransferPokemon(SelectedPokemon.Id);
 
                       switch (pokemonTransferResponse.Result)
@@ -246,14 +263,14 @@ namespace PokemonGo_UWP.ViewModels
                   }
                   finally
                   {
-                      Busy.SetBusy(false);
+                      ServerRequestRunning = false;
                   }
 
               };
 
               dialog.Show();
 
-          }, () => true));
+          }, () => !ServerRequestRunning));
 
         #endregion
 
@@ -266,7 +283,7 @@ namespace PokemonGo_UWP.ViewModels
           {
               try
               {
-                  Busy.SetBusy(true);
+                  ServerRequestRunning = true;
                   var isFavorite = Convert.ToBoolean(SelectedPokemon.Favorite);
                   var pokemonFavoriteResponse = await GameClient.SetFavoritePokemon(SelectedPokemon.Id, !isFavorite);
                   switch (pokemonFavoriteResponse.Result)
@@ -287,9 +304,9 @@ namespace PokemonGo_UWP.ViewModels
               }
               finally
               {
-                  Busy.SetBusy(false);
+                  ServerRequestRunning = false;
               }
-          }, () => true));
+          }, () => !ServerRequestRunning));
 
         #endregion
 
@@ -321,7 +338,7 @@ namespace PokemonGo_UWP.ViewModels
 
                   try
                   {
-                      Busy.SetBusy(true);
+                      ServerRequestRunning = true;
                       // Send rename request
                       var res = await GameClient.SetPokemonNickName((ulong)SelectedPokemon.Id, textbox.Text);
                       switch (res.Result)
@@ -343,7 +360,7 @@ namespace PokemonGo_UWP.ViewModels
                   }
                   finally
                   {
-                      Busy.SetBusy(false);
+                      ServerRequestRunning = false;
                   }
               };
 
@@ -367,34 +384,41 @@ namespace PokemonGo_UWP.ViewModels
             dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
             dialog.AcceptInvoked += async (sender, e) =>
             {
-                // Send power up request
-                var res = await GameClient.PowerUpPokemon(SelectedPokemon.WrappedData);
-                switch (res.Result)
+                try
                 {
-                    case UpgradePokemonResponse.Types.Result.Unset:
-                        break;
-                    case UpgradePokemonResponse.Types.Result.Success:
-                        // Reload updated data
-                        PokemonInventory.Remove(SelectedPokemon);
-                        var uppedPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
-                        PokemonInventory.Add(uppedPokemon);
-                        PokemonInventory.SortBySortingmode(SortingMode);
-                        SelectedPokemon = uppedPokemon;
-                        RaisePropertyChanged(nameof(SelectedPokemon));
-                        await GameClient.UpdateInventory();
-                        await GameClient.UpdateProfile();
-                        break;
-
-                    case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
-                        break;
-                    case UpgradePokemonResponse.Types.Result.ErrorInsufficientResources:
-                        break;
-                    case UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable:
-                        break;
-                    case UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    ServerRequestRunning = true;
+                    // Send power up request
+                    var res = await GameClient.PowerUpPokemon(SelectedPokemon.WrappedData);
+                    switch (res.Result)
+                    {
+                        case UpgradePokemonResponse.Types.Result.Unset:
+                            break;
+                        case UpgradePokemonResponse.Types.Result.Success:
+                            // Reload updated data
+                            PokemonInventory.Remove(SelectedPokemon);
+                            var uppedPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
+                            PokemonInventory.Add(uppedPokemon);
+                            PokemonInventory.SortBySortingmode(SortingMode);
+                            SelectedPokemon = uppedPokemon;
+                            RaisePropertyChanged(nameof(SelectedPokemon));
+                            await GameClient.UpdateInventory();
+                            await GameClient.UpdateProfile();
+                            break;
+                        case UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound:
+                            break;
+                        case UpgradePokemonResponse.Types.Result.ErrorInsufficientResources:
+                            break;
+                        case UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable:
+                            break;
+                        case UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+                finally
+                {
+                    ServerRequestRunning = false;
                 }
             };
 
@@ -403,7 +427,7 @@ namespace PokemonGo_UWP.ViewModels
 
         private bool CanPowerUp()
         {
-            if (SelectedPokemon == null) return false;
+            if (SelectedPokemon == null || ServerRequestRunning) return false;
             var pokemonLevel = PokemonInfo.GetLevel(SelectedPokemon.WrappedData);
             var currentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).FamilyId);
             var candiesToPowerUp = Convert.ToInt32(GameClient.PokemonUpgradeSettings.CandyCost[Convert.ToInt32(Math.Floor(PokemonInfo.GetLevel(SelectedPokemon.WrappedData)) - 1)]);
@@ -437,30 +461,39 @@ namespace PokemonGo_UWP.ViewModels
             };
             dialog.AcceptInvoked += async (sender, e) =>
             {
-                EvolvePokemonResponse res = await GameClient.EvolvePokemon(SelectedPokemon.WrappedData);
-                RaisePropertyChanged(() => EvolvedPokemonId);
-                switch (res.Result)
+                try
                 {
-                    case EvolvePokemonResponse.Types.Result.Unset:
-                        break;
-                    case EvolvePokemonResponse.Types.Result.Success:
-                        EvolvedPokemon = new PokemonDataWrapper(res.EvolvedPokemonData);
-                        PokemonEvolved?.Invoke(this, null);
-                        await GameClient.UpdateInventory();
-                        await GameClient.UpdateProfile();
-                        break;
+                    ServerRequestRunning = true;
+                    // Send evolve request
+                    EvolvePokemonResponse res = await GameClient.EvolvePokemon(SelectedPokemon.WrappedData);
+                    RaisePropertyChanged(() => EvolvedPokemonId);
+                    switch (res.Result)
+                    {
+                        case EvolvePokemonResponse.Types.Result.Unset:
+                            break;
+                        case EvolvePokemonResponse.Types.Result.Success:
+                            EvolvedPokemon = new PokemonDataWrapper(res.EvolvedPokemonData);
+                            PokemonEvolved?.Invoke(this, null);
+                            await GameClient.UpdateInventory();
+                            await GameClient.UpdateProfile();
+                            break;
 
-                    case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
-                        break;
-                    case EvolvePokemonResponse.Types.Result.FailedInsufficientResources:
-                        break;
-                    case EvolvePokemonResponse.Types.Result.FailedPokemonCannotEvolve:
-                        break;
-                    case EvolvePokemonResponse.Types.Result.FailedPokemonIsDeployed:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                };
+                        case EvolvePokemonResponse.Types.Result.FailedPokemonMissing:
+                            break;
+                        case EvolvePokemonResponse.Types.Result.FailedInsufficientResources:
+                            break;
+                        case EvolvePokemonResponse.Types.Result.FailedPokemonCannotEvolve:
+                            break;
+                        case EvolvePokemonResponse.Types.Result.FailedPokemonIsDeployed:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    };
+                }
+                finally
+                {
+                    ServerRequestRunning = false;
+                }
             };
 
             dialog.Show();
@@ -468,7 +501,7 @@ namespace PokemonGo_UWP.ViewModels
 
         private bool CanEvolve()
         {
-            if (SelectedPokemon == null) return false;
+            if (SelectedPokemon == null || ServerRequestRunning) return false;
             var currentCandy = GameClient.CandyInventory.FirstOrDefault(item => item.FamilyId == GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).FamilyId);
             return currentCandy != null && currentCandy.Candy_ >= GameClient.GetExtraDataForPokemon(SelectedPokemon.PokemonId).CandyToEvolve;
         }
