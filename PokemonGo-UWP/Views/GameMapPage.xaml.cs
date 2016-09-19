@@ -219,13 +219,20 @@ namespace PokemonGo_UWP.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 				SubscribeToCaptureEvents();
 
-				await GameMapControl.TryRotateToAsync(SettingsService.Instance.MapHeading);
-				await GameMapControl.TryTiltToAsync(SettingsService.Instance.MapPitch);
 			}
 			catch (Exception ex)
 			{
-				//For testing...
-				//await new MessageDialog($"ex in OnNavigatedTo:{ex.Message}").ShowAsyncQueue();
+				//because we are in "async void" unhandled exception might not be raised
+				await ExceptionHandler.HandleException(ex);
+			}
+			try
+			{
+				await GameMapControl.TryRotateToAsync(SettingsService.Instance.MapHeading);
+				await GameMapControl.TryTiltToAsync(SettingsService.Instance.MapPitch);
+			}
+			catch
+			{
+				//we don't care :)
 			}
 
 		}
@@ -273,14 +280,6 @@ namespace PokemonGo_UWP.Views
 			{ 
 				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-							//DarkAngel: For debug, I keep the statusbar visible in app.xaml.cs then use this :
-							//string dbg = "newloc:";
-							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Altitude},";
-							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Latitude},";
-							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Longitude},";
-							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Speed},";
-							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Heading}";
-							//await ToggleProgressBar(true, dbg);
 										// Set player icon's position
 							MapControl.SetLocation(PlayerImage, LocationServiceHelper.Instance.Geoposition.Coordinate.Point);
 
@@ -387,36 +386,11 @@ namespace PokemonGo_UWP.Views
 						GameMapControl.Style = MapStyle.Road;
 						break;
 				}
-				//Another way to set Aerial3DWithRoads using SetScene
-				//try
-				//{
-				//	GameMapControl.Style = MapStyle.Aerial3DWithRoads;
-				//	//Geopoint scenePoint = new Geopoint(GameMapControl.Center.Position);
-				//	MapScene customScene = MapScene.CreateFromCamera(GameMapControl.ActualCamera);
-				//	await GameMapControl.TrySetSceneAsync(customScene);
-				//}
-				//catch (Exception ex)
-				//{
-				//	await new Windows.UI.Popups.MessageDialog($"3DView error : {ex.Message}").ShowAsyncQueue();
-				//}
 			}
 			else
 			{
 				await new Windows.UI.Popups.MessageDialog("Sorry 3DView is not supported!").ShowAsyncQueue();
 			}
 		}
-		//DarkAngel : for debug purpose ;) need to let statusbar visible in app.xaml.cs to work...
-		//private async Task ToggleProgressBar(bool toggle, string message = "")
-		//{
-		//	StatusBarProgressIndicator progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-		//	if (toggle)
-		//	{
-		//		progressbar.Text = message;
-		//		progressbar.ProgressValue = null;
-		//		await progressbar.ShowAsync();
-		//	}
-		//	else
-		//		await progressbar.HideAsync();
-		//}
 	}
 }
