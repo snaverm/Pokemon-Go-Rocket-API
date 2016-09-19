@@ -17,6 +17,9 @@ using PokemonGo_UWP.Utils;
 using Template10.Common;
 using PokemonGo_UWP.Utils.Helpers;
 using System.ComponentModel;
+using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +47,8 @@ namespace PokemonGo_UWP.Views
 
                 // Add reactivate map update button
                 if (ReactivateMapAutoUpdateButton != null) return;
-                ReactivateMapAutoUpdateButton = new Button
+							#region Reactivate Map AutoUpdate Button
+							ReactivateMapAutoUpdateButton = new Button
                 {
                     Visibility = Visibility.Collapsed,
                     Style = (Style) BootStrapper.Current.Resources["ImageButtonStyle"],
@@ -74,7 +78,36 @@ namespace PokemonGo_UWP.Views
                             VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GameMapControl, 0), 1), 0), 0);
 
                 tsp.Children.Add(ReactivateMapAutoUpdateButton);
-                DisplayInformation.GetForCurrentView().OrientationChanged += GameMapPage_OrientationChanged;
+							#endregion
+							#region Map Style button ;)
+							if (GameMapControl.Is3DSupported)
+							{
+								var MapStyleButton = new Button
+								{
+									Style = (Style)BootStrapper.Current.Resources["ImageButtonStyle"],
+									Height = 44,
+									HorizontalAlignment = HorizontalAlignment.Center,
+									VerticalAlignment = VerticalAlignment.Center,
+									Margin = new Thickness(0, 0, 0, 34),
+									Content = new Image
+									{
+										Source =
+													new BitmapImage
+													{
+														UriSource =
+																	new Uri($"ms-appx:///Assets/Teams/no-team.png")
+													},
+										Stretch = Stretch.Uniform,
+										Height = 36,
+										HorizontalAlignment = HorizontalAlignment.Stretch
+									}
+								};
+								MapStyleButton.Tapped += MapStyleButton_Tapped;
+
+								tsp.Children.Add(MapStyleButton);
+							}
+							#endregion
+							DisplayInformation.GetForCurrentView().OrientationChanged += GameMapPage_OrientationChanged;
             };
         }
 
@@ -166,6 +199,7 @@ namespace PokemonGo_UWP.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+			try { 
             base.OnNavigatedTo(e);
             // Hide PokeMenu panel just in case
             HidePokeMenuStoryboard.Begin();
@@ -180,11 +214,21 @@ namespace PokemonGo_UWP.Views
             }
             // Set first position if we shomehow missed it
                 UpdateMap();
-			await GameMapControl.TryRotateToAsync(SettingsService.Instance.MapHeading);
-			await GameMapControl.TryTiltToAsync(SettingsService.Instance.MapPitch);
-			SubscribeToCaptureEvents();
+				//Changed order of calls, this allow to have events registration before trying to move map
+				//appears that for some reason TryRotate and/or TryTilt fails sometimes!
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-        }
+				SubscribeToCaptureEvents();
+
+				await GameMapControl.TryRotateToAsync(SettingsService.Instance.MapHeading);
+				await GameMapControl.TryTiltToAsync(SettingsService.Instance.MapPitch);
+			}
+			catch (Exception ex)
+			{
+				//For testing...
+				//await new MessageDialog($"ex in OnNavigatedTo:{ex.Message}").ShowAsyncQueue();
+			}
+
+		}
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
         {
@@ -229,8 +273,16 @@ namespace PokemonGo_UWP.Views
 			{ 
 				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                    // Set player icon's position
-                    MapControl.SetLocation(PlayerImage, LocationServiceHelper.Instance.Geoposition.Coordinate.Point);
+							//DarkAngel: For debug, I keep the statusbar visible in app.xaml.cs then use this :
+							//string dbg = "newloc:";
+							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Altitude},";
+							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Latitude},";
+							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Longitude},";
+							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Speed},";
+							//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Heading}";
+							//await ToggleProgressBar(true, dbg);
+										// Set player icon's position
+							MapControl.SetLocation(PlayerImage, LocationServiceHelper.Instance.Geoposition.Coordinate.Point);
 
                     // Update angle and center only if map is not being manipulated
                     if (lastAutoPosition == null)
@@ -251,9 +303,9 @@ namespace PokemonGo_UWP.Views
                     if (currentCoord == previousCoord && ReactivateMapAutoUpdateButton != null)
                     {
                         //Previous position was set automatically, continue!
-                        ReactivateMapAutoUpdateButton.Visibility = Visibility.Collapsed;
-                        GameMapControl.Center = LocationServiceHelper.Instance.Geoposition.Coordinate.Point;
-												//await GameMapControl.TrySetViewAsync(GameClient.Geoposition.Coordinate.Point);
+                        if(ReactivateMapAutoUpdateButton!=null)
+									ReactivateMapAutoUpdateButton.Visibility = Visibility.Collapsed;
+								GameMapControl.Center = LocationServiceHelper.Instance.Geoposition.Coordinate.Point;
 
                         lastAutoPosition = GameMapControl.Center;
 
@@ -311,6 +363,60 @@ namespace PokemonGo_UWP.Views
             ShowLevelUpPanelStoryboard.Begin();
         }
 
-        #endregion
-    }
+		#endregion
+		private async void MapStyleButton_Tapped(object sender, TappedRoutedEventArgs e)
+		{
+			if (GameMapControl.Is3DSupported)
+			{
+				switch (GameMapControl.Style)
+				{
+					case MapStyle.None:
+						GameMapControl.Style = MapStyle.Road;
+						break;
+					case MapStyle.Road:
+						GameMapControl.Style = MapStyle.Aerial3DWithRoads;
+						break;
+					case MapStyle.Aerial:
+					case MapStyle.AerialWithRoads:
+					case MapStyle.Terrain:
+					case MapStyle.Aerial3D:
+					case MapStyle.Aerial3DWithRoads:
+						GameMapControl.Style = MapStyle.Road;
+						break;
+					default:
+						GameMapControl.Style = MapStyle.Road;
+						break;
+				}
+				//Another way to set Aerial3DWithRoads using SetScene
+				//try
+				//{
+				//	GameMapControl.Style = MapStyle.Aerial3DWithRoads;
+				//	//Geopoint scenePoint = new Geopoint(GameMapControl.Center.Position);
+				//	MapScene customScene = MapScene.CreateFromCamera(GameMapControl.ActualCamera);
+				//	await GameMapControl.TrySetSceneAsync(customScene);
+				//}
+				//catch (Exception ex)
+				//{
+				//	await new Windows.UI.Popups.MessageDialog($"3DView error : {ex.Message}").ShowAsyncQueue();
+				//}
+			}
+			else
+			{
+				await new Windows.UI.Popups.MessageDialog("Sorry 3DView is not supported!").ShowAsyncQueue();
+			}
+		}
+		//DarkAngel : for debug purpose ;) need to let statusbar visible in app.xaml.cs to work...
+		//private async Task ToggleProgressBar(bool toggle, string message = "")
+		//{
+		//	StatusBarProgressIndicator progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+		//	if (toggle)
+		//	{
+		//		progressbar.Text = message;
+		//		progressbar.ProgressValue = null;
+		//		await progressbar.ShowAsync();
+		//	}
+		//	else
+		//		await progressbar.HideAsync();
+		//}
+	}
 }
