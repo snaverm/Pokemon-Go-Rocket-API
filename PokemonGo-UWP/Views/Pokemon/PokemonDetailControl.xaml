@@ -131,6 +131,28 @@
                            Canvas.ZIndex="5"
                            Stretch="Uniform" />
                 </Viewbox>
+                <!--Buddy Indicator-->
+                <Grid Grid.Row="1"
+                      Grid.ColumnSpan="3"
+                      Height="70"
+                      Width="70"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      Margin="0,15,240,0"
+                      Visibility="Collapsed">
+                    <Border Background="White"
+                            CornerRadius="35"
+                            Height="70"
+                            VerticalAlignment="Top">
+                        <Image Margin="9"
+                               Source="ms-appx:///assets/Icons/ic_buddy.png" />
+                    </Border>
+                    <Path HorizontalAlignment="Right"
+                          VerticalAlignment="Bottom"
+                          Data="M0 6 L8 8 L6 0"
+                          Margin="6"
+                          Fill="White" />
+                </Grid>
             </Grid>
 
             <Border CornerRadius="5"

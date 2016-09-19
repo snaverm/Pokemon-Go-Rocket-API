@@ -166,6 +166,7 @@
     <Content Include="Assets\Backgrounds\ui_bg_gym_resolve.png" />
     <Content Include="Assets\Backgrounds\ui_bg_purple.png" />
     <Content Include="Assets\Backgrounds\ui_bg_purple_02.png" />
+    <Content Include="Assets\Backgrounds\ui_bg_recentcatch.png" />
     <Content Include="Assets\Backgrounds\ui_settings_bg.png" />
     <Content Include="Assets\Buttons\btn_action_menu.png" />
     <Content Include="Assets\Buttons\btn_back_normal_dark.png" />
@@ -218,6 +219,7 @@
     <Content Include="Assets\Icons\hint_gym_neutral.png" />
     <Content Include="Assets\Icons\hint_gym_red.png" />
     <Content Include="Assets\Icons\hint_gym_yellow.png" />
+    <Content Include="Assets\Icons\ic_buddy.png" />
     <Content Include="Assets\Icons\ic_candy_light.png" />
     <Content Include="Assets\Icons\ic_combat.png" />
     <Content Include="Assets\Icons\ic_date.png" />
@@ -820,7 +822,7 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPokeStopPageViewModel.cs" />
-    <Compile Include="Views\EggDetailPage.xaml.cs">
+    <Compile Include="Views\Pokemon\EggDetailPage.xaml.cs">
       <DependentUpon>EggDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AchievementDetailPage.xaml.cs">
@@ -841,8 +843,8 @@
     <Compile Include="Views\ItemsInventoryPage.xaml.cs">
       <DependentUpon>ItemsInventoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pokemon\EggListControl.xaml.cs">
-      <DependentUpon>EggListControl.xaml</DependentUpon>
+    <Compile Include="Views\Pokemon\EggUserControl.xaml.cs">
+      <DependentUpon>EggUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pokemon\PokemonDetailControl.xaml.cs">
       <DependentUpon>PokemonDetailControl.xaml</DependentUpon>
@@ -850,11 +852,11 @@
     <Compile Include="Views\Pokemon\PokemonDetailPage.xaml.cs">
       <DependentUpon>PokemonDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pokemon\PokemonInventoryControl.xaml.cs">
+      <DependentUpon>PokemonInventoryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pokemon\PokemonInventoryPage.xaml.cs">
       <DependentUpon>PokemonInventoryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Pokemon\PokemonListControl.xaml.cs">
-      <DependentUpon>PokemonListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -933,7 +935,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\EggDetailPage.xaml">
+    <Page Include="Views\Pokemon\EggDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -961,7 +963,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pokemon\EggListControl.xaml">
+    <Page Include="Views\Pokemon\EggUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -973,13 +975,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pokemon\PokemonInventoryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pokemon\PokemonInventoryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Pokemon\PokemonListControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

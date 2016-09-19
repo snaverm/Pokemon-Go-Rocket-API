@@ -15,8 +15,6 @@ namespace PokemonGo_UWP.Entities
 {
     public class PokemonDataWrapper : INotifyPropertyChanged
     {
-        private DelegateCommand _gotoEggDetailsCommand;
-
         [JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
         private PokemonData _wrappedData;
 
@@ -37,16 +35,6 @@ namespace PokemonGo_UWP.Entities
         /// The file name for this Pokemon, located in /Assets/Pokemons
         /// </summary>
         public string ImageFilePath => $"ms-appx:///Assets/Pokemons/{(int)PokemonId}.png";
-
-        /// <summary>
-        ///     Navigate to detail page for the selected egg
-        /// </summary>
-        public DelegateCommand GotoEggDetailsCommand => _gotoEggDetailsCommand ?? (
-            _gotoEggDetailsCommand = new DelegateCommand(() =>
-            {
-                NavigationHelper.NavigationState["CurrentEgg"] = this;
-                BootStrapper.Current.NavigationService.Navigate(typeof(EggDetailPage));
-            }, () => true));
 
         #region Wrapped Properties
 

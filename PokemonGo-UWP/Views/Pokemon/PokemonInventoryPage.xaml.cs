@@ -33,12 +33,12 @@ namespace PokemonGo_UWP.Views
 				HideIncubatorsModalStoryboard.Completed += (ss, ee) => { IncubatorsModal.IsModal = false; };
 			};
 
-		    ViewModel.ResetView +=
-		        () =>
-		        {
-		            if (ViewModel.PokemonInventory != null && ViewModel.PokemonInventory.Count > 0)
-		                PokemonInventoryGridView?.ScrollIntoView(ViewModel.PokemonInventory[ViewModel.LastVisibleIndex]);
-		        };
+		    //ViewModel.ResetView +=
+		    //    () =>
+		    //    {
+		    //        if (ViewModel.PokemonInventory != null && ViewModel.PokemonInventory.Count > 0)
+		    //            PokemonInventoryGridView?.ScrollIntoView(ViewModel.PokemonInventory[ViewModel.LastVisibleIndex]);
+		    //    };
 		}
 
         private void ToggleIncubatorModel(object sender, TappedRoutedEventArgs e)
@@ -84,47 +84,29 @@ namespace PokemonGo_UWP.Views
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
         {
-            if (!(SortMenuPanel.Opacity > 0)) return;
-            backRequestedEventArgs.Handled = true;
-            HideSortMenuStoryboard.Begin();
+            //if (!(SortMenuPanel.Opacity > 0)) return;
+            //backRequestedEventArgs.Handled = true;
+            //HideSortMenuStoryboard.Begin();
         }
 
         #endregion
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-
-			//SortingButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-			//IncubatorButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
-			//switch (((Pivot)sender).SelectedIndex)
-			//{
-			//	case 0:
-			//		SortingButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
-			//		break;
-
-			//	case 1:
-			//		IncubatorButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
-			//		break;
-			//}
-		}
-
 		private void GridViewPokemonSizeChanged(object sender, SizeChangedEventArgs e)
 		{
-            if (e.PreviousSize != e.NewSize)
-            {
-                var panel_threads = (ItemsWrapGrid)PokemonInventoryGridView.ItemsPanelRoot;
-                panel_threads.ItemWidth = e.NewSize.Width / 3;
-            }
+            //if (e.PreviousSize != e.NewSize)
+            //{
+            //    var panel_threads = (ItemsWrapGrid)PokemonInventoryGridView.ItemsPanelRoot;
+            //    panel_threads.ItemWidth = e.NewSize.Width / 3;
+            //}
         }
 
 		private void GridViewEggsSizeChanged(object sender, SizeChangedEventArgs e)
 		{
-			if (e.PreviousSize != e.NewSize)
-			{
-				var panel_threads = (ItemsWrapGrid)EggsInventoryGridView.ItemsPanelRoot;
-				panel_threads.ItemWidth = e.NewSize.Width / 4;
-			}
+			//if (e.PreviousSize != e.NewSize)
+			//{
+			//	var panel_threads = (ItemsWrapGrid)EggsInventoryGridView.ItemsPanelRoot;
+			//	panel_threads.ItemWidth = e.NewSize.Width / 4;
+			//}
 		}
 	}
 }

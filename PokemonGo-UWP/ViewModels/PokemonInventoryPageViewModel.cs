@@ -91,7 +91,7 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        ///     Save state before navigating
+        /// Save state before navigating
         /// </summary>
         /// <param name="suspensionState"></param>
         /// <param name="suspending"></param>
@@ -143,29 +143,19 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         /// <summary>
-        /// Egg selected for incubation
-        /// </summary>
-        private PokemonData _selectedEgg;
-        public PokemonData SelectedEgg
-        {
-            get { return _selectedEgg; }
-            set { Set(ref _selectedEgg, value); }
-        }
-
-        /// <summary>
-        ///     Reference to Pokemon inventory
+        /// Reference to Pokemon inventory
         /// </summary>
         public ObservableCollection<PokemonDataWrapper> PokemonInventory { get; private set; } =
             new ObservableCollection<PokemonDataWrapper>();
 
         /// <summary>
-        ///     Reference to Eggs inventory
+        /// Reference to Eggs inventory
         /// </summary>
         public ObservableCollection<PokemonDataWrapper> EggsInventory { get; private set; } =
             new ObservableCollection<PokemonDataWrapper>();
 
         /// <summary>
-        ///     Reference to Incubators inventory
+        /// Reference to Incubators inventory
         /// </summary>
         public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.FreeIncubatorsInventory;
 
@@ -178,7 +168,7 @@ namespace PokemonGo_UWP.ViewModels
         private DelegateCommand _returnToGameScreen;
 
         /// <summary>
-        ///     Going back to map page
+        /// Going back to map page
         /// </summary>
         public DelegateCommand ReturnToGameScreen
             =>
@@ -189,6 +179,15 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Pokemon Inventory Handling
+
+        /// <summary>
+        /// Show sorting overlay for pokemon inventory
+        /// </summary>
+        private DelegateCommand<PokemonDataWrapper> _showPokemonSortingMenuCommand;
+        public DelegateCommand<PokemonDataWrapper> ShowPokemonSortingMenuCommand => _showPokemonSortingMenuCommand ?? (_showPokemonSortingMenuCommand = new DelegateCommand<PokemonDataWrapper>((selectedPokemon) =>
+        {
+
+        }));
 
         private void UpdateSorting()
         {
@@ -202,19 +201,28 @@ namespace PokemonGo_UWP.ViewModels
 
         #region Pokemon Detail
 
-        private DelegateCommand<PokemonDataWrapper> _gotoPokemonDetailPage;
-        public DelegateCommand<PokemonDataWrapper> GotoPokemonDetailPage
-            =>
-                _gotoPokemonDetailPage ??
-                (_gotoPokemonDetailPage =
-                    new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => {
-                        NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
-                        {
-                            SelectedPokemonId = selectedPokemon.Id.ToString(),
-                            SortingMode = CurrentPokemonSortingMode,
-                            ViewMode = PokemonDetailPageViewMode.Normal
-                        }, new SuppressNavigationTransitionInfo());
-                    }));
+        /// <summary>
+        /// Navigate to the detail page for the selected pokemon
+        /// </summary>
+        private DelegateCommand<PokemonDataWrapper> _gotoPokemonDetailCommand;
+        public DelegateCommand<PokemonDataWrapper> GotoPokemonDetailCommand => _gotoPokemonDetailCommand ?? (_gotoPokemonDetailCommand = new DelegateCommand<PokemonDataWrapper>((selectedPokemon) => 
+        {
+            NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
+            {
+                SelectedPokemonId = selectedPokemon.Id.ToString(),
+                SortingMode = CurrentPokemonSortingMode,
+                ViewMode = PokemonDetailPageViewMode.Normal
+            }, new SuppressNavigationTransitionInfo());
+        }));
+
+        /// <summary>
+        /// Navigate to detail page for the selected egg
+        /// </summary>
+        private DelegateCommand<PokemonDataWrapper> _gotoEggDetailCommand;
+        public DelegateCommand<PokemonDataWrapper> GotoEggDetailCommand => _gotoEggDetailCommand ?? (_gotoEggDetailCommand =  new DelegateCommand<PokemonDataWrapper>((selectedEgg) =>
+        {
+            NavigationService.Navigate(typeof(EggDetailPage), selectedEgg.Id.ToString(), new SuppressNavigationTransitionInfo());
+        }));
 
         #endregion
 

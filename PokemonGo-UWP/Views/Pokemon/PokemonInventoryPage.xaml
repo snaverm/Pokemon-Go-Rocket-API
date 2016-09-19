@@ -11,6 +11,7 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:entities="using:PokemonGo_UWP.Entities"
       xmlns:pogo="using:PokemonGo_UWP.Controls"
+      xmlns:local="using:PokemonGo_UWP.Views"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -155,7 +156,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
 
-                <Image Source="../Assets/Buttons/btn_close_dark.png" />
+                <Image Source="../../Assets/Buttons/btn_close_dark.png" />
             </Button>
         </RelativePanel>
 
@@ -214,7 +215,8 @@
                                                    Width="75"
                                                    Height="75"
                                                    Margin="10,15,10,0" />
-                                            <TextBlock Style="{StaticResource TextGridViewTop}">
+                                            <TextBlock >
+                                            <!--<TextBlock Style="{StaticResource TextGridViewTop}">-->
                                                 <Run FontWeight="Bold"
                                                      FontSize="15"
                                                      Text="{Binding Converter={StaticResource IncubatorUsagesCountToUsagesTextConverter}}" />
@@ -239,123 +241,27 @@
 
         </Grid>
 
-        <Border Margin="0">
-            <Border.Background>
-                <ImageBrush ImageSource="../Assets/Backgrounds/ui_bg_green.png" />
-            </Border.Background>
+        <Border Margin="12,0"
+                Background="White">
             <Pivot x:Name="MainUIPanel"
-                   SelectionChanged="SelectionChanged"
                    Style="{StaticResource PokemonInventoryPivotStyle}">
-                <PivotItem x:Name="PokemonsPivot">
+                <PivotItem x:Name="PokemonsPivot"
+                           Margin="12,0">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="PokemonHeader"
                                               Title="POKÉMON"
                                               DataCurrent="{Binding PokemonInventory.Count}"
                                               DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}" />
                     </PivotItem.Header>
-                    <RelativePanel>
-                        <GridView x:Name="PokemonInventoryGridView"
-                                  RelativePanel.AlignTopWithPanel="True"
-                                  RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                  RelativePanel.Above="SortingButton"
-                                  ItemsSource="{Binding PokemonInventory, Mode=OneWay}"
-                                  SelectionMode="None"
-                                  Padding="0,0,0,57.5"
-                                  ShowsScrollingPlaceholders="True"
-                                  SizeChanged="GridViewPokemonSizeChanged">
-
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="entities:PokemonDataWrapper">
-                                    <RelativePanel HorizontalAlignment="Stretch"
-                                                   VerticalAlignment="Stretch"
-                                                   Margin="0,0,0,10"
-                                                   Background="Transparent">
-                                        <interactivity:Interaction.Behaviors>
-                                            <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{Binding ElementName=Root, Path=DataContext.GotoPokemonDetailPage}"
-                                                                          CommandParameter="{Binding}" />
-                                            </core:EventTriggerBehavior>
-                                        </interactivity:Interaction.Behaviors>
-
-                                        <TextBlock Style="{StaticResource TextGridViewTop}"
-                                                   x:Name="CPTextBlock"
-                                                   RelativePanel.AlignTopWithPanel="True"
-                                                   RelativePanel.AlignHorizontalCenterWithPanel="True">
-                                           <Run x:Uid="CpTextBlock"
-                                                Text="CP" />
-                                           <Run FontSize="15"
-                                                Text="{x:Bind Cp}" />
-                                        </TextBlock>
-
-                                        <Image x:Name="PokemonImage"
-                                               RelativePanel.Below="CPTextBlock"
-                                               RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                               Source="{x:Bind PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
-                                               Width="48"
-                                               Height="48"
-                                               Margin="5"
-                                               x:Phase="2" />
-                                        <Grid Margin="-5"
-                                              RelativePanel.AlignTopWith="PokemonImage"
-                                              RelativePanel.AlignBottomWith="PokemonImage"
-                                              RelativePanel.AlignLeftWith="PokemonImage"
-                                              RelativePanel.AlignRightWith="PokemonImage"
-                                              Visibility="{x:Bind CreationTimeMs, Converter={StaticResource PokemonLastHoursVisibiltyConverter}}">
-                                            <Ellipse Fill="Blue"
-                                                     Margin="5"
-                                                     Opacity="0.05" />
-                                        </Grid>
-                                        <CheckBox x:Name="FavoriteCheckBox"
-                                                  RelativePanel.AlignTopWith="PokemonImage"
-                                                  RelativePanel.AlignRightWith="PokemonImage"
-                                                  IsEnabled="False"
-                                                  Style="{StaticResource CheckStar}"
-                                                  HorizontalAlignment="Right"
-                                                  Width="15"
-                                                  Height="15"
-                                                  IsChecked="{x:Bind Favorite, Mode=OneWay, Converter={StaticResource IntToBooleanConverter}}" />
-                                        <TextBlock x:Name="NameTextBlock"
-                                                   RelativePanel.Below="PokemonImage"
-                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                                   Text="{x:Bind Name}"
-                                                   Style="{StaticResource TextPokemonName}"
-                                                   x:Phase="0" />
-                                        <ProgressBar x:Name="StaminaProgress"
-                                                     RelativePanel.Below="NameTextBlock"
-                                                     RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                                     Value="{x:Bind Stamina}"
-                                                     Maximum="{x:Bind StaminaMax}"
-                                                     Margin="0,5"
-                                                     Style="{StaticResource PokemonHPProgressBarStyle}"
-                                                     Foreground="#6ee8b7"
-                                                     IsIndeterminate="False"
-                                                     HorizontalAlignment="Center"
-                                                     x:Phase="1" />
-                                    </RelativePanel>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-                        <Button x:Name="SortingButton"
-                                RelativePanel.AlignBottomWithPanel="True"
-                                RelativePanel.AlignRightWithPanel="True"
-                                Style="{StaticResource ButtonCircleBigInverse}"
-                                Margin="16">
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Click">
-                                    <media:ControlStoryboardAction Storyboard="{StaticResource ShowSortMenuStoryboard}" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-                            <Image Source="{Binding CurrentPokemonSortingMode, Converter={StaticResource PokemonSortingModesToIconConverter}}" />
-                        </Button>
-                    </RelativePanel>
+                    <local:PokemonInventoryControl DataContext="{Binding DataContext, ElementName=Root}" />
                 </PivotItem>
 
                 <PivotItem x:Name="EggsPivot">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="EggsHeader"
-                                                Title="EGGS"
-                                                DataCurrent="{Binding EggsInventory.Count}"
-                                                DataMaximum="9" />
+                                              Title="EGGS"
+                                              DataCurrent="{Binding EggsInventory.Count}"
+                                              DataMaximum="9" />
                     </PivotItem.Header>
                     <RelativePanel>
                         <GridView x:Name="EggsInventoryGridView"
@@ -375,7 +281,7 @@
 
                                         <interactivity:Interaction.Behaviors>
                                             <core:EventTriggerBehavior EventName="Tapped">
-                                                <core:InvokeCommandAction Command="{x:Bind GotoEggDetailsCommand}" />
+                                                <!--<core:InvokeCommandAction Command="{x:Bind GotoEggDetailsCommand}" />-->
                                             </core:EventTriggerBehavior>
                                         </interactivity:Interaction.Behaviors>
 
@@ -392,7 +298,7 @@
                                                      IsIndeterminate="False"
                                                      HorizontalAlignment="Center" />
 
-                                        <TextBlock Style="{StaticResource TextGridViewTop}">                                            
+                                        <TextBlock >                                            
                                                 <Run Text="{Binding EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.##\}}" />
                                                 <Run Text="/" />
                                                 <Run FontWeight="Bold"
@@ -412,7 +318,7 @@
                                 Style="{StaticResource ButtonCircleBigInverse}"
                                 Tapped="ToggleIncubatorModel"
                                 Margin="16">
-                            <Image Source="../Assets/Buttons/btn_incubator_dark.png" />
+                            <Image Source="../../Assets/Buttons/btn_incubator_dark.png" />
                         </Button>
 
                     </RelativePanel>
@@ -424,8 +330,8 @@
         <Button Command="{Binding ReturnToGameScreen}"
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
-                Margin="0,0,0,17.5">
-            <Image Source="../Assets/Buttons/btn_close.png" />
+                Margin="0,0,0,21">
+            <Image Source="ms-appx:///Assets/Buttons/btn_close.png" />
         </Button>
 
     </Grid>

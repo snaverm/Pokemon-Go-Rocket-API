@@ -30,6 +30,7 @@
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="TitleTextColor" Color="#44696c" />
+    <SolidColorBrush x:Key="GrayTextColor" Color="#96abac" />
 
     <!-- STYLE - FONTS -->
 
@@ -38,6 +39,28 @@
     <FontFamily x:Key="LatoLightFont">ms-appx:///Assets/Fonts/Lato-Light.ttf#Lato</FontFamily>
     <FontFamily x:Key="LatoMediumFont">ms-appx:///Assets/Fonts/Lato-Medium.ttf#Lato</FontFamily>
     <FontFamily x:Key="LatoBoldFont">ms-appx:///Assets/Fonts/Lato-Bold.ttf#Lato</FontFamily>
+
+    <!-- STYLE - PATHS -->
+
+    <x:String x:Key="FavoriteStarPathData">M 40.000 59.000 L 63.511 72.361 L 58.070 45.871 L 78.042 27.639 L 51.168 24.629 L 40.000 0.000 L 28.832 24.629 L 1.958 27.639 L 21.930 45.871 L 16.489 72.361 L 40.000 59.000</x:String>
+    <Style x:Key="FavoriteStarPathStyle"
+           TargetType="Path">
+        <Setter Property="Stroke"
+                Value="#fed214" />
+        <Setter Property="StrokeThickness"
+                Value="1.5" />
+        <Setter Property="Fill">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="1,1">
+                    <GradientStop Color="#fed214"
+                                  Offset="0" />
+                    <GradientStop Color="#ecaf06"
+                                  Offset="0.8" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- STYLE - BUTTONS -->
 
@@ -979,23 +1002,12 @@
                               Fill="Transparent"
                               Stroke="White"
                               StrokeThickness="1.8"
-                              Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000Z" />
+                              Data="{StaticResource FavoriteStarPathData}" />
                         <Path x:Name="StarFill"
                               Visibility="Collapsed"
                               Stretch="Fill"
-                              Stroke="#fed214"
-                              StrokeThickness="1.5"
-                              Data="M 320.000 339.000 L 343.511 352.361 L 338.070 325.871 L 358.042 307.639 L 331.168 304.629 L 320.000 280.000 L 308.832 304.629 L 281.958 307.639 L 301.930 325.871 L 296.489 352.361 L 320.000 339.000">
-                            <Path.Fill>
-                                <LinearGradientBrush StartPoint="0,0"
-                                                     EndPoint="1,1">
-                                    <GradientStop Color="#fed214"
-                                                  Offset="0" />
-                                    <GradientStop Color="#ecaf06"
-                                                  Offset="0.8" />
-                                </LinearGradientBrush>
-                            </Path.Fill>
-                        </Path>
+                              Style="{StaticResource FavoriteStarPathStyle}"
+                              Data="{StaticResource FavoriteStarPathData}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -1036,20 +1048,6 @@
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="TextGridViewTop" TargetType="TextBlock">
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="#333333" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="TextPokemonName" TargetType="TextBlock">
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="#000000" />
-        <Setter Property="FontSize" Value="15" />
-        <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="TextError" TargetType="TextBlock">
@@ -1764,7 +1762,7 @@
                           MinWidth="50" >
                         <Border x:Name="ProgressBarTrack" 
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="1.5" >
+                                CornerRadius="1" >
                             <Border.Background>
                                 <SolidColorBrush Color="Black"
                                                  Opacity="0.2" />
@@ -1775,7 +1773,7 @@
                             </Border.BorderBrush>
 
                             <Border Background="{TemplateBinding Foreground}"
-                                    CornerRadius="2"
+                                    CornerRadius="1"
                                     HorizontalAlignment="Left"
                                     x:Name="ProgressBarIndicator"/>
                         </Border>
@@ -1914,6 +1912,10 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="selectedBorder"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Duration="0"
+                                                         To="1" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="UnselectedPressed">
@@ -1942,6 +1944,10 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="selectedBorder"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Duration="0"
+                                                         To="1" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -1963,7 +1969,7 @@
                             <Rectangle x:Name="selectedBorder"
                                        Fill="#FF44696C"
                                        Height="2"
-                                       Margin="10,3,10,10"
+                                       Margin="10,3,10,0"
                                        RadiusX="2"
                                        RadiusY="2"
                                        Width="100"
