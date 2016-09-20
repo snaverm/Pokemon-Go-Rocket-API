@@ -1663,4 +1663,23 @@ namespace PokemonGo_UWP.Utils
         }
         #endregion
     }
+
+	public class IsIncenseActiveToPlayerIconConverter : IValueConverter
+	{
+		#region Implementation of IValueConverter
+
+		public object Convert(object value, Type targetType, object parameter, string language)
+		{
+			if ((bool)value)
+				return new Uri($"ms-appx:///Assets/Ui/ash_withincense.png");
+			else
+				return new Uri($"ms-appx:///Assets/Ui/ash.png");
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, string language)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+	}
 }

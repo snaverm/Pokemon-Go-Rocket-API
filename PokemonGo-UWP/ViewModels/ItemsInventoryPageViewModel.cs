@@ -158,20 +158,23 @@ namespace PokemonGo_UWP.ViewModels
 					dialog.AcceptInvoked += async (sender, e) =>
 					{
 						//// Send use request
-						//var res = await GameClient.UseIncense(item.ItemId);
-						var res = GetFakeIncenseResponse(item.ItemId);
+						var res = await GameClient.UseIncense(item.ItemId);
 						switch (res.Result)
 						{
 							case UseIncenseResponse.Types.Result.Success:
 								GameClient.AppliedItems.Add(new AppliedItemWrapper(res.AppliedIncense));
-								await GameClient.UpdateInventory();
+								SettingsService.Instance.IsIncenseActive = true;
+								SettingsService.Instance.IncenseAppliedMs = res.AppliedIncense.AppliedMs;
+								SettingsService.Instance.IncenseExpireMs = res.AppliedIncense.ExpireMs;
+								SettingsService.Instance.IncenseItemId = res.AppliedIncense.ItemId;
+								ReturnToGameScreen.Execute();
 								break;
 							case UseIncenseResponse.Types.Result.IncenseAlreadyActive:
+								SettingsService.Instance.IsIncenseActive = true;
+								ReturnToGameScreen.Execute();
 								break;
 							case UseIncenseResponse.Types.Result.LocationUnset:
-								break;
 							case UseIncenseResponse.Types.Result.NoneInInventory:
-								break;
 							case UseIncenseResponse.Types.Result.Unknown:
 								break;
 							default:
@@ -192,23 +195,24 @@ namespace PokemonGo_UWP.ViewModels
 					dialog.AcceptInvoked += async (sender, e) =>
 					{
 						// Send use request
-						//var res = await GameClient.UseXpBoost(item.ItemId);
-						var res = GetFakeXpBoostResponse(item.ItemId);
+						var res = await GameClient.UseXpBoost(item.ItemId);
 						switch (res.Result)
 						{
 							case UseItemXpBoostResponse.Types.Result.Success:
 								AppliedItem appliedItem = res.AppliedItems.Item.FirstOrDefault<AppliedItem>();
 								GameClient.AppliedItems.Add(new AppliedItemWrapper(appliedItem));
-								await GameClient.UpdateInventory();
+								SettingsService.Instance.IsXpBoostActive = true;
+								SettingsService.Instance.XpBoostAppliedMs = appliedItem.AppliedMs;
+								SettingsService.Instance.XpBoostExpireMs = appliedItem.ExpireMs;
+								ReturnToGameScreen.Execute();
 								break;
 							case UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive:
+								SettingsService.Instance.IsXpBoostActive = true;
+								ReturnToGameScreen.Execute();
 								break;
 							case UseItemXpBoostResponse.Types.Result.ErrorInvalidItemType:
-								break;
 							case UseItemXpBoostResponse.Types.Result.ErrorLocationUnset:
-								break;
 							case UseItemXpBoostResponse.Types.Result.ErrorNoItemsRemaining:
-								break;
 							case UseItemXpBoostResponse.Types.Result.Unset:
 								break;
 							default:
@@ -228,7 +232,7 @@ namespace PokemonGo_UWP.ViewModels
 				AppliedIncense = new AppliedItem
 				{
 					AppliedMs = DateTime.UtcNow.ToUnixTime(),
-					ExpireMs = DateTime.UtcNow.AddMinutes(10).ToUnixTime(),
+					ExpireMs = DateTime.UtcNow.AddMinutes(5).ToUnixTime(),
 					ItemId = itemId,
 					ItemType = POGOProtos.Inventory.Item.ItemType.Incense
 				}
@@ -240,7 +244,7 @@ namespace PokemonGo_UWP.ViewModels
 			AppliedItem appliedItem = new AppliedItem
 			{
 				AppliedMs = DateTime.UtcNow.ToUnixTime(),
-				ExpireMs = DateTime.UtcNow.AddMinutes(10).ToUnixTime(),
+				ExpireMs = DateTime.UtcNow.AddMinutes(5).ToUnixTime(),
 				ItemId = itemId,
 				ItemType = POGOProtos.Inventory.Item.ItemType.XpBoost
 			};

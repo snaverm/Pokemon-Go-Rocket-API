@@ -180,7 +180,6 @@ namespace PokemonGo_UWP.Utils
 				{
 					if (appliedItem.IsExpired)
 					{
-						OnAppliedItemExpired?.Invoke(null, appliedItem);
 						AppliedItems.Remove(appliedItem);
 						break;
 					}
@@ -232,17 +231,35 @@ namespace PokemonGo_UWP.Utils
         /// </summary>
         public static InventoryDelta InventoryDelta { get; private set; }
 
+		public static bool IsIncenseActive
+		{
+			get
+			{
+				bool foundActiveIncense = false;
+				foreach (AppliedItemWrapper appliedItem in AppliedItems)
+				{
+					if (appliedItem.ItemType == ItemType.Incense && !appliedItem.IsExpired)
+					{
+						foundActiveIncense = true;
+						break;
+					}
+				}
+				return foundActiveIncense;
+			}
+		}
+
+		#region Collections
+
 		/// <summary>
 		///		Collection of applied items
 		/// </summary>
 		public static ObservableCollection<AppliedItemWrapper> AppliedItems { get; set; } =
 			new ObservableCollection<AppliedItemWrapper>();
-        #region Collections
 
-        /// <summary>
-        ///     Collection of Pokemon in 1 step from current position
-        /// </summary>
-        public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } =
+		/// <summary>
+		///     Collection of Pokemon in 1 step from current position
+		/// </summary>
+		public static ObservableCollection<MapPokemonWrapper> CatchablePokemons { get; set; } =
             new ObservableCollection<MapPokemonWrapper>();
 
         /// <summary>
@@ -382,6 +399,25 @@ namespace PokemonGo_UWP.Utils
 			{
 				OnAppliedItemStarted?.Invoke(null, (AppliedItemWrapper)e.NewItems[0]);
 			}
+			else if (e.Action == NotifyCollectionChangedAction.Remove)
+			{
+				AppliedItemWrapper appliedItemWrapper = e.OldItems[0] as AppliedItemWrapper;
+				if (appliedItemWrapper.ItemType == ItemType.Incense)
+				{
+					SettingsService.Instance.IsIncenseActive = false;
+					SettingsService.Instance.IncenseAppliedMs = 0;
+					SettingsService.Instance.IncenseExpireMs = 0;
+					SettingsService.Instance.IncenseItemId = ItemId.ItemUnknown;
+				}
+				else if (appliedItemWrapper.ItemType == ItemType.XpBoost)
+				{
+					SettingsService.Instance.IsXpBoostActive = false;
+					SettingsService.Instance.XpBoostAppliedMs = 0;
+					SettingsService.Instance.XpBoostExpireMs = 0;
+				}
+
+				OnAppliedItemExpired?.Invoke(null, (AppliedItemWrapper)e.OldItems[0]);
+			}
 		}
 
 		#endregion
@@ -451,15 +487,39 @@ namespace PokemonGo_UWP.Utils
                     await new MessageDialog(e.Message).ShowAsyncQueue();
                 }
             }
-        }
 
-        /// <summary>
-        ///     Starts a PTC session for the given user
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns>true if login worked</returns>
-        public static async Task<bool> DoPtcLogin(string username, string password)
+			if (SettingsService.Instance.IsIncenseActive)
+			{
+				AppliedItem incenseItem = new AppliedItem
+				{
+					AppliedMs = SettingsService.Instance.IncenseAppliedMs,
+					ExpireMs = SettingsService.Instance.IncenseExpireMs,
+					ItemId = SettingsService.Instance.IncenseItemId,
+					ItemType = ItemType.Incense
+				};
+				AppliedItems.Add(new AppliedItemWrapper(incenseItem));
+			}
+
+			if (SettingsService.Instance.IsXpBoostActive)
+			{
+				AppliedItem xpboostItem = new AppliedItem
+				{
+					AppliedMs = SettingsService.Instance.XpBoostAppliedMs,
+					ExpireMs = SettingsService.Instance.XpBoostExpireMs,
+					ItemId = ItemId.ItemLuckyEgg,
+					ItemType = ItemType.XpBoost
+				};
+				AppliedItems.Add(new AppliedItemWrapper(xpboostItem));
+			}
+		}
+
+		/// <summary>
+		///     Starts a PTC session for the given user
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <returns>true if login worked</returns>
+		public static async Task<bool> DoPtcLogin(string username, string password)
         {
             _clientSettings = new Settings
             {
@@ -684,14 +744,17 @@ namespace PokemonGo_UWP.Utils
             LuredPokemons.UpdateByIndexWith(newLuredPokemon, x => x);
 
 			// Update IncensePokemon
-			var incensePokemonResponse = await GetIncensePokemons(LocationServiceHelper.Instance.Geoposition);
-			if (incensePokemonResponse.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
+			if (IsIncenseActive)
 			{
-				IncensePokemon[] newIncensePokemon;
-				newIncensePokemon = new IncensePokemon[1];
-				newIncensePokemon[0] = new IncensePokemon(incensePokemonResponse, incensePokemonResponse.Latitude, incensePokemonResponse.Longitude);
-				Logger.Write($"Found incense Pokemon {incensePokemonResponse.PokemonId}");
-				IncensePokemons.UpdateByIndexWith(newIncensePokemon, x => x);
+				var incensePokemonResponse = await GetIncensePokemons(LocationServiceHelper.Instance.Geoposition);
+				if (incensePokemonResponse.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
+				{
+					IncensePokemon[] newIncensePokemon;
+					newIncensePokemon = new IncensePokemon[1];
+					newIncensePokemon[0] = new IncensePokemon(incensePokemonResponse, incensePokemonResponse.Latitude, incensePokemonResponse.Longitude);
+					Logger.Write($"Found incense Pokemon {incensePokemonResponse.PokemonId}");
+					IncensePokemons.UpdateByIndexWith(newIncensePokemon, x => x);
+				}
 			}
             Logger.Write("Finished updating map objects");
 

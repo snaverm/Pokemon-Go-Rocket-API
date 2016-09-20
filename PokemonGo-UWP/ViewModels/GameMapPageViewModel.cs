@@ -59,11 +59,13 @@ namespace PokemonGo_UWP.ViewModels
 
 		private void GameClient_OnAppliedItemExpired(object sender, AppliedItemWrapper e)
 		{
+			RaisePropertyChanged("IsIncenseActive");
 			AppliedItemExpired?.Invoke(null, e);
 		}
 
 		private void GameClient_OnAppliedItemStarted(object sender, AppliedItemWrapper e)
 		{
+			RaisePropertyChanged("IsIncenseActive");
 			AppliedItemStarted?.Invoke(null, e);
 		}
 
@@ -219,6 +221,8 @@ namespace PokemonGo_UWP.ViewModels
 		///		Collection of Applied items, like Incense
 		/// </summary>
 		public static ObservableCollection<AppliedItemWrapper> AppliedItems => GameClient.AppliedItems;
+
+		public static bool IsIncenseActive => GameClient.IsIncenseActive;
 
         /// <summary>
         ///     Collection of Pokemon in 1 step from current position

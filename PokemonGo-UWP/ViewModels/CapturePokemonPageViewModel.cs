@@ -157,15 +157,18 @@ namespace PokemonGo_UWP.ViewModels
                 // Recovering the state
                 CurrentEncounter = new EncounterResponse();
                 CurrentLureEncounter = new DiskEncounterResponse();
+				CurrentIncenseEncounter = new IncenseEncounterResponse();
                 CurrentCaptureAward = new CaptureAward();
                 SelectedCaptureItem = new ItemData();
                 CurrentPokemon = JsonConvert.DeserializeObject<IMapPokemon>((string) suspensionState[nameof(CurrentPokemon)]);
                 CurrentEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentEncounter)]).CreateCodedInput());
                 CurrentLureEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentLureEncounter)]).CreateCodedInput());
+				CurrentIncenseEncounter.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentIncenseEncounter)]).CreateCodedInput());
                 CurrentCaptureAward.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(CurrentCaptureAward)]).CreateCodedInput());
                 SelectedCaptureItem.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(SelectedCaptureItem)]).CreateCodedInput());
                 RaisePropertyChanged(() => CurrentEncounter);
                 RaisePropertyChanged(() => CurrentLureEncounter);
+				RaisePropertyChanged(() => CurrentIncenseEncounter);
                 RaisePropertyChanged(() => CurrentCaptureAward);
                 RaisePropertyChanged(() => SelectedCaptureItem);
             }
@@ -193,6 +196,7 @@ namespace PokemonGo_UWP.ViewModels
                 suspensionState[nameof(CurrentPokemon)] = JsonConvert.SerializeObject(CurrentPokemon);
                 suspensionState[nameof(CurrentEncounter)] = CurrentEncounter.ToByteString().ToBase64();
                 suspensionState[nameof(CurrentLureEncounter)] = CurrentLureEncounter.ToByteString().ToBase64();
+				suspensionState[nameof(CurrentIncenseEncounter)] = CurrentIncenseEncounter.ToByteString().ToBase64();
                 suspensionState[nameof(CurrentCaptureAward)] = CurrentCaptureAward.ToByteString().ToBase64();
                 suspensionState[nameof(SelectedCaptureItem)] = SelectedCaptureItem.ToByteString().ToBase64();
             }

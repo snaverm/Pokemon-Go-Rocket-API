@@ -325,12 +325,12 @@
                          Canvas.ZIndex="1"
                          x:Name="GameMapControl">
 
-            <Image Source="../Assets/UI/ash.png"
-                   maps:MapControl.NormalizedAnchorPoint="0.5,1"
-                   Stretch="Uniform"
-                   Height="48"
-                   Width="48"
-                   x:Name="PlayerImage" />
+                <Image  Source="{Binding IsIncenseActive, Converter={StaticResource IsIncenseActiveToPlayerIconConverter}}" 
+                        maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                        Stretch="Uniform"
+                        Height="48"
+                        Width="48"
+                        x:Name="PlayerImage" />
 
             <maps:MapItemsControl ItemsSource="{Binding NearbyPokestops}">
                 <maps:MapItemsControl.ItemTemplate>
