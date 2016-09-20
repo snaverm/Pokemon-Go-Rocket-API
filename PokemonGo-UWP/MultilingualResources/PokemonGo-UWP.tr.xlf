@@ -559,6 +559,10 @@ Aynı zamanda {1} Stardust, {2} Şeker ve {3} XP kazandın.</target>
           <source>Lure Module</source>
           <target state="new">Lure Module</target>
         </trans-unit>
+        <trans-unit id="ItemUseQuestionText" translate="yes" xml:space="preserve">
+          <source>Use {0} ?</source>
+          <target state="new">Use {0} ?</target>
+        </trans-unit>
       </group>
     </body>
   </file>

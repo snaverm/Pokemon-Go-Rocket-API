@@ -402,6 +402,23 @@
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
 
+            <maps:MapItemsControl ItemsSource="{Binding IncensePokemon}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="entities:IncensePokemon">
+                        <Button Style="{ThemeResource ImageButtonStyle}"
+                                Command="{x:Bind TryCatchPokemon}">
+                            <Image
+                                Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}" 
+                                maps:MapControl.Location="{Binding Geoposition}" 
+                                maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" 
+                                Stretch="Uniform" 
+                                Canvas.ZIndex="4" 
+                                Height="{Binding ZoomLevel, ElementName=GameMapControl, Converter={StaticResource MapZoomLevelToIconSizeConverter}, ConverterParameter=1}" 
+                                Width="{Binding ZoomLevel, ElementName=GameMapControl, Converter={StaticResource MapZoomLevelToIconSizeConverter}, ConverterParameter=1}" />
+                        </Button>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
         </maps:MapControl>
 
         <Grid x:Name="NearbyPokemonContainer"
