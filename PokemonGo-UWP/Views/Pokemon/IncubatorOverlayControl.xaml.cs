@@ -13,11 +13,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace PokemonGo_UWP.Views
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace PokemonGo_UWP.Views.Pokemon
 {
-    public sealed partial class EggUserControl : UserControl
+    public sealed partial class IncubatorOverlayControl : UserControl
     {
-        public EggUserControl()
+        public IncubatorOverlayControl()
         {
             this.InitializeComponent();
         }

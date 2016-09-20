@@ -111,7 +111,7 @@
             <GridView.ItemTemplate>
                 <!--Template-->
                 <DataTemplate x:DataType="entities:PokemonDataWrapper">
-                    <Grid Background="White" Height="115">
+                    <Grid Height="115">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />

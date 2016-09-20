@@ -160,86 +160,7 @@
             </Button>
         </RelativePanel>
 
-        <Grid x:Name="IncubatorsContainer"
-              Canvas.ZIndex="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="IncubatorsGridTranslateTransform" />
-            </Grid.RenderTransform>
-            <controls:ModalDialog x:Name="IncubatorsModal"
-                                  Grid.Row="1"
-                                  CanBackButtonDismiss="True"
-                                  DisableBackButtonWhenModal="True">
-                <controls:ModalDialog.ModalBackground>
-                    <SolidColorBrush Color="Transparent" />
-                </controls:ModalDialog.ModalBackground>
-                <controls:ModalDialog.ModalContent>
-                    <Border x:Name="IncubatorsGrid"
-                            Background="White"
-                            BorderBrush="#efefef"
-                            BorderThickness="0,1,0,0">
-                        <RelativePanel>
-                            <StackPanel x:Name="HeaderPanel"
-                                        RelativePanel.AlignTopWithPanel="True"
-                                        RelativePanel.AlignLeftWithPanel="True"
-                                        RelativePanel.AlignRightWithPanel="True">
-                                <TextBlock x:Uid="incubatorsText"
-                                           Text="INCUBATORS"
-                                           Style="{StaticResource TextPageTitleDark}" />
-                                <Border Background="#000"
-                                        Width="150"
-                                        Height="1" />
-                            </StackPanel>
-                            <GridView RelativePanel.Below="HeaderPanel"
-                                      RelativePanel.Above="CloseIncubatorsGridViewButton"
-                                      RelativePanel.AlignLeftWithPanel="True"
-                                      RelativePanel.AlignRightWithPanel="True"
-                                      ItemsSource="{Binding IncubatorsInventory}"
-                                      IsItemClickEnabled="False"
-                                      SelectionMode="None">
 
-                                <GridView.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapGrid Orientation="Horizontal"
-                                                  MaximumRowsOrColumns="4" />
-                                    </ItemsPanelTemplate>
-                                </GridView.ItemsPanel>
-
-                                <GridView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Image Source="{Binding ItemId, Converter={StaticResource ItemIdToItemIconConverter}}"
-                                                   Width="75"
-                                                   Height="75"
-                                                   Margin="10,15,10,0" />
-                                            <TextBlock >
-                                            <!--<TextBlock Style="{StaticResource TextGridViewTop}">-->
-                                                <Run FontWeight="Bold"
-                                                     FontSize="15"
-                                                     Text="{Binding Converter={StaticResource IncubatorUsagesCountToUsagesTextConverter}}" />
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </GridView>
-                            <Button x:Name="CloseIncubatorsGridViewButton"
-                                    RelativePanel.AlignBottomWithPanel="True"
-                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                    Tapped="ToggleIncubatorModel"
-                                    Style="{StaticResource ButtonCircle}"
-                                    Margin="0,0,0,17.5">
-                                <Image Source="../Assets/Buttons/btn_close.png" />
-                            </Button>
-                        </RelativePanel>
-                    </Border>
-
-                </controls:ModalDialog.ModalContent>
-            </controls:ModalDialog>
-
-        </Grid>
 
         <Border Margin="12,0"
                 Background="White">
@@ -256,72 +177,15 @@
                     <local:PokemonInventoryControl DataContext="{Binding DataContext, ElementName=Root}" />
                 </PivotItem>
 
-                <PivotItem x:Name="EggsPivot">
+                <PivotItem x:Name="EggsPivot"
+                           Margin="12,0">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="EggsHeader"
                                               Title="EGGS"
                                               DataCurrent="{Binding EggsInventory.Count}"
                                               DataMaximum="9" />
                     </PivotItem.Header>
-                    <RelativePanel>
-                        <GridView x:Name="EggsInventoryGridView"
-                                  RelativePanel.AlignTopWithPanel="True"
-                                  RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                  RelativePanel.Above="IncubatorButton"
-                                  ItemsSource="{Binding EggsInventory}"
-                                  SelectionMode="None"
-                                  Padding="0,0,0,57.5"
-                                  SizeChanged="GridViewEggsSizeChanged">
-
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="entities:PokemonDataWrapper">
-                                    <StackPanel HorizontalAlignment="Center"
-                                                VerticalAlignment="Top"
-                                                Margin="0,0,0,10">
-
-                                        <interactivity:Interaction.Behaviors>
-                                            <core:EventTriggerBehavior EventName="Tapped">
-                                                <!--<core:InvokeCommandAction Command="{x:Bind GotoEggDetailsCommand}" />-->
-                                            </core:EventTriggerBehavior>
-                                        </interactivity:Interaction.Behaviors>
-
-                                        <Image Source="{x:Bind Converter={StaticResource EggDataToEggIconConverter}}"
-                                               Width="48"
-                                               Height="48"
-                                               Margin="5"
-                                               x:Phase="2" />
-
-                                        <ProgressBar Value="{Binding Converter={StaticResource EggDataToEggProgressConverter}}"
-                                                     Margin="0,5"
-                                                     Style="{StaticResource PokemonHPProgressBarStyle}"
-                                                     Foreground="#399FFF"
-                                                     IsIndeterminate="False"
-                                                     HorizontalAlignment="Center" />
-
-                                        <TextBlock >                                            
-                                                <Run Text="{Binding EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.##\}}" />
-                                                <Run Text="/" />
-                                                <Run FontWeight="Bold"
-                                                     Text="{x:Bind EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
-                                                <Run FontWeight="Bold"
-                                                     Text="km" />
-                                        </TextBlock>
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-
-                        <Button x:Name="IncubatorButton"
-                                RelativePanel.AlignBottomWithPanel="True"
-                                RelativePanel.AlignRightWithPanel="True"
-                                Style="{StaticResource ButtonCircleBigInverse}"
-                                Tapped="ToggleIncubatorModel"
-                                Margin="16">
-                            <Image Source="../../Assets/Buttons/btn_incubator_dark.png" />
-                        </Button>
-
-                    </RelativePanel>
+                    <local:EggInventoryControl DataContext="{Binding DataContext, ElementName=Root}" />
                 </PivotItem>
 
             </Pivot>

@@ -183,8 +183,8 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Show sorting overlay for pokemon inventory
         /// </summary>
-        private DelegateCommand<PokemonDataWrapper> _showPokemonSortingMenuCommand;
-        public DelegateCommand<PokemonDataWrapper> ShowPokemonSortingMenuCommand => _showPokemonSortingMenuCommand ?? (_showPokemonSortingMenuCommand = new DelegateCommand<PokemonDataWrapper>((selectedPokemon) =>
+        private DelegateCommand _showPokemonSortingMenuCommand;
+        public DelegateCommand ShowPokemonSortingMenuCommand => _showPokemonSortingMenuCommand ?? (_showPokemonSortingMenuCommand = new DelegateCommand(() =>
         {
 
         }));
@@ -196,6 +196,15 @@ namespace PokemonGo_UWP.ViewModels
 
             RaisePropertyChanged(() => PokemonInventory);
         }
+
+        /// <summary>
+        /// Show incubator overlay for egg inventory
+        /// </summary>
+        private DelegateCommand _showIncubatorOverlayCommand;
+        public DelegateCommand ShowIncubatorOverlayCommand => _showIncubatorOverlayCommand ?? (_showIncubatorOverlayCommand = new DelegateCommand(() =>
+        {
+
+        }));
 
         #endregion
 
