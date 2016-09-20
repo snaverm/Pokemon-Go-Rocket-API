@@ -159,6 +159,7 @@ namespace PokemonGo_UWP.ViewModels
 					{
 						//// Send use request
 						var res = await GameClient.UseIncense(item.ItemId);
+						//var res = GetFakeIncenseResponse(item.ItemId);
 						switch (res.Result)
 						{
 							case UseIncenseResponse.Types.Result.Success:
@@ -196,6 +197,7 @@ namespace PokemonGo_UWP.ViewModels
 					{
 						// Send use request
 						var res = await GameClient.UseXpBoost(item.ItemId);
+						//var res = GetFakeXpBoostResponse(item.ItemId);
 						switch (res.Result)
 						{
 							case UseItemXpBoostResponse.Types.Result.Success:
