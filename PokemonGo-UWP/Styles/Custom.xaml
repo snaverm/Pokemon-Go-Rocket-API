@@ -1184,7 +1184,7 @@
         <Setter Property="Foreground" Value="#000000" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="15" />
+        <Setter Property="Margin" Value="15,0" />
         <Setter Property="TextWrapping" Value="WrapWholeWords" />
     </Style>
 
