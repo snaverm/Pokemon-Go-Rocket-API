@@ -309,7 +309,7 @@ namespace PokemonGo_UWP.Views
                         lastAutoPosition = GameMapControl.Center;
 
                         if ((SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPS) &&
-                            (LocationServiceHelper.Instance.Geoposition.Coordinate.Heading != null))
+                            (LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.HasValue))
                             await GameMapControl.TryRotateToAsync(LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.Value);
 
                         if (SettingsService.Instance.IsRememberMapZoomEnabled)
