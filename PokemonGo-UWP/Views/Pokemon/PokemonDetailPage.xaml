@@ -423,12 +423,6 @@
                 <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
 
-            <Grid.Transitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition />
-                </TransitionCollection>
-            </Grid.Transitions>
-
             <Rectangle Grid.Row="0">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding SelectedPokemon, Converter={StaticResource PokemonDataToPokemonTypeBackgroundConverter}}"
@@ -472,7 +466,7 @@
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,21"
-                Command="{Binding ReturnToPokemonInventoryScreen}">
+                Command="{Binding ClosePokemonDetailPage}">
             <Image Source="{Binding ViewMode, Converter={StaticResource PokemonDetailPageViewModeToCloseButtonImageSourceConverter}}" />
         </Button>
 

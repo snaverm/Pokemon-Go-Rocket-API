@@ -10,8 +10,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
-        <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
-
+        
         <!--ANIMATIONS-->
 
         <!--Fade-->

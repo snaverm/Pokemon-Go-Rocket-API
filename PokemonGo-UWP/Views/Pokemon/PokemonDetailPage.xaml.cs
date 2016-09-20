@@ -90,6 +90,7 @@ namespace PokemonGo_UWP.Views
             EvolvePokemonStoryboard.Completed += async (s, e) =>
             {
                 await Task.Delay(1000);
+                ViewModel.EvolveAnimationIsRunning = false;
                 ViewModel.NavigateToEvolvedPokemonCommand.Execute();
             };
         }
@@ -101,6 +102,7 @@ namespace PokemonGo_UWP.Views
 
         private void ViewModelOnPokemonEvolved(object sender, EventArgs evolvePokemonResponse)
         {
+            ViewModel.EvolveAnimationIsRunning = true;
             ShowEvolveMenuStoryboard.Begin();
         }
 

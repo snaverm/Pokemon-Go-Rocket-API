@@ -1,10 +1,11 @@
 ﻿<UserControl
-    x:Class="PokemonGo_UWP.Views.Pokemon.EggInventoryControl"
+    x:Class="PokemonGo_UWP.Views.EggInventoryControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:PokemonGo_UWP.Views.Pokemon"
+    xmlns:local="using:PokemonGo_UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
     xmlns:entities="using:PokemonGo_UWP.Entities"
@@ -113,33 +114,39 @@
             <!--Template-->
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="entities:PokemonDataWrapper">
-                    <StackPanel HorizontalAlignment="Center"
-                                                VerticalAlignment="Top"
-                                                Margin="0,0,0,10">
+                    <Grid Height="115">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                        <Image Source="{x:Bind Converter={StaticResource EggDataToEggIconConverter}}"
-                                               Width="48"
-                                               Height="48"
-                                               Margin="5"
-                                               x:Phase="2" />
-
-                        <ProgressBar Value="{Binding Converter={StaticResource EggDataToEggProgressConverter}}"
-                                                     Margin="0,5"
-                                                     Style="{StaticResource PokemonHPProgressBarStyle}"
-                                                     Foreground="#399FFF"
-                                                     IsIndeterminate="False"
-                                                     HorizontalAlignment="Center" />
-
-                        <TextBlock >                                            
-                                                <Run Text="{Binding EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.#\}}" />
-                                                <Run Text="/" />
-                                                <Run FontWeight="Bold"
-                                                     Text="{x:Bind EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0\}}" />
-                                                <Run FontWeight="Bold"
-                                                     Text="km" />
+                        <Image Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Source="{x:Bind Converter={StaticResource EggDataToEggIconConverter}}"
+                               x:Phase="2" />
+                        <!--Formatting must be on one line to prevent blanks-->
+                        <TextBlock Grid.Row="2"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="{StaticResource LatoBoldFont}"
+                                   FontSize="15"
+                                   Foreground="{StaticResource TitleTextColor}"><Run Text="{x:Bind EggKmWalkedStart, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.0\}}" /><Run Text="/" /><Run Text="{x:Bind EggKmWalkedTarget, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:0.0\}}" />
+                            <Run FontFamily="{StaticResource LatoMediumFont}"
+                                 FontSize="11"
+                                 Foreground="{StaticResource GrayTextColor}"
+                                 Text="km" />
                         </TextBlock>
-
-                    </StackPanel>
+                        <ProgressBar Grid.Row="1"
+                                     Value="{x:Bind Converter={StaticResource EggDataToEggProgressConverter}}"
+                                     Margin="15,4"
+                                     Height="3"
+                                     Style="{StaticResource PokemonHPProgressBarStyle}"
+                                     Foreground="{StaticResource EggProgressColor}"
+                                     IsIndeterminate="False"
+                                     HorizontalAlignment="Stretch"
+                                     x:Phase="1" />
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

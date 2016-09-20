@@ -76,6 +76,7 @@
 
         <!--Content-->
         <GridView x:Name="PokemonInventoryGridView"
+                  x:FieldModifier="public"
                   ItemsSource="{Binding PokemonInventory, Mode=OneWay}"
                   ScrollViewer.VerticalScrollMode="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"

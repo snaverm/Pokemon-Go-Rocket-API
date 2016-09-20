@@ -1533,9 +1533,9 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null || !(value is IncubatedEggDataWrapper)) return 0;
+            if (value == null || !(value is IncubatedEggDataWrapper)) return 0.0;
             var pokemon = (IncubatedEggDataWrapper)value;
-            return (int)((pokemon.EggKmWalkedStart / pokemon.EggKmWalkedTarget) * 100);
+            return (double)((pokemon.EggKmWalkedStart / pokemon.EggKmWalkedTarget) * 100);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -1612,23 +1612,6 @@ namespace PokemonGo_UWP.Utils
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             return null;
-        }
-
-        #endregion
-    }
-
-    public class VisibleWhenStringEmptyConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            return string.IsNullOrEmpty((string)value) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
         }
 
         #endregion
@@ -1908,7 +1891,10 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (string.IsNullOrEmpty((string)value))
+            bool invert = false;
+            Boolean.TryParse((string)parameter, out invert);
+            
+            if (string.IsNullOrEmpty((string)value) ^ !invert)
             {
                 return Visibility.Collapsed;
             }

@@ -61,7 +61,7 @@
             <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter" />
             <utils:IncubatorUsagesCountToUsagesTextConverter x:Key="IncubatorUsagesCountToUsagesTextConverter" />
             <utils:EggDataToEggIconConverter x:Key="EggDataToEggIconConverter" />
-            <utils:VisibleWhenStringEmptyConverter x:Key="VisibleWhenStringEmptyConverter" />
+            <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
             <utils:VisibleWhenGreaterThanConverter x:Key="VisibleWhenGreaterThanConverter" />
             <utils:PlayerStatsTranslationConverter x:Key="PlayerStatsTranslationConverter" />
             <utils:MsToDateFormatConverter x:Key="MsToDateFormatConverter" />

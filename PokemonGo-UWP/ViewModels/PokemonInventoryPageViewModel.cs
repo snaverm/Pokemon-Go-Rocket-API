@@ -20,20 +20,6 @@ namespace PokemonGo_UWP.ViewModels
 {
     public class PokemonInventoryPageViewModel : ViewModelBase
     {
-        #region Game Management Vars
-
-        private int _lastVisibleIndex;
-
-        public int LastVisibleIndex
-        {
-            get { return Utilities.EnsureRange(_lastVisibleIndex, 0, PokemonInventory.Count-1); }
-            set { _lastVisibleIndex = value; }
-        }
-
-        public Action ResetView;
-
-        #endregion
-
         #region Lifecycle Handlers
 
         /// <summary>
@@ -50,9 +36,8 @@ namespace PokemonGo_UWP.ViewModels
                 // Recovering the state
                 PokemonInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(PokemonInventory)]);
                 EggsInventory = JsonConvert.DeserializeObject<ObservableCollection<PokemonDataWrapper>>((string)suspensionState[nameof(EggsInventory)]);
-                PlayerProfile = new PlayerData();
-                PlayerProfile.MergeFrom(ByteString.FromBase64((string)suspensionState[nameof(PlayerProfile)]).CreateCodedInput());
-                RaisePropertyChanged(() => PlayerProfile);
+                CurrentPokemonSortingMode = (PokemonSortingModes)suspensionState[nameof(CurrentPokemonSortingMode)];
+                PlayerProfile = GameClient.PlayerProfile;
             }
             else
             {
@@ -81,10 +66,19 @@ namespace PokemonGo_UWP.ViewModels
                     EggsInventory.Add(new PokemonDataWrapper(pokemonData));
                 }
 
-                if(mode == NavigationMode.Back)
-                    ResetView?.Invoke();
-
                 PlayerProfile = GameClient.PlayerProfile;
+            }
+
+            // try restoring scrolling position 
+            if (NavigationHelper.NavigationState.ContainsKey("LastViewedPokemonDetailID"))
+            {
+                ulong pokemonId = (ulong)NavigationHelper.NavigationState["LastViewedPokemonDetailID"];
+                NavigationHelper.NavigationState.Remove("LastViewedPokemonDetailID");
+                var pokemon = PokemonInventory.Where(p => p.Id == pokemonId).FirstOrDefault();
+                if(pokemon != null)
+                {
+                    ScrollPokemonToVisibleRequired?.Invoke(pokemon);
+                }
             }
 
             await Task.CompletedTask;
@@ -102,6 +96,7 @@ namespace PokemonGo_UWP.ViewModels
             {
                 suspensionState[nameof(PokemonInventory)] = JsonConvert.SerializeObject(PokemonInventory);
                 suspensionState[nameof(EggsInventory)] = JsonConvert.SerializeObject(EggsInventory);
+                suspensionState[nameof(CurrentPokemonSortingMode)] = CurrentPokemonSortingMode;
             }
             await Task.CompletedTask;
         }
@@ -115,6 +110,9 @@ namespace PokemonGo_UWP.ViewModels
         #endregion
 
         #region Bindable Game Vars
+
+        public delegate void ScrollPokemonToVisibleHandler(PokemonDataWrapper p);
+        public event ScrollPokemonToVisibleHandler ScrollPokemonToVisibleRequired;
 
         /// <summary>
         /// Player's profile, we use it just for the maximum ammount of pokemon

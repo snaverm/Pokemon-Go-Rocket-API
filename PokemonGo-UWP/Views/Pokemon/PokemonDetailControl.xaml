@@ -63,12 +63,11 @@
         <StackPanel Orientation="Vertical">
             <!-- Level Bar -->
             <Grid VerticalAlignment="Top"
-                  Margin="16"
+                  Margin="16,16,16,0"
                   Canvas.ZIndex="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="200" />
-                    <RowDefinition Height="135" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -157,13 +156,11 @@
 
             <Border CornerRadius="5"
                     Background="#FAFAFA"
-                    Margin="10,-150,10,-10"
+                    Margin="10,0,10,-10"
                     Padding="0,32,0,75"
                     BorderThickness="0"
                     Grid.RowSpan="4"
                     Grid.Row="2">
-
-
                 <StackPanel Orientation="Vertical">
 
                     <!-- Name & Stamina -->
@@ -507,14 +504,6 @@
                                                    HorizontalAlignment="Left"
                                                    Margin="-6,0,0,0"
                                                    VerticalAlignment="Center">
-                                                    <!--<interactivity:Interaction.Behaviors>
-                                                        <core:DataTriggerBehavior Binding="{Binding ElementName=Root, Path=StardustAmount}"
-                                                                                  ComparisonCondition="LessThan"
-                                                                                  Value="{Binding Converter={StaticResource PokemonToStardustForPowerUpConverter}}">
-                                                            <core:ChangePropertyAction PropertyName="Foreground"
-                                                                                       Value="Red" />
-                                                        </core:DataTriggerBehavior>
-                                                    </interactivity:Interaction.Behaviors>-->
                                         </TextBlock>
                                     </StackPanel>
 
@@ -533,14 +522,6 @@
                                                    Text="{Binding Converter={StaticResource PokemonToCandiesForPowerUpConverter}}"
                                                    HorizontalAlignment="Left"
                                                    VerticalAlignment="Center">
-                                                    <!--<interactivity:Interaction.Behaviors>
-                                                        <core:DataTriggerBehavior Binding="{Binding Converter={StaticResource PokemonToCurrentCandiesConverter}}"
-                                                                                  ComparisonCondition="LessThan"
-                                                                                  Value="{Binding Converter={StaticResource PokemonToCandiesForPowerUpConverter}}">
-                                                            <core:ChangePropertyAction PropertyName="Foreground"
-                                                                                       Value="Red" />
-                                                        </core:DataTriggerBehavior>
-                                                    </interactivity:Interaction.Behaviors>-->
                                         </TextBlock>
                                     </StackPanel>
 
@@ -594,14 +575,6 @@
                                                    Foreground="{Binding Converter={StaticResource PokemonToCandiesForEvolveForegroundConverter}}"
                                                    Text="{Binding Converter={StaticResource PokemonToCandiesForEvolveConverter}}"
                                                    VerticalAlignment="Center">
-                                                <!--<interactivity:Interaction.Behaviors>
-                                                    <core:DataTriggerBehavior x:Name="StardustPowerUpDataTrigger" Binding="{Binding Converter={StaticResource PokemonToCurrentCandiesConverter}}"
-                                                                              ComparisonCondition="LessThan"
-                                                                              Value="{Binding Converter={StaticResource PokemonToCandiesForEvolveConverter}}">
-                                                        <core:ChangePropertyAction PropertyName="Foreground"
-                                                                                   Value="Red" />
-                                                    </core:DataTriggerBehavior>
-                                                </interactivity:Interaction.Behaviors>-->
                                         </TextBlock>
                                     </StackPanel>
                                 </Grid>

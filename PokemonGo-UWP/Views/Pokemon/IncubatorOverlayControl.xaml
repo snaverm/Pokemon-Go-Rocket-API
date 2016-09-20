@@ -1,10 +1,11 @@
 ﻿<UserControl
-    x:Class="PokemonGo_UWP.Views.Pokemon.IncubatorOverlayControl"
+    x:Class="PokemonGo_UWP.Views.IncubatorOverlayControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:PokemonGo_UWP.Views.Pokemon"
+    xmlns:local="using:PokemonGo_UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -77,9 +78,9 @@
                         <Button x:Name="CloseIncubatorsGridViewButton"
                                     RelativePanel.AlignBottomWithPanel="True"
                                     RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                    Tapped="ToggleIncubatorModel"
                                     Style="{StaticResource ButtonCircle}"
                                     Margin="0,0,0,17.5">
+                            <!--Tapped="ToggleIncubatorModel"-->
                             <Image Source="../Assets/Buttons/btn_close.png" />
                         </Button>
                     </RelativePanel>

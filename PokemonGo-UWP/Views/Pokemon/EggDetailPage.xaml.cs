@@ -17,32 +17,32 @@ namespace PokemonGo_UWP.Views
         {
             InitializeComponent();
             // Setup incubators translation
-            Loaded += (s, e) =>
-            {
-                ShowIncubatorsModalAnimation.From =
-                    HideIncubatorsModalAnimation.To = IncubatorsModal.ActualHeight;
-                HideIncubatorsModalStoryboard.Completed += (ss, ee) => { IncubatorsModal.IsModal = false; };
-            };
+            //Loaded += (s, e) =>
+            //{
+            //    ShowIncubatorsModalAnimation.From =
+            //        HideIncubatorsModalAnimation.To = IncubatorsModal.ActualHeight;
+            //    HideIncubatorsModalStoryboard.Completed += (ss, ee) => { IncubatorsModal.IsModal = false; };
+            //};
         }
 
-        private void ToggleIncubatorModel(object sender, TappedRoutedEventArgs e)
-        {
-            if (IncubatorsModal.IsModal)
-            {
-                HideIncubatorsModalStoryboard.Begin();
-            }
-            else
-            {
-                IncubatorsModal.IsModal = true;
-                ShowIncubatorsModalStoryboard.Begin();
-            }
-        }
+        //private void ToggleIncubatorModel(object sender, TappedRoutedEventArgs e)
+        //{
+        //    if (IncubatorsModal.IsModal)
+        //    {
+        //        HideIncubatorsModalStoryboard.Begin();
+        //    }
+        //    else
+        //    {
+        //        IncubatorsModal.IsModal = true;
+        //        ShowIncubatorsModalStoryboard.Begin();
+        //    }
+        //}
 
         // TODO: replace with mvvm command, doing like this because I'm in a rush
         private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            ViewModel.UseIncubatorCommand.Execute((EggIncubator) e.ClickedItem);
-            HideIncubatorsModalStoryboard.Begin();
+            //ViewModel.UseIncubatorCommand.Execute((EggIncubator) e.ClickedItem);
+            //HideIncubatorsModalStoryboard.Begin();
         }
 
     }

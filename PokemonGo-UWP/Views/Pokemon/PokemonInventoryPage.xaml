@@ -174,7 +174,7 @@
                                               DataCurrent="{Binding PokemonInventory.Count}"
                                               DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}" />
                     </PivotItem.Header>
-                    <local:PokemonInventoryControl DataContext="{Binding DataContext, ElementName=Root}" />
+                    <local:PokemonInventoryControl x:Name="PokemonInventory" DataContext="{Binding DataContext, ElementName=Root}" />
                 </PivotItem>
 
                 <PivotItem x:Name="EggsPivot"

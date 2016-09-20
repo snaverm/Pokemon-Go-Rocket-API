@@ -41,6 +41,12 @@ namespace PokemonGo_UWP.ViewModels
                 Load(Convert.ToUInt64(navParam.SelectedPokemonId), navParam.SortingMode, navParam.ViewMode);
             }
 
+            // prevent going back to another PokemonDetailPage or CapturePokemonPage
+            while (NavigationService.Frame.BackStack.Last().SourcePageType == typeof(PokemonDetailPage) || NavigationService.Frame.BackStack.Last().SourcePageType == typeof(CapturePokemonPage))
+            {
+                NavigationService.Frame.BackStack.Remove(NavigationService.Frame.BackStack.LastOrDefault());
+            }
+
             await Task.CompletedTask;
         }
 
@@ -65,6 +71,30 @@ namespace PokemonGo_UWP.ViewModels
             PlayerTeamIsSet = GameClient.PlayerProfile.Team != TeamColor.Neutral;
         }
 
+        /// <summary>
+        /// Handling when navigating away to prevent illegal back
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            args.Cancel = false;
+            if (args.NavigationMode == NavigationMode.Back)
+            {
+                if (EvolveAnimationIsRunning)
+                {
+                    args.Cancel = true;
+                }
+
+                if (NavigationService.Frame.BackStack.Last().SourcePageType == typeof(PokemonInventoryPage))
+                {
+                    NavigationHelper.NavigationState.Add("LastViewedPokemonDetailID", SelectedPokemon.Id);
+                }
+            }
+
+            await Task.CompletedTask;
+        }
+
         #endregion
 
         #region Bindable Vars
@@ -72,6 +102,8 @@ namespace PokemonGo_UWP.ViewModels
         public List<PokemonDataWrapper> PokemonInventory { get; private set; } = new List<PokemonDataWrapper>();
 
         public PokemonSortingModes SortingMode { get; private set; }
+
+        public bool EvolveAnimationIsRunning { get; set; }
 
         /// <summary>
         /// Flag for an ongoing server request. Used to disable the controls
@@ -163,19 +195,16 @@ namespace PokemonGo_UWP.ViewModels
         #region Shared Logic
 
 
-        private DelegateCommand _returnToPokemonInventoryScreen;
+        private DelegateCommand _closePokemonDetailPage;
 
         /// <summary>
-        ///     Going back to inventory page
+        /// Close the Page and go back to the previous page
         /// </summary>
-        public DelegateCommand ReturnToPokemonInventoryScreen => _returnToPokemonInventoryScreen ?? (
-            _returnToPokemonInventoryScreen = new DelegateCommand(() =>
+        public DelegateCommand ClosePokemonDetailPage => _closePokemonDetailPage ?? (
+            _closePokemonDetailPage = new DelegateCommand(() =>
             {
-                // HACK - if we're coming fro the inventory we may go back, otherwise we go to map page
-                if (NavigationService.Frame.BackStack.Last().SourcePageType == typeof(PokemonInventoryPage))
-                    NavigationService.GoBack();
-                else
-                    NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
+                if (ServerRequestRunning) return;
+                NavigationService.GoBack();
             }, () => true)
             );
 

@@ -814,6 +814,10 @@ Je hebt ook {1} Stardust, {2} Candy en {3} XP gekregen.</target>
           <source>POKÉMON</source>
           <target state="new">POKÉMON</target>
         </trans-unit>
+        <trans-unit id="EggDetailIncubatingTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Walk to hatch this Egg.</source>
+          <target state="new">Walk to hatch this Egg.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

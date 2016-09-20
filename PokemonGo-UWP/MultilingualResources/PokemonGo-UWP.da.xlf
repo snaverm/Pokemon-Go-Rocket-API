@@ -266,6 +266,10 @@
           <source>POKÉMON</source>
           <target state="new">POKÉMON</target>
         </trans-unit>
+        <trans-unit id="EggDetailIncubatingTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Walk to hatch this Egg.</source>
+          <target state="new">Walk to hatch this Egg.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
