@@ -28,9 +28,6 @@ namespace PokemonGo_UWP.Entities
 		private GetIncensePokemonResponse _incensePokemonResponse;
 
 
-		/// <summary>
-		///     HACK - this should fix Pokestop floating on map
-		/// </summary>
 		public Point Anchor => new Point(0.5, 1);
 
 		public IncensePokemon(GetIncensePokemonResponse incensePokemonResponse, double lat, double lng)
