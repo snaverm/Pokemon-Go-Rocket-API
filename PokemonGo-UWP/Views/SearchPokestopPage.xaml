@@ -249,10 +249,10 @@
                     </Grid>
 
                     <Border Grid.Row="2" x:Name="DiscEdge"
-                        Width="250" Height="250"
-                        BorderThickness="10"
-                        CornerRadius="125"
-                        HorizontalAlignment="Center" Margin="0,-100,0,0">
+                            Width="250" Height="250"
+                            BorderThickness="10"
+                            CornerRadius="125"
+                            HorizontalAlignment="Center" Margin="0,-100,0,0">
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <GradientStop Color="#7CF7F5" Offset="0"></GradientStop>
@@ -260,15 +260,15 @@
                             </LinearGradientBrush>
                         </Border.BorderBrush>
                         <Border Background="#fff"
-                    BorderBrush="#fff"
-                    BorderThickness="10"
-                    CornerRadius="150">
+                                BorderBrush="#fff"
+                                BorderThickness="10"
+                                CornerRadius="150">
                             <Button Style="{ThemeResource ImageButtonStyle}"
-                        Command="{Binding SearchCurrentPokestop}"
-                        x:Name="SearchPokestopButton">
+                                    Command="{Binding SearchCurrentPokestop}"
+                                    x:Name="SearchPokestopButton">
                                 <Ellipse x:Name="PokestopImageEllipse"
-                                Width="210"
-                                Height="210">
+                                        Width="210"
+                                        Height="210">
                                     <Ellipse.Projection>
                                         <PlaneProjection />
                                     </Ellipse.Projection>
@@ -282,12 +282,12 @@
                     </Border>
 
                     <Button Grid.Row="1" 
-                    Width="100" Height="40" 
-                    BorderBrush="White" BorderThickness="5"
-                    Style="{ThemeResource ImageButtonStyle}"
-                    Command="{Binding ShowFortModifierDetails}"
-                    x:Name="PokestopModifierDetailsButton"
-                    HorizontalAlignment="Center" Background="White">
+                            Width="100" Height="40" 
+                            BorderBrush="White" BorderThickness="5"
+                            Style="{ThemeResource ImageButtonStyle}"
+                            Command="{Binding ShowFortModifierDetails}"
+                            x:Name="PokestopModifierDetailsButton"
+                            HorizontalAlignment="Center" Background="White">
                         <Image Source="{Binding CurrentPokestopInfo.Modifiers[0].ItemId, Converter={StaticResource ItemIdToItemIconConverter}}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" />
                     </Button>
 
@@ -325,13 +325,13 @@
                            Margin="15,20,15,20" />
                     </StackPanel>
                 </Border>
-                
+
                 <Grid Grid.Row="0"
-            Grid.RowSpan="3"
-            x:Name="GatheredItemsBorder"
-            Style="{StaticResource GridContainer}"
-            Visibility="Collapsed"
-            VerticalAlignment="Center">
+                    Grid.RowSpan="3"
+                    x:Name="GatheredItemsBorder"
+                    Style="{StaticResource GridContainer}"
+                    Visibility="Collapsed"
+                    VerticalAlignment="Center">
                     <Grid.RenderTransform>
                         <TranslateTransform x:Name="GatheredItemsTranslateTransform"
                                 Y="800" />
@@ -349,14 +349,14 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" x:Uid="AwardedExperienceTextBlock"
-                        Style="{StaticResource TextNormal}" FontWeight="Bold" />
+                                   Style="{StaticResource TextNormal}" FontWeight="Bold" />
                         <TextBlock Grid.Column="1" Text="{Binding CurrentSearchResponse.ExperienceAwarded}"
-                        Style="{StaticResource TextNormalSpotlight}" />
+                                   Style="{StaticResource TextNormalSpotlight}" />
                         <TextBlock Grid.Column="2" x:Uid="SpaceXpTextBlock" Style="{StaticResource TextNormalSpotlight}" />
                     </Grid>
                     <ListView ItemsSource="{Binding AwardedItems}"
-                    SelectionMode="None"
-                    Grid.Row="1">
+                            SelectionMode="None"
+                            Grid.Row="1">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Margin" Value="0" />
@@ -373,26 +373,26 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Column="0"
-                                Source="{Binding Converter={StaticResource ItemToItemIconConverter}}"
-                                Height="50"
-                                Stretch="Uniform"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Stretch" />
+                                        Source="{Binding Converter={StaticResource ItemToItemIconConverter}}"
+                                        Height="50"
+                                        Stretch="Uniform"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch" />
                                     <TextBlock Grid.Column="1"
-                                    Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                                    Style="{StaticResource TextNormal}" />
+                                        Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                        Style="{StaticResource TextNormal}" />
                                     <TextBlock Grid.Column="2"
-                                    x:Uid="NumberTextBlock"
-                                    Style="{StaticResource TextNormalSpotlight}" />
+                                        x:Uid="NumberTextBlock"
+                                        Style="{StaticResource TextNormalSpotlight}" />
                                     <TextBlock Grid.Column="3"
-                                    Text="{Binding ItemCount}"
-                                    Style="{StaticResource TextNormalSpotlight}" />
+                                        Text="{Binding ItemCount}"
+                                        Style="{StaticResource TextNormalSpotlight}" />
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                     <Grid Grid.Row="2" Margin="15,10,15,10"
-                Visibility="{Binding CurrentSearchResponse.PokemonDataEgg, Converter={StaticResource PokemonDataToVisibilityConverter}}">
+                          Visibility="{Binding CurrentSearchResponse.PokemonDataEgg, Converter={StaticResource PokemonDataToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
@@ -402,17 +402,17 @@
                         Style="{StaticResource TextNormal}" FontWeight="Bold" HorizontalAlignment="Right" />-->
                     </Grid>
                     <Button Grid.Row="3"
-                x:Name="loginButton"
-                Command="{Binding ReturnToGameScreen}"
-                Style="{StaticResource ButtonSubmit}">
+                            x:Name="loginButton"
+                            Command="{Binding ReturnToGameScreen}"
+                            Style="{StaticResource ButtonSubmit}">
                         <TextBlock Text="OK" />
                     </Button>
                 </Grid>
                 <Button Grid.Row="2"
-            x:Name="AbandonPokestopButton"
-            Command="{Binding AbandonPokestop}"
-            Style="{StaticResource ButtonCircle}"
-            Margin="0">
+                        x:Name="AbandonPokestopButton"
+                        Command="{Binding AbandonPokestop}"
+                        Style="{StaticResource ButtonCircle}"
+                        Margin="0">
                     <Image Source="../Assets/Buttons/btn_close.png" />
                 </Button>
             </Grid>
@@ -460,9 +460,9 @@
                     </StackPanel>
                 </Border>
                 <Border Grid.Row="0"
-                x:Name="DetailsErrorMessageBorder"
-                Visibility="Collapsed"
-                VerticalAlignment="Top">
+                        x:Name="DetailsErrorMessageBorder"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="#cc0000" Offset="0" />
@@ -471,30 +471,30 @@
                     </Border.Background>
                     <StackPanel d:IsHidden="True">
                         <TextBlock x:Name="TooFarAwayTextBlock"
-                    x:Uid="TooFarAwayTextBlock"
-                    Visibility="Collapsed"
-                    Style="{StaticResource TextError}"
-                    Margin="15,20,15,20" d:IsHidden="True" />
+                            x:Uid="TooFarAwayTextBlock"
+                            Visibility="Collapsed"
+                            Style="{StaticResource TextError}"
+                            Margin="15,20,15,20" d:IsHidden="True" />
 
                         <TextBlock x:Name="FortAlreadyHasModifierTextBlock"
-                    x:Uid="FortAlreadyHasModifierTextBlock"
-                    Visibility="Collapsed"
-                    Style="{StaticResource TextError}"
-                    Margin="15,20,15,20" d:IsHidden="True" />
+                            x:Uid="FortAlreadyHasModifierTextBlock"
+                            Visibility="Collapsed"
+                            Style="{StaticResource TextError}"
+                            Margin="15,20,15,20" d:IsHidden="True" />
 
                         <TextBlock x:Name="NoItemInInventoryTextBlock"
-                    x:Uid="NoItemInInventoryTextBlock"
-                    Visibility="Collapsed"
-                    Style="{StaticResource TextError}"
-                    Margin="15,20,15,20" d:IsHidden="True" />
+                            x:Uid="NoItemInInventoryTextBlock"
+                            Visibility="Collapsed"
+                            Style="{StaticResource TextError}"
+                            Margin="15,20,15,20" d:IsHidden="True" />
                     </StackPanel>
                 </Border>
                 <Grid Grid.Row="1" Style="{StaticResource GridContainer}">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding LureTitleText}"
-                        Style="{StaticResource TextLureTitle}" />
+                                Style="{StaticResource TextLureTitle}" />
                         <TextBlock Text="{Binding LureDetailsText}"
-                        Style="{StaticResource TextLureDetails}" />
+                                Style="{StaticResource TextLureDetails}" />
                         <Border Width="200" Height="40" Background="Pink" 
                                 HorizontalAlignment="Left" Margin="15,5,0,0" 
                                 CornerRadius="20" 
