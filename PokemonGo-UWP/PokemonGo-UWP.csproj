@@ -238,6 +238,7 @@
     <Content Include="Assets\Icons\pokestop_near_lured.png" />
     <Content Include="Assets\Icons\RecenterMapIconDark.png" />
     <Content Include="Assets\Icons\RecenterMapIconLight.png" />
+    <Content Include="Assets\Icons\spawnpoint.png" />
     <Content Include="Assets\Icons\stardust_painted.png" />
     <Content Include="Assets\Icons\stardust_vector.png" />
     <Content Include="Assets\Items\Egg.png" />
@@ -313,6 +314,7 @@
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\LiveTiles\Transparent\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\Square44x44Logo.png" />
+    <Content Include="Assets\UI\ash_withincense.png" />
     <Content Include="Assets\UI\night_sky_texture_by_amdillon.jpg" />
     <Content Include="Assets\Pokemons\1.png" />
     <Content Include="Assets\Pokemons\10.png" />
@@ -753,6 +755,7 @@
     <Compile Include="Entities\FortDataWrapper.cs" />
     <Compile Include="Entities\IMapPokemon.cs" />
     <Compile Include="Entities\AppliedItemWrapper.cs" />
+    <Compile Include="Entities\IncensePokemon.cs" />
     <Compile Include="Entities\IUpdatable.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\LuredPokemon.cs" />
@@ -762,6 +765,7 @@
     <Compile Include="Entities\ItemDataWrapper.cs" />
     <Compile Include="Entities\PokemonDataWrapper.cs" />
     <Compile Include="Entities\PokemonModel.cs" />
+    <Compile Include="Entities\SpawnPointWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Achievements\AchievementValueAttribute.cs" />
     <Compile Include="Utils\Achievements\BronzeAttribute.cs" />

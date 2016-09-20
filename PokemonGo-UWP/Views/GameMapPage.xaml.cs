@@ -395,7 +395,7 @@ namespace PokemonGo_UWP.Views
 				await new Windows.UI.Popups.MessageDialog("Sorry 3DView is not supported!").ShowAsyncQueue();
 			}
 		}
-	}
+
 		private void ViewModelOnAppliedItemExpired(object sender, AppliedItemWrapper AppliedItem)
 		{
 			HideAppliedItemStoryboard.Begin();
@@ -405,6 +405,5 @@ namespace PokemonGo_UWP.Views
 		{
 			ShowAppliedItemStoryboard.Begin();
 		}
-        #endregion
-    }
+	}
 }

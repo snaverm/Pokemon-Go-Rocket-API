@@ -561,6 +561,10 @@ Hai ottenuto anche {1} Polvere di stella, {2} Caramelle e {3} PE.</target>
           <source>Lure Module</source>
           <target state="new">Lure Module</target>
         </trans-unit>
+        <trans-unit id="ItemUseQuestionText" translate="yes" xml:space="preserve">
+          <source>Use {0} ?</source>
+          <target state="new">Use {0} ?</target>
+        </trans-unit>
       </group>
     </body>
   </file>
