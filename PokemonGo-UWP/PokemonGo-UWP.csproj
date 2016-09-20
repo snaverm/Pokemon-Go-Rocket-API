@@ -755,6 +755,7 @@
     <Compile Include="Entities\AppliedItemWrapper.cs" />
     <Compile Include="Entities\IUpdatable.cs" />
     <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\SpawnPointWrapper.cs" />
     <Compile Include="Entities\LuredPokemon.cs" />
     <Compile Include="Entities\MapPokemonWrapper.cs" />
     <Compile Include="Entities\NearbyPokemonWrapper.cs" />
