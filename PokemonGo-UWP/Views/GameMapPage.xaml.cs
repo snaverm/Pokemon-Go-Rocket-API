@@ -280,11 +280,26 @@ namespace PokemonGo_UWP.Views
 			{ 
 				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-										// Set player icon's position
+							try
+							{
+								string dbg = $"{DateTime.Now:mm:ss.fff}";
+								//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Altitude},";
+								//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Latitude},";
+								//dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position.Longitude},";
+								dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Heading} | ";
+								dbg += $"{LocationServiceHelper.Instance.Geoposition.Coordinate.Speed}";
+								await ToggleProgressBar(true, dbg);
+							}
+							catch
+							{
+							}
+
+							// Set player icon's position
 							MapControl.SetLocation(PlayerImage, LocationServiceHelper.Instance.Geoposition.Coordinate.Point);
 
-                    // Update angle and center only if map is not being manipulated
-                    if (lastAutoPosition == null)
+							
+							// Update angle and center only if map is not being manipulated
+							if (lastAutoPosition == null)
                     {
 									//Reset of position or first run
 									//Save Center
@@ -309,7 +324,7 @@ namespace PokemonGo_UWP.Views
                         lastAutoPosition = GameMapControl.Center;
 
                         if ((SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPS) &&
-                            (LocationServiceHelper.Instance.Geoposition.Coordinate.Heading != null))
+                            (LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.HasValue))
                             await GameMapControl.TryRotateToAsync(LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.Value);
 
                         if (SettingsService.Instance.IsRememberMapZoomEnabled)
@@ -392,5 +407,18 @@ namespace PokemonGo_UWP.Views
 				await new Windows.UI.Popups.MessageDialog("Sorry 3DView is not supported!").ShowAsyncQueue();
 			}
 		}
+		private async Task ToggleProgressBar(bool toggle, string message = "")
+		{
+			StatusBarProgressIndicator progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+			if (toggle)
+			{
+				progressbar.Text = message;
+				progressbar.ProgressValue = null;
+				await progressbar.ShowAsync();
+			}
+			else
+				await progressbar.HideAsync();
+		}
+
 	}
 }

@@ -46,7 +46,7 @@ namespace PokemonGo_UWP.Utils
 					catch { }
 
 					string message = Resources.CodeResources.GetString("SomethingWentWrongText");
-					if (showDebug)
+					//if (showDebug)
 					{
 						message += $"\nException";
 						message += $"\n Message:[{e?.Message}]";
