@@ -5,7 +5,7 @@
                      xmlns:utils="using:PokemonGo_UWP.Utils"
                      xmlns:converters="using:Template10.Converters"
                      xmlns:enums="using:POGOProtos.Enums"
-                     RequestedTheme="Light">
+                     RequestedTheme="Dark">
 
     <Application.Resources>
         <ResourceDictionary>

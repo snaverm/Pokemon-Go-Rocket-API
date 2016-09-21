@@ -162,9 +162,7 @@ namespace PokemonGo_UWP.ViewModels
         {
             get
             {
-                // Set theme
-                var currentTime = int.Parse(DateTime.Now.ToString("HH"));
-                return currentTime > 7 && currentTime < 19 ? ElementTheme.Light : ElementTheme.Dark;
+                return ElementTheme.Dark;
             }
         }
 

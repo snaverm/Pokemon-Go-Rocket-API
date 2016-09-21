@@ -281,7 +281,7 @@
                          RelativePanel.AlignRightWithPanel="True"
                          ZoomLevelChanged="GameMapControl_OnZoomLevelChanged"
                          RotateInteractionMode="GestureAndControl"
-                         TiltInteractionMode="GestureAndControl"                         
+                         TiltInteractionMode="GestureAndControl"  
                          MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneTime}"
                          Canvas.ZIndex="1"
                          x:Name="GameMapControl">

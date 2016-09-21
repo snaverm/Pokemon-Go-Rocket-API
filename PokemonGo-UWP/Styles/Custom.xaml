@@ -2982,7 +2982,28 @@
 
         </ResourceDictionary>
 
-        <ResourceDictionary x:Key="Default">
+		<ResourceDictionary x:Key="Dark">
+
+			<maps:MapColorScheme x:Key="MapColorScheme">Dark</maps:MapColorScheme>
+			<Color x:Key="BaseColor">DarkGray</Color>
+			<Color x:Key="ContrastColor">Black</Color>
+
+			<SolidColorBrush x:Key="ContrastColorBrush" Color="{ThemeResource ContrastColor}" />
+			<SolidColorBrush x:Key="ExtendedSplashBackgroundColorBrush" Color="{ThemeResource SystemAccentColor}" />
+			<SolidColorBrush x:Key="ExtendedSplashForegroundColorBrush" Color="{ThemeResource BaseColor}" />
+			<SolidColorBrush x:Key="PageHeaderBackgroundColorBrush" Color="DarkGray" />
+			<SolidColorBrush x:Key="ApplicationPageBackgroundThemeColorBrush" Color="Black" />
+			<SolidColorBrush x:Key="OtpEntryBackgroundColorBrush" Color="#BBBBBB" />
+
+			<Style TargetType="controls:PageHeader">
+				<Setter Property="Background" Value="{ThemeResource PageHeaderBackgroundColorBrush}" />
+				<Setter Property="Foreground" Value="{ThemeResource ContrastColorBrush}" />
+				<Setter Property="VisualStateNarrowMinWidth" Value="{ThemeResource NarrowMinWidth}" />
+				<Setter Property="VisualStateNormalMinWidth" Value="{ThemeResource NormalMinWidth}" />
+			</Style>
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
 
             <maps:MapColorScheme x:Key="MapColorScheme">Dark</maps:MapColorScheme>
             <Color x:Key="BaseColor">Black</Color>
