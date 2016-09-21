@@ -150,79 +150,85 @@ namespace PokemonGo_UWP.ViewModels
 					item.ItemId == POGOProtos.Inventory.Item.ItemId.ItemIncenseFloral ||
 					item.ItemId == POGOProtos.Inventory.Item.ItemId.ItemIncenseCool)
 				{
-					var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("ItemUseQuestionText"), Resources.Items.GetString(item.ItemId.ToString())));
-					dialog.AcceptText = Resources.CodeResources.GetString("YesText");
-					dialog.CancelText = Resources.CodeResources.GetString("CancelText");
-					dialog.CoverBackground = true;
-					dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
-					dialog.AcceptInvoked += async (sender, e) =>
+					if (!GameClient.IsIncenseActive)
 					{
-						//// Send use request
-						var res = await GameClient.UseIncense(item.ItemId);
-						//var res = GetFakeIncenseResponse(item.ItemId);
-						switch (res.Result)
+						var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("ItemUseQuestionText"), Resources.Items.GetString(item.ItemId.ToString())));
+						dialog.AcceptText = Resources.CodeResources.GetString("YesText");
+						dialog.CancelText = Resources.CodeResources.GetString("CancelText");
+						dialog.CoverBackground = true;
+						dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
+						dialog.AcceptInvoked += async (sender, e) =>
 						{
-							case UseIncenseResponse.Types.Result.Success:
-								GameClient.AppliedItems.Add(new AppliedItemWrapper(res.AppliedIncense));
-								SettingsService.Instance.IsIncenseActive = true;
-								SettingsService.Instance.IncenseAppliedMs = res.AppliedIncense.AppliedMs;
-								SettingsService.Instance.IncenseExpireMs = res.AppliedIncense.ExpireMs;
-								SettingsService.Instance.IncenseItemId = res.AppliedIncense.ItemId;
-								ReturnToGameScreen.Execute();
-								break;
-							case UseIncenseResponse.Types.Result.IncenseAlreadyActive:
-								SettingsService.Instance.IsIncenseActive = true;
-								ReturnToGameScreen.Execute();
-								break;
-							case UseIncenseResponse.Types.Result.LocationUnset:
-							case UseIncenseResponse.Types.Result.NoneInInventory:
-							case UseIncenseResponse.Types.Result.Unknown:
-								break;
-							default:
-								throw new ArgumentOutOfRangeException();
-						}
-					};
+							//// Send use request
+							var res = await GameClient.UseIncense(item.ItemId);
+							//var res = GetFakeIncenseResponse(item.ItemId);
+							switch (res.Result)
+							{
+								case UseIncenseResponse.Types.Result.Success:
+									GameClient.AppliedItems.Add(new AppliedItemWrapper(res.AppliedIncense));
+									SettingsService.Instance.IsIncenseActive = true;
+									SettingsService.Instance.IncenseAppliedMs = res.AppliedIncense.AppliedMs;
+									SettingsService.Instance.IncenseExpireMs = res.AppliedIncense.ExpireMs;
+									SettingsService.Instance.IncenseItemId = res.AppliedIncense.ItemId;
+									ReturnToGameScreen.Execute();
+									break;
+								case UseIncenseResponse.Types.Result.IncenseAlreadyActive:
+									SettingsService.Instance.IsIncenseActive = true;
+									ReturnToGameScreen.Execute();
+									break;
+								case UseIncenseResponse.Types.Result.LocationUnset:
+								case UseIncenseResponse.Types.Result.NoneInInventory:
+								case UseIncenseResponse.Types.Result.Unknown:
+									break;
+								default:
+									throw new ArgumentOutOfRangeException();
+							}
+						};
 
-					dialog.Show();
+						dialog.Show();
+					}
 				}
 
 				if (item.ItemId == POGOProtos.Inventory.Item.ItemId.ItemLuckyEgg)
 				{
-					var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("ItemUseQuestionText"), Resources.Items.GetString(item.ItemId.ToString())));
-					dialog.AcceptText = Resources.CodeResources.GetString("YesText");
-					dialog.CancelText = Resources.CodeResources.GetString("CancelText");
-					dialog.CoverBackground = true;
-					dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
-					dialog.AcceptInvoked += async (sender, e) =>
+					if (!GameClient.IsXpBoostActive)
 					{
-						// Send use request
-						var res = await GameClient.UseXpBoost(item.ItemId);
-						//var res = GetFakeXpBoostResponse(item.ItemId);
-						switch (res.Result)
+						var dialog = new PoGoMessageDialog("", string.Format(Resources.CodeResources.GetString("ItemUseQuestionText"), Resources.Items.GetString(item.ItemId.ToString())));
+						dialog.AcceptText = Resources.CodeResources.GetString("YesText");
+						dialog.CancelText = Resources.CodeResources.GetString("CancelText");
+						dialog.CoverBackground = true;
+						dialog.AnimationType = PoGoMessageDialogAnimation.Bottom;
+						dialog.AcceptInvoked += async (sender, e) =>
 						{
-							case UseItemXpBoostResponse.Types.Result.Success:
-								AppliedItem appliedItem = res.AppliedItems.Item.FirstOrDefault<AppliedItem>();
-								GameClient.AppliedItems.Add(new AppliedItemWrapper(appliedItem));
-								SettingsService.Instance.IsXpBoostActive = true;
-								SettingsService.Instance.XpBoostAppliedMs = appliedItem.AppliedMs;
-								SettingsService.Instance.XpBoostExpireMs = appliedItem.ExpireMs;
-								ReturnToGameScreen.Execute();
-								break;
-							case UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive:
-								SettingsService.Instance.IsXpBoostActive = true;
-								ReturnToGameScreen.Execute();
-								break;
-							case UseItemXpBoostResponse.Types.Result.ErrorInvalidItemType:
-							case UseItemXpBoostResponse.Types.Result.ErrorLocationUnset:
-							case UseItemXpBoostResponse.Types.Result.ErrorNoItemsRemaining:
-							case UseItemXpBoostResponse.Types.Result.Unset:
-								break;
-							default:
-								throw new ArgumentOutOfRangeException();
-						}
-					};
+							// Send use request
+							var res = await GameClient.UseXpBoost(item.ItemId);
+							//var res = GetFakeXpBoostResponse(item.ItemId);
+							switch (res.Result)
+							{
+								case UseItemXpBoostResponse.Types.Result.Success:
+									AppliedItem appliedItem = res.AppliedItems.Item.FirstOrDefault<AppliedItem>();
+									GameClient.AppliedItems.Add(new AppliedItemWrapper(appliedItem));
+									SettingsService.Instance.IsXpBoostActive = true;
+									SettingsService.Instance.XpBoostAppliedMs = appliedItem.AppliedMs;
+									SettingsService.Instance.XpBoostExpireMs = appliedItem.ExpireMs;
+									ReturnToGameScreen.Execute();
+									break;
+								case UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive:
+									SettingsService.Instance.IsXpBoostActive = true;
+									ReturnToGameScreen.Execute();
+									break;
+								case UseItemXpBoostResponse.Types.Result.ErrorInvalidItemType:
+								case UseItemXpBoostResponse.Types.Result.ErrorLocationUnset:
+								case UseItemXpBoostResponse.Types.Result.ErrorNoItemsRemaining:
+								case UseItemXpBoostResponse.Types.Result.Unset:
+									break;
+								default:
+									throw new ArgumentOutOfRangeException();
+							}
+						};
 
-					dialog.Show();
+						dialog.Show();
+					}
 				}
 			}, (ItemDataWrapper item) => true));
 

@@ -735,7 +735,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RoundProgressBar.cs" />
     <Compile Include="Controls\ArcProgressBar.cs" />
     <Compile Include="Controls\MessageDialog\PoGoMessageDialog.xaml.cs">
       <DependentUpon>PoGoMessageDialog.xaml</DependentUpon>

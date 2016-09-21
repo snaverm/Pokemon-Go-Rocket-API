@@ -1097,12 +1097,12 @@
         <Setter Property="Margin" Value="0, 0, 0, 0"/>
     </Style>
     
-    <Style x:Name="AppliedItemRemainingSecondsProgressBar" TargetType="POGOcontrols:RoundProgressBar">
-        <Setter Property="Radius" Value="32"/>
+    <Style x:Name="AppliedItemRemainingSecondsProgressBar" TargetType="POGOcontrols:CircularProgressBar">
+        <Setter Property="Diameter" Value="40"/>
         <Setter Property="StrokeThickness" Value="4"/>
-        <Setter Property="FilledColor" Value="Orange"/>
-        <Setter Property="ValueEndCapDiameter" Value="0"/>
-        <Setter Property="EmptyColor" Value="#55eeeeee"/>
+        <Setter Property="SegmentColor" Value="Orange"/>
+        <Setter Property="InnerSegmentColor" Value="#55eeeeee"/>
+        <Setter Property="Margin" Value="0,2,0,0"/>
     </Style>
 
     <!-- STYLE - END -->
@@ -1123,7 +1123,7 @@
         <Setter Property="Background" Value="#CCD3D3D3"/>
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="3,1"/>
-        <Setter Property="Margin" Value="0,12,0,0"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="Grid.Column" Value="1"/>
     </Style>
@@ -1335,6 +1335,7 @@
 
     <Style x:Key="RemainingTimeTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
     <!-- STYLE - END -->
 

@@ -248,6 +248,23 @@ namespace PokemonGo_UWP.Utils
 			}
 		}
 
+		public static bool IsXpBoostActive
+		{
+			get
+			{
+				bool foundActiveXpBoost = false;
+				foreach (AppliedItemWrapper appliedItem in AppliedItems)
+				{
+					if (appliedItem.ItemType == ItemType.XpBoost && !appliedItem.IsExpired)
+					{
+						foundActiveXpBoost = true;
+						break;
+					}
+				}
+				return foundActiveXpBoost;
+			}
+		}
+
 		#region Collections
 
 		/// <summary>
