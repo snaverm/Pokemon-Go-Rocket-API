@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using PokemonGo_UWP.Utils.Helpers;
 using POGOProtos.Map;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
 
 namespace PokemonGo_UWP.Entities
 {
@@ -13,6 +14,8 @@ namespace PokemonGo_UWP.Entities
 	{
 		[JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
 		private SpawnPoint _spawnPoint;
+
+		public Point Anchor => new Point(0.5, 1);
 
 		public SpawnPointWrapper(SpawnPoint spawnPoint)
 		{
