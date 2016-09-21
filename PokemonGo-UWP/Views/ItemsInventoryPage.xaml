@@ -106,12 +106,17 @@
                 </StackPanel>
 
                 <ListView ItemsSource="{Binding ItemsInventory}" 
-                          IsItemClickEnabled="False"
+                          IsItemClickEnabled="True"
                           SelectionMode="None"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           Margin="8,0"
                           Grid.Row="1"
                           Padding="0,0,0,60">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="ItemClick">
+                            <core:InvokeCommandAction Command="{Binding UseItemCommand}" InputConverter="{StaticResource ItemClickEventArgsToClickedItemConverter}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -195,14 +200,6 @@
                                            FontSize="14"
                                            FontWeight="SemiLight"
                                            Opacity="{Binding Converter={StaticResource ItemUseabilityToOpacityConverter}}" />
-                                <Button Grid.RowSpan="3" 
-                                        Grid.ColumnSpan="2" 
-                                        Style="{StaticResource ButtonNoStyleNoDisabledStyle}"
-                                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                        IsEnabled="{Binding Converter={StaticResource ItemUseabilityToBooleanConverter}}"
-                                        Command="{Binding ElementName=Root, Path=DataContext.UseItemCommand}"
-                                        CommandParameter="{Binding}"/>
-
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
