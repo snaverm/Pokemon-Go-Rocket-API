@@ -264,35 +264,6 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollectionPlus<PokemonData> PokemonsInventory { get; set; } =
             new ObservableCollectionPlus<PokemonData>();
 
-        public static PokemonSortingModes PokemonsInventorySortingMode { get; internal set; }
-        public static ObservableCollection<PokemonData> SortedPokemonsInventory()
-        {
-            var sortingMode = PokemonsInventorySortingMode;
-            var pokemonInventory = PokemonsInventory;
-            switch (sortingMode)
-            {
-                case PokemonSortingModes.Date:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.CreationTimeMs).ToObservableCollection();
-                case PokemonSortingModes.Fav:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Favorite)
-                         .ThenByDescending(pokemon => pokemon.Cp).ToObservableCollection();
-                case PokemonSortingModes.Number:
-                    return pokemonInventory.OrderBy(pokemon => pokemon.PokemonId)
-                         .ThenByDescending(pokemon => pokemon.Cp).ToObservableCollection();
-                case PokemonSortingModes.Health:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Stamina)
-                        .ThenByDescending(pokemon => pokemon.Cp).ToObservableCollection();
-                case PokemonSortingModes.Name:
-                    return pokemonInventory.OrderBy(pokemon => pokemon.Nickname)
-                            .ThenByDescending(pokemon => pokemon.Cp).ToObservableCollection();
-                case PokemonSortingModes.Combat:
-                    return pokemonInventory.OrderByDescending(pokemon => pokemon.Cp)
-                        .ThenBy(pokemon => Resources.Pokemon.GetString(pokemon.PokemonId.ToString())).ToObservableCollection();
-                default:
-                    return pokemonInventory.ToObservableCollection();
-            }
-        }
-
         /// <summary>
         ///     Stores Eggs in the current inventory
         /// </summary>
@@ -333,7 +304,7 @@ namespace PokemonGo_UWP.Utils
         ///     Stores data about Pokemon moves
         /// </summary>
         public static IEnumerable<MoveSettings> MoveSettings { get; private set; } = new List<MoveSettings>();
-        
+
         #endregion
 
         #endregion
@@ -655,7 +626,7 @@ namespace PokemonGo_UWP.Utils
                 .ToArray();
             Logger.Write($"Found {newGyms.Length} nearby Gyms");
             // For now, we do not show the gyms on the map, as they are not complete yet. Code remains, so we can still work on it.
-            NearbyGyms.UpdateWith(newGyms, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
+            //NearbyGyms.UpdateWith(newGyms, x => new FortDataWrapper(x), (x, y) => x.Id == y.Id);
 
             // Update LuredPokemon
             var newLuredPokemon = newPokeStops.Where(item => item.LureInfo != null).Select(item => new LuredPokemon(item.LureInfo, item.Latitude, item.Longitude)).ToArray();
