@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:local="using:PokemonGo_UWP.Controls" 
     x:Class="PokemonGo_UWP.Views.SearchPokestopPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -174,22 +174,6 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
-        <LinearGradientBrush x:Key="DayBackground" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#2EA0E9" Offset="0"></GradientStop>
-            <GradientStop Color="#AFEDF7" Offset="0.48"></GradientStop>
-            <GradientStop Color="#24E0D9" Offset="0.5"></GradientStop>
-            <GradientStop Color="#38FF9D" Offset="0.6"></GradientStop>
-            <GradientStop Color="#AEEFA2" Offset="1"></GradientStop>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush x:Key="NightBackground" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#0B254A" Offset="0"></GradientStop>
-            <GradientStop Color="#1B2C58" Offset="0.48"></GradientStop>
-            <GradientStop Color="#162346" Offset="0.5"></GradientStop>
-            <GradientStop Color="#1684B9" Offset="0.6"></GradientStop>
-            <GradientStop Color="#6A86B5" Offset="1"></GradientStop>
-        </LinearGradientBrush>
-
         <Storyboard x:Name="ShowPokestopInPurple">
             <ColorAnimation Storyboard.TargetName="RingEdge" Storyboard.TargetProperty="(Path.Fill).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" To="#2542C2" Duration="0"></ColorAnimation>
             <ColorAnimation Storyboard.TargetName="RingEdge" Storyboard.TargetProperty="(Path.Fill).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" To="#F183FE" Duration="0"></ColorAnimation>
@@ -206,12 +190,14 @@
                     RelativePanel.AlignBottomWithPanel="True"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
-                    Canvas.ZIndex="1" x:Name="MainGrid">
+                    Canvas.ZIndex="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="75" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="75" />
                 </Grid.RowDefinitions>
+
+                <local:OutdoorBackground Grid.RowSpan="3" />
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>

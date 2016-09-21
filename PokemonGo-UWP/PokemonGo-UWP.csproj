@@ -138,6 +138,7 @@
     <Content Include="Assets\Audio\EncounterPokemon.mp3" />
     <Content Include="Assets\Audio\Gameplay.mp3" />
     <Content Include="Assets\Audio\pokemon_found_ding.wav" />
+    <Content Include="Assets\Backgrounds\sky_day.png" />
     <Content Include="Assets\Backgrounds\details_type_bg_bug.png" />
     <Content Include="Assets\Backgrounds\details_type_bg_default.png" />
     <Content Include="Assets\Backgrounds\details_type_bg_dragon.png" />
@@ -158,6 +159,7 @@
     <Content Include="Assets\Backgrounds\Park.png" />
     <Content Include="Assets\Backgrounds\Parkscene_Background.png" />
     <Content Include="Assets\Backgrounds\Parkscene_Background_Night.png" />
+    <Content Include="Assets\Backgrounds\sky_night.png" />
     <Content Include="Assets\Backgrounds\ui_bg_blue_02.png" />
     <Content Include="Assets\Backgrounds\ui_bg_green.png" />
     <Content Include="Assets\Backgrounds\ui_bg_green_02.png" />
@@ -747,6 +749,9 @@
     <Compile Include="Controls\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OutdoorBackground.xaml.cs">
+      <DependentUpon>OutdoorBackground.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PoGoPivotHeader.xaml.cs">
       <DependentUpon>PoGoPivotHeader.xaml</DependentUpon>
     </Compile>
@@ -913,6 +918,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OutdoorBackground.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
