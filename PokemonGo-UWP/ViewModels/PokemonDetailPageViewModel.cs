@@ -272,12 +272,7 @@ namespace PokemonGo_UWP.ViewModels
                               // TODO: Implement message informing about success of transfer (Shell needed)
                               await GameClient.UpdateInventory();
                               await GameClient.UpdatePlayerStats();
-                              // HACK - if we're coming fro the inventory we may go back, otherwise we go to map page
-                              if (NavigationService.Frame.BackStack.Last().SourcePageType ==
-                                  typeof(PokemonInventoryPage))
-                                  NavigationService.GoBack();
-                              else
-                                  NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate);
+                              NavigationService.GoBack();
                               break;
 
                           case ReleasePokemonResponse.Types.Result.PokemonDeployed:

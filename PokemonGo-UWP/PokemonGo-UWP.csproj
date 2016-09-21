@@ -821,6 +821,9 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPokeStopPageViewModel.cs" />
+    <Compile Include="Views\Item\ItemUseOnPokemonPage.xaml.cs">
+      <DependentUpon>ItemUseOnPokemonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pokemon\EggDetailPage.xaml.cs">
       <DependentUpon>EggDetailPage.xaml</DependentUpon>
     </Compile>
@@ -839,7 +842,7 @@
     <Compile Include="Views\PokedexPage.xaml.cs">
       <DependentUpon>PokedexPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemsInventoryPage.xaml.cs">
+    <Compile Include="Views\Item\ItemsInventoryPage.xaml.cs">
       <DependentUpon>ItemsInventoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pokemon\EggDetailControl.xaml.cs">
@@ -862,6 +865,9 @@
     </Compile>
     <Compile Include="Views\Pokemon\PokemonInventoryPage.xaml.cs">
       <DependentUpon>PokemonInventoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pokemon\SortingMenuOverlayControl.xaml.cs">
+      <DependentUpon>SortingMenuOverlayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -940,6 +946,10 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Views\Item\ItemUseOnPokemonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pokemon\EggDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -964,7 +974,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ItemsInventoryPage.xaml">
+    <Page Include="Views\Item\ItemsInventoryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -995,6 +1005,10 @@
     <Page Include="Views\Pokemon\PokemonInventoryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pokemon\SortingMenuOverlayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

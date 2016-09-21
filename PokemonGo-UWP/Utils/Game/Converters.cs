@@ -1546,23 +1546,6 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-    public class PokemonSortingModesToSortingModesListConverter : IValueConverter
-    {
-        #region Implementation of IValueConverter
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            return Enum.GetValues(typeof(PokemonSortingModes)).Cast<PokemonSortingModes>().ToList();
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return value;
-        }
-
-        #endregion
-    }
-
     public class PokemonSortingModesToIconConverter : IValueConverter
     {
         #region Implementation of IValueConverter
@@ -1588,7 +1571,7 @@ namespace PokemonGo_UWP.Utils
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var sortingMode = (PokemonSortingModes)value;
-            return Resources.CodeResources.GetString(sortingMode.ToString());
+            return Resources.CodeResources.GetString(sortingMode.ToString()).ToUpper();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -1894,7 +1877,7 @@ namespace PokemonGo_UWP.Utils
             bool invert = false;
             Boolean.TryParse((string)parameter, out invert);
             
-            if (string.IsNullOrEmpty((string)value) ^ !invert)
+            if (string.IsNullOrEmpty((string)value) ^ invert)
             {
                 return Visibility.Collapsed;
             }

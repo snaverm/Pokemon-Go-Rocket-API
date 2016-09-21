@@ -66,6 +66,8 @@ namespace PokemonGo_UWP.ViewModels
                     EggsInventory.Add(new PokemonDataWrapper(pokemonData));
                 }
 
+                RaisePropertyChanged(() => TotalPokemonCount);
+
                 PlayerProfile = GameClient.PlayerProfile;
             }
 
@@ -133,7 +135,7 @@ namespace PokemonGo_UWP.ViewModels
             set
             {
                 SettingsService.Instance.PokemonSortingMode = value;
-                RaisePropertyChanged(nameof(CurrentPokemonSortingMode));
+                RaisePropertyChanged(() => CurrentPokemonSortingMode);
 
                 // When this changes we need to sort the collection again
                 UpdateSorting();
@@ -157,6 +159,13 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.FreeIncubatorsInventory;
 
+        /// <summary>
+        /// Total amount of Pokemon in players inventory
+        /// </summary>
+        public int TotalPokemonCount {
+            get { return PokemonInventory.Count + EggsInventory.Count; }
+        }
+
         #endregion
 
         #region Game Logic
@@ -172,7 +181,7 @@ namespace PokemonGo_UWP.ViewModels
             =>
                 _returnToGameScreen ??
                 (_returnToGameScreen =
-                    new DelegateCommand(() => { NavigationService.Navigate(typeof(GameMapPage), GameMapNavigationModes.PokemonUpdate); }, () => true));
+                    new DelegateCommand(() => { NavigationService.GoBack(); }, () => true));
 
         #endregion
 
@@ -187,6 +196,9 @@ namespace PokemonGo_UWP.ViewModels
 
         }));
 
+        /// <summary>
+        /// Sort the PokemonInventory with the CurrentPokemonSortingMode 
+        /// </summary>
         private void UpdateSorting()
         {
             PokemonInventory =

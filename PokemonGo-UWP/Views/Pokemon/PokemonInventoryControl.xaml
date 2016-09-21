@@ -8,8 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:entities="using:PokemonGo_UWP.Entities">
-
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:entities="using:PokemonGo_UWP.Entities"
+    xmlns:controls="using:Template10.Controls">
+    
     <Grid>
         <!--Adaptive Layout-->
         <VisualStateManager.VisualStateGroups>
@@ -206,16 +208,13 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+
         <Button x:Name="SortingButton"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Style="{StaticResource ButtonCircleBigInverse}"
-                Margin="16">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Click">
-                    <core:InvokeCommandAction Command="{Binding ShowPokemonSortingMenuCommand}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
+                Style="{StaticResource ButtonCircleBig}"
+                Margin="0,0,12,16"
+                Click="ShowSortingPanel_Click">
             <Image Source="{Binding CurrentPokemonSortingMode, Converter={StaticResource PokemonSortingModesToIconConverter}}" />
         </Button>
     </Grid>

@@ -154,13 +154,13 @@
         <Button x:Name="IncubatorButton"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Style="{StaticResource ButtonCircleBigInverse}"
-                Margin="16">
-            <interactivity:Interaction.Behaviors>
+                Style="{StaticResource ButtonCircleBig}"
+                Margin="0,0,12,16">
+            <!--<interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Click">
                     <core:InvokeCommandAction Command="{Binding ShowIncubatorOverlayCommand}" />
                 </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
+            </interactivity:Interaction.Behaviors>-->
             <Image Source="ms-appx:///Assets/Buttons/btn_incubator_dark.png" />
         </Button>
     </Grid>

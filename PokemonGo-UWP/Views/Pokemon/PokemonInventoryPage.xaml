@@ -19,7 +19,72 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <Storyboard x:Name="ShowSortMenuStoryboard">
+        <Storyboard x:Name="ShowSortingMenuStoryboard">
+            <DoubleAnimation Storyboard.TargetName="SortingMenuPanel"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1"
+                             Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetName="SortingMenuTranslateTransform"
+                             Storyboard.TargetProperty="Y"
+                             From="800"
+                             To="0"
+                             Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="SortingMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.01">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="HideSortingMenuStoryboard">
+            <DoubleAnimation Storyboard.TargetName="SortingMenuPanel"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1"
+                             To="0"
+                             Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetName="SortingMenuTranslateTransform"
+                             Storyboard.TargetProperty="Y"
+                             From="0"
+                             To="200"
+                             Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
+                                           Storyboard.TargetName="SortingMenuPanel">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>10</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+
+
+
+        <!--<Storyboard x:Name="ShowSortMenuStoryboard">
 
             <DoubleAnimation Storyboard.TargetName="SortMenuPanel"
                              Storyboard.TargetProperty="Opacity"
@@ -74,7 +139,7 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
+        </Storyboard>-->
 
         <Storyboard x:Name="ShowIncubatorsModalStoryboard">
             <DoubleAnimation x:Name="ShowIncubatorsModalAnimation"
@@ -96,8 +161,131 @@
 
     </Page.Resources>
 
+    <!--Contextmenu--><!--
+    <Grid x:Name="ContextMenuPanel"
+          RelativePanel.AlignTopWithPanel="True"
+          RelativePanel.AlignLeftWithPanel="True"
+          RelativePanel.AlignBottomWithPanel="True"
+          RelativePanel.AlignRightWithPanel="True"
+          Opacity="0">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.5,0"
+                                 EndPoint="0.5,1">
+                <GradientStop Color="#00b3ee9a"
+                              Offset="0.1" />
+                <GradientStop Color="#EE43bab6"
+                              Offset="0.8" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Bottom">
+            <StackPanel.RenderTransform>
+                <TranslateTransform Y="200"
+                                    x:Name="ContextMenuTranslateTransform" />
+            </StackPanel.RenderTransform>
+
+            --><!--Favorite--><!--
+            <Grid HorizontalAlignment="Right"
+                  Background="Transparent"
+                  Height="43">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="82" />
+                </Grid.ColumnDefinitions>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
+                        <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <TextBlock Grid.Column="0"
+                           x:Uid="FavoriteTextBlock"
+                           Text="FAVORITE"
+                           Style="{StaticResource TextSortTitle}"
+                           Foreground="#e4ffde"
+                           Margin="15,0,0,0" />
+                <Image Grid.Column="1"
+                       Height="25"
+                       Width="25"
+                       Source="ms-appx:///Assets/Icons/ic_fav_light.png" />
+            </Grid>
+
+            --><!--Appraise--><!--
+            <Grid HorizontalAlignment="Right"
+                  Background="Transparent"
+                  Height="43"
+                  Visibility="{Binding PlayerTeamIsSet, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="82" />
+                </Grid.ColumnDefinitions>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
+                        <core:InvokeCommandAction Command="{Binding AppraisePokemonCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <TextBlock Grid.Column="0"
+                           x:Uid="AppraiseTextBlock"
+                           Text="APPRAISE"
+                           Style="{StaticResource TextSortTitle}"
+                           Foreground="#e4ffde"
+                           Margin="15,0,0,0" />
+                <Image Grid.Column="1"
+                       Height="25"
+                       Width="25"
+                       Source="ms-appx:///Assets/Buttons/btn_close.png" />
+            </Grid>
+
+            --><!--Transfer--><!--
+            <Grid HorizontalAlignment="Right"
+                  Background="Transparent"
+                  Height="43">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="82" />
+                </Grid.ColumnDefinitions>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding TransferPokemonCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <TextBlock Grid.Column="0"
+                           x:Uid="TransferTextBlock"
+                           Text="TRANSFER"
+                           Style="{StaticResource TextSortTitle}"
+                           Foreground="#e4ffde" />
+                <Image Grid.Column="1"
+                       Height="25"
+                       Width="25"
+                       Source="ms-appx:///Assets/Icons/ic_candy_light.png" />
+            </Grid>
+        </StackPanel>
+
+        --><!--Close Contextmenu--><!--
+        <Button Style="{StaticResource ButtonCircle}"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,21,21">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <Image Source="ms-appx:///Assets/Buttons/btn_close.png" />
+        </Button>
+    </Grid>-->
+
     <Grid Background="{StaticResource PageBackgroundGradient}">
-        <RelativePanel x:Name="SortMenuPanel"
+        
+        <!--Sortmenu-->
+        <!--<RelativePanel x:Name="SortMenuPanel"
               Opacity="0"
               Canvas.ZIndex="0"
               Background="{StaticResource PageBackgroundGradient}">
@@ -158,27 +346,31 @@
 
                 <Image Source="../../Assets/Buttons/btn_close_dark.png" />
             </Button>
-        </RelativePanel>
+        </RelativePanel>-->
 
 
 
-        <Border Margin="12,0"
+
+        <Border Margin="8,0"
                 Background="White">
             <Pivot x:Name="MainUIPanel"
+                   Margin="0,10,0,0"
                    Style="{StaticResource PokemonInventoryPivotStyle}">
                 <PivotItem x:Name="PokemonsPivot"
-                           Margin="12,0">
+                           Margin="8,0">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="PokemonHeader"
                                               Title="POKÉMON"
-                                              DataCurrent="{Binding PokemonInventory.Count}"
+                                              DataCurrent="{Binding TotalPokemonCount}"
                                               DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}" />
                     </PivotItem.Header>
-                    <local:PokemonInventoryControl x:Name="PokemonInventory" DataContext="{Binding DataContext, ElementName=Root}" />
+                    <local:PokemonInventoryControl x:Name="PokemonInventory"
+                                                   DataContext="{Binding DataContext, ElementName=Root}"
+                                                   SortingMode="{Binding CurrentPokemonSortingMode, Mode=TwoWay}" />
                 </PivotItem>
 
                 <PivotItem x:Name="EggsPivot"
-                           Margin="12,0">
+                           Margin="8,0">
                     <PivotItem.Header>
                         <pogo:PoGoPivotHeader x:Uid="EggsHeader"
                                               Title="EGGS"
@@ -197,6 +389,5 @@
                 Margin="0,0,0,21">
             <Image Source="ms-appx:///Assets/Buttons/btn_close.png" />
         </Button>
-
     </Grid>
 </Page>
