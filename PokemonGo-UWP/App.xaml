@@ -49,6 +49,7 @@
             <utils:PlayerStatsTranslationConverter x:Key="PlayerStatsTranslationConverter" />
             <utils:MsToDateFormatConverter x:Key="MsToDateFormatConverter" />
             <utils:PlayerTeamToTeamImageConverter x:Key="PlayerTeamToTeamImageConverter" />
+            <utils:PlayerTeamToTeamBaseImageConverter x:Key="PlayerTeamToTeamBaseImageConverter" />
             <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
             <utils:AchievementValueToMedalImageConverter x:Key="AchievementValueToMedalImageConverter" />
             <utils:PlayerTeamToTeamBackgroundImageConverter x:Key="PlayerTeamToTeamBackgroundImageConverter" />

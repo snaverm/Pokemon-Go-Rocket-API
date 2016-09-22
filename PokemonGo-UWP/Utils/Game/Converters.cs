@@ -364,7 +364,7 @@ namespace PokemonGo_UWP.Utils
             var teamColor = (TeamColor)value;
             return new SolidColorBrush(teamColor == TeamColor.Neutral
                 ? Color.FromArgb(255, 26, 237, 213)
-                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 36, 176, 253) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 225, 63));
+                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 40, 89, 237) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 225, 63));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -636,6 +636,43 @@ namespace PokemonGo_UWP.Utils
                     break;
                 default:
                     path += "no-team";
+                    break;
+            }
+            path += ".png";
+
+            return new BitmapImage(new Uri(path));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PlayerTeamToTeamBaseImageConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var teamColor = (TeamColor)value;
+            var path = "ms-appx:///Assets/Teams/";
+
+            switch (teamColor)
+            {
+                case TeamColor.Blue:
+                    path += "gym_base_blue";
+                    break;
+                case TeamColor.Red:
+                    path += "gym_base_red";
+                    break;
+                case TeamColor.Yellow:
+                    path += "gym_base_yellow";
+                    break;
+                default:
+                    path += "gym_base_empty";
                     break;
             }
             path += ".png";
