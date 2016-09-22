@@ -166,14 +166,9 @@ namespace PokemonGo_UWP.ViewModels
 							{
 								case UseIncenseResponse.Types.Result.Success:
 									GameClient.AppliedItems.Add(new AppliedItemWrapper(res.AppliedIncense));
-									SettingsService.Instance.IsIncenseActive = true;
-									SettingsService.Instance.IncenseAppliedMs = res.AppliedIncense.AppliedMs;
-									SettingsService.Instance.IncenseExpireMs = res.AppliedIncense.ExpireMs;
-									SettingsService.Instance.IncenseItemId = res.AppliedIncense.ItemId;
 									ReturnToGameScreen.Execute();
 									break;
 								case UseIncenseResponse.Types.Result.IncenseAlreadyActive:
-									SettingsService.Instance.IsIncenseActive = true;
 									ReturnToGameScreen.Execute();
 									break;
 								case UseIncenseResponse.Types.Result.LocationUnset:
@@ -208,13 +203,9 @@ namespace PokemonGo_UWP.ViewModels
 								case UseItemXpBoostResponse.Types.Result.Success:
 									AppliedItem appliedItem = res.AppliedItems.Item.FirstOrDefault<AppliedItem>();
 									GameClient.AppliedItems.Add(new AppliedItemWrapper(appliedItem));
-									SettingsService.Instance.IsXpBoostActive = true;
-									SettingsService.Instance.XpBoostAppliedMs = appliedItem.AppliedMs;
-									SettingsService.Instance.XpBoostExpireMs = appliedItem.ExpireMs;
 									ReturnToGameScreen.Execute();
 									break;
 								case UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive:
-									SettingsService.Instance.IsXpBoostActive = true;
 									ReturnToGameScreen.Execute();
 									break;
 								case UseItemXpBoostResponse.Types.Result.ErrorInvalidItemType:

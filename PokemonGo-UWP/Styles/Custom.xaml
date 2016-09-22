@@ -1010,6 +1010,16 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PokeStopModifierButtonStyle" TargetType="Button" BasedOn="{StaticResource ImageButtonStyle}">
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Canvas.ZIndex" Value="5"/>
+    </Style>
+    
     <Style x:Key="CheckStar"
            TargetType="CheckBox">
         <Setter Property="Template">
@@ -1219,7 +1229,7 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="15,0,0,0" />
+        <Setter Property="Margin" Value="10,0,5,0" />
         <Setter Property="TextWrapping" Value="WrapWholeWords" />
     </Style>
 

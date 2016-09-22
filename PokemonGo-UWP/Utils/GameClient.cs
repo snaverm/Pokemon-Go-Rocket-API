@@ -418,21 +418,6 @@ namespace PokemonGo_UWP.Utils
 			}
 			else if (e.Action == NotifyCollectionChangedAction.Remove)
 			{
-				AppliedItemWrapper appliedItemWrapper = e.OldItems[0] as AppliedItemWrapper;
-				if (appliedItemWrapper.ItemType == ItemType.Incense)
-				{
-					SettingsService.Instance.IsIncenseActive = false;
-					SettingsService.Instance.IncenseAppliedMs = 0;
-					SettingsService.Instance.IncenseExpireMs = 0;
-					SettingsService.Instance.IncenseItemId = ItemId.ItemUnknown;
-				}
-				else if (appliedItemWrapper.ItemType == ItemType.XpBoost)
-				{
-					SettingsService.Instance.IsXpBoostActive = false;
-					SettingsService.Instance.XpBoostAppliedMs = 0;
-					SettingsService.Instance.XpBoostExpireMs = 0;
-				}
-
 				OnAppliedItemExpired?.Invoke(null, (AppliedItemWrapper)e.OldItems[0]);
 			}
 		}
@@ -504,30 +489,6 @@ namespace PokemonGo_UWP.Utils
                     await new MessageDialog(e.Message).ShowAsyncQueue();
                 }
             }
-
-			if (SettingsService.Instance.IsIncenseActive)
-			{
-				AppliedItem incenseItem = new AppliedItem
-				{
-					AppliedMs = SettingsService.Instance.IncenseAppliedMs,
-					ExpireMs = SettingsService.Instance.IncenseExpireMs,
-					ItemId = SettingsService.Instance.IncenseItemId,
-					ItemType = ItemType.Incense
-				};
-				AppliedItems.Add(new AppliedItemWrapper(incenseItem));
-			}
-
-			if (SettingsService.Instance.IsXpBoostActive)
-			{
-				AppliedItem xpboostItem = new AppliedItem
-				{
-					AppliedMs = SettingsService.Instance.XpBoostAppliedMs,
-					ExpireMs = SettingsService.Instance.XpBoostExpireMs,
-					ItemId = ItemId.ItemLuckyEgg,
-					ItemType = ItemType.XpBoost
-				};
-				AppliedItems.Add(new AppliedItemWrapper(xpboostItem));
-			}
 		}
 
 		/// <summary>
@@ -999,9 +960,14 @@ namespace PokemonGo_UWP.Utils
                         item.InventoryItemData.Item != null && CatchItemIds.Contains(item.InventoryItemData.Item.ItemId))
                     .GroupBy(item => item.InventoryItemData.Item)
                     .Select(item => item.First().InventoryItemData.Item), true);
+			AppliedItems.AddRange(
+				fullInventory
+				.Where(item => item.InventoryItemData.AppliedItems != null)
+					.SelectMany(item => item.InventoryItemData.AppliedItems.Item)
+					.Select(item => new AppliedItemWrapper(item)), true);
 
-            // Update incbuators
-            FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
+			// Update incbuators
+			FreeIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)
                 .SelectMany(item => item.InventoryItemData.EggIncubators.EggIncubator)
                 .Where(item => item != null && item.PokemonId == 0), true);
             UsedIncubatorsInventory.AddRange(fullInventory.Where(item => item.InventoryItemData.EggIncubators != null)

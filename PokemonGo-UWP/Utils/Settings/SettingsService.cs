@@ -6,8 +6,6 @@ using System.ComponentModel;
 using System;
 using Template10.Mvvm;
 using System.Runtime.CompilerServices;
-using POGOProtos.Inventory.Item;
-using PokemonGo.RocketAPI.Extensions;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -165,48 +163,6 @@ namespace PokemonGo_UWP.Utils
 		public double Zoomlevel
 		{
 			get { return Get(12D); }
-			set { Set(value); }
-		}
-
-		public bool IsIncenseActive
-		{
-			get { return Get(false); }
-			set { Set(value); }
-		}
-
-		public long IncenseAppliedMs
-		{
-			get { return Get(DateTime.UtcNow.ToUnixTime()); }
-			set { Set(value); }
-		}
-
-		public long IncenseExpireMs
-		{
-			get { return Get(DateTime.UtcNow.ToUnixTime()); }
-			set { Set(value); }
-		}
-
-		public ItemId IncenseItemId
-		{
-			get { return Get(ItemId.ItemIncenseOrdinary); }
-			set { Set(value); }
-		}
-
-		public bool IsXpBoostActive
-		{
-			get { return Get(false); }
-			set { Set(value); }
-		}
-
-		public long XpBoostAppliedMs
-		{
-			get { return Get(DateTime.UtcNow.ToUnixTime()); }
-			set { Set(value); }
-		}
-
-		public long XpBoostExpireMs
-		{
-			get { return Get(DateTime.UtcNow.ToUnixTime()); }
 			set { Set(value); }
 		}
 		#endregion
