@@ -19,8 +19,6 @@
     <Page.Resources>
         <utils:ItemUseabilityToOpacityConverter x:Key="ItemUseabilityToOpacityConverter" 
                                                 CurrentViewMode="{Binding ViewMode}" />
-        <utils:ItemUseabilityToBooleanConverter x:Key="ItemUseabilityToBooleanConverter"
-                                                CurrentViewMode="{Binding ViewMode}" />
         <Storyboard x:Name="ShowDiscardStoryboard">
 
             <DoubleAnimation

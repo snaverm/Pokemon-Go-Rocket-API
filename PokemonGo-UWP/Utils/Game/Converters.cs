@@ -872,47 +872,6 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
-	public class ItemUseabilityToBooleanConverter : DependencyObject, IValueConverter
-	{
-		public ViewModels.ItemsInventoryPageViewModel.ItemsInventoryViewMode CurrentViewMode
-		{
-			get { return (ViewModels.ItemsInventoryPageViewModel.ItemsInventoryViewMode)GetValue(CurrentViewModeProperty); }
-			set { SetValue(CurrentViewModeProperty, value); }
-		}
-
-		public static readonly DependencyProperty CurrentViewModeProperty =
-			DependencyProperty.Register("CurrentViewMode",
-										typeof(ViewModels.ItemsInventoryPageViewModel.ItemsInventoryViewMode),
-										typeof(ItemUseabilityToBooleanConverter),
-										new PropertyMetadata(null));
-
-		#region Implementation of IValueConverter
-
-		public object Convert(object value, Type targetType, object parameter, string language)
-		{
-			if (!(value is ItemDataWrapper)) return 1;
-
-			var useableList = CurrentViewMode == ViewModels.ItemsInventoryPageViewModel.ItemsInventoryViewMode.Normal ? GameClient.NormalUseItemIds : GameClient.CatchItemIds;
-
-			// If a similar item is already applied, it cannot be chosen again
-			foreach (AppliedItemWrapper appliedItem in GameClient.AppliedItems)
-			{
-				if (appliedItem.ItemId == ((ItemDataWrapper)value).ItemId)
-				{
-					return false;
-				}
-			}
-			return useableList.Contains(((ItemDataWrapper)value).ItemId) ? true : false;
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, string language)
-		{
-			return value;
-		}
-
-		#endregion
-	}
-
     public class CaptureXpToTotalCaptureXpConverter : IValueConverter
     {
         #region Implementation of IValueConverter

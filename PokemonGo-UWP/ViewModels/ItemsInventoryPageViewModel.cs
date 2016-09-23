@@ -161,7 +161,6 @@ namespace PokemonGo_UWP.ViewModels
 						{
 							//// Send use request
 							var res = await GameClient.UseIncense(item.ItemId);
-							//var res = GetFakeIncenseResponse(item.ItemId);
 							switch (res.Result)
 							{
 								case UseIncenseResponse.Types.Result.Success:
@@ -197,7 +196,6 @@ namespace PokemonGo_UWP.ViewModels
 						{
 							// Send use request
 							var res = await GameClient.UseXpBoost(item.ItemId);
-							//var res = GetFakeXpBoostResponse(item.ItemId);
 							switch (res.Result)
 							{
 								case UseItemXpBoostResponse.Types.Result.Success:
@@ -223,39 +221,6 @@ namespace PokemonGo_UWP.ViewModels
 				}
 			}, (ItemDataWrapper item) => true));
 
-		private UseIncenseResponse GetFakeIncenseResponse(POGOProtos.Inventory.Item.ItemId itemId)
-		{
-			return new UseIncenseResponse
-			{
-				Result = UseIncenseResponse.Types.Result.Success,
-				AppliedIncense = new AppliedItem
-				{
-					AppliedMs = DateTime.UtcNow.ToUnixTime(),
-					ExpireMs = DateTime.UtcNow.AddMinutes(5).ToUnixTime(),
-					ItemId = itemId,
-					ItemType = POGOProtos.Inventory.Item.ItemType.Incense
-				}
-			};
-		}
-
-		private UseItemXpBoostResponse GetFakeXpBoostResponse(POGOProtos.Inventory.Item.ItemId itemId)
-		{
-			AppliedItem appliedItem = new AppliedItem
-			{
-				AppliedMs = DateTime.UtcNow.ToUnixTime(),
-				ExpireMs = DateTime.UtcNow.AddMinutes(5).ToUnixTime(),
-				ItemId = itemId,
-				ItemType = POGOProtos.Inventory.Item.ItemType.XpBoost
-			};
-			AppliedItems appliedItems = new AppliedItems();
-			appliedItems.Item.Add(appliedItem);
-
-			return new UseItemXpBoostResponse
-			{
-				Result = UseItemXpBoostResponse.Types.Result.Success,
-				AppliedItems = appliedItems
-			};
-		}
 		#endregion
 
         #region Recycle
