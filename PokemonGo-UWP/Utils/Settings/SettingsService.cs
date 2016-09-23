@@ -165,6 +165,7 @@ namespace PokemonGo_UWP.Utils
 			get { return Get(12D); }
 			set { Set(value); }
 		}
+
 		#endregion
 
 		#region Dev Stuff
