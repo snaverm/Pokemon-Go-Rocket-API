@@ -851,8 +851,8 @@
     <Compile Include="Views\Pokemon\EggInventoryControl.xaml.cs">
       <DependentUpon>EggInventoryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pokemon\IncubatorOverlayControl.xaml.cs">
-      <DependentUpon>IncubatorOverlayControl.xaml</DependentUpon>
+    <Compile Include="Views\Pokemon\IncubatorSelectionOverlayControl.xaml.cs">
+      <DependentUpon>IncubatorSelectionOverlayControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pokemon\PokemonDetailControl.xaml.cs">
       <DependentUpon>PokemonDetailControl.xaml</DependentUpon>
@@ -986,7 +986,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pokemon\IncubatorOverlayControl.xaml">
+    <Page Include="Views\Pokemon\IncubatorSelectionOverlayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

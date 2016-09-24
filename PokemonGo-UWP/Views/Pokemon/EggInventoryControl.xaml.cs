@@ -23,5 +23,10 @@ namespace PokemonGo_UWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void ShowIncubatorSelection_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

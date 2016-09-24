@@ -150,17 +150,12 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        
-        <Button x:Name="IncubatorButton"
-                HorizontalAlignment="Right"
+
+        <Button HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Style="{StaticResource ButtonCircleBig}"
-                Margin="0,0,12,16">
-            <!--<interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Click">
-                    <core:InvokeCommandAction Command="{Binding ShowIncubatorOverlayCommand}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>-->
+                Margin="0,0,12,16"
+                Click="ShowIncubatorSelection_Click">
             <Image Source="ms-appx:///Assets/Buttons/btn_incubator_dark.png" />
         </Button>
     </Grid>
