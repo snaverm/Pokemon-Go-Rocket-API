@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using PokemonGo_UWP.Entities;
+using System.Collections.ObjectModel;
+using Template10.Mvvm;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace PokemonGo_UWP.Views
 {
@@ -24,9 +13,49 @@ namespace PokemonGo_UWP.Views
             this.InitializeComponent();
         }
 
+        #region Propertys
+
+        public static readonly DependencyProperty EggsInventoryProperty =
+            DependencyProperty.Register(nameof(EggsInventory), typeof(ObservableCollection<PokemonDataWrapper>), typeof(EggInventoryControl),
+                new PropertyMetadata(null));
+
+        public static readonly DependencyProperty EggSelectedCommandProperty =
+            DependencyProperty.Register(nameof(EggSelectedCommand), typeof(DelegateCommand<PokemonDataWrapper>), typeof(EggInventoryControl),
+                new PropertyMetadata(null));
+
+        public static readonly DependencyProperty CanShowIncubatorSelectionOverlayProperty =
+            DependencyProperty.Register(nameof(CanShowIncubatorSelectionOverlay), typeof(bool), typeof(EggInventoryControl),
+                new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonDataWrapper> EggsInventory
+        {
+            get { return (ObservableCollection<PokemonDataWrapper>)GetValue(EggsInventoryProperty); }
+            set { SetValue(EggsInventoryProperty, value); }
+        }
+
+        public DelegateCommand<PokemonDataWrapper> EggSelectedCommand
+        {
+            get { return (DelegateCommand<PokemonDataWrapper>)GetValue(EggSelectedCommandProperty); }
+            set { SetValue(EggSelectedCommandProperty, value); }
+        }
+
+        public bool CanShowIncubatorSelectionOverlay
+        {
+            get { return (bool)GetValue(CanShowIncubatorSelectionOverlayProperty); }
+            set { SetValue(CanShowIncubatorSelectionOverlayProperty, value); }
+        }
+
+        #endregion
+
+        #region Internal Methods
+
         private void ShowIncubatorSelection_Click(object sender, RoutedEventArgs e)
         {
-
+            // TODO: Enable this path of activation incubator via ItemsUseOnPokemonPage
+            IncubatorSelectionOverlayControl incubatorControl = new IncubatorSelectionOverlayControl();
+            incubatorControl.Show();
         }
+
+        #endregion
     }
 }

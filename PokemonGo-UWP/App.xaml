@@ -58,6 +58,8 @@
             <utils:EggDataToEggProgressConverter x:Key="EggDataToEggProgressConverter" />
             <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter" />
             <utils:IncubatorUsagesCountToUsagesTextConverter x:Key="IncubatorUsagesCountToUsagesTextConverter" />
+            <utils:IncubatorUsageToOpacityConverter x:Key="IncubatorUsageToOpacityConverter" />
+            <utils:IncubatorUnlimitedTypeToVisibilityConverter x:Key="IncubatorUnlimitedTypeToVisibilityConverter" />
             <utils:EggDataToEggIconConverter x:Key="EggDataToEggIconConverter" />
             <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
             <utils:VisibleWhenGreaterThanConverter x:Key="VisibleWhenGreaterThanConverter" />

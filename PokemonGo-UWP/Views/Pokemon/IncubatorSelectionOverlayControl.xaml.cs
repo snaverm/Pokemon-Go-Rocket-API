@@ -1,24 +1,15 @@
 ﻿using POGOProtos.Inventory;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using PokemonGo_UWP.Utils;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Template10.Common;
 using Template10.Controls;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace PokemonGo_UWP.Views
 {
@@ -27,6 +18,10 @@ namespace PokemonGo_UWP.Views
         public IncubatorSelectionOverlayControl()
         {
             this.InitializeComponent();
+
+            GameClient.IncubatorsInventory.CollectionChanged += LoadSortedIncubatorsInventory;
+
+            LoadSortedIncubatorsInventory(this, null);
         }
 
         /// <summary>
@@ -57,6 +52,9 @@ namespace PokemonGo_UWP.Views
 
         private Brush _formerModalBrush = null;
 
+        private ObservableCollection<EggIncubator> _incubatorsInventory = new ObservableCollection<EggIncubator>();
+        public ObservableCollection<EggIncubator> IncubatorsInventory { get { return _incubatorsInventory; } }
+
         /// <summary>
         /// Event handling for selected Incubator
         /// </summary>
@@ -68,15 +66,38 @@ namespace PokemonGo_UWP.Views
 
         #region Internal methods
 
-        //private void SortingModeListView_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    IncubatorSelected?.Invoke((PokemonSortingModes)e.ClickedItem);
-        //    Hide();
-        //}
+        private void LoadSortedIncubatorsInventory(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            IncubatorsInventory.Clear();
+            var orderedIncubators = GameClient.IncubatorsInventory
+                .OrderBy(x => x.PokemonId != 0)
+                .ThenBy(x => x.ItemId == POGOProtos.Inventory.Item.ItemId.ItemIncubatorBasicUnlimited)
+                .ThenByDescending(x => x.UsesRemaining);
+            foreach (var incubator in orderedIncubators)
+            {
+                IncubatorsInventory.Add(incubator);
+            }
+        }
+
+        private void IncubatorGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var clickedInc = (EggIncubator)e.ClickedItem;
+            // catch if already used incubator clicked
+            if (clickedInc.PokemonId != 0) return;
+            IncubatorSelected?.Invoke(clickedInc);
+            Hide();
+        }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Hide();
+        }
+
+        private void ShowStoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement store linking
+            var dialog = new MessageDialog("Sorry, check back later 😉", "Not yet implemented");
+            dialog.ShowAsync();
         }
 
         private void Hide()
@@ -110,5 +131,6 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
+
     }
 }

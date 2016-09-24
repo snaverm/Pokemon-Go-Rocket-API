@@ -1588,8 +1588,51 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var incubator = (EggIncubator)value;
-            return incubator.ItemId == ItemId.ItemIncubatorBasicUnlimited ? "∞" : $"{incubator.UsesRemaining}";
+            return string.Format(Resources.CodeResources.GetString("IncubatorRemainingUsesText"), ((EggIncubator)value).UsesRemaining);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+
+        #endregion
+    }
+
+    public class IncubatorUsageToOpacityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return ((EggIncubator)value).PokemonId == 0 ? 1.0 : 0.5;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+
+        #endregion
+    }
+
+    public class IncubatorUnlimitedTypeToVisibilityConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            bool invert = false;
+            Boolean.TryParse((string)parameter, out invert);
+            
+            if ((((EggIncubator)value).ItemId == ItemId.ItemIncubatorBasicUnlimited) ^ invert)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

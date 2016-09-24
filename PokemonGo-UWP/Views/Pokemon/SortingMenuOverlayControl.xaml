@@ -46,7 +46,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="SortingMenuPanel"
-          Background="{StaticResource PageBackgroundGradient}"
+          Background="{StaticResource DarkPageBackgroundGradient}"
           Opacity="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -65,7 +65,7 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Margin"
-                            Value="0" />
+                            Value="0,5" />
                     <Setter Property="HorizontalContentAlignment"
                             Value="Stretch" />
                 </Style>
@@ -83,7 +83,8 @@
                         <TextBlock Grid.Column="0"
                                    Text="{Binding Converter={StaticResource PokemonSortingModesTranslationConverter}}"
                                    Style="{StaticResource TextSortTitle}"
-                                   Foreground="#e4ffde" />
+                                   Foreground="#e4ffde"
+                                   CharacterSpacing="100"/>
                         <Image Grid.Column="1"
                                Height="25"
                                Width="25"

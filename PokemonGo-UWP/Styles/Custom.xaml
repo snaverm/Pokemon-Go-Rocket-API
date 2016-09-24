@@ -29,6 +29,20 @@
         <GradientStop Color="#43bab6" Offset="0.8" />
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="LightPageBackgroundGradient"
+                         StartPoint="0,0"
+                         EndPoint="0.8,1">
+        <GradientStop Color="#ffffff" Offset="0" />
+        <GradientStop Color="#eeffeb" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DarkPageBackgroundGradient"
+                         StartPoint="0,0"
+                         EndPoint="1,1">
+        <GradientStop Color="#4ab583" Offset="0" />
+        <GradientStop Color="#266378" Offset="0.8" />
+    </LinearGradientBrush>
+
     <SolidColorBrush x:Key="TitleTextColor" Color="#44696c" />
     <SolidColorBrush x:Key="TitleTextColorInactive" Color="#a1b4b5" />
     <SolidColorBrush x:Key="GrayTextColor" Color="#96abac" />

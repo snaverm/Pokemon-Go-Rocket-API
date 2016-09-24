@@ -537,11 +537,16 @@ Du hast auch {1} Sternenstaub, {2} Bonbon und {3} EP erhalten.</target>
         </trans-unit>
         <trans-unit id="CannotTransferFavorite" translate="yes" xml:space="preserve">
           <source>Cannot transfer a favorite Pokémon!</source>
-          <target state="new">Cannot transfer a favorite Pokémon!</target>
+          <target state="translated">Ein als Favorit markiertes Pokémon kann nicht verschickt werden.</target>
         </trans-unit>
         <trans-unit id="CantUseBerryText" translate="yes" xml:space="preserve">
           <source>You already used a Berry.</source>
           <target state="new">You already used a Berry.</target>
+        </trans-unit>
+        <trans-unit id="IncubatorRemainingUsesText" translate="yes" xml:space="preserve">
+          <source>{0} use(s) left</source>
+          <target state="translated">Noch {0} ×</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">If your language uses multiply sign, use × (unicode char) and not x</note>
         </trans-unit>
       </group>
     </body>
@@ -806,11 +811,11 @@ Du hast auch {1} Sternenstaub, {2} Bonbon und {3} EP erhalten.</target>
         </trans-unit>
         <trans-unit id="EggsTextBlock.Text" translate="yes" xml:space="preserve">
           <source>EGGS</source>
-          <target state="new">EGGS</target>
+          <target state="translated">EIER</target>
         </trans-unit>
         <trans-unit id="PokemonTextBlock.Text" translate="yes" xml:space="preserve">
           <source>POKÉMON</source>
-          <target state="new">POKÉMON</target>
+          <target state="translated">POKÉMON</target>
         </trans-unit>
         <trans-unit id="EggDetailIncubatingTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Walk to hatch this Egg.</source>

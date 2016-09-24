@@ -54,6 +54,7 @@
                                Margin="0,15,0,0"
                                Visibility="{Binding EggIncubatorId, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=True}"
                                HorizontalAlignment="Center"
+                               TextAlignment="Left"
                                Foreground="{StaticResource TitleTextColor}" 
                                FontFamily="{StaticResource LatoLightFont}"
                                FontSize="15"
@@ -62,6 +63,7 @@
                                Margin="0,15,0,0"
                                Visibility="{Binding EggIncubatorId, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=False}"
                                HorizontalAlignment="Center"
+                               TextAlignment="Left"
                                Text="Gehe zu Fuss, um dieses Ei auszubrüten."
                                Foreground="{StaticResource TitleTextColor}"
                                FontFamily="{StaticResource LatoLightFont}"
@@ -70,7 +72,8 @@
                     <Button Style="{StaticResource ButtonSubmit}"
                             Visibility="{Binding EggIncubatorId, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=True}"
                             MinWidth="180"
-                            HorizontalAlignment="Center">
+                            HorizontalAlignment="Center"
+                            Click="ShowIncubatorSelection_Click">
                         <TextBlock x:Uid="EggDetailButtonTextBlock" />
                     </Button>
                 </StackPanel>

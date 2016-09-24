@@ -342,7 +342,7 @@
                     <Image Grid.Column="1"
                            Height="25"
                            Width="25"
-                           Source="ms-appx:///Assets/Icons/ic_fav_light.png" />
+                           Source="ms-appx:///Assets/Icons/ic_fav.png" />
                 </Grid>
 
                 <!--Appraise-->
@@ -369,7 +369,7 @@
                     <Image Grid.Column="1"
                            Height="25"
                            Width="25"
-                           Source="ms-appx:///Assets/Buttons/btn_close.png" />
+                           Source="ms-appx:///Assets/Icons/ic_appraise.png" />
                 </Grid>
 
                 <!--Transfer-->
@@ -469,7 +469,7 @@
                 Command="{Binding ClosePokemonDetailPage}">
             <Image Source="{Binding ViewMode, Converter={StaticResource PokemonDetailPageViewModeToCloseButtonImageSourceConverter}}" />
         </Button>
-
+        <!--Contextmenu Button-->
         <Button RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
                 Style="{StaticResource ButtonCircleBig}"

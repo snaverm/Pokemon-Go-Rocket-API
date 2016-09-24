@@ -79,14 +79,14 @@
         <!--Content-->
         <GridView x:Name="PokemonInventoryGridView"
                   x:FieldModifier="public"
-                  ItemsSource="{Binding PokemonInventory, Mode=OneWay}"
+                  ItemsSource="{Binding ElementName=Root, Path=PokemonInventory, Mode=OneWay}"
                   ScrollViewer.VerticalScrollMode="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   SelectionMode="None"
                   IsItemClickEnabled="True">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="ItemClick">
-                    <core:InvokeCommandAction Command="{Binding GotoPokemonDetailCommand}"
+                    <core:InvokeCommandAction Command="{Binding ElementName=Root, Path=PokemonSelectedCommand, Mode=OneWay}"
                                               InputConverter="{StaticResource ItemClickEventArgsToClickedItemConverter}" />
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
@@ -208,14 +208,14 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-
+        <!--Sorting overlay Button-->
         <Button x:Name="SortingButton"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Style="{StaticResource ButtonCircleBig}"
                 Margin="0,0,12,16"
                 Click="ShowSortingPanel_Click">
-            <Image Source="{Binding CurrentPokemonSortingMode, Converter={StaticResource PokemonSortingModesToIconConverter}}" />
+            <Image Source="{Binding ElementName=Root, Path=SortingMode, Mode=OneWay, Converter={StaticResource PokemonSortingModesToIconConverter}}" />
         </Button>
     </Grid>
 </UserControl>

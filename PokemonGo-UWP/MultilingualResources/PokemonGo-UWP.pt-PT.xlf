@@ -544,6 +544,11 @@ You also got {1} Stardust, {2} Candy and {3} XP.</target>
           <source>You already used a Berry.</source>
           <target state="new">You already used a Berry.</target>
         </trans-unit>
+        <trans-unit id="IncubatorRemainingUsesText" translate="yes" xml:space="preserve">
+          <source>{0} use(s) left</source>
+          <target state="new">{0} use(s) left</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">If your language uses multiply sign, use × (unicode char) and not x</note>
+        </trans-unit>
       </group>
     </body>
   </file>

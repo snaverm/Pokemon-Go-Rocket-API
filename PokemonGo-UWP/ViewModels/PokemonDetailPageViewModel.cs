@@ -34,6 +34,10 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state
+                var sortingMode = (PokemonSortingModes)suspensionState[nameof(SortingMode)];
+                var viewMode = (PokemonDetailPageViewMode)suspensionState[nameof(ViewMode)];
+                var currentPokemonId = (ulong)suspensionState[nameof(SelectedPokemon)];
+                Load(currentPokemonId, sortingMode, viewMode);
             } else
             {
                 // Navigating from inventory page so we need to load the pokemoninventory and the current pokemon
@@ -92,6 +96,23 @@ namespace PokemonGo_UWP.ViewModels
                 }
             }
 
+            await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Save state before navigating
+        /// </summary>
+        /// <param name="suspensionState"></param>
+        /// <param name="suspending"></param>
+        /// <returns></returns>
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
+        {
+            if (suspending)
+            {
+                suspensionState[nameof(SortingMode)] = SortingMode;
+                suspensionState[nameof(ViewMode)] = ViewMode;
+                suspensionState[nameof(SelectedPokemon)] = SelectedPokemon.Id;
+            }
             await Task.CompletedTask;
         }
 

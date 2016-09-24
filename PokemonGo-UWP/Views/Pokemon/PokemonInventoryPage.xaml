@@ -80,67 +80,6 @@
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
-
-
-
-
-        <!--<Storyboard x:Name="ShowSortMenuStoryboard">
-
-            <DoubleAnimation Storyboard.TargetName="SortMenuPanel"
-                             Storyboard.TargetProperty="Opacity"
-                             From="0"
-                             To="1"
-                             Duration="0:0:0.2" />
-
-            <DoubleAnimation Storyboard.TargetName="MainUIPanel"
-                             Storyboard.TargetProperty="Opacity"
-                             From="1"
-                             To="0"
-                             Duration="0:0:0.2" />
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
-                                           Storyboard.TargetName="SortMenuPanel">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>10</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Name="HideSortMenuStoryboard">
-            <DoubleAnimation Storyboard.TargetName="SortMenuPanel"
-                             Storyboard.TargetProperty="Opacity"
-                             From="1"
-                             To="0"
-                             Duration="0:0:0.2" />
-
-            <DoubleAnimation Storyboard.TargetName="MainUIPanel"
-                             Storyboard.TargetProperty="Opacity"
-                             From="0"
-                             To="1"
-                             Duration="0:0:0.2" />
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.ZIndex)"
-                                           Storyboard.TargetName="SortMenuPanel">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>10</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
-                    <DiscreteObjectKeyFrame.Value>
-                        <x:Int32>0</x:Int32>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>-->
-
         <Storyboard x:Name="ShowIncubatorsModalStoryboard">
             <DoubleAnimation x:Name="ShowIncubatorsModalAnimation"
                              Storyboard.TargetName="IncubatorsGridTranslateTransform"
@@ -160,199 +99,12 @@
         </Storyboard>
 
     </Page.Resources>
-
-    <!--Contextmenu--><!--
-    <Grid x:Name="ContextMenuPanel"
-          RelativePanel.AlignTopWithPanel="True"
-          RelativePanel.AlignLeftWithPanel="True"
-          RelativePanel.AlignBottomWithPanel="True"
-          RelativePanel.AlignRightWithPanel="True"
-          Opacity="0">
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5,0"
-                                 EndPoint="0.5,1">
-                <GradientStop Color="#00b3ee9a"
-                              Offset="0.1" />
-                <GradientStop Color="#EE43bab6"
-                              Offset="0.8" />
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0"
-                    VerticalAlignment="Bottom">
-            <StackPanel.RenderTransform>
-                <TranslateTransform Y="200"
-                                    x:Name="ContextMenuTranslateTransform" />
-            </StackPanel.RenderTransform>
-
-            --><!--Favorite--><!--
-            <Grid HorizontalAlignment="Right"
-                  Background="Transparent"
-                  Height="43">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="82" />
-                </Grid.ColumnDefinitions>
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
-                        <core:InvokeCommandAction Command="{Binding FavoritePokemonCommand}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <TextBlock Grid.Column="0"
-                           x:Uid="FavoriteTextBlock"
-                           Text="FAVORITE"
-                           Style="{StaticResource TextSortTitle}"
-                           Foreground="#e4ffde"
-                           Margin="15,0,0,0" />
-                <Image Grid.Column="1"
-                       Height="25"
-                       Width="25"
-                       Source="ms-appx:///Assets/Icons/ic_fav_light.png" />
-            </Grid>
-
-            --><!--Appraise--><!--
-            <Grid HorizontalAlignment="Right"
-                  Background="Transparent"
-                  Height="43"
-                  Visibility="{Binding PlayerTeamIsSet, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="82" />
-                </Grid.ColumnDefinitions>
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
-                        <core:InvokeCommandAction Command="{Binding AppraisePokemonCommand}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <TextBlock Grid.Column="0"
-                           x:Uid="AppraiseTextBlock"
-                           Text="APPRAISE"
-                           Style="{StaticResource TextSortTitle}"
-                           Foreground="#e4ffde"
-                           Margin="15,0,0,0" />
-                <Image Grid.Column="1"
-                       Height="25"
-                       Width="25"
-                       Source="ms-appx:///Assets/Buttons/btn_close.png" />
-            </Grid>
-
-            --><!--Transfer--><!--
-            <Grid HorizontalAlignment="Right"
-                  Background="Transparent"
-                  Height="43">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="82" />
-                </Grid.ColumnDefinitions>
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding TransferPokemonCommand}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <TextBlock Grid.Column="0"
-                           x:Uid="TransferTextBlock"
-                           Text="TRANSFER"
-                           Style="{StaticResource TextSortTitle}"
-                           Foreground="#e4ffde" />
-                <Image Grid.Column="1"
-                       Height="25"
-                       Width="25"
-                       Source="ms-appx:///Assets/Icons/ic_candy_light.png" />
-            </Grid>
-        </StackPanel>
-
-        --><!--Close Contextmenu--><!--
-        <Button Style="{StaticResource ButtonCircle}"
-                Grid.Row="1"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0,0,21,21">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Tapped">
-                    <media:ControlStoryboardAction Storyboard="{StaticResource HideContextMenuStoryboard}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-            <Image Source="ms-appx:///Assets/Buttons/btn_close.png" />
-        </Button>
-    </Grid>-->
-
+    
+    <!--Main UI-->
     <Grid Background="{StaticResource PageBackgroundGradient}">
-        
-        <!--Sortmenu-->
-        <!--<RelativePanel x:Name="SortMenuPanel"
-              Opacity="0"
-              Canvas.ZIndex="0"
-              Background="{StaticResource PageBackgroundGradient}">
-            <ListView RelativePanel.AlignTopWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignRightWithPanel="True"
-                      RelativePanel.Above="CloseSortMenuButton"
-                      ItemsSource="{Binding Converter={StaticResource PokemonSortingModesToSortingModesListConverter}}"
-                      SelectedItem="{Binding CurrentPokemonSortingMode, Mode=TwoWay}"
-                      IsItemClickEnabled="True"
-                      VerticalAlignment="Bottom"
-                      Margin="0,0,0,77.5">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="ItemClick">
-                        <media:ControlStoryboardAction Storyboard="{StaticResource HideSortMenuStoryboard}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Margin"
-                                Value="0" />
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Right"
-                              Margin="15,5,15,5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Text="{Binding Converter={StaticResource PokemonSortingModesTranslationConverter}}"
-                                       Style="{StaticResource TextSortTitle}" />
-                            <Button Grid.Column="1"
-                                    IsHitTestVisible="False"
-                                    Style="{StaticResource ButtonCircleInverse}"
-                                    Margin="10,0,0,0">
-                                <Image Source="{Binding Converter={StaticResource PokemonSortingModesToIconConverter}}" />
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button x:Name="CloseSortMenuButton"
-                    RelativePanel.AlignBottomWithPanel="True"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    Style="{StaticResource ButtonCircleInverse}"
-                    Margin="0,0,0,17.5">
-
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Click">
-                        <media:ControlStoryboardAction Storyboard="{StaticResource HideSortMenuStoryboard}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-
-                <Image Source="../../Assets/Buttons/btn_close_dark.png" />
-            </Button>
-        </RelativePanel>-->
-
-
-
-
         <Border Margin="8,0"
-                Background="White">
+                Background="{StaticResource LightPageBackgroundGradient}">
+            <!--Content-->
             <Pivot x:Name="MainUIPanel"
                    Margin="0,10,0,0"
                    Style="{StaticResource PokemonInventoryPivotStyle}">
@@ -365,7 +117,8 @@
                                               DataMaximum="{Binding PlayerProfile.MaxPokemonStorage}" />
                     </PivotItem.Header>
                     <local:PokemonInventoryControl x:Name="PokemonInventory"
-                                                   DataContext="{Binding DataContext, ElementName=Root}"
+                                                   PokemonInventory="{Binding PokemonInventory}"
+                                                   PokemonSelectedCommand="{Binding GotoPokemonDetailCommand}"
                                                    SortingMode="{Binding CurrentPokemonSortingMode, Mode=TwoWay}" />
                 </PivotItem>
 
@@ -377,12 +130,14 @@
                                               DataCurrent="{Binding EggsInventory.Count}"
                                               DataMaximum="9" />
                     </PivotItem.Header>
-                    <local:EggInventoryControl DataContext="{Binding DataContext, ElementName=Root}" />
+                    <local:EggInventoryControl EggsInventory="{Binding EggsInventory}"
+                                               EggSelectedCommand="{Binding GotoEggDetailCommand}"
+                                               CanShowIncubatorSelectionOverlay="True" />
                 </PivotItem>
 
             </Pivot>
         </Border>
-
+        <!--Close Button-->
         <Button Command="{Binding ReturnToGameScreen}"
                 Style="{StaticResource ButtonCircle}"
                 VerticalAlignment="Bottom"

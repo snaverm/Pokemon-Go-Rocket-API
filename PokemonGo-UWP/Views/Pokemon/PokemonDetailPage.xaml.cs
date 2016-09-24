@@ -4,27 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using PokemonGo.RocketAPI;
-using PokemonGo_UWP.Utils;
-using POGOProtos.Networking.Responses;
 using Windows.System.Threading;
 using Windows.UI.Core;
-using PokemonGo_UWP.ViewModels;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Windows.UI.Xaml.Media.Animation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace PokemonGo_UWP.Views
 {
@@ -34,9 +18,6 @@ namespace PokemonGo_UWP.Views
         ReceivedPokemon
     }
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PokemonDetailPage : Page
     {
         public PokemonDetailPage()
@@ -107,7 +88,6 @@ namespace PokemonGo_UWP.Views
         }
 
         #endregion
-
 
     }
 }

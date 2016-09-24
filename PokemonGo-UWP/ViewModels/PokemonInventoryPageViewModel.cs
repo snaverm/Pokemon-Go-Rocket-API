@@ -14,7 +14,6 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using PokemonGo_UWP.Utils.Extensions;
 using Windows.UI.Xaml.Media.Animation;
-using Google.Protobuf;
 
 namespace PokemonGo_UWP.ViewModels
 {
@@ -57,8 +56,7 @@ namespace PokemonGo_UWP.ViewModels
                 // advancedrei: I have verified this is the sort order in the game.
                 foreach (var incubatedEgg in incubatedEggs)
                 {
-                    var incubatorData = GameClient.UsedIncubatorsInventory.FirstOrDefault(incubator => incubator.Id == incubatedEgg.EggIncubatorId);
-                    EggsInventory.Add(new IncubatedEggDataWrapper(incubatorData, GameClient.PlayerStats.KmWalked, incubatedEgg));
+                    EggsInventory.Add(new IncubatedEggDataWrapper(GameClient.GetIncubatorFromEgg(incubatedEgg), GameClient.PlayerStats.KmWalked, incubatedEgg));
                 }
 
                 foreach (var pokemonData in unincubatedEggs)
@@ -157,7 +155,7 @@ namespace PokemonGo_UWP.ViewModels
         /// <summary>
         /// Reference to Incubators inventory
         /// </summary>
-        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.FreeIncubatorsInventory;
+        public ObservableCollection<EggIncubator> IncubatorsInventory => GameClient.IncubatorsInventory;
 
         /// <summary>
         /// Total amount of Pokemon in players inventory

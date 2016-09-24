@@ -13,26 +13,6 @@
         <viewModels:EggDetailPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <!--<Page.Resources>
-        <Storyboard x:Name="ShowIncubatorsModalStoryboard">
-            <DoubleAnimation x:Name="ShowIncubatorsModalAnimation"
-                             Storyboard.TargetName="IncubatorsGridTranslateTransform"
-                             Storyboard.TargetProperty="Y"
-                             From="350"
-                             To="0"
-                             Duration="0:0:0.2" />
-        </Storyboard>
-
-        <Storyboard x:Name="HideIncubatorsModalStoryboard">
-            <DoubleAnimation x:Name="HideIncubatorsModalAnimation"
-                             Storyboard.TargetName="IncubatorsGridTranslateTransform"
-                             Storyboard.TargetProperty="Y"
-                             From="0"
-                             To="350"
-                             Duration="0:0:0.2" />
-        </Storyboard>
-    </Page.Resources>-->
-
     <Grid>
         <Grid x:Name="EggUi"
               RelativePanel.AlignTopWithPanel="True"
@@ -68,7 +48,7 @@
                   SelectedItem="{Binding SelectedEgg, Mode=TwoWay}" >
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <local:EggDetailControl />
+                    <local:EggDetailControl IncubateEggCommand="{Binding UseIncubatorCommand}" />
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>

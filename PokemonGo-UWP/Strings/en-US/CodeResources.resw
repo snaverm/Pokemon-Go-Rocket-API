@@ -343,4 +343,8 @@ You also got {1} Stardust, {2} Candy and {3} XP.</value>
   <data name="CantUseBerryText" xml:space="preserve">
     <value>You already used a Berry.</value>
   </data>
+  <data name="IncubatorRemainingUsesText" xml:space="preserve">
+    <value>{0} use(s) left</value>
+    <comment>If your language uses multiply sign, use × (unicode char) and not x</comment>
+  </data>
 </root>

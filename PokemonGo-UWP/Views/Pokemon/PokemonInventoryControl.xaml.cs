@@ -1,27 +1,9 @@
-﻿using POGOProtos.Data;
-using POGOProtos.Enums;
-using PokemonGo_UWP.Controls;
-using PokemonGo_UWP.Entities;
+﻿using PokemonGo_UWP.Entities;
 using PokemonGo_UWP.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Template10.Common;
-using Template10.Controls;
 using Template10.Mvvm;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace PokemonGo_UWP.Views
 {
@@ -32,9 +14,31 @@ namespace PokemonGo_UWP.Views
             this.InitializeComponent();
         }
 
+        #region Propertys
+
+        public static readonly DependencyProperty PokemonInventoryProperty =
+            DependencyProperty.Register(nameof(PokemonInventory), typeof(ObservableCollection<PokemonDataWrapper>), typeof(PokemonInventoryControl),
+                new PropertyMetadata(null));
+
+        public static readonly DependencyProperty PokemonSelectedCommandProperty =
+            DependencyProperty.Register(nameof(PokemonSelectedCommand), typeof(DelegateCommand<PokemonDataWrapper>), typeof(PokemonInventoryControl),
+                new PropertyMetadata(null));
+
         public static readonly DependencyProperty SortingModeProperty =
             DependencyProperty.Register(nameof(SortingMode), typeof(PokemonSortingModes), typeof(PokemonInventoryControl),
                 new PropertyMetadata(PokemonSortingModes.Combat));
+
+        public ObservableCollection<PokemonDataWrapper> PokemonInventory
+        {
+            get { return (ObservableCollection<PokemonDataWrapper>)GetValue(PokemonInventoryProperty); }
+            set { SetValue(PokemonInventoryProperty, value); }
+        }
+
+        public DelegateCommand<PokemonDataWrapper> PokemonSelectedCommand
+        {
+            get { return (DelegateCommand<PokemonDataWrapper>)GetValue(PokemonSelectedCommandProperty); }
+            set { SetValue(PokemonSelectedCommandProperty, value); }
+        }
 
         public PokemonSortingModes SortingMode
         {
@@ -42,11 +46,17 @@ namespace PokemonGo_UWP.Views
             set { SetValue(SortingModeProperty, value); }
         }
 
+        #endregion
+
+        #region Internal Methods
+
         private void ShowSortingPanel_Click(object sender, RoutedEventArgs e)
         {
             SortingMenuOverlayControl sortingMenu = new SortingMenuOverlayControl();
             sortingMenu.SortingmodeSelected += ((mode) => { SortingMode = mode; });
             sortingMenu.Show();
         }
+
+        #endregion
     }
 }

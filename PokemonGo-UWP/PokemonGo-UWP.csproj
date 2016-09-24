@@ -175,8 +175,6 @@
     <Content Include="Assets\Buttons\btn_close_normal.png" />
     <Content Include="Assets\Buttons\btn_close_normal_dark.png" />
     <Content Include="Assets\Buttons\btn_empty.png" />
-    <Content Include="Assets\Buttons\btn_incubator.png" />
-    <Content Include="Assets\Buttons\btn_incubator_dark.png" />
     <Content Include="Assets\Buttons\btn_items.png" />
     <Content Include="Assets\Buttons\btn_items_catch.png" />
     <Content Include="Assets\Buttons\btn_master.png" />
@@ -219,15 +217,17 @@
     <Content Include="Assets\Icons\hint_gym_neutral.png" />
     <Content Include="Assets\Icons\hint_gym_red.png" />
     <Content Include="Assets\Icons\hint_gym_yellow.png" />
+    <Content Include="Assets\Icons\ic_appraise.png" />
     <Content Include="Assets\Icons\ic_buddy.png" />
     <Content Include="Assets\Icons\ic_candy_light.png" />
     <Content Include="Assets\Icons\ic_combat.png" />
     <Content Include="Assets\Icons\ic_date.png" />
     <Content Include="Assets\Icons\ic_fav.png" />
-    <Content Include="Assets\Icons\ic_fav_light.png" />
     <Content Include="Assets\Icons\ic_health.png" />
+    <Content Include="Assets\Icons\ic_incubator.png" />
     <Content Include="Assets\Icons\ic_name.png" />
     <Content Include="Assets\Icons\ic_number.png" />
+    <Content Include="Assets\Icons\ic_store.png" />
     <Content Include="Assets\Icons\pokestop_far.png" />
     <Content Include="Assets\Icons\pokestop_far_inactive.png" />
     <Content Include="Assets\Icons\pokestop_far_inactive_lured.png" />
