@@ -480,23 +480,9 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-            <Path Data="M 2,2 H 19 M 2,8 H 19 M 2,14 H 19"
-                  HorizontalAlignment="Center"
-                  StrokeEndLineCap="Round"
-                  StrokeDashCap="Round"
-                  StrokeStartLineCap="Round"
-                  StrokeThickness="3"
-                  Margin="-2">
-                <Path.Stroke>
-                    <LinearGradientBrush StartPoint="0,0"
-                                         EndPoint="1,1">
-                        <GradientStop Color="#b0ffb0"
-                                      Offset="0" />
-                        <GradientStop Color="#66eecc"
-                                      Offset="0.8" />
-                    </LinearGradientBrush>
-                </Path.Stroke>
-            </Path>
+            <Path Data="{StaticResource MenuIconPathData}"
+                  Style="{StaticResource MenuIconPathStyle}"
+                  Margin="-2" />
         </Button>
     </RelativePanel>
 </Page>
