@@ -177,10 +177,10 @@ namespace PokemonGo_UWP.Views
 
         private async void ReactivateMapAutoUpdate_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                     lastAutoPosition = null;
-                    UpdateMap();
+                    await UpdateMap();
 						});
         }
 
@@ -200,7 +200,8 @@ namespace PokemonGo_UWP.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-			try { 
+			try
+			{ 
             base.OnNavigatedTo(e);
             // Hide PokeMenu panel just in case
             HidePokeMenuStoryboard.Begin();
@@ -214,7 +215,7 @@ namespace PokemonGo_UWP.Views
                     SetupMap();
             }
             // Set first position if we shomehow missed it
-                UpdateMap();
+                await UpdateMap();
 				//Changed order of calls, this allow to have events registration before trying to move map
 				//appears that for some reason TryRotate and/or TryTilt fails sometimes!
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
@@ -275,13 +276,15 @@ namespace PokemonGo_UWP.Views
 
         #region Handlers
 
-        private async void UpdateMap()
+        private async Task UpdateMap()
         {
 			if (LocationServiceHelper.Instance.Geoposition != null)
 			{ 
 				await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-										// Set player icon's position
+						try
+						{
+							// Set player icon's position
 							MapControl.SetLocation(PlayerImage, LocationServiceHelper.Instance.Geoposition.Coordinate.Point);
 
                     // Update angle and center only if map is not being manipulated
@@ -291,8 +294,8 @@ namespace PokemonGo_UWP.Views
 									//Save Center
                         lastAutoPosition = GameMapControl.Center;
 									//Reset orientation to default
-                        if (GameMapControl.Heading == LocationServiceHelper.Instance.Geoposition.Coordinate.Heading)
-                            GameMapControl.Heading = 0;
+                        if (double.IsNaN(GameMapControl.Heading))//DarkAngel: I love non nullable double that can be "!= null and not a number"...
+								await GameMapControl.TryRotateToAsync(0);
                     }
 
                     //Small Trick: I'm not testing lastAutoPosition == GameMapControl.Center because MapControl is not taking exact location when setting center!!
@@ -303,19 +306,25 @@ namespace PokemonGo_UWP.Views
                     if (currentCoord == previousCoord && ReactivateMapAutoUpdateButton != null)
                     {
                         //Previous position was set automatically, continue!
-                        if(ReactivateMapAutoUpdateButton!=null)
 									ReactivateMapAutoUpdateButton.Visibility = Visibility.Collapsed;
 								GameMapControl.Center = LocationServiceHelper.Instance.Geoposition.Coordinate.Point;
 
                         lastAutoPosition = GameMapControl.Center;
 
                         if ((SettingsService.Instance.MapAutomaticOrientationMode == MapAutomaticOrientationModes.GPS) &&
-                            (LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.HasValue))
-                            await GameMapControl.TryRotateToAsync(LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.Value);
-
+																			(
+																			LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.GetValueOrDefault(-1) >= 0
+																			&& LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.GetValueOrDefault(-1) <= 360
+																			))
+								await GameMapControl.TryRotateToAsync(LocationServiceHelper.Instance.Geoposition.Coordinate.Heading.GetValueOrDefault(GameMapControl.Heading));
                         if (SettingsService.Instance.IsRememberMapZoomEnabled)
                             GameMapControl.ZoomLevel = SettingsService.Instance.Zoomlevel;
                     }
+							}
+							catch (Exception ex)
+							{
+								await ExceptionHandler.HandleException(ex);
+							}
 						});
 			}
 		}
@@ -350,11 +359,11 @@ namespace PokemonGo_UWP.Views
             ViewModel.LevelUpRewardsAwarded -= ViewModelOnLevelUpRewardsAwarded;
         }
 
-		private void LocationHelperPropertyChanged(object sender, PropertyChangedEventArgs e)
+		private async void LocationHelperPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == nameof(LocationServiceHelper.Instance.Geoposition))
 			{
-				UpdateMap();
+				await UpdateMap();
 			}
 		}
 
