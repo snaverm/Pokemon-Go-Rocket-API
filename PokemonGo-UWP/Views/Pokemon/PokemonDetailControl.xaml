@@ -656,6 +656,11 @@
                                        FontFamily="{StaticResource LatoRegularFont}" />
 
                         </Grid>
+                        <TextBlock Margin="10,15,10,3" 
+                                   HorizontalAlignment="Center" 
+                                   Foreground="#414544"
+                                   FontFamily="{StaticResource LatoRegularFont}"
+                                   Text="{Binding CapturedCellId, Converter={StaticResource PokemonCaptureCellToLocationConverter}}" />
                         <TextBlock HorizontalAlignment="Center"
                                    Margin="5"
                                    Foreground="#626264"

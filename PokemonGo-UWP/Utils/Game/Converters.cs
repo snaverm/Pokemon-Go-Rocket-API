@@ -26,6 +26,8 @@ using Template10.Common;
 using Windows.UI.ViewManagement;
 using Windows.Graphics.Display;
 using Windows.Foundation;
+using Windows.Services.Maps;
+using System.Threading.Tasks;
 
 namespace PokemonGo_UWP.Utils
 {
@@ -546,6 +548,44 @@ namespace PokemonGo_UWP.Utils
             float heightStdDev = extraData.HeightStdDev * 2;
 
             return (pokemon.HeightM > commonHeight + heightStdDev) ? "XL" : "XS";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
+    public class PokemonCaptureCellToLocationConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if(value == null || !(value is ulong))
+            {
+                return "";
+            }
+
+            // We must call this async
+            var task = Task.Run(async () =>
+            {
+                var cellCenter = new S2CellId((ulong)value).ChildEndForLevel(30).ToLatLng();
+                MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(new Geopoint(new BasicGeoposition() { Latitude = cellCenter.LatDegrees, Longitude = cellCenter.LngDegrees }));
+
+                if(result.Status == MapLocationFinderStatus.Success && result.Locations.Count != 0)
+                {
+                    var captureLocation = result.Locations[0];
+                    return $"{captureLocation.Address.Town}, {captureLocation.Address.Region}, {captureLocation.Address.Country}";
+                } else
+                {
+                    return "";
+                }
+            });
+
+            return task.Result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
