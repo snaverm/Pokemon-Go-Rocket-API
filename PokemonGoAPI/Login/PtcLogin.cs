@@ -26,13 +26,15 @@ namespace PokemonGo.RocketAPI.Login
 
         private static HttpClient HttpClient;
 
+        private static CookieContainer Cookies;
+
         /// <summary>
         /// The Password for the user currently attempting  to authenticate.
         /// </summary>
         private string Password { get; }
 
         /// <summary>
-        /// The Username for teh suer currenrtly attempting to authenticate.
+        /// The Username for the user currenrtly attempting to authenticate.
         /// </summary>
         private string Username { get; }
 
@@ -42,9 +44,11 @@ namespace PokemonGo.RocketAPI.Login
 
         static PtcLogin()
         {
+            Cookies = new CookieContainer();
             HttpClient = new HttpClient(
                 new HttpClientHandler
                 {
+                    CookieContainer = Cookies,
                     AutomaticDecompression = DecompressionMethods.GZip,
                     AllowAutoRedirect = false
                 }
@@ -73,11 +77,19 @@ namespace PokemonGo.RocketAPI.Login
         /// <returns></returns>
         public async Task<AccessToken> GetAccessToken()
         {
-                // robertmclaws: Should we be setting every UserAgent property like the other requests?
-                var loginData = await GetLoginParameters().ConfigureAwait(false);
-                var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
-                var accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
-                return accessToken;
+            AccessToken accessToken;
+            PtcLoginParameters loginData = null;
+            var cookies = Cookies.GetCookies("sso.pokemon.com").ToList();
+            // @robertmclaws: "CASTGC" is the name of the login cookie that the service looks for, afaik.
+            //                The second one is listed as a backup in case they change the cookie name.
+            if (!cookies.Any(c => c.Name == "CASTGC") || cookies.Count == 0)
+            {
+                loginData = await GetLoginParameters().ConfigureAwait(false);
+            }
+            var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
+            accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
+
+            return accessToken;
         }
 
         #endregion
@@ -105,7 +117,11 @@ namespace PokemonGo.RocketAPI.Login
         /// <returns></returns>
         private async Task<string> GetAuthenticationTicket(PtcLoginParameters loginData)
         {
-            var requestData = new Dictionary<string, string>
+            HttpResponseMessage responseMessage;
+
+            if (loginData != null)
+            {
+                var requestData = new Dictionary<string, string>
                 {
                     {"lt", loginData.Lt},
                     {"execution", loginData.Execution},
@@ -113,16 +129,23 @@ namespace PokemonGo.RocketAPI.Login
                     {"username", Username},
                     {"password", Password}
                 };
-
-            var responseMessage = await HttpClient.PostAsync(Constants.LoginUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
+                responseMessage = await HttpClient.PostAsync(Constants.LoginUrl, new FormUrlEncodedContent(requestData)).ConfigureAwait(false);
+            }
+            else
+            {
+                responseMessage = await HttpClient.GetAsync(Constants.LoginUrl);
+            }
 
             // robertmclaws: No need to even read the string if we have results from the location query.
-            if (responseMessage.Headers.Location != null)
+            if (responseMessage.StatusCode == HttpStatusCode.Found && responseMessage.Headers.Location != null)
             {
                 var decoder = new WwwFormUrlDecoder(responseMessage.Headers.Location.Query);
                 if (decoder.Count == 0)
                 {
-                    if (Debugger.IsAttached) Debugger.Break();
+                    if (Debugger.IsAttached)
+                    {
+                        Debugger.Break();
+                    }
                     throw new LoginFailedException();
                 }
                 return decoder.GetFirstValueByName("ticket");

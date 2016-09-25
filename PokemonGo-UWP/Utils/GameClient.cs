@@ -1025,6 +1025,10 @@ namespace PokemonGo_UWP.Utils
             return await _client.Fort.SearchFort(pokestopId, latitude, longitude);
         }
 
+        public static async Task<AddFortModifierResponse> AddFortModifier(string pokestopId, ItemId modifierType)
+        {
+            return await _client.Fort.AddFortModifier(pokestopId, modifierType);
+        }
         #endregion
 
         #region Gym Handling

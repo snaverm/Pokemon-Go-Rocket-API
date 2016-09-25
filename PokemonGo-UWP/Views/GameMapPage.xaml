@@ -424,7 +424,11 @@
                                     <GridView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <Image Canvas.ZIndex="100"
+                                                    <Image VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                       Source="../Assets/UI/bush.png" Stretch="Uniform" 
+                                                       Height="60">
+                                                    </Image>
+                                                    <Image Canvas.ZIndex="100"
                                                        Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
                                                        Visibility="{Binding PokemonId, Converter={StaticResource NearbyPokemonInPokedexToVisibilityConverter}}"
                                                        Height="60"
