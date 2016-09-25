@@ -130,7 +130,7 @@
                            Canvas.ZIndex="5"
                            Stretch="Uniform" />
                 </Viewbox>
-                <!--Buddy Indicator-->
+                <!--Deployment Indicator-->
                 <Grid Grid.Row="1"
                       Grid.ColumnSpan="3"
                       Height="70"
@@ -138,14 +138,12 @@
                       HorizontalAlignment="Center"
                       VerticalAlignment="Top"
                       Margin="0,15,240,0"
-                      Visibility="Collapsed">
+                      Visibility="{Binding IsDeployed, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Border Background="White"
                             CornerRadius="35"
                             Height="70"
-                            VerticalAlignment="Top">
-                        <Image Margin="9"
-                               Source="ms-appx:///assets/Icons/ic_buddy.png" />
-                    </Border>
+                            VerticalAlignment="Top"
+                            Child="{Binding Converter={StaticResource PokemonToDeploymentImageConverter}, ConverterParameter=True}" />
                     <Path HorizontalAlignment="Right"
                           VerticalAlignment="Bottom"
                           Data="M0 6 L8 8 L6 0"
@@ -196,7 +194,6 @@
                         </Grid>
 
                         <StackPanel VerticalAlignment="Bottom">
-
                             <ProgressBar Value="{Binding Stamina, Mode=TwoWay}"
                                          Width="200"
                                          Maximum="{Binding StaminaMax}"
@@ -215,14 +212,11 @@
                                         <Run Text="/" />
                                         <Run Text="{Binding StaminaMax}" />
                             </TextBlock>
-
                         </StackPanel>
-
                     </StackPanel>
 
                     <!-- Data/PowerUp/Evolve/Moves/Transfer -->
                     <StackPanel>
-
                         <!-- Pokemon Data -->
                         <Grid Margin="16,0,16,8"
                               Padding="0,0,0,8"
@@ -656,11 +650,12 @@
                                        FontFamily="{StaticResource LatoRegularFont}" />
 
                         </Grid>
-                        <TextBlock Margin="10,15,10,3" 
-                                   HorizontalAlignment="Center" 
+                        <TextBlock Margin="10,15,10,3"
+                                   HorizontalAlignment="Center"
                                    Foreground="#414544"
                                    FontFamily="{StaticResource LatoRegularFont}"
-                                   Text="{Binding CapturedCellId, Converter={StaticResource PokemonCaptureCellToLocationConverter}}" />
+                                   Text="{Binding CapturedCellId, Converter={StaticResource PokemonCaptureCellToLocationConverter}}"
+                                   TextWrapping="WrapWholeWords" />
                         <TextBlock HorizontalAlignment="Center"
                                    Margin="5"
                                    Foreground="#626264"

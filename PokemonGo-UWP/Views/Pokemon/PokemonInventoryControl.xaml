@@ -158,23 +158,21 @@
                             <Path Style="{StaticResource FavoriteStarPathStyle}"
                                   Data="{StaticResource FavoriteStarPathData}" />
                         </Viewbox>
-                        <!--Buddy Indicator-->
+                        <!--Deployment Indicator-->
                         <Grid Grid.Row="1"
                               Height="20"
                               Width="19"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               Margin="0,5,0,0"
-                              Visibility="Collapsed">
+                              Visibility="{x:Bind IsDeployed, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Border Background="White"
                                     BorderBrush="#bebebe"
                                     BorderThickness="0.3"
                                     CornerRadius="10"
                                     Height="20"
-                                    VerticalAlignment="Top">
-                                <Image Margin="3"
-                                       Source="ms-appx:///assets/Icons/ic_buddy.png" />
-                            </Border>
+                                    VerticalAlignment="Top"
+                                    Child="{x:Bind Converter={StaticResource PokemonToDeploymentImageConverter}}" />
                             <Path HorizontalAlignment="Left"
                                   VerticalAlignment="Bottom"
                                   Data="M17.2 0 L19 4.5 L14.4 2.8"

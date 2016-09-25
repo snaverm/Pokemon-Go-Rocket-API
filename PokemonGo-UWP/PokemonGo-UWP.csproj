@@ -224,6 +224,9 @@
     <Content Include="Assets\Icons\hint_gym_red.png" />
     <Content Include="Assets\Icons\hint_gym_yellow.png" />
     <Content Include="Assets\Icons\ic_appraise.png" />
+    <Content Include="Assets\Icons\ic_arena_blue.png" />
+    <Content Include="Assets\Icons\ic_arena_red.png" />
+    <Content Include="Assets\Icons\ic_arena_yellow.png" />
     <Content Include="Assets\Icons\ic_buddy.png" />
     <Content Include="Assets\Icons\ic_candy_light.png" />
     <Content Include="Assets\Icons\ic_combat.png" />

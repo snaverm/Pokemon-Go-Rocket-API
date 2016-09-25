@@ -596,6 +596,55 @@ namespace PokemonGo_UWP.Utils
         #endregion
     }
 
+    public class PokemonToDeploymentImageConverter : IValueConverter
+    {
+        #region Implementation of IValueConverter
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) return null;
+            bool detailView = false;
+            Boolean.TryParse((string)parameter, out detailView);
+            PokemonDataWrapper pokemon = (PokemonDataWrapper)value;
+
+            Image img = new Image();
+            if(pokemon.IsBuddy)
+            {
+                // Buddy
+                img.Source = new BitmapImage(new Uri("ms-appx:///assets/Icons/ic_buddy.png"));
+                img.Margin = detailView ? new Thickness(9) : new Thickness(3);
+            } else
+            {
+                // ArenaDeployment
+                switch(GameClient.PlayerProfile.Team)
+                {
+                    case TeamColor.Red:
+                        img.Source = new BitmapImage(new Uri("ms-appx:///assets/Icons/ic_arena_red.png"));
+                        break;
+                    case TeamColor.Blue:
+                        img.Source = new BitmapImage(new Uri("ms-appx:///assets/Icons/ic_arena_blue.png"));
+                        break;
+                    case TeamColor.Yellow:
+                        img.Source = new BitmapImage(new Uri("ms-appx:///assets/Icons/ic_arena_yellow.png"));
+                        break;
+                    default:
+                        return null;
+                }
+
+                img.Margin = detailView ? new Thickness(15, 15, 10, 10) : new Thickness(3, 4, 2, 2);
+            }
+
+            return img;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
+
+        #endregion
+    }
+
     #endregion
 
     public class PokemonMoveToMoveNameConverter : IValueConverter
@@ -738,7 +787,7 @@ namespace PokemonGo_UWP.Utils
             var teamColor = (TeamColor)value;
             return new SolidColorBrush(teamColor == TeamColor.Neutral
                 ? Color.FromArgb(255, 26, 237, 213)
-                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 40, 89, 237) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 225, 63));
+                : teamColor == TeamColor.Blue ? Color.FromArgb(255, 40, 89, 237) : teamColor == TeamColor.Red ? Color.FromArgb(255, 237, 90, 90) : Color.FromArgb(255, 254, 196, 50));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -1965,12 +2014,12 @@ namespace PokemonGo_UWP.Utils
     {
         #region Implementation of IValueConverter
 
-        private object GetVisibility(object value)
+        private object GetVisibility(object value, bool invert)
         {
             if (!(value is bool))
                 return Visibility.Collapsed;
             bool objValue = (bool)value;
-            if (objValue)
+            if (objValue ^ invert)
             {
                 return Visibility.Visible;
             }
@@ -1978,7 +2027,10 @@ namespace PokemonGo_UWP.Utils
         }
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return GetVisibility(value);
+            bool invert = false;
+            Boolean.TryParse((string)parameter, out invert);
+
+            return GetVisibility(value, invert);
         }
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {

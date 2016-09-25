@@ -37,6 +37,7 @@
             <utils:PokemonToPokemonExceptionalHeightVisibilityConverter x:Key="PokemonToPokemonExceptionalHeightVisibilityConverter" />
             <utils:PokemonToPokemonExceptionalHeightTagConverter x:Key="PokemonToPokemonExceptionalHeightTagConverter" />
             <utils:PokemonCaptureCellToLocationConverter x:Key="PokemonCaptureCellToLocationConverter" />
+            <utils:PokemonToDeploymentImageConverter x:Key="PokemonToDeploymentImageConverter" />
             <utils:EmptyConverter x:Key="EmptyConverter" />
             <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter" />
             <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter" />

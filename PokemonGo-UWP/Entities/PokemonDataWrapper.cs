@@ -95,6 +95,11 @@ namespace PokemonGo_UWP.Entities
 
         public float AdditionalCpMultiplier => WrappedData.AdditionalCpMultiplier;
 
+        // Stubb Var
+        public bool IsBuddy = false;
+
+        public bool IsDeployed { get { return !string.IsNullOrEmpty(DeployedFortId) || IsBuddy; } }
+
         public int Favorite
         {
             get { return WrappedData.Favorite; }
