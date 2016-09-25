@@ -17,6 +17,7 @@
                    Margin="10,10,10,3"
                    VerticalAlignment="Top" />
         <TextBlock Style="{StaticResource TextSubTitle}"
+                   FontFamily="{StaticResource LatoMediumFont}"
                    HorizontalAlignment="Center"
                    Foreground="{StaticResource TitleTextColor}">
             <Run Text="{x:Bind DataCurrent, Mode=OneWay}" />
