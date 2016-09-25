@@ -29,76 +29,76 @@ namespace PokemonGo_UWP.Entities
             _wrappedData = update;
 
             OnPropertyChanged(nameof(ItemId));
-			OnPropertyChanged(nameof(ItemType));
-			OnPropertyChanged(nameof(AppliedMs));
-			OnPropertyChanged(nameof(ExpireMs));
-			OnPropertyChanged(nameof(MaxSeconds));
-			OnPropertyChanged(nameof(RemainingMs));
-			OnPropertyChanged(nameof(RemainingSeconds));
-			OnPropertyChanged(nameof(RemainingTime));
-		}
+            OnPropertyChanged(nameof(ItemType));
+            OnPropertyChanged(nameof(AppliedMs));
+            OnPropertyChanged(nameof(ExpireMs));
+            OnPropertyChanged(nameof(MaxSeconds));
+            OnPropertyChanged(nameof(RemainingMs));
+            OnPropertyChanged(nameof(RemainingSeconds));
+            OnPropertyChanged(nameof(RemainingTime));
+        }
 
-		#region Wrapped Properties
+        #region Wrapped Properties
 
-		public ItemId ItemId => _wrappedData.ItemId;
+        public ItemId ItemId => _wrappedData.ItemId;
 
-		public ItemType ItemType => _wrappedData.ItemType;
+        public ItemType ItemType => _wrappedData.ItemType;
 
         public long AppliedMs => _wrappedData.AppliedMs;
 
-		public long ExpireMs => _wrappedData.ExpireMs;
+        public long ExpireMs => _wrappedData.ExpireMs;
 
-		public long RemainingMs
-		{
-			get
-			{
-				long nowMs = DateTime.UtcNow.ToUnixTime();
-				long remainingMs = ExpireMs - nowMs;
-				if (remainingMs < 0) remainingMs = 0;
-				return remainingMs;
-			}
-		}
+        public long RemainingMs
+        {
+            get
+            {
+                long nowMs = DateTime.UtcNow.ToUnixTime();
+                long remainingMs = ExpireMs - nowMs;
+                if (remainingMs < 0) remainingMs = 0;
+                return remainingMs;
+            }
+        }
 
-		public int RemainingSeconds
-		{
-			get
-			{
-				return (int)(RemainingMs / 1000);
-			}
-		}
+        public int RemainingSeconds
+        {
+            get
+            {
+                return (int)(RemainingMs / 1000);
+            }
+        }
 
-		public string RemainingTime
-		{
-			get
-			{
-				DateTime remainingTime = new DateTime().AddMilliseconds(RemainingMs);
-				return remainingTime.ToString("mm:ss");
-			}
-		}
+        public string RemainingTime
+        {
+            get
+            {
+                DateTime remainingTime = new DateTime().AddMilliseconds(RemainingMs);
+                return remainingTime.ToString("mm:ss");
+            }
+        }
 
-		public bool IsExpired
-		{
-			get
-			{
-				if (RemainingMs <= 0) return true;
-				return false;
-			}
-		}
-		#endregion
+        public bool IsExpired
+        {
+            get
+            {
+                if (RemainingMs <= 0) return true;
+                return false;
+            }
+        }
+        #endregion
 
-		public int MaxSeconds
-		{
-			get
-			{
-				long maxMs = ExpireMs - AppliedMs;
-				int maxSeconds = (int)maxMs / 1000;
-				return maxSeconds;
-			}
-		}
+        public int MaxSeconds
+        {
+            get
+            {
+                long maxMs = ExpireMs - AppliedMs;
+                int maxSeconds = (int)maxMs / 1000;
+                return maxSeconds;
+            }
+        }
 
-		#region INotifyPropertyChanged
+        #region INotifyPropertyChanged
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

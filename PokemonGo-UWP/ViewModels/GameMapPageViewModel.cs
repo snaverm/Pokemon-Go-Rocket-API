@@ -57,17 +57,17 @@ namespace PokemonGo_UWP.ViewModels
             }
         }
 
-		private void GameClient_OnAppliedItemExpired(object sender, AppliedItemWrapper e)
-		{
-			RaisePropertyChanged("IsIncenseActive");
-			AppliedItemExpired?.Invoke(null, e);
-		}
+        private void GameClient_OnAppliedItemExpired(object sender, AppliedItemWrapper e)
+        {
+            RaisePropertyChanged("IsIncenseActive");
+            AppliedItemExpired?.Invoke(null, e);
+        }
 
-		private void GameClient_OnAppliedItemStarted(object sender, AppliedItemWrapper e)
-		{
-			RaisePropertyChanged("IsIncenseActive");
-			AppliedItemStarted?.Invoke(null, e);
-		}
+        private void GameClient_OnAppliedItemStarted(object sender, AppliedItemWrapper e)
+        {
+            RaisePropertyChanged("IsIncenseActive");
+            AppliedItemStarted?.Invoke(null, e);
+        }
 
         #region Lifecycle Handlers
 

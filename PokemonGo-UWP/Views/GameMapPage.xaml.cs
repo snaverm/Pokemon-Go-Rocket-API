@@ -325,8 +325,8 @@ namespace PokemonGo_UWP.Views
 			LocationServiceHelper.Instance.PropertyChanged += LocationHelperPropertyChanged;
             GameClient.HeadingUpdated += HeadingUpdated;
             ViewModel.LevelUpRewardsAwarded += ViewModelOnLevelUpRewardsAwarded;
-			ViewModel.AppliedItemExpired += ViewModelOnAppliedItemExpired;
-			ViewModel.AppliedItemStarted += ViewModelOnAppliedItemStarted;
+            ViewModel.AppliedItemExpired += ViewModelOnAppliedItemExpired;
+            ViewModel.AppliedItemStarted += ViewModelOnAppliedItemStarted;
         }
 
         private TimeSpan tick = new TimeSpan(DateTime.Now.Ticks);

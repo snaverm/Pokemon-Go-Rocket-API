@@ -18,95 +18,93 @@ using POGOProtos.Networking.Responses;
 
 namespace PokemonGo_UWP.Entities
 {
+    public class IncensePokemon : IMapPokemon
+    {
+        /// <summary>
+        /// Infos on the current lured Pokemon
+        /// </summary>
+        [JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
+        private GetIncensePokemonResponse _incensePokemonResponse;
 
-	public class IncensePokemon : IMapPokemon
-	{
-		/// <summary>
-		/// Infos on the current lured Pokemon
-		/// </summary>
-		[JsonProperty, JsonConverter(typeof(ProtobufJsonNetConverter))]
-		private GetIncensePokemonResponse _incensePokemonResponse;
+        public Point Anchor => new Point(0.5, 1);
 
+        public IncensePokemon(GetIncensePokemonResponse incensePokemonResponse, double lat, double lng)
+        {
+            _incensePokemonResponse = incensePokemonResponse;
+            Geoposition = new Geopoint(GetLocation(lat, lng, 1));
+        }
 
-		public Point Anchor => new Point(0.5, 1);
+        public void Update(IMapPokemon update)
+        {
+            var incense = (IncensePokemon)update;
 
-		public IncensePokemon(GetIncensePokemonResponse incensePokemonResponse, double lat, double lng)
-		{
-			_incensePokemonResponse = incensePokemonResponse;
-			Geoposition = new Geopoint(GetLocation(lat, lng, 1));
-		}
+            _incensePokemonResponse = incense._incensePokemonResponse;
+            Geoposition = incense.Geoposition;
 
-		public void Update(IMapPokemon update)
-		{
-			var incense = (IncensePokemon)update;
+            OnPropertyChanged(nameof(PokemonId));
+            OnPropertyChanged(nameof(EncounterId));
+            OnPropertyChanged(nameof(SpawnpointId));
+            OnPropertyChanged(nameof(Geoposition));
+        }
 
-			_incensePokemonResponse = incense._incensePokemonResponse;
-			Geoposition = incense.Geoposition;
+        #region Wrapped Properties
 
-			OnPropertyChanged(nameof(PokemonId));
-			OnPropertyChanged(nameof(EncounterId));
-			OnPropertyChanged(nameof(SpawnpointId));
-			OnPropertyChanged(nameof(Geoposition));
-		}
+        public PokemonId PokemonId => _incensePokemonResponse.PokemonId;
 
-		#region Wrapped Properties
+        public ulong EncounterId => _incensePokemonResponse.EncounterId;
 
-		public PokemonId PokemonId => _incensePokemonResponse.PokemonId;
+        public string SpawnpointId => _incensePokemonResponse.EncounterLocation;
 
-		public ulong EncounterId => _incensePokemonResponse.EncounterId;
+        public Geopoint Geoposition { get; set; }
 
-		public string SpawnpointId => _incensePokemonResponse.EncounterLocation;
+        #endregion
 
-		public Geopoint Geoposition { get; set; }
+        private DelegateCommand _tryCatchPokemon;
 
-		#endregion
+        /// <summary>
+        ///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
+        /// </summary>
+        public DelegateCommand TryCatchPokemon => _tryCatchPokemon ?? (
+            _tryCatchPokemon = new DelegateCommand(() =>
+            {
+                NavigationHelper.NavigationState["CurrentPokemon"] = this;
+                // Disable map update
+                GameClient.ToggleUpdateTimer(false);
+                BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage));
+            }, () => true)
+        );
 
-		private DelegateCommand _tryCatchPokemon;
+        private BasicGeoposition GetLocation(double x0, double y0, int radius)
+        {
+            var random = new Random();
 
-		/// <summary>
-		///     We're just navigating to the capture page, reporting that the player wants to capture the selected Pokemon.
-		/// </summary>
-		public DelegateCommand TryCatchPokemon => _tryCatchPokemon ?? (
-			_tryCatchPokemon = new DelegateCommand(() =>
-			{
-				NavigationHelper.NavigationState["CurrentPokemon"] = this;
-				// Disable map update
-				GameClient.ToggleUpdateTimer(false);
-				BootStrapper.Current.NavigationService.Navigate(typeof(CapturePokemonPage));
-			}, () => true)
-		);
+            // Convert radius from meters to degrees
+            double radiusInDegrees = radius / 111000f;
 
-		private BasicGeoposition GetLocation(double x0, double y0, int radius)
-		{
-			var random = new Random();
+            var u = random.NextDouble();
+            var v = random.NextDouble();
+            var w = radiusInDegrees * Math.Sqrt(u);
+            var t = 2 * Math.PI * v;
+            var x = w * Math.Cos(t);
+            var y = w * Math.Sin(t);
 
-			// Convert radius from meters to degrees
-			double radiusInDegrees = radius / 111000f;
+            // Adjust the x-coordinate for the shrinking of the east-west distances
+            var new_x = x / Math.Cos(y0);
 
-			var u = random.NextDouble();
-			var v = random.NextDouble();
-			var w = radiusInDegrees * Math.Sqrt(u);
-			var t = 2 * Math.PI * v;
-			var x = w * Math.Cos(t);
-			var y = w * Math.Sin(t);
+            var foundLatitude = new_x + x0;
+            var foundLongitude = y + y0;
+            return new BasicGeoposition { Latitude = foundLatitude, Longitude = foundLongitude };
+        }
 
-			// Adjust the x-coordinate for the shrinking of the east-west distances
-			var new_x = x / Math.Cos(y0);
+        #region INotifyPropertyChanged
 
-			var foundLatitude = new_x + x0;
-			var foundLongitude = y + y0;
-			return new BasicGeoposition { Latitude = foundLatitude, Longitude = foundLongitude };
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#region INotifyPropertyChanged
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

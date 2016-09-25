@@ -343,12 +343,12 @@ namespace PokemonGo_UWP.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-			ItemId itemId = ItemId.ItemUnknown;
+            ItemId itemId = ItemId.ItemUnknown;
 
-			if (value is ItemAward) itemId = (value as ItemAward).ItemId;
-			if (value is ItemData) itemId = (value as ItemData).ItemId;
-			if (value is ItemDataWrapper) itemId = (value as ItemDataWrapper).ItemId;
-			if (value is AppliedItemWrapper) itemId = (value as AppliedItemWrapper).ItemId;
+            if (value is ItemAward) itemId = (value as ItemAward).ItemId;
+            if (value is ItemData) itemId = (value as ItemData).ItemId;
+            if (value is ItemDataWrapper) itemId = (value as ItemDataWrapper).ItemId;
+            if (value is AppliedItemWrapper) itemId = (value as AppliedItemWrapper).ItemId;
 
             return new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png");
         }
@@ -363,26 +363,26 @@ namespace PokemonGo_UWP.Utils
 
 	public class ItemToItemImageConverter : IValueConverter
 	{
-		#region Implementation of IValueConverter
+        #region Implementation of IValueConverter
 
-		public object Convert(object value, Type targetType, object parameter, string language)
-		{
-			ItemId itemId = ItemId.ItemUnknown;
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            ItemId itemId = ItemId.ItemUnknown;
 
-			if (value is ItemAward) itemId = (value as ItemAward).ItemId;
-			if (value is ItemData) itemId = (value as ItemData).ItemId;
-			if (value is ItemDataWrapper) itemId = (value as ItemDataWrapper).ItemId;
-			if (value is AppliedItemWrapper) itemId = (value as AppliedItemWrapper).ItemId;
+            if (value is ItemAward) itemId = (value as ItemAward).ItemId;
+            if (value is ItemData) itemId = (value as ItemData).ItemId;
+            if (value is ItemDataWrapper) itemId = (value as ItemDataWrapper).ItemId;
+            if (value is AppliedItemWrapper) itemId = (value as AppliedItemWrapper).ItemId;
 
-			return new BitmapImage(new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png"));
-		}
+            return new BitmapImage(new Uri($"ms-appx:///Assets/Items/Item_{(int)itemId}.png"));
+        }
 
-		public object ConvertBack(object value, Type targetType, object parameter, string language)
-		{
-			return value;
-		}
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value;
+        }
 
-		#endregion
+        #endregion
 	}
 
 	public class PlayerTeamToTeamColorBrushConverter : IValueConverter

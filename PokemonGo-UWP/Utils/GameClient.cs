@@ -68,15 +68,15 @@ namespace PokemonGo_UWP.Utils
             /// </summary>
             private DispatcherTimer _mapUpdateTimer;
 
-			/// <summary>
-			/// Timer used to update applied item
-			/// </summary>
-			private DispatcherTimer _appliedItemUpdateTimer;
+            /// <summary>
+            /// Timer used to update applied item
+            /// </summary>
+            private DispatcherTimer _appliedItemUpdateTimer;
 
-			/// <summary>
-			/// True if another update operation is in progress.
-			/// </summary>
-			private bool _isHeartbeating;
+            /// <summary>
+            /// True if another update operation is in progress.
+            /// </summary>
+            private bool _isHeartbeating;
 
             /// <summary>
             /// Checks if we need to update data
@@ -154,38 +154,38 @@ namespace PokemonGo_UWP.Utils
             internal async Task StartDispatcher()
             {
                 _keepHeartbeating = true;
-				if (_mapUpdateTimer == null)
-				{
-					await DispatcherHelper.RunInDispatcherAndAwait(() =>
-					{
-						_mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-						_mapUpdateTimer.Tick += HeartbeatTick;
-						_mapUpdateTimer.Start();
-					});
-				}
-				if (_appliedItemUpdateTimer == null)
-				{
-					await DispatcherHelper.RunInDispatcherAndAwait((Action)(() =>
-					{
-						_appliedItemUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-						_appliedItemUpdateTimer.Tick += this._appliedItemUpdateTimer_Tick;
-						_appliedItemUpdateTimer.Start();
-					}));
-				}
+                if (_mapUpdateTimer == null)
+                {
+                    await DispatcherHelper.RunInDispatcherAndAwait(() =>
+                    {
+                        _mapUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                        _mapUpdateTimer.Tick += HeartbeatTick;
+                        _mapUpdateTimer.Start();
+                    });
+                }
+                if (_appliedItemUpdateTimer == null)
+                {
+                    await DispatcherHelper.RunInDispatcherAndAwait((Action)(() =>
+                    {
+                        _appliedItemUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                        _appliedItemUpdateTimer.Tick += this._appliedItemUpdateTimer_Tick;
+                        _appliedItemUpdateTimer.Start();
+                    }));
+                }
             }
 
-			private void _appliedItemUpdateTimer_Tick(object sender, object e)
-			{
-				foreach(AppliedItemWrapper appliedItem in AppliedItems)
-				{
-					if (appliedItem.IsExpired)
-					{
-						AppliedItems.Remove(appliedItem);
-						break;
-					}
-					appliedItem.Update(appliedItem.WrappedData);
-				}
-			}
+            private void _appliedItemUpdateTimer_Tick(object sender, object e)
+            {
+                foreach(AppliedItemWrapper appliedItem in AppliedItems)
+                {
+                    if (appliedItem.IsExpired)
+                    {
+                        AppliedItems.Remove(appliedItem);
+                        break;
+                    }
+                    appliedItem.Update(appliedItem.WrappedData);
+                }
+            }
 
             /// <summary>
             /// Stops heartbeat

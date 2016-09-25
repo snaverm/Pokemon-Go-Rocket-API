@@ -111,34 +111,34 @@ namespace PokemonGo_UWP.ViewModels
                         throw new ArgumentOutOfRangeException();
                 }
             }
-			else if(CurrentPokemon is IncensePokemon)
-			{
-				CurrentIncenseEncounter = await GameClient.EncounterIncensePokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
-				CurrentEncounter = new EncounterResponse()
-				{
-					Background = EncounterResponse.Types.Background.Park,
-					WildPokemon = new WildPokemon()
-					{
-						PokemonData = CurrentIncenseEncounter.PokemonData
-					}
-				};
-				switch (CurrentIncenseEncounter.Result)
-				{
-					case IncenseEncounterResponse.Types.Result.PokemonInventoryFull:
-						await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonInventoryFullText"), Resources.Pokemon.GetString($"{ CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
-						ReturnToGameScreen.Execute();
-						break;
-					case IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess:
-						break;
-					case IncenseEncounterResponse.Types.Result.IncenseEncounterUnknown:
-					case IncenseEncounterResponse.Types.Result.IncenseEncounterNotAvailable:
-						await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterErrorText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
-						ReturnToGameScreen.Execute();
-						break;
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
-			}
+            else if(CurrentPokemon is IncensePokemon)
+            {
+                CurrentIncenseEncounter = await GameClient.EncounterIncensePokemon(CurrentPokemon.EncounterId, CurrentPokemon.SpawnpointId);
+                CurrentEncounter = new EncounterResponse()
+                {
+                    Background = EncounterResponse.Types.Background.Park,
+                    WildPokemon = new WildPokemon()
+                    {
+                        PokemonData = CurrentIncenseEncounter.PokemonData
+                    }
+                };
+                switch (CurrentIncenseEncounter.Result)
+                {
+                    case IncenseEncounterResponse.Types.Result.PokemonInventoryFull:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonInventoryFullText"), Resources.Pokemon.GetString($"{ CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                        break;
+                    case IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess:
+                        break;
+                    case IncenseEncounterResponse.Types.Result.IncenseEncounterUnknown:
+                    case IncenseEncounterResponse.Types.Result.IncenseEncounterNotAvailable:
+                        await new MessageDialog(string.Format(Resources.CodeResources.GetString("PokemonEncounterErrorText"), Resources.Pokemon.GetString($"{CurrentPokemon.PokemonId}"))).ShowAsyncQueue();
+                        ReturnToGameScreen.Execute();
+                    break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
             PokemonExtraData = GameClient.GetExtraDataForPokemon(CurrentPokemon.PokemonId);
             SelectedCaptureItem = SelectAvailablePokeBall();
             Busy.SetBusy(false);
