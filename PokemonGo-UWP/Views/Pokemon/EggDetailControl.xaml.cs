@@ -26,13 +26,8 @@ namespace PokemonGo_UWP.Views
         private void ShowIncubatorSelection_Click(object sender, RoutedEventArgs e)
         {
             IncubatorSelectionOverlayControl incubatorControl = new IncubatorSelectionOverlayControl();
-            incubatorControl.IncubatorSelected += IncubatorControl_IncubatorSelected;
+            incubatorControl.IncubatorSelected += (incubator) => { IncubateEggCommand.Execute(incubator); };
             incubatorControl.Show();
-        }
-
-        private void IncubatorControl_IncubatorSelected(POGOProtos.Inventory.EggIncubator incubator)
-        {
-            IncubateEggCommand.Execute(incubator);
         }
 
         #region Dependency Propertys
