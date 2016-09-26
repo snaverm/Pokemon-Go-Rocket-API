@@ -80,8 +80,8 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState)
         {
-			GameClient.OnAppliedItemExpired += GameClient_OnAppliedItemExpired;
-			GameClient.OnAppliedItemStarted += GameClient_OnAppliedItemStarted;
+            GameClient.OnAppliedItemExpired += GameClient_OnAppliedItemExpired;
+            GameClient.OnAppliedItemStarted += GameClient_OnAppliedItemStarted;
 
             // Prevent from going back to other pages
             NavigationService.ClearHistory();
@@ -143,7 +143,7 @@ namespace PokemonGo_UWP.ViewModels
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
             if (suspending)
-            {                
+            {
                 suspensionState[nameof(PlayerProfile)] = PlayerProfile.ToByteString().ToBase64();
                 suspensionState[nameof(PlayerStats)] = PlayerStats.ToByteString().ToBase64();
             }
@@ -217,12 +217,12 @@ namespace PokemonGo_UWP.ViewModels
             private set { Set(ref _levelUpRewards, value); }
         }
 
-		/// <summary>
-		///		Collection of Applied items, like Incense
-		/// </summary>
-		public static ObservableCollection<AppliedItemWrapper> AppliedItems => GameClient.AppliedItems;
+        /// <summary>
+        ///		Collection of Applied items, like Incense
+        /// </summary>
+        public static ObservableCollection<AppliedItemWrapper> AppliedItems => GameClient.AppliedItems;
 
-		public static bool IsIncenseActive => GameClient.IsIncenseActive;
+        public static bool IsIncenseActive => GameClient.IsIncenseActive;
 
         /// <summary>
         ///     Collection of Pokemon in 1 step from current position
@@ -234,15 +234,15 @@ namespace PokemonGo_UWP.ViewModels
         /// </summary>
         public static ObservableCollection<LuredPokemon> LuredPokemon => GameClient.LuredPokemons;
 
-		/// <summary>
-		///     Collection of incense Pokemon
-		/// </summary>
-		public static ObservableCollection<IncensePokemon> IncensePokemon => GameClient.IncensePokemons;
+        /// <summary>
+        ///     Collection of incense Pokemon
+        /// </summary>
+        public static ObservableCollection<IncensePokemon> IncensePokemon => GameClient.IncensePokemons;
 
-		/// <summary>
-		///     Collection of Pokemon in 2 steps from current position
-		/// </summary>
-		public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons => GameClient.NearbyPokemons;
+        /// <summary>
+        ///     Collection of Pokemon in 2 steps from current position
+        /// </summary>
+        public static ObservableCollection<NearbyPokemonWrapper> NearbyPokemons => GameClient.NearbyPokemons;
 
         /// <summary>
         ///     Collection of Pokestops in the current area
@@ -269,19 +269,19 @@ namespace PokemonGo_UWP.ViewModels
 
         #endregion
 
-		#region AppliedItem Events
+        #region AppliedItem Events
 
-		/// <summary>
-		///		Event fired when an applied item has expired
-		/// </summary>
-		public event EventHandler<AppliedItemWrapper> AppliedItemExpired;
+        /// <summary>
+        ///		Event fired when an applied item has expired
+        /// </summary>
+        public event EventHandler<AppliedItemWrapper> AppliedItemExpired;
 
-		/// <summary>
-		///		Event fired when an new item has been applied
-		/// </summary>
-		public event EventHandler<AppliedItemWrapper> AppliedItemStarted;
+        /// <summary>
+        ///		Event fired when an new item has been applied
+        /// </summary>
+        public event EventHandler<AppliedItemWrapper> AppliedItemStarted;
 
-		#endregion
+        #endregion
 
         /// <summary>
         ///     Waits for GPS auth and, if auth is given, starts updating data

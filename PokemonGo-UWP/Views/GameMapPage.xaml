@@ -780,41 +780,39 @@
                 </Style>
             </ListView.ItemContainerStyle>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="8">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="8">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                        <TextBlock
-                            Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
-                            Style="{ThemeResource AppliedItemNameTextBlock}"
-                            Visibility="Collapsed" />
+                            <TextBlock Text="{Binding Converter={StaticResource ItemToItemNameConverter}}"
+                                       Style="{ThemeResource AppliedItemNameTextBlock}"
+                                       Visibility="Collapsed" />
 
-                        <Viewbox Style="{ThemeResource AppliedItemRemainingSecondsViewbox}">
-                            <POGOcontrols:CircularProgressBar Style="{ThemeResource AppliedItemRemainingSecondsProgressBar}"
-                                ImageSourcePath="{Binding Converter={StaticResource ItemToItemImageConverter}}"
-                                Maximum="{Binding MaxSeconds}"
-                                Value="{Binding RemainingSeconds}"/>
-                        </Viewbox>
+                            <Viewbox Style="{ThemeResource AppliedItemRemainingSecondsViewbox}">
+                                <POGOcontrols:CircularProgressBar Style="{ThemeResource AppliedItemRemainingSecondsProgressBar}"
+                                                                  ImageSourcePath="{Binding Converter={StaticResource ItemToItemIconConverter}}"
+                                                                  Maximum="{Binding MaxSeconds}"
+                                                                  Value="{Binding RemainingSeconds}" />
+                            </Viewbox>
 
-                        <Border Style="{ThemeResource RemainingTimeBorder}">
-                            <TextBlock Style="{ThemeResource RemainingTimeTextStyle}"
-                                        Text="{Binding RemainingTime}" />
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-        </ListView>
+                            <Border Style="{ThemeResource RemainingTimeBorder}">
+                                <TextBlock Style="{ThemeResource RemainingTimeTextStyle}"
+                                           Text="{Binding RemainingTime}" />
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
         <Grid x:Name="UIBottomPanel"
               RelativePanel.AlignBottomWithPanel="True"
