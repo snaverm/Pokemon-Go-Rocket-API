@@ -70,7 +70,7 @@
             <utils:PlayerTeamToTeamImageConverter x:Key="PlayerTeamToTeamImageConverter" />
             <utils:PlayerTeamToTeamBaseImageConverter x:Key="PlayerTeamToTeamBaseImageConverter" />
             <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
-            <utils:AchievementValueToMedalImageConverter x:Key="AchievementValueToMedalImageConverter" />
+            <utils:AchievementValueToMedalIconConverter x:Key="AchievementValueToMedalIconConverter" />
             <utils:PlayerTeamToTeamBackgroundImageConverter x:Key="PlayerTeamToTeamBackgroundImageConverter" />
             <utils:AchievementNextValueConverter x:Key="AchievementNextValueConverter" />
             <utils:AchievementValueConverter x:Key="AchievementValueConverter" />
@@ -93,34 +93,9 @@
             <utils:AchievementDescriptionTranslationConverter x:Key="AchievementDescriptionTranslationConverter" />
             <utils:WidthConverter x:Key="WidthConverter" />
             <utils:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+            <utils:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <utils:PokemonLastHoursVisibiltyConverter x:Key="PokemonLastHoursVisibiltyConverter" />
-            <utils:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <utils:IsIncenseActiveToPlayerIconConverter x:Key="IsIncenseActiveToPlayerIconConverter"/>
-            <utils:ItemToItemImageConverter x:Key="ItemToItemImageConverter"/>
-
-            <converters:ValueWhenConverter x:Key="VisibleWhenCanEvolveConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:Int32>0</x:Int32>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <Visibility>Collapsed</Visibility>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <Visibility>Visible</Visibility>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>
-
-            <!--<converters:ValueWhenConverter x:Key="VisibleWhenStringNotEmptyConverter">
-                <converters:ValueWhenConverter.When>
-                    <x:String></x:String>
-                </converters:ValueWhenConverter.When>
-                <converters:ValueWhenConverter.Value>
-                    <Visibility>Visible</Visibility>
-                </converters:ValueWhenConverter.Value>
-                <converters:ValueWhenConverter.Otherwise>
-                    <Visibility>Collapsed</Visibility>
-                </converters:ValueWhenConverter.Otherwise>
-            </converters:ValueWhenConverter>-->
+            <utils:IsIncenseActiveToPlayerIconConverter x:Key="IsIncenseActiveToPlayerIconConverter" />
 
         </ResourceDictionary>
     </Application.Resources>
