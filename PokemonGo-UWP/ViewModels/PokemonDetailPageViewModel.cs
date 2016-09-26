@@ -447,13 +447,13 @@ namespace PokemonGo_UWP.ViewModels
                             break;
                         case UpgradePokemonResponse.Types.Result.Success:
                             // Reload updated data
-                            bool stillSowingUppingPokemon = uppingPokemon == SelectedPokemon;
+                            bool selectedPokemonSameAsUpping = uppingPokemon == SelectedPokemon;
                             PokemonInventory.Remove(uppingPokemon);
                             var uppedPokemon = new PokemonDataWrapper(res.UpgradedPokemon);
                             PokemonInventory.Add(uppedPokemon);
                             PokemonInventory.SortBySortingmode(SortingMode);
                             // If the upping pokemon is still showing (not fliped to other), change selected to upped
-                            if(stillSowingUppingPokemon)
+                            if(selectedPokemonSameAsUpping)
                             {
                                 SelectedPokemon = uppedPokemon;
                                 RaisePropertyChanged(nameof(SelectedPokemon));
