@@ -843,6 +843,9 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPokeStopPageViewModel.cs" />
+    <Compile Include="Views\ChallengePage.xaml.cs">
+      <DependentUpon>ChallengePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Item\ItemUseOnPokemonPage.xaml.cs">
       <DependentUpon>ItemUseOnPokemonPage.xaml</DependentUpon>
     </Compile>
