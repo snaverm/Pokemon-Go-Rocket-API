@@ -1,6 +1,9 @@
 # Warning!
 
-[Game is not working now, please read here!](https://github.com/ST-Apps/PoGo-UWP/issues/1725)
+The Game is Working but with some small issues:
+- Captcha feature is missing, meaning that this version is not 100% safe. The latest update was released just to allow you to play again while we deal with missing features.
+- PTC login may fail and cause the app to crash
+These issues may be fixed soon.
 
 # Important information
 You can find the installation file for PoGo in [Releases](https://github.com/ST-Apps/PoGo-UWP/releases/). **Please read the whole release information before installing.**
