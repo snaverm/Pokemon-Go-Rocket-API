@@ -60,9 +60,7 @@ namespace PokemonGo_UWP.Views
             //BootStrapper.Current.NavigationService.Navigate(typeof(GameMapPage));
             if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack();
         }
-        private static async
-     Task
-         <VerifyChallengeResponse> VerifyChallenge(string token)
+        private static async Task <VerifyChallengeResponse> VerifyChallenge(string token)
         {
             return await _client.Misc.VerifyChallenge(token);
         }
