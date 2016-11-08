@@ -710,13 +710,6 @@ namespace PokemonGo_UWP.Utils
             return await _client.Misc.VerifyChallenge(token);
         }
 
-        private static async
-             Task
-                 <VerifyChallengeResponse> VerifyChallenge(string token)
-        {
-            return await _client.Misc.VerifyChallenge(token);
-        }
-
         #endregion
 
         #region Player Data & Inventory
