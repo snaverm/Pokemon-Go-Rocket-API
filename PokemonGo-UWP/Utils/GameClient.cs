@@ -700,16 +700,12 @@ namespace PokemonGo_UWP.Utils
             return await _client.Map.GetMapObjects();
         }
         
-        private static async
-   Task
-       <CheckChallengeResponse> CheckChallenge()
+        private static async Task <CheckChallengeResponse> CheckChallenge()
         {
             return await _client.Misc.CheckChallenge();
         }
         
-        private static async
-             Task
-                 <VerifyChallengeResponse> VerifyChallenge(string token)
+        private static async Task <VerifyChallengeResponse> VerifyChallenge(string token)
         {
             return await _client.Misc.VerifyChallenge(token);
         }
