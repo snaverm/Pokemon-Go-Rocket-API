@@ -13,10 +13,11 @@ using PokemonGoAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
 using System.Diagnostics;
 using System;
+using Google.Protobuf.Collections;
 
 namespace PokemonGo.RocketAPI
 {
-    public class Client : HttpClient
+    public partial class Client : HttpClient
     {
         private static readonly HttpClientHandler Handler = new HttpClientHandler
         {
@@ -174,7 +175,7 @@ namespace PokemonGo.RocketAPI
 
             //Encode payload and put in envelop, then send
             var data = requestEnvelope.ToByteString();
-            var result = await PostAsync(url, new ByteArrayContent(data.ToByteArray()));
+            var result = await PostAsync(url, new ByteArrayContent(data.ToByteArray())).ConfigureAwait(false);
 
             //Decode message
             var responseData = await result.Content.ReadAsByteArrayAsync();
@@ -187,6 +188,50 @@ namespace PokemonGo.RocketAPI
 
         #endregion
 
-    }
+        #region API 2.0 bridge
+
+        // For smoother migration to 2.0
+
+
+        // Conversion from obsolete Tuple
+        internal bool ProcessMessages<T1, T2, T3, T4, T5, T6>(Tuple<T1, T2, T3, T4, T5, T6> tuple)
+            where T1 : class, IMessage, new()
+            where T2 : class, IMessage, new()
+            where T3 : class, IMessage, new()
+            where T4 : class, IMessage, new()
+            where T5 : class, IMessage, new()
+            where T6 : class, IMessage, new()
+        {
+            IMessage[] msgs = new IMessage[] { tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4, tuple.Item5, tuple.Item6 };
+            return ProcessMessages(msgs);
+        }
+
+        // Conversion from obsolete Tuple
+        internal bool ProcessMessages<T1, T2>(Tuple<T1, T2> tuple)
+            where T1 : class, IMessage, new()
+            where T2 : class, IMessage, new()
+        {
+            IMessage[] msgs = new IMessage[] { tuple.Item1, tuple.Item2};
+            return ProcessMessages(msgs);
+        }
+
+        internal bool ProcessMessages(RepeatedField<ByteString> responses, params Type[] responseTypes)
+        {
+            IMessage[] msgs = new IMessage[responses.Count];
+
+            for (var i = 0; i < responseTypes.Length; i++)
+            {
+                msgs[i] = Activator.CreateInstance(responseTypes[i]) as IMessage;
+
+                var payload = responses[i];
+                msgs[i].MergeFrom(payload);
+            }
+
+            return ProcessMessages(msgs);
+        }
+
+    #endregion
+
+}
 
 }

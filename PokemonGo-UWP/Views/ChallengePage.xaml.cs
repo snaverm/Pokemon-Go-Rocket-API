@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI;
 using PokemonGo_UWP.Utils;
@@ -28,7 +30,6 @@ namespace PokemonGo_UWP.Views
     public sealed partial class ChallengePage : Page
     {
         public string ChallengeUri;
-        private static Client _client;
         public ChallengePage()
         {
             this.InitializeComponent();
@@ -36,33 +37,49 @@ namespace PokemonGo_UWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            ChallengeUri = e.Parameter.ToString();
+            ChallengeUri = ((JObject)JsonConvert.DeserializeObject((string)e.Parameter)).Last
+                        .ToObject<string>();
+
+            if (ChallengeUri.Length > 0 && ChallengeUri[0] == '"')
+                ChallengeUri = ChallengeUri.Substring(1);
+
+            if (ChallengeUri.Length > 0 && ChallengeUri[ChallengeUri.Length-1] == '"')
+                ChallengeUri = ChallengeUri.Substring(0, ChallengeUri.Length - 1);
+
             ChallengePanel.Navigate(new Uri(ChallengeUri));
+            Busy.SetBusy(false);
         }
 
         private void ChallengePanel_LoadCompleted(object sender, NavigationEventArgs e)
         {
             string url = e.Uri.ToString();
-                if (url.StartsWith("unity:"))
-                {
-                    string token = url.Substring("unity:".Length);
-                    Verify(token);
-                }
-                else
-                {
-                    //Error, no token!
-                }
+            if (url.StartsWith("unity:"))
+            {
+                string token = url.Substring("unity:".Length);
+                Verify(token);
+            }
+            else
+            {
+                //Error, no token!
             }
         }
         private async void Verify(string token)
         {
-            await VerifyChallenge(token);
+            await GameClient.VerifyChallenge(token);
             //BootStrapper.Current.NavigationService.Navigate(typeof(GameMapPage));
             if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack();
         }
-        private static async Task <VerifyChallengeResponse> VerifyChallenge(string token)
+
+        private void ChallengePanel_UnsupportedUriSchemeIdentified(WebView sender, WebViewUnsupportedUriSchemeIdentifiedEventArgs args)
         {
-            return await _client.Misc.VerifyChallenge(token);
+
+            string url = args.Uri.ToString();
+            if (url.StartsWith("unity:"))
+            {
+                string token = url.Substring("unity:".Length);
+                Verify(token);
+                args.Handled = true;
+            }
         }
     }
 }

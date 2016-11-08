@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView Name="ChallengePanel" LoadCompleted="ChallengePanel_LoadCompleted"/>
+        <WebView Name="ChallengePanel" LoadCompleted="ChallengePanel_LoadCompleted" UnsupportedUriSchemeIdentified="ChallengePanel_UnsupportedUriSchemeIdentified"/>
     </Grid>
 </Page>
