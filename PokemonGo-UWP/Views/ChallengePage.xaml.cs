@@ -43,12 +43,9 @@ namespace PokemonGo_UWP.Views
         private void ChallengePanel_LoadCompleted(object sender, NavigationEventArgs e)
         {
             string url = e.Uri.ToString();
-            if (url.StartsWith("unity:"))
-            {
-                int index = url.IndexOf("unity:");
-                if (index != -1)
+                if (url.StartsWith("unity:"))
                 {
-                    string token = url.Remove(index);
+                    string token = url.Substring("unity:".Length);
                     Verify(token);
                 }
                 else
