@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Reflection;
 
 namespace System.Net
@@ -19,21 +21,31 @@ namespace System.Net
         /// <returns></returns>
         public static IEnumerable<Cookie> GetCookies(this CookieContainer cookieContainer, string domain)
         {
+#if WINDOWS_UWP
             var domainTable = GetFieldValue<dynamic>(cookieContainer, "_domainTable");
-            foreach (var entry in domainTable)
+#else
+            var domainTable = GetFieldValue<dynamic>(cookieContainer, "m_domainTable");
+#endif
+            if (domainTable as IEnumerable != null)
             {
-                string key = GetPropertyValue<string>(entry, "Key");
-
-                if (key.Contains(domain))
+                foreach (var entry in domainTable)
                 {
-                    var value = GetPropertyValue<dynamic>(entry, "Value");
+                    string key = GetPropertyValue<string>(entry, "Key");
 
-                    var internalList = GetFieldValue<SortedList<string, CookieCollection>>(value, "_list");
-                    foreach (var li in internalList)
+                    if (key.Contains(domain))
                     {
-                        foreach (Cookie cookie in li.Value)
+                        var value = GetPropertyValue<dynamic>(entry, "Value");
+#if WINDOWS_UWP
+                        var internalList = GetFieldValue<SortedList<string, CookieCollection>>(value, "_list");
+#else
+                    var internalList = GetFieldValue<SortedList<string, CookieCollection>>(value, "m_list");
+#endif
+                        foreach (var li in internalList)
                         {
-                            yield return cookie;
+                            foreach (Cookie cookie in li.Value)
+                            {
+                                yield return cookie;
+                            }
                         }
                     }
                 }
@@ -49,9 +61,16 @@ namespace System.Net
         /// <returns></returns>
         internal static T GetFieldValue<T>(object instance, string fieldName)
         {
-            BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
-            FieldInfo fi = instance.GetType().GetField(fieldName, bindFlags);
-            return (T)fi.GetValue(instance);
+            try
+            {
+                BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+                FieldInfo fi = instance.GetType().GetField(fieldName, bindFlags);
+                return fi != null ? (T)fi.GetValue(instance) : (T)new object();
+            }
+            catch (Exception ex)
+            {
+                return (T)new object();
+            }
         }
 
         /// <summary>
