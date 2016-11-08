@@ -79,13 +79,14 @@ namespace PokemonGo.RocketAPI.Login
         {
             AccessToken accessToken;
             PtcLoginParameters loginData = null;
-            var cookies = Cookies.GetCookies("sso.pokemon.com").ToList();
+            Cookies = new CookieContainer();
+            //var cookies = Cookies.GetCookies("sso.pokemon.com")?.ToList();
             // @robertmclaws: "CASTGC" is the name of the login cookie that the service looks for, afaik.
             //                The second one is listed as a backup in case they change the cookie name.
-            if (!cookies.Any(c => c.Name == "CASTGC") || cookies.Count == 0)
-            {
+            //if (!cookies.Any(c => c.Name == "CASTGC") || cookies.Count == 0)
+            //{
                 loginData = await GetLoginParameters().ConfigureAwait(false);
-            }
+            //}
             var authTicket = await GetAuthenticationTicket(loginData).ConfigureAwait(false);
             accessToken = await GetOAuthToken(authTicket).ConfigureAwait(false);
 
@@ -99,7 +100,6 @@ namespace PokemonGo.RocketAPI.Login
         /// <summary>
         /// Responsible for retrieving login parameters for <see cref="GetAuthenticationTicket" />.
         /// </summary>
-        /// <param name="httpClient">An initialized <see cref="HttpClient" /></param>
         /// <returns><see cref="PtcLoginParameters" /> for <see cref="GetAuthenticationTicket" />.</returns>
         private async Task<PtcLoginParameters> GetLoginParameters()
         {
@@ -112,7 +112,6 @@ namespace PokemonGo.RocketAPI.Login
         /// <summary>
         /// Authenticates against the PTC login service and acquires an Authentication Ticket.
         /// </summary>
-        /// <param name="httpClient">The <see cref="HttpClient"/> instance to use for this request.</param>
         /// <param name="loginData">The <see cref="PtcLoginParameters" /> to use from this request. Obtained by calling <see cref="GetLoginParameters(HttpClient)"/>.</param>
         /// <returns></returns>
         private async Task<string> GetAuthenticationTicket(PtcLoginParameters loginData)
