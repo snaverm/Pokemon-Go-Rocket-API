@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using POGOProtos.Networking.Requests;
 using POGOProtos.Networking.Requests.Messages;
 using POGOProtos.Networking.Responses;
@@ -53,6 +53,20 @@ namespace PokemonGo.RocketAPI.Rpc
                 await
                     PostProtoPayload<Request, EncounterTutorialCompleteResponse>(RequestType.MarkTutorialComplete,
                         new MarkTutorialCompleteMessage());
+        }
+        public async Task<CheckChallengeResponse> CheckChallenge()
+        {
+            return await PostProtoPayload<Request, CheckChallengeResponse>(RequestType.CheckChallenge, new CheckChallengeMessage());
+        }
+
+        public async Task<VerifyChallengeResponse> VerifyChallenge(string token)
+        {
+            return await PostProtoPayload<Request, VerifyChallengeResponse>(RequestType.VerifyChallenge,
+                new VerifyChallengeMessage
+                {
+                    Token = token
+                });
+
         }
     }
 }
