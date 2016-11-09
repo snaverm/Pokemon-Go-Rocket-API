@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using POGOProtos.Networking.Requests;
 using POGOProtos.Networking.Requests.Messages;
+using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Login;
@@ -16,9 +17,11 @@ namespace PokemonGo.RocketAPI.Rpc
     {
         //public event GoogleDeviceCodeDelegate GoogleDeviceCodeEvent;
         private readonly ILoginType login;
+        private readonly Client _client;
 
         public Login(Client client) : base(client)
         {
+            _client = client;
             login = SetLoginType(client.Settings);
         }
 
@@ -63,7 +66,7 @@ namespace PokemonGo.RocketAPI.Rpc
 
             var serverResponse = await PostProto<Request>(Resources.RpcUrl, serverRequest);
 
-            if(serverRequest.StatusCode == (int) StatusCode.AccessDenied)
+            if (serverRequest.StatusCode == (int) StatusCode.AccessDenied)
             {
                 throw new AccountLockedException();
             }
@@ -75,6 +78,9 @@ namespace PokemonGo.RocketAPI.Rpc
             }
 
             Client.AccessToken.AuthTicket = serverResponse.AuthTicket;
+
+            /* Temporary inserted here from 2.0 - there is better mechanism */
+            _client.ProcessMessages(serverResponse.Returns, typeof(GetPlayerResponse), typeof(CheckChallengeResponse));
 
             if (serverResponse.StatusCode == (int)StatusCode.Redirect)
             {

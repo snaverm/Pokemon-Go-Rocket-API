@@ -21,7 +21,7 @@ namespace PokemonGo.RocketAPI.Rpc
             Task
                 <
                     Tuple
-                        <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
+                        <GetMapObjectsResponse, CheckChallengeResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects()
         {
             #region Messages
@@ -33,10 +33,11 @@ namespace PokemonGo.RocketAPI.Rpc
                 Latitude = Client.CurrentLatitude,
                 Longitude = Client.CurrentLongitude
             };
+            var checkChallengeMessage = new CheckChallengeMessage();
             var getHatchedEggsMessage = new GetHatchedEggsMessage();
             var getInventoryMessage = new GetInventoryMessage
             {
-                LastTimestampMs = DateTime.UtcNow.ToUnixTime()
+                LastTimestampMs = DateTime.UtcNow.ToUnixTime() // Should be timestamp of last inventory response, no?
             };
             var checkAwardedBadgesMessage = new CheckAwardedBadgesMessage();
             var downloadSettingsMessage = new DownloadSettingsMessage
@@ -51,6 +52,11 @@ namespace PokemonGo.RocketAPI.Rpc
                 {
                     RequestType = RequestType.GetMapObjects,
                     RequestMessage = getMapObjectsMessage.ToByteString()
+                },
+                new Request
+                {
+                    RequestType = RequestType.CheckChallenge,
+                    RequestMessage = checkChallengeMessage.ToByteString()
                 },
                 new Request
                 {
@@ -69,11 +75,17 @@ namespace PokemonGo.RocketAPI.Rpc
                     RequestType = RequestType.DownloadSettings,
                     RequestMessage = downloadSettingsMessage.ToByteString()
                 });
+
             var response = await PostProtoPayload
-                        <Request, GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse,
+                        <Request, GetMapObjectsResponse, CheckChallengeResponse, GetHatchedEggsResponse, GetInventoryResponse,
                             CheckAwardedBadgesResponse, DownloadSettingsResponse>(request);
 
-            _client.Download.DownloadSettingsHash = response?.Item5?.Hash ?? "";
+
+            /* Temporary inserted here from 2.0 - there is better mechanism */
+            _client.ProcessMessages<GetMapObjectsResponse, CheckChallengeResponse, GetHatchedEggsResponse, GetInventoryResponse,
+                            CheckAwardedBadgesResponse, DownloadSettingsResponse>(response);
+
+            _client.Download.DownloadSettingsHash = response?.Item6?.Hash ?? "";
 
             return response;
         }
