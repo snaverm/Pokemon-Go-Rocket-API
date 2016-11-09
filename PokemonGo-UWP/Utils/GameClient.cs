@@ -694,7 +694,7 @@ namespace PokemonGo_UWP.Utils
 
                     BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
                     {
-                        SelectedPokemonId = currentPokemon.PokemonId.ToString(),
+                        SelectedPokemonId = currentPokemon.Id.ToString(),
                         ViewMode = PokemonDetailPageViewMode.ReceivedPokemon
                     });
                 }
