@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -416,6 +416,31 @@ namespace PokemonGo_UWP.Utils
             return tokenString == null ? null : JsonConvert.DeserializeObject<AccessToken>(SettingsService.Instance.AccessTokenString);
         }
 
+
+        /// <summary>
+        /// Creates and initializes API client
+        /// </summary>
+        private static void CreateClient()
+        {
+            //Unregister old handlers
+            if (_client != null)
+            {
+                _client.CheckChallengeReceived -= _client_CheckChallengeReceived;
+            }
+
+            _client = new Client(_clientSettings, null, DeviceInfos.Current);
+
+            //Register EventHandlers
+            _client.CheckChallengeReceived += _client_CheckChallengeReceived;
+
+            var apiFailureStrategy = new ApiFailureStrategy(_client);
+            _client.ApiFailure = apiFailureStrategy;
+            // Register to AccessTokenChanged
+            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
+            apiFailureStrategy.OnFailureToggleUpdateTimer += ToggleUpdateTimer;
+        }
+
+
         /// <summary>
         ///     Sets things up if we didn't come from the login page
         /// </summary>
@@ -436,12 +461,8 @@ namespace PokemonGo_UWP.Utils
                 GooglePassword = SettingsService.Instance.LastLoginService == AuthType.Google ? credentials.Password : null,
             };
 
-            _client = new Client(_clientSettings, null, DeviceInfos.Current) { AccessToken = LoadAccessToken() };
-            var apiFailureStrategy = new ApiFailureStrategy(_client);
-            _client.ApiFailure = apiFailureStrategy;
-            // Register to AccessTokenChanged
-            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
-            apiFailureStrategy.OnFailureToggleUpdateTimer += ToggleUpdateTimer;
+            CreateClient();
+
             try
             {
                 await _client.Login.DoLogin();
@@ -475,11 +496,9 @@ namespace PokemonGo_UWP.Utils
                 PtcPassword = password,
                 AuthType = AuthType.Ptc
             };
-            _client = new Client(_clientSettings, null, DeviceInfos.Current);
-            var apiFailureStrategy = new ApiFailureStrategy(_client);
-            _client.ApiFailure = apiFailureStrategy;
-            // Register to AccessTokenChanged
-            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
+
+            CreateClient();
+
             // Get PTC token
             await _client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
@@ -492,6 +511,7 @@ namespace PokemonGo_UWP.Utils
             // Return true if login worked, meaning that we have a token
             return true;
         }
+
 
         /// <summary>
         ///     Starts a Google session for the given user
@@ -508,11 +528,8 @@ namespace PokemonGo_UWP.Utils
                 AuthType = AuthType.Google
             };
 
-            _client = new Client(_clientSettings, null, DeviceInfos.Current);
-            var apiFailureStrategy = new ApiFailureStrategy(_client);
-            _client.ApiFailure = apiFailureStrategy;
-            // Register to AccessTokenChanged
-            apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
+            CreateClient();
+
             // Get Google token
             await _client.Login.DoLogin();
             // Update current token even if it's null and clear the token for the other identity provide
@@ -615,16 +632,39 @@ namespace PokemonGo_UWP.Utils
                 Busy.SetBusy(false);
         }
 
-        private static async void LocationHelperPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private static async void _client_CheckChallengeReceived(object sender, CheckChallengeResponse e)
         {
-            if (e.PropertyName == nameof(LocationServiceHelper.Instance.Geoposition))
+
+            if (e.ShowChallenge && !String.IsNullOrWhiteSpace(e.ChallengeUrl) && e.ChallengeUrl.Length > 5)
             {
-                // Updating player's position
-                var position = LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position;
-                if (_client != null)
-                    await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, LocationServiceHelper.Instance.Geoposition.Coordinate.Accuracy);
+                // Captcha is shown in checkChallengeResponse.ChallengeUrl
+                Logger.Write($"ChallengeURL: {e.ChallengeUrl}");
+                // breakpoint here to manually resolve Captcha in a browser
+                // after that set token to str variable from browser (see screenshot)
+                Logger.Write("Pause");
+
+                //GOTO THE REQUIRED PAGE
+                if (BootStrapper.Current.NavigationService.CurrentPageType != typeof(ChallengePage))
+                {
+                     await DispatcherHelper.RunInDispatcherAndAwait(() =>
+                     {
+                         // We are not in UI thread probably, so run this via dispatcher
+                         BootStrapper.Current.NavigationService.Navigate(typeof(ChallengePage), e.ChallengeUrl);
+                     });
+                }
             }
+
         }
+        private static async void LocationHelperPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if(e.PropertyName==nameof(LocationServiceHelper.Instance.Geoposition))
+			{
+				// Updating player's position
+				var position = LocationServiceHelper.Instance.Geoposition.Coordinate.Point.Position;
+				if (_client != null)
+					await _client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, LocationServiceHelper.Instance.Geoposition.Coordinate.Accuracy);
+			}
+		}
 
         /// <summary>
         ///     DateTime for the last map update
@@ -705,9 +745,9 @@ namespace PokemonGo_UWP.Utils
                 }
             }
             Logger.Write("Finished updating map objects");
-
+            
             // Update Hatched Eggs
-            var hatchedEggResponse = mapObjects.Item2;
+            var hatchedEggResponse = mapObjects.Item3;
             if (hatchedEggResponse.Success)
             {
                 //OnEggHatched?.Invoke(null, hatchedEggResponse);
@@ -732,7 +772,7 @@ namespace PokemonGo_UWP.Utils
 
                     BootStrapper.Current.NavigationService.Navigate(typeof(PokemonDetailPage), new SelectedPokemonNavModel()
                     {
-                        SelectedPokemonId = currentPokemon.PokemonId.ToString(),
+                        SelectedPokemonId = currentPokemon.Id.ToString(),
                         ViewMode = PokemonDetailPageViewMode.ReceivedPokemon
                     });
                 }
@@ -754,7 +794,7 @@ namespace PokemonGo_UWP.Utils
             Task
                 <
                     Tuple
-                        <GetMapObjectsResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
+                        <GetMapObjectsResponse, CheckChallengeResponse, GetHatchedEggsResponse, GetInventoryResponse, CheckAwardedBadgesResponse,
                             DownloadSettingsResponse>> GetMapObjects(Geoposition geoposition)
         {
             _lastGeopositionMapObjectsRequest = geoposition;
@@ -1216,6 +1256,23 @@ namespace PokemonGo_UWP.Utils
         {
             return IncubatorsInventory.FirstOrDefault(item => item.Id == null ? false : item.Id.Equals(egg.EggIncubatorId));
         }
+
+        #endregion
+
+
+        #region Misc
+
+
+        /// <summary>
+        ///     Verifies challenge
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static async Task<VerifyChallengeResponse> VerifyChallenge(string token)
+        {
+            return await _client.Misc.VerifyChallenge(token);
+        }
+
 
         #endregion
 
