@@ -375,7 +375,7 @@ namespace PokemonGo_UWP.Utils
             _client.ApiFailure = apiFailureStrategy;
             // Register to AccessTokenChanged
             apiFailureStrategy.OnAccessTokenUpdated += (s, e) => SaveAccessToken();
-
+            apiFailureStrategy.OnFailureToggleUpdateTimer += ToggleUpdateTimer;
         }
 
 
