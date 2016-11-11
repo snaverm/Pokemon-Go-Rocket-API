@@ -310,7 +310,8 @@ namespace PokemonGo_UWP
                 }
                 else if (latestUpdateInfo.Status == UpdateManager.UpdateStatus.NextVersionNotReady)
                 {
-                    var dialog = new MessageDialog("Please wait on next update", "This version is obsolete");
+                    var dialog = new MessageDialog("We've temporarily disabled the app to protect your account. An update will be ready soon. " +
+                        "Please DO NOT open an issue on GitHub. Thank you for your patience.");
                     dialog.Commands.Add(new UICommand("OK"));
                     dialog.DefaultCommandIndex = 0;
                     dialog.CancelCommandIndex = 1;
