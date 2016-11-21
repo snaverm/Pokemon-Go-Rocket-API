@@ -310,8 +310,11 @@ namespace PokemonGo_UWP
                 }
                 else if (latestUpdateInfo.Status == UpdateManager.UpdateStatus.NextVersionNotReady)
                 {
-                    var dialog = new MessageDialog("We've temporarily disabled the app to protect your account. An update will be ready soon. " +
-                        "Please DO NOT open an issue on GitHub. Thank you for your patience.");
+                    var twoLines = Environment.NewLine + Environment.NewLine;
+                    var dialog = new MessageDialog("Niantic has raised the minimum API level above what we have access to, so we've temporarily disabled the app to protect your account." + 
+                        twoLines + "DO NOT attempt to bypass this check. Accounts that access lower APIs than the minimum WILL BE BANNED by Niantic." + twoLines + 
+                        "An update will be ready soon. Please DO NOT open an issue on GitHub, you are seeing this message because we already know about it, and this is how we're telling you. " +
+                        "Thank you for your patience." + twoLines + "- The PoGo-UWP Team");
                     dialog.Commands.Add(new UICommand("OK"));
                     dialog.DefaultCommandIndex = 0;
                     dialog.CancelCommandIndex = 1;
