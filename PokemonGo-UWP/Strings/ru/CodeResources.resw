@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy hh:mm tt</value>
+  </data>
+  <data name="PokemonFledText" xml:space="preserve">
+    <value>{0} сбежал</value>
+  </data>
+  <data name="GettingGpsSignalText" xml:space="preserve">
+    <value>Получение GPS сигнала...</value>
+  </data>
+  <data name="GettingUserDataText" xml:space="preserve">
+    <value>Получение пользовательских данных...</value>
+  </data>
+  <data name="GoogleErrorText" xml:space="preserve">
+    <value>Google вернул ошибку: </value>
+  </data>
+  <data name="GoogleNotRespondingText" xml:space="preserve">
+    <value>Google не отвечает, подождите немного и попробуйте ешё раз.</value>
+  </data>
+  <data name="LoadingEncounterText" xml:space="preserve">
+    <value>Загрузка битвы с {0}</value>
+  </data>
+  <data name="LoggingInText" xml:space="preserve">
+    <value>Вход...</value>
+  </data>
+  <data name="LoginFailedText" xml:space="preserve">
+    <value>Вход не удался, попробуйте ещё раз.</value>
+  </data>
+  <data name="NoText" xml:space="preserve">
+    <value>Нет
+</value>
+    <comment>Capslock</comment>
+  </data>
+  <data name="NoGpsPermissionsText" xml:space="preserve">
+    <value>Нам требуется GPS для запуска игры, пожалуйста, включите его и попробуйте ещё раз.</value>
+  </data>
+  <data name="PokemonRanAwayText" xml:space="preserve">
+    <value>Покемон сбежал :(</value>
+  </data>
+  <data name="PtcDownText" xml:space="preserve">
+    <value>Вход через PTC возможно не работает, попробуйте позже.</value>
+  </data>
+  <data name="SomethingWentWrongText" xml:space="preserve">
+    <value>Что-то пошло не так и приложение может работать не стабильно. Вы хотите выйти и попробовать ещё раз?</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>hh:mm tt</value>
+  </data>
+  <data name="UpdateDownloadingText" xml:space="preserve">
+    <value>Скачивается обновление {0}</value>
+  </data>
+  <data name="UpdatedVersionText" xml:space="preserve">
+    <value>Версия {0} доступна для скачивания. Вы хотите обновиться?
+{1}</value>
+  </data>
+  <data name="UpdateFailedText" xml:space="preserve">
+    <value>Обновление неудачно: {0}
+Открыть страницу с инструкцией по ручной установке?</value>
+  </data>
+  <data name="UpdateInstallingText" xml:space="preserve">
+    <value>Установка обновления, приложение перезагружается...</value>
+  </data>
+  <data name="WrongUsernameText" xml:space="preserve">
+    <value>Неправильный логин/пароль или сервера недоступный, попробуйте позже.</value>
+  </data>
+  <data name="YesText" xml:space="preserve">
+    <value>Да</value>
+    <comment>Capslock</comment>
+  </data>
+  <data name="InstinctTeamText" xml:space="preserve">
+    <value>Команда "Инстинкт"</value>
+  </data>
+  <data name="NoTeamText" xml:space="preserve">
+    <value>Без команды</value>
+  </data>
+  <data name="ValorTeamText" xml:space="preserve">
+    <value>Команда "Отвага"</value>
+  </data>
+  <data name="MysticTeamText" xml:space="preserve">
+    <value>Команда "Мистика"</value>
+  </data>
+  <data name="TransferPokemonSuccessText" xml:space="preserve">
+    <value>Успешно переданно! Полученна {0} Конфета(ы) от профессора.</value>
+  </data>
+  <data name="TransferPokemonWarningText" xml:space="preserve">
+    <value>Вы не можете вернуть это после отправки Профессору. Вы правда хотите отправить {0} Профессору?</value>
+  </data>
+  <data name="LoginExpired" xml:space="preserve">
+    <value>Предыдущая авторизация истекла.</value>
+  </data>
+  <data name="ActivityUnknown" xml:space="preserve">
+    <value>Неизвестно</value>
+  </data>
+  <data name="ActivityCatchPokemon" xml:space="preserve">
+    <value>Покемон Пойман</value>
+  </data>
+  <data name="ActivityCatchLegendPokemon" xml:space="preserve">
+    <value>Пойман Легендарный Покемон</value>
+  </data>
+  <data name="ActivityFleePokemon" xml:space="preserve">
+    <value>Покемон сбежал</value>
+  </data>
+  <data name="ActivityEvolvePokemon" xml:space="preserve">
+    <value>Покемон эволюционирован</value>
+  </data>
+  <data name="ActivityHatchEgg" xml:space="preserve">
+    <value>Яйцо вылупилось!</value>
+  </data>
+  <data name="ActivityWalkKm" xml:space="preserve">
+    <value>Ходьба Км</value>
+  </data>
+  <data name="ActivityPokedexEntryNew" xml:space="preserve">
+    <value>Новый Покемон</value>
+  </data>
+  <data name="ActivityCatchFirstThrow" xml:space="preserve">
+    <value>Первый бросок</value>
+  </data>
+  <data name="ActivityCatchNiceThrow" xml:space="preserve">
+    <value>Отличный бросок</value>
+  </data>
+  <data name="ActivityCatchGreatThrow" xml:space="preserve">
+    <value>Большой бросок</value>
+  </data>
+  <data name="ActivityCatchExcellentThrow" xml:space="preserve">
+    <value>Замечательный бросок</value>
+  </data>
+  <data name="ActivityCatchCurveball" xml:space="preserve">
+    <value>Крученный</value>
+  </data>
+  <data name="ActivityCatchFirstCatchOfDay" xml:space="preserve">
+    <value>Первый пойманный за день!</value>
+  </data>
+  <data name="ActivityCatchMilestone" xml:space="preserve">
+    <value>Пойман Milestone</value>
+  </data>
+  <data name="ActivityReleasePokemon" xml:space="preserve">
+    <value>Выпущенный покемон</value>
+  </data>
+  <data name="ActivityDefeatGymDefender" xml:space="preserve">
+    <value>Поражение в спортзале Защитника</value>
+  </data>
+  <data name="ActivityDefeatGymLeader" xml:space="preserve">
+    <value>Поражение в спортзале Лидера</value>
+  </data>
+  <data name="Combat" xml:space="preserve">
+    <value>По CP</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>По дате</value>
+  </data>
+  <data name="Fav" xml:space="preserve">
+    <value>По популярности</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>По здоровью</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>По имени</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>По номеру</value>
+  </data>
+  <data name="PokemonInventoryFullText" xml:space="preserve">
+    <value>Ваш инвентарь полон, нужно передать некоторых покемонов прежде чем ловить снова {0}.</value>
+  </data>
+</root>

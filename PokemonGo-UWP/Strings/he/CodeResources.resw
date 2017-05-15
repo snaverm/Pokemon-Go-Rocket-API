@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PokemonFledText" xml:space="preserve">
+    <value>{0} נמלטו</value>
+  </data>
+  <data name="GettingGpsSignalText" xml:space="preserve">
+    <value>...GPS מקבל קליטת</value>
+  </data>
+  <data name="GettingUserDataText" xml:space="preserve">
+    <value>...מקבל נתוני משתמש.</value>
+  </data>
+  <data name="GoogleErrorText" xml:space="preserve">
+    <value>:Google החזיר שגיאה</value>
+  </data>
+  <data name="GoogleNotRespondingText" xml:space="preserve">
+    <value>אינו מגיב, אנא נסה שוב מאוחר יותר Google</value>
+  </data>
+  <data name="LoadingEncounterText" xml:space="preserve">
+    <value>{0} טעינת המפגש עם </value>
+  </data>
+  <data name="LoggingInText" xml:space="preserve">
+    <value>...כניסה</value>
+  </data>
+  <data name="LoginFailedText" xml:space="preserve">
+    <value>הכניסה נכשלה, נא לנסות שוב.</value>
+  </data>
+  <data name="NoGpsPermissionsText" xml:space="preserve">
+    <value>אנחנו צריכים הרשאות ה-GPS כדי להפעיל את המשחק, בבקשה לאפשר אותו ולנסות שוב.</value>
+  </data>
+  <data name="PokemonRanAwayText" xml:space="preserve">
+    <value>:( פוקימון ברח, מצטער</value>
+  </data>
+  <data name="PtcDownText" xml:space="preserve">
+    <value>כניסה PTC למטה, אנא נסה שוב מאוחר יותר</value>
+  </data>
+  <data name="SomethingWentWrongText" xml:space="preserve">
+    <value>משהו השתבש, יישום עשוי להיות לא יציב עכשיו. האם אתה רוצה להתנתק ולנסות שוב?</value>
+  </data>
+  <data name="UpdateDownloadingText" xml:space="preserve">
+    <value>{הורדת עדכון {0</value>
+  </data>
+  <data name="UpdatedVersionText" xml:space="preserve">
+    <value>{0} גירסה מעודכנת זמינה. האם ברצונך לעדכן?
+{1} </value>
+  </data>
+  <data name="UpdateFailedText" xml:space="preserve">
+    <value>{העדכון נכשל: {0
+פתח את דף עם קבצי התקנה להתקנה ידנית?</value>
+  </data>
+  <data name="UpdateInstallingText" xml:space="preserve">
+    <value>יישום התקנת עדכון, מופעל מחדש...</value>
+  </data>
+  <data name="WrongUsernameText" xml:space="preserve">
+    <value>הלא נכון שם משתמש/סיסמה או שרת מנותק, אנא נסה שנית</value>
+  </data>
+  <data name="NoTeamText" xml:space="preserve">
+    <value>אין צוות</value>
+  </data>
+  <data name="ActivityUnknown" xml:space="preserve">
+    <value>Neznámé</value>
+  </data>
+</root>

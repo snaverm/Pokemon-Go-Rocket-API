@@ -1,0 +1,255 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="using:PokemonGo_UWP.Utils"
+    xmlns:viewModels="using:PokemonGo_UWP.ViewModels"
+    x:Name="Page"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:SettingsPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#4ab583" Offset="0" />
+                <GradientStop Color="#266378" Offset="0.8" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock x:Uid="SettingsHeaderText"
+                       Text="SETTINGS"
+                       Style="{StaticResource TextPageTitle}" />
+            <Border Background="#ffffff"
+                    Width="150"
+                    Height="1" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="0,0,0,57.5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsUseNianticMapTextBlock"
+                               Text="Use Niantic Map"
+                               Style="{StaticResource TextSettingsTitle}" />
+
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsNianticMapEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsMapRotationModeGPSTextBlock"
+                               Text="Auto-Rotate based on"
+                               Style="{StaticResource TextSettingsTitle}" />
+					<ComboBox Grid.Column="1"
+                              Margin="0,8,15,10"
+															ItemsSource="{Binding MapAutomaticOrientationMode_List, Mode=OneWay}" 
+															SelectedItem="{Binding MapAutomaticOrientationMode, Mode=TwoWay}" >
+					</ComboBox>
+
+				</Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsRememberMapZoomTextBlock"
+                               Text="Remember Map Zoom"
+                               Style="{StaticResource TextSettingsTitle}" />
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsRememberMapZoomEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+                </Grid>
+				<Border Background="#33ffffff" Height="1" Margin="15" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsMusicTextBlock"
+                               Text="Music"
+                               Style="{StaticResource TextSettingsTitle}" />
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsMusicEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsVibrationTextBlock"
+                               Text="Vibration"
+                               Style="{StaticResource TextSettingsTitle}" />
+
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsVibrationEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsBatterySaverTextBlock"
+                               Text="Battery Saver"
+                               Style="{StaticResource TextSettingsTitle}" />
+
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsBatterySaverEnabled, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+                </Grid>
+				<Grid VerticalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="135" />
+					</Grid.ColumnDefinitions>
+					<StackPanel VerticalAlignment="Center">
+						<TextBlock x:Uid="SettingsLanguageTextBlock"
+                                   Text="Language"
+                                   Style="{StaticResource TextSettingsTitle}"
+                                   Margin="15,15,15,5" />
+						<TextBlock x:Uid="SettingsLanguageRestartTextBlock"
+                                   Text="You must restart the App to take effect."
+                                   Style="{StaticResource TextSettingsTitle}"
+                                   FontSize="12" Margin="15,0,15,15" Foreground="#ddd"/>
+					</StackPanel>
+					<ComboBox x:Name="LanguageComboBox"
+                              VerticalAlignment="Center"
+                              Grid.ColumnSpan="2"
+                              HorizontalAlignment="Right"
+                              ItemsSource="{Binding languageList, Mode=OneWay}" SelectedItem="{Binding UserLanguage, Mode=TwoWay}" 
+                              Margin="0,8,15,10" />
+				</Grid>
+				<Border Background="#33ffffff" Height="1" Margin="15" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="135" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               x:Uid="SettingsLiveTileTextBlock"
+                               Text="Live Tile Mode"
+                               Style="{StaticResource TextSettingsTitle}" />
+                </Grid>
+                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              Margin="15,0,15,15">
+                    <StackPanel Orientation="Horizontal" Height="100">
+                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                                CommandParameter="0"
+                                Style="{StaticResource ButtonNoStyle}"
+                                Margin="0,0,10,0"
+                                Padding="0">
+                            <Image Source="/Assets/LiveTiles/Normal/Square150x150Logo.scale-200.png" />
+                        </Button>
+                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                                CommandParameter="1"
+                                Style="{StaticResource ButtonNoStyle}"
+                                Background="#11000000"
+                                Margin="0,0,10,0"
+                                Padding="0">
+                            <Image Source="/Assets/LiveTiles/Transparent/Square150x150Logo.scale-200.png" />
+                        </Button>
+                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                                CommandParameter="2"
+                                Style="{StaticResource ButtonNoStyle}"
+                                Margin="0,0,10,0"
+                                Padding="0">
+                            <Image Source="../Assets/LiveTiles/Peek.gif" />
+                        </Button>
+                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                                CommandParameter="3"
+                                Style="{StaticResource ButtonNoStyle}"
+                                Margin="0,0,0,0"
+                                Padding="0">
+                            <Image Source="../Assets/LiveTiles/People.gif" />
+                        </Button>
+                        <!-- Image cannot load GIF. Use some NUGET? -->
+                        <!--
+                        <Button Command="{Binding LiveTileSelectionCommand}" 
+                                CommandParameter="4"
+                                Style="{StaticResource ButtonNoStyle}"
+                                Margin="0,0,10,0"
+                                Padding="0">
+                            <Image Source="../Assets/Square150x150Logo.scale-200.png" />
+                        </Button>-->
+                        <!-- End -->
+                    </StackPanel>
+                </ScrollViewer>
+                <Border Background="#33ffffff" Height="1" Margin="15,15,15,0" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="135" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0"
+                               x:Uid="SettingsShowDebugInfoInErrorMessage"
+                               Text="Show details on error message"
+                               Style="{StaticResource TextSettingsTitle}" />
+
+					<CheckBox Grid.Column="1"
+                              IsChecked="{Binding ShowDebugInfoInErrorMessage, Mode=TwoWay}"
+                              Style="{StaticResource SettingsCheckbox}"
+                              Margin="0,8,15,10" />
+				</Grid>
+			
+				<Border Background="#33ffffff" Height="1" Margin="15,15,15,0" />
+				<Button Command="{Binding DoPtcLogoutCommand}"
+                        Style="{StaticResource ButtonNoStyle}"
+                        Padding="0,15,0,0">
+					<TextBlock x:Uid="SettingsSignOutTextBlock"
+                                Text="Sign Out"
+                                Style="{StaticResource TextSettingsTitle}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right" Margin="15,15,15,10"/>
+				</Button>
+				<TextBlock 
+                   Style="{StaticResource TextSettingsTitle}"
+                   Text="{Binding CurrentVersion}"
+                   FontSize="12"
+                   Foreground="#ccc"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Padding="0" Margin="15,0,15,15"/>
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <Button Grid.Row="1"
+                Command="{Binding CloseCommand}"
+                Style="{StaticResource ButtonCircle}"
+                VerticalAlignment="Bottom">
+            <Image Source="../Assets/Buttons/btn_close.png" />
+        </Button>
+
+    </Grid>
+
+</Page>

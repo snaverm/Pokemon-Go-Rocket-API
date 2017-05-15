@@ -1,0 +1,103 @@
+<common:BootStrapper x:Class="PokemonGo_UWP.App"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:common="using:Template10.Common"
+                     xmlns:utils="using:PokemonGo_UWP.Utils"
+                     xmlns:converters="using:Template10.Converters"
+                     xmlns:enums="using:POGOProtos.Enums"
+                     RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Custom.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <utils:PokemonTypeToBackgroundImageConverter x:Key="PokemonTypeToBackgroundConverter"/>
+            <utils:PokemonIdToPokedexDescription x:Key="PokemonIdToPokedexDescription"/>
+            <utils:PokemonIdToNumericId x:Key="PokemonIdToNumericId" />
+            <utils:ItemClickEventArgsToClickedItemConverter x:Key="ItemClickEventArgsToClickedItemConverter" />
+            <utils:PokemonIdToPokemonSpriteConverter x:Key="PokemonIdToPokemonSpriteConverter" />
+            <utils:PokemonTypeTranslationConverter x:Key="PokemonTypeTranslationConverter" />
+            <utils:PokemonDetailPageViewModeToCloseButtonImageSourceConverter x:Key="PokemonDetailPageViewModeToCloseButtonImageSourceConverter" />
+            <utils:PokemonToCurrentCandiesConverter x:Key="PokemonToCurrentCandiesConverter" />
+            <utils:PokemonToStardustForPowerUpConverter x:Key="PokemonToStardustForPowerUpConverter" />
+            <utils:PokemonToStardustForPowerUpForegroundConverter x:Key="PokemonToStardustForPowerUpForegroundConverter" />
+            <utils:PokemonToCandiesForPowerUpConverter x:Key="PokemonToCandiesForPowerUpConverter" />
+            <utils:PokemonToCandiesForPowerUpForegroundConverter x:Key="PokemonToCandiesForPowerUpForegroundConverter" />
+            <utils:PokemonToPokemonFamilyNameStringConverter x:Key="PokemonToPokemonFamilyNameStringConverter" />
+            <utils:PokemonToCandyImageConverter x:Key="PokemonToCandyImageConverter" />
+            <utils:PokemonToTranslatedPokemonTypeConverter x:Key="PokemonToTranslatedPokemonTypeConverter" />
+            <utils:PokemonToPokemonSecondTypeVisibilityConverter x:Key="PokemonToPokemonSecondTypeVisibilityConverter" />
+            <utils:PokemonToCandiesForEvolveConverter x:Key="PokemonToCandiesForEvolveConverter" />
+            <utils:PokemonToCandiesForEvolveForegroundConverter x:Key="PokemonToCandiesForEvolveForegroundConverter" />
+            <utils:PokemonToPokemonEvolveVisibilityConverter x:Key="PokemonToPokemonEvolveVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalWeightVisibilityConverter x:Key="PokemonToPokemonExceptionalWeightVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalWeightTagConverter x:Key="PokemonToPokemonExceptionalWeightTagConverter" />
+            <utils:PokemonToPokemonExceptionalHeightVisibilityConverter x:Key="PokemonToPokemonExceptionalHeightVisibilityConverter" />
+            <utils:PokemonToPokemonExceptionalHeightTagConverter x:Key="PokemonToPokemonExceptionalHeightTagConverter" />
+            <utils:PokemonCaptureCellToLocationConverter x:Key="PokemonCaptureCellToLocationConverter" />
+            <utils:PokemonToDeploymentImageConverter x:Key="PokemonToDeploymentImageConverter" />
+            <utils:EmptyConverter x:Key="EmptyConverter" />
+            <utils:PlayerTeamToTeamColorBrushConverter x:Key="PlayerTeamToTeamColorBrushConverter" />
+            <utils:EncounterBackgroundToBackgroundImageConverter x:Key="EncounterBackgroundToBackgroundImageConverter" />
+            <utils:ItemToItemNameConverter x:Key="ItemToItemNameConverter" />
+            <utils:ItemToItemRecycleVisibilityConverter x:Key="ItemToItemRecycleVisibilityConverter" />
+            <utils:CaptureXpToTotalCaptureXpConverter x:Key="CaptureXpToTotalCaptureXpConverter" />
+            <utils:ActivityTypeToActivityNameConverter x:Key="ActivityTypeToActivityNameConverter" />
+            <utils:MapObjectToGeopointConverter x:Key="MapObjectToGeopointConverter" />
+            <utils:ItemIdToItemIconConverter x:Key="ItemIdToItemIconConverter" />
+            <utils:PokemonDataToVisibilityConverter x:Key="PokemonDataToVisibilityConverter" />
+            <utils:ItemToItemIconConverter x:Key="ItemToItemIconConverter" />
+            <utils:NearbyPokemonDistanceToDistanceImageConverter x:Key="NearbyPokemonDistanceToDistanceImageConverter" />
+            <utils:PokestopToIconConverter x:Key="PokestopToIconConverter" />
+            <utils:GymToIconConverter x:Key="GymToIconConverter" />
+            <utils:CurrentTimeToMapColorSchemeConverter x:Key="CurrentTimeToMapColorSchemeConverter" />
+            <utils:PokemonDataToPokemonStaminaConverter x:Key="PokemonDataToPokemonStaminaConverter" />
+            <utils:PokemonIdToPokemonNameConverter x:Key="PokemonIdToPokemonNameConverter" />
+            <utils:PokemonSortingModesToIconConverter x:Key="PokemonSortingModesToIconConverter" />
+            <utils:PokemonSortingModesTranslationConverter x:Key="PokemonSortingModesTranslationConverter" />
+            <utils:EggDataToEggProgressConverter x:Key="EggDataToEggProgressConverter" />
+            <utils:ItemToItemDescriptionConverter x:Key="ItemToItemDescriptionConverter" />
+            <utils:IncubatorUsagesCountToUsagesTextConverter x:Key="IncubatorUsagesCountToUsagesTextConverter" />
+            <utils:IncubatorUsageToOpacityConverter x:Key="IncubatorUsageToOpacityConverter" />
+            <utils:IncubatorUnlimitedTypeToVisibilityConverter x:Key="IncubatorUnlimitedTypeToVisibilityConverter" />
+            <utils:EggDataToEggIconConverter x:Key="EggDataToEggIconConverter" />
+            <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <utils:VisibleWhenGreaterThanConverter x:Key="VisibleWhenGreaterThanConverter" />
+            <utils:PlayerStatsTranslationConverter x:Key="PlayerStatsTranslationConverter" />
+            <utils:MsToDateFormatConverter x:Key="MsToDateFormatConverter" />
+            <utils:PlayerTeamToTeamImageConverter x:Key="PlayerTeamToTeamImageConverter" />
+            <utils:PlayerTeamToTeamBaseImageConverter x:Key="PlayerTeamToTeamBaseImageConverter" />
+            <utils:PlayerTeamToTeamNameConverter x:Key="PlayerTeamToTeamNameConverter" />
+            <utils:AchievementValueToMedalIconConverter x:Key="AchievementValueToMedalIconConverter" />
+            <utils:PlayerTeamToTeamBackgroundImageConverter x:Key="PlayerTeamToTeamBackgroundImageConverter" />
+            <utils:AchievementNextValueConverter x:Key="AchievementNextValueConverter" />
+            <utils:AchievementValueConverter x:Key="AchievementValueConverter" />
+            <utils:AchievementTranslationConverter x:Key="AchievementTranslationConverter" />
+            <utils:PlayerDataToCurrentExperienceConverter x:Key="PlayerDataToCurrentExperienceConverter" />
+            <utils:PlayerDataToTotalLevelExperienceConverter x:Key="PlayerDataToTotalLevelExperienceConverter" />
+            <utils:PlayerDataToPokeCoinsConverter x:Key="PlayerDataToPokeCoinsConverter" />
+            <utils:AchievementToCompletedPercentageConverter x:Key="AchievementToCompletedPercentageConverter" />
+            <utils:StringFormatConverter x:Key="StringFormatConverter" />
+            <utils:PokemonDataToPokemonTypeBackgroundConverter x:Key="PokemonDataToPokemonTypeBackgroundConverter"/>
+            <utils:PokemonDataToMaxLevelBarConverter x:Key="PokemonDataToMaxLevelBarConverter"/>
+            <utils:PokemonDataToLevelBarConverter x:Key="PokemonDataToLevelBarConverter"/>
+            <utils:PokemonFamilyToCandyImageConverter x:Key="PokemonFamilyToCandyImageConverter"/>
+            <utils:PokemonFamilyNameToStringConverter x:Key="PokemonFamilyNameToStringConverter"/>
+            <utils:PokemonMoveToMoveTypeStringConverter x:Key="PokemonMoveToMoveTypeStringConverter"/>
+            <utils:PokemonMoveToMoveNameConverter x:Key="PokemonMoveToMoveNameConverter"/>
+            <utils:PokemonMoveToMovePowerConverter x:Key="PokemonMoveToMovePowerConverter"/>
+            <utils:VisibleWhenTypeIsNotNoneConverter x:Key="VisibleWhenTypeIsNotNoneConverter"/>
+            <utils:InverseVisibleWhenTypeIsNotNoneConverter x:Key="InverseVisibleWhenTypeIsNotNoneConverter" />
+            <utils:AchievementDescriptionTranslationConverter x:Key="AchievementDescriptionTranslationConverter" />
+            <utils:WidthConverter x:Key="WidthConverter" />
+            <utils:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+            <utils:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <utils:PokemonLastHoursVisibiltyConverter x:Key="PokemonLastHoursVisibiltyConverter" />
+            <utils:IsIncenseActiveToPlayerIconConverter x:Key="IsIncenseActiveToPlayerIconConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</common:BootStrapper>
