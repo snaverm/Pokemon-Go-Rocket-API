@@ -1,3 +1,7 @@
+# IMPORTANT
+A new version has been developed by another gitter:
+Check on: https://github.com/mtaheij/PoGo-UWP
+
 # Warning!
 
 The Game is Working but with some small issues:
